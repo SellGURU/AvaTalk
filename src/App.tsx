@@ -6,7 +6,11 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={route} />
+      <div className='w-full h-screen flex justify-center items-center overflow-hidden '>
+        <div className='w-full max-w-sm'>
+          <RouterProvider router={route} />
+        </div>
+      </div>
     </>
   )
 }
