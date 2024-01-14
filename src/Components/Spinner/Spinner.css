@@ -1,0 +1,18 @@
+.spinner {
+    @apply flex flex-col-reverse items-center justify-center h-28;
+}
+
+.circle {
+    @apply bg-gray-200 w-2 h-2 m-1 rounded-full;
+}
+
+.circle.middle {
+    @apply bg-violet-700;
+}
+
+.mode-0 ,.mode-2 {
+    @apply flex-row;
+}
+.mode-3{
+    @apply flex-col;
+}

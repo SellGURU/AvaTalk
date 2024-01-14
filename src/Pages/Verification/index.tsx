@@ -1,5 +1,6 @@
 import VerificationInput from "react-verification-input";
 import './verification.css'
+import Spinner from "../../Components/Spinner/Spinner";
 const Verification = () => {
     return (
         <>
@@ -28,6 +29,7 @@ const Verification = () => {
             </div>
 
         </div>
+        <Spinner/>
         </>
     )
 }
