@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <div className='w-full h-screen flex justify-center overflow-hidden '>
+      <div className='w-full h-screen flex justify-center items-center overflow-hidden '>
         <div className='w-full max-w-sm'>
           <RouterProvider router={route} />
         </div>
