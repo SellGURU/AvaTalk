@@ -1,0 +1,11 @@
+.Carbon-Google-Button-container {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(-35deg, rgba(109, 40, 217, 1) 0%, rgba(232, 225, 218, 1) 140%) border-box;
+    border: 1px solid transparent;    
+    box-shadow: 0px 0px 8px 0px rgba(111, 140, 176, 0.41);
+    @apply text-slate-800 w-full disabled:cursor-not-allowed flex justify-center items-center bg-white leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+};
+
+.Carbon-Google-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}
