@@ -1,0 +1,6 @@
+.vi__character {
+    @apply text-gray-700 w-10 rounded-xl bg-gray-100 ;
+    border: 1px solid #E3E3EE;
+    font-size: 16px;
+
+}

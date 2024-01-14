@@ -13,6 +13,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.2",
+    "react-verification-code-input": "^1.2.9",
+    "react-verification-input": "^4.1.0",
     "symphony-ui": "^1.0.7"
   },
   "devDependencies": {
