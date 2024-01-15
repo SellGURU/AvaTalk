@@ -1,6 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification } from "../Pages";
-import Spinner from "../Pages/Spinner";
+import { Home, Login, Verification , Spinner, CreateAccount} from "../Pages";
 
 const route = createHashRouter([
     {
@@ -18,7 +17,11 @@ const route = createHashRouter([
     {
         path: "/Spinner",
         element:<Spinner></Spinner>,
-    }    
+    },
+    {
+        path: "/register",
+        element:<CreateAccount></CreateAccount>,
+    }       
 ])
 
 export default route
