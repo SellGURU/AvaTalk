@@ -4,7 +4,6 @@ const Spinner = () => {
     return (
         <>
         <Spinners theme="Carbon"/>
-        {/* <Spinners/> */}
         </>
     )
 }
