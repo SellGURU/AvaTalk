@@ -1,0 +1,19 @@
+.Carbon-ContentCard-Container {
+    border: 1px solid white;
+    box-shadow:
+    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    -6px -6px 20px 0px rgba(255, 255, 255, 1),
+    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+
+    @apply w-full flex flex-col items-center text-gray-700 text-center rounded-3xl min-h-44 max-w-[365px] p-5 bg-gray-100;
+}
+.Carbon-ContentCard-Icons{
+    @apply flex flex-row gap-[6px];
+}
+.Carbon-ContentCard-CardIcon{
+    box-shadow:
+    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    -6px -6px 20px 0px rgba(255, 255, 255, 1),
+    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    @apply bg-gray-100 w-10 h-10 flex justify-center items-center rounded-full p-2 border border-white ; 
+}
