@@ -16,6 +16,7 @@
     "react-leaflet-location-picker": "^1.4.2",
     "react-location-picker": "^1.5.0",
     "react-router-dom": "^6.21.2",
+    "react-scripts": "^5.0.1",
     "react-verification-code-input": "^1.2.9",
     "react-verification-input": "^4.1.0",
     "symphony-ui": "^1.0.7"

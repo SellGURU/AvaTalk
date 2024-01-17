@@ -4,7 +4,8 @@ import { useState } from "react"
 import { FileUploadr, StepController } from "../../Components"
 import { Button, TextField } from "symphony-ui";
 import LocationPicker from "react-leaflet-location-picker";
-import './index.scss'
+import styles from './CreateAccount.module.css';
+
 
 const CreateAccount = () => {
     const [step,setStep] = useState<number>(1);
@@ -31,7 +32,7 @@ const CreateAccount = () => {
                                 setStep(step -1);
                             }
                         }} theme="Carbon-back">
-                            <div className="backIcon  w-[8px] h-[20px] bg-slate-400"></div>
+                            <div className={styles.backIcon +" w-[8px] h-[20px] bg-slate-400"}></div>
                         </Button>
                     :
                         <div className=" h-10 mb-10"></div>
