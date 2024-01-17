@@ -1,3 +1,4 @@
 import FileUploadr from "./UploadImage";
+import StepController from "./StepController";
 
-export {FileUploadr}
+export {FileUploadr,StepController}
