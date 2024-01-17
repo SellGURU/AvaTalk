@@ -5,7 +5,7 @@
     background: linear-gradient(rgba(243 ,244 ,246,1), rgba(243, 244 ,246,1)) padding-box,
                 linear-gradient(35deg, rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%) border-box,
                 linear-gradient(35deg,rgba(246, 246, 249, 0.5),rgba(255, 255, 255, 0.5))  border-box;    
-    @apply  w-full max-w-[325px] max-h-[300px] relative px-[21px] rounded-[27px] py-[18px]
+    @apply  w-full  max-h-[300px] relative px-[21px] rounded-[27px] py-[18px]
 }
 .Carbon-ImageUploader-title{
     @apply text-[20px] font-semibold text-center text-gray-700

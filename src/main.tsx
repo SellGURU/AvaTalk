@@ -6,7 +6,7 @@ import 'symphony-ui/Themes/index.scss';
 import './Themes/index.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
 )
