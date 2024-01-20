@@ -1,8 +1,24 @@
-import { useState } from "react"
 import { Button , TextField} from "symphony-ui"
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+
+const initialValue = {
+    emailOrPhone : ''
+}
+const validationSchema = Yup.object().shape({
+  emailOrPhone: Yup.string().email("Please enter a valid email").required("Required"),
+});
 
 const Login = () => {
-    const [email,setEmail] = useState('');
+    const navigate = useNavigate();
+    const formik = useFormik({
+        initialValues: initialValue,
+        validationSchema,
+        onSubmit: values => {
+            console.log(values)
+        },
+    });    
     return (
         <>
         <div className="w-full px-4">
@@ -13,17 +29,18 @@ const Login = () => {
             </div>
             <div className="mb-8">
                 <TextField
+                    {...formik.getFieldProps('emailOrPhone')}
                     theme="Carbon"
-                    name="email"
-                    inValid={false}
-                    onBlur={() => {}}
+                    name="emailOrPhone"
+                    errorMessage = {formik.errors?.emailOrPhone}
                     placeholder="Enter your phone number or email..."
-                    onChange={(event) => setEmail(event.target.value)}
                     type="email"
-                    value={email}
+                    inValid={((formik.errors?.emailOrPhone != undefined) && formik.touched?.emailOrPhone as boolean)}
                 ></TextField>
             </div>
-            <Button theme="Carbon">Continue</Button>
+            <Button onClick={() => {
+                navigate('/Verification')
+            }} disabled={!formik.isValid || !formik.touched.emailOrPhone} theme="Carbon">Continue</Button>
             <div className="flex w-full items-center mt-11">
                 <div style={{background:'linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)'}} className="w-full h-[4px]">
                     <div style={{background:'linear-gradient(to top,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)'}} className="w-full h-[4px]"></div>
