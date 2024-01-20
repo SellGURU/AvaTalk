@@ -1,21 +1,15 @@
-import React from "react";
-import { Navigate, Route } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-
 interface ProtectedRouteProps {
-  element: React.ReactNode;
-  path?: string;
+  Component: React.ComponentType<any>;
 }
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, path }) => {
+function ProtectedRoute({ Component }: ProtectedRouteProps) {
   const { isLoggedIn } = useAuth();
-
   if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
-
-  return <Route path={path} element={element} />;
-};
-
+  return <Component />;
+}
 export default ProtectedRoute;
