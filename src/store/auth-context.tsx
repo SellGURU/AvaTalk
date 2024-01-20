@@ -14,7 +14,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps>({
   token: "",
   isLoggedIn: false,
-  login: (token) => {},
+  login: () => {},
   logout: () => {},
 });
 
