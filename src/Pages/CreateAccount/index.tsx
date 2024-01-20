@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react"
-import { FileUploadr, StepController, TextField } from "../../Components"
-import { Button } from "symphony-ui";
+import { FileUploadr, StepController } from "../../Components"
+import { Button,TextField } from "symphony-ui";
 import LocationPicker from "react-leaflet-location-picker";
 import styles from './CreateAccount.module.css';
 import * as Yup from "yup";
