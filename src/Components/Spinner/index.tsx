@@ -14,7 +14,7 @@ const Spinners: React.FC<SpinnersProps> = ({theme}) => {
   }, []);
 
   return (
-    <div className={`${theme}-Spinner-SpinnerContainer ${theme}-Spinner-Mode-${mode}`}>
+    <div className={`${theme}-Spinner-Container ${theme}-Spinner-Mode-${mode}`}>
       <div className={`${theme}-Spinner-Circle ${mode === 0 || mode === 2 ? 'top' : 'top'}`}></div>
       <div className={`${theme}-Spinner-Circle ${mode === 1 || mode === 3 ? `${theme}-Spinner-Circle-Middle` : `${theme}-Spinner-Circle-Middle`}`}></div>
       {mode === 0 || mode === 2 ? <div className={`${theme}-Spinner-Circle bottom`}></div> : null}

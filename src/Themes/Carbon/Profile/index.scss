@@ -8,7 +8,7 @@
     max-width: fit-content;
 }
 .Carbon-Profile-Content {
-    @apply flex flex-col gap-4 justify-center items-center absolute top-11 px-4;
+    @apply flex flex-col gap-4 justify-center items-center absolute top-11 px-4 pb-20;
 }
 .Carbon-Profile-ProfilePicture {
     box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
@@ -20,7 +20,7 @@
 }
 .Carbon-Profile-GalleryIcon {
     border-color: rgba(214, 227, 243, 0.46);
-    @apply w-10 h-10 bg-slate-50 absolute left-56 top-[168px] rounded-full flex justify-center items-center border;
+    @apply w-10 h-10 bg-slate-50 absolute left-60 top-[168px] rounded-full flex justify-center items-center border;
 }
 .Carbon-Profile-GalleryImport {
     @apply  left-80 top-32;
@@ -31,16 +31,25 @@
 .Carbon-Profile-SubTitle {
     @apply text-sm;
 }
-.Carbon-Profile-Footer {
-    @apply h-16 fixed rounded-xl border border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center;
-}
-.Carbon-Profile-FooterIcon {
-    @apply w-10 h-10 p-2 rounded-full;
-}
-.Carbon-Profile-ActiveIcon {
-    box-shadow: 4px 4px 14px 0px #C1D5EE inset, -4px -4px 9px 0px #FFFFFFE0 inset;
-    border: 1px solid white;
-}
 .Carbon-Google-Button-container {
     background: none;
 }
+.Carbon-Profile-InstagramIcon{
+    background-image: url(../../../../public/instagram.png);
+    background-size: cover;
+}
+.Carbon-Profile-LinkedinIcon{
+    background-image: url(../../../../public/linkedin.png);
+    background-size: cover;
+}
+.Carbon-Profile-Icons{
+    @apply flex flex-row gap-4;
+}
+.Carbon-Profile-BackgroundIcons{
+    box-shadow:
+    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    -6px -6px 20px 0px rgba(255, 255, 255, 1),
+    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    @apply bg-gray-100 w-16 h-16 flex justify-center items-center rounded-full p-2 border border-white ; 
+}
+

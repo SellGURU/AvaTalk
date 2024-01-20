@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard/ContentCard';
+import Footer from '../Footer';
 
 interface ProfileProps {
   theme?: string;
@@ -43,21 +44,31 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           </Button>
         </div>
         <ContentCard theme="Carbon" title="Social">
-          <h1>child</h1>
+          <div className={`${theme}-Profile-Icons`}>
+            <div className={`${theme}-Profile-BackgroundIcons`}>
+              <div className={`${theme}-ContentCard-CardIcon ${theme}-Profile-InstagramIcon` } ></div>
+            </div>
+            <div className={`${theme}-Profile-BackgroundIcons`}>
+              <div className={`${theme}-ContentCard-CardIcon ${theme}-Profile-LinkedinIcon`} ></div>
+            </div>
+          </div>
         </ContentCard>
         <ContentCard theme="Carbon" title="Links">
-          <h1>child</h1>
+          <div className={`${theme}-Profile-Icons`}>
+            <div className={`${theme}-Profile-BackgroundIcons`}>
+              <img className={`${theme}-ContentCard-CardIcon`} src="../../public/Cicon.svg" alt="" />
+            </div>
+            <div className={`${theme}-Profile-BackgroundIcons`}>
+              <img className={`${theme}-ContentCard-CardIcon`} src="../../public/global.svg" alt="" />
+            </div>
+          </div>
         </ContentCard>
         <ContentCard theme="Carbon" title="About me">
           <h1>Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.</h1>
         </ContentCard>
       </div>
-      <div className={`${theme}-Profile-Footer`}>
-        <img className={`${theme}-Profile-FooterIcon ${theme}-Profile-ActiveIcon`} src="../../public/profile-circle.svg" alt="" />
-        <img className={`${theme}-Profile-FooterIcon`} src="../../public/book.svg" alt="" />
-        <img className={`${theme}-Profile-FooterIcon`} src="../../public/status-up.svg" alt="" />
-        <img className={`${theme}-Profile-FooterIcon`} src="../../public/setting.svg" alt="" />
-      </div>
+      <Footer theme="Carbon"/>
+      
     </div>
     </>
     

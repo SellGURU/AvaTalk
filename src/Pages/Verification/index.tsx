@@ -1,5 +1,6 @@
 import VerificationInput from "react-verification-input";
-import './verification.modular.css';
+import './verification.css';
+
 const Verification = () => {
     return (
         <>
