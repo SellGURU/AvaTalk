@@ -33,4 +33,4 @@ const Verification = () => {
     )
 }
 
-export default Verification
+export default Verification;
