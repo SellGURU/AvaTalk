@@ -14,9 +14,9 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
                 {title}
             </div>
             <div className={`${theme}-ContentCard-Icons`}>
-                <img className={`${theme}-ContentCard-CardIcon`} src="../../public/arrow-swap-horizontal.svg" alt="" />
-                <img className={`${theme}-ContentCard-CardIcon`} src="../../public/trash.svg" alt="" />
-                <img className={`${theme}-ContentCard-CardIcon`} src="../../public/edit.svg" alt="" />
+                <img className={`${theme}-ContentCard-CardIcon`} src="./arrow-swap-horizontal.svg" alt="" />
+                <img className={`${theme}-ContentCard-CardIcon`} src="./trash.svg" alt="" />
+                <img className={`${theme}-ContentCard-CardIcon`} src="./edit.svg" alt="" />
             </div>
         </div>
 

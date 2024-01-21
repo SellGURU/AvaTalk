@@ -4,16 +4,32 @@
 .Carbon-Splash-SplashIcon {
     @apply max-w-64 ;
 }
-.Carbon-Splash-fade {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-  
+
 .Carbon-Splash-show {
     opacity: 1;
 }
-
-.Carbon-Splash-hide {
-    opacity: 0;
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
 }
-    
+@keyframes fadeOut {
+    0%, 50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+}
+.Carbon-Splash-fade {
+    animation: fadeInOut 3s ease-in-out infinite;
+}
+.Carbon-Splash-hide {
+    animation: fadeOut 3s ease-in-out forwards;
+}
+
+
+  

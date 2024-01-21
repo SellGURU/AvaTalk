@@ -8,23 +8,21 @@ const Splash: React.FC<SplashProps> = ({ theme }) => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const splashTimeout = setTimeout(() => {
+    const fadeOutTimeout = setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, 4000);
 
     return () => {
-      clearTimeout(splashTimeout);
+      clearTimeout(fadeOutTimeout);
     };
   }, []);
 
   return (
-    <>
-      <div className={`${theme}-Splash-fade ${showSplash ? `${theme}-Splash-show` : `${theme}-Splash-hide`}`}>
-        <div className={`${theme}-Splash-Container`}>
-          <img className={`${theme}-Splash-SplashIcon`} src="../../public/splash.svg" alt="" />
-        </div>
+    <div className={`${theme}-Splash-fade ${showSplash ? `${theme}-Splash-show` : `${theme}-Splash-hide`}`}>
+      <div className={`${theme}-Splash-Container`}>
+        <img className={`${theme}-Splash-SplashIcon`} src="./splash.svg" alt="" />
       </div>
-    </>
+    </div>
   );
 };
 

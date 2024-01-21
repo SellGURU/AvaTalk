@@ -6,9 +6,11 @@
     border-bottom: 1px solid;
     border-image: linear-gradient(to right, #FFFFFF,#E2E8F0  ) 1;
     max-width: fit-content;
+    margin: 0 auto;
+    @apply  top-0 w-full h-[218px];
 }
 .Carbon-Profile-Content {
-    @apply flex flex-col gap-4 justify-center items-center absolute top-11 px-4 pb-20;
+    @apply flex flex-col gap-4 justify-center items-center mt-11 px-4 pb-20;
 }
 .Carbon-Profile-ProfilePicture {
     box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
@@ -16,11 +18,11 @@
 }
 .Carbon-Profile-ProfilePictureBorder {
     background-image: url(./profileImage.png) ;
-    @apply absolute inset-0 rounded-full border-2 bg-cover bg-no-repeat	border-gray-100;
+    @apply w-40 h-40 inset-0 rounded-full border-2 bg-cover bg-no-repeat	border-gray-100;
 }
 .Carbon-Profile-GalleryIcon {
     border-color: rgba(214, 227, 243, 0.46);
-    @apply w-10 h-10 bg-slate-50 absolute left-60 top-[168px] rounded-full flex justify-center items-center border;
+    @apply w-10 h-10 bg-slate-50  left-60 top-[168px] rounded-full flex justify-center items-center border;
 }
 .Carbon-Profile-GalleryImport {
     @apply  left-80 top-32;
@@ -35,11 +37,11 @@
     background: none;
 }
 .Carbon-Profile-InstagramIcon{
-    background-image: url(../../../../public/instagram.png);
+    background-image: url(./public/instagram.png);
     background-size: cover;
 }
 .Carbon-Profile-LinkedinIcon{
-    background-image: url(../../../../public/linkedin.png);
+    background-image: url(./public/linkedin.png);
     background-size: cover;
 }
 .Carbon-Profile-Icons{
