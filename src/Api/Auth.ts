@@ -3,23 +3,33 @@ import Api from "./Api";
 // import { toast } from 'react-toastify';
 
 interface LoginData {
-  email: string | null;
-  phone: number | null;
+  // email: string | null;
+  mobile_number: string | null;
 }
-
+interface Location {
+  lat: number;
+  lng: number;
+}
 interface RegisterData {
-  firstName: string;
-  lastName: string;
-  phone: number | null;
-  job: string | null;
-  company: string | null;
-  location: string | null;
-  file: string | null;
+  first_name: string;
+  last_name: string;
+  mobile_number: string | null;
+  job_title: string | null;
+  company_name: string | null;
+  location: Location | null;
+  profile_pic: string | null;
 }
 
 class Auth extends Api {
   static login(data: LoginData, submit: (res: any) => void) {
     this.post("/login", data)
+      .then((res) => {
+        submit(res);
+      })
+      .catch((er) => console.error(er.message));
+  }
+  static get_Login_code(data: LoginData, submit: (res: any) => void) {
+    this.post("/get_Login_code", data)
       .then((res) => {
         submit(res);
       })
