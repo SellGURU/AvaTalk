@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Contacts } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Contacts, Dev } from "../Pages";
 // import ProtectedRoute from "./ProtectedRoute";
 
 const route = createHashRouter([
@@ -8,6 +8,10 @@ const route = createHashRouter([
     // element: <ProtectedRoute element={<Home />} />,
     element: <Home></Home>,
   },
+  {
+    path: "/dev",
+    element: <Dev></Dev>,
+  },  
   {
     path: "/login",
     element: <Login></Login>,
