@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard/ContentCard';
-import Footer from '../Footer';
 
 interface ProfileProps {
   theme?: string;
@@ -70,7 +69,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <h1>Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.</h1>
           </ContentCard>
         </div>
-        <Footer activeItem='' theme="Carbon"/>
+       
       </div>
     </div>
     </>
