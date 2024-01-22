@@ -1,7 +1,8 @@
 import React from "react";
-import { Button } from "symphony-ui";
+import { Button, TextField } from "symphony-ui";
 import Footer from "../Footer";
 import ToggleButton from "../ToggleButton";
+import SearchBox from "../SearchBox";
 
 interface ProfileProps {
   theme?: string;
@@ -9,15 +10,20 @@ interface ProfileProps {
 
 const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
   return (
-    <div>
-      <div className={`${theme}-Profile-Content`}>
-        <p className=" leading-[24px] text-[16px] font-[600]">Contacts</p>
-      </div>
-      <div className=" flex justify-between items-center">
-        <ToggleButton />
+    <div className={`${theme}-ContactsView-Container `}>
+      <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
+      {/* </div> */}
+      <div className={`${theme}-ContactsView-buttonsContainer `}>
+        <ToggleButton leftText="Contact List" rightText="Tag List" theme="Carbon" />
         <Button theme="Carbon">
           <div>Add Contact</div>
         </Button>
+      </div>
+      <div className="mt-8">
+        <SearchBox value="" theme="Carbon" placeholder="Search name or email..." />
+      </div>
+      <div className="mt-[20px]">
+        <TextField theme="Carbon" name="contact" value="" onChange={() => {}} onBlur={() => {}} errorMessage={""} placeholder="No contact yet" type="email" inValid={false}></TextField>
       </div>
       <Footer activeItem="contacts" theme="Carbon" />
     </div>

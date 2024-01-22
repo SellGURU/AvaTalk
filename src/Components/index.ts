@@ -6,14 +6,6 @@ import FileUploadr from "./UploadImage";
 import TextField from "./TextField";
 import StepController from "./StepController";
 import ToggleButton from "./ToggleButton";
+import SearchBox from "./SearchBox";
 
-export { 
-    Profile,
-    Spinners,
-    ContentCard,
-    StepController,
-    TextField,
-    FileUploadr,
-    ToggleButton,
-    Select 
-};
+export { Profile, Spinners, ContentCard, StepController, TextField, FileUploadr, ToggleButton, Select, SearchBox };
