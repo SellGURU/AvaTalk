@@ -9,8 +9,8 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
   return (
     <>
     <div className={`${theme}-ContentCard-Container`}>
-        <div className='flex flex-row justify-between w-full mb-4'>
-            <div className='text-sm	font-medium	'>
+        <div className={`${theme}-ContentCard-Section`}>
+            <div className={`${theme}-ContentCard-Title`}>
                 {title}
             </div>
             <div className={`${theme}-ContentCard-Icons`}>
@@ -20,7 +20,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
             </div>
         </div>
 
-        <div className="text-left text-sm	">{children}</div>
+        <div className={`${theme}-ContentCard-Children`}>{children}</div>
         
     </div>
     </>

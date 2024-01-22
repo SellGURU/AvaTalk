@@ -14,14 +14,12 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         <img className={`${theme}-Profile-Background`} src='./profile-background.png' />
         <div className={`${theme}-Profile-Content`}>
           
-          <div className="w-48">
-            <Button theme="Carbon-Google">
-              <img className="mr-2" src="./eye.svg" alt="" />
-              <div>
-                Preview Profile
-              </div>
-            </Button>
-          </div>
+          <Button theme="Carbon-Google">
+            <img className="mr-2" src="./eye.svg" alt="" />
+            <div>
+              Preview Profile
+            </div>
+          </Button>
 
           <div className={`${theme}-Profile-ProfilePicture`}>
             <div className={`${theme}-Profile-ProfilePictureBorder`}></div>
@@ -30,6 +28,9 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             </div>
             <div className={`${theme}-Profile-GalleryIcon ${theme}-Profile-GalleryImport`}>
               <img src="./gallery-import.svg" alt="" />
+            </div>
+            <div className={`${theme}-Profile-GalleryIcon ${theme}-Profile-ScanBarcode`}>
+              <img src="./scan-barcode.svg" alt="" />
             </div>
           </div>
 
