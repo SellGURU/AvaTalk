@@ -1,0 +1,76 @@
+.Carbon-Select-container {
+  @apply flex flex-col  relative w-[100%]  gap-y-1;
+}
+.Carbon-Select-label {
+  // box-shadow: inset 0px 1px 1px 0px rgba(107, 119, 130, 0.85);
+  @apply leading-[19.36px] text-[13px] ml-6 font-medium text-gray-700;
+}
+.Carbon-Select-input {
+    border: 1px solid transparent;   
+    // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
+    // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);    
+    background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
+                linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box
+                linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+  @apply focus:outline-none w-full h-[44px] boxsInnerShadows rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400  ;
+}
+
+.Carbon-Select-inValid {
+  @apply border-red-500 border-2 #{!important};;
+}
+.Carbon-Select-box {
+    border: 1px solid transparent;   
+    background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
+                linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box
+                linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;  
+  // box-shadow: 0px 0px 8px 0px rgba(225, 225, 255, 1);
+  // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1),inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);    
+  // box-shadow: -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  @apply rounded-[27px] flex items-center boxsInnerShadows  justify-between bg-gray-100;
+}
+.Carbon-Select-togglePassword {
+  @apply cursor-pointer;
+}
+.Carbon-Select-icon-eye {
+  @apply bg-[url('/Carbon/eye.svg')] w-[25px] h-[22px];
+}
+.Carbon-Select-icon-eyeOff {
+  @apply bg-[url('/Carbon/eyeOff.svg')] w-[25px] h-[22px];
+}
+.Carbon-Select-error {
+  @apply text-red-500 text-[11px] font-medium ml-6 mt-[1px];
+}
+
+.Carbon-Select-label-required{
+  @apply text-red-500 ml-1
+}
+
+// .Carbon-Select-dropDown-container{
+//   @apply absolute z-40 overflow-y-scroll hiddenScrollBar w-[68px]  bg-gray-100 h-24 top-16
+// }
+.Carbon-Select-dropDown-item{
+  @apply flex justify-between cursor-pointer px-2 border-b pb-2 border-gray-200 my-2 w-full
+}
+.Carbon-Select-dropDown-item-text{
+  @apply text-[10px] ml-2
+}
+.Carbon-Select-icon{
+    @apply w-4 absolute right-4 h-5 mt-2 bg-slate-400 justify-self-center mb-1 ;
+     mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url('./src/assets/Carbon/bottomVector.svg');    
+}
+
+.Carbon-Select-dropDown-container {
+    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),-6px -6px 20px 0px rgba(255, 255, 255, 1);
+  @apply w-full bg-gray-100 absolute top-[52px] h-[250px] border rounded-b-[27px]
+}
+.Carbon-Select-box[data-showselect = 'true'] {
+    @apply border-t-white rounded-b-none #{!important};
+}
+.Carbon-Select-input[data-showselect = 'true'] {
+    @apply rounded-b-none #{!important};
+}
