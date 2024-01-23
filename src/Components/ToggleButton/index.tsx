@@ -1,5 +1,32 @@
-const ToggleButton = () => {
-  return <div className="h-[44px] text-black  rounded-xl border border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center">ToggleButton</div>;
+import { useState } from "react";
+import { Button } from "symphony-ui";
+
+interface ToggleProps {
+  theme?: string;
+  leftText: string;
+  rightText: string;
+}
+const ToggleButton: React.FC<ToggleProps> = ({ theme, leftText, rightText }) => {
+  const [activeButton, setActiveButton] = useState(leftText);
+
+  const handleButtonClick = (buttonText: string) => {
+    setActiveButton(buttonText);
+  };
+  const activeStyle = `${theme}-ToggleButton-ActiveButton `;
+  return (
+    <div className={`${theme}-ToggleButton-container `}>
+      <div className={`  ${activeButton === leftText ? activeStyle : ""} `}>
+        <Button onClick={() => handleButtonClick(leftText)} theme="Carbon-Toggle">
+          {leftText}
+        </Button>
+      </div>
+      <div className={`  ${activeButton === rightText ? activeStyle : ""} `}>
+        <Button onClick={() => handleButtonClick(rightText)} theme="Carbon-Toggle">
+          {rightText}
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default ToggleButton;

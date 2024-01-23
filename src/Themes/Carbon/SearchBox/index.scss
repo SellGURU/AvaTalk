@@ -1,0 +1,74 @@
+.Carbon-SearchBox-container {
+  @apply flex flex-col  relative w-[100%]  gap-y-1;
+}
+.Carbon-SearchBox-label {
+  // box-shadow: inset 0px 1px 1px 0px rgba(107, 119, 130, 0.85);
+  @apply leading-[19.36px] text-[13px] ml-6 font-medium text-gray-700;
+}
+.Carbon-SearchBox-input {
+  border: 1px solid transparent;
+  // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
+  // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
+    linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+  @apply focus:outline-none w-full h-[44px] boxsInnerShadows rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
+}
+
+.Carbon-SearchBox-inValid {
+  @apply border-red-500 border-2 #{!important};
+}
+.Carbon-SearchBox-box {
+  border: 1px solid transparent;
+  background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
+    linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+  // box-shadow: 0px 0px 8px 0px rgba(225, 225, 255, 1);
+  // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1),inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  // box-shadow: -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
+  @apply rounded-[27px] flex items-center boxsInnerShadows  justify-between bg-gray-100;
+}
+.Carbon-SearchBox-togglePassword {
+  @apply cursor-pointer;
+}
+.Carbon-SearchBox-icon-eye {
+  @apply bg-[url('/Carbon/eye.svg')] w-[25px] h-[22px];
+}
+.Carbon-SearchBox-icon-eyeOff {
+  @apply bg-[url('/Carbon/eyeOff.svg')] w-[25px] h-[22px];
+}
+.Carbon-SearchBox-error {
+  @apply text-red-500 text-[11px] font-medium ml-6 mt-[1px];
+}
+
+.Carbon-SearchBox-label-required {
+  @apply text-red-500 ml-1;
+}
+
+.Carbon-SearchBox-selectPhone-container {
+  @apply mr-3 ml-7 cursor-pointer flex justify-center items-center;
+}
+.Carbon-SearchBox-selectPhone-container-icon {
+  @apply ml-2 w-[10px];
+}
+.Carbon-SearchBox-dropDown-container {
+  @apply absolute z-40 overflow-y-scroll hiddenScrollBar w-[68px]  bg-gray-100 h-24 top-16;
+}
+.Carbon-SearchBox-dropDown-item {
+  @apply flex justify-between cursor-pointer px-2 border-b pb-2 border-gray-200 my-2 w-full;
+}
+.Carbon-SearchBox-dropDown-item-text {
+  @apply text-[10px] ml-2;
+}
+.Carbon-SearchBox-input[type="phone"] {
+  @apply border-l-0 rounded-l-none pl-1  #{!important};
+}
+.Carbon-SearchBox-box[deta-selectBox="true"] {
+  @apply rounded-bl-none #{!important};
+}
+.Carbon-SearchBox-FooterIcon {
+  @apply w-10 h-10 p-2 mr-[17px] rounded-full cursor-pointer;
+}
+.Carbon-SearchBox-ActiveIcon {
+  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+  border: 1px solid white;
+}
