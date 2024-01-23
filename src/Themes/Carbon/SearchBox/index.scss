@@ -65,8 +65,8 @@
 .Carbon-SearchBox-box[deta-selectBox="true"] {
   @apply rounded-bl-none #{!important};
 }
-.Carbon-SearchBox-FooterIcon {
-  @apply w-10 h-10 p-2 mr-[17px] rounded-full cursor-pointer;
+.Carbon-SearchBox-searchIcon {
+  @apply w-10 h-10 p-2 absolute right-3  rounded-full cursor-pointer;
 }
 .Carbon-SearchBox-ActiveIcon {
   box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
