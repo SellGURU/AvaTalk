@@ -6,6 +6,7 @@ import FileUploadr from "./UploadImage";
 import TextField from "./TextField";
 import StepController from "./StepController";
 import ToggleButton from "./ToggleButton";
+import SearchBox from "./SearchBox";
 
 export { 
     Profile,
@@ -15,5 +16,6 @@ export {
     TextField,
     FileUploadr,
     ToggleButton,
-    Select 
+    Select,
+    SearchBox 
 };

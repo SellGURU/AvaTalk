@@ -1,0 +1,12 @@
+.Carbon-ToggleButton-container {
+  //   background: linear-gradient(white, white) padding-box, linear-gradient(-35deg, rgb(214, 227, 243) 0%, rgba(232, 225, 218, 1) 140%) border-box !important;
+  border: 1px solid transparent;
+  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41);
+
+  @apply text-slate-800 w-full disabled:cursor-not-allowed flex  justify-between space-x-4 bg-slate-100 items-center  leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+}
+.Carbon-ToggleButton-ActiveButton {
+  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+  border: 1px solid white;
+  @apply rounded-[27px] h-[32px] flex items-center justify-center   #{!important};
+}
