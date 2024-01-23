@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "symphony-ui"
-import ContentCard from '../ContentCard/ContentCard';
+import ContentCard from '../ContentCard';
 
 interface ProfileProps {
   theme?: string;
@@ -10,26 +10,27 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
     <>
     <div className={`${theme}-Profile-Container`}>
       <div className={`${theme}-Profile-ProfileSection`}>
-        <img className={`${theme}-Profile-Background`} src='./profile-background.png' />
-        <div className={`${theme}-Profile-Content`}>
-          
-          <Button theme="Carbon-Google">
-            <img className="mr-2" src="./eye.svg" alt="" />
-            <div>
-              Preview Profile
-            </div>
-          </Button>
+        <div className={`${theme}-Profile-Background`}></div>
+        <div className={`${theme}-Profile-Content`}>  
+          <div className={`${theme}-Profile-BtnContainer`}>
+            <Button theme="Carbon-Google">
+              <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
+              <div>
+                Preview Profile
+              </div>
+            </Button>
+          </div>
 
           <div className={`${theme}-Profile-ProfilePicture`}>
             <div className={`${theme}-Profile-ProfilePictureBorder`}></div>
-            <div className={`${theme}-Profile-GalleryIcon`}>
-              <img src="./gallery-edit.svg" alt="" />
+            <div className={`${theme}-Profile-GalleryVectorContainer`}>
+              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
             </div>
-            <div className={`${theme}-Profile-GalleryIcon ${theme}-Profile-GalleryImport`}>
-              <img src="./gallery-import.svg" alt="" />
+            <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
+              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
             </div>
-            <div className={`${theme}-Profile-GalleryIcon ${theme}-Profile-ScanBarcode`}>
-              <img src="./scan-barcode.svg" alt="" />
+            <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-ScanBarcode`}>
+              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
             </div>
           </div>
 
@@ -39,29 +40,33 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           </div>
 
           <Button theme="Carbon">
-            <img className="mr-2" src="./user-edit.svg" alt="" />
+            <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
             <div>
               Edit Profile
             </div>
           </Button>
 
           <ContentCard theme="Carbon" title="Social">
-            <div className={`${theme}-Profile-Icons`}>
-              <div className={`${theme}-Profile-BackgroundIcons`}>
-                <div className={`${theme}-ContentCard-CardIcon ${theme}-Profile-InstagramIcon`}></div>
+            <div className={`${theme}-Profile-Vectors`}>
+              <div className={`${theme}-Profile-BackgroundVectors`}>
+                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-InstagramVector`}></div>
               </div>
-              <div className={`${theme}-Profile-BackgroundIcons`}>
-                <div className={`${theme}-ContentCard-CardIcon ${theme}-Profile-LinkedinIcon`}></div>
+              <div className={`${theme}-Profile-BackgroundVectors`}>
+                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-LinkedinVector`}></div>
               </div>
             </div>
           </ContentCard>
           <ContentCard theme="Carbon" title="Links">
-            <div className={`${theme}-Profile-Icons`}>
-              <div className={`${theme}-Profile-BackgroundIcons`}>
-                <img className={`${theme}-ContentCard-CardIcon`} src="./Cicon.svg" alt="" />
+            <div className={`${theme}-Profile-Vectors`}>
+              <div className={`${theme}-Profile-BackgroundVectors`}>
+                <div className={`${theme}-ContentCard-CardVector`}>
+                  <div className={`${theme}-ContentCard-CVector`}></div>
+                </div>
               </div>
-              <div className={`${theme}-Profile-BackgroundIcons`}>
-                <img className={`${theme}-ContentCard-CardIcon`} src="./global.svg" alt="" />
+              <div className={`${theme}-Profile-BackgroundVectors`}>
+                <div className={`${theme}-ContentCard-CardVector`}>
+                  <div className={`${theme}-ContentCard-GlobalVector`}></div>
+                </div>
               </div>
             </div>
           </ContentCard>
