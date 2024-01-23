@@ -8,7 +8,6 @@ const initialValue = {
   emailOrPhone: "",
 };
 const validationSchema = Yup.object().shape({
-  //   emailOrPhone: Yup.string().email("Please enter a valid email").required("Required"),
   emailOrPhone: Yup.string()
     .matches(/^[0-9]+$/, "Please enter a valid phone number")
     .required("Required"),
