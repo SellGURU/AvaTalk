@@ -15,13 +15,13 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
             </div>
             <div className={`${theme}-ContentCard-Vectors`}>
               <div className={`${theme}-ContentCard-CardVector`}>
-                <div className={`${theme}-ContentCard-ArrowVector`}></div>
+                <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div className={`${theme}-ContentCard-CardVector`}>
-                <div className={`${theme}-ContentCard-TrashVector`}></div>
+                <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div className={`${theme}-ContentCard-CardVector`}>
-                <div className={`${theme}-ContentCard-EditVector`}></div>
+                <div className={`${theme}-ContentCard-EditVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
             </div>
         </div>

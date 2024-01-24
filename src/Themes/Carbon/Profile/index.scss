@@ -24,13 +24,13 @@
 .Carbon-Profile-Content {
     @apply relative flex flex-col gap-4 justify-center items-center mt-11 px-4 pb-20;
 }
-.Carbon-Profile-ProfilePicture {
+.Carbon-Profile-ProfilePictureSection {
     box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
-    @apply w-40 h-40 border-2 border-white rounded-full relative;
+    @apply w-40 h-40 rounded-full relative;
 }
-.Carbon-Profile-ProfilePictureBorder {
+.Carbon-Profile-ProfilePicture {
+    @apply w-full h-full bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full border-2 border-gray-100;
     background-image: url(./src/assets/Carbon/profileImage.png);
-    @apply w-40 h-40 bg-cover bg-no-repeat inset-0 rounded-full border-2 border-gray-100;
 }
 .Carbon-Profile-GalleryVectorContainer {
     box-shadow: 2px 2px 20px 0px #6F8CB036,
@@ -44,16 +44,20 @@
     @apply absolute w-10 h-10 bg-slate-50 left-32 top-24 rounded-full flex justify-center items-center border;
 }
 .Carbon-Profile-GalleryVector{
-    @apply w-6 h-6 bg-cover bg-no-repeat;
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-6 h-6 bg-violet-700;
 }
 .Carbon-Profile-EditGalleryVector{
-    background-image: url(./src/assets/Carbon/editGallery.svg);
+    mask-image: url(./src/assets/Carbon/editGallery.svg);
 }
 .Carbon-Profile-ImportGalleryVector{
-    background-image: url(./src/assets/Carbon/importGallery.svg);
+    mask-image: url(./src/assets/Carbon/importGallery.svg);
 }
 .Carbon-Profile-ScanBarcodeVector{
-    background-image: url(./src/assets/Carbon/scanBarcode.svg);
+    mask-image: url(./src/assets/Carbon/scanBarcode.svg);
 }
 .Carbon-Profile-GalleryImport {
     @apply left-52 top-16;
@@ -68,10 +72,6 @@
 .Carbon-Profile-SubTitle {
     @apply text-sm;
 }
-.Carbon-Google-Button-container {
-    background: linear-gradient(#F8FAFC, #F8FAFC) padding-box,
-    linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box !important;
-}
 .Carbon-Profile-PreviewProfileBtnVector{
     background: url(./src/assets/Carbon/eyeVector.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;  
@@ -84,10 +84,12 @@
     @apply w-48 h-[40px];  
 }
 .Carbon-Profile-InstagramVector{
-    background-image: url(./src/assets/Carbon/instagram.png);
+    background: url(./src/assets/Carbon/instagram.png) no-repeat;
+    background-size: cover;
 }
 .Carbon-Profile-LinkedinVector{
-    background-image: url(./src/assets/Carbon/linkedin.png);
+    background: url(./src/assets/Carbon/linkedin.png) no-repeat;
+    background-size: cover;
 }
 .Carbon-Profile-Vectors{
     @apply flex flex-row gap-4;
@@ -98,8 +100,5 @@
     -6px -6px 20px 0px rgba(255, 255, 255, 1),
     2px 2px 4px 0px rgba(114, 142, 171, 0.1);
     @apply bg-gray-100 w-16 h-16 flex justify-center items-center rounded-full p-2 border border-white ; 
-}
-.Carbon-Profile-BackgroundVectors div {
-    @apply bg-cover bg-no-repeat;
 }
 

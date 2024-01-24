@@ -2,13 +2,37 @@
   box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
   -6px -6px 20px 0px rgba(255, 255, 255, 1),
   2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-
-    @apply h-16 sticky rounded-xl border border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center;
+  
+  @apply h-16 sticky rounded-xl border border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center;
 }
-.Carbon-Footer-FooterIcon {
+.Carbon-Footer-VectorSection {
   @apply w-10 h-10 p-2 rounded-full cursor-pointer;
 }
-.Carbon-Footer-ActiveIcon {
-  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
-  border: 1px solid white;
+.Carbon-Footer-Vectors{
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-6 h-6 bg-slate-400; 
 }
+.Carbon-Footer-UserVector {
+  mask-image: url(./src/assets/Carbon/userVector.svg);
+}
+.Carbon-Footer-BookVector {
+  mask-image: url(./src/assets/Carbon/bookVector.svg);
+}
+.Carbon-Footer-StatusVector {
+  mask-image: url(./src/assets/Carbon/statusupVector.svg);
+}
+.Carbon-Footer-SettingVector {
+  mask-image: url(./src/assets/Carbon/settingVector.svg);
+}
+.Carbon-Footer-ActiveVectorSection {
+  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+  outline: 1px solid white;
+  @apply flex justify-center items-center;
+}
+.Carbon-Footer-ActiveVectors{
+  @apply bg-violet-700;
+}
+

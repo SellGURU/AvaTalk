@@ -12,3 +12,7 @@
 .Carbon-Google-Button-container-disabled {
   @apply opacity-[50%] #{!important};
 }
+.Carbon-Google-Button-container[data-mode = 'profile-review-button'] {
+  background: linear-gradient(#F8FAFC, #F8FAFC) padding-box,
+  linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box !important;
+}

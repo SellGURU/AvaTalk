@@ -17,9 +17,6 @@
     2px 2px 4px 0px rgba(114, 142, 171, 0.1);
     @apply bg-gray-100 w-10 h-10 flex justify-center items-center rounded-full border border-white ; 
 }
-.Carbon-ContentCard-CardVector div{
-    @apply w-6 h-6 bg-cover bg-no-repeat;
-}
 .Carbon-ContentCard-Title {
     text-shadow: 0px 1px 1px currentColor;
     @apply text-sm font-medium;
@@ -31,18 +28,26 @@
     @apply text-left text-sm;
 }
 .Carbon-ContentCard-CVector{
-    background-image: url(./src/assets/Carbon/cLinksVector.svg);
-    @apply h-[30px] #{!important} ;
+    background: url(./src/assets/Carbon/cLinksVector.svg) no-repeat center;
+    @apply w-6 h-[30px] #{!important} ;
 }
 .Carbon-ContentCard-GlobalVector{
-    background-image: url(./src/assets/Carbon/globalLinksVector.svg);
+    background: url(./src/assets/Carbon/globalLinksVector.svg) no-repeat center;
+    @apply w-6 h-6;
+}
+.Carbon-ContentCard-MaskVector{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-6 h-6 bg-violet-700;
 }
 .Carbon-ContentCard-ArrowVector{
-    background-image: url(./src/assets/Carbon/arrowSwapHorizontalVector.svg);
+    mask-image: url(./src/assets/Carbon/arrowSwapHorizontalVector.svg);
 }
 .Carbon-ContentCard-TrashVector{
-    background-image: url(./src/assets/Carbon/trashVector.svg);
+    mask-image: url(./src/assets/Carbon/trashVector.svg);
 }
 .Carbon-ContentCard-EditVector{
-    background-image: url(./src/assets/Carbon/editContentCard.svg);
+    mask-image: url(./src/assets/Carbon/editContentCard.svg);
 }

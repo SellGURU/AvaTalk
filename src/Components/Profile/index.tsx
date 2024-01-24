@@ -13,16 +13,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         <div className={`${theme}-Profile-Background`}></div>
         <div className={`${theme}-Profile-Content`}>  
           <div className={`${theme}-Profile-BtnContainer`}>
-            <Button theme="Carbon-Google">
+          <Button theme="Carbon-Google" data-mode="profile-review-button">
               <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
-              <div>
-                Preview Profile
-              </div>
-            </Button>
+              <div>Preview Profile</div>
+          </Button>
           </div>
 
-          <div className={`${theme}-Profile-ProfilePicture`}>
-            <div className={`${theme}-Profile-ProfilePictureBorder`}></div>
+          <div className={`${theme}-Profile-ProfilePictureSection`}>
+            <div className={`${theme}-Profile-ProfilePicture`}></div>
             <div className={`${theme}-Profile-GalleryVectorContainer`}>
               <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
             </div>
