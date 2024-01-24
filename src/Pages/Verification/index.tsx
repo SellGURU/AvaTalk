@@ -1,7 +1,13 @@
 import VerificationInput from "react-verification-input";
 import './verification.css';
+import { Auth } from "../../Api";
+import { useNavigate } from "react-router-dom";
+import {AuthContext} from '../../store/auth-context';
+import { useContext } from "react";
 
 const Verification = () => {
+    const navigate = useNavigate();
+    const authContext = useContext(AuthContext)
     return (
         <>
         <div className="text-center text-gray-700 flex justify-center">
@@ -11,6 +17,12 @@ const Verification = () => {
             <p className="text-sm mb-6 font-medium">Sample@gmail.com</p>
             <div>
             <VerificationInput
+                onComplete={(value) => {
+                    Auth.login({mobile_number:'',code:value}).then((res) => {
+                        authContext.login(res.data.token)
+                        navigate("/register");
+                    })
+                }}
                 classNames={{
                     container: "container",
                     character: "character",

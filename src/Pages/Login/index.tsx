@@ -7,10 +7,25 @@ import { Auth } from "../../Api";
 const initialValue = {
   emailOrPhone: "",
 };
+
+const validateEmail = (email: string | undefined) => {
+   return Yup.string().email().isValidSync(email)
+};
+
+const validatePhone = (phone: number | undefined) => {
+   return Yup.number().integer().positive().test(
+      (phone) => {
+        return (phone && phone.toString().length >= 8 && phone.toString().length <= 14) ? true : false;
+      }
+    ).isValidSync(phone);
+};
+
 const validationSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
-    .matches(/^[0-9]+$/, "Please enter a valid phone number")
-    .required("Required"),
+      .required('Email / Phone is required')
+      .test('email_or_phone', 'Email / Phone is invalid', (value) => {
+         return validateEmail(value) || validatePhone(parseInt(value ?? '0'));
+      })
 });
 
 const Login = () => {
@@ -23,12 +38,9 @@ const Login = () => {
     },
   });
   function handleSubmit() {
-    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }, (res) => {
-      console.log(res);
-      if (res.data === "Mobile number is not registered") {
-        navigate("/Verification");
-      }
-    });
+    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
+      navigate('/Verification')
+    })
   }
   return (
     <>
