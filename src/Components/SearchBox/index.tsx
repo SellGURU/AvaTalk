@@ -40,7 +40,7 @@ const SearchBox: React.FC<InputProps> = ({ theme, label, name, placeholder, onCh
           onBlur={onBlur}
           value={value}
         />
-        <img className={`${theme}-SearchBox-FooterIcon ${theme}-SearchBox-ActiveIcon`} src="../../../public/search-normal.svg" alt="" />
+        <img className={`${theme}-SearchBox-searchIcon ${theme}-SearchBox-ActiveIcon`} src="../../../public/search-normal.svg" alt="" />
       </div>
     </div>
   );

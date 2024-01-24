@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, TextField } from "symphony-ui";
-import Footer from "../Footer";
+import { Button } from "symphony-ui";
 import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
 
@@ -23,9 +22,13 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
         <SearchBox value="" theme="Carbon" placeholder="Search name or email..." />
       </div>
       <div className="mt-[20px]">
-        <TextField theme="Carbon" name="contact" value="" onChange={() => {}} onBlur={() => {}} errorMessage={""} placeholder="No contact yet" type="email" inValid={false}></TextField>
+        {/* <TextField theme="Carbon" name="contact" value="" onChange={() => {}} onBlur={() => {}} errorMessage={""} placeholder="No contact yet" type="email" inValid={false}></TextField> */}
+        <div className={`${theme}-ContactsView-box w-[100%]`}>
+          <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
+            No contact yet
+          </div>
+        </div>
       </div>
-      <Footer activeItem="contacts" theme="Carbon" />
     </div>
   );
 };
