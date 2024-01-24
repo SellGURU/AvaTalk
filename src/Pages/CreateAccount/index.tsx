@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
+import { useNavigate } from "react-router";
 
 const initialValue = {
   FirstName: "",
@@ -30,12 +31,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
     onSubmit: (values) => {
-      Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }, (res) => {
-        console.log(res.data);
+      Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }).then(() => {
+        navigate('/')
       });
     },
   });

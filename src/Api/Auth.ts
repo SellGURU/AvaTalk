@@ -5,6 +5,7 @@ import Api from "./Api";
 interface LoginData {
   // email: string | null;
   mobile_number: string | null;
+  code?:string
 }
 interface Location {
   lat: number;
@@ -21,27 +22,18 @@ interface RegisterData {
 }
 
 class Auth extends Api {
-  static login(data: LoginData, submit: (res: any) => void) {
-    this.post("/login", data)
-      .then((res) => {
-        submit(res);
-      })
-      .catch((er) => console.error(er.message));
+  static login(data: LoginData) {
+    const response = this.post("/login", data)
+    return response
   }
-  static get_Login_code(data: LoginData, submit: (res: any) => void) {
-    this.post("/get_Login_code", data)
-      .then((res) => {
-        submit(res);
-      })
-      .catch((er) => console.error(er.message));
+  static get_Login_code(data: LoginData) {
+    const response = this.post("/get_Login_code", data)
+    return response
   }
 
-  static register(data: RegisterData, submit: (res: any) => void) {
-    this.post("/register", data)
-      .then((res) => {
-        submit(res);
-      })
-      .catch((er) => console.error(er.message));
+  static register(data: RegisterData) {
+    const response = this.post("/register", data)
+    return response
   }
 
   static logout() {
