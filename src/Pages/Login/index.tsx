@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../Api";
+import { AuthContext } from "../../store/auth-context";
+import { useContext } from "react";
 
 const initialValue = {
   emailOrPhone: "",
@@ -30,6 +32,7 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext)
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -39,6 +42,9 @@ const Login = () => {
   });
   function handleSubmit() {
     Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
+      authContext.verificationHandler({
+        emailOrPhone: formik.values.emailOrPhone
+      })
       navigate('/Verification')
     })
   }
@@ -57,7 +63,7 @@ const Login = () => {
           //     navigate("/Verification");
           //   }
           // }
-          disabled={!formik.isValid || !formik.touched.emailOrPhone}
+          disabled={!formik.isValid || formik.values.emailOrPhone.length ==0}
           theme="Carbon"
         >
           Continue
@@ -73,7 +79,7 @@ const Login = () => {
         </div>
 
         <div className="mt-11">
-          <Button theme="Carbon-Google">
+          <Button onClick={handleSubmit} theme="Carbon-Google">
             <img className="mr-2" src="./Google.png" alt="" />
             <div>Continue with Google</div>
           </Button>
