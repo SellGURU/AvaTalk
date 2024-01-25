@@ -12,7 +12,7 @@
     display: none;
 }
 .Carbon-Profile-Background{
-    background-image: url(./src/assets/Carbon/BackgroundProfileImage.png) ;
+    background-image: url(/Carbon/BackgroundProfileImage.png) ;
     border: 1px solid transparent;
     box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
     -6px -6px 20px 0px rgba(255, 255, 255, 1),
@@ -30,7 +30,7 @@
 }
 .Carbon-Profile-ProfilePicture {
     @apply w-full h-full bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full border-2 border-gray-100;
-    background-image: url(./src/assets/Carbon/profileImage.png);
+    background-image: url(/Carbon/profileImage.png);
 }
 .Carbon-Profile-GalleryVectorContainer {
     box-shadow: 2px 2px 20px 0px #6F8CB036,
@@ -51,13 +51,13 @@
     @apply w-6 h-6 bg-violet-700;
 }
 .Carbon-Profile-EditGalleryVector{
-    mask-image: url(./src/assets/Carbon/editGallery.svg);
+    mask-image: url(/Carbon/editGallery.svg);
 }
 .Carbon-Profile-ImportGalleryVector{
-    mask-image: url(./src/assets/Carbon/importGallery.svg);
+    mask-image: url(/Carbon/importGallery.svg);
 }
 .Carbon-Profile-ScanBarcodeVector{
-    mask-image: url(./src/assets/Carbon/scanBarcode.svg);
+    mask-image: url(/Carbon/scanBarcode.svg);
 }
 .Carbon-Profile-GalleryImport {
     @apply left-52 top-16;
@@ -73,22 +73,22 @@
     @apply text-sm;
 }
 .Carbon-Profile-PreviewProfileBtnVector{
-    background: url(./src/assets/Carbon/eyeVector.svg);
+    background: url(/Carbon/eyeVector.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;  
 }
 .Carbon-Profile-EditProfileBtnVector{
-    background-image: url(./src/assets/Carbon/editProfile.svg);
+    background-image: url(/Carbon/editProfile.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-BtnContainer{
     @apply w-48 h-[40px];  
 }
 .Carbon-Profile-InstagramVector{
-    background: url(./src/assets/Carbon/instagram.png) no-repeat;
+    background: url(/Carbon/instagram.png) no-repeat;
     background-size: cover;
 }
 .Carbon-Profile-LinkedinVector{
-    background: url(./src/assets/Carbon/linkedin.png) no-repeat;
+    background: url(/Carbon/linkedin.png) no-repeat;
     background-size: cover;
 }
 .Carbon-Profile-Vectors{

@@ -20,7 +20,7 @@ const Splash: React.FC<SplashProps> = ({ theme }) => {
   return (
     <div className={`${theme}-Splash-fade ${showSplash ? `${theme}-Splash-show` : `${theme}-Splash-hide`}`}>
       <div className={`${theme}-Splash-Container`}>
-        <img className={`${theme}-Splash-SplashIcon`} src="./splash.svg" alt="" />
+        <img className={`${theme}-Splash-SplashIcon`} src="/Carbon/splashImage.svg" alt="" />
       </div>
     </div>
   );
