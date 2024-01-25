@@ -16,16 +16,16 @@
   @apply w-6 h-6 bg-slate-400; 
 }
 .Carbon-Footer-UserVector {
-  mask-image: url(./src/assets/Carbon/userVector.svg);
+  mask-image: url(Carbon/userVector.svg);
 }
 .Carbon-Footer-BookVector {
-  mask-image: url(./src/assets/Carbon/bookVector.svg);
+  mask-image: url(Carbon/bookVector.svg);
 }
 .Carbon-Footer-StatusVector {
-  mask-image: url(./src/assets/Carbon/statusupVector.svg);
+  mask-image: url(/Carbon/statusupVector.svg);
 }
 .Carbon-Footer-SettingVector {
-  mask-image: url(./src/assets/Carbon/settingVector.svg);
+  mask-image: url(Carbon/settingVector.svg);
 }
 .Carbon-Footer-ActiveVectorSection {
   box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;

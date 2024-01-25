@@ -80,7 +80,7 @@ const Login = () => {
 
         <div className="mt-11">
           <Button onClick={handleSubmit} theme="Carbon-Google">
-            <img className="mr-2" src="./Google.png" alt="" />
+            <img className="mr-2" src="./Carbon/Google.png" alt="" />
             <div>Continue with Google</div>
           </Button>
         </div>
