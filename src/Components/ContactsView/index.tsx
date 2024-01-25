@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "symphony-ui";
 import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
+import ContactList from "../ContactList";
 
 interface ProfileProps {
   theme?: string;
@@ -29,6 +30,7 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
           </div>
         </div>
       </div>
+      <ContactList theme={theme} />
     </div>
   );
 };
