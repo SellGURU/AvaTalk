@@ -3,9 +3,11 @@ import {Profile} from "../../Components"
 import { useState } from "react"
 import { MenuType } from "../../Types"
 import ContactsView from "../../Components/ContactsView"
+import Splash from "../../Components/Splash"
 
 const Home = () => {
     const [menu,setMenu] = useState<MenuType>('profile')
+    const [showSplash,setshowSplash] = useState(true);
     const menuResolver = () => {
         switch (menu) {
             case 'profile' : return <Profile theme="Carbon"></Profile>
@@ -14,10 +16,19 @@ const Home = () => {
             case 'status' : return <Profile theme="Carbon"></Profile>
         }
     }
+    setTimeout(() => {
+        setshowSplash(false)
+    }, 3000);
     return (
         <>
-            {menuResolver()}
-            <Footer activeItem={menu} onItemChange={setMenu} theme="Carbon"/>
+            {showSplash ?
+                <Splash theme="Carbon"></Splash>
+            :
+            <>
+                {menuResolver()}
+                <Footer activeItem={menu} onItemChange={setMenu} theme="Carbon"/>
+            </>
+            }
         </>
     )
 }
