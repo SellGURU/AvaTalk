@@ -3,19 +3,36 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../Api";
+import { AuthContext } from "../../store/auth-context";
+import { useContext } from "react";
 
 const initialValue = {
   emailOrPhone: "",
 };
+
+const validateEmail = (email: string | undefined) => {
+   return Yup.string().email().isValidSync(email)
+};
+
+const validatePhone = (phone: number | undefined) => {
+   return Yup.number().integer().positive().test(
+      (phone) => {
+        return (phone && phone.toString().length >= 8 && phone.toString().length <= 14) ? true : false;
+      }
+    ).isValidSync(phone);
+};
+
 const validationSchema = Yup.object().shape({
-  //   emailOrPhone: Yup.string().email("Please enter a valid email").required("Required"),
   emailOrPhone: Yup.string()
-    .matches(/^[0-9]+$/, "Please enter a valid phone number")
-    .required("Required"),
+      .required('Email / Phone is required')
+      .test('email_or_phone', 'Email / Phone is invalid', (value) => {
+         return validateEmail(value) || validatePhone(parseInt(value ?? '0'));
+      })
 });
 
 const Login = () => {
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext)
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -24,12 +41,12 @@ const Login = () => {
     },
   });
   function handleSubmit() {
-    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }, (res) => {
-      console.log(res);
-      if (res.data === "Mobile number is not registered") {
-        navigate("/Verification");
-      }
-    });
+    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
+      authContext.verificationHandler({
+        emailOrPhone: formik.values.emailOrPhone
+      })
+      navigate('/Verification')
+    })
   }
   return (
     <>
@@ -46,7 +63,7 @@ const Login = () => {
           //     navigate("/Verification");
           //   }
           // }
-          disabled={!formik.isValid || !formik.touched.emailOrPhone}
+          disabled={!formik.isValid || formik.values.emailOrPhone.length ==0}
           theme="Carbon"
         >
           Continue
@@ -62,7 +79,7 @@ const Login = () => {
         </div>
 
         <div className="mt-11">
-          <Button theme="Carbon-Google">
+          <Button onClick={handleSubmit} theme="Carbon-Google">
             <img className="mr-2" src="./Google.png" alt="" />
             <div>Continue with Google</div>
           </Button>

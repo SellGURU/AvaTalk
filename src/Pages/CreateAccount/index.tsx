@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
+import { useNavigate } from "react-router";
 
 const initialValue = {
   FirstName: "",
@@ -30,12 +31,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
     onSubmit: (values) => {
-      Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }, (res) => {
-        console.log(res.data);
+      Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }).then(() => {
+        navigate('/')
       });
     },
   });
@@ -172,9 +174,9 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }
             <TextField {...formik.getFieldProps("CompanyName")} label="Company Name" placeholder="Enter your company name..." theme="Carbon" name="CompanyName" type="text" inValid={false}></TextField>
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <TextField label="Your Location" placeholder="Search your location..." theme="Carbon" name="Last Name" type="text" inValid={false} onBlur={() => {}} onChange={() => {}} value=""></TextField>
-          </div>
+          </div> */}
           <div>
             <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
           </div>

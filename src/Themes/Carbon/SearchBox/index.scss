@@ -11,7 +11,7 @@
   // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
     linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
-  @apply focus:outline-none w-full h-[44px] boxsInnerShadows rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
+  @apply focus:outline-none w-full h-[56px] boxsInnerShadows rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
 }
 
 .Carbon-SearchBox-inValid {
@@ -65,8 +65,8 @@
 .Carbon-SearchBox-box[deta-selectBox="true"] {
   @apply rounded-bl-none #{!important};
 }
-.Carbon-SearchBox-FooterIcon {
-  @apply w-10 h-10 p-2 mr-[17px] rounded-full cursor-pointer;
+.Carbon-SearchBox-searchIcon {
+  @apply w-10 h-10 p-2 absolute right-3  rounded-full cursor-pointer;
 }
 .Carbon-SearchBox-ActiveIcon {
   box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;

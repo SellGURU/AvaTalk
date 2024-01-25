@@ -1,0 +1,35 @@
+.Carbon-Presentation-Container {
+    @apply w-full h-screen flex justify-center text-gray-700 text-center;
+}
+.Carbon-Presentation-PresentationSection {
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    @apply relative overflow-auto w-full ;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.Carbon-Presentation-PresentationSection::-webkit-scrollbar{
+    display: none;
+}
+.Carbon-Presentation-Content {
+    @apply relative flex flex-col gap-4 justify-center items-center mt-11 px-4 pb-20;
+}
+.Carbon-Presentation-PresentationPictureSection {
+    box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
+    @apply w-40 h-40 rounded-full relative;
+}
+.Carbon-Presentation-PresentationPicture {
+    @apply w-full h-full bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full border-2 border-gray-100;
+    background-image: url(./src/assets/Carbon/profileImage.png);
+}
+.Carbon-Presentation-PresentationName {
+    text-shadow: 0px 1px 1px currentColor;
+    @apply font-medium text-lg;
+}
+.Carbon-Presentation-SubTitle {
+    @apply text-sm;
+}
+
+
+
+  

@@ -1,6 +1,9 @@
 .Carbon-Button-container {
   background: linear-gradient(35deg, rgba(232, 225, 218, 1) -100%, #6432c9 50%, rgba(100, 50, 201, 1) 100%);
-  box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
+  text-shadow: 0px 1px 1px currentColor;
+  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+          -6px -6px 20px 0px rgba(255, 255, 255, 1),
+          2px 2px 4px 0px rgba(114, 142, 171, 0.1) !important;
   @apply flex justify-center items-center text-white w-full disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
 }
 

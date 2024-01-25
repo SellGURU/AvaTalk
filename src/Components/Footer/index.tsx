@@ -14,13 +14,56 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
     }
   };
 
-  const activeStyle = `${theme}-Footer-ActiveIcon`;
   return (
     <div className={`${theme}-Footer-Container`}>
-      <img onClick={() => handleItemClick("profile")} className={`${theme}-Footer-FooterIcon  ${activeItem === "profile" ? activeStyle : ""}`} src={activeItem === "profile" ? "./profile-circle.svg" : "./profile-circle-gray.svg"} alt="" />
-      <img onClick={() => handleItemClick("contacts")} className={`${theme}-Footer-FooterIcon ${activeItem === "contacts" ? activeStyle : ""}`} src={activeItem === "contacts" ? "./public/book-color.svg" : "./book.svg"} alt="" />
-      <img onClick={() => handleItemClick("status")} className={`${theme}-Footer-FooterIcon ${activeItem === "status" ? activeStyle : ""}`} src={activeItem === "status" ? "./status-up-color.svg" : "./status-up.svg"} alt="" />
-      <img onClick={() => handleItemClick("settings")} className={`${theme}-Footer-FooterIcon ${activeItem === "settings" ? activeStyle : ""}`} src={activeItem === "settings" ? "./setting-2-color.svg" : "./setting.svg"} alt="" />
+      <div
+        onClick={() => handleItemClick("profile")}
+        className={`${theme}-Footer-VectorSection ${
+          activeItem === "profile" ? `${theme}-Footer-ActiveVectorSection` : ""
+        }`}
+      >
+        <div
+          className={`${theme}-Footer-Vectors ${theme}-Footer-UserVector ${
+            activeItem === "profile" ? `${theme}-Footer-ActiveVectors` : ""
+          }`}
+        ></div>
+      </div>
+      <div
+        onClick={() => handleItemClick("contacts")}
+        className={`${theme}-Footer-VectorSection ${
+          activeItem === "contacts" ? `${theme}-Footer-ActiveVectorSection` : ""
+        }`}
+      >
+        <div
+          className={`${theme}-Footer-Vectors ${theme}-Footer-BookVector ${
+            activeItem === "contacts" ? `${theme}-Footer-ActiveVectors` : ""
+          }`}
+        ></div>
+      </div>
+      <div
+        onClick={() => handleItemClick("status")}
+        className={`${theme}-Footer-VectorSection ${
+          activeItem === "status" ? `${theme}-Footer-ActiveVectorSection` : ""
+        }`}
+      >
+        <div
+          className={`${theme}-Footer-Vectors ${theme}-Footer-StatusVector ${
+            activeItem === "status" ? `${theme}-Footer-ActiveVectors` : ""
+          }`}
+        ></div>
+      </div>
+      <div
+        onClick={() => handleItemClick("settings")}
+        className={`${theme}-Footer-VectorSection ${
+          activeItem === "settings" ? `${theme}-Footer-ActiveVectorSection` : ""
+        }`}
+      >
+        <div
+          className={`${theme}-Footer-Vectors ${theme}-Footer-SettingVector ${
+            activeItem === "settings" ? `${theme}-Footer-ActiveVectors` : ""
+          }`}
+        ></div>
+      </div>
     </div>
   );
 };
