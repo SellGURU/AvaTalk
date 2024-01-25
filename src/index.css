@@ -28,12 +28,18 @@
     background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box, linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) border-box;
   }
   .contactBoxShadows {
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41);
+    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
   }
   .contactBorderGradin {
     background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box, linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%) border-box;
   }
   .hiddenScrollBar::-webkit-scrollbar {
     display: none !important;
+  }
+  .exhibitionBoxShadows {
+    box-shadow: 2px 2px 20px 0px rgba(111, 140, 176, 0.21), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+  }
+  .contactNameShadow {
+    text-shadow: 0px 1px 1px 0px rgba(107, 119, 130, 0.85);
   }
 }

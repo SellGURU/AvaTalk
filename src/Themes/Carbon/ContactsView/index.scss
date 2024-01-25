@@ -1,5 +1,5 @@
 .Carbon-ContactsView-Container {
-  @apply h-screen  text-gray-700 mt-[200px];
+  @apply w-full h-screen   text-gray-700 mt-[200px];
 }
 .Carbon-ContactsView-contactText {
   @apply leading-[24px] text-[16px] text-gray-700 mb-[22px]  font-[600];
@@ -12,6 +12,16 @@
 }
 .Carbon-ContactsView-innerBox {
   border: 1px solid transparent;
-
-  @apply rounded-[27px] flex items-center contactBorderGradin boxOutterShadows bg-gray-100 h-[44px] text-gray-500/60 px-4 leading-[18px] text-[13px] font-[300]   justify-between;
+  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+  @apply rounded-[27px] flex items-center  bg-gray-100 h-[44px] text-gray-500/60 px-4 leading-[18px] text-[13px] font-[300]   justify-between;
+}
+.Carbon-ContactsView-Section {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  @apply relative overflow-auto;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.Carbon-ContactsView-Section::-webkit-scrollbar {
+  display: none;
 }
