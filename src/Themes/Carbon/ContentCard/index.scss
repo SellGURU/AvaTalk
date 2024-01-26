@@ -10,6 +10,9 @@
 .Carbon-ContentCard-Vectors{
     @apply flex flex-row gap-[6px] ;
 }
+.Carbon-ContentCard-Vectors[data-mode='review']{
+    @apply invisible ;
+}
 .Carbon-ContentCard-CardVector{
     box-shadow:
     4px 4px 20px 0px rgba(111, 140, 176, 0.41),
@@ -28,11 +31,11 @@
     @apply text-left text-sm;
 }
 .Carbon-ContentCard-CVector{
-    background: url(./src/assets/Carbon/cLinksVector.svg) no-repeat center;
+    background: url(/Carbon/cLinksVector.svg) no-repeat center;
     @apply w-6 h-[30px] #{!important} ;
 }
 .Carbon-ContentCard-GlobalVector{
-    background: url(./src/assets/Carbon/globalLinksVector.svg) no-repeat center;
+    background: url(/Carbon/globalLinksVector.svg) no-repeat center;
     @apply w-6 h-6;
 }
 .Carbon-ContentCard-MaskVector{
@@ -43,11 +46,11 @@
     @apply w-6 h-6 bg-violet-700;
 }
 .Carbon-ContentCard-ArrowVector{
-    mask-image: url(./src/assets/Carbon/arrowSwapHorizontalVector.svg);
+    mask-image: url(/Carbon/arrowSwapHorizontalVector.svg);
 }
 .Carbon-ContentCard-TrashVector{
-    mask-image: url(./src/assets/Carbon/trashVector.svg);
+    mask-image: url(/Carbon/trashVector.svg);
 }
 .Carbon-ContentCard-EditVector{
-    mask-image: url(./src/assets/Carbon/editContentCard.svg);
+    mask-image: url(/Carbon/editContentCard.svg);
 }

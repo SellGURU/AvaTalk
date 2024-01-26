@@ -83,7 +83,7 @@ const TextField: React.FC<InputProps> = ({
               <>
                   <div onClick={() => setShowDropDown(!ShowDropDown)}  className={`${theme}-TextField-selectPhone-container`}>
                         <img style={{}} src={`https://flagcdn.com/w20/${phoneCountry?.codeName}.png`}></img>
-                        <img className={`${theme}-TextField-selectPhone-container-icon`}  src="./src/assets/Carbon/bottomVector.svg" alt="" />
+                        <img className={`${theme}-TextField-selectPhone-container-icon`}  src="./Carbon/bottomVector.svg" alt="" />
                   </div>
                   {
                     ShowDropDown ?

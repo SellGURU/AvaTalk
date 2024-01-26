@@ -174,9 +174,9 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }
             <TextField {...formik.getFieldProps("CompanyName")} label="Company Name" placeholder="Enter your company name..." theme="Carbon" name="CompanyName" type="text" inValid={false}></TextField>
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <TextField label="Your Location" placeholder="Search your location..." theme="Carbon" name="Last Name" type="text" inValid={false} onBlur={() => {}} onChange={() => {}} value=""></TextField>
-          </div>
+          </div> */}
           <div>
             <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
           </div>

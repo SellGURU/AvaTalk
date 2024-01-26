@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
 
@@ -6,30 +6,42 @@ interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
+  const [mode,setMode] = useState<'profile'|'review'>('profile')
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
       <div className={`${theme}-Profile-ProfileSection`}>
         <div className={`${theme}-Profile-Background`}></div>
         <div className={`${theme}-Profile-Content`}>  
-          <div className={`${theme}-Profile-BtnContainer`}>
-          <Button theme="Carbon-Google" data-mode="profile-review-button">
-              <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
-              <div>Preview Profile</div>
-          </Button>
-          </div>
+          {
+            mode == 'profile' ?
+              <div className={`${theme}-Profile-BtnContainer`}>
+                <Button onClick={() => {setMode('review')}} theme="Carbon-Google" data-mode="profile-review-button">
+                    <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
+                    <div>Preview Profile</div>
+                </Button>
+              </div>
+            :
+            <Button onClick={() => {setMode('profile')}} theme='Carbon-back'>
+              <div className={`${theme}-Profile-closeIcon`}></div>
+            </Button>
+          }
 
           <div className={`${theme}-Profile-ProfilePictureSection`}>
             <div className={`${theme}-Profile-ProfilePicture`}></div>
-            <div className={`${theme}-Profile-GalleryVectorContainer`}>
-              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
-            </div>
-            <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
-              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
-            </div>
-            <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-ScanBarcode`}>
-              <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
-            </div>
+            {mode == 'profile' ?
+              <>
+                <div className={`${theme}-Profile-GalleryVectorContainer`}>
+                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
+                </div>
+                <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
+                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
+                </div>
+                <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-ScanBarcode`}>
+                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
+                </div>
+              </>
+            :undefined}
           </div>
 
           <div>
@@ -37,14 +49,30 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <p className={`${theme}-Profile-SubTitle`}>CoFounder & CEO</p>
           </div>
 
-          <Button theme="Carbon">
-            <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
-            <div>
-              Edit Profile
+          {mode == 'profile' ?
+            <Button theme="Carbon">
+              <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
+              <div>
+                Edit Profile
+              </div>
+            </Button>
+          :
+            <>
+            <div className='flex gap-x-2 items-center w-full'>
+              <Button theme="Carbon">
+                <div className={`${theme}-Profile-StartPresentionBtnVector`}></div>
+                <div>
+                  Start Presentation
+                </div>
+              </Button>     
+              <Button data-mode="calendar" theme='Carbon-back'>
+                <div className={`${theme}-Profile-CalenderBtnVector`}></div>
+              </Button>       
             </div>
-          </Button>
+            </>
+          }
 
-          <ContentCard theme="Carbon" title="Social">
+          <ContentCard mod={mode} theme="Carbon" title="Social">
             <div className={`${theme}-Profile-Vectors`}>
               <div className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-InstagramVector`}></div>
@@ -54,7 +82,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               </div>
             </div>
           </ContentCard>
-          <ContentCard theme="Carbon" title="Links">
+          <ContentCard mod={mode} theme="Carbon" title="Links">
             <div className={`${theme}-Profile-Vectors`}>
               <div className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
@@ -68,7 +96,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               </div>
             </div>
           </ContentCard>
-          <ContentCard theme="Carbon" title="About me">
+          <ContentCard mod={mode} theme="Carbon" title="About me">
             <h1>Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.</h1>
           </ContentCard>
         </div>
