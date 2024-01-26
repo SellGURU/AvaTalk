@@ -102,3 +102,15 @@
     @apply bg-gray-100 w-16 h-16 flex justify-center items-center rounded-full p-2 border border-white ; 
 }
 
+.Carbon-Profile-closeIcon{
+    background: url(/Carbon/Add.svg);    
+    @apply w-6 h-6 bg-cover bg-no-repeat;  
+}
+.Carbon-Profile-StartPresentionBtnVector{
+    background-image: url(/Carbon/play-circle.svg);
+    @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
+}
+.Carbon-Profile-CalenderBtnVector{
+    background-image: url(/Carbon/calendar-2.svg);
+    @apply w-6 h-6  bg-cover bg-no-repeat;
+}
