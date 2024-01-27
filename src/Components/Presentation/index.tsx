@@ -1,33 +1,98 @@
-import React from "react";
+import React , {useState} from "react";
 import { Button } from "symphony-ui";
+// import { MenuType } from "../../Types"
+import FooterPresentation from "../FooterPresentation";
 
 interface PresentationProps {
   theme?: string;
 }
 
 const Presentation: React.FC<PresentationProps> = ({ theme }) => {
-
+  const [mode,setMode] = useState<'profile'|'review'>('profile')
+  // const [menu,setMenu] = useState<MenuType>('profile')
 
   return (
+    <>
     <div className={`${theme}-Presentation-Container`}>
-        <div className={`${theme}-Presentation-PresentationSection`}>
-            <div className={`${theme}-Presentation-Content`}>  
-
-                <div className={`${theme}-Presentation-PresentationPictureSection`}>
-                    <div className={`${theme}-Presentation-PresentationPicture`}></div>
+      <div className={`${theme}-Presentation-PresentationSection`}>
+        <div className={`${theme}-Presentation-Content`}>  
+          <div className={`${theme}-Presentation-ArrowLeft ${theme}-Presentation-PictureSection`}>
+            <div className={`${theme}-Presentation-ArrowLeftVector`}></div>
+          </div>
+          <div className={`${theme}-Presentation-PictureSection`}>
+            <div className={`${theme}-Presentation-PresentationPicture`}></div>
+          </div>
+          <div>
+            <h1 className={`${theme}-Presentation-PresentationName`}>Farzin Azami</h1>
+            <p className={`${theme}-Presentation-SubTitle`}>CoFounder & CEO</p>
+          </div>
+          {
+            mode == 'profile' ?
+              <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
+                Start Presentation
+              </Button>
+            :
+            ""
+          }
+      
+          {mode == 'profile' ?
+            <div className={`${theme}-Presentation-InfoSection`}>
+              <div className={`${theme}-Presentation-Info`}>
+                <div className={`${theme}-Presentation-Vectors`}>
+                  <div className={`${theme}-Presentation-CallVector`}></div>
                 </div>
-
-                <div>
-                    <h1 className={`${theme}-Presentation-PresentationName`}>Farzin Azami</h1>
-                    <p className={`${theme}-Presentation-SubTitle`}>CoFounder & CEO</p>
+                <div>+44 (788)29 59 722</div>
+              </div>
+              <div className={`${theme}-Presentation-Info`}>
+                <div className={`${theme}-Presentation-Vectors`}>
+                  <div className={`${theme}-Presentation-EmailVector`}></div>
                 </div>
-
-                <Button theme="Carbon">
-                    Start Presentation
-                </Button>
+                <div>Azami@codie.ai</div>
+              </div>
+              <div className={`${theme}-Presentation-Info`}>
+                <div className={`${theme}-Presentation-Vectors`}>
+                  <div className={`${theme}-Presentation-WebsiteVector`}></div>
+                </div>
+                <div>codie.ai</div>
+              </div>
+              <div className={`${theme}-Presentation-Info`}>
+                <div className={`${theme}-Presentation-Vectors`}>
+                  <div className={`${theme}-Presentation-LinkedinVector`}></div>
+                </div>
+                <div>LinkedIn</div>
+              </div>              
             </div>
+          :
+            <>
+            <div className="flex flex-col gap-3 items-center w-full">
+              <div className="font-semibold	mb-1 mt-6">Ask me more information</div>
+              <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
+                Can you introduce yourself?
+              </Button>
+              <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
+                Tell me more about your business
+              </Button>  
+              <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
+                What services do you provide in Codie?
+              </Button>  
+            </div>
+            </>
+          }
+
+
+
         </div>
+      </div>
     </div>
+    {
+      mode == 'profile' ?
+        ""
+      :
+        <FooterPresentation theme="Carbon"/>
+    }
+
+
+    </>
   );
 };
 
