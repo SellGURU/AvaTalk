@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
+import { BookMark } from '../__Modal__';
 
 interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
+  const [showBookMark,setShowBookMark] = useState(false)
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
@@ -65,7 +67,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   Start Presentation
                 </div>
               </Button>     
-              <Button data-mode="calendar" theme='Carbon-back'>
+              <Button onClick={() => {setShowBookMark(true)}} data-mode="calendar" theme='Carbon-back'>
                 <div className={`${theme}-Profile-CalenderBtnVector`}></div>
               </Button>       
             </div>
@@ -102,6 +104,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         </div>
        
       </div>
+
+      <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
     </div>
     </>
     
