@@ -37,7 +37,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div>
-                <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-ScanBarcode`}>
+                <div className={`${theme}-Profile-ScanBarcode`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
                 </div>
               </>
