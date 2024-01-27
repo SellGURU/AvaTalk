@@ -3,6 +3,7 @@
 
 import { createContext, PropsWithChildren, useState } from "react";
 import { removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage/Token";
+import {User} from "../Model";
 
 interface VerificationProps {
   emailOrPhone:string;
@@ -12,6 +13,8 @@ interface AuthContextProps {
   token: string | null;
   isLoggedIn: boolean;
   varification:VerificationProps;
+  currentUser:User;
+  setUser:(user:User) => void;
   login: (token: string) => void;
   verificationHandler: (verification:VerificationProps) => void;
   logout: () => void;
@@ -23,6 +26,8 @@ export const AuthContext = createContext<AuthContextProps>({
   varification:{
     emailOrPhone:''
   },
+  setUser:() => {},
+  currentUser: new User(),
   verificationHandler: () => {},
   login: () => {},
   logout: () => {},
@@ -30,6 +35,7 @@ export const AuthContext = createContext<AuthContextProps>({
 
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
+  const [user,setUser] = useState<User>(new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
       emailOrPhone:''
@@ -42,9 +48,11 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     // localStorage.removeItem("token");
     removeTokenFromLocalStorage();
   }
+
   function verificationHandler(verification:VerificationProps) {
     setVerification(verification)
   }
+
   function loginHandler(token: string) {
     setToken(token);
     // localStorage.setItem("token", token);
@@ -55,6 +63,10 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     token,
     isLoggedIn: userIsLoggedIn,
     varification:verification,
+    currentUser: user,
+    setUser:(user:User) => {
+      setUser(user)
+    },
     verificationHandler:verificationHandler,
     login: loginHandler,
     logout: logoutHandler,

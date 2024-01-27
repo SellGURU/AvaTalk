@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FileUploadr, StepController, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 import LocationPicker from "react-leaflet-location-picker";
@@ -10,6 +10,8 @@ import { useFormik } from "formik";
 import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
 import { useNavigate } from "react-router";
+import {User} from "../../Model";
+import { AuthContext } from "../../store/auth-context";
 
 const initialValue = {
   FirstName: "",
@@ -32,11 +34,23 @@ const validationSchema = Yup.object().shape({
 
 const CreateAccount = () => {
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext)
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
     onSubmit: (values) => {
       Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }).then(() => {
+        const newUser = new User({
+          firstName:values.FirstName,
+          lastName:values.LastName,
+          phone:values.Phone,
+          banelImage:'',
+          company:values.CompanyName,
+          imageurl:values.PrifileImage,
+          job:values.JobTitle,
+          location:location
+        })
+        authContext.setUser(newUser)
         navigate('/')
       });
     },
