@@ -1,13 +1,27 @@
 import { createHashRouter } from "react-router-dom";
 import { Home, Login, Verification, Spinner, CreateAccount, Splash, Contacts, Dev } from "../Pages";
+
+import ContactPage from "../Pages/ContactPage";
+
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import ContactPage from "../Pages/ContactPage";
+import { ContactsView, Profile } from "../Components";
 
 const route = createHashRouter([
   {
     path: "/",
     element: <ProtectedRoute Component={Home} />,
+
+    children: [
+      {
+        path: "/",
+        element: <Profile theme="Carbon"></Profile>,
+      },
+      {
+        path: "/contacts",
+        element: <ContactsView theme="Carbon"></ContactsView>,
+      },
+    ],
     // element: <Home></Home>,
   },
   {
@@ -34,10 +48,10 @@ const route = createHashRouter([
     path: "/splash",
     element: <Splash />,
   },
-  {
-    path: "/contacts",
-    element: <Contacts />,
-  },
+  // {
+  //   path: "/contacts",
+  //   element: <Contacts />,
+  // },
   {
     path: "/contacts/:contactId",
     element: <ContactPage />,

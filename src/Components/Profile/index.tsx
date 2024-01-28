@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
+import { BookMark } from '../__Modal__';
+import { useAuth } from '../../hooks/useAuth';
 
 interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
+  const [showBookMark,setShowBookMark] = useState(false)
+  const authContext = useAuth()
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
@@ -28,7 +32,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           }
 
           <div className={`${theme}-Profile-ProfilePictureSection`}>
-            <div className={`${theme}-Profile-ProfilePicture`}></div>
+            {/* <div className={`${theme}-Profile-ProfilePicture`}></div> */}
+            <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
             {mode == 'profile' ?
               <>
                 <div className={`${theme}-Profile-GalleryVectorContainer`}>
@@ -37,7 +42,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div>
-                <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-ScanBarcode`}>
+                <div className={`${theme}-Profile-ScanBarcode`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
                 </div>
               </>
@@ -45,8 +50,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           </div>
 
           <div>
-            <h1 className={`${theme}-Profile-ProfileName`}>Farzin Azami</h1>
-            <p className={`${theme}-Profile-SubTitle`}>CoFounder & CEO</p>
+            <h1 className={`${theme}-Profile-ProfileName`}>{authContext.currentUser.information?.firstName}</h1>
+            <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
           </div>
 
           {mode == 'profile' ?
@@ -65,7 +70,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   Start Presentation
                 </div>
               </Button>     
-              <Button data-mode="calendar" theme='Carbon-back'>
+              <Button onClick={() => {setShowBookMark(true)}} data-mode="calendar" theme='Carbon-back'>
                 <div className={`${theme}-Profile-CalenderBtnVector`}></div>
               </Button>       
             </div>
@@ -102,6 +107,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         </div>
        
       </div>
+
+      <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
     </div>
     </>
     

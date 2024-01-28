@@ -1,21 +1,13 @@
-import Footer from "../../Components/Footer"
-import {Profile} from "../../Components"
 import { useState } from "react"
 import { MenuType } from "../../Types"
-import ContactsView from "../../Components/ContactsView"
-import Splash from "../../Components/Splash"
+import {Splash ,Footer} from "../../Components"
+import { Outlet, useNavigate} from "react-router-dom"
+import { resolveMenuFromRoute, resolveNavigation } from "../../help"
 
 const Home = () => {
-    const [menu,setMenu] = useState<MenuType>('profile')
+    const navigate = useNavigate();  
+    const [menu,setMenu] = useState<MenuType>(resolveMenuFromRoute() as MenuType)
     const [showSplash,setshowSplash] = useState(true);
-    const menuResolver = () => {
-        switch (menu) {
-            case 'profile' : return <Profile theme="Carbon"></Profile>
-            case 'contacts' : return <ContactsView theme="Carbon"></ContactsView>
-            case 'settings' : return <Profile theme="Carbon"></Profile>
-            case 'status' : return <Profile theme="Carbon"></Profile>
-        }
-    }
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);
@@ -25,8 +17,11 @@ const Home = () => {
                 <Splash theme="Carbon"></Splash>
             :
             <>
-                {menuResolver()}
-                <Footer activeItem={menu} onItemChange={setMenu} theme="Carbon"/>
+                <Outlet></Outlet>
+                <Footer activeItem={menu} onItemChange={(element) => {
+                    setMenu(element)
+                    resolveNavigation(element,navigate)
+                }} theme="Carbon"/>
             </>
             }
         </>

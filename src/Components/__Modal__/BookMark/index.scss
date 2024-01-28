@@ -1,0 +1,24 @@
+.react-calendar{
+    width: 100% !important;   
+    @apply bg-gray-100 rounded-[27px] border-none boxsInnerShadows  #{!important};
+}
+.react-calendar__navigation {
+    @apply rounded-[27px]
+}
+.react-calendar__navigation__prev2-button {
+    @apply rounded-[27px]
+}
+.react-calendar__navigation__next2-button{
+    @apply rounded-[27px]
+}
+.react-calendar__tile {
+    @apply rounded-[27px]
+}
+
+.ReactModal__Content {
+ @apply static #{!important};
+}
+
+.ReactModal__Overlay {
+    @apply flex w-full justify-center items-center #{!important};
+}

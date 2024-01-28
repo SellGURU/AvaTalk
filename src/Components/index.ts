@@ -10,4 +10,8 @@ import SearchBox from "./SearchBox";
 import Presentation from "./Presentation";
 import ContactDetails from "./ContactDetails";
 
-export { Profile, Spinners, ContentCard, StepController, TextField, FileUploadr, ToggleButton, Select, SearchBox, Presentation, ContactDetails };
+import ContactsView from "./ContactsView";
+import Splash from "./Splash";
+import Footer from "./Footer";
+
+export { Profile, Spinners, ContentCard, StepController, TextField, FileUploadr, ToggleButton, Select, SearchBox, Presentation, ContactsView, Splash, Footer, ContactDetails };
