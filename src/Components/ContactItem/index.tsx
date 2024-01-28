@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface DataProps {
   id: number;
   name: string;
@@ -9,10 +11,10 @@ interface DataProps {
 
 const ContactItem = ({ data, theme }: { data: DataProps; theme: string | undefined }) => {
   return (
-    <div className={`${theme}-ContactItem-container `}>
+    <Link to={`/contacts/${data.id}`} className={`${theme}-ContactItem-container `}>
       <div className={`${theme}-ContactItem-section `}>
         {data.Exchange && <p className={`${theme}-ContactItem-exchange `}>Exchange</p>}
-        <img src={data.image} alt={data.name} />
+        <img src={data.image} alt={data.name} className="w-[50px] h-[50px]" />
         <div className={`${theme}-ContactItem-card `}>
           <div className={`${theme}-ContactItem-innerCard `}>
             <p className={`${theme}-ContactItem-name `}>{data.name}</p>
@@ -25,7 +27,7 @@ const ContactItem = ({ data, theme }: { data: DataProps; theme: string | undefin
           <p className={`${theme}-ContactItem-email `}>{data.email}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

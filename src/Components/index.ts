@@ -8,17 +8,6 @@ import StepController from "./StepController";
 import ToggleButton from "./ToggleButton";
 import SearchBox from "./SearchBox";
 import Presentation from "./Presentation";
+import ContactDetails from "./ContactDetails";
 
-
-export { 
-    Profile,
-    Spinners,
-    ContentCard,
-    StepController,
-    TextField,
-    FileUploadr,
-    ToggleButton,
-    Select,
-    SearchBox ,
-    Presentation
-};
+export { Profile, Spinners, ContentCard, StepController, TextField, FileUploadr, ToggleButton, Select, SearchBox, Presentation, ContactDetails };

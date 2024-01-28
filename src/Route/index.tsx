@@ -1,18 +1,19 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Contacts, Dev ,  } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Contacts, Dev } from "../Pages";
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
+import ContactPage from "../Pages/ContactPage";
 
 const route = createHashRouter([
   {
     path: "/",
-    element: <ProtectedRoute Component={Home}/>,
+    element: <ProtectedRoute Component={Home} />,
     // element: <Home></Home>,
   },
   {
     path: "/dev",
     element: <Dev></Dev>,
-  },  
+  },
   {
     path: "/login",
     element: <Login></Login>,
@@ -38,8 +39,12 @@ const route = createHashRouter([
     element: <Contacts />,
   },
   {
+    path: "/contacts/:contactId",
+    element: <ContactPage />,
+  },
+  {
     path: "/presentation",
-    element: <Presentations/>,
+    element: <Presentations />,
   },
 ]);
 
