@@ -35,13 +35,15 @@ export const AuthContext = createContext<AuthContextProps>({
 
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
-  const [user,setUser] = useState<User>(new User());
+  const localuser = localStorage.getItem('authUser')
+  // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
+  const [user,setUser] = useState<User>(localuser ? Object.assign(new User(),JSON.parse(localuser)) : new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
       emailOrPhone:''
     }
   )
-  const userIsLoggedIn = !!token;
+  const userIsLoggedIn = !!token && !!user.information;
 
   function logoutHandler() {
     setToken(null);
@@ -65,6 +67,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     varification:verification,
     currentUser: user,
     setUser:(user:User) => {
+      localStorage.setItem('authUser',JSON.stringify(user))
+      // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
       setUser(user)
     },
     verificationHandler:verificationHandler,

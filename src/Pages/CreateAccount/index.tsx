@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FileUploadr, StepController, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 import LocationPicker from "react-leaflet-location-picker";
@@ -11,7 +11,7 @@ import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
 import { useNavigate } from "react-router";
 import {User} from "../../Model";
-import { AuthContext } from "../../store/auth-context";
+import { useAuth } from "../../hooks/useAuth";
 
 const initialValue = {
   FirstName: "",
@@ -34,7 +34,7 @@ const validationSchema = Yup.object().shape({
 
 const CreateAccount = () => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext)
+  const authContext = useAuth()
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -64,6 +64,7 @@ const CreateAccount = () => {
     lat: 51.5072,
     lng: 0.1276,
   });
+  
   const resolveStepContent = () => {
     switch (step) {
       case 1:
@@ -71,7 +72,7 @@ const CreateAccount = () => {
       case 2:
         return <LocationStep formik={formik} setLocation={setLocation} location={location} setStep={setStep}></LocationStep>;
       case 3:
-        return <ProfileImageStep onSubmit={formik.handleSubmit}></ProfileImageStep>;
+        return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
     }
   };
   return (
@@ -119,6 +120,10 @@ interface LocationStepProps extends stepsProps {
 interface InfoStepProps extends stepsProps {
   country: PhoneCountry;
   setCountry: (country: PhoneCountry) => void;
+}
+
+interface UploadStepProps extends stepsProps {
+  onSubmit: () => void
 }
 
 const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountry }) => {
@@ -210,7 +215,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }
   );
 };
 
-const ProfileImageStep = ({ onSubmit }: { onSubmit: () => void }) => {
+const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -222,8 +227,8 @@ const ProfileImageStep = ({ onSubmit }: { onSubmit: () => void }) => {
         </div>
         <div className="px-4">
           <FileUploadr
-            uploades={() => {
-              // setFiles(res)
+            uploades={(res) => {
+              formik.setFieldValue('PrifileImage',res[0].url)
             }}
             theme="Carbon"
           ></FileUploadr>
