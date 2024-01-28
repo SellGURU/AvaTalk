@@ -41,7 +41,7 @@
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)padding-box,
     linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box;
 
-    @apply absolute w-10 h-10 bg-slate-50 left-32 top-24 rounded-full flex justify-center items-center border;
+    @apply absolute w-10 h-10 cursor-pointer bg-slate-50 left-32 top-24 rounded-full flex justify-center items-center border;
 }
 .Carbon-Profile-GalleryVector{
     mask-size: 100%;

@@ -8,6 +8,7 @@ import AuthContextProvider from "./store/auth-context.tsx";
 import Modal from 'react-modal';
 import './Api/axios.ts';
 import 'react-calendar/dist/Calendar.css';
+import "cropperjs/dist/cropper.css";
 
 Modal.setAppElement('#root');
 

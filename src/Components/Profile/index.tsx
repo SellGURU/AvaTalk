@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
 import { BookMark } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
+import CropperBox from '../CropperBox/index';
 
 interface ProfileProps {
   theme?: string;
@@ -10,7 +11,13 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [showBookMark,setShowBookMark] = useState(false)
+  const [avatarUrl,setAvatarUrl] = useState('')
   const authContext = useAuth()
+  const getNewAvatarUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setAvatarUrl(URL.createObjectURL(e.target.files[0]));
+    }
+  };
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
@@ -37,8 +44,10 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             {mode == 'profile' ?
               <>
                 <div className={`${theme}-Profile-GalleryVectorContainer`}>
+                  <input onChange={getNewAvatarUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
                 </div>
+
                 <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div>
@@ -107,7 +116,10 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         </div>
        
       </div>
-
+      <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+        authContext.currentUser.updateImageurl(resolve)
+        setAvatarUrl('')
+      }}></CropperBox>
       <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
     </div>
     </>
