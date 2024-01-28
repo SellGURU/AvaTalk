@@ -10,6 +10,8 @@ import { useFormik } from "formik";
 import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
 import { useNavigate } from "react-router";
+import {User} from "../../Model";
+import { useAuth } from "../../hooks/useAuth";
 
 const initialValue = {
   FirstName: "",
@@ -32,11 +34,23 @@ const validationSchema = Yup.object().shape({
 
 const CreateAccount = () => {
   const navigate = useNavigate();
+  const authContext = useAuth()
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
     onSubmit: (values) => {
       Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }).then(() => {
+        const newUser = new User({
+          firstName:values.FirstName,
+          lastName:values.LastName,
+          phone:values.Phone,
+          banelImage:'',
+          company:values.CompanyName,
+          imageurl:values.PrifileImage,
+          job:values.JobTitle,
+          location:location
+        })
+        authContext.setUser(newUser)
         navigate('/')
       });
     },
@@ -50,6 +64,7 @@ const CreateAccount = () => {
     lat: 51.5072,
     lng: 0.1276,
   });
+  
   const resolveStepContent = () => {
     switch (step) {
       case 1:
@@ -57,7 +72,7 @@ const CreateAccount = () => {
       case 2:
         return <LocationStep formik={formik} setLocation={setLocation} location={location} setStep={setStep}></LocationStep>;
       case 3:
-        return <ProfileImageStep onSubmit={formik.handleSubmit}></ProfileImageStep>;
+        return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
     }
   };
   return (
@@ -105,6 +120,10 @@ interface LocationStepProps extends stepsProps {
 interface InfoStepProps extends stepsProps {
   country: PhoneCountry;
   setCountry: (country: PhoneCountry) => void;
+}
+
+interface UploadStepProps extends stepsProps {
+  onSubmit: () => void
 }
 
 const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountry }) => {
@@ -196,7 +215,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }
   );
 };
 
-const ProfileImageStep = ({ onSubmit }: { onSubmit: () => void }) => {
+const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -208,8 +227,8 @@ const ProfileImageStep = ({ onSubmit }: { onSubmit: () => void }) => {
         </div>
         <div className="px-4">
           <FileUploadr
-            uploades={() => {
-              // setFiles(res)
+            uploades={(res) => {
+              formik.setFieldValue('PrifileImage',res[0].url)
             }}
             theme="Carbon"
           ></FileUploadr>

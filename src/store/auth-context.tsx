@@ -3,6 +3,7 @@
 
 import { createContext, PropsWithChildren, useState } from "react";
 import { removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage/Token";
+import {User} from "../Model";
 
 interface VerificationProps {
   emailOrPhone:string;
@@ -12,6 +13,8 @@ interface AuthContextProps {
   token: string | null;
   isLoggedIn: boolean;
   varification:VerificationProps;
+  currentUser:User;
+  setUser:(user:User) => void;
   login: (token: string) => void;
   verificationHandler: (verification:VerificationProps) => void;
   logout: () => void;
@@ -23,6 +26,8 @@ export const AuthContext = createContext<AuthContextProps>({
   varification:{
     emailOrPhone:''
   },
+  setUser:() => {},
+  currentUser: new User(),
   verificationHandler: () => {},
   login: () => {},
   logout: () => {},
@@ -30,21 +35,26 @@ export const AuthContext = createContext<AuthContextProps>({
 
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
+  const localuser = localStorage.getItem('authUser')
+  // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
+  const [user,setUser] = useState<User>(localuser ? Object.assign(new User(),JSON.parse(localuser)) : new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
       emailOrPhone:''
     }
   )
-  const userIsLoggedIn = !!token;
+  const userIsLoggedIn = !!token && !!user.information;
 
   function logoutHandler() {
     setToken(null);
     // localStorage.removeItem("token");
     removeTokenFromLocalStorage();
   }
+
   function verificationHandler(verification:VerificationProps) {
     setVerification(verification)
   }
+
   function loginHandler(token: string) {
     setToken(token);
     // localStorage.setItem("token", token);
@@ -55,6 +65,12 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     token,
     isLoggedIn: userIsLoggedIn,
     varification:verification,
+    currentUser: user,
+    setUser:(user:User) => {
+      localStorage.setItem('authUser',JSON.stringify(user))
+      // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
+      setUser(user)
+    },
     verificationHandler:verificationHandler,
     login: loginHandler,
     logout: logoutHandler,

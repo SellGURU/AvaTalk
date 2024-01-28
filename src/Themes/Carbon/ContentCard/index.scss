@@ -10,6 +10,9 @@
 .Carbon-ContentCard-Vectors{
     @apply flex flex-row gap-[6px] ;
 }
+.Carbon-ContentCard-Vectors[data-mode='review']{
+    @apply invisible ;
+}
 .Carbon-ContentCard-CardVector{
     box-shadow:
     4px 4px 20px 0px rgba(111, 140, 176, 0.41),

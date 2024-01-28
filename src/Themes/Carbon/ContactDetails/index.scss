@@ -1,0 +1,78 @@
+.Carbon-ContactDetails-VectorSection {
+  @apply w-10 h-10 p-2 rounded-full cursor-pointer;
+}
+.Carbon-ContactDetails-Vectors {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-7 h-7 bg-slate-400;
+}
+.Carbon-ContactDetails-phoneIcon {
+  mask-image: url(/Carbon/call.svg);
+}
+.Carbon-ContactDetails-emailIcon {
+  mask-image: url(/Carbon/email.svg);
+}
+.Carbon-ContactDetails-locationIcon {
+  mask-image: url(/Carbon/location.svg);
+}
+.Carbon-ContactDetails-buildingIcon {
+  mask-image: url(/Carbon/buliding.svg);
+}
+.Carbon-ContactDetails-meetingIcon {
+  mask-image: url(/Carbon/meet.svg);
+}
+.Carbon-ContactDetails-calendarIcon {
+  mask-image: url(/Carbon/calendar.svg);
+}
+.Carbon-ContactDetails-crossIcon {
+  mask-image: url(/Carbon/Add.svg);
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-4 h-4 bg-slate-400 cursor-pointer;
+}
+.Carbon-ContactDetails-importIcon {
+  mask-image: url(/Carbon/import.svg);
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-5 h-5 bg-violet-700;
+}
+.Carbon-ContactDetails-editIcon {
+  mask-image: url(/Carbon/edit.svg);
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-5 h-5 bg-violet-700;
+}
+.Carbon-ContactDetails-recycleIcon {
+  mask-image: url(/Carbon/recycle.svg);
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-5 h-5 bg-violet-700;
+}
+.Carbon-ContactDetails-ActiveVectorSection {
+  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+  outline: 1px solid white;
+  @apply flex justify-center items-center;
+}
+.Carbon-ContactDetails-ActiveVectors {
+  @apply bg-violet-700;
+}
+
+.Carbon-ContactDetails-textItem {
+  @apply contactNameShadow text-gray-700 leading-[21px] text-[14px] font-[500];
+}
+.Carbon-ContactDetails-nameItem {
+  @apply contactNameShadow text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];
+}
+.Carbon-ContactDetails-jobItem {
+  @apply contactNameShadow text-gray-700/80 tracking-wider mb-[20px] leading-[20px] text-[14px] font-[400];
+}
