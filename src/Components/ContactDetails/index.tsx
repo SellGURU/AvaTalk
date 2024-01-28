@@ -22,13 +22,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   };
   return (
     <div>
-      <div className="flex items-center space-x-4 absolute pl-[60px] top-2">
+      <div className="flex items-center space-x-4 absolute  top-8">
         <Button onClick={() => navigate(-1)} theme="Carbon-back">
           <div className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}></div>
         </Button>
         <p className="text-gray-700 leading-[24px] text-[16px] font-[600] contactNameShadow">Contact info</p>
       </div>
-      <div className="h-screen flex flex-col items-center mt-[150px]">
+      <div className="h-screen flex flex-col items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
           <img src={selectedContact?.image} alt={selectedContact?.name} />
           <div className=" flex flex-col items-center space-y-[9px]">

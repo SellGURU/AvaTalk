@@ -1,6 +1,20 @@
+const generateSlugId = () => {
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const slugLength = 24;
+
+  let slugId = "";
+
+  for (let i = 0; i < slugLength; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    slugId += characters.charAt(randomIndex);
+  }
+
+  return slugId;
+};
+
 const dummyData = [
   {
-    id: 1,
+    id: generateSlugId(),
     name: "Sara Doe",
     email: "sonia.doe@example.com",
     image: "../../public/Acord/person.png",
@@ -14,7 +28,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 2,
+    id: generateSlugId(),
     name: "Jane Smith",
     email: "jane.smith@example.com",
     image: "../../public/Acord/person.png",
@@ -28,7 +42,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 3,
+    id: generateSlugId(),
     name: "Elson Johnson",
     email: "bob.johnson@example.com",
     image: "../../public/Acord/person.png",
@@ -42,7 +56,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 4,
+    id: generateSlugId(),
     name: "Jane Smith",
     email: "jourg.smith@example.com",
     image: "../../public/Acord/person.png",
@@ -56,7 +70,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 5,
+    id: generateSlugId(),
     name: "Bob Johnson",
     email: "david.bonson@example.com",
     image: "../../public/Acord/person.png",
@@ -70,7 +84,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 6,
+    id: generateSlugId(),
     name: "Elson Johnson",
     email: "bob.johnson@example.com",
     image: "../../public/Acord/person.png",
@@ -84,7 +98,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 7,
+    id: generateSlugId(),
     name: "Jane Smith",
     email: "jourg.smith@example.com",
     image: "../../public/Acord/person.png",
@@ -98,7 +112,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 8,
+    id: generateSlugId(),
     name: "Bob Johnson",
     email: "david.bonson@example.com",
     image: "../../public/Acord/person.png",
@@ -112,7 +126,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 9,
+    id: generateSlugId(),
     name: "Elson Johnson",
     email: "bob.johnson@example.com",
     image: "../../public/Acord/person.png",
@@ -126,7 +140,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 10,
+    id: generateSlugId(),
     name: "Jane Smith",
     email: "jourg.smith@example.com",
     image: "../../public/Acord/person.png",
@@ -140,7 +154,7 @@ const dummyData = [
     job: "Digital Marketer",
   },
   {
-    id: 11,
+    id: generateSlugId(),
     name: "Bobii Johnson",
     email: "david.bonson@example.com",
     image: "../../public/Acord/person.png",
