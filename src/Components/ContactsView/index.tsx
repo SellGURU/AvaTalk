@@ -4,6 +4,7 @@ import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
 import ContactList from "../ContactList";
 import dummyData from "../../data/dummy_data";
+import { Outlet } from "react-router";
 interface ProfileProps {
   theme?: string;
 }
@@ -18,8 +19,8 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
   };
   return (
     <div className={`${theme}-ContactsView-Container  `}>
+      <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
-      {/* </div> */}
       <div className={`${theme}-ContactsView-buttonsContainer `}>
         <ToggleButton leftText="Contact List" rightText="Tag List" theme="Carbon" />
         <Button theme="Carbon">
