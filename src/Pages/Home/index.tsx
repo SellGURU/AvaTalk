@@ -4,6 +4,7 @@ import {Splash ,Footer} from "../../Components"
 import { Outlet, useNavigate} from "react-router-dom"
 import { resolveMenuFromRoute, resolveNavigation } from "../../help"
 
+
 const Home = () => {
     const navigate = useNavigate();  
     const [menu,setMenu] = useState<MenuType>(resolveMenuFromRoute() as MenuType)
