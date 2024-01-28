@@ -1,6 +1,5 @@
 import React , {useState} from "react";
 import { Button } from "symphony-ui";
-// import { MenuType } from "../../Types"
 import FooterPresentation from "../FooterPresentation";
 
 interface PresentationProps {
@@ -9,8 +8,6 @@ interface PresentationProps {
 
 const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
-  // const [menu,setMenu] = useState<MenuType>('profile')
-
   return (
     <>
     <div className={`${theme}-Presentation-Container`}>
@@ -23,7 +20,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <div className={`${theme}-Presentation-PresentationPicture`}></div>
           </div>
           <div>
-            <h1 className={`${theme}-Presentation-PresentationName`}>Farzin Azami</h1>
+            <h1 className={`${theme}-Presentation-PresentationName ${theme}-TextShadow`}>Farzin Azami</h1>
             <p className={`${theme}-Presentation-SubTitle`}>CoFounder & CEO</p>
           </div>
           {
@@ -64,16 +61,16 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             </div>
           :
             <>
-            <div className="flex flex-col gap-3 items-center w-full">
-              <div className="font-semibold	mb-1 mt-6">Ask me more information</div>
+            <div className={`${theme}-Presentation-MoreInfoSection`}>
+              <div className={`${theme}-Presentation-MoreInfoTitle ${theme}-TextShadow`}>Ask me more information</div>
               <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
-                Can you introduce yourself?
+              Can you introduce yourself?
               </Button>
               <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
-                Tell me more about your business
+              Tell me more about your business
               </Button>  
               <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
-                What services do you provide in Codie?
+              What services do you provide in Codie?
               </Button>  
             </div>
             </>

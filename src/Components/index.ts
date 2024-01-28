@@ -11,6 +11,7 @@ import Presentation from "./Presentation";
 import ContactsView from "./ContactsView";
 import Splash from "./Splash";
 import Footer from "./Footer";
+import FooterPresentation from "./FooterPresentation";
 
 export { 
     Profile,
@@ -25,5 +26,6 @@ export {
     Presentation,
     ContactsView,
     Splash,
-    Footer
+    Footer,
+    FooterPresentation
 };
