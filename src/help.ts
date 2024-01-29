@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { MenuType } from "./Types";
-import {Box ,SocialBox} from "./Model";
+import {AboutBox, Box ,LinkBox,SocialBox} from "./Model";
 
 const resolveMenuFromRoute = () => {
     // console.log(window.location.hash.replace('#/','').split('/')[0])
@@ -32,6 +32,12 @@ const boxProvider = (box:any) => {
         case 'SocialBox' : {
             return Object.assign(new SocialBox('simple',[]),box)
         }
+        case 'LinkBox' : {
+            return Object.assign(new LinkBox('simple',[]),box)
+        }   
+        case 'AboutBox' : {
+            return Object.assign(new AboutBox('simple',''),box)
+        }                
         default : {
             return Object.assign(new Box('simple'),box)
         }

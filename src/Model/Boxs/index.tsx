@@ -1,5 +1,5 @@
 class Box {
-    protected typeName:'Box'|'SocialBox' = 'Box'
+    protected typeName:'Box'|'SocialBox'|'LinkBox'|'AboutBox' = 'Box'
     constructor(protected title:string){}
     
     public getTitle() {

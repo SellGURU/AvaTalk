@@ -30,7 +30,24 @@ const useMoch = () => {
                     "value": "dsdsdsdsxs"
                 }                                                
             ]
-        }
+        },
+        {
+            "title": "Links",
+            "typeName": 'LinkBox',
+            "links": [
+                {
+                    "url": "https://web-codie.vercel.app/#/",
+                }, 
+                {
+                    "url": "https://web-codie.vercel.app/#/",
+                },                                                               
+            ]
+        },
+        {
+            "title": "About me",
+            "typeName": 'AboutBox',
+            "text":'Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.'
+        }                  
     ])
 }
 
