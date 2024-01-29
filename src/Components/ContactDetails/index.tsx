@@ -1,15 +1,28 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ContatDetails.module.css";
 import { Button } from "symphony-ui";
-import dummyData from "../../data/dummy_data";
+// import dummyData from "../../data/dummy_data";
 import { useState } from "react";
+import { Auth } from "../../Api";
+import { ContactData } from "../../Api/Auth";
+import { useConstructor } from "../../help";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
   const [showExhibition, setShowExhibition] = useState(true);
+  const [contacts, setContacts] = useState<ContactData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useConstructor(() => {
+    setIsLoading(true);
+    Auth.contactBoxs((res) => {
+      setContacts(res);
+      setIsLoading(false);
+    });
+  });
 
   const { contactId } = useParams();
-  const selectedContact = dummyData.find((item) => item.id.toString() === contactId);
+  const selectedContact = contacts.find((item) => item.id.toString() === contactId);
 
   const navigate = useNavigate();
 
@@ -20,6 +33,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const handleShowLess = () => {
     setShowMore(false);
   };
+  if (isLoading) return <p>Loading...</p>;
   return (
     <div>
       <div className="flex items-center space-x-4 absolute  top-8">

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Box} from "../Model";
+import { Box } from "../Model";
 import { boxProvider } from "../help";
 import Api from "./Api";
 
 interface LoginData {
   // email: string | null;
   mobile_number: string | null;
-  code?:string
+  code?: string;
 }
 interface Location {
   lat: number;
@@ -21,36 +21,59 @@ interface RegisterData {
   location: Location | null;
   profile_pic: string | null;
 }
+export interface ContactData {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  Exhibition: boolean;
+  Exchange: boolean;
+  phone: string;
+  location: string;
+  company: string;
+  meetDate: string;
+  addDate: string;
+  job: string;
+}
 
 class Auth extends Api {
   static login(data: LoginData) {
-    const response = this.post("/login", data)
-    return response
+    const response = this.post("/login", data);
+    return response;
   }
   static get_Login_code(data: LoginData) {
-    const response = this.post("/get_Login_code", data)
-    return response
+    const response = this.post("/get_Login_code", data);
+    return response;
   }
 
   static register(data: RegisterData) {
-    const response = this.post("/register", data)
-    return response
+    const response = this.post("/register", data);
+    return response;
   }
 
   static logout() {
     this.post("/logout").then(() => {});
   }
 
-  static getBoxs(resolve:(data:Array<Box>) => void){
-    const resolveSocial:Array<Box> = []
-    this.post('/profileInfo',{}).then(res => {
+  static getBoxs(resolve: (data: Array<Box>) => void) {
+    const resolveSocial: Array<Box> = [];
+    this.post("/profileInfo", {}).then((res) => {
       res.data.map((item: any) => {
-        const newBox = boxProvider(item)
-        resolveSocial.push(newBox)
-      })
-      resolve(resolveSocial)
-    })
-
+        const newBox = boxProvider(item);
+        resolveSocial.push(newBox);
+      });
+      resolve(resolveSocial);
+    });
+  }
+  static contactBoxs(resolve: (data: Array<ContactData>) => void) {
+    const resolveSocial: Array<ContactData> = [];
+    this.post("/contactInfo", {}).then((res) => {
+      res.data.map((item: any) => {
+        const newBox = boxProvider(item);
+        resolveSocial.push(newBox);
+      });
+      resolve(resolveSocial);
+    });
   }
 }
 
