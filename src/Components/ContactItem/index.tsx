@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 interface DataProps {
-  id: number;
+  id: string;
   name: string;
   email: string;
   image: string;

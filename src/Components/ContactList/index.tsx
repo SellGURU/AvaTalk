@@ -6,7 +6,7 @@ import ContactItem from "../ContactItem";
 //   theme?: string;
 // }
 interface DataProps {
-  id: number;
+  id: string;
   name: string;
   email: string;
   image: string;
