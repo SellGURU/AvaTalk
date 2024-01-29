@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import { MenuType } from "./Types";
+import {AboutBox, Box ,LinkBox,SocialBox} from "./Model";
 
 const resolveMenuFromRoute = () => {
     // console.log(window.location.hash.replace('#/','').split('/')[0])
@@ -15,8 +18,35 @@ const resolveNavigation = (item:MenuType, navigate:(route:string) => void) => {
         case 'status' : return navigate('/')
     }        
 }
+const useConstructor = (callBack = () => {}) => {
+  const [hasBeenCalled, setHasBeenCalled] = useState(false);
+  if (hasBeenCalled) {
+    return;
+  }
+  callBack();
+  setHasBeenCalled(true);
+};
+
+const boxProvider = (box:any) => {
+    switch(box.typeName) {
+        case 'SocialBox' : {
+            return Object.assign(new SocialBox('simple',[]),box)
+        }
+        case 'LinkBox' : {
+            return Object.assign(new LinkBox('simple',[]),box)
+        }   
+        case 'AboutBox' : {
+            return Object.assign(new AboutBox('simple',''),box)
+        }                
+        default : {
+            return Object.assign(new Box('simple'),box)
+        }
+    }
+}
 
 export {
     resolveMenuFromRoute,
-    resolveNavigation
+    resolveNavigation,
+    useConstructor,
+    boxProvider
 }

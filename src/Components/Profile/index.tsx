@@ -4,6 +4,7 @@ import ContentCard from '../ContentCard';
 import { BookMark } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
+import {Box} from '../../Model';
 
 interface ProfileProps {
   theme?: string;
@@ -18,6 +19,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       setAvatarUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
+  
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
@@ -85,8 +87,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             </div>
             </>
           }
-
-          <ContentCard mod={mode} theme="Carbon" title="Social">
+          {authContext.currentUser.boxs?.map((item:Box) => {
+            return (
+              <ContentCard mod={mode} theme="Carbon" title={item.getTitle()}>
+                {item.resolveRender('Carbon')}
+              </ContentCard>              
+            )
+          })}
+          {/* <ContentCard mod={mode} theme="Carbon" title="Social">
             <div className={`${theme}-Profile-Vectors`}>
               <div className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-InstagramVector`}></div>
@@ -112,7 +120,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           </ContentCard>
           <ContentCard mod={mode} theme="Carbon" title="About me">
             <h1>Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.</h1>
-          </ContentCard>
+          </ContentCard> */}
         </div>
        
       </div>
