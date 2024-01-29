@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {Box} from "../Model";
+import { boxProvider } from "../help";
 import Api from "./Api";
-// import { toast } from 'react-toastify';
 
 interface LoginData {
   // email: string | null;
@@ -38,6 +39,18 @@ class Auth extends Api {
 
   static logout() {
     this.post("/logout").then(() => {});
+  }
+
+  static getBoxs(resolve:(data:Array<Box>) => void){
+    const resolveSocial:Array<Box> = []
+    this.post('/profileInfo',{}).then(res => {
+      res.data.map((item: any) => {
+        const newBox = boxProvider(item)
+        resolveSocial.push(newBox)
+      })
+      resolve(resolveSocial)
+    })
+
   }
 }
 

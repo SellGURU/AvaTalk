@@ -1,3 +1,5 @@
+import Box from "../Boxs";
+
 interface Information {
     firstName:string;
     lastName:string;
@@ -15,6 +17,8 @@ interface Location {
 }
 
 class User {
+    public boxs:Array<Box> = []
+
     constructor(public information?:Information){}
     public resolveImageUrl() {
         if(this.information?.imageurl!= ''){
@@ -33,6 +37,16 @@ class User {
 
     private syncToLocalStorage () {
         localStorage.setItem('authUser',JSON.stringify(new User(this.information)))
+    }
+
+    public addBox(newBox:Box) {
+        this.boxs.push(newBox)
+        this.syncToLocalStorage()
+    }
+
+    public setBox(newBoxs:Array<Box>){
+        this.boxs = newBoxs
+        this.syncToLocalStorage()
     }
 } 
 export default User
