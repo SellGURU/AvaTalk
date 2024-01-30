@@ -65,24 +65,51 @@ class Auth extends Api {
       resolve(resolveSocial);
     });
   }
-  static contactBoxs(resolve: (data: Array<ContactData>) => void) {
-    const resolveSocial: Array<ContactData> = [];
-    this.post("/contactInfo", {}).then((res) => {
-      res.data.map((item: any) => {
-        const newBox = boxProvider(item);
-        resolveSocial.push(newBox);
-      });
-      resolve(resolveSocial);
+
+  static getAllContacts(callBack: (data: Array<ContactData>) => void) {
+    this.post("/contactsInfo", {}).then((res) => {
+      const contactDataArray: Array<ContactData> = res.data.map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        email: item.email,
+        image: item.image,
+        Exhibition: item.Exhibition,
+        Exchange: item.Exchange,
+        phone: item.phone,
+        location: item.location,
+        company: item.company,
+        meetDate: item.meetDate,
+        addDate: item.addDate,
+        job: item.job,
+      }));
+      callBack(contactDataArray);
     });
   }
-  static getContactDetails(contactId: string, resolve: (data: ContactData | null) => void) {
-    this.post("/contactInfo", {}).then((res) => {
-      const contact = res.data.find((item: any) => item.id === contactId);
+
+  static getContactDetails(contactId: string, callBack: (data: ContactData | null) => void) {
+    this.post("/contactDetails", {}).then((res) => {
+      // const contact = res.data.find((item: any) => item.id === contactId);
+      const contact = res.data[0];
+
       if (contact) {
-        const contactDetails = boxProvider(contact);
-        resolve(contactDetails);
+        const contactDetails: ContactData = {
+          id: contact.id,
+          name: contact.name,
+          email: contact.email,
+          image: contact.image,
+          Exhibition: contact.Exhibition,
+          Exchange: contact.Exchange,
+          phone: contact.phone,
+          location: contact.location,
+          company: contact.company,
+          meetDate: contact.meetDate,
+          addDate: contact.addDate,
+          job: contact.job,
+        };
+
+        callBack(contactDetails);
       } else {
-        resolve(null); // Contact not found
+        callBack(null);
       }
     });
   }
