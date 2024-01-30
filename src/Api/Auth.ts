@@ -75,6 +75,17 @@ class Auth extends Api {
       resolve(resolveSocial);
     });
   }
+  static getContactDetails(contactId: string, resolve: (data: ContactData | null) => void) {
+    this.post("/contactInfo", {}).then((res) => {
+      const contact = res.data.find((item: any) => item.id === contactId);
+      if (contact) {
+        const contactDetails = boxProvider(contact);
+        resolve(contactDetails);
+      } else {
+        resolve(null); // Contact not found
+      }
+    });
+  }
 }
 
 export default Auth;
