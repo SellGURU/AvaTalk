@@ -2,7 +2,7 @@
 import Modal from "react-modal";
 
 import "./index.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import LocationPicker from "react-leaflet-location-picker";
 import { SearchBox, Select, TextArea, TextField } from "../..";
@@ -25,18 +25,19 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
     lng: 0.1276,
   });
   const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
-  const [contacts, setContacts] = useState<ContactData[]>([]);
+  const [contact, setContact] = useState<ContactData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useConstructor(() => {
+  useEffect(() => {
     setIsLoading(true);
-    Auth.contactBoxs((res) => {
-      setContacts(res);
-      setIsLoading(false);
-    });
-  });
-  const selectedContact = contacts.find((item) => item.id.toString() === contactId);
-  console.log(selectedContact);
+    if (contactId) {
+      Auth.getContactDetails(contactId, (contactDetails) => {
+        setContact(contactDetails);
+        setIsLoading(false);
+      });
+    }
+  }, [contactId]);
+  // console.log("contact", contact);
   const pointMode = {
     banner: false,
     control: {
@@ -60,14 +61,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
       >
         <>
           <div className="h-[80vh] hiddenScrollBar overflow-y-scroll">
-            <div className="">
-              {/* <div className="w-full flex justify-center items-center mt-2 mb-6">
-                <div className="text-sm text-gray-700 max-w-[228px] opacity-80 text-center">Tell us more about yourself</div>
-              </div> */}
-            </div>
+            <div className=""></div>
             <div className="px-4">
               <div className="flex justify-between items-center">
-                <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Contact</div>
+                <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Edit Contact</div>
                 <Button onClick={onClose} theme="Carbon-back">
                   <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
@@ -161,7 +158,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="mt-4">
                 <Button onClick={onClose} theme="Carbon">
-                  <div>Add Contact</div>
+                  <div>Save Contact</div>
                 </Button>
               </div>
             </div>

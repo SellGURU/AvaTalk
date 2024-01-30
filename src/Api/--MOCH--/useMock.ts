@@ -62,7 +62,7 @@ const useMoch = () => {
       text: "Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.",
     },
   ]);
-  Api.post("/contactInfo", [
+  Api.post("/contactsInfo", [
     {
       id: generateSlugId(),
       name: "Sara Doe",
@@ -207,6 +207,22 @@ const useMoch = () => {
       id: generateSlugId(),
       name: "Bobii Johnson",
       email: "david.bonson@example.com",
+      image: "../../public/Acord/person.png",
+      Exhibition: true,
+      Exchange: true,
+      phone: "+44 (788)29 59 722",
+      location: "London, Street21, NO.124",
+      company: "Codie",
+      meetDate: "Met at the exhibition",
+      addDate: "Added on 12.08.2023",
+      job: "Digital Marketer",
+    },
+  ]);
+  Api.post("/contactDetails", [
+    {
+      id: generateSlugId(),
+      name: "Sara Doe",
+      email: "sonia.doe@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
       Exchange: true,

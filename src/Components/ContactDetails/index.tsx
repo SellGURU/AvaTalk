@@ -2,11 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ContatDetails.module.css";
 import { Button } from "symphony-ui";
 // import dummyData from "../../data/dummy_data";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Auth } from "../../Api";
 import { ContactData } from "../../Api/Auth";
-// import { useConstructor } from "../../help";
 import { EditContact } from "../__Modal__";
+import { useConstructor } from "../../help";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
@@ -17,14 +17,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const { contactId } = useParams();
 
-  // useConstructor(() => {
-  //   setIsLoading(true);
-  //   Auth.contactBoxs((res) => {
-  //     setContacts(res);
-  //     setIsLoading(false);
-  //   });
-  // });
-  useEffect(() => {
+  useConstructor(() => {
     setIsLoading(true);
     if (contactId) {
       Auth.getContactDetails(contactId, (contactDetails) => {
@@ -32,7 +25,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         setIsLoading(false);
       });
     }
-  }, [contactId]);
+  });
 
   // const selectedContact = contacts.find((item) => item.id.toString() === contactId);
 

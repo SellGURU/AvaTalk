@@ -19,9 +19,10 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [contacts, setContacts] = useState<ContactData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
   useConstructor(() => {
     setIsLoading(true);
-    Auth.contactBoxs((res) => {
+    Auth.getAllContacts((res) => {
       setContacts(res);
     });
     setIsLoading(false);
