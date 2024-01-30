@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
 import { BookMark } from '../__Modal__';
@@ -32,7 +32,21 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       setShowChangePhoto(false)
     }
   };  
-  
+  const changePhotoRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        changePhotoRef.current &&
+        !changePhotoRef.current.contains(event.target as Node)
+      ) {
+        setShowChangePhoto(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [changePhotoRef]);  
   const [draggedItem,setDraggedItem] = useState<any>();  
   const navigate = useNavigate();
   return (
@@ -65,7 +79,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 </div>
                 {
                   showChangePhoto ?
-                    <div style={{boxShadow:'2px 2px 8px 0px rgba(114, 142, 171, 0.2)'}} className='bottom-[-80px] w-[215px] max-w-[215px] bg-gray-100 h-[100px] absolute left-0 rounded-[27px]'>
+                    <div ref={changePhotoRef} style={{boxShadow:'2px 2px 8px 0px rgba(114, 142, 171, 0.2)'}} className='bottom-[-80px] w-[215px] max-w-[215px] bg-gray-100 h-[100px] absolute left-0 rounded-[27px]'>
                       <div className='text-gray-700 relative cursor-pointer pt-4 pb-3 text-sm border-b border-white'>
                           Change Profile Picture
                           <input onChange={getNewAvatarUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
