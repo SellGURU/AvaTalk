@@ -9,10 +9,12 @@
     border: 1px solid transparent;   
     // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
     // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);    
-    background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
-                linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box
-                linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
-  @apply focus:outline-none w-full h-[44px] text-[13px] boxsInnerShadows rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400  ;
+    // background: linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box
+    //             linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+    background: linear-gradient(0deg,rgba(255,255,255,1),rgba(255,255,255,0)) border-box,
+                linear-gradient(0deg,rgba(243,244,246,0.5),rgba(255,255,255,0.5)) border-box;
+    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6),inset 4px 4px 14px 2px rgba(226,232,240,1) !important;
+  @apply focus:outline-none w-full h-[44px] text-[13px]  rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400  ;
 }
 
 .Carbon-TextField-inValid {
