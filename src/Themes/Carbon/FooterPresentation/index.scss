@@ -35,7 +35,9 @@
 .Carbon-FooterPresentation-SendVector {
   mask-image: url(/Carbon/send.svg);
   @apply cursor-pointer;
-
+}
+.Carbon-FooterPresentation-KeyboardVector {
+  mask-image: url(/Carbon/keyboard.svg);
 }
 .Carbon-FooterPresentation-VectorSection {
   @apply w-10 h-10 p-2 rounded-full cursor-pointer;

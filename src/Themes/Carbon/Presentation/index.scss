@@ -12,7 +12,7 @@
     display: none;
 }
 .Carbon-Presentation-Content {
-    @apply relative flex flex-col gap-4 justify-center items-center mt-16 px-4 pb-20;
+    @apply relative flex flex-col gap-4 justify-center items-center mt-16 px-6 pb-20;
 }
 .Carbon-Presentation-PictureSection { 
     box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
@@ -36,7 +36,7 @@
     @apply text-sm;
 }
 .Carbon-Presentation-ArrowLeft{
-    @apply w-10 h-10 absolute left-[18px] -top-2 ;
+    @apply w-10 h-10 absolute left-6 -top-2 ;
 }
 .Carbon-Presentation-ArrowLeftVector{
     background:url(/Carbon/arrowLeftVector.svg) no-repeat;
@@ -60,12 +60,10 @@
     @apply w-10 h-10 rounded-full flex justify-center items-center mr-2;
 }
 .Carbon-Presentation-CallVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/callVector.svg);
     @apply w-6 h-6 bg-violet-700;   
 }
 .Carbon-Presentation-EmailVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/emailVector.svg);
     @apply w-6 h-6 bg-violet-700;   
 
@@ -76,7 +74,6 @@
 
 }
 .Carbon-Presentation-LinkedinVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/linkedinVector.svg);
     @apply w-6 h-6 bg-violet-700;   
 
@@ -86,7 +83,6 @@
     @apply flex flex-col gap-4 justify-center text-sm font-medium mt-11;
 }
 .Carbon-Presentation-Info{
-    // justify-content: left;
     @apply flex items-center;   
 }
 .Carbon-Presentation-MoreInfoSection{
@@ -95,6 +91,22 @@
 .Carbon-Presentation-MoreInfoTitle{
     @apply font-semibold mb-1 mt-6;
 }
+.Carbon-Presentation-fadeIn {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.Carbon-Presentation-AnswerTitle{
+    @apply mt-6 self-start ms-6;
+}
+
 
 ///
 .Carbon-TextShadow {
