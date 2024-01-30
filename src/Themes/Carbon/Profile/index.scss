@@ -12,7 +12,7 @@
     display: none;
 }
 .Carbon-Profile-Background{
-    background-image: url(/Carbon/BackgroundProfileImage.png) ;
+    // background-image: url(/Carbon/BackgroundProfileImage.png) ;
     border: 1px solid transparent;
     box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
     -6px -6px 20px 0px rgba(255, 255, 255, 1),
@@ -41,7 +41,7 @@
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)padding-box,
     linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box;
 
-    @apply absolute w-10 h-10 cursor-pointer bg-slate-50 left-32 top-24 rounded-full flex justify-center items-center border;
+    @apply absolute w-10 h-10 cursor-pointer bg-slate-50 right-32 top-24 rounded-full flex justify-center items-center border;
 }
 .Carbon-Profile-GalleryVector{
     mask-size: 100%;

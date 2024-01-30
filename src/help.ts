@@ -44,9 +44,78 @@ const boxProvider = (box:any) => {
     }
 }
 
+const getDragAfterElement = (
+    container:any, y:any
+) => {
+    const draggableElements = [
+        ...container.querySelectorAll(
+            "li:not(.dragging)"
+        ),];
+ 
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box =
+                child.getBoundingClientRect();
+            const offset =
+                y - box.top - box.height / 2;
+            if (
+                offset < 0 &&
+                offset > closest.offset) {
+                return {
+                    offset: offset,
+                    element: child,
+                };} 
+            else {
+                return closest;
+            }},
+        {
+            offset: Number.NEGATIVE_INFINITY,
+        }
+    ).element;
+};
+
+const dragStart = (e:any,allowDrag:boolean,setDraggedItem:(value:any) => void) => {
+    if(allowDrag){
+        setDraggedItem(e.target)
+        setTimeout(() => {
+        e.target.style.display =
+            "none";
+        }, 0);
+    }    
+}
+
+const dragEnd = (e:any,allowDrag:boolean,setDraggedItem:(value:any) => void) => {
+    setTimeout(() => {
+        if(allowDrag){
+            e.target.style.display = "";
+            setDraggedItem(null)
+        }
+    }, 0);    
+}
+
+const dragOver = (e:any,allowDrag:boolean,draggedItem:any) => {
+    if(allowDrag){
+        const sortableList = document.getElementById("sortable");
+        e.preventDefault();
+        const afterElement =getDragAfterElement(sortableList,e.clientY);
+        if (afterElement == null) {
+            sortableList?.appendChild(
+                draggedItem
+            );} 
+        else {
+            sortableList?.insertBefore(
+                draggedItem,
+                afterElement
+            );}            
+    }    
+}
 export {
     resolveMenuFromRoute,
     resolveNavigation,
     useConstructor,
-    boxProvider
+    boxProvider,
+    getDragAfterElement,
+    dragStart,
+    dragEnd,
+    dragOver
 }
