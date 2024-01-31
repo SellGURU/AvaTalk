@@ -31,7 +31,7 @@ const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose
                 <p className="text-gray-700  font-[500] text-[14px] leading-[21px]">Are you sure you want to delete this Contact?</p>
               </div>
               <div className="mt-10 flex items-center space-x-3 px-10">
-                <Button onClick={onClose} theme="Carbon-Delete">
+                <Button onClick={onClose} theme="Carbon-Outline">
                   Delete
                 </Button>
                 <Button onClick={onClose} theme="Carbon">

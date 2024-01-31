@@ -1,13 +1,9 @@
 .Carbon-ToggleButton-container {
-  background: linear-gradient(rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) padding-box, linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box !important;
-  border: 1px solid transparent;
-  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-
-  @apply w-full disabled:cursor-not-allowed flex  justify-around space-x-4 bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
+  @apply w-full disabled:cursor-not-allowed boxShadow-Gray flex borderBox-Gray   justify-around space-x-4 bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
 }
 .Carbon-ToggleButton-notActiveButton {
-  border: 1px solid transparent;
-  @apply text-gray-700 leading-[21px] text-[14px] contactNameShadow font-[500];
+  // border: 1px solid transparent;
+  @apply text-gray-700 leading-[21px] text-[14px] font-[500];
 }
 .Carbon-ToggleButton-ActiveButton {
   box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
