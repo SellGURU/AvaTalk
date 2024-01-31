@@ -1,11 +1,11 @@
 .Carbon-ContentCard-Container {
-    border: 1px solid white;
-    box-shadow:
-    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    // border: 1px solid white;
+    // box-shadow:
+    // 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    // -6px -6px 20px 0px rgba(255, 255, 255, 1),
+    // 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
 
-    @apply w-[-webkit-fill-available] flex flex-col mb-4 items-start text-gray-700 text-center rounded-3xl min-h-44 p-5 bg-gray-100;
+    @apply w-[-webkit-fill-available] boxBorderGradion contactBoxShadows flex flex-col mb-4 items-start text-gray-700 text-center rounded-3xl min-h-44 p-5 bg-gray-100;
 }
 .Carbon-ContentCard-Vectors{
     @apply flex flex-row gap-[6px] ;

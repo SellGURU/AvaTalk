@@ -1,5 +1,5 @@
 .Carbon-ContactItem-container {
-  @apply my-5 contactBorderGradin h-[88px] flex items-center w-full relative  contactBoxShadows rounded-[24px]  px-4;
+  @apply my-5 h-[88px] bg-gray-100 boxBorderGradion flex items-center w-full relative  contactBoxShadows rounded-[24px]  px-4;
 }
 .Carbon-ContactItem-section {
   @apply flex w-full   items-center pt-4;

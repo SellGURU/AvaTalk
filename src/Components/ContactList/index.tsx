@@ -32,7 +32,7 @@ const ContactList = ({ data, theme }: { data: DataProps[]; theme: string | undef
 
   // console.log("boxHeight", boxHeight);
   return (
-    <div className=" w-full overflow-y-scroll hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
+    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
       {data.map((items, index) => (
         <ContactItem theme={theme} key={index} data={items} />
       ))}

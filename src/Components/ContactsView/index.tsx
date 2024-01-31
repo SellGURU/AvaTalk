@@ -24,8 +24,8 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
     setIsLoading(true);
     Auth.getAllContacts((res) => {
       setContacts(res);
+      setIsLoading(false);
     });
-    setIsLoading(false);
   });
 
   const filteredData = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -43,7 +43,7 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
           <div>Add Contact</div>
         </Button>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 px-6">
         <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search name or email..." />
       </div>
       {!(contacts.length > 0) && isLoading ? (
