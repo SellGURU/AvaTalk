@@ -16,10 +16,14 @@ interface AddContactProps {
 }
 
 const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme }) => {
-  const [location, setLocation] = useState({
+  // const [location, setLocation] = useState({
+  //   lat: 51.5072,
+  //   lng: 0.1276,
+  // });
+  const location = {
     lat: 51.5072,
     lng: 0.1276,
-  });
+  };
   const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
   const pointMode = {
     banner: false,
