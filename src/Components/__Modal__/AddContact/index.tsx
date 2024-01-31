@@ -138,7 +138,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
               </div>
 
               <div className="mt-4">
-                <Select valueElement="" label="Tag" placeholder="Select tag..." theme="Carbon" />
+                <Select label="Tag" placeholder="Select tag..." theme="Carbon" />
               </div>
               <div className="mt-4">
                 <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="" onBlur={() => {}} label="Note" theme="Carbon" onChange={() => {}} value="" />

@@ -10,7 +10,7 @@ import { SearchBox, Select, TextArea, TextField } from "../..";
 import { Button } from "symphony-ui";
 import { useConstructor } from "../../../help";
 import { Auth } from "../../../Api";
-import { ContactData } from "../../../Api/Auth";
+// import { ContactData } from "../../../Api/Auth";
 
 interface EditContactProps {
   isOpen: boolean;
@@ -21,12 +21,16 @@ interface EditContactProps {
 }
 
 const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpen, onClose, theme }) => {
-  const [location, setLocation] = useState({
+  // const [location, setLocation] = useState({
+  //   lat: 51.5072,
+  //   lng: 0.1276,
+  // });
+  const location = {
     lat: 51.5072,
     lng: 0.1276,
-  });
+  };
   const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
-  const [contact, setContact] = useState<ContactData | null>(null);
+  // const [contact, setContact] = useState<ContactData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const [fullName, setFullName] = useState("");
@@ -34,14 +38,14 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
-  const [tag, setTag] = useState("");
+  // const [tag, setTag] = useState("");
   const [note, setNote] = useState("");
 
   useConstructor(() => {
     setIsLoading(true);
     if (contactId) {
       Auth.getContactDetails(contactId, (contactDetails) => {
-        setContact(contactDetails);
+        // setContact(contactDetails);
         setIsLoading(false);
         setFullName(contactDetails?.fullName || "");
         setEmailAddress(contactDetails?.email || "");
@@ -65,6 +69,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
     codeName: "us",
     codePhone: "+1",
   });
+  if (isLoading) return <p></p>;
   return (
     <>
       <Modal
@@ -103,7 +108,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
 
               <div className="mb-4">
                 <TextField
-                  value={contact?.email || ""}
+                  value={emailAddress}
                   onChange={(e) => {
                     setEmailAddress(e.target.value);
                   }}
@@ -120,7 +125,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
 
               <div className="mb-4">
                 <TextField
-                  value={contact?.phone || ""}
+                  value={phone}
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
@@ -144,7 +149,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="mt-4">
                 <TextField
-                  value={contact?.company || ""}
+                  value={company}
                   onChange={(e) => {
                     setCompany(e.target.value);
                   }}
@@ -160,7 +165,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="mt-4">
                 <TextField
-                  value={contact?.job || ""}
+                  value={jobTitle}
                   onChange={(e) => {
                     setJobTitle(e.target.value);
                   }}
@@ -176,7 +181,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
 
               <div className="mt-4">
-                <Select valueElement="" label="Tag" placeholder="Select tag..." theme="Carbon" />
+                <Select valueElement={{ exhibition: true }} label="Tag" placeholder="Select tag..." theme="Carbon" />
               </div>
               <div className="mt-4">
                 <TextArea
@@ -190,7 +195,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
                   onChange={(e) => {
                     setNote(e.target.value);
                   }}
-                  value={contact?.meetDate || ""}
+                  value={note}
                 />
               </div>
               <div className="mt-4">
