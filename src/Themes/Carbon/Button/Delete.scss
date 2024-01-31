@@ -1,0 +1,16 @@
+.Carbon-Delete-Button-container {
+  // background: linear-gradient(35deg, rgba(232, 225, 218, 1) -100%, #6432c9 50%, rgba(100, 50, 201, 1) 100%);
+  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1);
+  text-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1);
+  background: linear-gradient(0deg, rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box, linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
+    linear-gradient(0deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
+  // text-shadow: 0px 1px 1px currentColor;
+  //   box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+  //           -6px -6px 20px 0px rgba(255, 255, 255, 1),
+  //           2px 2px 4px 0px rgba(114, 142, 171, 0.1) !important;
+  @apply flex justify-center tracking-tighter items-center text-[#6432C9] border border-[#6432C9] w-full disabled:cursor-not-allowed bg-white leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+}
+
+.Carbon-Delete-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}

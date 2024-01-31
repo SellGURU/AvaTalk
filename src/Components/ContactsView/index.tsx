@@ -46,7 +46,7 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
       <div className="mt-8 px-6">
         <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search name or email..." />
       </div>
-      {!(contacts.length > 0) && isLoading ? (
+      {!(contacts.length > 0) && !isLoading ? (
         <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
           <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
             No contact yet

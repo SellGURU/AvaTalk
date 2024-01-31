@@ -112,24 +112,13 @@ class Auth extends Api {
       }
     });
   }
-  static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
-    const requestData = {
-      contactId,
-      updatedData,
-    };
-
-    this.post("/contactDetails", requestData).then(() => {
-      callBack();
-    });
-  }
-  // static updateContactDetails(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
+  // static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
   //   const requestData = {
   //     contactId,
   //     updatedData,
   //   };
 
-  //   // Assuming you are using PATCH method to update contact details
-  //   this.patch(`/contactDetails/${contactId}`, requestData).then(() => {
+  //   this.post("/contactDetails", requestData).then(() => {
   //     callBack();
   //   });
   // }

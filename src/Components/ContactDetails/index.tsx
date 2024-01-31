@@ -5,7 +5,7 @@ import { Button } from "symphony-ui";
 import { useState } from "react";
 import { Auth } from "../../Api";
 import { ContactData } from "../../Api/Auth";
-import { EditContact } from "../__Modal__";
+import { DeleteContact, EditContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
@@ -15,6 +15,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const [contact, setContact] = useState<ContactData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
+  const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
   const { contactId } = useParams();
 
   useConstructor(() => {
@@ -51,7 +52,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
             <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
-            <div className={`${theme}-ContactDetails-recycleIcon`}></div>
+            <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
         <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
@@ -120,6 +121,14 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         isOpen={showEditContactModal}
         onClose={() => {
           setShowEditContactModal(false);
+        }}
+      />
+      <DeleteContact
+        theme="Carbon"
+        contactId={contactId}
+        isOpen={showDeleteContactModal}
+        onClose={() => {
+          setShowDeleteContactModal(false);
         }}
       />
     </div>
