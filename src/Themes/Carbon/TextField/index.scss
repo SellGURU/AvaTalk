@@ -21,13 +21,13 @@
 }
 .Carbon-TextField-box {
   border: 1px solid transparent;
-  background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
-    linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+  // background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
+  //   linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
   // box-shadow: 0px 0px 8px 0px rgba(225, 225, 255, 1);
   // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1),inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
-  @apply rounded-[27px] flex items-center boxsInnerShadows  justify-between bg-gray-100;
+  @apply rounded-[27px] flex items-center bg-gray-100 boxsInnerShadows boxBorderGradion  justify-between ;
 }
 .Carbon-TextField-togglePassword {
   @apply cursor-pointer;
