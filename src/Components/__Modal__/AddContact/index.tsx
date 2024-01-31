@@ -49,7 +49,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
                 <div className="text-sm text-gray-700 max-w-[228px] opacity-80 text-center">Tell us more about yourself</div>
               </div> */}
             </div>
-            <div className="px-4">
+            <div className="p-5">
               <div className="flex justify-between items-center">
                 <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Contact</div>
                 <Button onClick={onClose} theme="Carbon-back">

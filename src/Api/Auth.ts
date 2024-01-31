@@ -23,7 +23,7 @@ interface RegisterData {
 }
 export interface ContactData {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
   image: string;
   Exhibition: boolean;
@@ -70,7 +70,7 @@ class Auth extends Api {
     this.post("/contactsInfo", {}).then((res) => {
       const contactDataArray: Array<ContactData> = res.data.map((item: any) => ({
         id: item.id,
-        name: item.name,
+        fullName: item.fullName,
         email: item.email,
         image: item.image,
         Exhibition: item.Exhibition,
@@ -94,7 +94,7 @@ class Auth extends Api {
       if (contact) {
         const contactDetails: ContactData = {
           id: contact.id,
-          name: contact.name,
+          fullName: contact.fullName,
           email: contact.email,
           image: contact.image,
           Exhibition: contact.Exhibition,
@@ -106,13 +106,33 @@ class Auth extends Api {
           addDate: contact.addDate,
           job: contact.job,
         };
-
         callBack(contactDetails);
       } else {
         callBack(null);
       }
     });
   }
+  static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
+    const requestData = {
+      contactId,
+      updatedData,
+    };
+
+    this.post("/contactDetails", requestData).then(() => {
+      callBack();
+    });
+  }
+  // static updateContactDetails(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
+  //   const requestData = {
+  //     contactId,
+  //     updatedData,
+  //   };
+
+  //   // Assuming you are using PATCH method to update contact details
+  //   this.patch(`/contactDetails/${contactId}`, requestData).then(() => {
+  //     callBack();
+  //   });
+  // }
 }
 
 export default Auth;

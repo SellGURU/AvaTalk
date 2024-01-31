@@ -65,7 +65,7 @@ const useMoch = () => {
   Api.post("/contactsInfo", [
     {
       id: generateSlugId(),
-      name: "Sara Doe",
+      fullName: "Sara Doe",
       email: "sonia.doe@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -79,7 +79,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Jane Smith",
+      fullName: "Jane Smith",
       email: "jane.smith@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: false,
@@ -93,7 +93,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Elson Johnson",
+      fullName: "Elson Johnson",
       email: "bob.johnson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -107,7 +107,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Jane Smith",
+      fullName: "Jane Smith",
       email: "jourg.smith@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: false,
@@ -121,7 +121,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Bob Johnson",
+      fullName: "Bob Johnson",
       email: "david.bonson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -135,7 +135,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Elson Johnson",
+      fullName: "Elson Johnson",
       email: "bob.johnson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -149,7 +149,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Jane Smith",
+      fullName: "Jane Smith",
       email: "jourg.smith@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: false,
@@ -163,7 +163,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Bob Johnson",
+      fullName: "Bob Johnson",
       email: "david.bonson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -177,7 +177,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Elson Johnson",
+      fullName: "Elson Johnson",
       email: "bob.johnson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -191,7 +191,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Jane Smith",
+      fullName: "Jane Smith",
       email: "jourg.smith@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: false,
@@ -205,7 +205,7 @@ const useMoch = () => {
     },
     {
       id: generateSlugId(),
-      name: "Bobii Johnson",
+      fullName: "Bobii Johnson",
       email: "david.bonson@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,
@@ -221,7 +221,7 @@ const useMoch = () => {
   Api.post("/contactDetails", [
     {
       id: generateSlugId(),
-      name: "Sara Doe",
+      fullName: "Sara Doe",
       email: "sonia.doe@example.com",
       image: "../../public/Acord/person.png",
       Exhibition: true,

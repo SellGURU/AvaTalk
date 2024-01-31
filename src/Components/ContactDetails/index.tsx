@@ -27,8 +27,6 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     }
   });
 
-  // const selectedContact = contacts.find((item) => item.id.toString() === contactId);
-
   const navigate = useNavigate();
 
   const handleShowMore = () => {
@@ -49,14 +47,14 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       </div>
       <div className="h-screen flex flex-col items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
-          <img src={contact?.image} alt={contact?.name} />
+          <img src={contact?.image} alt={contact?.fullName} />
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
             <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
             <div className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.name}</p>
+        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className="flex items-center justify-between mb-[20px]">
           {showExhibition && (

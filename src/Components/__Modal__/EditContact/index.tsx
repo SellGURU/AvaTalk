@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Modal from "react-modal";
 
 import "./index.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import LocationPicker from "react-leaflet-location-picker";
 import { SearchBox, Select, TextArea, TextField } from "../..";
@@ -28,16 +29,30 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
   const [contact, setContact] = useState<ContactData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const [fullName, setFullName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [tag, setTag] = useState("");
+  const [note, setNote] = useState("");
+
+  useConstructor(() => {
     setIsLoading(true);
     if (contactId) {
       Auth.getContactDetails(contactId, (contactDetails) => {
         setContact(contactDetails);
         setIsLoading(false);
+        setFullName(contactDetails?.fullName || "");
+        setEmailAddress(contactDetails?.email || "");
+        setPhone(contactDetails?.phone || "");
+        setCompany(contactDetails?.company || "");
+        setJobTitle(contactDetails?.job || "");
+        setNote(contactDetails?.meetDate || "");
       });
     }
-  }, [contactId]);
-  // console.log("contact", contact);
+  });
+
   const pointMode = {
     banner: false,
     control: {
@@ -62,7 +77,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
         <>
           <div className="h-[80vh] hiddenScrollBar overflow-y-scroll">
             <div className=""></div>
-            <div className="px-4">
+            <div className="p-5">
               <div className="flex justify-between items-center">
                 <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Edit Contact</div>
                 <Button onClick={onClose} theme="Carbon-back">
@@ -71,8 +86,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="my-4">
                 <TextField
-                  value=""
-                  onChange={() => {}}
+                  value={fullName}
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                  }}
                   onBlur={() => {}}
                   label="Full Name"
                   placeholder="Enter your first and last name..."
@@ -86,8 +103,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
 
               <div className="mb-4">
                 <TextField
-                  value=""
-                  onChange={() => {}}
+                  value={contact?.email || ""}
+                  onChange={(e) => {
+                    setEmailAddress(e.target.value);
+                  }}
                   onBlur={() => {}}
                   label="Email Address"
                   placeholder="Enter your email address..."
@@ -101,8 +120,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
 
               <div className="mb-4">
                 <TextField
-                  value=""
-                  onChange={() => {}}
+                  value={contact?.phone || ""}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
                   onBlur={() => {}}
                   label="Phone"
                   placeholder="Enter your phone number..."
@@ -123,8 +144,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="mt-4">
                 <TextField
-                  value=""
-                  onChange={() => {}}
+                  value={contact?.company || ""}
+                  onChange={(e) => {
+                    setCompany(e.target.value);
+                  }}
                   onBlur={() => {}}
                   label="Company"
                   placeholder="Enter your company name..."
@@ -137,8 +160,10 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
               <div className="mt-4">
                 <TextField
-                  value=""
-                  onChange={() => {}}
+                  value={contact?.job || ""}
+                  onChange={(e) => {
+                    setJobTitle(e.target.value);
+                  }}
                   onBlur={() => {}}
                   label="Job Title"
                   placeholder="Enter your job title..."
@@ -154,7 +179,19 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
                 <Select valueElement="" label="Tag" placeholder="Select tag..." theme="Carbon" />
               </div>
               <div className="mt-4">
-                <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="" onBlur={() => {}} label="Note" theme="Carbon" onChange={() => {}} value="" />
+                <TextArea
+                  inValid=""
+                  placeholder="Enter your note..."
+                  textAreaHeight="136px"
+                  name=""
+                  onBlur={() => {}}
+                  label="Note"
+                  theme="Carbon"
+                  onChange={(e) => {
+                    setNote(e.target.value);
+                  }}
+                  value={contact?.meetDate || ""}
+                />
               </div>
               <div className="mt-4">
                 <Button onClick={onClose} theme="Carbon">

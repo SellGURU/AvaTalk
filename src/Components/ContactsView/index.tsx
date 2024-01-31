@@ -28,7 +28,7 @@ const ContactsView: React.FC<ProfileProps> = ({ theme }) => {
     setIsLoading(false);
   });
 
-  const filteredData = contacts.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredData = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);

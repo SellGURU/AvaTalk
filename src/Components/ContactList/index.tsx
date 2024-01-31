@@ -7,7 +7,7 @@ import ContactItem from "../ContactItem";
 // }
 interface DataProps {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
   image: string;
   Exhibition: boolean;
