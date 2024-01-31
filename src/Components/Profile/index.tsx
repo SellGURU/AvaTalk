@@ -1,10 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
 import { BookMark } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
 import {Box} from '../../Model';
+import { useNavigate } from 'react-router-dom';
+import { dragEnd, dragOver, dragStart} from '../../help';
 
 interface ProfileProps {
   theme?: string;
@@ -13,18 +16,44 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [showBookMark,setShowBookMark] = useState(false)
   const [avatarUrl,setAvatarUrl] = useState('')
+  const [backgroundUrl,setBackgroundUrl] = useState('')
   const authContext = useAuth()
+  const [showChangePhoto,setShowChangePhoto] = useState(false)
+  const [allowDrag,setAllowDrag] = useState(false)
   const getNewAvatarUrl = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setAvatarUrl(URL.createObjectURL(e.target.files[0]));
+      setShowChangePhoto(false)
     }
   };
-  
+  const getNewBackGroundUrl = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setBackgroundUrl(URL.createObjectURL(e.target.files[0]));
+      setShowChangePhoto(false)
+    }
+  };  
+  const changePhotoRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        changePhotoRef.current &&
+        !changePhotoRef.current.contains(event.target as Node)
+      ) {
+        setShowChangePhoto(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [changePhotoRef]);  
+  const [draggedItem,setDraggedItem] = useState<any>();  
+  const navigate = useNavigate();
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
       <div className={`${theme}-Profile-ProfileSection`}>
-        <div className={`${theme}-Profile-Background`}></div>
+        <img className={`${theme}-Profile-Background`} src={authContext.currentUser.resolveBackImageUrl()} />
         <div className={`${theme}-Profile-Content`}>  
           {
             mode == 'profile' ?
@@ -45,14 +74,27 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
             {mode == 'profile' ?
               <>
-                <div className={`${theme}-Profile-GalleryVectorContainer`}>
-                  <input onChange={getNewAvatarUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
+                <div onClick={() => {setShowChangePhoto(true)}} className={`${theme}-Profile-GalleryVectorContainer`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
                 </div>
-
-                <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
+                {
+                  showChangePhoto ?
+                    <div ref={changePhotoRef} style={{boxShadow:'2px 2px 8px 0px rgba(114, 142, 171, 0.2)'}} className='bottom-[-80px] w-[215px] max-w-[215px] bg-gray-100 h-[100px] absolute left-0 rounded-[27px]'>
+                      <div className='text-gray-700 relative cursor-pointer pt-4 pb-3 text-sm border-b border-white'>
+                          Change Profile Picture
+                          <input onChange={getNewAvatarUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
+                        </div>
+                      <div className='text-gray-700 relative cursor-pointer pt-4 pb-3 text-sm'>
+                        Add Background Picture
+                        <input onChange={getNewBackGroundUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
+                      </div>
+                    </div>
+                  :
+                  undefined
+                }
+                {/* <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
-                </div>
+                </div> */}
                 <div className={`${theme}-Profile-ScanBarcode`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
                 </div>
@@ -75,7 +117,9 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           :
             <>
             <div className='flex gap-x-2 items-center w-full'>
-              <Button theme="Carbon">
+              <Button onClick={() => {
+                navigate('/presentation')
+              }} theme="Carbon">
                 <div className={`${theme}-Profile-StartPresentionBtnVector`}></div>
                 <div>
                   Start Presentation
@@ -87,40 +131,25 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             </div>
             </>
           }
-          {authContext.currentUser.boxs?.map((item:Box) => {
-            return (
-              <ContentCard mod={mode} theme="Carbon" title={item.getTitle()}>
-                {item.resolveRender('Carbon')}
-              </ContentCard>              
-            )
-          })}
-          {/* <ContentCard mod={mode} theme="Carbon" title="Social">
-            <div className={`${theme}-Profile-Vectors`}>
-              <div className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-InstagramVector`}></div>
-              </div>
-              <div className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-LinkedinVector`}></div>
-              </div>
-            </div>
-          </ContentCard>
-          <ContentCard mod={mode} theme="Carbon" title="Links">
-            <div className={`${theme}-Profile-Vectors`}>
-              <div className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector`}>
-                  <div className={`${theme}-ContentCard-CVector`}></div>
-                </div>
-              </div>
-              <div className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector`}>
-                  <div className={`${theme}-ContentCard-GlobalVector`}></div>
-                </div>
-              </div>
-            </div>
-          </ContentCard>
-          <ContentCard mod={mode} theme="Carbon" title="About me">
-            <h1>Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.</h1>
-          </ContentCard> */}
+          <ul id="sortable" onDragStart={(e: any) => {
+            dragStart(e,allowDrag,setDraggedItem)
+          }} onDragEnd={(e:any) => {
+            dragEnd(e,allowDrag,setAllowDrag)
+          }}
+          onDragOver={(e) => {
+            dragOver(e,allowDrag,draggedItem)
+          }}
+          >
+
+            {authContext.currentUser.boxs?.map((item:Box) => {
+              return (
+                <ContentCard mod={mode} setAllowDrag={setAllowDrag} theme="Carbon" title={item.getTitle()}>
+                  {item.resolveRender('Carbon')}
+                </ContentCard>              
+              )
+            })}
+
+          </ul>
         </div>
        
       </div>
@@ -128,6 +157,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         authContext.currentUser.updateImageurl(resolve)
         setAvatarUrl('')
       }}></CropperBox>
+
+      <CropperBox url={backgroundUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+        authContext.currentUser.updateBackgroundurl(resolve)
+        setBackgroundUrl('')
+      }}></CropperBox>      
       <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
     </div>
     </>
