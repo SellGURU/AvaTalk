@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({theme,content}) => {
         <>
             <div className={`${theme}-Card-container`}>
                 <div className="flex items-center justify-start">
-                    <div className={`${theme}-Card-icon`}></div>
+                    <div className={`${theme}-Card-icon`} style={{maskImage:`url(/Carbon/${content.icon})`}}></div>
                     <div className="text-left text-sm ml-3 text-gray-700 font-semibold">{content.name}</div>
                 </div>
                 <div className="text-left text-sm text-gray-700 mt-2">{content.description}</div>

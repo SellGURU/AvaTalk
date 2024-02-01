@@ -7,6 +7,7 @@ const resolveMenuFromRoute = () => {
     // console.log(window.location.hash.replace('#/','').split('/')[0])
     switch (window.location.hash.replace('#/','').split('/')[0]) {
         case '' : return 'profile';
+        case 'edit': return 'profile';
         default : return window.location.hash.replace('#/','').split('/')[0];
     }
 } 

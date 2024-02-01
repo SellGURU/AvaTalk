@@ -12,18 +12,23 @@ const Edit:React.FC<EditProps> = ({theme}) => {
     const [editCards] =useState([
         {
             name:'Contact Info',
-            icon:'',
+            icon:'book.svg',
             description:'Add the contact info you’d like to share others.'
-        }
+        },
+        {
+            name:'About',
+            icon:'info.svg',
+            description:'Share something about yourself.'
+        }        
     ])
     return (
         <>
-              <div className="w-full h-full absolute top-8 z-10 bg-white">
+              <div className={`${theme}-Edit-container`}>
                 <div className="flex px-6 items-center space-x-4 absolute  top-8">
                     <Button onClick={() => {navigate(-1)}} theme={`${theme}-back`}>
                         <div className={`${theme}-back-Button-vector`}></div>
                     </Button>
-                    <p className="text-gray-700 leading-[24px] text-[16px] font-[600] contactNameShadow">Contact info</p>
+                    <p className={`${theme}-Edit-title`}>Contact info</p>
                 </div>            
 
                 <div className="px-6 mt-32">
