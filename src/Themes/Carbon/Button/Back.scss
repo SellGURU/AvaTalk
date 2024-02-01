@@ -6,6 +6,14 @@
   @apply h-11 w-12 #{!important};
 };
 
+.Carbon-back-Button-vector{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url('/Carbon/leftVector.svg');    
+    @apply w-[8px] h-[20px] bg-slate-400
+}
 
 .Carbon-back-Button-container-disabled {
   @apply opacity-[50%] #{!important};

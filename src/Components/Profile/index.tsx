@@ -6,7 +6,7 @@ import { BookMark } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
 import {Box} from '../../Model';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { dragEnd, dragOver, dragStart} from '../../help';
 
 interface ProfileProps {
@@ -52,6 +52,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
+      <Outlet></Outlet>
       <div className={`${theme}-Profile-ProfileSection`}>
         <img className={`${theme}-Profile-Background`} src={authContext.currentUser.resolveBackImageUrl()} />
         <div className={`${theme}-Profile-Content`}>  
@@ -108,7 +109,9 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           </div>
 
           {mode == 'profile' ?
-            <Button theme="Carbon">
+            <Button onClick={() => {
+              navigate('/edit')
+            }} theme="Carbon">
               <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
               <div>
                 Edit Profile

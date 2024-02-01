@@ -10,7 +10,8 @@ import SearchBox from "./SearchBox";
 import Presentation from "./Presentation";
 import ContactDetails from "./ContactDetails";
 import TextArea from "./TextArea";
-
+import Edit from "./Edit";
+import Card from "./Card";
 import ContactsView from "./ContactsView";
 import Splash from "./Splash";
 import Footer from "./Footer";
@@ -33,4 +34,6 @@ export {
   ContactDetails,
   TextArea,
   FooterPresentation,
+  Edit,
+  Card
 };
