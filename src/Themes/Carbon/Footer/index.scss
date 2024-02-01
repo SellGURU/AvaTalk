@@ -1,9 +1,9 @@
 .Carbon-Footer-Container {
-  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+  /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
   -6px -6px 20px 0px rgba(255, 255, 255, 1),
-  2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+  2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
   
-  @apply h-16 sticky rounded-xl border border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center;
+  @apply h-16 sticky rounded-xl border boxShadow-Gray border-b-0 border-white bottom-0 bg-slate-100 py-3 px-7 gap-16 flex items-center justify-center;
 }
 .Carbon-Footer-VectorSection {
   @apply w-10 h-10 p-2 rounded-full cursor-pointer;

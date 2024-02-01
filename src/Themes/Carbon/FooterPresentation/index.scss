@@ -1,14 +1,14 @@
 .Carbon-FooterPresentation-Container {
-  border: 1px solid transparent;
+  /* border: 1px solid transparent;
   background: linear-gradient(0deg, #E2E8F0, #E2E8F0) padding-box,
   linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box,
-  linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) border-box;
+  linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) border-box; */
 
-  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+  /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
                 -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                  2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+                  2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
 
-  @apply h-16 sticky rounded-xl border-b-0 bottom-0 bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
+  @apply h-16 sticky rounded-xl border-b-0 bottom-0 boxShadow-Gray borderBox-Gray2 bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
 }
 .Carbon-FooterPresentation-BackgroundItems {
   background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,

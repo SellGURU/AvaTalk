@@ -13,8 +13,8 @@
 }
 .Carbon-ContactsView-innerBox {
   border: 1px solid transparent;
-  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-  @apply rounded-[27px] flex items-center bg-gray-100 h-[44px] text-gray-500/60 px-4 leading-[18px] text-[13px] font-[300]   justify-between;
+  /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
+  @apply rounded-[27px] flex items-center boxShadow-Gray bg-gray-100 h-[44px] text-gray-500/60 px-4 leading-[18px] text-[13px] font-[300]   justify-between;
 }
 .Carbon-ContactsView-Section {
   /* Hide scrollbar for IE, Edge and Firefox */
