@@ -48,7 +48,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    @apply w-6 h-6 bg-violet-700;
+    @apply w-6 h-6 bg-primary-color;
 }
 .Carbon-Profile-EditGalleryVector{
     mask-image: url(/Carbon/editGallery.svg);
@@ -63,14 +63,14 @@
     @apply left-52 top-16;
 }
 .Carbon-Profile-ScanBarcode{
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
                     -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);    
+                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);     */
     border: 1px solid transparent;
     background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
                 linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
                 linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-    @apply absolute w-10 h-10 bg-gray-100 rounded-full flex justify-center items-center left-52 -top-[58px] ;
+    @apply absolute w-10 h-10 boxShadow-Gray bg-gray-100 rounded-full flex justify-center items-center left-52 -top-[58px] ;
 }
 .Carbon-Profile-ProfileName {
     text-shadow: 0px 1px 1px currentColor;
@@ -102,11 +102,11 @@
     @apply flex flex-row flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    box-shadow:
+    /* box-shadow:
     4px 4px 20px 0px rgba(111, 140, 176, 0.41),
     -6px -6px 20px 0px rgba(255, 255, 255, 1),
-    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-    @apply bg-gray-100 w-16 h-16 flex justify-center items-center rounded-full p-2 border border-white ; 
+    2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
+    @apply bg-gray-100 w-16 h-16 flex justify-center boxShadow-Gray items-center rounded-full p-2 border border-white ; 
 }
 
 .Carbon-Profile-closeIcon{

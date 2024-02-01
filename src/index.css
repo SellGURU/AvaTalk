@@ -44,6 +44,14 @@
     background: linear-gradient(0deg,rgba(243,244,246),rgba(243,244,246)) padding-box,linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box, linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;  
   }
 
+  /* mina-soheilifar border box*/
+  .borderBox-Gray2 {
+    border: 1px solid transparent;
+    background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
+                linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
+                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;    
+  }
+
   .borderBox-primary {
     border: 1px solid transparent;
     background: linear-gradient(0deg,rgba(255,255,255),rgba(255,255,255)) padding-box,linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box, linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box; 
