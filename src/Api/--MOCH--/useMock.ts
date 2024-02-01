@@ -234,6 +234,73 @@ const useMoch = () => {
       job: "Digital Marketer",
     },
   ]);
+  Api.post("/tagsInfo", [
+    {
+      id: generateSlugId(),
+      tag: "Exhibition",
+      color: "#FBBF24",
+      contacts: [
+        {
+          name: "John Doe",
+          email: "john.doe@example.com",
+          phone: "+1 (555) 123-4567",
+        },
+        {
+          name: "Alice Johnson",
+          email: "alice.johnson@example.com",
+          phone: "+1 (555) 987-6543",
+        },
+      ],
+    },
+    {
+      id: generateSlugId(),
+      tag: "Priority",
+      color: "#14B8A6",
+      contacts: [
+        {
+          name: "Jane Smith",
+          email: "jane.smith@example.com",
+          phone: "+1 (555) 789-0123",
+        },
+      ],
+    },
+    {
+      id: generateSlugId(),
+      tag: "Company",
+      color: "#6366F1",
+      contacts: [
+        {
+          name: "Robert Johnson",
+          email: "robert.johnson@example.com",
+          phone: "+1 (555) 234-5678",
+        },
+        {
+          name: "Eva Williams",
+          email: "eva.williams@example.com",
+          phone: "+1 (555) 876-5432",
+        },
+      ],
+    },
+  ]);
+  Api.post("/tagDetails", [
+    {
+      id: generateSlugId(),
+      tag: "Exhibition",
+      color: "",
+      contacts: [
+        {
+          name: "John Doe",
+          email: "john.doe@example.com",
+          phone: "+1 (555) 123-4567",
+        },
+        {
+          name: "Alice Johnson",
+          email: "alice.johnson@example.com",
+          phone: "+1 (555) 987-6543",
+        },
+      ],
+    },
+  ]);
 };
 
 export default useMoch;

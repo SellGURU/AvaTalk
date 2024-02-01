@@ -10,11 +10,14 @@ import SearchBox from "./SearchBox";
 import Presentation from "./Presentation";
 import ContactDetails from "./ContactDetails";
 import TextArea from "./TextArea";
-
+import ContactList from "./ContactList";
+import ContactItem from "./ContactItem";
 import ContactsView from "./ContactsView";
 import Splash from "./Splash";
 import Footer from "./Footer";
 import FooterPresentation from "./FooterPresentation";
+import TagList from "./TagList";
+import TagItem from "./TagItem";
 
 export {
   Profile,
@@ -33,4 +36,8 @@ export {
   ContactDetails,
   TextArea,
   FooterPresentation,
+  ContactList,
+  ContactItem,
+  TagList,
+  TagItem,
 };

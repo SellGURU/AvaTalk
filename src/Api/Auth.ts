@@ -36,6 +36,19 @@ export interface ContactData {
   job: string;
 }
 
+interface ContactType {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface TagsData {
+  id: string;
+  tag: string;
+  color: string;
+  contacts: ContactType[];
+}
+
 class Auth extends Api {
   static login(data: LoginData) {
     const response = this.post("/login", data);
@@ -112,16 +125,56 @@ class Auth extends Api {
       }
     });
   }
-  // static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
-  //   const requestData = {
-  //     contactId,
-  //     updatedData,
-  //   };
 
-  //   this.post("/contactDetails", requestData).then(() => {
-  //     callBack();
-  //   });
-  // }
+  static getAllTags(callBack: (data: Array<TagsData>) => void) {
+    this.post("/tagsInfo").then((res) => {
+      const tagDataArray: Array<TagsData> = res.data.map((item: any) => ({
+        id: item.id,
+        tag: item.tag,
+        color: item.color,
+        contacts: item.contacts.map((contact: any) => ({
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone,
+        })),
+      }));
+
+      callBack(tagDataArray);
+    });
+  }
+
+  static getTagDetails(tagId: string, callBack: (data: TagsData | null) => void) {
+    this.post("/tagDetails", {}).then((res) => {
+      // const tag = res.data.find((item: any) => item.id === tagId);
+      const tag = res.data[0];
+
+      if (tag) {
+        const tagDetails: TagsData = {
+          id: tag.id,
+          tag: tag.tag,
+          color: tag.color,
+          contacts: tag.contacts.map((contact: any) => ({
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone,
+          })),
+        };
+        callBack(tagDetails);
+      } else {
+        callBack(null);
+      }
+    });
+  }
 }
+
+// static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
+//   const requestData = {
+//     contactId,
+//     updatedData,
+//   };
+
+//   this.post("/contactDetails", requestData).then(() => {
+//     callBack();
+//   });
 
 export default Auth;
