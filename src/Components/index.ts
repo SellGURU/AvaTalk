@@ -12,6 +12,8 @@ import ContactDetails from "./ContactDetails";
 import TextArea from "./TextArea";
 import ContactList from "./ContactList";
 import ContactItem from "./ContactItem";
+import Edit from "./Edit";
+import Card from "./Card";
 import ContactsView from "./ContactsView";
 import Splash from "./Splash";
 import Footer from "./Footer";
@@ -40,4 +42,6 @@ export {
   ContactItem,
   TagList,
   TagItem,
+  Edit,
+  Card
 };

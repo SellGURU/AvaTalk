@@ -1,0 +1,21 @@
+.Carbon-Card-container{
+    @apply w-full min-h-[89px] cursor-pointer mb-4 relative pt-[20px] px-5  pb-2 boxShadow-Gray borderBox-Gray rounded-[24px]
+}
+
+.Carbon-Card-icon{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    // mask-image: url(/Carbon/book.svg);
+    @apply w-6 h-6 bg-primary-color;
+}
+
+.Carbon-Card-Vector {
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url(/Vector.svg);
+    @apply w-[10px] h-[24px] bg-slate-400;    
+}

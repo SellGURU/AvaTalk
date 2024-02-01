@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -16,6 +16,12 @@ const route = createHashRouter([
       {
         path: "/",
         element: <Profile theme="Carbon"></Profile>,
+        children:[
+          {
+            path:'edit',
+            element:<Edit></Edit>
+          }
+        ]
       },
       {
         path: "/contacts",

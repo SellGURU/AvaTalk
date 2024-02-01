@@ -6,5 +6,6 @@ import Spinner from "./Spinner";
 import Splash from "./splash";
 import Contacts from "./Contacts";
 import Dev from "./Dev";
+import Edit from "./Edit";
 
-export { CreateAccount, Home, Login, Verification, Spinner, Splash, Contacts, Dev };
+export { CreateAccount, Home,Edit, Login, Verification, Spinner, Splash, Contacts, Dev };
