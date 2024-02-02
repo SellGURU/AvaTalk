@@ -8,5 +8,5 @@ import Contacts from "./Contacts";
 import Dev from "./Dev";
 import Edit from "./Edit";
 import Chats from "./Chats";
-
-export { CreateAccount, Chats,Home,Edit, Login, Verification, Spinner, Splash, Contacts, Dev };
+import {EditAbout} from "./EditPages";
+export { CreateAccount, Chats,Home,Edit,EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev };

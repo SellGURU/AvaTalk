@@ -1,4 +1,5 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
 interface Contenttype {
     name:string,
@@ -9,13 +10,16 @@ interface Contenttype {
 interface CardProps {
     theme?:string
     content:Contenttype
+    linkTo:string
 }
 
-const Card: React.FC<CardProps> = ({theme,content}) => {
-
+const Card: React.FC<CardProps> = ({theme,content,linkTo}) => {
+    const navigate = useNavigate();
     return (
         <>
-            <div className={`${theme}-Card-container`}>
+            <div onClick={() => {
+                navigate(linkTo)
+            }} className={`${theme}-Card-container`}>
                 <div className="flex items-center justify-start">
                     <div className={`${theme}-Card-icon`} style={{maskImage:`url(/Carbon/${content.icon})`}}></div>
                     <div className="text-left text-sm ml-3 text-gray-700 font-semibold">{content.name}</div>
