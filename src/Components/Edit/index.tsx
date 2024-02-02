@@ -21,7 +21,13 @@ const Edit:React.FC<EditProps> = ({theme}) => {
             icon:'info.svg',
             link:'about',
             description:'Share something about yourself.'
-        }        
+        },
+        {
+            name:'Gallery',
+            icon:'gallery.svg',
+            link:'gallery',
+            description:'Add images to your profile.'
+        }           
     ])
     return (
         <>
@@ -31,7 +37,7 @@ const Edit:React.FC<EditProps> = ({theme}) => {
                 <Button onClick={() => {navigate(-1)}} theme={`${theme}-back`}>
                     <div className={`${theme}-back-Button-vector`}></div>
                 </Button>
-                <p className={`${theme}-Edit-title`}>Contact info</p>
+                <p className={`${theme}-Edit-title`}>Edit Profile</p>
             </div>            
 
             <div className="px-6 mt-32">

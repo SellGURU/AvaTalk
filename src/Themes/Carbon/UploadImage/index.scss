@@ -71,3 +71,6 @@
 .Carbon-ImageUploader-uploader-suportText-container{
     @apply flex justify-center items-center mt-2 
 }
+.Carbon-ImageUploader-label{
+    @apply leading-[19.36px] w-full  text-left text-[13px] ml-6 font-medium text-gray-700;
+}
