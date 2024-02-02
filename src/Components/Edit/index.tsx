@@ -33,7 +33,13 @@ const Edit:React.FC<EditProps> = ({theme}) => {
             icon:'location2.svg',
             link:'googlemap',
             description:'Share a store or office location.'
-        }                     
+        }, 
+        {
+            name:'Videos',
+            icon:'video-play.svg',
+            link:'videos',
+            description:'Make your page come to life with a video.'
+        }                              
     ])
     return (
         <>
@@ -46,7 +52,7 @@ const Edit:React.FC<EditProps> = ({theme}) => {
                 <p className={`${theme}-Edit-title`}>Edit Profile</p>
             </div>            
 
-            <div className="px-6 mt-32">
+            <div className="px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
                 {editCards.map(item => {
                     return (
                         <Card linkTo={item.link} content={item} theme="Carbon"></Card>
