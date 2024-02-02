@@ -3,7 +3,7 @@
 }
 .Carbon-TextArea-label {
   // box-shadow: inset 0px 1px 1px 0px rgba(107, 119, 130, 0.85);
-  @apply leading-[19.36px] text-[13px] ml-6 font-medium text-gray-700;
+  @apply leading-[19.36px] text-left text-[13px] ml-6 font-medium text-gray-700;
 }
 .Carbon-TextArea-input {
   border: 1px solid transparent;

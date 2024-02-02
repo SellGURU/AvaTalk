@@ -1,0 +1,23 @@
+.Carbon-Ar-Button-container {
+  @apply flex absolute bottom-16 right-6 justify-center boxShadow-purple boxShadow-Gray  items-center tracking-tighter text-white w-[65px] h-[65px] disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-full #{!important};
+}
+
+.Carbon-Ar-Button-icon {
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url('/Carbon/Ar.svg');    
+    @apply w-[20px] h-[20px] bg-white
+}
+
+.Carbon-Ar-Button-icon-text{
+    @apply text-white
+}
+
+.Carbon-Ar-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}
+.Carbon-Ar-Button-container[data-mode="presentation-answer-button"] {
+  @apply px-6 py-[14px] h-16 #{!important};
+}
