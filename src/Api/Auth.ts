@@ -99,7 +99,7 @@ class Auth extends Api {
     });
   }
 
-  static getContactDetails(contactId: string, callBack: (data: ContactData | null) => void) {
+  static getContactDetails(_contactId: string, callBack: (data: ContactData | null) => void) {
     this.post("/contactDetails", {}).then((res) => {
       // const contact = res.data.find((item: any) => item.id === contactId);
       const contact = res.data[0];
@@ -143,7 +143,7 @@ class Auth extends Api {
     });
   }
 
-  static getTagDetails(tagId: string, callBack: (data: TagsData | null) => void) {
+  static getTagDetails(_tagId: string, callBack: (data: TagsData | null) => void) {
     this.post("/tagDetails", {}).then((res) => {
       // const tag = res.data.find((item: any) => item.id === tagId);
       const tag = res.data[0];

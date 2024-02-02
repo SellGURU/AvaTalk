@@ -7,5 +7,6 @@ import Splash from "./splash";
 import Contacts from "./Contacts";
 import Dev from "./Dev";
 import Edit from "./Edit";
+import Chats from "./Chats";
 
-export { CreateAccount, Home,Edit, Login, Verification, Spinner, Splash, Contacts, Dev };
+export { CreateAccount, Chats,Home,Edit, Login, Verification, Spinner, Splash, Contacts, Dev };

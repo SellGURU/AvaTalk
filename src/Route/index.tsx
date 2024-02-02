@@ -5,7 +5,7 @@ import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import { ContactsView, Profile } from "../Components";
+import { Chat, ContactsView, Profile } from "../Components";
 
 const route = createHashRouter([
   {
@@ -33,6 +33,10 @@ const route = createHashRouter([
           },
         ]
       },
+      {
+        path: "/chats",
+        element: <Chat theme="Carbon"/>,
+      },      
     ],
     // element: <Home></Home>,
   },
@@ -72,6 +76,10 @@ const route = createHashRouter([
     path: "/presentation",
     element: <Presentations />,
   },
+  // {
+  //   path: "/chat",
+  //   element: <Chats/>,
+  // },
 ]);
 
 export default route;

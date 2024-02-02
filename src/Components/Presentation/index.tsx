@@ -28,7 +28,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const [receivedValue, setReceivedValue] = useState('');
 
   // Callback function to receive the value from FooterComponent
-  const handleSendVector = (value) => {
+  const handleSendVector = (value: React.SetStateAction<string>) => {
     setReceivedValue(value);
   };
 

@@ -14,6 +14,8 @@ import ContactList from "./ContactList";
 import ContactItem from "./ContactItem";
 import Edit from "./Edit";
 import Card from "./Card";
+import Chat from "./Chat";
+
 import ContactsView from "./ContactsView";
 import Splash from "./Splash";
 import Footer from "./Footer";
@@ -43,5 +45,6 @@ export {
   TagList,
   TagItem,
   Edit,
-  Card
+  Card,
+  Chat
 };
