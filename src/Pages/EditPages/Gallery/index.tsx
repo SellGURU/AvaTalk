@@ -1,5 +1,5 @@
 import { Button, TextField } from "symphony-ui"
-import { BackIcon,TextArea } from "../../../Components"
+import { BackIcon } from "../../../Components"
 import ImageUploadr from "../../../Components/UploadImage"
 
 const EditGallery =() => {

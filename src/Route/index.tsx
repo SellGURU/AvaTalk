@@ -6,7 +6,7 @@ import ContactPage from "../Pages/ContactPage";
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
-import { EditGallery } from "../Pages/EditPages";
+import { EditGallery, EditGoogleMap } from "../Pages/EditPages";
 
 const route = createHashRouter([
   {
@@ -29,7 +29,11 @@ const route = createHashRouter([
               {
                 path:'gallery',
                 element:<EditGallery></EditGallery>
-              }              
+              },
+              {
+                path:'googlemap',
+                element:<EditGoogleMap></EditGoogleMap>
+              }                                 
             ]
           }
         ]

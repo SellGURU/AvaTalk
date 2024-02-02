@@ -27,7 +27,13 @@ const Edit:React.FC<EditProps> = ({theme}) => {
             icon:'gallery.svg',
             link:'gallery',
             description:'Add images to your profile.'
-        }           
+        },
+        {
+            name:'Google Map',
+            icon:'location2.svg',
+            link:'googlemap',
+            description:'Share a store or office location.'
+        }                     
     ])
     return (
         <>
