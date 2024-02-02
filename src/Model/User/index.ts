@@ -1,3 +1,5 @@
+import Box from "../Boxs";
+
 interface Information {
     firstName:string;
     lastName:string;
@@ -15,6 +17,8 @@ interface Location {
 }
 
 class User {
+    public boxs:Array<Box> = []
+
     constructor(public information?:Information){}
     public resolveImageUrl() {
         if(this.information?.imageurl!= ''){
@@ -22,7 +26,12 @@ class User {
         }
         return `https://ui-avatars.com/api/?name=${this.information?.firstName}+${this.information?.lastName}`
     }
-
+    public resolveBackImageUrl() {
+        if(this.information?.banelImage!= ''){
+            return this.information?.banelImage
+        }
+        return '/Carbon/BackgroundProfileImage.png'       
+    }
     public updateImageurl(base64Image:string|ArrayBuffer|null) {
         if(this.information){
             console.log('updated')
@@ -31,8 +40,24 @@ class User {
         }
     }
 
+    public updateBackgroundurl(base64Image:string|ArrayBuffer|null) {
+        if(this.information){
+            this.information.banelImage= base64Image as string
+            this.syncToLocalStorage()
+        }
+    }
     private syncToLocalStorage () {
         localStorage.setItem('authUser',JSON.stringify(new User(this.information)))
+    }
+
+    public addBox(newBox:Box) {
+        this.boxs.push(newBox)
+        this.syncToLocalStorage()
+    }
+
+    public setBox(newBoxs:Array<Box>){
+        this.boxs = newBoxs
+        this.syncToLocalStorage()
     }
 } 
 export default User

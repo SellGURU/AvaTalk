@@ -40,7 +40,7 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-5 h-5 bg-violet-700;
+  @apply w-5 h-5 cursor-pointer bg-primary-color;
 }
 .Carbon-ContactDetails-editIcon {
   mask-image: url(/Carbon/edit.svg);
@@ -48,7 +48,7 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-5 h-5 bg-violet-700;
+  @apply w-5 h-5 cursor-pointer bg-primary-color;
 }
 .Carbon-ContactDetails-recycleIcon {
   mask-image: url(/Carbon/recycle.svg);
@@ -56,23 +56,23 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-5 h-5 bg-violet-700;
+  @apply w-5 h-5 cursor-pointer bg-primary-color;
 }
 .Carbon-ContactDetails-ActiveVectorSection {
-  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
-  outline: 1px solid white;
+  // box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+  // outline: 1px solid white;
   @apply flex justify-center items-center;
 }
 .Carbon-ContactDetails-ActiveVectors {
-  @apply bg-violet-700;
+  @apply bg-primary-color;
 }
 
 .Carbon-ContactDetails-textItem {
-  @apply contactNameShadow text-gray-700 leading-[21px] text-[14px] font-[500];
+  @apply  text-gray-700 leading-[21px] text-[14px] font-[500];
 }
 .Carbon-ContactDetails-nameItem {
-  @apply contactNameShadow text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];
+  @apply  text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];
 }
 .Carbon-ContactDetails-jobItem {
-  @apply contactNameShadow text-gray-700/80 tracking-wider mb-[20px] leading-[20px] text-[14px] font-[400];
+  @apply  text-gray-700/80 tracking-wider mb-[20px] leading-[20px] text-[14px] font-[400];
 }

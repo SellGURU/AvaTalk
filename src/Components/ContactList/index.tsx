@@ -6,33 +6,16 @@ import ContactItem from "../ContactItem";
 //   theme?: string;
 // }
 interface DataProps {
-  id: number;
-  name: string;
+  id: string;
+  fullName: string;
   email: string;
   image: string;
   Exhibition: boolean;
   Exchange: boolean;
 }
 const ContactList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
-  // const [boxHeight, setBoxHeight] = useState(window.innerHeight);
-  // const [variable, setVariable] = useState(boxHeight > 700 ? 0.63 : boxHeight > 650 ? 0.6 : boxHeight > 600 ? 0.55 : boxHeight > 530 ? 0.5 : 0.45);
-  // const handleResize = () => {
-  //   setBoxHeight(window.innerHeight);
-  //   setVariable(window.innerHeight > 700 ? 0.63 : window.innerHeight > 650 ? 0.6 : window.innerHeight > 600 ? 0.55 : window.innerHeight > 530 ? 0.5 : 0.45);
-  // };
-  // useEffect(() => {
-  //   setBoxHeight(window.innerHeight);
-  //   setVariable(window.innerHeight > 700 ? 0.63 : window.innerHeight > 650 ? 0.6 : window.innerHeight > 600 ? 0.55 : window.innerHeight > 530 ? 0.5 : 0.45);
-  //   window.addEventListener("resize", handleResize, false);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize, false);
-  //   };
-  // }, []);
-
-  // console.log("boxHeight", boxHeight);
   return (
-    <div className=" w-full overflow-y-scroll hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
+    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
       {data.map((items, index) => (
         <ContactItem theme={theme} key={index} data={items} />
       ))}

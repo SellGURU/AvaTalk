@@ -12,17 +12,17 @@
     display: none;
 }
 .Carbon-Presentation-Content {
-    @apply relative flex flex-col gap-4 justify-center items-center mt-16 px-4 pb-20;
+    @apply relative flex flex-col gap-4 justify-center items-center mt-16 px-6 pb-20;
 }
 .Carbon-Presentation-PictureSection { 
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
+    /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
                     -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);    
-    border: 1px solid transparent;
+                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);     */
+    /* border: 1px solid transparent;
     background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
                 linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
-                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-    @apply w-48 h-48 bg-gray-100 rounded-full flex items-center justify-center;
+                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box; */
+    @apply w-48 h-48 bg-gray-100 boxShadow-Gray borderBox-Gray2 rounded-full flex items-center justify-center;
 }
 .Carbon-Presentation-PresentationPicture {
     @apply w-40 h-40 bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full;
@@ -36,7 +36,7 @@
     @apply text-sm;
 }
 .Carbon-Presentation-ArrowLeft{
-    @apply w-10 h-10 absolute left-[18px] -top-2 ;
+    @apply w-10 h-10 absolute left-6 -top-2 ;
 }
 .Carbon-Presentation-ArrowLeftVector{
     background:url(/Carbon/arrowLeftVector.svg) no-repeat;
@@ -60,25 +60,22 @@
     @apply w-10 h-10 rounded-full flex justify-center items-center mr-2;
 }
 .Carbon-Presentation-CallVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/callVector.svg);
-    @apply w-6 h-6 bg-violet-700;   
+    @apply w-6 h-6 bg-primary-color;   
 }
 .Carbon-Presentation-EmailVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/emailVector.svg);
-    @apply w-6 h-6 bg-violet-700;   
+    @apply w-6 h-6 bg-primary-color;   
 
 }
 .Carbon-Presentation-WebsiteVector{
     mask-image: url(/Carbon/globalLinksVector.svg);
-    @apply w-6 h-6 bg-violet-700;   
+    @apply w-6 h-6 bg-primary-color;   
 
 }
 .Carbon-Presentation-LinkedinVector{
-    // mask-image: url(/Carbon/globalLinksVector.svg);
     mask-image: url(/Carbon/linkedinVector.svg);
-    @apply w-6 h-6 bg-violet-700;   
+    @apply w-6 h-6 bg-primary-color;   
 
 }
 
@@ -86,10 +83,37 @@
     @apply flex flex-col gap-4 justify-center text-sm font-medium mt-11;
 }
 .Carbon-Presentation-Info{
-    // justify-content: left;
-    @apply flex items-center;
-    
+    @apply flex items-center;   
+}
+.Carbon-Presentation-MoreInfoSection{
+    @apply flex flex-col gap-3 items-center w-full;
+}
+.Carbon-Presentation-MoreInfoTitle{
+    @apply font-semibold mb-1 mt-6;
+}
+.Carbon-Presentation-fadeIn {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.Carbon-Presentation-AnswerTitle{
+    @apply mt-6 self-start ms-6;
 }
 
 
-  
+///
+.Carbon-TextShadow {
+    /* Shadows are visible under slightly transparent text color */
+    color: rgba(55, 65, 81, 0.8);
+    text-shadow: 0px 1px 1px white, 0 0 0 #000, 0px 1px 1px white;
+}
+/* Don't show shadows when selecting text */
+// ::-moz-selection { background: #5af; color: #fff; text-shadow: none; }
+// ::selection { background: #5af; color: #fff; text-shadow: none; }

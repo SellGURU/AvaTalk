@@ -1,11 +1,11 @@
 .Carbon-ContactItem-container {
-  @apply my-5 contactBorderGradin h-[88px] flex items-center w-full relative  contactBoxShadows rounded-[24px]  px-4;
+  @apply my-5 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
 }
 .Carbon-ContactItem-section {
   @apply flex w-full   items-center pt-4;
 }
 .Carbon-ContactItem-exchange {
-  @apply absolute top-0 left-4 bg-violet-700 text-[white] leading-[20px] text-[10px] font-[400]  py-[1px] px-[8px] rounded-[4px];
+  @apply absolute top-0 left-4 bg-primary-color text-[white] leading-[20px] text-[10px] font-[400]  py-[1px] px-[8px] rounded-[4px];
 }
 .Carbon-ContactItem-card {
   @apply w-full pl-3 pr-10;
@@ -14,17 +14,17 @@
   @apply flex items-center  w-full justify-between;
 }
 .Carbon-ContactItem-name {
-  @apply leading-[21px] text-[14px] font-[500] contactNameShadow text-gray-700;
+  @apply leading-[21px] text-[14px] font-[500]  text-gray-700;
 }
 .Carbon-ContactItem-iconContainer {
   @apply flex items-center  space-x-6;
 }
 .Carbon-ContactItem-exhibition {
-  @apply exhibitionBoxShadows flex justify-center items-center text-gray-700 leading-[20px] text-[12px] font-[400] bg-amber-400 border w-[85px] h-[24px] rounded-[47px];
+  @apply flex justify-center items-center text-gray-700 leading-[20px] text-[12px] font-[400] bg-amber-400 border w-[85px] h-[24px] rounded-[47px];
 }
 .Carbon-ContactItem-vectorIcon {
   @apply bg-[url('../../../Vector.svg')] w-[10px] h-[15px];
 }
 .Carbon-ContactItem-email {
-  @apply text-gray-700/80 contactNameShadow leading-[21px] text-[14px] font-[400];
+  @apply text-gray-700/80  leading-[21px] text-[14px] font-[400];
 }

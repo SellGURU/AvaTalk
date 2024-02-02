@@ -4,18 +4,23 @@ interface ContentCardProps {
   theme?: string;
   children?: React.ReactNode;
   title?: string;
+  setAllowDrag?: (action:boolean) => void;
   mod?: 'profile'|'review'
 }
-const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, title,mod}) => {
+const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, title,mod,setAllowDrag}) => {
   return (
     <>
-    <div className={`${theme}-ContentCard-Container`}>
+    <li draggable className={`${theme}-ContentCard-Container`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div className={`${theme}-ContentCard-Title`}>
                 {title}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
-              <div className={`${theme}-ContentCard-CardVector`}>
+              <div onMouseDown={() => {
+                if(setAllowDrag){
+                  setAllowDrag(true)
+                }
+              }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div className={`${theme}-ContentCard-CardVector`}>
@@ -29,7 +34,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
 
         <div className={`${theme}-ContentCard-Children`}>{children}</div>
         
-    </div>
+    </li>
     </>
     
   );

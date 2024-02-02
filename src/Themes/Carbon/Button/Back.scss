@@ -1,21 +1,19 @@
 .Carbon-back-Button-container {
-  box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-  -6px -6px 20px 0px rgba(255, 255, 255, 1),
-      2px 2px 4px 0px rgba(114, 142, 171, 0.1);    
-  border: 1px solid transparent;
-  background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-    linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
-      linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-
-  @apply w-10 disabled:cursor-not-allowed flex justify-center items-center bg-gray-100 leading-[19.36px] border text-[14px] font-[500]  rounded-full h-10 #{!important};
-  
-  // @apply w-10 disabled:cursor-not-allowed flex justify-center items-center  boxOutterShadows grayBorderGradin bg-gray-100 leading-[19.36px] border text-[14px] font-[500]  rounded-full h-10 #{!important};
+  @apply w-10 disabled:cursor-not-allowed flex boxShadow-Gray borderBox-Gray justify-center items-center bg-gray-100 leading-[19.36px] border text-[14px] font-[500]  rounded-full h-10 #{!important};
 };
 
 .Carbon-back-Button-container[data-mode = 'calendar'] {
   @apply h-11 w-12 #{!important};
 };
 
+.Carbon-back-Button-vector{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url('/Carbon/leftVector.svg');    
+    @apply w-[8px] h-[20px] bg-slate-400
+}
 
 .Carbon-back-Button-container-disabled {
   @apply opacity-[50%] #{!important};

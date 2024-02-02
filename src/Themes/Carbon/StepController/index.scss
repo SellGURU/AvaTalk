@@ -3,10 +3,10 @@
 };
 
 .Carbon-StepController-step {
-   @apply w-8 h-4 boxsInnerShadows bg-slate-200 rounded-[9px] mr-2;
+   @apply w-8 h-4 bg-slate-200 rounded-[9px] mr-2;
 };
 
 .Carbon-StepController-step-active {
-   @apply w-[75px]  bg-primary-color boxOutterShadows #{!important};
+   @apply w-[75px]  bg-primary-color  #{!important};
 };
 

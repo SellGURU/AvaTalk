@@ -1,0 +1,7 @@
+.Carbon-Outline-Button-container {
+  @apply flex justify-center  boxShadow-Gray  items-center text-primary-color borderBox-primary  w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+}
+
+.Carbon-Outline-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}

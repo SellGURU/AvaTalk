@@ -1,0 +1,11 @@
+
+.Carbon-ChatItem-section {
+  @apply flex w-full  items-center ;
+}
+
+.Carbon-ChatItem-iconContainer {
+  @apply flex items-center  space-x-3;
+}
+.Carbon-ChatItem-card {
+  @apply w-full px-3 ;
+}
