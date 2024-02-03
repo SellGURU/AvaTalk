@@ -11,6 +11,7 @@ import { Auth } from "../../Api";
 // import { useAuth } from "../../hooks/useAuth";
 import { ContactData, TagsData } from "../../Api/Auth";
 import { TagList } from "..";
+import AddTag from "../__Modal__/AddTag";
 
 interface Props {
   theme?: string;
@@ -18,6 +19,7 @@ interface Props {
 
 const ContactsView: React.FC<Props> = ({ theme }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
+  const [showAddTagModal, setShowAddTagModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [contacts, setContacts] = useState<ContactData[]>([]);
   const [tags, setTags] = useState<TagsData[]>([]);
@@ -48,8 +50,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   //     setIsLoading(false);
   //   });
   // });
-  console.log(contacts);
-  console.log(tags);
+  // console.log(contacts);
+  // console.log(tags);
   const filteredContacts = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
   const filteredTags = tags.filter((item) => item.tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -65,7 +67,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
       <div className={`${theme}-ContactsView-buttonsContainer `}>
         <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
-        <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => console.log("Tag Modal")} theme="Carbon">
+        <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => setShowAddTagModal(true)} theme="Carbon">
           {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
         </Button>
       </div>
@@ -108,6 +110,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           setShowAddContactModal(false);
         }}
       ></AddContact>
+      <AddTag
+        theme="Carbon"
+        isOpen={showAddTagModal}
+        onClose={() => {
+          setShowAddTagModal(false);
+        }}
+      ></AddTag>
     </div>
   );
 };

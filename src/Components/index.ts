@@ -20,6 +20,7 @@ import Footer from "./Footer";
 import FooterPresentation from "./FooterPresentation";
 import TagList from "./TagList";
 import TagItem from "./TagItem";
+import ColorBox from "./ColorBox";
 
 export {
   Profile,
@@ -43,5 +44,6 @@ export {
   TagList,
   TagItem,
   Edit,
-  Card
+  Card,
+  ColorBox,
 };

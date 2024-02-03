@@ -5,13 +5,14 @@ interface SelectProps extends HtmlHTMLAttributes<HTMLDivElement> {
   label?: string;
   valueElement?: { exhibition: boolean };
   placeholder?: string;
+  dropDownHeight?: string;
 }
 
 function inputId(): string {
   return "Select" + Math.floor(Math.random() * 100000).toString();
 }
 
-const Select: React.FC<SelectProps> = ({ children, theme, label, valueElement, placeholder, ...props }) => {
+const Select: React.FC<SelectProps> = ({ children, theme, dropDownHeight, label, valueElement, placeholder, ...props }) => {
   const [showSelect, setShowSelect] = useState(false);
   const [updatedValueElement, setUpdatedValueElement] = useState(valueElement);
 
@@ -52,7 +53,11 @@ const Select: React.FC<SelectProps> = ({ children, theme, label, valueElement, p
             style={{ rotate: showSelect === true ? "180deg" : "0deg" }}
           ></div>
         </div>
-        {showSelect && <div className={`${theme}-Select-dropDown-container`}>{children}</div>}
+        {showSelect && (
+          <div style={{ height: dropDownHeight }} className={`${theme}-Select-dropDown-container`}>
+            {children}
+          </div>
+        )}
       </div>
     </>
   );
