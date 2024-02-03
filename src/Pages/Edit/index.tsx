@@ -2,11 +2,7 @@ import { Edit as EditComponent } from "../../Components"
 const Edit = () => {
     return (
         <>
-           return (
-                <>
-                    <EditComponent theme="Carbon"></EditComponent>
-                </>
-           )
+            <EditComponent theme="Carbon"></EditComponent>
         </>
     )
 }

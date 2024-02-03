@@ -9,13 +9,15 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendV
   // send chat input
   const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
   };
 
   const handleSendClick = () => {
     // Call the callback function from the parent component with the input value
-    onSendVector(inputValue);
+    if(onSendVector){
+      onSendVector(inputValue);
+    }
 
     // Clear the input field if needed
     setInputValue('');

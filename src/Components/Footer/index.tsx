@@ -41,6 +41,18 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
         ></div>
       </div>
       <div
+        onClick={() => handleItemClick("chats")}
+        className={`${theme}-Footer-VectorSection ${
+          activeItem === "chats" ? `${theme}-Footer-ActiveVectorSection` : ""
+        }`}
+      >
+        <div
+          className={`${theme}-Footer-Vectors ${theme}-Footer-ChatVector ${
+            activeItem === "chats" ? `${theme}-Footer-ActiveVectors` : ""
+          }`}
+        ></div>
+      </div>
+      <div
         onClick={() => handleItemClick("status")}
         className={`${theme}-Footer-VectorSection ${
           activeItem === "status" ? `${theme}-Footer-ActiveVectorSection` : ""

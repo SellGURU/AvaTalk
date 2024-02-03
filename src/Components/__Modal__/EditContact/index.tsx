@@ -181,7 +181,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
 
               <div className="mt-4">
-                <Select valueElement={{ exhibition: true }} label="Tag" placeholder="Select tag..." theme="Carbon" />
+                <Select valueElement={<><div></div></>} label="Tag" placeholder="Select tag..." theme="Carbon" />
               </div>
               <div className="mt-4">
                 <TextArea

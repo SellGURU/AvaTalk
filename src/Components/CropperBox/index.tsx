@@ -32,7 +32,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve}) => {
         {
             url.length > 0 ?
             <>
-                    <div className="absolute w-full top-0 left-0 h-screen z-20 bg-black opacity-60"></div>     
+                    <div className="absolute w-full top-0 left-0 h-screen z-[22] bg-black opacity-60"></div>     
                     <div className='absolute w-full h-full flex z-30 justify-center items-center'>
                         <div>
                             <Cropper

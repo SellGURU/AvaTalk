@@ -15,6 +15,7 @@ const resolveNavigation = (item:MenuType, navigate:(route:string) => void) => {
     switch (item) {
         case 'profile' : return navigate('/')
         case 'contacts' : return navigate('/contacts')
+        case 'chats' : return navigate('/chats')
         case 'settings' : return navigate('/')
         case 'status' : return navigate('/')
     }        

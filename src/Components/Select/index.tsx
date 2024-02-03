@@ -3,11 +3,10 @@ import { HtmlHTMLAttributes, useEffect, useState } from "react";
 interface SelectProps extends HtmlHTMLAttributes<HTMLDivElement> {
   theme?: string;
   label?: string;
-  valueElement?: { exhibition: boolean };
+  valueElement: React.ReactNode;
   placeholder?: string;
   dropDownHeight?: string;
 }
-
 function inputId(): string {
   return "Select" + Math.floor(Math.random() * 100000).toString();
 }

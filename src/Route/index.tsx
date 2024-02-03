@@ -1,11 +1,12 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import { ContactsView, Profile } from "../Components";
+import { Chat, ContactsView, Profile } from "../Components";
+import { EditGallery, EditGoogleMap, EditVideos } from "../Pages/EditPages";
 
 const route = createHashRouter([
   {
@@ -19,7 +20,25 @@ const route = createHashRouter([
         children:[
           {
             path:'edit',
-            element:<Edit></Edit>
+            element:<Edit></Edit>,
+            children:[
+              {
+                path:'about',
+                element:<EditAbout></EditAbout>
+              },
+              {
+                path:'gallery',
+                element:<EditGallery></EditGallery>
+              },
+              {
+                path:'googlemap',
+                element:<EditGoogleMap></EditGoogleMap>
+              },      
+              {
+                path:'videos',
+                element:<EditVideos></EditVideos>
+              }                                          
+            ]
           }
         ]
       },
@@ -33,6 +52,10 @@ const route = createHashRouter([
           },
         ]
       },
+      {
+        path: "/chats",
+        element: <Chat theme="Carbon"/>,
+      },      
     ],
     // element: <Home></Home>,
   },
@@ -72,6 +95,10 @@ const route = createHashRouter([
     path: "/presentation",
     element: <Presentations />,
   },
+  // {
+  //   path: "/chat",
+  //   element: <Chats/>,
+  // },
 ]);
 
 export default route;

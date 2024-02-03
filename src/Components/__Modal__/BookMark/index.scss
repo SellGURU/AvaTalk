@@ -20,5 +20,5 @@
 }
 
 .ReactModal__Overlay {
-    @apply flex w-full justify-center items-center #{!important};
+    @apply flex w-full justify-center z-20 items-center #{!important};
 }

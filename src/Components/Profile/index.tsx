@@ -156,6 +156,16 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         </div>
        
       </div>
+      {mode == 'review' ?
+        <Button onClick={() => {
+          window.open('https://switch-camera-button.vercel.app/#detect1')
+        }} theme='Carbon-Ar'>
+          <div>
+            <div className={`${theme}-Ar-Button-icon`}></div>
+            <div className={`${theme}-Ar-Button-icon-text`}>AR</div>
+          </div>
+        </Button>
+      :undefined}
       <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
         authContext.currentUser.updateImageurl(resolve)
         setAvatarUrl('')
