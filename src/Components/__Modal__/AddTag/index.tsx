@@ -55,7 +55,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
                 <ColorBox />
               </div>
               <div className="mt-4">
-                <Select label="Tag" dropDownHeight={contacts.length * 50 + "px"} placeholder="Select tag..." theme="Carbon">
+                <Select label="Tag" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
                   {isLoading ? (
                     <p></p>
                   ) : (
