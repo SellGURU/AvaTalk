@@ -47,7 +47,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
       Auth.getContactDetails(contactId, (contactDetails) => {
         // setContact(contactDetails);
         setIsLoading(false);
-        setFullName(contactDetails?.fullName || "");
+        setFullName(contactDetails?.firstName || "");
         setEmailAddress(contactDetails?.email || "");
         setPhone(contactDetails?.phone || "");
         setCompany(contactDetails?.company || "");

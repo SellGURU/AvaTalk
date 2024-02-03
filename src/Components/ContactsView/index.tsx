@@ -8,10 +8,9 @@ import { Outlet } from "react-router";
 import { AddContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Auth } from "../../Api";
-// import { useAuth } from "../../hooks/useAuth";
-import { ContactData, TagsData } from "../../Api/Auth";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
+import { Tag,Contact } from "../../Types";
 
 interface Props {
   theme?: string;
@@ -21,8 +20,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showAddTagModal, setShowAddTagModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [contacts, setContacts] = useState<ContactData[]>([]);
-  const [tags, setTags] = useState<TagsData[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
 
@@ -52,8 +51,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   // });
   // console.log(contacts);
   // console.log(tags);
-  const filteredContacts = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
-  const filteredTags = tags.filter((item) => item.tag.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredContacts = contacts.filter((item) => item.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);

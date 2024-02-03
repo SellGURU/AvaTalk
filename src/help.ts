@@ -111,6 +111,21 @@ const dragOver = (e:any,allowDrag:boolean,draggedItem:any) => {
             );}            
     }    
 }
+
+const generateSlugId = () => {
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const slugLength = 24;
+
+  let slugId = "";
+
+  for (let i = 0; i < slugLength; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    slugId += characters.charAt(randomIndex);
+  }
+
+  return slugId;
+};
+
 export {
     resolveMenuFromRoute,
     resolveNavigation,
@@ -119,5 +134,6 @@ export {
     getDragAfterElement,
     dragStart,
     dragEnd,
-    dragOver
+    dragOver,
+    generateSlugId
 }

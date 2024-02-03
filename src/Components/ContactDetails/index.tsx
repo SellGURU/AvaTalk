@@ -4,15 +4,14 @@ import { Button } from "symphony-ui";
 // import dummyData from "../../data/dummy_data";
 import { useState } from "react";
 import { Auth } from "../../Api";
-import { ContactData } from "../../Api/Auth";
 import { DeleteContact, EditContact } from "../__Modal__";
 import { useConstructor } from "../../help";
+import { Contact } from "../../Types";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
   const [showExhibition, setShowExhibition] = useState(true);
-  // const [contacts, setContacts] = useState<ContactData[]>([]);
-  const [contact, setContact] = useState<ContactData | null>(null);
+  const [contact, setContact] = useState<Contact | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
@@ -48,14 +47,14 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       </div>
       <div className="h-screen flex flex-col items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
-          <img src={contact?.image} alt={contact?.fullName} />
+          <img src={contact?.photo} alt={contact?.lastName} />
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
             <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
+        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.firstName + ' '+ contact?.lastName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className="flex items-center justify-between mb-[20px]">
           {showExhibition && (

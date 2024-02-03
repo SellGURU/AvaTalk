@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "../Model";
+import { Contact, Tag } from "../Types";
 import { boxProvider } from "../help";
 import Api from "./Api";
 
@@ -21,33 +22,20 @@ interface RegisterData {
   location: Location | null;
   profile_pic: string | null;
 }
-export interface ContactData {
-  id: string;
-  fullName: string;
-  email: string;
-  image: string;
-  Exhibition: boolean;
-  Exchange: boolean;
-  phone: string;
-  location: string;
-  company: string;
-  meetDate: string;
-  addDate: string;
-  job: string;
-}
 
-interface ContactType {
-  name: string;
-  email: string;
-  phone: string;
-}
 
-export interface TagsData {
-  id: string;
-  tag: string;
-  color: string;
-  contacts: ContactType[];
-}
+// interface ContactType {
+//   name: string;
+//   email: string;
+//   phone: string;
+// }
+
+// export interface TagsData {
+//   id: string;
+//   tag: string;
+//   color: string;
+//   contacts: ContactType[];
+// }
 
 class Auth extends Api {
   static login(data: LoginData) {
@@ -79,102 +67,30 @@ class Auth extends Api {
     });
   }
 
-  static getAllContacts(callBack: (data: Array<ContactData>) => void) {
+  static getAllContacts(resolve: (data: Array<Contact>) => void) {
     this.post("/contactsInfo", {}).then((res) => {
-      const contactDataArray: Array<ContactData> = res.data.map((item: any) => ({
-        id: item.id,
-        fullName: item.fullName,
-        email: item.email,
-        image: item.image,
-        Exhibition: item.Exhibition,
-        Exchange: item.Exchange,
-        phone: item.phone,
-        location: item.location,
-        company: item.company,
-        meetDate: item.meetDate,
-        addDate: item.addDate,
-        job: item.job,
-      }));
-      callBack(contactDataArray);
+      resolve(res.data);
     });
   }
 
-  static getContactDetails(_contactId: string, callBack: (data: ContactData | null) => void) {
+  static getContactDetails(_contactId: string, resolve: (data: Contact) => void) {
     this.post("/contactDetails", {}).then((res) => {
-      // const contact = res.data.find((item: any) => item.id === contactId);
-      const contact = res.data[0];
-
-      if (contact) {
-        const contactDetails: ContactData = {
-          id: contact.id,
-          fullName: contact.fullName,
-          email: contact.email,
-          image: contact.image,
-          Exhibition: contact.Exhibition,
-          Exchange: contact.Exchange,
-          phone: contact.phone,
-          location: contact.location,
-          company: contact.company,
-          meetDate: contact.meetDate,
-          addDate: contact.addDate,
-          job: contact.job,
-        };
-        callBack(contactDetails);
-      } else {
-        callBack(null);
-      }
+      resolve(res.data)
     });
   }
 
-  static getAllTags(callBack: (data: Array<TagsData>) => void) {
+  static getAllTags(resolve: (data: Array<Tag>) => void) {
     this.post("/tagsInfo").then((res) => {
-      const tagDataArray: Array<TagsData> = res.data.map((item: any) => ({
-        id: item.id,
-        tag: item.tag,
-        color: item.color,
-        contacts: item.contacts.map((contact: any) => ({
-          name: contact.name,
-          email: contact.email,
-          phone: contact.phone,
-        })),
-      }));
-
-      callBack(tagDataArray);
+      resolve(res.data);
     });
   }
 
-  static getTagDetails(_tagId: string, callBack: (data: TagsData | null) => void) {
+  static getTagDetails(_tagId: string, resolve: (data: Tag) => void) {
     this.post("/tagDetails", {}).then((res) => {
-      // const tag = res.data.find((item: any) => item.id === tagId);
-      const tag = res.data[0];
-
-      if (tag) {
-        const tagDetails: TagsData = {
-          id: tag.id,
-          tag: tag.tag,
-          color: tag.color,
-          contacts: tag.contacts.map((contact: any) => ({
-            name: contact.name,
-            email: contact.email,
-            phone: contact.phone,
-          })),
-        };
-        callBack(tagDetails);
-      } else {
-        callBack(null);
-      }
+      resolve(res.data)
     });
   }
 }
 
-// static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
-//   const requestData = {
-//     contactId,
-//     updatedData,
-//   };
-
-//   this.post("/contactDetails", requestData).then(() => {
-//     callBack();
-//   });
 
 export default Auth;
