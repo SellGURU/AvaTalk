@@ -8,7 +8,7 @@
                 -6px -6px 20px 0px rgba(255, 255, 255, 1),
                   2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
 
-  @apply h-16 sticky rounded-xl border-b-0 bottom-0 boxShadow-Gray borderBox-Gray2 bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
+  @apply h-16 absolute w-full rounded-xl border-b-0 bottom-0 boxShadow-Gray borderBox-Gray2 bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
 }
 .Carbon-FooterPresentation-BackgroundItems {
   background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,

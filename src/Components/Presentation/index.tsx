@@ -1,46 +1,47 @@
 import React , {useState , useEffect} from "react";
 import { Button } from "symphony-ui";
 import FooterPresentation from "../FooterPresentation";
+import { BackIcon } from "..";
 
 interface PresentationProps {
   theme?: string;
 }
 
 const Presentation: React.FC<PresentationProps> = ({ theme }) => {
-  const [mode,setMode] = useState<'profile'|'review'>('profile')
+  const [startChat,setStartChat] = useState(false)
   // for question button 
-  const [selectedOption, setSelectedOption] = useState<'question'|'answer'>('question')
+  // const [selectedOption, setSelectedOption] = useState<'question'|'answer'>('question')
+  const [showSuggestions,setShowSuggestions] = useState(false);
   const [buttonText, setButtonText] = useState<string>(''); // State to store the text value of the clicked button
-
+  const [chats,setChats] = useState([])
   const handleButtonClick = (text: string) => {
-    setButtonText(text); // Set the text value when a button is clicked
-    setSelectedOption('answer'); // Change the selected option to 'answer'
+    setButtonText(text); 
+    setShowSuggestions(false)
   };
   // for show with delay and fade
   const [showMoreInfoSection, setShowMoreInfoSection] = useState(false);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowMoreInfoSection(true);
-    }, 2000);
+      setShowSuggestions(true)
+    }, 10000);
     return () => clearTimeout(timeoutId);
   }, []);
   //for give value from chat in footer component
-  const [receivedValue, setReceivedValue] = useState('');
+  const [, setText] = useState('');
 
   // Callback function to receive the value from FooterComponent
   const handleSendVector = (value: React.SetStateAction<string>) => {
-    setReceivedValue(value);
+    setText(value);
   };
-
   
   return (
     <>
     <div className={`${theme}-Presentation-Container`}>
       <div className={`${theme}-Presentation-PresentationSection`}>
+        <BackIcon theme="Carbon" title=""></BackIcon>
         <div className={`${theme}-Presentation-Content`}>  
-          <div className={`${theme}-Presentation-ArrowLeft ${theme}-Presentation-PictureSection`}>
-            <div className={`${theme}-Presentation-ArrowLeftVector`}></div>
-          </div>
+    
           <div className={`${theme}-Presentation-PictureSection`}>
             <div className={`${theme}-Presentation-PresentationPicture`}></div>
           </div>
@@ -49,15 +50,15 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <p className={`${theme}-Presentation-SubTitle`}>CoFounder & CEO</p>
           </div>
           {
-            mode == 'profile' ?
-              <Button onClick={() => {setMode('review')}} theme="Carbon" data-mode="profile-review-button">
+            !startChat?
+              <Button onClick={() => {setStartChat(true)}} theme="Carbon" data-mode="profile-review-button">
                 Start Presentation
               </Button>
             :
             ""
           }
       
-          {mode == 'profile' ?
+          {!startChat ?
             <div className={`${theme}-Presentation-InfoSection`}>
               <div className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
@@ -89,12 +90,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             {showMoreInfoSection  && (
               <>
                 {
-                  selectedOption == 'question' ?
+                  showSuggestions  && chats.length ==0 ?
                     <>
-                    {/* footer chat value */}
-                      <div>{receivedValue}</div>
-                    {/* footer chat value */}
-
                       <div className={`${theme}-Presentation-MoreInfoTitle ${theme}-TextShadow`}>Ask me more information</div>
                       <Button onClick={() => handleButtonClick('Can you introduce yourself?')} theme="Carbon" data-mode="question-answer-button">
                       Can you introduce yourself?
@@ -122,10 +119,10 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
 
         </div>
       </div>
-    </div>
     {
-      mode == 'profile' ? "" : <FooterPresentation theme="Carbon" onSendVector={handleSendVector}/>
+      startChat ? <FooterPresentation theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
+    </div>
 
 
     </>
