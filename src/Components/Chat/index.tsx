@@ -10,14 +10,47 @@ interface ProfileProps {
 const Chat: React.FC<ProfileProps> = ({ theme }) => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const filteredData = [
+    const chat = [
     {
       id:'1',
-      name:'',
-      content:''
-    }
+      name:'User0215784515',
+      date:'Yesterday',
+      time:'07:45 pm',
+      content:'Can you call me? It’s necessary to talk wit...',
+    },
+    {
+      id:'2',
+      name:'User0215784516',
+      date:'2024/01/18',
+      time:'06:33 pm',
+      content:'Can you call me? It’s necessary to talk wit...',
+    },
+    {
+      id:'3',
+      name:'User0215784517',
+      date:'2024/01/17',
+      time:'06:25 pm',
+      content:'Can you call me? It’s necessary to talk wit...',
+    },
+    {
+      id:'4',
+      name:'User0215784518',
+      date:'2024/01/16',
+      time:'06:15 pm',
+      content:'Can you call me? It’s necessary to talk wit...',
+    },
+    {
+      id:'5',
+      name:'User0215784519',
+      date:'2024/01/15',
+      time:'05:15 pm',
+      content:'Can you call me? It’s necessary to talk wit...',
+    },
   ];
+  const filteredData = chat.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.date.toLowerCase().includes(searchQuery.toLowerCase()) || item.content.toLowerCase().includes(searchQuery.toLowerCase()));
+
+
+
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
