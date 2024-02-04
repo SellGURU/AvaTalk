@@ -1,7 +1,11 @@
-import React , {useState , useEffect} from "react";
-import { Button } from "symphony-ui";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React , {useState , useEffect, useRef} from "react";
+import { Button, Suggestions } from "symphony-ui";
 import FooterPresentation from "../FooterPresentation";
-import { BackIcon } from "..";
+import { AudioProvider, BackIcon } from "..";
+import { useAuth } from "../../hooks/useAuth";
+import { chat } from "../../Types";
+import { sendToApi } from "../../help";
 
 interface PresentationProps {
   theme?: string;
@@ -12,12 +16,23 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   // for question button 
   // const [selectedOption, setSelectedOption] = useState<'question'|'answer'>('question')
   const [showSuggestions,setShowSuggestions] = useState(false);
-  const [buttonText, setButtonText] = useState<string>(''); // State to store the text value of the clicked button
-  const [chats,setChats] = useState([])
-  const handleButtonClick = (text: string) => {
-    setButtonText(text); 
-    setShowSuggestions(false)
-  };
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [audioUrl, setAudioUrl] = useState<string>('');
+  const [isTalking,setIsTalking] = useState(false)
+  const [chats,setChats] = useState<Array<chat>>([
+  ])
+  const user = useAuth()
+  // const handleButtonClick = (text: string) => {
+  //   setShowSuggestions(false)
+  //   sendToApi(chats,setChats,text,(res) => {
+
+  //   })
+  // };
+  const [suggestionList] = useState([
+    'Can you introduce yourself?',
+    'Tell me more about your business',
+    'What services do you provide in Codie?'
+  ])
   // for show with delay and fade
   const [showMoreInfoSection, setShowMoreInfoSection] = useState(false);
   useEffect(() => {
@@ -28,13 +43,22 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     return () => clearTimeout(timeoutId);
   }, []);
   //for give value from chat in footer component
-  const [, setText] = useState('');
-
   // Callback function to receive the value from FooterComponent
-  const handleSendVector = (value: React.SetStateAction<string>) => {
-    setText(value);
+  const handleSendVector = (value: string) => {
+    setShowSuggestions(false)
+    sendToApi(chats,setChats,value,(res) => {
+      setAudioUrl(res.answer.audio_file)
+      setIsTalking(true)
+    })
   };
   
+  useEffect(() => {
+    if(audioRef.current){
+        const refren = audioRef.current  as any   
+        refren.load()
+    }           
+  })
+
   return (
     <>
     <div className={`${theme}-Presentation-Container`}>
@@ -46,8 +70,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <div className={`${theme}-Presentation-PresentationPicture`}></div>
           </div>
           <div>
-            <h1 className={`${theme}-Presentation-PresentationName ${theme}-TextShadow`}>Farzin Azami</h1>
-            <p className={`${theme}-Presentation-SubTitle`}>CoFounder & CEO</p>
+            <h1 className={`${theme}-Presentation-PresentationName ${theme}-TextShadow`}>{user.currentUser.information?.firstName}</h1>
+            <p className={`${theme}-Presentation-SubTitle`}>{user.currentUser.information?.job}</p>
           </div>
           {
             !startChat?
@@ -92,23 +116,25 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 {
                   showSuggestions  && chats.length ==0 ?
                     <>
-                      <div className={`${theme}-Presentation-MoreInfoTitle ${theme}-TextShadow`}>Ask me more information</div>
-                      <Button onClick={() => handleButtonClick('Can you introduce yourself?')} theme="Carbon" data-mode="question-answer-button">
-                      Can you introduce yourself?
-                      </Button>
-                      <Button onClick={() => handleButtonClick('Tell me more about your business')} theme="Carbon" data-mode="question-answer-button">
-                      Tell me more about your business
-                      </Button>  
-                      <Button onClick={() => handleButtonClick('What services do you provide in Codie?')} theme="Carbon" data-mode="question-answer-button">
-                      What services do you provide in Codie?
-                      </Button> 
+                      <Suggestions  theme="Carbon"  onVSelectItem={(text:string|null) =>{handleSendVector(text as string)}} suggestions={suggestionList}></Suggestions>
                     </>
                   :
                   <>
-                  <div className={`${theme}-Presentation-AnswerTitle`}>{buttonText}</div>
-                  <Button theme="Carbon" data-mode="presentation-answer-button">
-                    Of course! I am Farzin Azami. the CoFounder of Codie. How can I help you?
-                  </Button> 
+                  {
+                    chats.map((item) => {
+                      return (
+                        <>
+                          {item.from == 'user' ?
+                            <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
+                          :
+                            <div className={`${theme}-Presentation-chatItem`}>
+                              {item.text}
+                            </div> 
+                          }
+                        </>
+                      )
+                    })
+                  }
                   
                   </>
                 }
@@ -122,6 +148,10 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     {
       startChat ? <FooterPresentation theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
+      <AudioProvider autoPlay={isTalking} onEnd={() => {
+        setAudioUrl('')
+        setIsTalking(false)
+      }} url={audioUrl} audioref={audioRef}></AudioProvider>     
     </div>
 
 

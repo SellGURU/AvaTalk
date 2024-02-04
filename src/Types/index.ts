@@ -26,6 +26,14 @@ interface Contact {
   job: string;
 }
 
+interface chat {
+  from:'Ai'|'user',
+  text:string,
+  currentconverationid:string,
+  instanceid:string,
+  audio_file:string
+}
+
 type MenuType = 'profile'| 'contacts' | 'chats' | 'status' | 'settings';
 
 
@@ -33,5 +41,6 @@ export type {
     PhoneCountry,
     MenuType,
     Tag,
-    Contact
+    Contact,
+    chat
 }

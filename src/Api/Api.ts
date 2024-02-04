@@ -4,7 +4,7 @@ import { getTokenFromLocalStorage } from "../Storage/Token.ts";
 import { toast } from "react-toastify";
 
 class Api {
-  protected static base_url: string = "https://codie-backend.azurewebsites.net/digital_card";
+  protected static base_url: string = "https://vercel-backend-one-roan.vercel.app/mobile";
 
   protected static post(url: string, data?: any) {
     toast.loading('pending ...')
