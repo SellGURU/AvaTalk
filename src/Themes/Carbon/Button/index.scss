@@ -8,3 +8,6 @@
 .Carbon-Button-container[data-mode="presentation-answer-button"] {
   @apply px-6 py-[14px] h-16 #{!important};
 }
+.Carbon-Button-container[data-mode="ChatDetails-question-button"] {
+  @apply rounded-xl w-fit py-[9px] px-[14px] h-10 #{!important};
+}

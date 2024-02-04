@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Chats } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -53,16 +53,16 @@ const route = createHashRouter([
           },
         ]
       },
-      // {
-      //   path: "/chats",
-      //   element: <Chat theme="Carbon"/>,
-      //   children:[
-      //     {
-      //       path: ":chatId",
-      //       element: <ChatPage />,
-      //     },
-      //   ]
-      // },      
+      {
+        path: "/chats",
+        element: <Chat theme="Carbon"/>,
+        children:[
+          {
+            path: ":chatId",
+            element: <ChatPage />,
+          },
+        ]
+      },      
     ],
     // element: <Home></Home>,
   },
@@ -102,24 +102,7 @@ const route = createHashRouter([
     path: "/presentation",
     element: <Presentations />,
   },
-  // {
-  //   path: "/contacts/:contactId",
-  //   element: <ChatPage />,
-  // },
-  {
-    path: "/chat",
-    element: <Chats/>,
-    // children:[
-    //   {
-    //     path: ":chatId",
-    //     element: <ChatPage />,
-    //   },
-    // ]
-  },
-  {
-    path: "/chats/:chatId",
-    element: <ChatPage />,
-  },
+
 ]);
 
 export default route;
