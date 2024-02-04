@@ -6,5 +6,5 @@
   @apply opacity-[50%] #{!important};
 }
 .Carbon-Button-container[data-mode="presentation-answer-button"] {
-  @apply px-6 py-[14px] h-16 #{!important};
+  @apply px-6 py-[14px] h-auto text-left #{!important};
 }

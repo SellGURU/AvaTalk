@@ -23,7 +23,7 @@ import FooterPresentation from "./FooterPresentation";
 import TagList from "./TagList";
 import TagItem from "./TagItem";
 import ColorBox from "./ColorBox";
-
+import AudioProvider from "./AudioProvider";
 export {
   Profile,
   Spinners,
@@ -50,4 +50,5 @@ export {
   ColorBox,
   Chat,
   BackIcon,
+  AudioProvider
 };
