@@ -3,26 +3,30 @@ import { Link } from "react-router-dom";
 interface DataProps {
   id: string;
   name: string;
+  date: string;
+  time:string;
   content:string;
 }
 
-const ChatItem = ({ theme }: { data: DataProps; theme: string | undefined }) => {
+const ChatItem = ({data, theme }: { data: DataProps; theme: string | undefined }) => {
   return (
-    <Link to={`/chats`} className={`${theme}-ContactItem-container `}>
-      <div className={`${theme}-ContactItem-section ${theme}-ChatItem-section`}>
-        <div className={`${theme}-ChatItem-card `}>
-          <div className={`${theme}-ContactItem-innerCard `}>
-            <p className={`${theme}-ContactItem-name `}>User0215784515</p>
+    <>
+    <div className={`${theme}-ChatItem-date`}>{data.date}</div>
+    <Link to={`/chats/${data.id}`} className={`${theme}-ChatItem-container`}>
+      <div className={`${theme}-ChatItem-section`}>
+        <div className={`${theme}-ChatItem-card`}>
+          <div className={`${theme}-ChatItem-innerCard `}>
+            <p className={`${theme}-ChatItem-name`}>{data.name}</p>
             <div className={`${theme}-ChatItem-iconContainer `}>
-              <div className="text-xs	">06:45 pm</div>
+              <div>{data.time}</div>
               <img src="../../../Vector.svg" alt="" />
-              {/* <div className={`${theme}-ContactItem-vectorIcon `}></div> */}
             </div>
           </div>
-          <p className={`${theme}-ContactItem-email `}>Can you call me? It’s necessary to talk wit...</p>
+          <p className={`${theme}-ChatItem-content`}>{data.content}</p>
         </div>
       </div>
     </Link>
+    </>
   );
 };
 

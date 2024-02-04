@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Chats } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -7,6 +7,7 @@ import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
 import { EditGallery, EditGoogleMap, EditVideos } from "../Pages/EditPages";
+import ChatPage from "../Pages/ChatPage";
 
 const route = createHashRouter([
   {
@@ -52,10 +53,16 @@ const route = createHashRouter([
           },
         ]
       },
-      {
-        path: "/chats",
-        element: <Chat theme="Carbon"/>,
-      },      
+      // {
+      //   path: "/chats",
+      //   element: <Chat theme="Carbon"/>,
+      //   children:[
+      //     {
+      //       path: ":chatId",
+      //       element: <ChatPage />,
+      //     },
+      //   ]
+      // },      
     ],
     // element: <Home></Home>,
   },
@@ -96,9 +103,23 @@ const route = createHashRouter([
     element: <Presentations />,
   },
   // {
-  //   path: "/chat",
-  //   element: <Chats/>,
+  //   path: "/contacts/:contactId",
+  //   element: <ChatPage />,
   // },
+  {
+    path: "/chat",
+    element: <Chats/>,
+    // children:[
+    //   {
+    //     path: ":chatId",
+    //     element: <ChatPage />,
+    //   },
+    // ]
+  },
+  {
+    path: "/chats/:chatId",
+    element: <ChatPage />,
+  },
 ]);
 
 export default route;
