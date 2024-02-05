@@ -26,6 +26,7 @@ import ColorBox from "./ColorBox";
 import Setting from "./Setting";
 import SettingCard from "./SettingCard";
 
+import AudioProvider from "./AudioProvider";
 export {
   Profile,
   Spinners,
@@ -54,4 +55,5 @@ export {
   BackIcon,
   Setting,
   SettingCard,
+  AudioProvider,
 };

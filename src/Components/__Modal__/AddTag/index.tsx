@@ -8,7 +8,7 @@ import { Button } from "symphony-ui";
 import { useConstructor } from "../../../help";
 import { Auth } from "../../../Api";
 import { useState } from "react";
-import { ContactData } from "../../../Api/Auth";
+import { Contact } from "../../../Types";
 
 interface AddContactProps {
   isOpen: boolean;
@@ -18,7 +18,7 @@ interface AddContactProps {
 }
 
 const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme }) => {
-  const [contacts, setContacts] = useState<ContactData[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,7 +79,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
                               </div>
                             )}
                           </div>
-                          <p className="leading-[21px] font-[400] text-[14px] text-gray-700">{contact.fullName}</p>
+                          <p className="leading-[21px] font-[400] text-[14px] text-gray-700">{contact.firstName + ' '+ contact.lastName}</p>
                         </li>
                       ))}
                     </ul>

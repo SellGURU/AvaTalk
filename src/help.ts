@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { MenuType } from "./Types";
+import { MenuType, chat } from "./Types";
 import {AboutBox, Box ,LinkBox,SocialBox} from "./Model";
+import { Chat } from "./Api";
 
 const resolveMenuFromRoute = () => {
     // console.log(window.location.hash.replace('#/','').split('/')[0])
@@ -111,6 +112,50 @@ const dragOver = (e:any,allowDrag:boolean,draggedItem:any) => {
             );}            
     }    
 }
+
+const generateSlugId = () => {
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const slugLength = 24;
+
+  let slugId = "";
+
+  for (let i = 0; i < slugLength; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    slugId += characters.charAt(randomIndex);
+  }
+
+  return slugId;
+};
+
+const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:string,onresolve:(res:any) => void) => {
+    const aiChats = chats.filter((item) => item.from == 'Ai')
+    const newChat:chat = {
+      from:'user',
+      text:text,
+      instanceid:'',
+      audio_file:'',
+      currentconverationid:''  
+    }
+    setChats([...chats,newChat])
+    chats.push(newChat)
+    Chat.flow({
+      "text":text,
+      "language":"English",
+      "message_key":"",
+      "apikey":"0e218a19f41b4eb689003fa634889a19",
+      "is_silent":false,
+      "getcurrentconvesationid":aiChats.length > 0 ? aiChats[aiChats.length -1].currentconverationid : 1      
+    }).then(res => {
+      setChats([...chats,{
+        from:'Ai',
+        text:res.answer.answer,
+        audio_file:res.answer.audio_file,
+        instanceid:res.instanceid,
+        currentconverationid:res.currentconverationid
+      }])
+      onresolve(res)
+    })    
+}
 export {
     resolveMenuFromRoute,
     resolveNavigation,
@@ -119,5 +164,7 @@ export {
     getDragAfterElement,
     dragStart,
     dragEnd,
-    dragOver
+    dragOver,
+    generateSlugId,
+    sendToApi
 }
