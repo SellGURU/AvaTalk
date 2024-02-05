@@ -143,12 +143,12 @@ const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:s
     }).then(res => {
       setChats([...chats,{
         from:'Ai',
-        text:res.data.answer.answer,
-        audio_file:res.data.answer.audio_file,
-        instanceid:res.data.instanceid,
-        currentconverationid:res.data.currentconverationid
+        text:res.answer.answer,
+        audio_file:res.answer.audio_file,
+        instanceid:res.instanceid,
+        currentconverationid:res.currentconverationid
       }])
-      onresolve(res.data)
+      onresolve(res)
     }).catch(() => {
         oncatch()
     })    
