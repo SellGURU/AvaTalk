@@ -6,6 +6,7 @@ import { AudioProvider, BackIcon } from "..";
 import { useAuth } from "../../hooks/useAuth";
 import { chat } from "../../Types";
 import { sendToApi } from "../../help";
+import { BeatLoader } from "react-spinners";
 
 interface PresentationProps {
   theme?: string;
@@ -19,6 +20,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
   const [isTalking,setIsTalking] = useState(false)
+  const [isLoading,setIsLoading] = useState(false);
   const [chats,setChats] = useState<Array<chat>>([
   ])
   const user = useAuth()
@@ -28,6 +30,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
 
   //   })
   // };
+
   const [suggestionList] = useState([
     'Can you introduce yourself?',
     'Tell me more about your business',
@@ -39,16 +42,20 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     const timeoutId = setTimeout(() => {
       setShowMoreInfoSection(true);
       setShowSuggestions(true)
-    }, 10000);
+    }, 2000);
     return () => clearTimeout(timeoutId);
   }, []);
   //for give value from chat in footer component
   // Callback function to receive the value from FooterComponent
   const handleSendVector = (value: string) => {
     setShowSuggestions(false)
+    setIsLoading(true)
     sendToApi(chats,setChats,value,(res) => {
       setAudioUrl(res.answer.audio_file)
       setIsTalking(true)
+      setIsLoading(false)
+    },() => {
+      setIsLoading(false)
     })
   };
   
@@ -135,7 +142,16 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                       )
                     })
                   }
-                  
+                  {
+                    isLoading ?
+                      <>
+                        <div className="  w-full px-4 flex justify-start items-center h-10 borderBox-Gray2 bg-slate-100 ">
+                          <BeatLoader size={10} color="#702CDA" />
+                        </div>
+                      </>
+                    :
+                    undefined
+                  }
                   </>
                 }
               </> 
@@ -146,12 +162,12 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         </div>
       </div>
     {
-      startChat ? <FooterPresentation theme="Carbon" onSendVector={handleSendVector}/> : undefined
+      startChat ? <FooterPresentation isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
       <AudioProvider autoPlay={isTalking} onEnd={() => {
         setAudioUrl('')
         setIsTalking(false)
-      }} url={audioUrl} audioref={audioRef}></AudioProvider>     
+      }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>     
     </div>
 
 
