@@ -117,6 +117,24 @@ const useMoch = () => {
       typeName: "AboutBox",
       text: "Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.",
     },
+    {
+      title: "Gallery",
+      typeName: "GalleryBox",
+      contents:[
+        {
+            original: "https://picsum.photos/id/1018/1000/600/",
+            thumbnail: "https://picsum.photos/id/1018/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1015/1000/600/",
+            thumbnail: "https://picsum.photos/id/1015/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1019/1000/600/",
+            thumbnail: "https://picsum.photos/id/1019/250/150/",
+        },    
+      ]
+    },    
   ]);
   Api.post("/contactsInfo",contacts);
   Api.post("/contactDetails",contacts[0]);

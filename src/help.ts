@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { MenuType, chat } from "./Types";
-import { AboutBox, Box, LinkBox, SocialBox } from "./Model";
+import { AboutBox, Box, GalleryBox, LinkBox, SocialBox } from "./Model";
 import { Chat } from "./Api";
 
 const resolveMenuFromRoute = () => {
@@ -49,6 +49,9 @@ const boxProvider = (box: any) => {
     case "AboutBox": {
       return Object.assign(new AboutBox("simple", ""), box);
     }
+    case "GalleryBox": {
+      return Object.assign(new GalleryBox("simple",[]), box);
+    }    
     default: {
       return Object.assign(new Box("simple"), box);
     }

@@ -19,6 +19,7 @@ const initialValue = {
   Phone: "",
   JobTitle: "",
   CompanyName: "",
+  email:"",
   YourLocation: {
     lat: 33,
     lng: 33,
@@ -30,6 +31,7 @@ const validationSchema = Yup.object().shape({
   LastName: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
+  email:Yup.string().email()
 });
 
 const CreateAccount = () => {
@@ -127,6 +129,7 @@ interface UploadStepProps extends stepsProps {
 }
 
 const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountry }) => {
+  const authContext = useAuth()
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -144,10 +147,16 @@ const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountr
           <div className="mb-4">
             <TextField {...formik.getFieldProps("LastName")} label="Last Name" placeholder="Enter your last name..." theme="Carbon" name="LastName" type="text" required errorMessage={formik.errors.LastName} inValid={formik.errors.LastName && formik.touched?.LastName}></TextField>
           </div>
-
+          {/* {authContext.varification.emailOrPhone} */}
+          {authContext.varification.emailOrPhone.includes('@')?
           <div className="mb-4">
             <TextField {...formik.getFieldProps("Phone")} label="Phone" placeholder="Enter your phone number..." theme="Carbon" name="Phone" type="phone" phoneCountry={country} setPhoneCountry={setCountry} errorMessage={formik.errors.Phone} inValid={formik.errors.Phone && formik.touched?.Phone}></TextField>
           </div>
+          :
+          <div className="mb-4">
+            <TextField {...formik.getFieldProps("email")} label="email" placeholder="Enter your email ..." theme="Carbon" name="email" type="email"  errorMessage={formik.errors.email} inValid={formik.errors.email && formik.touched?.email}></TextField>
+          </div>          
+          }
           <div className="mt-8">
             <Button
               disabled={formik.errors.Phone || formik.errors.LastName || formik.errors.FirstName || !formik.touched.FirstName || !formik.touched.LastName}

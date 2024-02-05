@@ -22,7 +22,7 @@
     @apply flex flex-row justify-between w-full mb-4;
 }
 .Carbon-ContentCard-Children {
-    @apply text-left text-sm;
+    @apply text-left w-full text-sm;
 }
 .Carbon-ContentCard-CVector{
     background: url(/Carbon/cLinksVector.svg) no-repeat center;
