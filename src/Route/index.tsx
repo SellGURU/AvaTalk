@@ -6,7 +6,7 @@ import ContactPage from "../Pages/ContactPage";
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
-import { EditGallery, EditGoogleMap, EditVideos } from "../Pages/EditPages";
+import { EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 
 const route = createHashRouter([
@@ -24,12 +24,24 @@ const route = createHashRouter([
             element: <Edit></Edit>,
             children: [
               {
+                path: "contact-info",
+                element: <EditContactInfo></EditContactInfo>,
+              },
+              {
                 path: "about",
                 element: <EditAbout></EditAbout>,
               },
               {
+                path: "links",
+                element: <EditLinks></EditLinks>,
+              },
+              {
                 path: "gallery",
                 element: <EditGallery></EditGallery>,
+              },
+              {
+                path: "socials",
+                element: <EditSocials></EditSocials>,
               },
               {
                 path: "googlemap",

@@ -8,7 +8,7 @@ interface SettingProps {
   theme?: string;
 }
 
-const Setting: React.FC<SettingProps> = ({ theme }) => {
+const Setting: React.FC<SettingProps> = () => {
   //   const navigate = useNavigate();
   const [editCards] = useState([
     {
