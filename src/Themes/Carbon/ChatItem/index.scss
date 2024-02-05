@@ -1,11 +1,59 @@
+.Carbon-ChatItem-container {
+  @apply my-5 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
+}
+
 
 .Carbon-ChatItem-section {
   @apply flex w-full  items-center ;
 }
 
 .Carbon-ChatItem-iconContainer {
-  @apply flex items-center  space-x-3;
+  @apply flex items-center text-xs space-x-3;
+}
+.Carbon-ChatItem-innerCard {
+  @apply flex items-center  w-full justify-between;
+}
+.Carbon-ChatItem-name {
+  @apply leading-[21px] text-[14px] font-[500]  text-gray-700;
 }
 .Carbon-ChatItem-card {
   @apply w-full px-3 ;
+}
+
+.Carbon-ChatItem-content {
+  @apply text-gray-700/80  leading-[21px] text-[14px] font-[400];
+}
+.Carbon-ChatItem-date {
+  @apply text-sm pl-4 ;
+}
+.Carbon-ChatDetails-container {
+  @apply w-full h-full top-8 z-10 bg-white
+}
+
+.Carbon-ChatDetails-title {
+  @apply text-gray-700 leading-[24px] text-[16px] font-[600] 
+}
+
+
+
+
+///
+.Carbon-SearchBox-input {
+  border: 1px solid transparent;
+  box-shadow: 4px 4px 14px 0px #E2E8F0 inset,
+    -4px -4px 9px 0px #FFFFFF99 inset;
+
+  background: linear-gradient(0deg, #F3F4F6, #F3F4F6) padding-box,
+    linear-gradient(122.51deg, rgba(243, 244, 246, 0.5) 16.62%, rgba(255, 255, 255, 0.5) 56.74%) border-box,
+    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) border-box;
+
+  @apply focus:outline-none w-full h-[56px]  rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
+}
+.Carbon-SearchBox-box {
+
+  @apply rounded-[27px] flex items-center   justify-between bg-gray-100;
+}
+.Carbon-SearchBox-ActiveIcon {
+  box-shadow: 4px 4px 14px 0px #E7E5E4 inset, -4px -4px 9px 0px #ffffffe0 inset;
+  border: 1px solid white;
 }

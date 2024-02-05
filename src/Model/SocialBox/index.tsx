@@ -35,11 +35,11 @@ class Social {
 
     private resolveClassVectorName() {
         switch (this.type){
-            case 'Facebook' : return ''
+            case 'Facebook' : return 'faceBookVector'
             case 'Instagram' : return 'InstagramVector'
             case 'Linkedin' : return 'LinkedinVector'
-            case 'Twitter/ X' : return ''
-            case 'Youtube' : return ''
+            case 'Twitter/ X' : return 'tweeterVector'
+            case 'Youtube' : return 'youtubeVector'
         }
     }
 }

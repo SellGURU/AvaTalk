@@ -1,0 +1,54 @@
+.ReactModal__Content {
+ @apply static #{!important};
+}
+
+.ReactModal__Overlay {
+    @apply flex w-full justify-center z-20 items-center #{!important};
+}
+
+.Carbon-ShareContact-QrCodeVector{
+    background-image: url(/Carbon/qrCode.svg);
+    @apply w-28 h-28 bg-cover bg-no-repeat mt-5 mb-6;
+}
+.Carbon-ShareContact-VectorSection {
+    box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
+    outline: 1px solid white;
+    @apply w-6 h-6 p-1 flex justify-center items-center rounded-full cursor-pointer;
+  }
+.Carbon-ShareContact-Vectors{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-4 h-4 bg-primary-color; 
+}
+.Carbon-ShareContact-Container {
+    @apply flex w-full justify-between items-center;
+}
+.Carbon-ShareContact-Title {
+    @apply text-gray-700 text-base font-semibold;
+}
+.Carbon-ShareContact-Body {
+    @apply mt-4 w-full flex flex-col items-center;
+}
+.Carbon-ShareContact-Cards {
+    @apply flex flex-col items-center gap-[14px] min-w-[245px];
+}
+.Carbon-ShareContact-CardItems {
+    @apply flex flex-row gap-2 items-center justify-center cursor-pointer;
+}
+.Carbon-ShareContact-SmsVector {
+    mask-image: url(/Carbon/message.svg);
+}
+.Carbon-ShareContact-ImportVector {
+    mask-image: url(/Carbon/import.svg);
+}
+.Carbon-ShareContact-CopyVector {
+    mask-image: url(/Carbon/copy.svg);
+}
+.Carbon-ShareContact-LinkVector {
+    mask-image: url(/Carbon/link.svg);
+}
+.Carbon-ShareContact-EmailVector {
+    mask-image: url(/Carbon/emailshare.svg);
+}

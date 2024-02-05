@@ -1,5 +1,5 @@
 .Carbon-Profile-Container {
-    @apply w-full h-screen relative flex justify-center text-gray-700 text-center;
+    @apply w-full h-svh relative flex justify-center text-gray-700 text-center;
 }
 .Carbon-Profile-ProfileSection {
     /* Hide scrollbar for IE, Edge and Firefox */
@@ -97,6 +97,20 @@
 .Carbon-Profile-LinkedinVector{
     background: url(/Carbon/linkedin.png) no-repeat;
     background-size: cover;
+}
+.Carbon-Profile-faceBookVector{
+    background: url(/Carbon/faceBook.svg) no-repeat;
+    background-size: cover;
+}
+.Carbon-Profile-tweeterVector{
+    background: url(/Carbon/x-tweeter.svg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.Carbon-Profile-youtubeVector{
+    background: url(/Carbon/youtube.svg) no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 .Carbon-Profile-Vectors{
     @apply flex flex-row flex-wrap gap-4;

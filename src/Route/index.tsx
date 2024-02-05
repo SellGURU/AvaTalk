@@ -1,12 +1,13 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
-import { EditGallery, EditGoogleMap, EditVideos } from "../Pages/EditPages";
+import { EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
+import ChatPage from "../Pages/ChatPage";
 
 const route = createHashRouter([
   {
@@ -17,45 +18,73 @@ const route = createHashRouter([
       {
         path: "/",
         element: <Profile theme="Carbon"></Profile>,
-        children:[
+        children: [
           {
-            path:'edit',
-            element:<Edit></Edit>,
-            children:[
+            path: "edit",
+            element: <Edit></Edit>,
+            children: [
               {
-                path:'about',
-                element:<EditAbout></EditAbout>
+                path: "contact-info",
+                element: <EditContactInfo></EditContactInfo>,
               },
               {
-                path:'gallery',
-                element:<EditGallery></EditGallery>
+                path: "about",
+                element: <EditAbout></EditAbout>,
               },
               {
-                path:'googlemap',
-                element:<EditGoogleMap></EditGoogleMap>
-              },      
+                path: "links",
+                element: <EditLinks></EditLinks>,
+              },
               {
-                path:'videos',
-                element:<EditVideos></EditVideos>
-              }                                          
-            ]
-          }
-        ]
+                path: "gallery",
+                element: <EditGallery></EditGallery>,
+              },
+              {
+                path: "socials",
+                element: <EditSocials></EditSocials>,
+              },
+              {
+                path: "googlemap",
+                element: <EditGoogleMap></EditGoogleMap>,
+              },
+              {
+                path: "videos",
+                element: <EditVideos></EditVideos>,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/contacts",
         element: <ContactsView theme="Carbon"></ContactsView>,
-        children:[
+        children: [
           {
             path: ":contactId",
             element: <ContactPage />,
           },
-        ]
+        ],
+      },
+      {
+        path: "/settings",
+        element: <Setting></Setting>,
+        // children:[
+        //   {
+        //     path: ":contactId",
+        //     element: <ContactPage />,
+        //   },
+        // ]
       },
       {
         path: "/chats",
-        element: <Chat theme="Carbon"/>,
-      },      
+        element: <Chat theme="Carbon" />,
+        children: [
+          {
+            path: ":chatId",
+            element: <ChatPage />,
+          },
+        ],
+      },
     ],
     // element: <Home></Home>,
   },
@@ -95,10 +124,6 @@ const route = createHashRouter([
     path: "/presentation",
     element: <Presentations />,
   },
-  // {
-  //   path: "/chat",
-  //   element: <Chats/>,
-  // },
 ]);
 
 export default route;

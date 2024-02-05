@@ -8,6 +8,8 @@ import ChatItem from "../ChatItem";
 interface DataProps {
   id: string;
   name: string;
+  date: string;
+  time:string;
   content:string
 }
 const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {

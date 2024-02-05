@@ -1,18 +1,74 @@
+import { Contact, Tag } from "../../Types";
+import { generateSlugId } from "../../help";
 import Api from "./Api";
-const generateSlugId = () => {
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  const slugLength = 24;
 
-  let slugId = "";
 
-  for (let i = 0; i < slugLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    slugId += characters.charAt(randomIndex);
-  }
-
-  return slugId;
-};
-
+const tags:Array<Tag> = [
+    {
+      id: generateSlugId(),
+      name: "Exhibition",
+      color: "#FBBF24",
+      contacts:5
+    },
+    {
+      id: generateSlugId(),
+      name: "Priority",
+      color: "#14B8A6",
+      contacts:10
+    },
+    {
+      id: generateSlugId(),
+      name: "Company",
+      color: "#6366F1",
+      contacts: 15
+    },    
+]
+const contacts:Array<Contact> = [
+    {
+      id: generateSlugId(),
+      firstName:'Sara',
+      lastName:'Doe',
+      email: "sonia.doe@example.com",
+      photo: "/Acord/person.png",
+      tags:[
+        {
+          id: generateSlugId(),
+          name: "Exhibition",
+          color: "#FBBF24",
+          contacts: 12
+        }
+      ],
+      isExchange: true,
+      phone: "+44 (788)29 59 722",
+      location: "London, Street21, NO.124",
+      company: "Codie",
+      meetDate: "Met at the exhibition",
+      addDate: "Added on 12.08.2023",
+      job: "Digital Marketer",
+    },
+    {
+      id: generateSlugId(),
+      firstName:'Sara',
+      lastName:'Doe',
+      email: "sonia.doe@example.com",
+      photo: "/Acord/person.png",
+      tags:[
+        {
+          id: generateSlugId(),
+          name: "Exhibition",
+          color: "#FBBF24",
+          contacts: 12
+        }
+      ],
+      isExchange: true,
+      phone: "+44 (788)29 59 722",
+      location: "London, Street21, NO.124",
+      company: "Codie",
+      meetDate: "Met at the exhibition",
+      addDate: "Added on 12.08.2023",
+      job: "Digital Marketer",
+    },    
+]
 const useMoch = () => {
   Api.post("/login", { token: "ebdsjcdkosoqe3r4gnfvnwoe2g94nvsjka23f0vslvnsk39jsncje239" });
   Api.post("/get_Login_code", { message: "Mobile number is not registered" });
@@ -61,246 +117,47 @@ const useMoch = () => {
       typeName: "AboutBox",
       text: "Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.",
     },
+    {
+      title: "Gallery",
+      typeName: "GalleryBox",
+      contents:[
+        {
+            original: "https://picsum.photos/id/1018/1000/600/",
+            thumbnail: "https://picsum.photos/id/1018/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1015/1000/600/",
+            thumbnail: "https://picsum.photos/id/1015/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1019/1000/600/",
+            thumbnail: "https://picsum.photos/id/1019/250/150/",
+        },    
+      ]
+    },    
   ]);
-  Api.post("/contactsInfo", [
-    {
-      id: generateSlugId(),
-      fullName: "Sara Doe",
-      email: "sonia.doe@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
+  Api.post("/contactsInfo",contacts);
+  Api.post("/contactDetails",contacts[0]);
+  Api.post("/tagsInfo", tags);
+  Api.post("/tagDetails",tags[0]);
+  Api.post("/flow_uni",
+  {
+    "answer": {
+        "Command": "file_information",
+        "answer": "Hello! How can I help you today?",
+        "suggestion_list": [],
+        "products": {},
+        "photo_file": "",
+        "audio_file_name": "audio_1707111441_fed79a2841_English_en-US-AndrewNeural.wav",
+        "video_file": null,
+        "audio_file": "https://codieappstorage.blob.core.windows.net/codievoice/Audios/audio_1707111441_fed79a2841_English_en-US-AndrewNeural.wav"
     },
-    {
-      id: generateSlugId(),
-      fullName: "Jane Smith",
-      email: "jane.smith@example.com",
-      image: "/Acord/person.png",
-      Exhibition: false,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Elson Johnson",
-      email: "bob.johnson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Jane Smith",
-      email: "jourg.smith@example.com",
-      image: "/Acord/person.png",
-      Exhibition: false,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Bob Johnson",
-      email: "david.bonson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Elson Johnson",
-      email: "bob.johnson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Jane Smith",
-      email: "jourg.smith@example.com",
-      image: "/Acord/person.png",
-      Exhibition: false,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Bob Johnson",
-      email: "david.bonson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Elson Johnson",
-      email: "bob.johnson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Jane Smith",
-      email: "jourg.smith@example.com",
-      image: "/Acord/person.png",
-      Exhibition: false,
-      Exchange: false,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-    {
-      id: generateSlugId(),
-      fullName: "Bobii Johnson",
-      email: "david.bonson@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-  ]);
-  Api.post("/contactDetails", [
-    {
-      id: generateSlugId(),
-      fullName: "Sara Doe",
-      email: "sonia.doe@example.com",
-      image: "/Acord/person.png",
-      Exhibition: true,
-      Exchange: true,
-      phone: "+44 (788)29 59 722",
-      location: "London, Street21, NO.124",
-      company: "Codie",
-      meetDate: "Met at the exhibition",
-      addDate: "Added on 12.08.2023",
-      job: "Digital Marketer",
-    },
-  ]);
-  Api.post("/tagsInfo", [
-    {
-      id: generateSlugId(),
-      tag: "Exhibition",
-      color: "#FBBF24",
-      contacts: [
-        {
-          name: "John Doe",
-          email: "john.doe@example.com",
-          phone: "+1 (555) 123-4567",
-        },
-        {
-          name: "Alice Johnson",
-          email: "alice.johnson@example.com",
-          phone: "+1 (555) 987-6543",
-        },
-      ],
-    },
-    {
-      id: generateSlugId(),
-      tag: "Priority",
-      color: "#14B8A6",
-      contacts: [
-        {
-          name: "Jane Smith",
-          email: "jane.smith@example.com",
-          phone: "+1 (555) 789-0123",
-        },
-      ],
-    },
-    {
-      id: generateSlugId(),
-      tag: "Company",
-      color: "#6366F1",
-      contacts: [
-        {
-          name: "Robert Johnson",
-          email: "robert.johnson@example.com",
-          phone: "+1 (555) 234-5678",
-        },
-        {
-          name: "Eva Williams",
-          email: "eva.williams@example.com",
-          phone: "+1 (555) 876-5432",
-        },
-      ],
-    },
-  ]);
-  Api.post("/tagDetails", [
-    {
-      id: generateSlugId(),
-      tag: "Exhibition",
-      color: "",
-      contacts: [
-        {
-          name: "John Doe",
-          email: "john.doe@example.com",
-          phone: "+1 (555) 123-4567",
-        },
-        {
-          name: "Alice Johnson",
-          email: "alice.johnson@example.com",
-          phone: "+1 (555) 987-6543",
-        },
-      ],
-    },
-  ]);
+    "currentconverationid": 8919224343,
+    "instanceid": "ad5777e2-906b-43f0-b550-1433c04d0305",
+    "message_state": true,
+    "message_key": "",
+    "resources ": []
+  });
 };
 
 export default useMoch;

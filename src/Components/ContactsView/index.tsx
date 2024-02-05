@@ -8,9 +8,9 @@ import { Outlet } from "react-router";
 import { AddContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Auth } from "../../Api";
-// import { useAuth } from "../../hooks/useAuth";
-import { ContactData, TagsData } from "../../Api/Auth";
 import { TagList } from "..";
+import AddTag from "../__Modal__/AddTag";
+import { Tag,Contact } from "../../Types";
 
 interface Props {
   theme?: string;
@@ -18,9 +18,10 @@ interface Props {
 
 const ContactsView: React.FC<Props> = ({ theme }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
+  const [showAddTagModal, setShowAddTagModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [contacts, setContacts] = useState<ContactData[]>([]);
-  const [tags, setTags] = useState<TagsData[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
 
@@ -48,10 +49,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   //     setIsLoading(false);
   //   });
   // });
-  console.log(contacts);
-  console.log(tags);
-  const filteredContacts = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
-  const filteredTags = tags.filter((item) => item.tag.toLowerCase().includes(searchQuery.toLowerCase()));
+  // console.log(contacts);
+  // console.log(tags);
+  const filteredContacts = contacts.filter((item) => item.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -65,7 +66,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
       <div className={`${theme}-ContactsView-buttonsContainer `}>
         <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
-        <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => console.log("Tag Modal")} theme="Carbon">
+        <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => setShowAddTagModal(true)} theme="Carbon">
           {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
         </Button>
       </div>
@@ -108,6 +109,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           setShowAddContactModal(false);
         }}
       ></AddContact>
+      <AddTag
+        theme="Carbon"
+        isOpen={showAddTagModal}
+        onClose={() => {
+          setShowAddTagModal(false);
+        }}
+      ></AddTag>
     </div>
   );
 };
