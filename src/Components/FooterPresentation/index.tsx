@@ -7,10 +7,11 @@ interface FooterPresentationProps {
   theme?: string;
   onSendVector : (value: string) => void;
   isLoading: boolean
+  isRecording:boolean
+  setIsRecording:(record:boolean) => void
 }
-const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendVector,isLoading}) => {
+const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendVector,isLoading,isRecording,setIsRecording}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
-  const [isRecording,setIsRecording] = useState(false);
   const [resolvedText,setResolvedText] = useState('');
   const startSpeetchToText = () => {
     // setResolveText('')
@@ -38,7 +39,7 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendV
   };  
   const handleSendClick = () => {
     // Call the callback function from the parent component with the input value
-    if(onSendVector){
+    if(onSendVector && inputValue.length > 0 && !isLoading){
       onSendVector(inputValue);
     }
 

@@ -25,8 +25,9 @@ import TagItem from "./TagItem";
 import ColorBox from "./ColorBox";
 import Setting from "./Setting";
 import SettingCard from "./SettingCard";
-
 import AudioProvider from "./AudioProvider";
+import AiAvatar from "./AiAvatar";
+
 export {
   Profile,
   Spinners,
@@ -56,4 +57,5 @@ export {
   Setting,
   SettingCard,
   AudioProvider,
+  AiAvatar,
 };

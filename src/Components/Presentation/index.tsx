@@ -2,7 +2,7 @@
 import React , {useState , useEffect, useRef} from "react";
 import { Button, Suggestions } from "symphony-ui";
 import FooterPresentation from "../FooterPresentation";
-import { AudioProvider, BackIcon } from "..";
+import { AiAvatar, AudioProvider, BackIcon } from "..";
 import { useAuth } from "../../hooks/useAuth";
 import { chat } from "../../Types";
 import { sendToApi } from "../../help";
@@ -18,9 +18,12 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   // const [selectedOption, setSelectedOption] = useState<'question'|'answer'>('question')
   const [showSuggestions,setShowSuggestions] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
+  const [videoUrl, setVideoUrl] = useState<string>('./videos/02.mp4');
   const [isTalking,setIsTalking] = useState(false)
   const [isLoading,setIsLoading] = useState(false);
+  const [isRecording,setIsRecording] = useState(false)
   const [chats,setChats] = useState<Array<chat>>([
   ])
   const user = useAuth()
@@ -30,7 +33,20 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
 
   //   })
   // };
-
+  useEffect(() => {
+      if(videoRef.current && !isRecording){
+          const refren = videoRef.current  as any   
+          // setShowOpacity(true)
+          refren.load()
+      }        
+  })   
+  useEffect(() => {
+      if(isTalking){
+        setVideoUrl('./videos/03.mp4')
+      }else{
+        setVideoUrl('./videos/02.mp4')
+      }
+  })
   const [suggestionList] = useState([
     'Can you introduce yourself?',
     'Tell me more about your business',
@@ -74,7 +90,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         <div className={`${theme}-Presentation-Content`}>  
     
           <div className={`${theme}-Presentation-PictureSection`}>
-            <div className={`${theme}-Presentation-PresentationPicture`}></div>
+            {/* <div className={`${theme}-Presentation-PresentationPicture`}></div> */}
+            <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
           </div>
           <div>
             <h1 className={`${theme}-Presentation-PresentationName ${theme}-TextShadow`}>{user.currentUser.information?.firstName}</h1>
@@ -162,7 +179,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         </div>
       </div>
     {
-      startChat ? <FooterPresentation isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
+      startChat ? <FooterPresentation isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
       <AudioProvider autoPlay={isTalking} onEnd={() => {
         setAudioUrl('')
