@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
