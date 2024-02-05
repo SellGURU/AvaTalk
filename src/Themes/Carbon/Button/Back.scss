@@ -3,7 +3,7 @@
 };
 
 .Carbon-back-Button-container-box {
-  @apply flex px-6 items-center space-x-4 absolute  top-8 #{!important};
+  @apply flex px-6 items-center space-x-4 absolute z-10 top-8 #{!important};
 };
 
 .Carbon-back-Button-container[data-mode = 'calendar'] {

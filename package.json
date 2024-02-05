@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@types/react-modal": "^3.16.3",
+    "annyang": "^2.6.1",
     "axios": "^1.6.5",
     "axios-mock-adapter": "^1.22.0",
     "cropperjs": "^1.6.1",
@@ -24,6 +25,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.21.2",
     "react-scripts": "^5.0.1",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.4",
     "react-verification-code-input": "^1.2.9",
     "react-verification-input": "^4.1.0",
