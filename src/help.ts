@@ -127,7 +127,7 @@ const generateSlugId = () => {
   return slugId;
 };
 
-const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:string,onresolve:(res:any) => void) => {
+const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:string,onresolve:(res:any) => void,oncatch:() => void) => {
     const aiChats = chats.filter((item) => item.from == 'Ai')
     const newChat:chat = {
       from:'user',
@@ -148,14 +148,17 @@ const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:s
     }).then(res => {
       setChats([...chats,{
         from:'Ai',
-        text:res.answer.answer,
-        audio_file:res.answer.audio_file,
-        instanceid:res.instanceid,
-        currentconverationid:res.currentconverationid
+        text:res.data.answer.answer,
+        audio_file:res.data.answer.audio_file,
+        instanceid:res.data.instanceid,
+        currentconverationid:res.data.currentconverationid
       }])
-      onresolve(res)
+      onresolve(res.data)
+    }).catch(() => {
+        oncatch()
     })    
 }
+
 export {
     resolveMenuFromRoute,
     resolveNavigation,
