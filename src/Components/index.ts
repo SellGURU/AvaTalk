@@ -23,6 +23,8 @@ import FooterPresentation from "./FooterPresentation";
 import TagList from "./TagList";
 import TagItem from "./TagItem";
 import ColorBox from "./ColorBox";
+import Setting from "./Setting";
+import SettingCard from "./SettingCard";
 
 export {
   Profile,
@@ -50,4 +52,6 @@ export {
   ColorBox,
   Chat,
   BackIcon,
+  Setting,
+  SettingCard,
 };

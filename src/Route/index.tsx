@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
+import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -17,45 +17,55 @@ const route = createHashRouter([
       {
         path: "/",
         element: <Profile theme="Carbon"></Profile>,
-        children:[
+        children: [
           {
-            path:'edit',
-            element:<Edit></Edit>,
-            children:[
+            path: "edit",
+            element: <Edit></Edit>,
+            children: [
               {
-                path:'about',
-                element:<EditAbout></EditAbout>
+                path: "about",
+                element: <EditAbout></EditAbout>,
               },
               {
-                path:'gallery',
-                element:<EditGallery></EditGallery>
+                path: "gallery",
+                element: <EditGallery></EditGallery>,
               },
               {
-                path:'googlemap',
-                element:<EditGoogleMap></EditGoogleMap>
-              },      
+                path: "googlemap",
+                element: <EditGoogleMap></EditGoogleMap>,
+              },
               {
-                path:'videos',
-                element:<EditVideos></EditVideos>
-              }                                          
-            ]
-          }
-        ]
+                path: "videos",
+                element: <EditVideos></EditVideos>,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/contacts",
         element: <ContactsView theme="Carbon"></ContactsView>,
-        children:[
+        children: [
           {
             path: ":contactId",
             element: <ContactPage />,
           },
-        ]
+        ],
+      },
+      {
+        path: "/settings",
+        element: <Setting></Setting>,
+        // children:[
+        //   {
+        //     path: ":contactId",
+        //     element: <ContactPage />,
+        //   },
+        // ]
       },
       {
         path: "/chats",
-        element: <Chat theme="Carbon"/>,
-      },      
+        element: <Chat theme="Carbon" />,
+      },
     ],
     // element: <Home></Home>,
   },
