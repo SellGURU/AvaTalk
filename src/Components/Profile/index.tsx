@@ -8,6 +8,7 @@ import CropperBox from '../CropperBox/index';
 import {Box} from '../../Model';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { dragEnd, dragOver, dragStart} from '../../help';
+import ShareContact from '../__Modal__/ShareContact';
 
 interface ProfileProps {
   theme?: string;
@@ -15,6 +16,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [showBookMark,setShowBookMark] = useState(false)
+  const [showShareContact,setShowShareContact] = useState(false)
   const [avatarUrl,setAvatarUrl] = useState('')
   const [backgroundUrl,setBackgroundUrl] = useState('')
   const authContext = useAuth()
@@ -97,7 +99,9 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div> */}
                 <div className={`${theme}-Profile-ScanBarcode`}>
-                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
+                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
+                  </Button> 
                 </div>
               </>
             :undefined}
@@ -176,6 +180,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         setBackgroundUrl('')
       }}></CropperBox>      
       <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
+      <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
     </div>
     </>
     
