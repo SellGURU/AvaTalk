@@ -70,7 +70,7 @@
     background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
                 linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
                 linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-    @apply absolute w-10 h-10 boxShadow-Gray bg-gray-100 rounded-full flex justify-center items-center left-52 -top-[58px] ;
+    @apply absolute w-10 h-10 boxShadow-Gray bg-gray-100 rounded-full flex justify-center items-center right-7 ;
 }
 .Carbon-Profile-ProfileName {
     text-shadow: 0px 1px 1px currentColor;
@@ -88,7 +88,7 @@
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-BtnContainer{
-    @apply w-48 h-[40px];  
+    @apply flex;  
 }
 .Carbon-Profile-InstagramVector{
     background: url(/Carbon/instagram.png) no-repeat;

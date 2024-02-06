@@ -47,10 +47,10 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share a store or office location.",
     },
     {
-      name: "Al Setting",
+      name: "AI Setting",
       icon: "lsetting.svg",
       link: "share",
-      description: "Share a store or office location.",
+      description: "Customize AI settings.",
     },
     {
       name: "Videos",

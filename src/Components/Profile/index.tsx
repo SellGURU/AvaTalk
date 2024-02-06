@@ -62,9 +62,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             mode == 'profile' ?
               <div className={`${theme}-Profile-BtnContainer`}>
                 <Button onClick={() => {setMode('review')}} theme="Carbon-Google" data-mode="profile-review-button">
-                    <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
-                    <div>Preview Profile</div>
+                  <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
+                  <div>Preview Profile</div>
                 </Button>
+                <div className={`${theme}-Profile-ScanBarcode`}>
+                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
+                  </Button> 
+                </div>
               </div>
             :
             <Button onClick={() => {setMode('profile')}} theme='Carbon-back'>
@@ -98,11 +103,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 {/* <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div> */}
-                <div className={`${theme}-Profile-ScanBarcode`}>
-                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
-                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
-                  </Button> 
-                </div>
+
               </>
             :undefined}
           </div>
