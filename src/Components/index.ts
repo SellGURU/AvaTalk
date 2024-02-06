@@ -27,7 +27,7 @@ import Setting from "./Setting";
 import SettingCard from "./SettingCard";
 import AudioProvider from "./AudioProvider";
 import AiAvatar from "./AiAvatar";
-
+import Timer from "./Timer";
 export {
   Profile,
   Spinners,
@@ -58,4 +58,5 @@ export {
   SettingCard,
   AudioProvider,
   AiAvatar,
+  Timer
 };

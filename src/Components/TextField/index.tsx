@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from "react";
+import React, { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 
 import Countries from './Countries.json';
 
@@ -21,6 +21,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: "text" | "password" | "email" | "phone";
   inValid: boolean | string;
   errorMessage?: string;
+  setValue?: (value:string) => void
 }
 
 
@@ -43,6 +44,7 @@ const TextField: React.FC<InputProps> = ({
   required,
   phoneCountry,
   setPhoneCountry,
+  setValue,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,7 +55,17 @@ const TextField: React.FC<InputProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [langList,_setLangList] = useState(Countries)
 
-
+  useEffect(() => {
+    if(type == 'phone'){
+      const code = value.split(' ')[0]
+      // console.log(code)
+      // console.log(langList.filter(item => item.codePhone == code))
+      const lists = langList.filter(item => item.codePhone == code)[0]
+      if(lists && setPhoneCountry){
+        setPhoneCountry(lists)
+      }
+    }
+  },[type, value])
   const getInputType = () => {
     if (type === "password" && showPassword) {
       return "text";
@@ -94,6 +106,10 @@ const TextField: React.FC<InputProps> = ({
                               <div onClick={() => {
                                 if(setPhoneCountry){
                                   setPhoneCountry(item)
+                                  const number =  value.split(' ')[1] ? value.split(' ')[1] : value.replace('+','')
+                                  if(setValue){
+                                    setValue(item.codePhone+' '+ number)
+                                  }
                                 }
                                 setShowDropDown(false)
                               }} key={index} className={`${theme}-TextField-dropDown-item`}>
