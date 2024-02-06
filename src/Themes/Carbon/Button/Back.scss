@@ -7,6 +7,8 @@
 };
 
 .Carbon-back-Button-container[data-mode = 'calendar'] {
+  box-shadow: 2px 2px 20px 0px #6F8CB036, 2px 2px 4px 0px #728EAB1A !important;
+
   @apply h-11 w-12 #{!important};
 };
 
