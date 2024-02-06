@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FileUploadr, StepController, TextField } from "../../Components";
 import { Button } from "symphony-ui";
-import LocationPicker from "react-leaflet-location-picker";
+// import LocationPicker from "react-leaflet-location-picker";
 import styles from "./CreateAccount.module.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -12,6 +12,7 @@ import { Auth } from "../../Api";
 import { useNavigate } from "react-router";
 import {User} from "../../Model";
 import { useAuth } from "../../hooks/useAuth";
+import { useConstructor } from "../../help";
 
 const initialValue = {
   FirstName: "",
@@ -37,6 +38,13 @@ const validationSchema = Yup.object().shape({
 const CreateAccount = () => {
   const navigate = useNavigate();
   const authContext = useAuth()
+  useConstructor(() => {
+    if(authContext.varification.emailOrPhone.length == 0){
+      setTimeout(() => {
+        navigate('/login')
+      }, 200);
+    }
+  })
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -174,16 +182,16 @@ const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountr
   );
 };
 
-const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }) => {
-  const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
-  const pointMode = {
-    banner: false,
-    control: {
-      values: pointVals,
-      onClick: (point: any) => setPointVals([...[point]]),
-      onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
-    },
-  };
+const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
+  // const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
+  // const pointMode = {
+  //   banner: false,
+  //   control: {
+  //     values: pointVals,
+  //     onClick: (point: any) => setPointVals([...[point]]),
+  //     onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
+  //   },
+  // };
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -205,9 +213,9 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, location, formik }
           {/* <div className="mb-4">
             <TextField label="Your Location" placeholder="Search your location..." theme="Carbon" name="Last Name" type="text" inValid={false} onBlur={() => {}} onChange={() => {}} value=""></TextField>
           </div> */}
-          <div>
+          {/* <div>
             <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
-          </div>
+          </div> */}
           <div className="mt-8">
             <Button
               onClick={() => {
@@ -236,6 +244,7 @@ const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
         </div>
         <div className="px-4">
           <FileUploadr
+            mod="profile"
             uploades={(res) => {
               formik.setFieldValue('PrifileImage',res[0].url)
             }}

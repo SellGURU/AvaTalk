@@ -4,10 +4,18 @@ import { Auth } from "../../Api";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from '../../store/auth-context';
 import { useContext } from "react";
+import { useConstructor } from "../../help";
 
 const Verification = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext)
+    useConstructor(() => {
+        if(authContext.varification.emailOrPhone.length == 0){
+        setTimeout(() => {
+            navigate('/login')
+        }, 200);
+        }
+    })    
     return (
         <>
         <div className="text-center px-4 text-gray-700 flex justify-center">

@@ -67,7 +67,7 @@
 
 .Carbon-Select-dropDown-container {
   // box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1);
-  @apply w-full bg-gray-100 absolute top-[65px]  border rounded-b-[27px];
+  @apply w-full bg-gray-100 absolute top-[50px]  border rounded-b-[27px];
 }
 .Carbon-Select-box[data-showselect="true"] {
   @apply border-t-white rounded-b-none #{!important};
