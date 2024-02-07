@@ -11,12 +11,19 @@ class GalleryBox extends Box{
         super(title)
         this.typeName = 'GalleryBox'
     }
+    public getContents() {
+        return this.contents
+    }
     public resolveRender(theme: string): JSX.Element {
         return (
             <div className={`${theme}-Profile-Vectors justify-center relative`}>
                 <ImageGallery items={this.contents} />                
             </div>            
         )
+    }
+
+    public getRouteAddress(): string {
+        return 'gallery'
     }
 }
 

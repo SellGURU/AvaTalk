@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box } from '../../Model';
 
 interface ContentCardProps {
   theme?: string;
+  item:Box
   children?: React.ReactNode;
-  title?: string;
   setAllowDrag?: (action:boolean) => void;
   mod?: 'profile'|'review'
 }
-const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, title,mod,setAllowDrag}) => {
+const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,setAllowDrag}) => {
   const [activeDrag,setActiveDrag] = useState(false)
   useEffect(() => {
     setTimeout(() => {
       setActiveDrag(false)
     }, 6000);
   })
+  const navigate = useNavigate();
   return (
     <>
     <li draggable className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div className={`${theme}-ContentCard-Title`}>
-                {title}
+                {item.getTitle()}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
               <div onClick={() => {
@@ -34,13 +37,15 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",children, titl
               <div className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
-              <div className={`${theme}-ContentCard-CardVector`}>
+              <div onClick={() => {
+                navigate('/edit/'+item.getRouteAddress())
+              }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-EditVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
             </div>
         </div>
 
-        <div className={`${theme}-ContentCard-Children`}>{children}</div>
+        <div className={`${theme}-ContentCard-Children`}>{item.resolveRender(theme)}</div>
         
     </li>
     </>

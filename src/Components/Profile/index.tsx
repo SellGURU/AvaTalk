@@ -161,8 +161,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
 
             {authContext.currentUser.boxs?.map((item:Box) => {
               return (
-                <ContentCard mod={mode} theme="Carbon" title={item.getTitle()}>
-                  {item.resolveRender('Carbon')}
+                <ContentCard item={item} mod={mode} theme="Carbon" >
                 </ContentCard>              
               )
             })}

@@ -4,15 +4,16 @@ import React, { HtmlHTMLAttributes, useState } from "react";
 
 type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   theme?: string;
+  value?:Array<any>
   uploades?: (files:Array<any>) => void
   mod?:'files' | 'profile',
   label?:string
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
-  const [files,setFiles] = useState<Array<any>>([]);
+  const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -74,7 +75,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                           height:'100%'
                         }}>
                             <div style={{display:'grid'}}>
-                              {files.length > 0 ?
+                              {files.length > 0 && mod == 'profile'?
                                 <img className="w-[66px] justify-self-center my-2 h-[66px] rounded-full " src={files[0].url} alt="" />
                               :
                                 <div className={`${theme}-ImageUploader-icon`}></div>

@@ -6,6 +6,14 @@ class Box {
         return this.title
     }
 
+    public getTypeName() {
+        return this.typeName
+    }
+
+    public getRouteAddress() {
+        return ''
+    }
+
     public resolveRender(theme:string) {
         return (
             <>

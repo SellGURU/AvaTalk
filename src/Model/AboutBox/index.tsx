@@ -5,10 +5,16 @@ class AboutBox extends Box {
         super(title)
         this.typeName = 'AboutBox'
     }
+    public getBio() {
+        return this.text
+    }
     public resolveRender() {
         return (
             <h1>{this.text}</h1>          
         )
+    }    
+    public getRouteAddress(): string {
+        return 'about'
     }    
 }
 

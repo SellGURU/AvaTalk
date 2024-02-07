@@ -51,6 +51,9 @@ class User {
     }
 
     public addBox(newBox:Box) {
+        if(this.boxs.filter((item) => item.getTypeName() == newBox.getTypeName()).length > 0){
+            this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
+        }
         this.boxs.push(newBox)
         this.syncToLocalStorage()
     }

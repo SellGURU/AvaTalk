@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({theme,content,linkTo}) => {
         <>
             <div onClick={() => {
                 navigate(linkTo)
-            }} className={`${theme}-Card-container`}>
+            }} aria-disabled={linkTo == ''? 'true': 'false'} className={`${theme}-Card-container`}>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center justify-start">
                         <div className={`${theme}-Card-icon`} style={{maskImage:`url(/Carbon/${content.icon})`,WebkitMaskImage:`url(/Carbon/${content.icon})`}}></div>
