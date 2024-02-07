@@ -162,7 +162,7 @@ const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountr
           </div>
           :
           <div className="mb-4">
-            <TextField {...formik.getFieldProps("email")} label="Email" placeholder="Enter your email ..." theme="Carbon" name="email" type="email"  errorMessage={formik.errors.email} inValid={formik.errors.email && formik.touched?.email}></TextField>
+            <TextField {...formik.getFieldProps("email")} label="Email" required placeholder="Enter your email ..." theme="Carbon" name="email" type="email"  errorMessage={formik.errors.email} inValid={formik.errors.email && formik.touched?.email}></TextField>
           </div>          
           }
           <div className="mt-8">

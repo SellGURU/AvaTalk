@@ -1,4 +1,4 @@
-import React, { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
+import React, {InputHTMLAttributes, useEffect, useState } from "react";
 
 import Countries from './Countries.json';
 
@@ -106,7 +106,7 @@ const TextField: React.FC<InputProps> = ({
                               <div onClick={() => {
                                 if(setPhoneCountry){
                                   setPhoneCountry(item)
-                                  const number =  value.split(' ')[1] ? value.split(' ')[1] : value.replace('+','')
+                                  const number =  value.split(' ')[1] ? value.split(' ')[1] : ''
                                   if(setValue){
                                     setValue(item.codePhone+' '+ number)
                                   }
