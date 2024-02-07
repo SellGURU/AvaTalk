@@ -1,4 +1,4 @@
-import React, { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
+import React, {InputHTMLAttributes, useEffect, useState } from "react";
 
 import Countries from './Countries.json';
 
