@@ -19,7 +19,7 @@ const ChatItem = ({data, theme }: { data: DataProps; theme: string | undefined }
             <p className={`${theme}-ChatItem-name`}>{data.name}</p>
             <div className={`${theme}-ChatItem-iconContainer `}>
               <div>{data.time}</div>
-              <img src="../../../Vector.svg" alt="" />
+              <div className={`${theme}-ChatItem-Vector`}></div>
             </div>
           </div>
           <p className={`${theme}-ChatItem-content`}>{data.content}</p>

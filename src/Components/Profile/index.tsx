@@ -82,8 +82,10 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
             {mode == 'profile' ?
               <>
-                <div onClick={() => {setShowChangePhoto(true)}} className={`${theme}-Profile-GalleryVectorContainer`}>
-                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
+                <div className={`${theme}-Profile-GalleryVectorContainer`}>
+                  <Button onClick={() => {setShowChangePhoto(true)}} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
+                  </Button> 
                 </div>
                 {
                   showChangePhoto ?

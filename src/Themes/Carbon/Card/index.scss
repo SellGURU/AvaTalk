@@ -19,3 +19,6 @@
     mask-image: url(/Vector.svg);
     @apply w-[10px] h-[24px] bg-slate-400;    
 }
+.Carbon-Card-container[aria-disabled ='true']{
+    @apply opacity-50;
+}

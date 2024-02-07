@@ -1,5 +1,5 @@
 .Carbon-ToggleButton-container {
-  @apply w-full disabled:cursor-not-allowed boxShadow-Gray flex borderBox-Gray   justify-around space-x-4 bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
+  @apply w-full disabled:cursor-not-allowed boxShadow-Gray flex borderBox-Gray   justify-around  bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
 }
 .Carbon-ToggleButton-notActiveButton {
   // border: 1px solid transparent;
@@ -8,5 +8,5 @@
 .Carbon-ToggleButton-ActiveButton {
   box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
   border: 1px solid white;
-  @apply rounded-[27px] h-[32px] flex items-center justify-center   #{!important};
+  @apply rounded-[27px] h-[32px] flex items-center justify-center overflow-hidden  #{!important};
 }

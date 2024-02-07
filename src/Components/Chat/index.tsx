@@ -81,6 +81,7 @@ const chat = [
     setActiveView(buttonText);
   };
   return (
+    
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText `}>Chats</p>
@@ -90,9 +91,9 @@ const chat = [
       </div>
       {activeView === "Visitors Chat History" ? (
         <>
-          <div className="mt-8 px-6">
+          {/* <div className="mt-8 px-6">
             <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search chat history..." />
-          </div>
+          </div> */}
           {!(chats.length > 0) && isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
@@ -105,9 +106,9 @@ const chat = [
         </>
       ) : (
         <>
-          <div className="mt-8 px-6">
+          {/* <div className="mt-8 px-6">
             <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search test history..." />
-          </div>
+          </div> */}
           {!(tags.length > 0) && isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>

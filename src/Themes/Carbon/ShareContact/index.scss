@@ -11,10 +11,8 @@
     @apply w-28 h-28 bg-cover bg-no-repeat mt-5 mb-6;
 }
 .Carbon-ShareContact-VectorMainSection {
-    box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
-    outline: 1px solid white;
-    @apply w-6 h-6 p-1 flex justify-center items-center rounded-full cursor-pointer;
-  }
+    @apply w-6 h-6 p-1 flex justify-center items-center rounded-full cursor-pointer borderBox-Gray ;
+}
 .Carbon-ShareContact-VectorSection {
     @apply w-14 h-14;
 }
@@ -42,7 +40,7 @@
     @apply flex flex-col items-center gap-[14px] min-w-[245px];
 }
 .Carbon-ShareContact-CardItems {
-    @apply flex flex-row gap-2 items-center justify-start cursor-pointer pl-8 ;
+  @apply borderBox-Gray boxShadow-Gray flex flex-row gap-2 items-center justify-start text-gray-700 bg-gray-100 leading-[21px]  text-[14px] font-[400]    focus:outline-none w-full h-[44px]   rounded-[27px]  placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400 cursor-pointer pl-8;
 }
 .Carbon-ShareContact-SmsVector {
     mask-image: url(/Carbon/message.svg);
