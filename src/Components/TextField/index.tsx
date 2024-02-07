@@ -106,7 +106,7 @@ const TextField: React.FC<InputProps> = ({
                               <div onClick={() => {
                                 if(setPhoneCountry){
                                   setPhoneCountry(item)
-                                  const number =  value.split(' ')[1] ? value.split(' ')[1] : value.replace('+','')
+                                  const number =  value.split(' ')[1] ? value.split(' ')[1] : ''
                                   if(setValue){
                                     setValue(item.codePhone+' '+ number)
                                   }

@@ -9,7 +9,7 @@ import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
 
 const initialValue = {
-  emailOrPhone: "",
+  emailOrPhone: "+44",
 };
 
 const validateEmail = (email: string | undefined) => {
@@ -92,7 +92,7 @@ const Login = () => {
                   //     navigate("/Verification");
                   //   }
                   // }
-                  disabled={!formik.isValid || formik.values.emailOrPhone.length ==0}
+                  disabled={!formik.isValid || formik.values.emailOrPhone.length <= 4}
                   theme="Carbon"
                 >
                   Continue
