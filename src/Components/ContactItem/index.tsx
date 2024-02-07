@@ -12,8 +12,7 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
             <p className={`${theme}-ContactItem-name `}>{data.firstName+' '+ data.lastName}</p>
             <div className={`${theme}-ContactItem-iconContainer `}>
               {data.tags.length>0 && <p className={`${theme}-ContactItem-exhibition `}>{data.tags[0].name}</p>}
-              <img src="../../../Vector.svg" alt="" />
-              {/* <div className={`${theme}-ContactItem-vectorIcon `}></div> */}
+              <div className={`${theme}-ContactItem-Vector`}></div>
             </div>
           </div>
           <p className={`${theme}-ContactItem-email `}>{data.email}</p>

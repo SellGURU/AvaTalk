@@ -37,32 +37,32 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
                 <div className={`${theme}-ShareContact-QrCodeVector`}></div>
                 <div className={`${theme}-ShareContact-Cards`}>
-                    <div className={`${theme}-TextField-input ${theme}-ShareContact-CardItems ShadowStyleOne`} onClick={() => {setMode('smsSection')}}>
-                        <div className={` ShadowStyleTwo`}>
+                    <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('smsSection')}}>
+                        <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-SmsVector`}></div>
                         </div>
                         Share via SMS 
                     </div>
-                    <div className={`${theme}-TextField-input ${theme}-ShareContact-CardItems ShadowStyleThree`} onClick={() => {setMode('emailSection')}}>
-                        <div className={`ShadowStyleTwo`}>
+                    <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('emailSection')}}>
+                        <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-EmailVector`}></div>
                         </div>
                         Share via Email
                     </div>
-                    <div className={`${theme}-TextField-input ${theme}-ShareContact-CardItems ShadowStyleFour`}>
-                        <div className={`ShadowStyleTwo`}>
+                    <div className={`${theme}-ShareContact-CardItems`}>
+                        <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-CopyVector`}></div>
                         </div>
                         Copy to Clipboard
                     </div>
-                    <div className={`${theme}-TextField-input ${theme}-ShareContact-CardItems `}>
-                        <div className={`${theme}-ShareContact-VectorMainSection`}>
+                    <div className={`${theme}-ShareContact-CardItems`}>
+                        <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-ImportVector`}></div>
                         </div>
                         Download QR Code
                     </div>
-                    <div className={`${theme}-TextField-input ${theme}-ShareContact-CardItems`}>
-                        <div className={`${theme}-ShareContact-VectorMainSection`}>
+                    <div className={`${theme}-ShareContact-CardItems`}>
+                        <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-LinkVector`}></div>
                         </div>
                         Share Link
@@ -84,7 +84,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 </Button>
             </div>
                 <div className={`${theme}-ShareContact-Body`}>
-                    <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection`}>
+                    <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection btnInnerShadowsDark`}>
                         <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-Vectors ${theme}-ShareContact-SmsVector`}></div>
                     </div>
                     <div className="text-gray-700 text-center font-semibold text-base mt-2">Share via SMS</div>
@@ -148,7 +148,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 </Button>
             </div>
                 <div className={`${theme}-ShareContact-Body`}>
-                    <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection`}>
+                    <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection btnInnerShadowsDark `}>
                         <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-Vectors ${theme}-ShareContact-EmailVector`}></div>
                     </div>
                     <div className="text-gray-700 text-center font-semibold text-base mt-2">Share via Email</div>

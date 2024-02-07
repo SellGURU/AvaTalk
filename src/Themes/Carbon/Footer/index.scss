@@ -1,9 +1,5 @@
 .Carbon-Footer-Container {
-  /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-  -6px -6px 20px 0px rgba(255, 255, 255, 1),
-  2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
-  
-  @apply h-16 sticky rounded-xl border w-full boxShadow-Gray border-b-0 z-20 border-white bottom-0 bg-slate-100 py-3 px-7  flex items-center justify-between;
+  @apply h-16 sticky rounded-xl w-full boxShadow-Gray borderBox-Gray z-20  bottom-0 py-3 px-7  flex items-center justify-between;
 }
 .Carbon-Footer-VectorSection {
   @apply w-10 h-10 p-2 rounded-full cursor-pointer;
@@ -31,9 +27,7 @@
   mask-image: url(/Carbon/chatVector.svg);
 }
 .Carbon-Footer-ActiveVectorSection {
-  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
-  outline: 1px solid white;
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center borderBox-Gray;
 }
 .Carbon-Footer-ActiveVectors{
   @apply bg-violet-700;
