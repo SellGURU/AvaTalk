@@ -6,6 +6,6 @@
   @apply opacity-[50%] #{!important};
 };
 
-.Carbon-Google-Button-container[data-mode = 'profile-review-button'] {
-  @apply borderBox-Gray #{!important};
+.Carbon-Google-Button-container[data-mode ='profile-review-button'] {
+  @apply h-10 w-48 borderBox-Gray #{!important};
 }

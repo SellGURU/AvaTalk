@@ -3,11 +3,21 @@ import './verification.css';
 import { Auth } from "../../Api";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from '../../store/auth-context';
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useConstructor } from "../../help";
+import { Timer } from "../../Components";
 
 const Verification = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext)
+    const [completeTimer,setCompleteTimer] = useState(false)
+    useConstructor(() => {
+        if(authContext.varification.emailOrPhone.length == 0){
+        setTimeout(() => {
+            navigate('/login')
+        }, 200);
+        }
+    })    
     return (
         <>
         <div className="text-center px-4 text-gray-700 flex justify-center">
@@ -37,9 +47,19 @@ const Verification = () => {
                 }}
             />
             </div>
-            <p className="text-sm mt-8 text-violet-700 font-medium">I didn’t receive a code   02:00</p>
+            <p onClick={() => {
+                completeTimer ? setCompleteTimer(false) : undefined
+            }} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
+                {
+                    !completeTimer?
+                        <span className="ml-2"><Timer oncomplete={() => {
+                            setCompleteTimer(true)
+                        }} initialMinute={2} initialSeconds={1}></Timer></span>
+                    :undefined
+                }
+            </p>
             </div>
-
+            
         </div>
         </>
     )

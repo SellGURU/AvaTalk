@@ -7,8 +7,9 @@ import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
 import {Box} from '../../Model';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { dragEnd, dragOver, dragStart} from '../../help';
+// import { dragEnd, dragOver, dragStart, useConstructor} from '../../help';
 import ShareContact from '../__Modal__/ShareContact';
+import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 
 interface ProfileProps {
   theme?: string;
@@ -21,7 +22,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [backgroundUrl,setBackgroundUrl] = useState('')
   const authContext = useAuth()
   const [showChangePhoto,setShowChangePhoto] = useState(false)
-  const [allowDrag,setAllowDrag] = useState(false)
+  // const [allowDrag,setAllowDrag] = useState(false)
   const getNewAvatarUrl = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setAvatarUrl(URL.createObjectURL(e.target.files[0]));
@@ -49,8 +50,16 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [changePhotoRef]);  
-  const [draggedItem,setDraggedItem] = useState<any>();  
+  // const [draggedItem,setDraggedItem] = useState<any>();  
   const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+        const el = document.getElementById('sortable');
+        Sortable.create(el,{
+          filter: ".ignore-elements"
+        });      
+    }, 500);
+  })
   return (
     <>
     <div className={`${theme}-Profile-Container`}>
@@ -62,9 +71,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             mode == 'profile' ?
               <div className={`${theme}-Profile-BtnContainer`}>
                 <Button onClick={() => {setMode('review')}} theme="Carbon-Google" data-mode="profile-review-button">
-                    <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
-                    <div>Preview Profile</div>
+                  <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
+                  <div>Preview Profile</div>
                 </Button>
+                <div className={`${theme}-Profile-ScanBarcode`}>
+                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
+                  </Button> 
+                </div>
               </div>
             :
             <Button onClick={() => {setMode('profile')}} theme='Carbon-back'>
@@ -98,11 +112,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 {/* <div className={`${theme}-Profile-GalleryVectorContainer ${theme}-Profile-GalleryImport`}>
                   <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ImportGalleryVector`}></div>
                 </div> */}
-                <div className={`${theme}-Profile-ScanBarcode`}>
-                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
-                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-ScanBarcodeVector`}></div>
-                  </Button> 
-                </div>
+
               </>
             :undefined}
           </div>
@@ -138,19 +148,20 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             </div>
             </>
           }
-          <ul id="sortable" onDragStart={(e: any) => {
-            dragStart(e,allowDrag,setDraggedItem)
-          }} onDragEnd={(e:any) => {
-            dragEnd(e,allowDrag,setAllowDrag)
-          }}
-          onDragOver={(e) => {
-            dragOver(e,allowDrag,draggedItem)
-          }}
+          <ul id="sortable"
+          // onDragStart={(e: any) => {
+          //   dragStart(e,allowDrag,setDraggedItem)
+          // }} onDragEnd={(e:any) => {
+          //   dragEnd(e,allowDrag,setAllowDrag)
+          // }}
+          // onDragOver={(e) => {
+          //   dragOver(e,allowDrag,draggedItem)
+          // }}
           >
 
             {authContext.currentUser.boxs?.map((item:Box) => {
               return (
-                <ContentCard mod={mode} setAllowDrag={setAllowDrag} theme="Carbon" title={item.getTitle()}>
+                <ContentCard mod={mode} theme="Carbon" title={item.getTitle()}>
                   {item.resolveRender('Carbon')}
                 </ContentCard>              
               )

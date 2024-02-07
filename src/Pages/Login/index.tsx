@@ -1,4 +1,4 @@
-import { Button, TextField } from "symphony-ui";
+import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,10 @@ import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useState } from "react";
 import Splash from "../../Components/Splash";
+import { TextField } from "../../Components";
 
 const initialValue = {
-  emailOrPhone: "",
+  emailOrPhone: "+44",
 };
 
 const validateEmail = (email: string | undefined) => {
@@ -27,7 +28,7 @@ const validationSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
       .required('Email / Phone is required')
       .test('email_or_phone', 'Email / Phone is invalid', (value) => {
-         return validateEmail(value) || validatePhone(parseInt(value ?? '0'));
+         return validateEmail(value) || validatePhone(parseInt(value.replace('+','').replace(' ','') ?? '0'));
       })
 });
 
@@ -42,6 +43,10 @@ const Login = () => {
       console.log(values);
     },
   });
+  const [country, setCountry] = useState<any>({
+    codeName: "us",
+    codePhone: "+1",
+  });  
   function handleSubmit() {
     Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
       authContext.verificationHandler({
@@ -63,16 +68,31 @@ const Login = () => {
                 <div className="w-full flex justify-center">
                   <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Phone Number or Email Address to Login</div>
                 </div>
-                <div className="mb-8">
-                  <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
-                </div>
+
+                {
+                  formik.values.emailOrPhone[0] == '+'?
+                  <div className="mb-8">
+                    <TextField 
+                    {...formik.getFieldProps("emailOrPhone")} 
+                    // value={country.codePhone + formik.values.emailOrPhone}
+                    phoneCountry={country} 
+                    setValue={(value) => {
+                      formik.setFieldValue('emailOrPhone',value)
+                    }}
+                    setPhoneCountry={setCountry} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="phone" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                  </div>                
+                  :
+                  <div className="mb-8">
+                    <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                  </div>
+                }
                 <Button
                   onClick={handleSubmit}
                   //     () => {
                   //     navigate("/Verification");
                   //   }
                   // }
-                  disabled={!formik.isValid || formik.values.emailOrPhone.length ==0}
+                  disabled={!formik.isValid || formik.values.emailOrPhone.length <= 4}
                   theme="Carbon"
                 >
                   Continue
