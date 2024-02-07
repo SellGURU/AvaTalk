@@ -1,5 +1,5 @@
 .Carbon-back-Button-container {
-  @apply w-10 disabled:cursor-not-allowed flex boxShadow-Gray borderBox-Gray justify-center items-center bg-gray-100 leading-[19.36px] border text-[14px] font-[500]  rounded-full h-10 #{!important};
+  @apply w-10 disabled:cursor-not-allowed flex borderBox-Gray boxShadow-Gray  justify-center items-center bg-gray-100 leading-[19.36px] text-[14px] font-[500]  rounded-full h-10 #{!important};
 };
 
 .Carbon-back-Button-container-box {

@@ -91,8 +91,10 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
             {mode == 'profile' ?
               <>
-                <div onClick={() => {setShowChangePhoto(true)}} className={`${theme}-Profile-GalleryVectorContainer`}>
-                  <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
+                <div className={`${theme}-Profile-GalleryVectorContainer`}>
+                  <Button onClick={() => {setShowChangePhoto(true)}} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
+                  </Button> 
                 </div>
                 {
                   showChangePhoto ?
@@ -161,8 +163,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
 
             {authContext.currentUser.boxs?.map((item:Box) => {
               return (
-                <ContentCard mod={mode} theme="Carbon" title={item.getTitle()}>
-                  {item.resolveRender('Carbon')}
+                <ContentCard item={item} mod={mode} theme="Carbon" >
                 </ContentCard>              
               )
             })}
