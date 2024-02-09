@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ToggleButton from "../ToggleButton";
-import SearchBox from "../SearchBox";
+// import SearchBox from "../SearchBox";
 import ChatList from "../ChatList";
 import { Outlet } from "react-router";
 import { useConstructor } from "../../help";
@@ -14,7 +14,7 @@ interface Props {
 
 const Chat: React.FC<Props> = ({ theme }) => {
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery] = useState<string>("");
   const [chats, setChats] = useState<Contact[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
       });
   });
 
-;
+
 const chat = [
   {
     id:'1',
@@ -74,9 +74,9 @@ const chat = [
   const filteredData = chat.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.date.toLowerCase().includes(searchQuery.toLowerCase()) || item.content.toLowerCase().includes(searchQuery.toLowerCase()));
   // const filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
+  // const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchQuery(event.target.value);
+  // };
   const handleToggleButtonClick = (buttonText: string) => {
     setActiveView(buttonText);
   };

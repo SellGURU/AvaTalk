@@ -9,7 +9,7 @@ interface ContentCardProps {
   setAllowDrag?: (action:boolean) => void;
   mod?: 'profile'|'review'
 }
-const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,setAllowDrag}) => {
+const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => {
   const [activeDrag,setActiveDrag] = useState(false)
   useEffect(() => {
     setTimeout(() => {
@@ -25,23 +25,24 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,setAl
                 {item.getTitle()}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
-              <div onClick={() => {
+              <div onTouchStart={() => {
                 setActiveDrag(!activeDrag)
-              }} onMouseDown={() => {
-                if(setAllowDrag){
-                  setAllowDrag(true)
-                }
-              }} className={`${theme}-ContentCard-CardVector`} style={{backgroundColor:activeDrag?'#8E69CE':'unset'}}>
+              }} onClick={() => {
+                // setActiveDrag(!activeDrag)
+              }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
-              <div onClick={() => {
+              <button onTouchStart={() => {
+                navigate('/edit/'+item.getRouteAddress())
+              }} onClick={() => {
+                // alert('clicked')
                 navigate('/edit/'+item.getRouteAddress())
               }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-EditVector ${theme}-ContentCard-MaskVector`}></div>
-              </div>
+              </button>
             </div>
         </div>
 

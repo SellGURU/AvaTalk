@@ -10,6 +10,9 @@
 .Carbon-ContentCard-CardVector{
     @apply bg-gray-100 w-10 h-10 flex justify-center borderBox-Gray boxShadow-Gray items-center rounded-full ; 
 }
+.Carbon-ContentCard-CardVector[data-active='true']{
+    @apply bg-primary-color btnInnerShadowsDark; 
+}
 .Carbon-ContentCard-Title {
     @apply text-sm font-semibold;
 }
