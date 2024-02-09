@@ -31,39 +31,39 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Socials",
       icon: "social.svg",
-      link: "socials",
+      link: "",
       description: "Share your social media profiles.",
     },
     {
       name: "Links",
       icon: "link.svg",
-      link: "links",
+      link: "",
       description: "Add websites to your profile.",
     },
     {
       name: "Google Map",
       icon: "location2.svg",
-      link: "googlemap",
+      link: "",
       description: "Share a store or office location.",
     },
     {
       name: "AI Setting",
-      icon: "lsetting.svg",
+      icon: "",
       link: "",
       description: "Customize AI settings.",
     },
     {
       name: "Videos",
       icon: "video-play.svg",
-      link: "videos",
+      link: "",
       description: "Make your page come to life with a video.",
     },
   ]);
   return (
     <>
+      <Outlet></Outlet>
       <div className={`${theme}-Edit-container`}>
-        <Outlet></Outlet>
-        <div className="flex px-6 items-center space-x-4 absolute  top-8">
+        <div className="flex px-6 items-center space-x-4 absolute  top-16">
           <Button
             onClick={() => {
               navigate(-1);
@@ -75,7 +75,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
           <p className={`${theme}-Edit-title`}>Edit Profile</p>
         </div>
 
-        <div className="px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+        <div className="px-6 mt-[120px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
           {editCards.map((item) => {
             return <Card linkTo={item.link} content={item} theme="Carbon"></Card>;
           })}

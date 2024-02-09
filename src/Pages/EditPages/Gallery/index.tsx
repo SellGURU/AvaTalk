@@ -35,29 +35,34 @@ const EditGallery =() => {
     }
     return (
         <>
-            <div className="w-full absolute h-screen bg-white z-[12]">
-                <BackIcon title="Gallery" theme="Carbon"></BackIcon>
-                <div className="mt-24 px-6">
-                    <TextField  {...formik.getFieldProps("title")} inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)} theme="Carbon" label="Title" name="title"  type="text" placeholder="Enter title..."></TextField>
+            <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
+                <div className="relative top-4">
+                    <BackIcon title="Gallery" theme="Carbon"></BackIcon>
                 </div>
-                <div className="px-6 mt-3">
-                  <ImageUploadr value={formik.values.files.map((item,index) => {
-                    return {
-                        url:item.original,
-                        name:'itembox '+index*2000
-                    }
-                    })} uploades={(files:Array<any>) => {
-                    const converted = files.map(item => {
+                <div className="mt-[120px] hiddenScrollBar h-full">
+                    <div className="mt-24 px-6">
+                        <TextField  {...formik.getFieldProps("title")} inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)} theme="Carbon" label="Title" name="title"  type="text" placeholder="Enter title..."></TextField>
+                    </div>
+                    <div className="px-6 mt-3">
+                    <ImageUploadr value={formik.values.files.map((item,index) => {
                         return {
-                            original:item.url,
-                            thumbnail:item.url
+                            url:item.original,
+                            name:'itembox '+index*2000
                         }
-                    })
-                    formik.setFieldValue('files',converted)
-                  }}  mod="files" label="Upload Images"></ImageUploadr>
-                </div>
-                <div className="px-6 mt-10">
-                    <Button onClick={submit} theme="Carbon">Save Change</Button>
+                        })} uploades={(files:Array<any>) => {
+                        const converted = files.map(item => {
+                            return {
+                                original:item.url,
+                                thumbnail:item.url
+                            }
+                        })
+                        formik.setFieldValue('files',converted)
+                    }}  mod="files" label="Upload Images"></ImageUploadr>
+                    </div>
+                    <div className="px-6 mt-10">
+                        <Button onClick={submit} theme="Carbon">Save Change</Button>
+                    </div>
+
                 </div>
             </div>
         </>
