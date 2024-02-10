@@ -15,14 +15,7 @@
     @apply relative flex flex-col gap-4 justify-center items-center px-6 pb-20;
 }
 .Carbon-Presentation-PictureSection { 
-    /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-                    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);     */
-    /* border: 1px solid transparent;
-    background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-                linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
-                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box; */
-    @apply w-48 h-48 bg-gray-100 boxShadow-Gray borderBox-Gray2 rounded-full flex items-center justify-center;
+    @apply w-48 h-48 bg-gray-100 borderBox-Gray boxShadow-Gray rounded-full flex items-center justify-center;
 }
 .Carbon-Presentation-PresentationPicture {
     @apply w-40 h-40 bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full;
@@ -47,16 +40,8 @@
     mask-size: 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    mask-position: center;
-
-    box-shadow: 6px 6px 22px 0px rgba(63, 70, 78, 0.31),
-    -4px -4px 20px 0px rgba(255, 255, 255, 1),
-        4px 4px 14px 0px rgba(193, 213, 238, 1) inset,
-            -4px -4px 9px 0px rgba(255, 255, 255, 0.88) inset;
-    background: linear-gradient(0deg, #F3F4F6, #F3F4F6) padding-box,
-    linear-gradient(122.51deg, rgba(227, 227, 238, 0.5) 16.62%, rgba(255, 255, 255, 0.5) 56.74%)border-box,
-    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2;
+    mask-position: center;    
+    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2 borderBox-Gray btnInnerShadowsDark;
 }
 .Carbon-Presentation-CallVector{
     mask-image: url(/Carbon/callVector.svg);

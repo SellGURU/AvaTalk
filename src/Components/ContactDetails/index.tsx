@@ -66,7 +66,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
 
           <Button theme="Carbon-Show">Add Tag</Button>
         </div>
-        <div className="flex flex-col   space-y-3">
+        <div className="flex flex-col space-y-3">
           <div className="flex items-center space-x-2">
             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
               <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
