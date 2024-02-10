@@ -31,7 +31,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Socials",
       icon: "social.svg",
-      link: "",
+      link: "socials",
       description: "Share your social media profiles.",
     },
     {
@@ -48,7 +48,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     },
     {
       name: "AI Setting",
-      icon: "",
+      icon: "aiSetting.svg",
       link: "",
       description: "Customize AI settings.",
     },
