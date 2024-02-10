@@ -74,7 +74,7 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendV
         <div onClick={() => {setMode('review')}} data-mode="profile-review-button" className={`${theme}-FooterPresentation-BackgroundItems ${theme}-FooterPresentation-VectorSection`}>
           <div className={`${theme}-FooterPresentation-Vectors ${theme}-FooterPresentation-MicVector`}></div>
         </div>
-        <div className={`${theme}-FooterPresentation-BackgroundItems px-3 py-2`}>
+        <div className={`${theme}-FooterPresentation-BackgroundInput px-3 py-2`}>
           <input onKeyDown={handleKeyPress} className={`${theme}-FooterPresentation-Input`} value={inputValue}
             onChange={handleInputChange} placeholder="Message..." type="text" />
           <div className={`${theme}-FooterPresentation-Vectors ${theme}-FooterPresentation-SendVector`}

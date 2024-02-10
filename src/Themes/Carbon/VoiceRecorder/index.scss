@@ -2,17 +2,12 @@
   @apply z-[-1] top-0 absolute block opacity-50 w-[100px] h-[var(--Acord-voiceRecorder-width)] rounded-full bg-primary-color;
 }
 
-.Carbon-VoiceRecorder-container {
-  background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-    linear-gradient(122.51deg, rgba(227, 227, 238, 0.5) 16.62%, rgba(255, 255, 255, 0.5) 56.74%)border-box,
-    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-  border: 1px solid transparent;
-  
+.Carbon-VoiceRecorder-container { 
   margin: 0 auto;
   @apply relative cursor-pointer rounded-full bg-gray-100 flex justify-center items-center w-14 h-14 p-2  ;
 }
 .Carbon-VoiceRecorder-containerBox {
-  box-shadow: 4px 4px 14px 0px rgb(225, 225, 255) inset, 4px -4px 9px 0px rgba(255, 255, 255, 0.6) inset;
+  @apply borderBox-Gray btnInnerShadowsDark ;
 }
 
 .Carbon-VoiceRecorder-icon {

@@ -1,6 +1,6 @@
 .react-calendar{
     width: 100% !important;   
-    @apply bg-gray-100 rounded-[27px] border-none boxsInnerShadows  #{!important};
+    @apply bg-gray-100 rounded-[27px] border-none boxsInnerShadows borderBox-Gray #{!important};
 }
 .react-calendar__navigation {
     @apply rounded-[27px]
