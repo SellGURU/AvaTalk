@@ -4,7 +4,7 @@ import { BackIcon } from "../../../Components";
 const EditLinks = () => {
   return (
     <>
-      <div className="w-full absolute h-screen bg-white z-[12]">
+      <div className="w-full absolute h-screen top-[25px] bg-white z-[12]">
         <BackIcon title="Links" theme="Carbon"></BackIcon>
         <div className="mt-24 px-6">
           <TextField theme="Carbon" label="Title" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="Enter title..."></TextField>
