@@ -15,8 +15,11 @@ const validationSchema = Yup.object().shape({
 
 const EditAbout =() => {
     const auth = useAuth()
-     const navigate = useNavigate();
-    const currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'AboutBox')[0] as AboutBox
+    const navigate = useNavigate();
+    let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'AboutBox')[0] as AboutBox
+    if(currentBox == undefined) {
+        currentBox = new AboutBox('about','')
+    }
     const initialValue = {
         title:currentBox.getTitle(),
         bio:currentBox.getBio()

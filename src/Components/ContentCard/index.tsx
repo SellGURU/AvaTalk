@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '../../Model';
+import { useAuth } from '../../hooks/useAuth';
 
 interface ContentCardProps {
   theme?: string;
@@ -16,6 +17,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => 
       setActiveDrag(false)
     }, 6000);
   })
+  const auth = useAuth()
   const navigate = useNavigate();
   return (
     <>
@@ -32,7 +34,10 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => 
               }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
-              <div className={`${theme}-ContentCard-CardVector`}>
+              <div onClick={() => {
+                auth.currentUser.removeBox(item)
+                navigate('/')
+              }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <button onTouchStart={() => {

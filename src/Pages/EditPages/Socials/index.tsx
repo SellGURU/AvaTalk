@@ -37,7 +37,10 @@ const EditSocials = () => {
           icon:'devicon_youtube.svg'
       },                                
   ]
-  const currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'SocialBox')[0] as SocialBox
+  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'SocialBox')[0] as SocialBox
+  if(currentBox == undefined) {
+      currentBox = new SocialBox('social',[])
+  }   
   const [socials,setSocials] = useState<Array<Social>>(currentBox.getSocialMedias().map(((item:Social) => Object.assign(new Social('Facebook',item.value),item))))
   const [selectItem,setSelectedItem] = useState<null|Social>(null)  
   const [openNewSocial,setOpenNewSocial] = useState(false)
