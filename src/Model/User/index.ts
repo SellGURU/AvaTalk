@@ -47,7 +47,7 @@ class User {
         }
     }
     private syncToLocalStorage () {
-        localStorage.setItem('authUser',JSON.stringify(new User(this.information)))
+        localStorage.setItem('authUser',JSON.stringify(this))
     }
 
     public addBox(newBox:Box) {
@@ -57,7 +57,10 @@ class User {
         this.boxs.push(newBox)
         this.syncToLocalStorage()
     }
-
+    public removeBox(newBox:Box) {
+        this.boxs = this.boxs.filter((item) => item.getTypeName() != newBox.getTypeName())
+        this.syncToLocalStorage()
+    }
     public setBox(newBoxs:Array<Box>){
         this.boxs = newBoxs
         this.syncToLocalStorage()
