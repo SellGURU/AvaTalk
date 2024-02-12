@@ -4,6 +4,7 @@
 import { createContext, PropsWithChildren, useState } from "react";
 import { removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage/Token";
 import {User} from "../Model";
+import { reolveJsonToObject } from "../help";
 
 interface VerificationProps {
   emailOrPhone:string;
@@ -36,8 +37,12 @@ export const AuthContext = createContext<AuthContextProps>({
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
   const localuser = localStorage.getItem('authUser')
+  reolveJsonToObject(localuser as string)
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
-  const [user,setUser] = useState<User>(localuser ? Object.assign(new User(),JSON.parse(localuser)) : new User());
+  const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
+  resolveUser.setBox(reolveJsonToObject(localuser as string))
+
+  const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
       emailOrPhone:''

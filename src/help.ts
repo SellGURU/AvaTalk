@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { MenuType, chat } from "./Types";
-import { AboutBox, Box, GalleryBox, LinkBox, SocialBox } from "./Model";
+import { AboutBox, Box, GalleryBox, GoogleMapBox, LinkBox, SocialBox } from "./Model";
 import { Chat } from "./Api";
 
 const resolveMenuFromRoute = () => {
@@ -157,6 +157,25 @@ const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:s
     })    
 }
 
+const reolveJsonToObject = (jsonuser:string) => {
+  const jsonparse = JSON.parse(jsonuser)
+  if(jsonparse){
+    console.log(jsonparse)
+    return resolveBoxsJson(jsonparse.boxs)
+  }
+  return []
+}
+
+const resolveBoxsJson = (jsonBox:Array<any>) => {
+  return jsonBox.map((item) => {
+    switch (item.typeName) {
+      case 'GoogleMapBox' : return new GoogleMapBox(item.title,item.location)
+      case 'AboutBox' : return new AboutBox(item.title,item.text)
+      case 'GalleryBox' : return new GalleryBox(item.title,item.contents)
+      case 'SocialBox' : return new SocialBox(item.title,item.socialMedias)
+    }
+  }) as Array<Box>
+}
 export {
     resolveMenuFromRoute,
     resolveNavigation,
@@ -167,5 +186,6 @@ export {
     dragEnd,
     dragOver,
     generateSlugId,
-    sendToApi
+    sendToApi,
+    reolveJsonToObject
 }

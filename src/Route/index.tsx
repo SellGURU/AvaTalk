@@ -6,9 +6,13 @@ import ContactPage from "../Pages/ContactPage";
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
+<<<<<<< HEAD
 import { EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import { SettingAccount, SettingConnectedAccount, SettingSharing, SettingService, SettingPayment, SettingPrivacyPolicy,SettingTermsService ,SettingSupport } from "../Pages/SettingPages";
 
+=======
+import { EditAiSetting, EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
+>>>>>>> 76e37ce45ef9fd782ccac846bacdbff78f4ccc3f
 import ChatPage from "../Pages/ChatPage";
 
 
@@ -49,6 +53,10 @@ const route = createHashRouter([
               {
                 path: "googlemap",
                 element: <EditGoogleMap></EditGoogleMap>,
+              },
+              {
+                path: "ai-setting",
+                element: <EditAiSetting></EditAiSetting>,
               },
               {
                 path: "videos",

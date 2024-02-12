@@ -4,7 +4,7 @@ import Box from "../Boxs"
 type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube'
 
 class Social {
-    constructor(protected type:initialSocials,protected value:string){
+    constructor(protected type:initialSocials,public value:string){
 
     }
 
@@ -14,9 +14,17 @@ class Social {
         }
         return 'URL'
     }
-
+    public getType() {
+        return this.type
+    }
     public miniIconUrl() {
-        return ''   
+        switch(this.type) {
+            case 'Facebook': return 'devicon_facebook.svg'
+            case 'Instagram': return 'devicon_instagram.svg'
+            case 'Linkedin' : return 'devicon_linkdin.svg'
+            case 'Twitter/ X': return 'devicon_twitter.svg'
+            case 'Youtube': return 'devicon_youtube.svg'
+        }
     }
 
     public standardIconUrl() {
@@ -31,6 +39,10 @@ class Social {
                 <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div>
             </div>            
         )
+    }
+
+    public resolveUrl() {
+        return this.value
     }
 
     private resolveClassVectorName() {
@@ -63,9 +75,18 @@ class SocialBox extends Box{
             </div>            
         )
     }
+    public getRouteAddress(): string {
+        return 'socials'
+    }
+    public getSocialMedias() {
+        return this.socialMedias
+    }
 }
 
 export {
     SocialBox,
-    Social
+    Social,
+}
+export type {
+    initialSocials
 }

@@ -4,20 +4,17 @@ import { MenuType } from "../../Types"
 import {Splash ,Footer} from "../../Components"
 import { Outlet, useNavigate,useSearchParams } from "react-router-dom"
 import { resolveMenuFromRoute, resolveNavigation, useConstructor } from "../../help"
-import { Auth } from "../../Api"
-import { useAuth } from "../../hooks/useAuth"
 
 
 const Home = () => {
     const navigate = useNavigate();  
-    const authContext = useAuth()
     const [parametr] = useSearchParams() 
     const [menu,setMenu] = useState<MenuType>(resolveMenuFromRoute() as MenuType)
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     useConstructor(() => {
-        Auth.getBoxs((res) => {
-            authContext.currentUser.setBox(res)
-        })
+        // Auth.getBoxs((res) => {
+        //     authContext.currentUser.setBox(res)
+        // })
 
     })
     setTimeout(() => {

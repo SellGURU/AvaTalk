@@ -13,7 +13,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Contact Info",
       icon: "book.svg",
-      link: "",
+      link: "contact-info",
       description: "Add the contact info you’d like to share others.",
     },
     {
@@ -31,31 +31,31 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Socials",
       icon: "social.svg",
-      link: "",
+      link: "socials",
       description: "Share your social media profiles.",
     },
     {
       name: "Links",
       icon: "link.svg",
-      link: "",
+      link: "links",
       description: "Add websites to your profile.",
     },
     {
       name: "Google Map",
       icon: "location2.svg",
-      link: "",
+      link: "googlemap",
       description: "Share a store or office location.",
     },
     {
       name: "AI Setting",
-      icon: "",
-      link: "",
+      icon: "aiSetting.svg",
+      link: "ai-setting",
       description: "Customize AI settings.",
     },
     {
       name: "Videos",
       icon: "video-play.svg",
-      link: "",
+      link: "videos",
       description: "Make your page come to life with a video.",
     },
   ]);
