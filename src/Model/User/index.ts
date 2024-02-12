@@ -9,6 +9,9 @@ interface Information {
     location:Location;
     imageurl:string;
     banelImage:string;
+    personlEmail:string;
+    workEmail:string;
+    workPhone:string
 }
 
 interface Location {
@@ -26,6 +29,10 @@ class User {
         }
         return `https://ui-avatars.com/api/?name=${this.information?.firstName}+${this.information?.lastName}`
     }
+    public updateInformation(information:Information){
+        this.information = information
+        this.syncToLocalStorage()
+    }
     public resolveBackImageUrl() {
         if(this.information?.banelImage!= ''){
             return this.information?.banelImage
@@ -34,7 +41,6 @@ class User {
     }
     public updateImageurl(base64Image:string|ArrayBuffer|null) {
         if(this.information){
-            console.log('updated')
             this.information.imageurl= base64Image as string
             this.syncToLocalStorage()
         }

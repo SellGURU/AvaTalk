@@ -13,7 +13,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Contact Info",
       icon: "book.svg",
-      link: "",
+      link: "contact-info",
       description: "Add the contact info you’d like to share others.",
     },
     {
