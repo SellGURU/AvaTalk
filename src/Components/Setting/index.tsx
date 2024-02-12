@@ -8,9 +8,9 @@ interface SettingProps {
   theme?: string;
 }
 
-const Setting: React.FC<SettingProps> = () => {
+const Setting: React.FC<SettingProps> = ({theme}) => {
   //   const navigate = useNavigate();
-  const [editCards] = useState([
+  const [settingCards] = useState([
     {
       name: "Your Account",
       icon: "account.svg",
@@ -19,7 +19,7 @@ const Setting: React.FC<SettingProps> = () => {
     {
       name: "Connected Accounts",
       icon: "connected.svg",
-      link: "connected-account",
+      link: "connectedaccount",
     },
     {
       name: "Sharing",
@@ -39,12 +39,12 @@ const Setting: React.FC<SettingProps> = () => {
     {
       name: "Privacy Policy",
       icon: "policy.svg",
-      link: "privacy-policy",
+      link: "privacypolicy",
     },
     {
       name: "Terms of Service",
       icon: "security.svg",
-      link: "terms-service",
+      link: "termsservice",
     },
     {
       name: "Support",
@@ -54,25 +54,20 @@ const Setting: React.FC<SettingProps> = () => {
   ]);
   return (
     <>
-      {/* <div className={`${theme}-Edit-container`}> */}
-      <div className="h-screen">
+      <div className={`Carbon-ContactsView-Container  relative`}>
         <Outlet></Outlet>
-        {/* <div className="flex px-6 items-center space-x-4 absolute  top-8">
-          <Button
-            onClick={() => {
-              navigate(-1);
-            }}
-            theme={`${theme}-back`}
-          >
-            <div className={`${theme}-back-Button-vector`}></div>
-          </Button>
-          <p className={`${theme}-Edit-title`}>Edit Profile</p>
-        </div> */}
+        <div className="flex px-6 items-center justify-center space-x-4 absolute h-10 top-8">
+          <p className={`${theme}-Edit-title`}>Setting</p>
+        </div>
 
-        <div className="px-6 mt-[200px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
-          {editCards.map((item) => {
+        <div className="px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] ">
+          {settingCards.map((item) => {
             return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>;
           })}
+          <div className="mt-5 flex items-center justify-center cursor-pointer">
+            <div className={`${theme}-Setting-LogoutVector`}></div>
+            <p className="text-cyan-500 ms-2">Log out</p>
+          </div>
         </div>
       </div>
     </>

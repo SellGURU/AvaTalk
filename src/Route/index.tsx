@@ -7,7 +7,10 @@ import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
 import { EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
+import { SettingAccount, SettingConnectedAccount, SettingSharing, SettingService, SettingPayment, SettingPrivacyPolicy,SettingTermsService ,SettingSupport } from "../Pages/SettingPages";
+
 import ChatPage from "../Pages/ChatPage";
+
 
 const route = createHashRouter([
   {
@@ -68,6 +71,40 @@ const route = createHashRouter([
       {
         path: "/settings",
         element: <Setting></Setting>,
+        children: [
+          {
+            path: "account",
+            element: <SettingAccount></SettingAccount>,
+          },
+          {
+            path: "connectedaccount",
+            element: <SettingConnectedAccount></SettingConnectedAccount>,
+          },
+          {
+            path: "sharing",
+            element: <SettingSharing></SettingSharing>,
+          },
+          {
+            path: "service",
+            element: <SettingService></SettingService>,
+          },
+          {
+            path: "payment",
+            element: <SettingPayment></SettingPayment>,
+          },
+          {
+            path: "privacypolicy",
+            element: <SettingPrivacyPolicy></SettingPrivacyPolicy>,
+          },
+          {
+            path: "termsservice",
+            element: <SettingTermsService></SettingTermsService>,
+          },
+          {
+            path: "support",
+            element: <SettingSupport></SettingSupport>,
+          },
+        ],
         // children:[
         //   {
         //     path: ":contactId",

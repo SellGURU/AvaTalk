@@ -1,10 +1,8 @@
-.Carbon-ImageUploader-container{
-    border: 2px solid transparent;   
-    // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
-    box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6),inset 4px 4px 14px 0px rgba(225, 225, 255, 1),;        
+.Carbon-ImageUploader-container{    
     background: linear-gradient(rgba(243 ,244 ,246,1), rgba(243, 244 ,246,1)) padding-box,
                 linear-gradient(35deg, rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%) border-box,
-                linear-gradient(35deg,rgba(246, 246, 249, 0.5),rgba(255, 255, 255, 0.5))  border-box;    
+                linear-gradient(35deg,rgba(246, 246, 249, 0.5),rgba(255, 255, 255, 0.5))  border-box;   
+    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6), inset 4px 4px 14px 2px rgba(226, 232, 240, 1);
     @apply  w-full  max-h-[300px] relative px-[21px] rounded-[27px] py-[18px]
 }
 .Carbon-ImageUploader-title{
@@ -33,7 +31,7 @@
     @apply w-full cursor-pointer relative h-full bg-gray-50 border-dashed rounded-[4px]  border border-slate-300
 }
 .Carbon-ImageUploader-uploadBox-file{
-        box-shadow: inset -4px -4px 9px 0px rgba(255 ,255 ,255,0.6) ,inset 1px 1px 8px 0px rgba(14 ,160 ,11, 0.2);
+    box-shadow: inset -4px -4px 9px 0px rgba(255 ,255 ,255,0.6) ,inset 1px 1px 8px 0px rgba(14 ,160 ,11, 0.2);
     @apply w-full mt-[6px] mb-[6px] flex justify-between px-[12px] items-center h-[36px] rounded-[27px] border border-green-600
 }
 .Carbon-ImageUploader-uploadBox-button-container{

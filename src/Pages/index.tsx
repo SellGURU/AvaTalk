@@ -9,5 +9,6 @@ import Dev from "./Dev";
 import Edit from "./Edit";
 import Chats from "./Chats";
 import { EditAbout } from "./EditPages";
+// import { SettingAccount } from "./SettingPages";
 import Setting from "./Setting";
 export { CreateAccount, Chats, Home, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting };
