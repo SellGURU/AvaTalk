@@ -1,39 +1,6 @@
-import { Button, TextField } from "symphony-ui"
-import { BackIcon,TextArea } from "../../../Components"
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { useAuth } from "../../../hooks/useAuth";
-import { AboutBox } from "../../../Model";
-import { useNavigate } from "react-router";
-
-
-
-const validationSchema = Yup.object().shape({
-    title:Yup.string().required(),
-    bio:Yup.string().required()
-});
+import { BackIcon } from "../../../Components"
 
 const SettingService =() => {
-    const auth = useAuth()
-     const navigate = useNavigate();
-    const currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'AboutBox')[0] as AboutBox
-    const initialValue = {
-        title:currentBox.getTitle(),
-        bio:currentBox.getBio()
-    };    
-    const formik = useFormik({
-        initialValues: initialValue,
-        validationSchema,
-        onSubmit: (values) => {
-        console.log(values);
-        },
-    });   
-    const submit = () => {
-        auth.currentUser.addBox(
-            new AboutBox(formik.values.title,formik.values.bio)
-        )
-        navigate('/')
-    }
     return (
         <>
             <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
@@ -76,8 +43,6 @@ const SettingService =() => {
                     <div className="mt-8 mb-4">
                         <button className="Carbon-Button-container">Continue to payment</button>
                     </div>
-                    
-                    
                 </div>
             </div>
         </>
