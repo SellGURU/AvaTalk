@@ -39,6 +39,20 @@ class User {
         }
         return '/Carbon/BackgroundProfileImage.png'       
     }
+    public isHaveBackImage() {
+        if(this.resolveBackImageUrl() != '/Carbon/BackgroundProfileImage.png'){
+            return 'Change'
+        }else{
+            return 'Add'
+        }
+    }
+    public isHaveProfileImage() {
+        if(this.resolveImageUrl()?.includes('https://ui-avatars.com/api/?name=')){
+            return 'Add'
+        }else{
+            return 'Change'
+        }
+    }    
     public updateImageurl(base64Image:string|ArrayBuffer|null) {
         if(this.information){
             this.information.imageurl= base64Image as string

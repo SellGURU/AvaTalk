@@ -100,11 +100,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   showChangePhoto ?
                     <div ref={changePhotoRef} style={{boxShadow:'2px 2px 8px 0px rgba(114, 142, 171, 0.2)'}} className='bottom-[-80px] w-[215px] max-w-[215px] bg-gray-100 h-[100px] absolute left-0 rounded-[27px]'>
                       <div className='text-gray-700 relative cursor-pointer pt-4 pb-3 text-sm border-b border-white'>
-                          Change Profile Picture
+                          {authContext.currentUser.isHaveProfileImage()} Profile Picture
                           <input onChange={getNewAvatarUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
                         </div>
                       <div className='text-gray-700 relative cursor-pointer pt-4 pb-3 text-sm'>
-                        Add Background Picture
+                        {authContext.currentUser.isHaveBackImage()} Background Picture
                         <input onChange={getNewBackGroundUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
                       </div>
                     </div>
@@ -174,7 +174,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       </div>
       {mode == 'review' ?
         <Button onClick={() => {
-          window.open('https://switch-camera-button.vercel.app/#detect1')
+          window.open('https://ar-card-eight.vercel.app/#detect1')
         }} theme='Carbon-Ar'>
           <div>
             <div className={`${theme}-Ar-Button-icon`}></div>
