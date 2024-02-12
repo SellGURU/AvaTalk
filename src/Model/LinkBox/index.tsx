@@ -13,6 +13,10 @@ class Link {
             </div>       
         )
     }    
+
+    public geturl(){
+        return this.url
+    }
 }
 
 class LinkBox extends Box{
@@ -34,6 +38,11 @@ class LinkBox extends Box{
             </div>            
         )
     }    
-    
+    public getRouteAddress(): string {
+        return 'links'
+    }
+    public getLinks() {
+        return this.links
+    }    
 }
-export default LinkBox
+export {LinkBox,Link}

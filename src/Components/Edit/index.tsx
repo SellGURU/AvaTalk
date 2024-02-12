@@ -49,13 +49,13 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "AI Setting",
       icon: "aiSetting.svg",
-      link: "ai-setting",
+      link: "",
       description: "Customize AI settings.",
     },
     {
       name: "Videos",
       icon: "video-play.svg",
-      link: "videos",
+      link: "",
       description: "Make your page come to life with a video.",
     },
   ]);

@@ -56,8 +56,11 @@ const TextField: React.FC<InputProps> = ({
   const [langList,_setLangList] = useState(Countries)
 
   useEffect(() => {
+    let code ='+44'
     if(type == 'phone'){
-      const code = value.split(' ')[0]
+      if(value){
+        code = value.split(' ')[0]
+      }
       // console.log(code)
       // console.log(langList.filter(item => item.codePhone == code))
       const lists = langList.filter(item => item.codePhone == code)[0]
