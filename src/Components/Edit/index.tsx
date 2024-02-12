@@ -37,7 +37,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Links",
       icon: "link.svg",
-      link: "",
+      link: "links",
       description: "Add websites to your profile.",
     },
     {
