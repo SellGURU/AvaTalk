@@ -28,6 +28,8 @@ import SettingCard from "./SettingCard";
 import AudioProvider from "./AudioProvider";
 import AiAvatar from "./AiAvatar";
 import Timer from "./Timer";
+import Analytics from "./Analytics";
+import AreaChartComponent from "./AreaChartComponent";
 export {
   Profile,
   Spinners,
@@ -58,5 +60,7 @@ export {
   SettingCard,
   AudioProvider,
   AiAvatar,
-  Timer
+  Timer,
+  Analytics,
+  AreaChartComponent,
 };

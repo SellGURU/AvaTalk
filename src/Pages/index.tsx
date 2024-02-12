@@ -10,4 +10,5 @@ import Edit from "./Edit";
 import Chats from "./Chats";
 import { EditAbout } from "./EditPages";
 import Setting from "./Setting";
-export { CreateAccount, Chats, Home, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting };
+import AnalyticsPage from "./AnalyticsPage";
+export { CreateAccount, Chats, Home, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage };
