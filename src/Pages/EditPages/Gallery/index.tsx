@@ -15,7 +15,10 @@ const validationSchema = Yup.object().shape({
 const EditGallery = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GalleryBox")[0] as GalleryBox;
+  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GalleryBox")[0] as GalleryBox;
+  if (currentBox == undefined) {
+    currentBox = new GalleryBox("gallery", []);
+  }
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -33,7 +36,7 @@ const EditGallery = () => {
   };
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[15px] bg-white z-[15]">
+      <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-4">
           <BackIcon title="Gallery" theme="Carbon"></BackIcon>
         </div>
@@ -41,6 +44,7 @@ const EditGallery = () => {
           <div className="mt-24 px-6">
             <TextField
               {...formik.getFieldProps("title")}
+              errorMessage={formik.errors?.title}
               inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)}
               theme="Carbon"
               label="Title"

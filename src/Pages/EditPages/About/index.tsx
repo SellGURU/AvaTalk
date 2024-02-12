@@ -14,7 +14,10 @@ const validationSchema = Yup.object().shape({
 const EditAbout = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "AboutBox")[0] as AboutBox;
+  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "AboutBox")[0] as AboutBox;
+  if (currentBox == undefined) {
+    currentBox = new AboutBox("about", "");
+  }
   const initialValue = {
     title: currentBox.getTitle(),
     bio: currentBox.getBio(),
@@ -32,7 +35,7 @@ const EditAbout = () => {
   };
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-screen top-[15px] bg-white z-[15]">
+      <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
         <div className="relative top-4">
           <BackIcon title="About" theme="Carbon"></BackIcon>
         </div>

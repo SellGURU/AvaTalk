@@ -58,7 +58,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     const timeoutId = setTimeout(() => {
       setShowMoreInfoSection(true);
       setShowSuggestions(true)
-    }, 2000);
+    }, 10000);
     return () => clearTimeout(timeoutId);
   }, []);
   //for give value from chat in footer component
@@ -100,7 +100,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           {
             !startChat?
               <Button onClick={() => {setStartChat(true)}} theme="Carbon" data-mode="profile-review-button">
-                Start Presentation
+                start to chat
               </Button>
             :
             ""
@@ -108,25 +108,33 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       
           {!startChat ?
             <div className={`${theme}-Presentation-InfoSection`}>
-              <div className={`${theme}-Presentation-Info`}>
+              <div  className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-CallVector`}></div>
                 </div>
-                <div>+44 (788)29 59 722</div>
+                <div onClick={() => {
+                window.open("+447882959722"); 
+              }}>+44 (788)29 59 722</div>
               </div>
-              <div className={`${theme}-Presentation-Info`}>
+              <div onClick={() => {
+                window.open("mailto:Azami@codie.ai"); 
+              }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-EmailVector`}></div>
                 </div>
                 <div>Azami@codie.ai</div>
               </div>
-              <div className={`${theme}-Presentation-Info`}>
+              <div onClick={() => {
+                window.open("https://codie.ai/"); 
+              }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-WebsiteVector`}></div>
                 </div>
                 <div>codie.ai</div>
               </div>
-              <div className={`${theme}-Presentation-Info`}>
+              <div onClick={() => {
+                window.open('https://www.linkedin.com/in/dr-farzin-azami-0919712b/')
+              }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-LinkedinVector`}></div>
                 </div>

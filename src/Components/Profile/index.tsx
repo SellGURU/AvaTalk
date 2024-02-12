@@ -150,7 +150,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             </div>
             </>
           }
-          <ul id="sortable"
+          <ul style={{width:'100%'}} id="sortable"
           // onDragStart={(e: any) => {
           //   dragStart(e,allowDrag,setDraggedItem)
           // }} onDragEnd={(e:any) => {
