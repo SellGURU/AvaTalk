@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, TextField } from "symphony-ui"
-import { BackIcon } from "../../../Components"
-import LocationPicker from "react-leaflet-location-picker"
-import { useState } from "react"
-import { useAuth } from "../../../hooks/useAuth"
-import { GoogleMapBox } from "../../../Model"
-import { useFormik } from "formik"
+import { Button, TextField } from "symphony-ui";
+import { BackIcon } from "../../../Components";
+import LocationPicker from "react-leaflet-location-picker";
+import { useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { GoogleMapBox } from "../../../Model";
+import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
-    title:Yup.string().required(),
+  title: Yup.string().required(),
 });
 
 const EditGoogleMap =() => {
     const auth = useAuth()
     const navigate = useNavigate();
-    const [pointVals, setPointVals] = useState([[33, 33]]);
+    const [pointVals, setPointVals] = useState([[auth.currentUser.information?.location.lat, auth.currentUser.information?.location.lng]]);
     const pointMode = {
         banner: false,
         control: {
@@ -28,8 +28,8 @@ const EditGoogleMap =() => {
     let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'GoogleMapBox')[0] as GoogleMapBox    
     if(currentBox == undefined) {
         currentBox = new GoogleMapBox('',{
-            lan:33,
-            lat:33
+            lan:auth.currentUser.information?.location.lat as number,
+            lat:auth.currentUser.information?.location.lng as number
         })
     }
     const initialValue = {
@@ -45,8 +45,8 @@ const EditGoogleMap =() => {
     const submit =() => {
         auth.currentUser.addBox(
             new GoogleMapBox(formik.values.title,{
-                lan:pointVals[0][0],
-                lat:pointVals[0][1]
+                lan:pointVals[0][0] as number,
+                lat:pointVals[0][1] as number
             })
         )
         navigate('/')

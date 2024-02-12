@@ -13,7 +13,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Contact Info",
       icon: "book.svg",
-      link: "",
+      link: "contact-info",
       description: "Add the contact info you’d like to share others.",
     },
     {
@@ -37,7 +37,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Links",
       icon: "link.svg",
-      link: "",
+      link: "links",
       description: "Add websites to your profile.",
     },
     {

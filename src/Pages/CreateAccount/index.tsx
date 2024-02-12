@@ -58,7 +58,10 @@ const CreateAccount = () => {
           company:values.CompanyName,
           imageurl:values.PrifileImage,
           job:values.JobTitle,
-          location:location
+          location:location,
+          personlEmail:'',
+          workEmail:'',
+          workPhone:''
         })
         authContext.setUser(newUser)
         navigate('/?splash=false')
