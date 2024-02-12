@@ -1,16 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TextField, Button } from "symphony-ui";
-import { BackIcon, SearchBox } from "../../../Components";
+import {  Button } from "symphony-ui";
+import { BackIcon, TextField } from "../../../Components";
 import LocationPicker from "react-leaflet-location-picker";
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
+const validationSchema = Yup.object().shape({
+  job:Yup.string(),
+  company:Yup.string(),
+});
 
 const EditContactInfo = () => {
+  const auth = useAuth()
+  const initialValue = {
+    job:auth.currentUser.information?.job,
+    company:auth.currentUser.information?.company,
+    personlEmail:auth.currentUser.information?.personlEmail,
+    workEmail:auth.currentUser.information?.workEmail,
+    phone:auth.currentUser.information?.phone,
+    workPhone:auth.currentUser.information?.workPhone
+  };    
   const [location] = useState({
-    lat: 51.5072,
-    lng: 0.1276,
+    lat: auth.currentUser.information?.location.lat,
+    lng: auth.currentUser.information?.location.lng,
   });
+  const formik = useFormik({
+      initialValues: initialValue,
+      validationSchema,
+      onSubmit: (values) => {
+      console.log(values);
+      },
+  });     
+  const navigate = useNavigate();
   const [pointVals, setPointVals] = useState([[location.lat, location.lng]]);
-  const [phone, setPhone] = useState("");
   const pointMode = {
     banner: false,
     control: {
@@ -23,65 +48,78 @@ const EditContactInfo = () => {
     codeName: "us",
     codePhone: "+1",
   });
+  const submit = () => {
+    auth.currentUser.updateInformation({
+      job:formik.values.job as string,
+      banelImage:auth.currentUser.information?.banelImage as string,
+      company:formik.values.company as string ,
+      firstName:auth.currentUser.information?.firstName as string,
+      imageurl:auth.currentUser.information?.imageurl as string,
+      lastName:auth.currentUser.information?.lastName as string,
+      location:{
+        lat:pointVals[0][0] as number,
+        lng:pointVals[0][1] as number
+      },
+      phone:'',
+      personlEmail:formik.values.personlEmail as string,
+      workEmail:formik.values.workEmail as string,
+      workPhone:formik.values.workPhone as string
+    })
+    navigate('/')
+  }
   return (
     <>
       <div className=" absolute  hiddenScrollBar  h-[-webkit-fill-available] px-6 pb-[100px] hiddenScrollBar overflow-y-scroll w-full hiddenScrollBar  top-[30px] bg-white z-[12]">
         <BackIcon title="Contact Info" theme="Carbon"></BackIcon>
         <div className="mt-24 px-6">
-          <TextField theme="Carbon" label="Job Title" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="Enter your job title..."></TextField>
+          <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title" inValid={false} name="job"  type="text"  placeholder="Enter your job title..."></TextField>
         </div>
         <div className="mt-3 px-6">
-          <TextField theme="Carbon" label="Company" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="Enter your company name..."></TextField>
+          <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={false} name="company" type="text" placeholder="Enter your company name..."></TextField>
         </div>
-        <div className="mt-3 px-6">
-          <SearchBox onChange={() => {}} label="Location" inputHeight="44px" value="" theme="Carbon" placeholder="Enter your location..." />
-        </div>
+
         <div className="mt-3 px-6">
           <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
         </div>
         <div className="mt-3 px-6">
           <TextField
+            {...formik.getFieldProps("personlEmail")}
             theme="Carbon"
             label="Personl Email"
             inValid={false}
-            name="title"
-            onBlur={() => {}}
-            onChange={() => {}}
+            name="personlEmail"
             type="text"
-            value=""
             placeholder="Enter your personal Email..."
           ></TextField>
         </div>
         <div className="mt-3 px-6">
-          <TextField theme="Carbon" label="Work Email" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="Enter your work Email..."></TextField>
+          <TextField {...formik.getFieldProps("workEmail")} theme="Carbon" label="Work Email" inValid={false} name="workEmail"  type="text"  placeholder="Enter your work Email..."></TextField>
         </div>
-        <div className="mt-3 px-6">
+        {/* <div className="mt-3 px-6">
           <TextField
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
-            onBlur={() => {}}
+            {...formik.getFieldProps("phone")}
             label="Phone"
             placeholder="Enter your phone number..."
             theme="Carbon"
-            name="Phone"
+            name="phone"
             type="phone"
+            setValue={(value) => {
+              formik.setFieldValue('phone',value)
+            }}            
             phoneCountry={country}
             setPhoneCountry={setCountry}
             errorMessage=""
             inValid=""
           ></TextField>
-        </div>
+        </div> */}
         <div className="mt-3 px-6">
           <TextField
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
-            onBlur={() => {}}
+            {...formik.getFieldProps("workPhone")}
             label="Work Phone"
             placeholder="Enter your work phone number..."
+            setValue={(value) => {
+              formik.setFieldValue('workPhone',value)
+            }}               
             theme="Carbon"
             name="workPhone"
             type="phone"
@@ -92,7 +130,7 @@ const EditContactInfo = () => {
           ></TextField>
         </div>
         <div className="px-6 mt-10">
-          <Button theme="Carbon">Save Change</Button>
+          <Button onClick={submit} theme="Carbon">Save Change</Button>
         </div>
       </div>
     </>

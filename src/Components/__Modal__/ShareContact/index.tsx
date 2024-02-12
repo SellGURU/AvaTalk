@@ -83,16 +83,16 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
             </div>
-                <div className={`${theme}-ShareContact-Body`}>
-                    <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection btnInnerShadowsDark`}>
-                        <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-Vectors ${theme}-ShareContact-SmsVector`}></div>
-                    </div>
-                    <div className="text-gray-700 text-center font-semibold text-base mt-2">Share via SMS</div>
-                    <div className="w-full flex justify-center items-center mt-2 mb-6">
-                        <div className="text-sm text-gray-700 opacity-80 text-center">We will send a text message with your contact info and profile to:</div>
-                    </div>
+            <div className={`${theme}-ShareContact-Body`}>
+                <div className={`${theme}-ShareContact-VectorMainSection ${theme}-ShareContact-VectorSection btnInnerShadowsDark`}>
+                    <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-Vectors ${theme}-ShareContact-SmsVector`}></div>
                 </div>
-                <div className="px-4">
+                <div className="text-gray-700 text-center font-semibold text-base mt-2">Share via SMS</div>
+                <div className="w-full flex justify-center items-center mt-2 mb-6">
+                    <div className="text-sm text-gray-700 opacity-80 text-center">We will send a text message with your contact info and profile to:</div>
+                </div>
+            </div>
+            <div className="px-4">
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
                             <label className="Carbon-TextField-label ">

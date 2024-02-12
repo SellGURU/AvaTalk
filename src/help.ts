@@ -165,7 +165,6 @@ const sendToApi = (chats: Array<chat>, setChats: (chats: Array<chat>) => void, t
 const reolveJsonToObject = (jsonuser: string) => {
   const jsonparse = JSON.parse(jsonuser);
   if (jsonparse) {
-    console.log(jsonparse);
     return resolveBoxsJson(jsonparse.boxs);
   }
   return [];
@@ -182,6 +181,8 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
         return new GalleryBox(item.title, item.contents);
       case "SocialBox":
         return new SocialBox(item.title, item.socialMedias);
+      case "LinkBox":
+        return new LinkBox(item.title, item.links);
     }
   }) as Array<Box>;
 };

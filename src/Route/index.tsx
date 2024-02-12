@@ -9,6 +9,7 @@ import { Chat, ContactsView, Profile } from "../Components";
 import { EditAiSetting, EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
+import { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
 
 const route = createHashRouter([
   {
@@ -83,6 +84,40 @@ const route = createHashRouter([
       {
         path: "/settings",
         element: <Setting></Setting>,
+        children: [
+          {
+            path: "account",
+            element: <SettingAccount></SettingAccount>,
+          },
+          {
+            path: "connectedaccount",
+            element: <SettingConnectedAccount></SettingConnectedAccount>,
+          },
+          {
+            path: "sharing",
+            element: <SettingSharing></SettingSharing>,
+          },
+          {
+            path: "service",
+            element: <SettingService></SettingService>,
+          },
+          {
+            path: "payment",
+            element: <SettingPayment></SettingPayment>,
+          },
+          {
+            path: "privacypolicy",
+            element: <SettingPrivacyPolicy></SettingPrivacyPolicy>,
+          },
+          {
+            path: "termsservice",
+            element: <SettingTermsService></SettingTermsService>,
+          },
+          {
+            path: "support",
+            element: <SettingSupport></SettingSupport>,
+          },
+        ],
         // children:[
         //   {
         //     path: ":contactId",

@@ -1,0 +1,22 @@
+.Carbon-Setting-contactText {
+  @apply leading-[24px] text-[16px] text-gray-700 mb-[6px] px-6  font-[600];
+}
+.Carbon-Setting-CardContainer {
+  @apply w-full min-h-[56px] cursor-pointer relative px-5  py-4 boxShadow-Gray borderBox-Gray rounded-[24px] mt-4
+}
+.Carbon-Setting-LogoutVector{
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url('/Carbon/logout.svg');    
+  @apply w-5 h-5 bg-cyan-500 ;
+}
+.Carbon-Setting-TickCircle {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url('/Carbon/tickCircle.svg');    
+  @apply w-6 h-6 bg-primary-color;
+}
