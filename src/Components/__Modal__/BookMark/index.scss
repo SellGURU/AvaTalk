@@ -14,6 +14,9 @@
 .react-calendar__tile {
     @apply rounded-[27px]
 }
+.react-calendar__tile--active {
+    @apply bg-primary-color #{!important};
+}
 
 .ReactModal__Content {
  @apply static #{!important};
