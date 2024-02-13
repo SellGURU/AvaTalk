@@ -19,9 +19,7 @@ const SettingCard: React.FC<CardProps> = ({ theme, content, linkTo }) => {
       <div
         onClick={() => {
           navigate(linkTo);
-        }}
-        className={`${theme}-Setting-CardContainer`}
-      >
+        }} aria-disabled={linkTo == ''? 'true': 'false'} className={`${theme}-Setting-CardContainer`} >
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <div className={`${theme}-Card-icon`} style={{ maskImage: `url(/Carbon/${content.icon})` }}></div>

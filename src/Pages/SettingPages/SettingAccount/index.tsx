@@ -1,6 +1,8 @@
-import { BackIcon } from "../../../Components"
+import { BackIcon,Select } from "../../../Components"
 
 const SettingAccount =() => {
+    // const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+    // const [isLoading, setIsLoading] = useState(false);
     return (
         <>
             <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
@@ -14,7 +16,6 @@ const SettingAccount =() => {
                             <div className="Carbon-TextField-container w-[100%]">
                                 <label className="Carbon-TextField-label ">
                                     First Name
-                                    <span className="Carbon-TextField-label-required">*</span>
                                 </label>
                                 <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
                                     <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield76297" placeholder="Enter your first name..." name="FirstName" />
@@ -25,7 +26,6 @@ const SettingAccount =() => {
                             <div className="Carbon-TextField-container w-[100%]">
                                 <label className="Carbon-TextField-label">
                                     Last Name
-                                    <span className="Carbon-TextField-label-required">*</span>
                                 </label>
                                 <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
                                     <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield42095" placeholder="Enter your last name..." name="LastName" />
@@ -55,13 +55,10 @@ const SettingAccount =() => {
                             </div>
                         </div>
                         <div className="mb-4">
-                            <div className="Carbon-TextField-container w-[100%]">
-                                <label className="Carbon-TextField-label" >Language</label>
-                                <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                                    <img className="Carbon-TextField-selectPhone-container-icon" src="./Carbon/bottomVector.svg" alt=""/>
-                                    <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="English" name="Phone" />
-                                </div>
-                            </div>
+                            <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
+  
+                            </Select>
+
                         </div>
                         <div className="mt-8 mb-4">
                             <button className="Carbon-Button-container">Save Changes</button>
