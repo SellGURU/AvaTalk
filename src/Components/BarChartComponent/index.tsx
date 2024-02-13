@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
 
 const data = [
   {
@@ -33,26 +33,24 @@ const data = [
 
 const BarChartComponent = () => {
   return (
-    <div className=" rounded-[24px] bg-gray-100 pt-10 pb-4  boxShadow-Gray">
-      <p className=" text-gray-700 leading-[21px] text-[14px] font-[500] pl-16 pb-2">Clicks per Category</p>
-      <BarChart
-        width={500}
-        height={300}
-        data={data}
-        // margin={{
-        //   top: 5,
-        //   right: 30,
-        //   left: 20,
-        //   bottom: 5,
-        // }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
-        <YAxis fontSize={12} stroke="#9CA3AF" />
-        {/* <Tooltip /> */}
-        {/* <Legend /> */}
-        <Bar dataKey="value" fill="#5048E5" radius={[4, 4, 0, 0]} />
-      </BarChart>
+    <div style={{ width: "100%", height: 300 }} className="boxShadow-Gray bg-gray-100 py-10 px-4 rounded-[24px]">
+      <p className="text-gray-700 leading-[21px] text-[14px] font-[500] pl-16 pb-2">Clicks per Category</p>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={data}
+          // margin={{
+          //   top: 5,
+          //   right: 30,
+          //   left: 20,
+          //   bottom: 5,
+          // }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
+          <YAxis fontSize={12} stroke="#9CA3AF" />
+          <Bar dataKey="value" fill="#5048E5" radius={[4, 4, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
