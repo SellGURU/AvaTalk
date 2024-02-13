@@ -118,7 +118,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                                 <div>
                                     <div className='grid grid-cols-2 mb-4 justify-between gap-x-4 gap-y-2'>
                                         {
-                                            times.map((item,index) => {
+                                            times.map((item) => {
                                                 return (
                                                     <>
                                                         <div className={`Carbon-ShareContact-CardItems`}>{item.title}</div>

@@ -15,7 +15,7 @@ interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
-  const [mode,setMode] = useState<'profile'|'review'>('profile')
+  const [mode,setMode] = useState<'profile'|'review'>(window.location.href.includes('?review=true')?'review':'profile')
   const [showBookMark,setShowBookMark] = useState(false)
   const [showShareContact,setShowShareContact] = useState(false)
   const [avatarUrl,setAvatarUrl] = useState('')
