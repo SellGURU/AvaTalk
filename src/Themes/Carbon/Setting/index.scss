@@ -20,3 +20,6 @@
   mask-image: url('/Carbon/tickCircle.svg');    
   @apply w-6 h-6 bg-primary-color;
 }
+.Carbon-Setting-CardContainer[aria-disabled ='true']{
+  @apply opacity-50
+}
