@@ -30,6 +30,10 @@ import AiAvatar from "./AiAvatar";
 import Timer from "./Timer";
 import Analytics from "./Analytics";
 import AreaChartComponent from "./AreaChartComponent";
+import PiChartComponent from "./PiChartComponent";
+import BarChartComponent from "./BarChartComponent";
+import AnalyticsSummary from "./AnalyticsSummary";
+import DatePicker from "./DatePicker";
 export {
   Profile,
   Spinners,
@@ -63,4 +67,8 @@ export {
   Timer,
   Analytics,
   AreaChartComponent,
+  PiChartComponent,
+  BarChartComponent,
+  AnalyticsSummary,
+  DatePicker,
 };
