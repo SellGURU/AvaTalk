@@ -22,3 +22,21 @@
 .ReactModal__Overlay {
     @apply flex w-full justify-center z-20 items-center #{!important};
 }
+
+.bookMarkLayoutIcon {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+//   mask-image: url('/Carbon/logout.svg');     
+}
+
+.global-Icons {
+    mask-image: url('/Carbon/global.svg');  
+    @apply w-5 h-5 bg-gray-500 ; 
+}
+
+.calender-Icons {
+    mask-image: url('/Carbon/calendar-2.svg');  
+    @apply w-5 h-5 bg-gray-500 ; 
+}

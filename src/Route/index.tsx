@@ -8,8 +8,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Chat, ContactsView, Profile } from "../Components";
 import { EditAiSetting, EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
+import AnalyticsPage from "../Pages/AnalyticsPage";
 import { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
-
 
 const route = createHashRouter([
   {
@@ -70,6 +70,16 @@ const route = createHashRouter([
             element: <ContactPage />,
           },
         ],
+      },
+      {
+        path: "/anaylitics",
+        element: <AnalyticsPage></AnalyticsPage>,
+        // children: [
+        //   {
+        //     path: ":contactId",
+        //     element: <ContactPage />,
+        //   },
+        // ],
       },
       {
         path: "/settings",

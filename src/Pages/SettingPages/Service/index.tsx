@@ -34,10 +34,12 @@ const SettingService =() => {
                             </div>
                         </div>
                     </div>
-                    <div className="px-6 mb-4 flex flex-col Carbon-Setting-CardContainer ps-5 ">
+                    <div className="px-6 mb-4 flex items-center Carbon-Setting-CardContainer ps-5 ">
+                        <span className="w-6 h-6 mr-3 cursor-pointer relative borderBox-Gray btnInnerShadowsDark rounded-full"></span>
                         Annually
                     </div>
-                    <div className="px-6 mb-4 flex flex-col Carbon-Setting-CardContainer ps-5 ">
+                    <div className="px-6 mb-4 flex items-center Carbon-Setting-CardContainer ps-5 ">
+                        <span className="w-6 h-6 mr-3 cursor-pointer relative borderBox-Gray btnInnerShadowsDark rounded-full"></span>
                         Monthly
                     </div>
                     <div className="mt-8 mb-4">

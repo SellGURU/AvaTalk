@@ -6,7 +6,7 @@ import { Chat } from "./Api";
 
 const resolveMenuFromRoute = () => {
   // console.log(window.location.hash.replace('#/','').split('/')[0])
-  switch (window.location.hash.replace("#/", "").replace('?splash=false','').split("/")[0]) {
+  switch (window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0]) {
     case "":
       return "profile";
     case "edit":
@@ -26,7 +26,7 @@ const resolveNavigation = (item: MenuType, navigate: (route: string) => void) =>
     case "settings":
       return navigate("/settings");
     case "status":
-      return navigate("/");
+      return navigate("/anaylitics");
   }
 };
 const useConstructor = (callBack = () => {}) => {
@@ -50,8 +50,8 @@ const boxProvider = (box: any) => {
       return Object.assign(new AboutBox("simple", ""), box);
     }
     case "GalleryBox": {
-      return Object.assign(new GalleryBox("simple",[]), box);
-    }    
+      return Object.assign(new GalleryBox("simple", []), box);
+    }
     default: {
       return Object.assign(new Box("simple"), box);
     }
@@ -125,67 +125,65 @@ const generateSlugId = () => {
   return slugId;
 };
 
-const sendToApi = (chats:Array<chat>,setChats:(chats:Array<chat>) => void,text:string,onresolve:(res:any) => void,oncatch:() => void) => {
-    const aiChats = chats.filter((item) => item.from == 'Ai')
-    const newChat:chat = {
-      from:'user',
-      text:text,
-      instanceid:'',
-      audio_file:'',
-      currentconverationid:''  
-    }
-    setChats([...chats,newChat])
-    chats.push(newChat)
-    Chat.flow({
-      "text":text,
-      "language":"English",
-      "message_key":"",
-      "apikey":"0e218a19f41b4eb689003fa634889a19",
-      "is_silent":false,
-      "getcurrentconvesationid":aiChats.length > 0 ? aiChats[aiChats.length -1].currentconverationid : 1      
-    }).then(res => {
-      setChats([...chats,{
-        from:'Ai',
-        text:res.answer.answer,
-        audio_file:res.answer.audio_file,
-        instanceid:res.instanceid,
-        currentconverationid:res.currentconverationid
-      }])
-      onresolve(res)
-    }).catch(() => {
-        oncatch()
-    })    
-}
+const sendToApi = (chats: Array<chat>, setChats: (chats: Array<chat>) => void, text: string, onresolve: (res: any) => void, oncatch: () => void) => {
+  const aiChats = chats.filter((item) => item.from == "Ai");
+  const newChat: chat = {
+    from: "user",
+    text: text,
+    instanceid: "",
+    audio_file: "",
+    currentconverationid: "",
+  };
+  setChats([...chats, newChat]);
+  chats.push(newChat);
+  Chat.flow({
+    text: text,
+    language: "English",
+    message_key: "",
+    apikey: "0e218a19f41b4eb689003fa634889a19",
+    is_silent: false,
+    getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
+  })
+    .then((res) => {
+      setChats([
+        ...chats,
+        {
+          from: "Ai",
+          text: res.answer.answer,
+          audio_file: res.answer.audio_file,
+          instanceid: res.instanceid,
+          currentconverationid: res.currentconverationid,
+        },
+      ]);
+      onresolve(res);
+    })
+    .catch(() => {
+      oncatch();
+    });
+};
 
-const reolveJsonToObject = (jsonuser:string) => {
-  const jsonparse = JSON.parse(jsonuser)
-  if(jsonparse){
-    return resolveBoxsJson(jsonparse.boxs)
+const reolveJsonToObject = (jsonuser: string) => {
+  const jsonparse = JSON.parse(jsonuser);
+  if (jsonparse) {
+    return resolveBoxsJson(jsonparse.boxs);
   }
-  return []
-}
+  return [];
+};
 
-const resolveBoxsJson = (jsonBox:Array<any>) => {
+const resolveBoxsJson = (jsonBox: Array<any>) => {
   return jsonBox.map((item) => {
     switch (item.typeName) {
-      case 'GoogleMapBox' : return new GoogleMapBox(item.title,item.location)
-      case 'AboutBox' : return new AboutBox(item.title,item.text)
-      case 'GalleryBox' : return new GalleryBox(item.title,item.contents)
-      case 'SocialBox' : return new SocialBox(item.title,item.socialMedias)
-      case 'LinkBox' : return new LinkBox(item.title,item.links)
+      case "GoogleMapBox":
+        return new GoogleMapBox(item.title, item.location);
+      case "AboutBox":
+        return new AboutBox(item.title, item.text);
+      case "GalleryBox":
+        return new GalleryBox(item.title, item.contents);
+      case "SocialBox":
+        return new SocialBox(item.title, item.socialMedias);
+      case "LinkBox":
+        return new LinkBox(item.title, item.links);
     }
-  }) as Array<Box>
-}
-export {
-    resolveMenuFromRoute,
-    resolveNavigation,
-    useConstructor,
-    boxProvider,
-    getDragAfterElement,
-    dragStart,
-    dragEnd,
-    dragOver,
-    generateSlugId,
-    sendToApi,
-    reolveJsonToObject
-}
+  }) as Array<Box>;
+};
+export { resolveMenuFromRoute, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };

@@ -19,7 +19,7 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
     {
       name: "Connected Accounts",
       icon: "connected.svg",
-      link: "connectedaccount",
+      link: "",
     },
     {
       name: "Sharing",
@@ -34,7 +34,7 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
     {
       name: "payment-subscription",
       icon: "payment.svg",
-      link: "payment",
+      link: "",
     },
     {
       name: "Privacy Policy",
