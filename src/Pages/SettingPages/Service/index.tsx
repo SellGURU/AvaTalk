@@ -1,16 +1,24 @@
-import { BackIcon } from "../../../Components"
+import { Button } from "symphony-ui"
+import { Outlet, useNavigate } from "react-router-dom"
 
 const SettingService =() => {
+    const navigate = useNavigate();
+
     return (
         <>
-            <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
-                <div className="relative top-4">
-                    <BackIcon title="Your Service" theme="Carbon"></BackIcon>
+        <div className={`Carbon-ChatDetails-container`}>
+            <Outlet></Outlet>
+            <div className="flex px-6 items-center space-x-4 absolute  top-8">
+                <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
+                    <div className={`Carbon-back-Button-vector`}></div>
+                </Button>
+                <p className={`Carbon-ChatDetails-title`}>Your Service</p>
+            </div>            
 
-                </div>
-                <div className="mt-[120px] hiddenScrollBar h-full ">
+            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+                <div className="">
                     <div className="flex flex-col justify-center items-center">
-                        <img className={`Carbon-Splash-SplashIcon w-36 h-14 mb-6`} src="/Carbon/splashImage.svg" alt="" />
+                        <img className={`Carbon-Setting-logo`} src="/Carbon/splashImage.svg" alt="" />
                         <p className="mb-4">You’re using our free plan</p>
                         <p className="text-gray-500 mb-2">Unlock the full networking experience with upgrade features</p>
                     </div>
@@ -47,6 +55,7 @@ const SettingService =() => {
                     </div>
                 </div>
             </div>
+        </div>
         </>
     )
 }

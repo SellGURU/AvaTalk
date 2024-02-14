@@ -30,6 +30,10 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
               <div>Of course! I am Farzin Azami. the CoFounder of Codie. How can I help you?</div>
               <Button theme="Carbon" data-mode="ChatDetails-question-button">Can you introduce yourself?</Button>
               <div>Of course! I am Farzin Azami. the CoFounder of Codie. How can I help you?</div>
+              <Button theme="Carbon" data-mode="ChatDetails-question-button">Can you introduce yourself?</Button>
+              <div>Of course! I am Farzin Azami. the CoFounder of Codie. How can I help you?</div>
+              <Button theme="Carbon" data-mode="ChatDetails-question-button">Can you introduce yourself?</Button>
+              <div>Of course! I am Farzin Azami. the CoFounder of Codie. How can I help you?</div>
             </div>
                 
           </div>
