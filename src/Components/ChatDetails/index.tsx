@@ -19,7 +19,7 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
                 <p className={`${theme}-ChatDetails-title`}>User0215784515</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
               <div className="text-center mb-1">12 Jan 2024</div>
               
               <Button theme="Carbon" data-mode="ChatDetails-question-button">Can you introduce yourself?</Button>              

@@ -16,7 +16,7 @@ const SettingSupport =() => {
                 <p className={`Carbon-ChatDetails-title`}>Support</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <p className="mb-4 ">Get in touch with us! Have any questions? Let us know, we're here to help!</p>
                 <div className="mb-4 text-left">
                     <TextField onBlur={() => {}} onChange={() =>{}}  value="" name="Name"  theme="Carbon" label="Name" inValid={false}  type="text" placeholder="Enter your full name..."></TextField>

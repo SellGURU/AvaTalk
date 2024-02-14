@@ -15,7 +15,7 @@ const SettingSharing =() => {
                 <p className={`Carbon-ChatDetails-title`}>Sharing</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="px-6 ">
                     <div className="Carbon-Edit-title">Select Sharing Mode</div>
                     <div className="px-6 mt-24 Carbon-Setting-CardContainer flex items-center gap-2 text-justify">

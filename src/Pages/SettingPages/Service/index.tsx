@@ -15,7 +15,7 @@ const SettingService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Service</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-[-webkit-fill-available] overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`Carbon-Setting-logo`} src="/Carbon/splashImage.svg" alt="" />

@@ -16,7 +16,7 @@ import ContactItem from "../ContactItem";
 // }
 const ContactList = ({ data, theme }: { data: Contact[]; theme: string | undefined }) => {
   return (
-    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
+    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-dvh pb-[220px]">
       {data.map((items, index) => (
         <ContactItem theme={theme} key={index} data={items} />
       ))}
