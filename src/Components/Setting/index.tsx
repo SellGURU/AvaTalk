@@ -57,7 +57,7 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
     
       <div className={`Carbon-ContactsView-Container`}>
         <Outlet></Outlet>
-        <p className={`${theme}-Edit-title px-6 pb-[6px] mt-3`}>Setting</p>
+        <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
         <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll pb-[300px] ">
           {settingCards.map((item) => {
             return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>
