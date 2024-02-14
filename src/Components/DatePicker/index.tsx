@@ -17,9 +17,8 @@ const DatePicker = () => {
         </div> */}
       <div className=" h-[44px] flex justify-center  bg-slate-100 rounded-[21px] w-4/6  boxShadow-Gray">
         <div className="h-full flex items-center justify-start">
-          <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 flex " alt="" />
+          <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 " alt="" />
         </div>
-
         <Litepicker
           className="bg-slate-100 "
           value={day}
@@ -44,7 +43,7 @@ const DatePicker = () => {
             autoApply: false,
             format: "YYYY-MM-DD",
             singleMode: false,
-            numberOfColumns: 2,
+            numberOfColumns: 1,
             numberOfMonths: 2,
             showWeekNumbers: true,
             dropdowns: {
