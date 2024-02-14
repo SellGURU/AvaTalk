@@ -33,17 +33,17 @@ const data = [
 
 const BarChartComponent = () => {
   return (
-    <div style={{ width: "100%", height: 300 }} className="boxShadow-Gray bg-gray-100 py-10 px-4 rounded-[24px]">
-      <p className="text-gray-700 leading-[21px] text-[14px] font-[500] pl-16 pb-2">Clicks per Category</p>
+    <div style={{ width: "100%", height: 300 }} className="boxShadow-Gray bg-gray-100 pt-[20px] pb-10 px-2 rounded-[24px]">
+      <p className="text-gray-700 leading-[21px] text-[14px] font-[600]  pb-2">Clicks per Category</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          // margin={{
-          //   top: 5,
-          //   right: 30,
-          //   left: 20,
-          //   bottom: 5,
-          // }}
+          margin={{
+            top: 10,
+            right: 10,
+            left: -30,
+            bottom: 0,
+          }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
