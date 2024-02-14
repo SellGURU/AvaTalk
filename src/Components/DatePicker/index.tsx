@@ -15,13 +15,13 @@ const DatePicker = () => {
           </div>
        
         </div> */}
-      <div className=" h-[44px] flex justify-center  bg-slate-100 rounded-[21px] w-8/12  boxShadow-Gray">
-        <div className="h-full flex items-center">
+      <div className=" h-[44px] flex justify-center  bg-slate-100 rounded-[21px] w-4/6  boxShadow-Gray">
+        <div className="h-full flex items-center justify-start">
           <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 flex " alt="" />
         </div>
 
         <Litepicker
-          className="bg-slate-100"
+          className="bg-slate-100 "
           value={day}
           // onChange={(value) => {
           //   setDay(value);
@@ -57,7 +57,7 @@ const DatePicker = () => {
           //   className="block w-56 "
         />
       </div>
-      <div className=" w-4/12">
+      <div className=" w-2/6">
         <Button theme="Carbon">
           <div className="space-x-1 flex items-center">
             <img src="../../../Carbon/export.svg" alt="" />

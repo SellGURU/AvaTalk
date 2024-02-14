@@ -80,9 +80,9 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
 
                     <div className='mt-4'>
                         <Calendar formatShortWeekday={(_locale, date) => days[date.getDay()]} onChange={() => {
-                            setTimeout(() => {
-                                setStep(2)
-                            }, 1000);
+                            // setTimeout(() => {
+                            //     setStep(2)
+                            // }, 1000);
                         }} value={new Date()} />
                     </div>
                     <div className='w-full mt-[27px] px-4'>

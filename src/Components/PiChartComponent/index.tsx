@@ -11,9 +11,9 @@ const COLORS = ["#ad97ea", "#855CF8", "#000000", "#263238"];
 
 const PiChartComponent = () => {
   return (
-    <div className="rounded-[24px] bg-gray-100 pt-10 pb-4 px-4 flex flex-col justify-center boxShadow-Gray">
-      <p className="text-gray-700 leading-[21px] text-[14px] font-[500] pl-16 pb-2">Type of Views</p>
-      <ResponsiveContainer width="100%" height={400}>
+    <div style={{ width: "100%", height: 300 }} className="rounded-[24px] bg-gray-100 pt-[20px]  px-4 flex flex-col justify-center boxShadow-Gray">
+      <p className="text-gray-700 leading-[21px] text-[14px] font-[600]  ">Type of Views</p>
+      <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Legend layout="vertical" verticalAlign="top" align="right" />
           <Pie startAngle={-270} data={data} cx="50%" cy="50%" labelLine={false} fill="#8884d8" dataKey="value">
