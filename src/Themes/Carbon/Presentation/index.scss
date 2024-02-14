@@ -41,7 +41,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;    
-    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2 borderBox-Gray btnInnerShadowsDark;
+    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2  btnInnerShadowsDark;
 }
 .Carbon-Presentation-CallVector{
     mask-image: url(/Carbon/callVector.svg);

@@ -1,12 +1,12 @@
 .Carbon-ContactDetails-VectorSection {
-  @apply w-10 h-10 p-2 rounded-full cursor-pointer;
+  @apply w-10 h-10 p-2 rounded-full cursor-pointer btnInnerShadowsDark;
 }
 .Carbon-ContactDetails-Vectors {
   mask-size: 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-7 h-7 bg-slate-400;
+  @apply w-7 h-7 bg-slate-400 ;
 }
 .Carbon-ContactDetails-phoneIcon {
   mask-image: url(/Carbon/call.svg);
@@ -62,7 +62,7 @@
   @apply flex justify-center items-center;
 }
 .Carbon-ContactDetails-ActiveVectors {
-  @apply bg-primary-color;
+  @apply bg-primary-color ;
 }
 
 .Carbon-ContactDetails-textItem {

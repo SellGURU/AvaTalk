@@ -15,7 +15,7 @@ interface DataProps {
 const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
 
   return (
-    <div className=" w-full overflow-y-scroll hiddenScrollBar mt-4 h-[-webkit-fill-available] px-6 pb-[220px]">
+    <div className=" w-full overflow-y-scroll hiddenScrollBar mt-4 h-dvh px-6 pb-[220px]">
       {data.map((items, index) => (
         <ChatItem theme={theme} key={index} data={items} />
       ))}

@@ -85,7 +85,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                             }, 1000);
                         }} value={new Date()} />
                     </div>
-                    <div className='w-full mt-[27px]'>
+                    <div className='w-full mt-[27px] px-4'>
                         <div className='flex justify-start'>
                             <img src="./Carbon/global.svg" alt="" />
                             <div className='text-sm font-medium text-gray-700 ml-2'>Time Zone</div>
@@ -102,7 +102,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             {
                 step == 2 ?
                     <>
-                        <div className='w-full mt-[27px]'>
+                        <div className='w-full mt-[27px] px-4'>
                             <div className='flex justify-start'>
                                 <img src="./Carbon/global.svg" alt="" />
                                 <div className='text-sm font-medium text-gray-700 ml-2'>Time Zone</div>
@@ -140,7 +140,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             {
                 step == 3 ?
                     <>
-                        <div className='w-full mt-[27px]'>
+                        <div className='w-full mt-[27px] px-4'>
                             <div>
                                 <div className='flex justify-start items-center mb-2'>
                                     <div className='bookMarkLayoutIcon global-Icons ' />

@@ -47,7 +47,9 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       </div>
       <div className="h-screen flex flex-col items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
-          <img src={contact?.photo} alt={contact?.lastName} />
+          <div className="borderBox-Gray boxShadow-Gray rounded-full">
+            <img src={contact?.photo} alt={contact?.lastName} />
+          </div>
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
             <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
