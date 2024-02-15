@@ -15,7 +15,7 @@ const DatePicker = () => {
           <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 " alt="" />
         </div>
         <Litepicker
-          className="bg-slate-100 block w-56 "
+          className="bg-slate-100 block w-56 pl-4  "
           value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
           onChange={(value) => {
             const [startDateString, endDateString] = value.split(" - ");

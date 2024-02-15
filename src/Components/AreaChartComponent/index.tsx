@@ -69,7 +69,7 @@ const AreaChartComponent = () => {
           <XAxis dataKey="name" strokeWidth="0px" fontSize={12} stroke="#9CA3AF" />
           <YAxis fontSize={12} stroke="#9CA3AF" />
           <Tooltip />
-          <Area type="monotone" dataKey="view" stroke="#8884d8" fill="#8884d8" />
+          <Area type="monotone" dataKey="view" stroke="#6D28D9" fill="#6D28D9" />
         </AreaChart>
       </ResponsiveContainer>
     </div>
