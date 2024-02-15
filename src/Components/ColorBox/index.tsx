@@ -13,11 +13,11 @@ const ColorBox = () => {
     <div>
       <p className="leading-[20px] text-[13px] mb-[4px]  ml-6 font-medium text-gray-700">Color</p>
       <div className={` boxShadow-Gray flex flex-wrap justify-center  bg-gray-100 rounded-[27px]  w-full`}>
-        <div className="py-[21px]">
+        <div className="py-[21px] px-3">
           {/* First Row */}
-          <div className="flex ">
+          <div className="flex gap-[6px]">
             {colors.slice(0, 8).map((color, index) => (
-              <div key={index} className={`relative w-8 h-8 mr-[6px] mb-2 rounded-full cursor-pointer `} style={{ backgroundColor: color }} onClick={() => handleCircleClick(color)}>
+              <div key={index} className={`relative w-8 h-8 mb-2 rounded-full cursor-pointer `} style={{ backgroundColor: color }} onClick={() => handleCircleClick(color)}>
                 {selectedColor === color && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <img src="../../../public/Carbon/checkMark.svg" alt="" />
@@ -28,9 +28,9 @@ const ColorBox = () => {
           </div>
 
           {/* Second Row */}
-          <div className="flex ">
+          <div className="flex gap-[6px]">
             {colors.slice(8).map((color, index) => (
-              <div key={index} className={`relative w-8 h-8 mr-[6px]  rounded-full cursor-pointer `} style={{ backgroundColor: color }} onClick={() => handleCircleClick(color)}>
+              <div key={index} className={`relative w-8 h-8  rounded-full cursor-pointer `} style={{ backgroundColor: color }} onClick={() => handleCircleClick(color)}>
                 {selectedColor === color && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <img src="../../../public/Carbon/checkMark.svg" alt="" />

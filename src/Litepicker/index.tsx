@@ -47,6 +47,7 @@ function Litepicker(props: LitepickerProps) {
   }, [props.value]);
 
   const { options, value, onChange, getRef, ...computedProps } = props;
+  console.log(options, value, onChange, getRef);
   return (
     <input
       ref={litepickerRef}

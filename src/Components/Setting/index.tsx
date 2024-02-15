@@ -54,15 +54,13 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
   ]);
   return (
     <>
-      <div className={`Carbon-ContactsView-Container  relative`}>
+    
+      <div className={`Carbon-ContactsView-Container`}>
         <Outlet></Outlet>
-        <div className="flex px-6 items-center justify-center space-x-4 absolute h-10 top-8">
-          <p className={`${theme}-Edit-title`}>Setting</p>
-        </div>
-
-        <div className="px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] ">
+        <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
+        <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll pb-[300px] ">
           {settingCards.map((item) => {
-            return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>;
+            return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}
           <div className="mt-5 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>

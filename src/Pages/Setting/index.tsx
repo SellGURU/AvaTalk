@@ -3,7 +3,7 @@ import { Setting as SettingComponent } from "../../Components";
 const Setting = () => {
   return (
     <>
-      <SettingComponent theme="Carbon"></SettingComponent>;
+      <SettingComponent theme="Carbon"></SettingComponent>
     </>
   ) 
 };
