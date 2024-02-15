@@ -39,7 +39,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   if (isLoading) return <p></p>;
   return (
     <div>
-      <div className="flex items-center space-x-4 absolute  top-8">
+      <div className="flex items-center space-x-4 absolute px-6 top-8">
         <Button onClick={() => navigate(-1)} theme="Carbon-back">
           <div className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}></div>
         </Button>

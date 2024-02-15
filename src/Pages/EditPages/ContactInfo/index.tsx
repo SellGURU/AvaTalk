@@ -69,7 +69,7 @@ const EditContactInfo = () => {
   }
   return (
     <>
-      <div className=" absolute  hiddenScrollBar  h-dvh px-6 pb-[100px] hiddenScrollBar overflow-y-scroll w-full hiddenScrollBar  top-[30px] bg-white z-[12]">
+      <div className=" absolute  hiddenScrollBar  h-dvh pb-[100px] hiddenScrollBar overflow-y-scroll w-full hiddenScrollBar  top-[30px] bg-white z-[12]">
         <BackIcon title="Contact Info" theme="Carbon"></BackIcon>
         <div className="mt-24 px-6">
           <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title" inValid={false} name="job"  type="text"  placeholder="Enter your job title..."></TextField>

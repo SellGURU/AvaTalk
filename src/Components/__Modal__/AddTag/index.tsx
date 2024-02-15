@@ -36,18 +36,18 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
         isOpen={isOpen}
         onAfterOpen={onAfterOpen}
         onRequestClose={onClose}
-        style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "450px", background: "rgba(255, 255, 255, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+        style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
         contentLabel="Example Modal"
       >
         <>
-          <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
-            <div className="p-5">
-              <div className="flex justify-between items-center">
-                <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Tag</div>
-                <Button onClick={onClose} theme="Carbon-back">
-                  <div className={`${theme}-Profile-closeIcon`}></div>
-                </Button>
-              </div>
+          <div className="flex w-full justify-between items-center">
+            <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Tag</div>
+            <Button onClick={onClose} theme="Carbon-back">
+              <div className={`${theme}-Profile-closeIcon`}></div>
+            </Button>
+          </div>
+          {/* <div className="h-[65vh] hiddenScrollBar overflow-y-scroll"> */}
+            <div>
               <div className="my-4">
                 <TextField value="" onChange={() => {}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
               </div>
@@ -93,7 +93,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
                 </Button>
               </div>
             </div>
-          </div>
+          {/* </div> */}
         </>
       </Modal>
     </>

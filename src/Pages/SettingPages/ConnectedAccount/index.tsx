@@ -4,8 +4,8 @@ const SettingConnectedAccount =() => {
 
     return (
         <>
-            <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
-                <div className="relative top-4">
+            <div className=" w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+                <div className=" top-4">
                     <BackIcon title="Connected Accounts" theme="Carbon"></BackIcon>
 
                 </div>
