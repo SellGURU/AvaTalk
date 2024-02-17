@@ -1,0 +1,13 @@
+.Carbon-Analytics-container {
+  @apply py-20 overflow-y-scroll hiddenScrollBar mt-4 h-screen px-4;
+}
+
+.Carbon-Analytics-text {
+  @apply text-gray-700 leading-[24px] text-[16px] font-[600] mb-[20px];
+}
+.Carbon-Analytics-divider1 {
+  @apply mb-6;
+}
+.Carbon-Analytics-divider2 {
+  @apply mb-4;
+}
