@@ -174,7 +174,70 @@ const useMoch = () => {
       personlEmail:'',
       workEmail:'',
       workPhone:''
-    }
+    },
+    boxs:[
+    {
+      title: "Social",
+      typeName: "SocialBox",
+      socialMedias: [
+        {
+          type: "Linkedin",
+          value: "dsdsdsd",
+        },
+        {
+          type: "Instagram",
+          value: "dsdsdsdsxs",
+        },
+        {
+          type: "Youtube",
+          value: "dsdsdsdsxs",
+        },
+        {
+          type: "Twitter/ X",
+          value: "dsdsdsdsxs",
+        },
+        {
+          type: "Facebook",
+          value: "dsdsdsdsxs",
+        },
+      ],
+    },
+    {
+      title: "Links",
+      typeName: "LinkBox",
+      links: [
+        {
+          url: "https://web-codie.vercel.app/#/",
+        },
+        {
+          url: "https://web-codie.vercel.app/#/",
+        },
+      ],
+    },
+    {
+      title: "About me",
+      typeName: "AboutBox",
+      text: "Creating has always been fascinating to me and I have found it in design. As a designer, I am always trying to create or improve a more useful and purposeful user experience to make it more profitable for businesses.",
+    },
+    {
+      title: "Gallery",
+      typeName: "GalleryBox",
+      contents:[
+        {
+            original: "https://picsum.photos/id/1018/1000/600/",
+            thumbnail: "https://picsum.photos/id/1018/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1015/1000/600/",
+            thumbnail: "https://picsum.photos/id/1015/250/150/",
+        },
+        {
+            original: "https://picsum.photos/id/1019/1000/600/",
+            thumbnail: "https://picsum.photos/id/1019/250/150/",
+        },    
+      ]
+    },      
+    ]
   })
 };
 
