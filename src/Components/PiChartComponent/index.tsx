@@ -13,8 +13,10 @@ const initialData: DataItem[] = [
   { name: "Email", value: 300, color: "#000000" },
   { name: "SMS", value: 200, color: "#263238" },
 ];
-
-const PiChartComponent = () => {
+interface Props {
+  theme?: string;
+}
+const PiChartComponent: React.FC<Props> = ({ theme }) => {
   const [data, setData] = useState<DataItem[]>(initialData);
   const [legendItems, setLegendItems] = useState<boolean[]>(initialData.map(() => true));
 
@@ -28,10 +30,10 @@ const PiChartComponent = () => {
   };
 
   const renderLegend = () => (
-    <ul className="legend">
+    <ul>
       {initialData.map((entry, index) => (
         <li
-          className="cursor-pointer flex items-center space-x-2"
+          className={`${theme}-PiChartComponent-listItem `}
           key={`legend-${index}`}
           onClick={() => handleLegendClick(index)}
           style={{ textDecoration: legendItems[index] ? "" : "line-through", color: entry.color }}
@@ -44,8 +46,8 @@ const PiChartComponent = () => {
   );
 
   return (
-    <div style={{ width: "100%", height: 300 }} className="rounded-[24px] bg-gray-100 pt-[20px] px-4 flex flex-col justify-center boxShadow-Gray">
-      <p className="text-gray-700 leading-[21px] text-[14px] font-[600]">Type of Views</p>
+    <div className={`${theme}-PiChartComponent-container`}>
+      <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />

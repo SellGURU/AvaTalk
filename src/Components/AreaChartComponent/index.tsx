@@ -51,10 +51,13 @@ const data = [
   },
 ];
 
-const AreaChartComponent = () => {
+interface Props {
+  theme?: string;
+}
+const AreaChartComponent: React.FC<Props> = ({ theme }) => {
   return (
-    <div style={{ width: "100%", height: 300 }} className="rounded-[24px] bg-gray-100 pt-[20px] pb-10 px-2  justify-center boxShadow-Gray">
-      <p className="text-gray-700 leading-[21px] text-[14px] font-[600]   pb-2">Page Views</p>
+    <div className={`${theme}-AreaChartComponent-container`}>
+      <p className={`${theme}-AreaChartComponent-text`}>Page Views</p>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
@@ -65,11 +68,11 @@ const AreaChartComponent = () => {
             bottom: 0,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <XAxis dataKey="name" strokeWidth="0px" fontSize={12} stroke="#9CA3AF" />
           <YAxis fontSize={12} stroke="#9CA3AF" />
           <Tooltip />
-          <Area type="monotone" dataKey="view" stroke="#6D28D9" fill="#6D28D9" />
+          <Area type="monotone" dataKey="view" stroke="#6D28D9" opacity={0.5} fill="#6D28D9" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

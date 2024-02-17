@@ -1,23 +1,27 @@
+import React from "react";
 import { AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, PiChartComponent } from "..";
 
-const Analytics = () => {
+interface Props {
+  theme?: string;
+}
+const Analytics: React.FC<Props> = ({ theme }) => {
   return (
-    <div className="  py-20 overflow-y-scroll hiddenScrollBar mt-4 h-screen px-4">
-      <p className="text-gray-700 leading-[24px] text-[16px] font-[600] mb-[20px]">Analytics</p>
-      <div className="mb-6">
+    <div className={`${theme}-Analytics-container`}>
+      <p className={`${theme}-Analytics-text`}>Analytics</p>
+      <div className={`${theme}-Analytics-divider1`}>
         <DatePicker />
       </div>
-      <div className="mb-4">
-        <AnalyticsSummary />
+      <div className={`${theme}-Analytics-divider2`}>
+        <AnalyticsSummary theme={theme} />
       </div>
-      <div className="mb-4">
-        <AreaChartComponent />
+      <div className={`${theme}-Analytics-divider2`}>
+        <AreaChartComponent theme={theme} />
       </div>
-      <div className="mb-4">
-        <PiChartComponent />
+      <div className={`${theme}-Analytics-divider2`}>
+        <PiChartComponent theme={theme} />
       </div>
       <div>
-        <BarChartComponent />
+        <BarChartComponent theme={theme} />
       </div>
     </div>
   );

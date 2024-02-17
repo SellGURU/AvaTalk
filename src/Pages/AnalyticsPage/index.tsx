@@ -3,7 +3,7 @@ import Analytics from "../../Components/Analytics";
 const AnalyticsPage = () => {
   return (
     <>
-      <Analytics />
+      <Analytics theme="Carbon" />
     </>
   );
 };
