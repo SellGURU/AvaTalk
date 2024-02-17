@@ -163,6 +163,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           <div>
             <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName}</h1>
             <p className={`${theme}-Profile-SubTitle`}>{shareUser.information?.job}</p>
+            <p className={`${theme}-Profile-SubTitle`}>{shareUser.information?.company}</p>
           </div>
 
           {mode == 'profile' ?
