@@ -158,6 +158,24 @@ const useMoch = () => {
     "message_key": "",
     "resources ": []
   });
+  Api.post('/share',{
+    information:{
+      firstName:'Farzin',
+      lastName:'Azami',
+      phone:'',
+      job:'',
+      company:'',
+      location:{
+        lat:20,
+        lng:33,
+      },
+      imageurl:'',
+      banelImage:'',
+      personlEmail:'',
+      workEmail:'',
+      workPhone:''
+    }
+  })
 };
 
 export default useMoch;

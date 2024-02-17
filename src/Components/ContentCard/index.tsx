@@ -8,7 +8,7 @@ interface ContentCardProps {
   item:Box
   children?: React.ReactNode;
   setAllowDrag?: (action:boolean) => void;
-  mod?: 'profile'|'review'
+  mod?: 'profile'|'review'|'share'
 }
 const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => {
   const [activeDrag,setActiveDrag] = useState(false)
