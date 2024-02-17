@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
 
 const data = [
   {
@@ -30,11 +30,13 @@ const data = [
     value: 420,
   },
 ];
-
-const BarChartComponent = () => {
+interface Props {
+  theme?: string;
+}
+const BarChartComponent: React.FC<Props> = ({ theme }) => {
   return (
-    <div style={{ width: "100%", height: 300 }} className="boxShadow-Gray bg-gray-100 pt-[20px] pb-10 px-2 rounded-[24px]">
-      <p className="text-gray-700 leading-[21px] text-[14px] font-[600]  pb-2">Clicks per Category</p>
+    <div className={`${theme}-BarChartComponent-container`}>
+      <p className={`${theme}-BarChartComponent-text`}>Clicks per Category</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -45,9 +47,10 @@ const BarChartComponent = () => {
             bottom: 0,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
           <YAxis fontSize={12} stroke="#9CA3AF" />
+          <Tooltip cursor={false} />
           <Bar dataKey="value" fill="#5048E5" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
