@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Calendar from 'react-calendar';
 import Modal from 'react-modal';
 import { Button } from 'symphony-ui';
 import './index.scss';
 import { useState } from 'react';
 import { BackIcon, TextArea, TextField } from '../..';
+import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
 
 interface BookMarkProps {
     isOpen : boolean
@@ -41,6 +43,9 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             title:'12:30 pm'
         }                                                           
     ])
+    const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+    )    
     const [time,selectTime] = useState<any>(null)
     const [day,selectedDay] = useState(new Date())
     return (
@@ -80,7 +85,21 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             </div>
             {step == 1 ?
                 <>
+                    <div className='w-full mt-[27px] px-4'>
+                        {/* <div className='flex justify-start'>
+                            <img src="./Carbon/global.svg" alt="" />
+                            <div className='text-sm font-medium text-gray-700 ml-2'>Time Zone</div>
+                        </div>
+                        <div className='mt-[8px] flex justify-between items-center'>
+                            <div className='text-gray-400 text-sm'>Eastern Time - US & Canada (3:51 pm)</div>
+                            <img className='' src="./Carbon/bottomVector.svg" alt="" />
+                        </div> */}
+                        <TimezoneSelect 
 
+                        value={selectedTimezone}
+                        onChange={setSelectedTimezone}
+                        />
+                    </div>
                     <div className='mt-4'>
                         <Calendar formatShortWeekday={(_locale, date) => days[date.getDay()]} onChange={(e) => {
                             selectedDay(e as Date)
@@ -89,16 +108,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                             }, 1000);
                         }} value={day} />
                     </div>
-                    <div className='w-full mt-[27px] px-4'>
-                        <div className='flex justify-start'>
-                            <img src="./Carbon/global.svg" alt="" />
-                            <div className='text-sm font-medium text-gray-700 ml-2'>Time Zone</div>
-                        </div>
-                        <div className='mt-[8px] flex justify-between items-center'>
-                            <div className='text-gray-400 text-sm'>Eastern Time - US & Canada (3:51 pm)</div>
-                            <img className='' src="./Carbon/bottomVector.svg" alt="" />
-                        </div>
-                    </div>
+
                 </>
             :
             undefined
@@ -107,15 +117,20 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                 step == 2 ?
                     <>
                         <div className='w-full mt-[27px] px-4'>
-                            <div className='flex justify-start'>
+                            {/* <div className='flex justify-start'>
                                 <img src="./Carbon/global.svg" alt="" />
                                 <div className='text-sm font-medium text-gray-700 ml-2'>Time Zone</div>
                             </div>
                             <div className='mt-[8px] flex justify-between items-center'>
                                 <div className='text-gray-400 text-sm'>Eastern Time - US & Canada (3:51 pm)</div>
                                 <img className='' src="./Carbon/bottomVector.svg" alt="" />
-                            </div>
-                        </div>              
+                            </div> */}
+                            <TimezoneSelect 
+
+                            value={selectedTimezone}
+                            onChange={setSelectedTimezone}
+                            />
+                        </div>           
                         <div className='border py-5 rounded-[27px] mt-5 px-4 border-white w-full'>
                             <div className='text-center text-gray-700 text-base'>Select a Time</div>
                             <div className='flex justify-center mt-4'>
