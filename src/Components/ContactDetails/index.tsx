@@ -45,10 +45,10 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </Button>
         <p className="text-gray-700 leading-[24px] text-[16px] font-[600] contactNameShadow">Contact info</p>
       </div>
-      <div className="h-screen flex flex-col items-center mt-[60px]">
+      <div className=" hiddenScrollBar h-dvh overflow-y-scroll pb-[160px] flex flex-col   items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
           <div className="borderBox-Gray boxShadow-Gray rounded-full">
-            <img src={contact?.photo} alt={contact?.lastName} />
+            <img src={contact?.photo} alt={contact?.fullName} />
           </div>
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
@@ -56,7 +56,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.firstName + ' '+ contact?.lastName}</p>
+        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className="flex items-center justify-between mb-[20px]">
           {showExhibition && (
