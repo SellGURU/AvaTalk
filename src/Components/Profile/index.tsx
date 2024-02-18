@@ -84,7 +84,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         setShareUser(shareUser)
         setShowToturial(true)
         setIsLoading(false)
-        shareUser.setBox(boxs)
+        shareUser.setBox(boxs,{isShare:true})
       })      
     }
   })

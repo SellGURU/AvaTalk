@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
+import { useAuth } from "../../hooks/useAuth";
 
 interface SettingProps {
   theme?: string;
@@ -10,6 +11,7 @@ interface SettingProps {
 
 const Setting: React.FC<SettingProps> = ({theme}) => {
   //   const navigate = useNavigate();
+  const auth =useAuth()
   const [settingCards] = useState([
     {
       name: "Your Account",
@@ -64,7 +66,7 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
           })}
           <div className="mt-5 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>
-            <p className="text-cyan-500 ms-2">Log out</p>
+            <p onClick={() =>auth.logout()} className="text-cyan-500 ms-2">Log out</p>
           </div>
         </div>
       </div>
