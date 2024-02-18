@@ -79,11 +79,12 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [shareUser,setShareUser] = useState(authContext.currentUser)
   useConstructor(() => {
     if(mode == 'share') {
-      Share.getShare(searchParams.get('user') as string ,(res) => {
+      Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
         const shareUser = new User(res.information)
         setShareUser(shareUser)
         setShowToturial(true)
         setIsLoading(false)
+        shareUser.setBox(boxs,{isShare:true})
       })      
     }
   })
