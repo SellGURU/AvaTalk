@@ -91,5 +91,8 @@ class User {
             this.syncToLocalStorage()
         }
     }
+    public resolveLink() {
+        return location.hostname+'/#/share/?user='+this.information?.firstName
+    }
 } 
 export default User

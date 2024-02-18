@@ -8,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { AnimateGroup } from 'react-animation'
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -89,36 +90,39 @@ const EditSocials = () => {
             </div>
           ) : (
             <>
-              {socials.map((item: Social, index) => {
-                return (
-                  <div className="mt-3 px-6">
-                    {index == 0 ? <div className={`Carbon-Select-label mb-1 w-full text-left`}>Social Medias</div> : undefined}
-                    <div className="Carbon-TextField-input ">
-                      <div className="w-full flex items-center justify-between">
-                        <div className="flex justify-start items-center">
-                          <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
-                          <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
-                        </div>
-                        <div className="flex justify-end gap-1 items-start">
-                          <div
-                            onClick={() => {
-                              setSelectedItem(item);
-                              setOpenNewSocial(true);
-                            }}
-                            className={`Carbon-ContactDetails-editIcon`}
-                          ></div>
-                          <div
-                            onClick={() => {
-                              deleteSocial(index);
-                            }}
-                            className={`Carbon-ContactDetails-recycleIcon`}
-                          ></div>
+              <AnimateGroup animation="popIn" durationOut="500">
+                {socials.map((item: Social, index) => {
+                  return (
+                    <div className="mt-3 px-6">
+                      {index == 0 ? <div className={`Carbon-Select-label mb-1 w-full text-left`}>Social Medias</div> : undefined}
+                      <div className="Carbon-TextField-input ">
+                        <div className="w-full flex items-center justify-between">
+                          <div className="flex justify-start items-center">
+                            <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
+                            <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
+                          </div>
+                          <div className="flex justify-end gap-1 items-start">
+                            <div
+                              onClick={() => {
+                                setSelectedItem(item);
+                                setOpenNewSocial(true);
+                              }}
+                              className={`Carbon-ContactDetails-editIcon`}
+                            ></div>
+                            <div
+                              onClick={() => {
+                                deleteSocial(index);
+                              }}
+                              className={`Carbon-ContactDetails-recycleIcon`}
+                            ></div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+
+              </AnimateGroup>
             </>
           )}
           <div className="px-6 mt-3">

@@ -12,7 +12,7 @@
     @apply rounded-[27px]
 }
 .react-calendar__tile {
-    @apply rounded-[27px]
+    @apply rounded-[27px] py-3 px-2 #{!important}
 }
 .react-calendar__tile--active {
     @apply bg-primary-color #{!important};

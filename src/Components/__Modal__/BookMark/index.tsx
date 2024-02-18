@@ -41,6 +41,8 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             title:'12:30 pm'
         }                                                           
     ])
+    const [time,selectTime] = useState<any>(null)
+    const [day,selectedDay] = useState(new Date())
     return (
         <>
         <Modal
@@ -49,8 +51,9 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
             onRequestClose={() => {
                 setStep(1)
                 onClose()
+                selectTime(null)
             }}
-            style={{content:{borderRadius:'24px',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
+            style={{content:{borderRadius:'24px',width:'100%',maxWidth:'360px',maxHeight:'550px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         >
    
@@ -79,11 +82,12 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                 <>
 
                     <div className='mt-4'>
-                        <Calendar formatShortWeekday={(_locale, date) => days[date.getDay()]} onChange={() => {
-                            // setTimeout(() => {
-                            //     setStep(2)
-                            // }, 1000);
-                        }} value={new Date()} />
+                        <Calendar formatShortWeekday={(_locale, date) => days[date.getDay()]} onChange={(e) => {
+                            selectedDay(e as Date)
+                            setTimeout(() => {
+                                setStep(2)
+                            }, 1000);
+                        }} value={day} />
                     </div>
                     <div className='w-full mt-[27px] px-4'>
                         <div className='flex justify-start'>
@@ -121,16 +125,20 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                                             times.map((item) => {
                                                 return (
                                                     <>
-                                                        <div className={`Carbon-ShareContact-CardItems`}>{item.title}</div>
+                                                        <div onClick={() => {
+                                                            selectTime(item)
+                                                        }} className={` ${time?.title == item.title ? 'Carbon-ShareContact-CardItems-active':'Carbon-ShareContact-CardItems'}`}>{item.title}</div>
                                                     </>
                                                 )
                                             })
                                         }
 
                                     </div>
-                                    <Button onClick={() => {
-                                        setStep(3)
-                                    }} theme='Carbon'>Continue</Button>
+                                    {time!= null ?
+                                        <Button onClick={() => {
+                                            setStep(3)
+                                        }} theme='Carbon'>Continue</Button>
+                                    :undefined}
                                 </div>
                             </div>
                         </div>     
