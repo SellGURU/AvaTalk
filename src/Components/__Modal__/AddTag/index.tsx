@@ -47,52 +47,52 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
             </Button>
           </div>
           {/* <div className="h-[65vh] hiddenScrollBar overflow-y-scroll"> */}
-            <div>
-              <div className="my-4">
-                <TextField value="" onChange={() => {}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
-              </div>
-              <div>
-                <ColorBox />
-              </div>
-              <div className="mt-4">
-                <Select label="Tag" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
-                  {isLoading ? (
-                    <p></p>
-                  ) : (
-                    <ul>
-                      {contacts.map((contact) => (
-                        <li key={contact.id} className=" flex px-[20px]  h-[50px] items-center border border-white">
-                          <div
-                            onClick={() => {
-                              // Toggle selection of the contact
-                              if (selectedContacts.includes(contact.id)) {
-                                setSelectedContacts(selectedContacts.filter((id) => id !== contact.id));
-                              } else {
-                                setSelectedContacts([...selectedContacts, contact.id]);
-                              }
-                            }}
-                            className={`w-6 h-6 mr-2 cursor-pointer boxShadow-Gray  border border-white rounded-md ${selectedContacts.includes(contact.id) ? "bg-primary-color" : "bg-gray-100"}`}
-                          >
-                            {selectedContacts.includes(contact.id) && (
-                              <div className=" flex items-center justify-center">
-                                <span className="text-white">✓</span>
-                              </div>
-                            )}
-                          </div>
-                          <p className="leading-[21px] font-[400] text-[14px] text-gray-700">{contact.firstName + ' '+ contact.lastName}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Select>
-              </div>
-
-              <div className="mt-4">
-                <Button onClick={onClose} theme="Carbon">
-                  <div>Add Tag</div>
-                </Button>
-              </div>
+          <div>
+            <div className="my-4">
+              <TextField value="" onChange={() => {}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
             </div>
+            <div>
+              <ColorBox />
+            </div>
+            <div className="mt-4">
+              <Select label="Tag" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
+                {isLoading ? (
+                  <p></p>
+                ) : (
+                  <ul>
+                    {contacts.map((contact) => (
+                      <li key={contact.id} className=" flex px-[20px]  h-[50px] items-center border border-white">
+                        <div
+                          onClick={() => {
+                            // Toggle selection of the contact
+                            if (selectedContacts.includes(contact.id)) {
+                              setSelectedContacts(selectedContacts.filter((id) => id !== contact.id));
+                            } else {
+                              setSelectedContacts([...selectedContacts, contact.id]);
+                            }
+                          }}
+                          className={`w-6 h-6 mr-2 cursor-pointer boxShadow-Gray  border border-white rounded-md ${selectedContacts.includes(contact.id) ? "bg-primary-color" : "bg-gray-100"}`}
+                        >
+                          {selectedContacts.includes(contact.id) && (
+                            <div className=" flex items-center justify-center">
+                              <span className="text-white">✓</span>
+                            </div>
+                          )}
+                        </div>
+                        <p className="leading-[21px] font-[400] text-[14px] text-gray-700">{contact.fullName}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </Select>
+            </div>
+
+            <div className="mt-4">
+              <Button onClick={onClose} theme="Carbon">
+                <div>Add Tag</div>
+              </Button>
+            </div>
+          </div>
           {/* </div> */}
         </>
       </Modal>

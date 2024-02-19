@@ -10,7 +10,7 @@ import { useConstructor } from "../../help";
 import { Auth } from "../../Api";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
-import { Tag,Contact } from "../../Types";
+import { Tag, Contact } from "../../Types";
 
 interface Props {
   theme?: string;
@@ -36,7 +36,11 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         setIsLoading(false);
       });
   });
+  const handleAddContact = (formData: Contact) => {
+    const formDataWithPhoto = { ...formData, photo: "/Acord/person.png", isExchange: true };
 
+    setContacts([...contacts, formDataWithPhoto]);
+  };
   // useConstructor(() => {
   //   setIsLoading(true);
   //   Auth.getAllContacts((res) => {
@@ -51,7 +55,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   // });
   // console.log(contacts);
   // console.log(tags);
-  const filteredContacts = contacts.filter((item) => item.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredContacts = contacts.filter((item) => item.fullName.toLowerCase().includes(searchQuery.toLowerCase()) || item.email.toLowerCase().includes(searchQuery.toLowerCase()));
   const filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,8 +107,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       )}
 
       <AddContact
+        title="Add Contact"
         theme="Carbon"
         isOpen={showAddContactModal}
+        onAddContact={handleAddContact}
         onClose={() => {
           setShowAddContactModal(false);
         }}

@@ -1,12 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
-import styles from "./ContatDetails.module.css";
+import { useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
-// import dummyData from "../../data/dummy_data";
 import { useState } from "react";
 import { Auth } from "../../Api";
-import { DeleteContact, EditContact } from "../__Modal__";
+import { AddContact, DeleteContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Contact } from "../../Types";
+import { BackIcon } from "..";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
@@ -27,8 +26,6 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     }
   });
 
-  const navigate = useNavigate();
-
   const handleShowMore = () => {
     setShowMore(true);
   };
@@ -39,16 +36,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   if (isLoading) return <p></p>;
   return (
     <div>
-      <div className="flex items-center space-x-4 absolute px-6 top-8">
-        <Button onClick={() => navigate(-1)} theme="Carbon-back">
-          <div className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}></div>
-        </Button>
-        <p className="text-gray-700 leading-[24px] text-[16px] font-[600] contactNameShadow">Contact info</p>
+      <div className="flex items-center w-full space-x-4 absolute px-6 top-8">
+        <BackIcon theme={theme} title="Contact info"></BackIcon>
       </div>
-      <div className="h-screen flex flex-col items-center mt-[60px]">
+      <div className=" hiddenScrollBar h-dvh overflow-y-scroll pb-[160px] flex flex-col   items-center mt-[60px]">
         <div className="flex items-center space-x-4 mb-[8px] -mr-9">
           <div className="borderBox-Gray boxShadow-Gray rounded-full">
-            <img src={contact?.photo} alt={contact?.lastName} />
+            <img src={contact?.photo} alt={contact?.fullName} />
           </div>
           <div className=" flex flex-col items-center space-y-[9px]">
             <div className={`${theme}-ContactDetails-importIcon`}></div>
@@ -56,7 +50,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.firstName + ' '+ contact?.lastName}</p>
+        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className="flex items-center justify-between mb-[20px]">
           {showExhibition && (
@@ -116,14 +110,24 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </Button>
         </div>
       </div>
-      <EditContact
+      {/* <EditContact
         theme="Carbon"
         contactId={contactId}
         isOpen={showEditContactModal}
         onClose={() => {
           setShowEditContactModal(false);
         }}
-      />
+      /> */}
+      <AddContact
+        title="Edit Contact"
+        onAddContact={() =>{}}
+        theme="Carbon"
+        contactId={contactId}
+        isOpen={showEditContactModal}
+        onClose={() => {
+          setShowEditContactModal(false);
+        }}      
+      ></AddContact>
       <DeleteContact
         theme="Carbon"
         contactId={contactId}

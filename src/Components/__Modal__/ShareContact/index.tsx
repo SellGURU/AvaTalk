@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Button } from 'symphony-ui';
 import { useAuth } from '../../../hooks/useAuth';
+import QRCode from 'react-qr-code';
+import { toast } from 'react-toastify';
 
 interface ShareContactProps {
     isOpen : boolean
@@ -35,7 +37,15 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             <div className={`${theme}-ShareContact-Body`}>
                 <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
-                <div className={`${theme}-ShareContact-QrCodeVector`}></div>
+                {/* <div className={`${theme}-ShareContact-QrCodeVector`}></div> */}
+                <div className={`${theme}-ShareContact-QrCodeVector`}>
+                    <QRCode
+                        size={256}
+                        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                        value={authContext.currentUser.resolveLink()}
+                        viewBox={`0 0 256 256`}
+                        />
+                </div>
                 <div className={`${theme}-ShareContact-Cards`}>
                     <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('smsSection')}}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
@@ -49,7 +59,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                         Share via Email
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems`}>
+                    <div onClick={() => {
+                        navigator.clipboard.writeText(authContext.currentUser.resolveLink())
+                        toast.success("Copied Successfully")
+                    }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-CopyVector`}></div>
                         </div>

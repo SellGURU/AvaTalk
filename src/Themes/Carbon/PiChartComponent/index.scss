@@ -1,0 +1,10 @@
+.Carbon-PiChartComponent-container {
+  @apply h-[300px] w-[100%] rounded-[24px] bg-gray-100 pt-[20px] px-4 flex flex-col justify-center boxShadow-Gray;
+}
+
+.Carbon-PiChartComponent-text {
+  @apply text-gray-700 leading-[21px] text-[14px] font-[600];
+}
+.Carbon-PiChartComponent-listItem {
+  @apply cursor-pointer flex items-center space-x-2;
+}

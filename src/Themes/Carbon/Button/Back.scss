@@ -1,20 +1,27 @@
 .Carbon-back-Button-container {
-  @apply w-10 disabled:cursor-not-allowed flex borderBox-Gray boxShadow-Gray  justify-center items-center bg-gray-100 leading-[19.36px] text-[14px] font-[500]  rounded-full h-10 #{!important};
-};
+  @apply w-10 disabled:cursor-not-allowed flex borderBox-Gray boxShadow-Gray  justify-center items-center bg-gray-100 leading-[19.36px] text-[14px] font-[500]  rounded-full h-10 #{!important}
+}
+
+.Carbon-back-Button-container:hover {
+   transform: scale(1.1)
+}
 
 .Carbon-back-Button-container-box {
-  @apply flex px-6 items-center space-x-4 absolute z-10 top-8 #{!important};
-};
+  @apply flex px-6 items-center space-x-4 absolute z-10 top-8 #{!important}
+}
 
 .Carbon-back-Button-container-box[data-mode ='modal'] {
-  @apply flex px-0 items-center space-x-4 z-10 relative top-0  #{!important};
-};
+  @apply flex px-0 items-center space-x-4 z-10 relative top-0  #{!important}
+}
+
+.Carbon-back-Button-container-box[data-mode ='gallery'] {
+  @apply flex px-0 items-center space-x-4 z-10 absolute top-[50%]  #{!important}
+}
 
 .Carbon-back-Button-container[data-mode = 'calendar'] {
   box-shadow: 2px 2px 20px 0px #6F8CB036, 2px 2px 4px 0px #728EAB1A !important;
-
   @apply h-11 w-12 #{!important};
-};
+}
 
 .Carbon-back-Button-vector{
     mask-size: 100%;
@@ -26,5 +33,5 @@
 }
 
 .Carbon-back-Button-container-disabled {
-  @apply opacity-[50%] #{!important};
+  @apply opacity-[50%] #{!important}
 }

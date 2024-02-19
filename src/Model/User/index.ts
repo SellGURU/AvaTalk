@@ -19,6 +19,10 @@ interface Location {
     lng:number
 }
 
+interface Config {
+    isShare:boolean
+}
+
 class User {
     public boxs:Array<Box> = []
 
@@ -81,9 +85,14 @@ class User {
         this.boxs = this.boxs.filter((item) => item.getTypeName() != newBox.getTypeName())
         this.syncToLocalStorage()
     }
-    public setBox(newBoxs:Array<Box>){
+    public setBox(newBoxs:Array<Box>,config?:Config){
         this.boxs = newBoxs
-        this.syncToLocalStorage()
+        if(!config?.isShare){
+            this.syncToLocalStorage()
+        }
+    }
+    public resolveLink() {
+        return location.hostname+'/#/share/?user='+this.information?.firstName
     }
 } 
 export default User
