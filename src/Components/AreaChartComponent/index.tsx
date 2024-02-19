@@ -53,7 +53,7 @@ const data = [
 
 const AreaChartComponent = () => {
   return (
-    <div style={{ width: "100%", height: 300 }} className="rounded-[24px] bg-gray-100 pt-[20px] pb-10 px-2  justify-center boxShadow-Gray">
+    <div style={{ width: "100%", height: 300 }} className="rounded-[24px] pt-[20px] pb-10 px-2  justify-center borderBox-Gray boxShadow-Gray">
       <p className="text-gray-700 leading-[21px] text-[14px] font-[600]   pb-2">Page Views</p>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart

@@ -33,7 +33,7 @@ const data = [
 
 const BarChartComponent = () => {
   return (
-    <div style={{ width: "100%", height: 300 }} className="boxShadow-Gray bg-gray-100 pt-[20px] pb-10 px-2 rounded-[24px]">
+    <div style={{ width: "100%", height: 300 }} className=" borderBox-Gray boxShadow-Gray pt-[20px] pb-10 px-2 rounded-[24px]">
       <p className="text-gray-700 leading-[21px] text-[14px] font-[600]  pb-2">Clicks per Category</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart

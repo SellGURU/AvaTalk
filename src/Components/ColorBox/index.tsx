@@ -12,7 +12,7 @@ const ColorBox = () => {
   return (
     <div>
       <p className="leading-[20px] text-[13px] mb-[4px]  ml-6 font-medium text-gray-700">Color</p>
-      <div className={` boxShadow-Gray flex flex-wrap justify-center  bg-gray-100 rounded-[27px]  w-full`}>
+      <div className={`flex flex-wrap justify-center rounded-[27px] borderBox-Gray boxsInnerShadows w-full`}>
         <div className="py-[21px] px-3">
           {/* First Row */}
           <div className="flex gap-[6px]">

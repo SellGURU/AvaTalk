@@ -2,7 +2,7 @@ import { AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, Pi
 
 const Analytics = () => {
   return (
-    <div className="  py-20 overflow-y-scroll hiddenScrollBar mt-4 h-screen px-4">
+    <div className="mt-[50px] overflow-y-scroll hiddenScrollBar h-screen px-6 py-6">
       <p className="text-gray-700 leading-[24px] text-[16px] font-[600] mb-[20px]">Analytics</p>
       <div className="mb-6">
         <DatePicker />
@@ -16,7 +16,7 @@ const Analytics = () => {
       <div className="mb-4">
         <PiChartComponent />
       </div>
-      <div>
+      <div className="mb-12">
         <BarChartComponent />
       </div>
     </div>
