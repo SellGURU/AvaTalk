@@ -20,7 +20,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
       <div className={`${theme}-Analytics-divider2`}>
         <PiChartComponent theme={theme} />
       </div>
-      <div>
+      <div className="mb-12">
         <BarChartComponent theme={theme} />
       </div>
     </div>
