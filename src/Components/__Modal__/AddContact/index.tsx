@@ -5,36 +5,27 @@ import "./index.scss";
 import { useState } from "react";
 
 import LocationPicker from "react-leaflet-location-picker";
-import { SearchBox, Select, TextArea, TextField } from "../..";
+import { Select, TextArea, TextField } from "../..";
 import { Button } from "symphony-ui";
 import { generateSlugId } from "../../../help";
-import { Tag } from "../../../Types";
+import { Contact } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
-import { GoogleMapBox } from "../../../Model";
 
-interface ContactType {
-  id: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  company: string;
-  job: string;
-  mapLocation: { lat: number | undefined; lng: number | undefined };
-  tags: Tag[];
-  note?: string;
-}
+
 
 interface AddContactProps {
   isOpen: boolean;
   onClose: () => void;
+  title:string;
+  contactId?:string;
   theme?: string;
   onAfterOpen?: () => void;
-  onAddContact: (formData: ContactType) => void;
+  onAddContact: (formData: Contact) => void;
 }
 
-const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme, onAddContact }) => {
+const AddContact: React.FC<AddContactProps> = ({ isOpen,title, onAfterOpen, onClose, theme, onAddContact }) => {
   const auth = useAuth();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Contact>({
     fullName: "",
     email: "",
     phone: "",
@@ -42,7 +33,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
     mapLocation: { lat: 0, lng: 0 },
     job: "",
     tags: [],
-    note: "",
+    id:''
   });
 
   const [pointVals, setPointVals] = useState([[auth.currentUser.information?.location.lat, auth.currentUser.information?.location.lng]]);
@@ -54,13 +45,6 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
       onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
     },
   };
-  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GoogleMapBox")[0] as GoogleMapBox;
-  if (currentBox == undefined) {
-    currentBox = new GoogleMapBox("", {
-      lat: auth.currentUser.information?.location.lat as number,
-      lan: auth.currentUser.information?.location.lng as number,
-    });
-  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -75,7 +59,6 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
     const formDataWithId = { ...formData, id, mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] } }; // Add id to formData
 
     onAddContact(formDataWithId);
-    console.log(formDataWithId);
 
     setFormData({
       fullName: "",
@@ -85,7 +68,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
       mapLocation: { lat: 0, lng: 0 },
       job: "",
       tags: [],
-      note: "",
+      id:'',
     });
     onClose();
   };
@@ -109,7 +92,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
             <div className=""></div>
             <div className="p-5">
               <div className="flex justify-between items-center">
-                <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Contact</div>
+                <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">{title}</div>
                 <Button onClick={onClose} theme="Carbon-back">
                   <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
@@ -161,9 +144,6 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
                 ></TextField>
               </div>
               <div className="mt-4">
-                <SearchBox onChange={() => {}} label="Your Location" inputHeight="44px" value="" theme="Carbon" placeholder="Search your location..." />
-              </div>
-              <div className="mt-4">
                 <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
               </div>
               <div className="mt-4">
@@ -213,11 +193,11 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, t
                   placeholder="Enter your note..."
                   textAreaHeight="136px"
                   name="note"
+                  value=""
                   onBlur={() => {}}
                   label="Note"
                   theme="Carbon"
                   onChange={handleInputChange}
-                  value={formData.note}
                 />
               </div>
               <div className="mt-4">
