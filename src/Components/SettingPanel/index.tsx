@@ -5,11 +5,11 @@ import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
 import { useAuth } from "../../hooks/useAuth";
 
-interface SettingProps {
+interface SettingPanelProps {
   theme?: string;
 }
 
-const Setting: React.FC<SettingProps> = ({theme}) => {
+const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
   //   const navigate = useNavigate();
   const auth =useAuth()
   const [settingCards] = useState([
@@ -73,4 +73,4 @@ const Setting: React.FC<SettingProps> = ({theme}) => {
     </>
   );
 };
-export default Setting;
+export default SettingPanel;
