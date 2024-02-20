@@ -10,7 +10,7 @@ import { BackIcon } from "..";
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
   const [showExhibition, setShowExhibition] = useState(true);
-  const [contact, setContact] = useState<Contact | null>(null);
+  const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
@@ -25,6 +25,34 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       });
     }
   });
+
+  const handleEditContact = (updatedContactData: Contact) => {
+    setContact(updatedContactData);
+    console.log(updatedContactData);
+    if (contactId) {
+      Auth.editContact(
+        contactId,
+        {
+          fullName: updatedContactData.fullName,
+          email: updatedContactData.email,
+          photo: updatedContactData.photo,
+          tags: updatedContactData.tags,
+          isExchange: updatedContactData.isExchange,
+          phone: updatedContactData.phone,
+          location: updatedContactData.location,
+          mapLocation: updatedContactData.mapLocation,
+          company: updatedContactData.company,
+          note: updatedContactData.note,
+          addDate: updatedContactData.addDate,
+          job: updatedContactData.job,
+        },
+        (res) => {
+          console.log(res);
+        }
+      );
+    }
+    setShowEditContactModal(false);
+  };
 
   const handleShowMore = () => {
     setShowMore(true);
@@ -94,7 +122,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-meetingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.meetDate}</p>
+                <p className={`${theme}-ContactDetails-textItem`}>{contact?.note}</p>
               </div>
               <div className="flex items-center space-x-2">
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
@@ -119,14 +147,17 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         }}
       /> */}
       <AddContact
+        mode="edit"
+        onEditContact={handleEditContact}
+        contactData={contact}
         title="Edit Contact"
-        onAddContact={() =>{}}
+        onAddContact={() => {}}
         theme="Carbon"
         contactId={contactId}
         isOpen={showEditContactModal}
         onClose={() => {
           setShowEditContactModal(false);
-        }}      
+        }}
       ></AddContact>
       <DeleteContact
         theme="Carbon"

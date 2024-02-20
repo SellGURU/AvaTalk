@@ -23,7 +23,6 @@ interface RegisterData {
   profile_pic: string | null;
 }
 
-
 // interface ContactType {
 //   name: string;
 //   email: string;
@@ -75,8 +74,13 @@ class Auth extends Api {
 
   static getContactDetails(_contactId: string, resolve: (data: Contact) => void) {
     this.post("/contactDetails", {}).then((res) => {
-      resolve(res.data)
+      resolve(res.data);
     });
+  }
+
+  static editContact(_contactId: string, data: Partial<Contact>, submit: (res: any) => void) {
+    const endpoint = "/contactDetails";
+    this.post(endpoint, data).then((res) => submit(res));
   }
 
   static getAllTags(resolve: (data: Array<Tag>) => void) {
@@ -87,10 +91,9 @@ class Auth extends Api {
 
   static getTagDetails(_tagId: string, resolve: (data: Tag) => void) {
     this.post("/tagDetails", {}).then((res) => {
-      resolve(res.data)
+      resolve(res.data);
     });
   }
 }
-
 
 export default Auth;

@@ -19,9 +19,9 @@ interface Contact {
   isExchange?: boolean;
   phone: string;
   location?: string;
-  mapLocation?: { lat: number | undefined; lng: number | undefined };
+  mapLocation: { lat: number | undefined; lng: number | undefined };
   company: string;
-  meetDate?: string;
+  note: string;
   addDate?: string;
   job: string;
 }
