@@ -55,7 +55,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
               <ColorBox />
             </div>
             <div className="mt-4">
-              <Select label="Tag" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
+              <Select label="Contacts" valueElement={<div></div>} placeholder="Select Contacts..." theme="Carbon">
                 {isLoading ? (
                   <p></p>
                 ) : (
