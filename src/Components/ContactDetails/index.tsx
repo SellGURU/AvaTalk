@@ -28,7 +28,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
 
   const handleEditContact = (updatedContactData: Contact) => {
     setContact(updatedContactData);
-    console.log(updatedContactData);
+    // console.log(updatedContactData);
     if (contactId) {
       Auth.editContact(
         contactId,
@@ -64,15 +64,15 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   if (isLoading) return <p></p>;
   return (
     <div>
-      <div className="flex items-center w-full space-x-4 absolute px-6 top-8">
+      <div className={`${theme}-ContactDetails-infoContainer`}>
         <BackIcon theme={theme} title="Contact info"></BackIcon>
       </div>
-      <div className=" hiddenScrollBar h-dvh overflow-y-scroll pb-[160px] flex flex-col   items-center mt-[60px]">
-        <div className="flex items-center space-x-4 mb-[8px] -mr-9">
-          <div className="borderBox-Gray boxShadow-Gray rounded-full">
+      <div className={`${theme}-ContactDetails-container2`}>
+        <div className={`${theme}-ContactDetails-container3`}>
+          <div className={`${theme}-ContactDetails-contactImageContainer`}>
             <img src={contact?.photo} alt={contact?.fullName} />
           </div>
-          <div className=" flex flex-col items-center space-y-[9px]">
+          <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div className={`${theme}-ContactDetails-importIcon`}></div>
             <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
@@ -80,24 +80,24 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </div>
         <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
-        <div className="flex items-center justify-between mb-[20px]">
+        <div className={`${theme}-ContactDetails-showExibitionconContainer`}>
           {showExhibition && (
-            <div className="flex items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px] bg-amber-400 ">
-              <p className="text-gray-700 leading-[20px] text-[14px] font-[500] tracking-tight">Exhibition</p>
+            <div className={`${theme}-ContactDetails-exibitionconContainer`}>
+              <p className={`${theme}-ContactDetails-exibition`}>Exhibition</p>
               <div onClick={() => setShowExhibition(false)} className={` ${theme}-ContactDetails-crossIcon  `}></div>
             </div>
           )}
 
           <Button theme="Carbon-Show">Add Tag</Button>
         </div>
-        <div className="flex flex-col space-y-3">
-          <div className="flex items-center space-x-2">
+        <div className={`${theme}-ContactDetails-container4`}>
+          <div className={`${theme}-ContactDetails-container5`}>
             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
               <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
             </div>
             <p className={`${theme}-ContactDetails-textItem`}>{contact?.phone}</p>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className={`${theme}-ContactDetails-container5`}>
             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
               <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
             </div>
@@ -106,25 +106,25 @@ const ContactDetails = ({ theme }: { theme: string }) => {
 
           {showMore && (
             <>
-              <div className="flex items-center space-x-2">
+              <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-locationIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.location}</p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-buildingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.company}</p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-meetingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.note}</p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-calendarIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
@@ -138,14 +138,6 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </Button>
         </div>
       </div>
-      {/* <EditContact
-        theme="Carbon"
-        contactId={contactId}
-        isOpen={showEditContactModal}
-        onClose={() => {
-          setShowEditContactModal(false);
-        }}
-      /> */}
       <AddContact
         mode="edit"
         onEditContact={handleEditContact}
