@@ -36,4 +36,6 @@ interface chat {
 
 type MenuType = "profile" | "contacts" | "chats" | "status" | "settings";
 
-export type { PhoneCountry, MenuType, Tag, Contact, chat };
+type SharingModType = 'Default Mode'|'Lead Mode'|'Lead Mode'
+
+export type { PhoneCountry, MenuType, Tag, Contact, chat ,SharingModType};

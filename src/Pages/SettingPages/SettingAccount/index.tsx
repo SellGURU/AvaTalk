@@ -3,13 +3,27 @@ import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
 import { useContext , useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 
+const validationSchema = Yup.object().shape({
+});
 
 const SettingAccount =() => {
     const navigate = useNavigate();
     const context=useContext(AuthContext)
-    const [firstName,setFirstName] = useState(context.currentUser.information?.firstName);
+    const initialValue = {
+    firstname:context.currentUser.information?.firstName ,
+    };    
+    const formik = useFormik({
+        initialValues: initialValue,
+        validationSchema,
+        onSubmit: (values) => {
+        console.log(values);
+        },        
+    })
+    const [firstName,setFirstName] = useState(context.currentUser.information?.firstName as string);
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -26,9 +40,9 @@ const SettingAccount =() => {
                     <div className="Carbon-TextField-container w-[100%]">
                         First Name
                         <div className="">
-                            <TextField value={firstName} onChange={(e) => setFirstName(e.target.value)} 
+                            <TextField {...formik.getFieldProps("firstname")} inValid={false} 
                             // {...formik.getFieldProps("emailOrPhone")} 
-                            theme="Carbon" name="firstName" 
+                            theme="Carbon" name="firstname" 
                             // errorMessage={formik.errors?.emailOrPhone} 
                             type="text" 
                             // inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}
@@ -75,7 +89,25 @@ const SettingAccount =() => {
 
                 </div>
                 <div className="mt-8 mb-4">
-                    <button className="Carbon-Button-container">Save Changes</button>
+                    <Button onClick={() => {
+                        context.currentUser.updateInformation({
+                            banelImage:context.currentUser.information?.banelImage as string,
+                            company:'',
+                            firstName: formik.values.firstname,
+                            workPhone:'',
+                            imageurl:'',
+                            job:'',
+                            lastName:'',
+                            location:{
+                                lat:0,
+                                lng:0
+                            },
+                            personlEmail:'',
+                            phone:'',
+                            workEmail:''
+
+                        })
+                    }} className="Carbon-Button-container">Save Changes</Button>
                 </div>
                 <div className="mt-5 flex items-center cursor-pointer">
                     <p className="text-cyan-500 ms-2">Delete Your Account</p>

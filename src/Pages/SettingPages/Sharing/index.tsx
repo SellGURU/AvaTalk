@@ -1,9 +1,12 @@
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { SharingModType } from "../../../Types";
 
 const SettingSharing =() => {
     const navigate = useNavigate();
+    const auth = useAuth()
     const pelan = [
         {
             title:'Default Mode',
@@ -21,12 +24,13 @@ const SettingSharing =() => {
             content:'Share your contact details directly to your contact’s phone, without any forms or follow-up.'
         },
     ]
-    const [activePelan , setActivePelan] = useState(pelan[0])
+    // const [activePelan , setActivePelan] = useState(pelan[0])
     // toggles
     const [sendEmailActive, setSendEmailActive] = useState(true);
     const [sendSMSActive, setSendSMSActive] = useState(false);
     const [additionalSettingsActive, setAdditionalSettingsActive] = useState(false);
-
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
+    console.log(auth)
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -43,7 +47,10 @@ const SettingSharing =() => {
                     <div className="Carbon-Edit-title">Select Sharing Mode</div>
                     {pelan.map((item)=>{
                         return(
-                            <div className="px-6 mt-24 Carbon-Setting-CardContainer flex items-center gap-2 text-justify" onClick={()=>{setActivePelan(item)}}>
+                            <div className="px-6 mt-24 Carbon-Setting-CardContainer flex items-center gap-2 text-justify" onClick={()=>{
+                                auth.currentUser.setShareMode(item.title as SharingModType)
+                                forceUpdate()
+                                }}>
                                 <div>
                                     <div className="font-medium text-sm flex gap-2 items-center mb-1">
                                         {item.title}
@@ -55,7 +62,7 @@ const SettingSharing =() => {
                                     </div>
                                     <p className="text-xs text-gray-400">{item.content}</p>
                                 </div>
-                                {activePelan.title==item.title ? 
+                                {auth.currentUser.getShareMode()==item.title ? 
                                     <div className="w-6 h-6 cursor-pointer boxShadow-Gray rounded-full border border-white bg-primary-color">
                                         <div className="w-6 h-6 flex items-center justify-center">
                                             <span className="text-white">✓</span>
@@ -75,10 +82,13 @@ const SettingSharing =() => {
                             <div className="flex gap-2 items-center">
                                 Send a follow-up email
                             </div>
-                            <div className={`w-16 h-7 cursor-pointer rounded-[100px] btnInnerShadowsDark flex items-center ${ sendEmailActive ? 'justify-end' : 'justify-start'}`} onClick={() => setSendEmailActive(!sendEmailActive)} >
-                                <div className={`w-6 h-6 boxShadow-Gray rounded-full border border-white ${ sendEmailActive ? 'bg-primary-color' : 'bg-white'}`}>
+                            <div className={`w-16 h-7 cursor-pointer rounded-[100px] btnInnerShadowsDark flex items-center ${ auth.currentUser.advancedSettings?.Sendafollowupemail == true ? 'justify-end' : 'justify-start'}`} onClick={() => {
+                                auth.currentUser.advancedSettings.Sendafollowupemail = !auth.currentUser.advancedSettings.Sendafollowupemail 
+                                forceUpdate()
+                            }} >
+                                <div className={`w-6 h-6 boxShadow-Gray rounded-full border border-white ${ auth.currentUser.advancedSettings.Sendafollowupemail == true ? 'bg-primary-color' : 'bg-white'}`}>
                                     <div className="w-6 h-6 flex items-center justify-center">
-                                        <span className={sendEmailActive ? 'text-white' : 'text-primary-color'}>|</span>
+                                        <span className={auth.currentUser.advancedSettings?.Sendafollowupemail== true ? 'text-white' : 'text-primary-color'}>|</span>
                                     </div>
                                 </div>
                             </div>
