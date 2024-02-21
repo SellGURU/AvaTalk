@@ -1,7 +1,7 @@
 import { Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
-import { useContext , useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -15,6 +15,11 @@ const SettingAccount =() => {
     const context=useContext(AuthContext)
     const initialValue = {
     firstname:context.currentUser.information?.firstName ,
+    lastname:context.currentUser.information?.lastName ,
+    personlEmail:context.currentUser.information?.personlEmail ,
+    phone:context.currentUser.information?.phone ,
+
+    
     };    
     const formik = useFormik({
         initialValues: initialValue,
@@ -23,7 +28,8 @@ const SettingAccount =() => {
         console.log(values);
         },        
     })
-    const [firstName,setFirstName] = useState(context.currentUser.information?.firstName as string);
+    
+    // const [firstName,setFirstName] = useState(context.currentUser.information?.firstName as string);
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -35,75 +41,51 @@ const SettingAccount =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Account</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col  px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="mb-4">
-                    <div className="Carbon-TextField-container w-[100%]">
-                        First Name
-                        <div className="">
-                            <TextField {...formik.getFieldProps("firstname")} inValid={false} 
-                            // {...formik.getFieldProps("emailOrPhone")} 
-                            theme="Carbon" name="firstname" 
-                            // errorMessage={formik.errors?.emailOrPhone} 
-                            type="text" 
-                            // inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}
-                            ></TextField>
-                        </div>
+                    <div className="flex flex-col relative gap-y-4 w-[100%]">
+
+                        <TextField {...formik.getFieldProps("firstname")} inValid={false} 
+                        theme="Carbon" name="firstname" label="First Name"
+                        type="text" 
+                        ></TextField>
+                        
+                        <TextField {...formik.getFieldProps("lastname")} inValid={false} 
+                        theme="Carbon" name="lastname" label="Last Name"
+                        type="text" 
+                        ></TextField>
+
+                        <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
+                        theme="Carbon" name="personlEmail"
+                        type="email" ></TextField>
+
+                        <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={false} 
+                        theme="Carbon" name="phone"
+                        type="phone" ></TextField>
+
+                        <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
+
+                        </Select>
+
                     </div>
                 </div>
-                <div className="mb-4">
-                    <div className="Carbon-TextField-container w-[100%]">
-                        <label className="Carbon-TextField-label">
-                            Last Name
-                        </label>
-                        <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                            <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield42095" placeholder="Enter your last name..." name="LastName" />
 
-                        </div>
-                    </div>
-                </div>
-                <div className="mb-4">
-                    <div className="Carbon-TextField-container w-[100%]">
-                        <label className="Carbon-TextField-label" >Account Email</label>
-                        <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-
-                            <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="email" id="textfield28972" placeholder="Enter your email address..." name="Email" />
-                        </div>
-                    </div>
-                </div>
-                <div className="mb-4">
-                    <div className="Carbon-TextField-container w-[100%]">
-                        <label className="Carbon-TextField-label" >Account Phone</label>
-                        <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                            <div className="Carbon-TextField-selectPhone-container">
-                                <img src="https://flagcdn.com/w20/us.png"/>
-                                <img className="Carbon-TextField-selectPhone-container-icon" src="./Carbon/bottomVector.svg" alt=""/>
-                            </div>
-                            <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="Enter your phone number..." name="Phone" />
-                        </div>
-                    </div>
-                </div>
-                <div className="mb-4">
-                    <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
-
-                    </Select>
-
-                </div>
                 <div className="mt-8 mb-4">
                     <Button onClick={() => {
                         context.currentUser.updateInformation({
                             banelImage:context.currentUser.information?.banelImage as string,
                             company:'',
-                            firstName: formik.values.firstname,
+                            firstName: formik.values.firstname as string,
                             workPhone:'',
                             imageurl:'',
                             job:'',
-                            lastName:'',
+                            lastName:formik.values.lastname as string,
                             location:{
                                 lat:0,
                                 lng:0
                             },
-                            personlEmail:'',
-                            phone:'',
+                            personlEmail:formik.values.personlEmail as string,
+                            phone:formik.values.phone as string,
                             workEmail:''
 
                         })

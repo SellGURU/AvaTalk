@@ -1,7 +1,8 @@
 class AdvancedSettings {
     public Sendafollowupemail :boolean = false
-    public Sendafollowupemail2 :boolean = false
-    public Sendafollowupemail3 :boolean = false
+    public Sendafollowupsms :boolean = false
+    public Additionalsettings :boolean = false
+    
 
     // public setEmail(action:boolean) {
     //     this.Sendafollowupemail= action
