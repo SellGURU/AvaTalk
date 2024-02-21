@@ -7,6 +7,8 @@ import { useAuth } from "../../hooks/useAuth";
 import { chat } from "../../Types";
 import { sendToApi } from "../../help";
 import { BeatLoader } from "react-spinners";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
+import Setting from '../Setting'
 
 interface PresentationProps {
   theme?: string;
@@ -14,6 +16,16 @@ interface PresentationProps {
 
 const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const [startChat,setStartChat] = useState(false)
+  const languagesList = [
+    { lan: "English", code: "en-US" },
+    { lan: "German", code: "de" },
+    { lan: "French", code: "fr" },
+    { lan: "Persian", code: "fa" },
+    { lan: "Turkish", code: "tr-TR" },
+    { lan: "Chinese", code: "zh-cn" },
+    { lan: "Arabic", code: "ar-AE" },
+  ];  
+  const [selectedLang,setSelectedLang] = useState(languagesList[0])
   // for question button 
   // const [selectedOption, setSelectedOption] = useState<'question'|'answer'>('question')
   const [showSuggestions,setShowSuggestions] = useState(false);
@@ -81,12 +93,21 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         refren.load()
     }           
   })
+  const settingRef = useRef<HTMLDivElement>(null)
+  const [showSetting,setShowSetting] = useState(false)
 
+  useModalAutoClose({
+    refrence:settingRef,
+    close:() => {
+      setShowSetting(false)
+    }
+  })
   return (
     <>
     <div className={`${theme}-Presentation-Container`}>
       <div className={`${theme}-Presentation-PresentationSection`}>
         <BackIcon theme="Carbon" title=""></BackIcon>
+      
         <div className={`${theme}-Presentation-Content`}>  
     
           <div className={`${theme}-Presentation-PictureSection`}>
@@ -170,8 +191,9 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                   {
                     isLoading ?
                       <>
-                        <div className="  w-full px-4 flex justify-start items-center h-10 borderBox-Gray2 bg-slate-100 ">
+                        <div className="  w-full px-4 flex justify-between items-center h-10 borderBox-Gray2 bg-slate-100 ">
                           <BeatLoader size={10} color="#702CDA" />
+                          <div>stop</div>
                         </div>
                       </>
                     :
@@ -185,9 +207,26 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           }
 
         </div>
+        {showSetting &&
+          <Setting 
+          theme="Carbon"
+          languagesList={languagesList} 
+          onChangeLanguage={(lan) =>{
+            setSelectedLang(lan)
+          }} 
+          onLogout={() =>{}} 
+          onClearHistory={() => {}} 
+          settingRef={settingRef}></Setting>
+        }
+        <div
+          onClick={() => {
+            setShowSetting((prev) => !prev);
+          }}
+          className={`${theme}-Presentation-setting-icon`}
+        />          
       </div>
     {
-      startChat ? <FooterPresentation isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
+      startChat ? <FooterPresentation langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
       <AudioProvider autoPlay={isTalking} onEnd={() => {
         setAudioUrl('')
