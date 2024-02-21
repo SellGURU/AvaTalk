@@ -1,5 +1,5 @@
 .Carbon-ChatItem-container {
-  @apply my-5 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
+  @apply mb-6 mt-2 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
 }
 
 
@@ -14,7 +14,7 @@
   @apply flex items-center  w-full justify-between;
 }
 .Carbon-ChatItem-name {
-  @apply leading-[21px] text-[14px] font-[500]  text-gray-700;
+  @apply leading-[21px] text-[14px] font-[600]  text-gray-700;
 }
 .Carbon-ChatItem-card {
   @apply w-full px-3 ;
@@ -24,7 +24,7 @@
   @apply text-gray-700/80  leading-[21px] text-[14px] font-[400];
 }
 .Carbon-ChatItem-date {
-  @apply text-sm pl-4 mt-4;
+  @apply text-xs text-gray-500 pl-4 mt-4;
 }
 .Carbon-ChatDetails-container {
   @apply w-full h-full top-8 z-10 bg-white

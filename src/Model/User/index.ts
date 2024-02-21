@@ -50,6 +50,11 @@ class User {
             return 'Add'
         }
     }
+    public updateInformation(information:Information){
+        this.information = information
+        this.syncToLocalStorage()
+        
+    }
     public isHaveProfileImage() {
         if(this.resolveImageUrl()?.includes('https://ui-avatars.com/api/?name=')){
             return 'Add'

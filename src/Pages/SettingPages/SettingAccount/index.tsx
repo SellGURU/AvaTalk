@@ -1,9 +1,15 @@
-import { Select } from "../../../Components"
+import { Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
+import { useContext , useState } from "react";
+import { AuthContext } from "../../../store/auth-context";
+
+
 
 const SettingAccount =() => {
     const navigate = useNavigate();
+    const context=useContext(AuthContext)
+    const [firstName,setFirstName] = useState(context.currentUser.information?.firstName);
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -18,11 +24,15 @@ const SettingAccount =() => {
             <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="mb-4">
                     <div className="Carbon-TextField-container w-[100%]">
-                        <label className="Carbon-TextField-label ">
-                            First Name
-                        </label>
-                        <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                            <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield76297" placeholder="Enter your first name..." name="FirstName" />
+                        First Name
+                        <div className="">
+                            <TextField value={firstName} onChange={(e) => setFirstName(e.target.value)} 
+                            // {...formik.getFieldProps("emailOrPhone")} 
+                            theme="Carbon" name="firstName" 
+                            // errorMessage={formik.errors?.emailOrPhone} 
+                            type="text" 
+                            // inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}
+                            ></TextField>
                         </div>
                     </div>
                 </div>
