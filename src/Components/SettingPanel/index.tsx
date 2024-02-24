@@ -18,11 +18,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       icon: "account.svg",
       link: "account",
     },
-    {
-      name: "Connected Accounts",
-      icon: "connected.svg",
-      link: "",
-    },
+
     {
       name: "Sharing",
       icon: "share.svg",
@@ -33,11 +29,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       icon: "service.svg",
       link: "service",
     },
-    {
-      name: "payment-subscription",
-      icon: "payment.svg",
-      link: "",
-    },
+
     {
       name: "Privacy Policy",
       icon: "policy.svg",
@@ -52,6 +44,16 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       name: "Support",
       icon: "support.svg",
       link: "support",
+    },
+    {
+      name: "Connected Accounts",
+      icon: "connected.svg",
+      link: "",
+    },
+    {
+      name: "payment-subscription",
+      icon: "payment.svg",
+      link: "",
     },
   ]);
   return (
