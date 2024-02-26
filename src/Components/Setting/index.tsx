@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LanguageModal, LogoutModal } from "symphony-ui";
+import { useConstructor } from "../../help";
 
 type Language = {
   lan: string;
@@ -9,6 +10,7 @@ type SettingProps = {
   theme?: string;
   languagesList: Language[];
   settingRef: React.RefObject<HTMLDivElement>;
+  selectedLang: Language
   // onChangeLanguage: (selectedLanguage: string) => void; // Updated onChangeLanguage prop
   onChangeLanguage: (selectedLanguage: { lan: string; code: string }) => void;
   onClearHistory: () => void;
@@ -23,12 +25,13 @@ const Setting: React.FC<SettingProps> = ({
   onChangeLanguage,
   onClearHistory,
   onLogout,
+  selectedLang,
   // onStorageLanguage,
   // saveToLocalStorage,
   languagesList,
 }) => {
   const [showLanguageList, setShowLanguageList] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(selectedLang.lan);
   const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   // const [confirmLogout, setConfirmLogout] = useState(false);
@@ -79,8 +82,29 @@ const Setting: React.FC<SettingProps> = ({
     onLogout();
   }
 
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem("selectedLanguage");
+  // useEffect(() => {
+  //   const storedLanguage =null
+
+  //   if (storedLanguage) {
+  //     const parsedLanguage = JSON.parse(storedLanguage);
+  //     setSelectedLanguage(parsedLanguage.lan);
+  //     setNewLanguage(parsedLanguage.lan);
+  //   } else {
+  //     // If no language is stored in localStorage, set the default language to English
+  //     const defaultLanguage = languagesList[0];
+
+  //     if (defaultLanguage) {
+  //       setSelectedLanguage(defaultLanguage.lan);
+  //       setNewLanguage(defaultLanguage.lan);
+
+  //       // const defaultLanguageToStore = JSON.stringify(defaultLanguage);
+  //       // localStorage.setItem("selectedLanguage", defaultLanguageToStore);
+  //     }
+  //   }
+  // }, [languagesList]);
+
+  useConstructor(() => {
+    const storedLanguage =null
 
     if (storedLanguage) {
       const parsedLanguage = JSON.parse(storedLanguage);
@@ -88,7 +112,7 @@ const Setting: React.FC<SettingProps> = ({
       setNewLanguage(parsedLanguage.lan);
     } else {
       // If no language is stored in localStorage, set the default language to English
-      const defaultLanguage = languagesList[0];
+      const defaultLanguage = selectedLang;
 
       if (defaultLanguage) {
         setSelectedLanguage(defaultLanguage.lan);
@@ -97,9 +121,8 @@ const Setting: React.FC<SettingProps> = ({
         // const defaultLanguageToStore = JSON.stringify(defaultLanguage);
         // localStorage.setItem("selectedLanguage", defaultLanguageToStore);
       }
-    }
-  }, [languagesList]);
-
+    }    
+  })
   function handleChangeLanguage() {
     const selectedLanguageObj = languagesList.find(
       (item) => item.lan === selectedLanguage
@@ -108,7 +131,7 @@ const Setting: React.FC<SettingProps> = ({
     if (selectedLanguageObj) {
       setNewLanguage(selectedLanguage);
       onChangeLanguage(selectedLanguageObj);
-
+      console.log(selectedLanguageObj)
     //   const languageToStore = JSON.stringify(selectedLanguageObj);
     //   localStorage.setItem("selectedLanguage", languageToStore);
       setShowLanguageModal(false);

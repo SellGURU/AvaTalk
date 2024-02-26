@@ -59,6 +59,14 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         setVideoUrl('./videos/02.mp4')
       }
   })
+  const BLokedIdList =useRef<string[]>([]);
+  const handleStop = (id: string) => {
+    setIsLoading(false);
+    const newChats = chats;
+    newChats.pop();
+    setChats(newChats);
+    BLokedIdList.current = [...BLokedIdList.current, id];
+  };  
   const [suggestionList] = useState([
     'Can you introduce yourself?',
     'Tell me more about your business',
@@ -84,7 +92,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       setIsLoading(false)
     },() => {
       setIsLoading(false)
-    })
+    },selectedLang.lan,BLokedIdList)
   };
   
   useEffect(() => {
@@ -92,7 +100,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         const refren = audioRef.current  as any   
         refren.load()
     }           
-  })
+  },[isTalking,chats])
   const settingRef = useRef<HTMLDivElement>(null)
   const [showSetting,setShowSetting] = useState(false)
 
@@ -193,7 +201,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                       <>
                         <div className="  w-full px-4 flex justify-between items-center h-10 borderBox-Gray2 bg-slate-100 ">
                           <BeatLoader size={10} color="#702CDA" />
-                          <div>stop</div>
+                          <div onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
                         </div>
                       </>
                     :
@@ -210,12 +218,18 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         {showSetting &&
           <Setting 
           theme="Carbon"
+          selectedLang={selectedLang}
           languagesList={languagesList} 
           onChangeLanguage={(lan) =>{
+            setIsTalking(false)
             setSelectedLang(lan)
+            setChats([...[]])
           }} 
           onLogout={() =>{}} 
-          onClearHistory={() => {}} 
+          onClearHistory={() => {
+            setChats([...[]])
+            setIsTalking(false)
+          }} 
           settingRef={settingRef}></Setting>
         }
         <div
