@@ -1,29 +1,83 @@
-.Carbon-Setting-contactText {
-  @apply leading-[24px] text-[16px] text-gray-700 mb-[6px] px-6  font-[600];
+.Carbon-Setting-container {
+  @apply top-6 right-[12rem] absolute ;
 }
-.Carbon-Setting-CardContainer {
-  @apply w-full min-h-[56px] cursor-pointer relative px-5  py-4 boxShadow-Gray borderBox-Gray rounded-[24px] mt-4
+.Carbon-Setting-secondDiv {
+  @apply relative  z-20;
 }
-.Carbon-Setting-LogoutVector{
-  mask-size: 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-image: url('/Carbon/logout.svg');    
-  @apply w-5 h-5 bg-cyan-500 ;
+.Carbon-Setting-thirdDiv {
+  @apply bg-white w-[150px] max-h-[80px]   z-10 border-gray-100  absolute rounded-[5px] px-3 pt-2 pb-2  shadow-xl mt-[24px];
 }
-.Carbon-Setting-TickCircle {
-  mask-size: 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-image: url('/Carbon/tickCircle.svg');    
-  @apply w-6 h-6 bg-primary-color;
+.Carbon-Setting-fourthDiv {
+  @apply flex flex-col;
 }
-.Carbon-Setting-CardContainer[aria-disabled ='true']{
-  @apply opacity-50
+.Carbon-Setting-fifthDiv {
+  @apply flex items-center gap-x-2 mb-2;
 }
-.Carbon-Setting-logo {
-  @apply  w-36 h-14 mb-6; 
+.Carbon-Setting-language {
+  @apply leading-[14.5px]   text-[12px] font-[400] cursor-pointer whitespace-nowrap;
+}
+.Carbon-Setting-clicked {
+  @apply text-primary-color;
+}
+.Carbon-Setting-unClicked {
+  @apply text-secondary-color;
+}
 
+.Carbon-Setting-history {
+  @apply leading-[14.5px]  text-[12px] font-[400]   tracking-wide  whitespace-nowrap cursor-pointer;
+}
+.Carbon-Setting-sixDiv {
+  @apply flex items-center gap-x-2;
+}
+.Carbon-Setting-logout {
+  @apply leading-[14.5px]  text-[12px] font-[400]    tracking-wide whitespace-nowrap cursor-pointer;
+}
+
+.Carbon-Setting-translateIcon {
+  @apply w-[16px] cursor-pointer bg-[#253343]  h-[16px];
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url("/Acord/translate.svg");
+}
+.Carbon-Setting-icons-selected {
+  @apply bg-primary-color #{!important};
+}
+
+.Carbon-Setting-alertIcon {
+  @apply bg-[url('/Acord/alert.svg')] w-[16px] cursor-pointer  h-[16px];
+}
+
+.Carbon-Setting-languageListContainer {
+  @apply top-0 right-40 pl-2 z-50 text-left rounded-[5px] leading-[14.5px]  text-[12px] font-[400]  text-secondary-color tracking-wide bg-white py-1 absolute shadow-xl w-[75px] max-h-fit;
+}
+.Carbon-Setting-languageList {
+  @apply space-y-2;
+}
+.Carbon-Setting-listItem {
+  @apply cursor-pointer;
+}
+.Carbon-Setting-listItemIcon {
+  @apply ml-2;
+}
+.Carbon-Setting-listItemSure {
+  @apply text-[#DC3545];
+}
+
+.Carbon-Setting-historyIcon {
+  @apply w-4 cursor-pointer bg-[#253343]  h-4;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url("/Acord/broom.svg");
+}
+.Carbon-Setting-logoutIcon {
+  @apply w-4 cursor-pointer bg-[#253343]  h-4;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url("/Acord/logout.svg");
 }

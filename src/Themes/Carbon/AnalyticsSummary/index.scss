@@ -6,7 +6,7 @@
   @apply flex space-x-4 w-full justify-between items-center;
 }
 .Carbon-AnalyticsSummary-cardContainer {
-  @apply bg-gray-100 rounded-[24px] w-full h-[97px] boxShadow-Gray;
+  @apply  rounded-[24px] w-full h-[97px] borderBox-Gray boxShadow-Gray;
 }
 .Carbon-AnalyticsSummary-text {
   @apply leading-[21px] text-[14px] font-[600] text-gray-700 pt-[13px] pl-3 md:pl-6 whitespace-nowrap  pb-2;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { MutableRefObject, useState } from "react";
 import { MenuType, chat } from "./Types";
 import { AboutBox, Box, GalleryBox, GoogleMapBox, LinkBox, SocialBox } from "./Model";
 import { Chat } from "./Api";
@@ -125,10 +125,19 @@ const generateSlugId = () => {
   return slugId;
 };
 
-const sendToApi = (chats: Array<chat>, setChats: (chats: Array<chat>) => void, text: string, onresolve: (res: any) => void, oncatch: () => void) => {
+const sendToApi = (
+  chats: Array<chat>, 
+  setChats: (chats: Array<chat>) => void,
+  text: string,
+  onresolve: (res: any) => void,
+  oncatch: () => void,
+  language:string,
+  BLokedIdList:MutableRefObject<string[]>
+  ) => {
   const aiChats = chats.filter((item) => item.from == "Ai");
   const newChat: chat = {
     from: "user",
+    message_key: makeid(15),
     text: text,
     instanceid: "",
     audio_file: "",
@@ -136,26 +145,31 @@ const sendToApi = (chats: Array<chat>, setChats: (chats: Array<chat>) => void, t
   };
   setChats([...chats, newChat]);
   chats.push(newChat);
+  console.dir(BLokedIdList.current)
   Chat.flow({
     text: text,
-    language: "English",
-    message_key: "",
+    language: language,
+    message_key: makeid(15),
     apikey: "0e218a19f41b4eb689003fa634889a19",
     is_silent: false,
     getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })
     .then((res) => {
-      setChats([
-        ...chats,
-        {
-          from: "Ai",
-          text: res.answer.answer,
-          audio_file: res.answer.audio_file,
-          instanceid: res.instanceid,
-          currentconverationid: res.currentconverationid,
-        },
-      ]);
-      onresolve(res);
+      console.dir(BLokedIdList.current)
+      if(!BLokedIdList.current.includes(res.message_key as never)){
+        setChats([
+          ...chats,
+          {
+            from: "Ai",
+            text: res.answer.answer,
+            message_key:res.message_key,
+            audio_file: res.answer.audio_file,
+            instanceid: res.instanceid,
+            currentconverationid: res.currentconverationid,
+          },
+        ]);
+        onresolve(res);
+      }
     })
     .catch(() => {
       oncatch();
@@ -186,4 +200,17 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
     }
   }) as Array<Box>;
 };
+
+function makeid(length: number) {
+  let result = '';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
 export { resolveMenuFromRoute, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };

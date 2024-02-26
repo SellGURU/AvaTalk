@@ -6,5 +6,5 @@
   @apply text-gray-700 leading-[21px] text-[14px] font-[500];
 }
 .Carbon-ToggleButton-ActiveButton {
-  @apply rounded-[27px] h-[32px] flex items-center justify-center overflow-hidden borderBox-Gray btnInnerShadowsDark #{!important};
+  @apply rounded-[27px] h-[32px] flex items-center justify-center overflow-hidden borderBox-Gray boxShadow-Gray #{!important};
 }

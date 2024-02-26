@@ -10,7 +10,7 @@ const DatePicker = () => {
 
   return (
     <div className="flex mt-4 space-x-3  items-center ">
-      <div className=" h-[44px] flex justify-center  bg-slate-100 rounded-[21px] w-4/6  boxShadow-Gray">
+      <div className=" h-[44px] flex justify-center rounded-[21px] w-4/6 borderBox-Gray boxShadow-Gray">
         <div className="h-full flex items-center justify-start">
           <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 " alt="" />
         </div>

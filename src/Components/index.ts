@@ -23,7 +23,7 @@ import FooterPresentation from "./FooterPresentation";
 import TagList from "./TagList";
 import TagItem from "./TagItem";
 import ColorBox from "./ColorBox";
-import Setting from "./Setting";
+import SettingPanel from "./SettingPanel";
 import SettingCard from "./SettingCard";
 import AudioProvider from "./AudioProvider";
 import AiAvatar from "./AiAvatar";
@@ -60,7 +60,7 @@ export {
   ColorBox,
   Chat,
   BackIcon,
-  Setting,
+  SettingPanel,
   SettingCard,
   AudioProvider,
   AiAvatar,

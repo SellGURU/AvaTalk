@@ -1,0 +1,18 @@
+.Carbon-DeleteContact-container {
+  @apply h-[23vh] hiddenScrollBar  p-5 overflow-y-scroll;
+}
+.Carbon-DeleteContact-content {
+  @apply flex flex-col justify-center items-center;
+}
+.Carbon-DeleteContact-content {
+  @apply flex flex-col justify-center items-center;
+}
+.Carbon-DeleteContact-deleteContact {
+  @apply text-gray-700 pb-4  font-[600] text-[16px] leading-[24px];
+}
+.Carbon-DeleteContact-question {
+  @apply text-gray-700  font-[500] text-[14px] leading-[21px];
+}
+.Carbon-DeleteContact-buttonContainer {
+  @apply mt-10 flex items-center space-x-3 px-10;
+}

@@ -1,12 +1,42 @@
 .Carbon-ContactDetails-VectorSection {
   @apply w-10 h-10 p-2 rounded-full cursor-pointer btnInnerShadowsDark;
 }
+.Carbon-ContactDetails-infoContainer {
+  @apply flex items-center w-full space-x-4 absolute px-6 top-8;
+}
+.Carbon-ContactDetails-container2 {
+  @apply hiddenScrollBar h-dvh overflow-y-scroll pb-[160px] flex flex-col   items-center mt-[60px];
+}
+.Carbon-ContactDetails-container3 {
+  @apply flex items-center space-x-4 mb-[8px] -mr-9;
+}
+.Carbon-ContactDetails-contactImageContainer {
+  @apply borderBox-Gray boxShadow-Gray rounded-full;
+}
+.Carbon-ContactDetails-importIconContainer {
+  @apply flex flex-col items-center space-y-[9px];
+}
+.Carbon-ContactDetails-showExibitionconContainer {
+  @apply flex items-center justify-between mb-[20px];
+}
+.Carbon-ContactDetails-exibitionconContainer {
+  @apply flex items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px] bg-amber-400;
+}
+.Carbon-ContactDetails-exibition {
+  @apply text-gray-700 leading-[20px] text-[14px] font-[500] tracking-tight;
+}
+.Carbon-ContactDetails-container4 {
+  @apply flex flex-col space-y-3;
+}
+.Carbon-ContactDetails-container5 {
+  @apply flex items-center space-x-2;
+}
 .Carbon-ContactDetails-Vectors {
   mask-size: 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-7 h-7 bg-slate-400 ;
+  @apply w-7 h-7 bg-slate-400;
 }
 .Carbon-ContactDetails-phoneIcon {
   mask-image: url(/Carbon/call.svg);
@@ -62,15 +92,15 @@
   @apply flex justify-center items-center;
 }
 .Carbon-ContactDetails-ActiveVectors {
-  @apply bg-primary-color ;
+  @apply bg-primary-color;
 }
 
 .Carbon-ContactDetails-textItem {
-  @apply  text-gray-700 leading-[21px] text-[14px] font-[500];
+  @apply text-gray-700 leading-[21px] text-[14px] font-[500];
 }
 .Carbon-ContactDetails-nameItem {
-  @apply  text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];
+  @apply text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];
 }
 .Carbon-ContactDetails-jobItem {
-  @apply  text-gray-700/80 tracking-wider mb-[20px] leading-[20px] text-[14px] font-[400];
+  @apply text-gray-700/80 tracking-wider mb-[20px] leading-[20px] text-[14px] font-[400];
 }

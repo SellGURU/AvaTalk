@@ -1,9 +1,9 @@
-import { Setting as SettingComponent } from "../../Components";
+import { SettingPanel } from "../../Components";
 
 const Setting = () => {
   return (
     <>
-      <SettingComponent theme="Carbon"></SettingComponent>
+    <SettingPanel theme="Carbon"></SettingPanel>
     </>
   ) 
 };

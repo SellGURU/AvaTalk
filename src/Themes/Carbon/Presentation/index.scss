@@ -93,3 +93,12 @@
 .Carbon-Presentation-AnswerTitle{
     @apply mt-6 self-start ms-6;
 }
+
+.Carbon-Presentation-setting-icon{
+    @apply w-[25px] h-[25px] bg-primary-color top-10 right-4 z-20 absolute cursor-pointer;
+    mask-position: center;
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;    
+    mask-image: url("/Acord/setting.svg");
+}

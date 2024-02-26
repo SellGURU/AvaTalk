@@ -82,9 +82,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
         const shareUser = new User(res.information)
         setShareUser(shareUser)
-        setShowToturial(true)
+        if(localStorage.getItem("showTotorial"+searchParams.get('user'))){
+          setShowToturial(false)
+        }else{
+          setShowToturial(true)
+          localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
+        }
         setIsLoading(false)
-        shareUser.setBox(boxs)
+        shareUser.setBox(boxs,{isShare:true})
       })      
     }
   })
@@ -123,7 +128,9 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
                 :
-                undefined 
+                <Button theme='Carbon-back' style={{visibility:'hidden'}}>
+                  <div className={`${theme}-Profile-closeIcon`}></div>
+                </Button>
               }
             </>
           }

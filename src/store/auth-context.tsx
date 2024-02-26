@@ -31,7 +31,9 @@ export const AuthContext = createContext<AuthContextProps>({
   currentUser: new User(),
   verificationHandler: () => {},
   login: () => {},
-  logout: () => {},
+  logout: () => {
+    localStorage.clear()
+  },
 });
 
 function AuthContextProvider({ children }: PropsWithChildren) {
