@@ -13,7 +13,7 @@ interface AddContactProps {
   contactId: string | undefined;
 }
 
-const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose }) => {
+const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme }) => {
   return (
     <>
       <Modal
@@ -24,20 +24,18 @@ const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose
         contentLabel="Example Modal"
       >
         <>
-          <div className="h-[23vh] hiddenScrollBar  overflow-y-scroll">
-            <div className="p-5">
-              <div className="flex flex-col justify-center items-center">
-                <p className="text-gray-700 pb-4  font-[600] text-[16px] leading-[24px]">Delete Contact</p>
-                <p className="text-gray-700  font-[500] text-[14px] leading-[21px]">Are you sure you want to delete this Contact?</p>
-              </div>
-              <div className="mt-10 flex items-center space-x-3 px-10">
-                <Button onClick={onClose} theme="Carbon-Outline">
-                  Delete
-                </Button>
-                <Button onClick={onClose} theme="Carbon">
-                  Cancel
-                </Button>
-              </div>
+          <div className={`${theme}-DeleteContact-container`}>
+            <div className={`${theme}-DeleteContact-content`}>
+              <p className={`${theme}-DeleteContact-deleteContact`}>Delete Contact</p>
+              <p className={`${theme}-DeleteContact-question`}>Are you sure you want to delete this Contact?</p>
+            </div>
+            <div className={`${theme}-DeleteContact-buttonContainer`}>
+              <Button onClick={onClose} theme="Carbon-Outline">
+                Delete
+              </Button>
+              <Button onClick={onClose} theme="Carbon">
+                Cancel
+              </Button>
             </div>
           </div>
         </>

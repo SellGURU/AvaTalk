@@ -109,6 +109,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <AddContact
         title="Add Contact"
         theme="Carbon"
+        mode="add"
+        onEditContact={() => {}}
         isOpen={showAddContactModal}
         onAddContact={handleAddContact}
         onClose={() => {

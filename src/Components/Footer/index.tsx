@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
       <div
         onClick={() => handleItemClick("profile")}
         className={`${theme}-Footer-VectorSection ${
-          activeItem === "profile" ? `${theme}-Footer-ActiveVectorSection btnInnerShadowsDark` : ""
+          activeItem === "profile" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
         <div
@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
       <div
         onClick={() => handleItemClick("contacts")}
         className={`${theme}-Footer-VectorSection ${
-          activeItem === "contacts" ? `${theme}-Footer-ActiveVectorSection btnInnerShadowsDark` : ""
+          activeItem === "contacts" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
         <div
@@ -43,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
       <div
         onClick={() => handleItemClick("chats")}
         className={`${theme}-Footer-VectorSection ${
-          activeItem === "chats" ? `${theme}-Footer-ActiveVectorSection btnInnerShadowsDark` : ""
+          activeItem === "chats" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
         <div
@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
       <div
         onClick={() => handleItemClick("status")}
         className={`${theme}-Footer-VectorSection ${
-          activeItem === "status" ? `${theme}-Footer-ActiveVectorSection btnInnerShadowsDark` : ""
+          activeItem === "status" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
         <div
@@ -67,7 +67,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
       <div
         onClick={() => handleItemClick("settings")}
         className={`${theme}-Footer-VectorSection ${
-          activeItem === "settings" ? `${theme}-Footer-ActiveVectorSection btnInnerShadowsDark` : ""
+          activeItem === "settings" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
         <div

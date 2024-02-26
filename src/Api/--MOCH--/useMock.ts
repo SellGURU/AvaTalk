@@ -25,8 +25,9 @@ const tags: Array<Tag> = [
 const contacts: Array<Contact> = [
   {
     id: generateSlugId(),
-    fullName: "Sara Doe",
-    email: "soniaa.doe@example.com",
+    fullName: "John Lee",
+    email: "John.lee@example.com",
+    mapLocation: { lat: 28.7523, lng: 4.35464 },
     photo: "/Acord/person.png",
     tags: [
       {
@@ -40,13 +41,14 @@ const contacts: Array<Contact> = [
     phone: "+44 (788)29 59 722",
     location: "London, Street21, NO.124",
     company: "Codie",
-    meetDate: "Met at the exhibition",
+    note: "Met at the exhibition",
     addDate: "Added on 12.08.2023",
     job: "Digital Marketer",
   },
   {
     id: generateSlugId(),
     fullName: "Sara Doe",
+    mapLocation: { lat: 80, lng: 75.6 },
     email: "sonia.doe@example.com",
     photo: "/Acord/person.png",
     tags: [
@@ -61,7 +63,7 @@ const contacts: Array<Contact> = [
     phone: "+44 (788)29 59 722",
     location: "London, Street21, NO.124",
     company: "Codie",
-    meetDate: "Met at the exhibition",
+    note: "Met at the exhibition",
     addDate: "Added on 12.08.2023",
     job: "Digital Marketer",
   },

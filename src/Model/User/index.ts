@@ -1,4 +1,6 @@
+import { SharingModType } from "../../Types";
 import Box from "../Boxs";
+import AdvancedSettings from "./AdvancedSettings";
 
 interface Information {
     firstName:string;
@@ -25,7 +27,8 @@ interface Config {
 
 class User {
     public boxs:Array<Box> = []
-
+    protected sharingMod:SharingModType = 'Default Mode'
+    public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
     public resolveImageUrl() {
         if(this.information?.imageurl!= ''){
@@ -49,6 +52,12 @@ class User {
         }else{
             return 'Add'
         }
+    }
+    public setShareMode(mode:SharingModType) {
+        this.sharingMod= mode
+    }
+    public getShareMode() {
+        return this.sharingMod
     }
     public isHaveProfileImage() {
         if(this.resolveImageUrl()?.includes('https://ui-avatars.com/api/?name=')){

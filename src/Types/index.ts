@@ -19,9 +19,9 @@ interface Contact {
   isExchange?: boolean;
   phone: string;
   location?: string;
-  mapLocation?: { lat: number | undefined; lng: number | undefined };
+  mapLocation: { lat: number | undefined; lng: number | undefined };
   company: string;
-  meetDate?: string;
+  note: string;
   addDate?: string;
   job: string;
 }
@@ -36,4 +36,6 @@ interface chat {
 
 type MenuType = "profile" | "contacts" | "chats" | "status" | "settings";
 
-export type { PhoneCountry, MenuType, Tag, Contact, chat };
+type SharingModType = 'Default Mode'|'Lead Mode'|'Lead Mode'
+
+export type { PhoneCountry, MenuType, Tag, Contact, chat ,SharingModType};
