@@ -6,13 +6,17 @@ import annyang from 'annyang';
 interface FooterPresentationProps {
   theme?: string;
   onSendVector : (value: string) => void;
+  langCode:string
   isLoading: boolean
   isRecording:boolean
   setIsRecording:(record:boolean) => void
 }
-const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme , onSendVector,isLoading,isRecording,setIsRecording}) => {
+const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme ,langCode, onSendVector,isLoading,isRecording,setIsRecording}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [resolvedText,setResolvedText] = useState('');
+  useEffect(() => {
+    annyang.setLanguage(langCode)
+  },[langCode])
   const startSpeetchToText = () => {
     // setResolveText('')
     annyang.start({ autoRestart: true, continuous: false });

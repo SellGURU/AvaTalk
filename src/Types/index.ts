@@ -29,6 +29,7 @@ interface Contact {
 interface chat {
   from: "Ai" | "user";
   text: string;
+  message_key:string;
   currentconverationid: string;
   instanceid: string;
   audio_file: string;

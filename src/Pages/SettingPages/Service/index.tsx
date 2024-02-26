@@ -2,9 +2,14 @@ import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
 import { useState } from "react";
 
+interface serviceType {
+    title:string,
+    price:number
+}
+
 const SettingService =() => {
     const navigate = useNavigate();
-    const service = [
+    const service:Array<serviceType> = [
         {
             title:'Annually',
             price:345
@@ -14,7 +19,7 @@ const SettingService =() => {
             price:45
         },
     ] 
-    const [activeService,setAtiveService] = useState({})
+    const [activeService,setAtiveService] = useState<serviceType>()
 
     return (
         <>
@@ -57,7 +62,7 @@ const SettingService =() => {
                     {service.map((item)=>{
                         return(
                             <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
-                                {activeService.title == item.title ?
+                                {activeService?.title == item.title ?
                                     <>
                                     <div className="flex items-center">
                                         <span className="w-6 h-6 mr-3 cursor-pointer relative border border-white bg-primary-color rounded-full p-[5px]">
