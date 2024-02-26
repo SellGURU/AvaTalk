@@ -1,7 +1,7 @@
 import { Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
-import { useContext } from "react";
+import { useContext , useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -28,6 +28,10 @@ const SettingAccount =() => {
         console.log(values);
         },        
     })
+    const [country, setCountry] = useState<any>({
+        codeName: "us",
+        codePhone: "+1",
+    });
     
     // const [firstName,setFirstName] = useState(context.currentUser.information?.firstName as string);
     return (
@@ -61,6 +65,8 @@ const SettingAccount =() => {
 
                         <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={false} 
                         theme="Carbon" name="phone"
+                        phoneCountry={country}
+                        setPhoneCountry={setCountry}
                         type="phone" ></TextField>
 
                         <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
