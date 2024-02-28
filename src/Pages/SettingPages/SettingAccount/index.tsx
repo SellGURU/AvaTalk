@@ -78,6 +78,7 @@ const SettingAccount =() => {
 
                 <div className="mt-8 mb-4">
                     <Button onClick={() => {
+                        navigate(-1)
                         context.currentUser.updateInformation({
                             banelImage:context.currentUser.information?.banelImage as string,
                             company:'',
