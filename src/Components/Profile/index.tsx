@@ -217,7 +217,24 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           {mode == 'review' || mode == 'share' ?
             <div className='flex justify-between items-center w-full gap-x-4'>
               <div className={`${(showToturial && toturialStep == 3) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
-                <div className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold  w-full'>Save Contact</div>
+                <div onClick={() => {
+                      const contact = {
+                        name: shareUser.information?.lastName as string,
+                        phone: shareUser.information?.phone as string,
+                        email: shareUser.information?.personlEmail as string };
+
+                      // create a vcard file
+                      const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nEMAIL:" + contact.email + "\nEND:VCARD";
+                      const blob = new Blob([vcard], { type: "text/vcard" });
+                      const url = URL.createObjectURL(blob);
+
+                      const newLink = document.createElement('a');
+                      newLink.download = contact.name + ".vcf";
+                      newLink.textContent = contact.name;
+                      newLink.href = url;
+
+                      newLink.click();                  
+                }} className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm cursor-pointer font-semibold  w-full'>Save Contact</div>
                 {(showToturial && toturialStep == 3) ?
                  <ToturialsBox theme='Carbon' left='32' position='top' skip={() => {
                   setShowToturial(false)
