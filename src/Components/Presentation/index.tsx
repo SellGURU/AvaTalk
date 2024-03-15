@@ -9,6 +9,7 @@ import { sendToApi } from "../../help";
 import { BeatLoader } from "react-spinners";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Setting from '../Setting'
+import { useNavigate } from "react-router-dom";
 
 interface PresentationProps {
   theme?: string;
@@ -77,10 +78,17 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowMoreInfoSection(true);
-      setShowSuggestions(true)
+      // setShowSuggestions(true)
     }, 10000);
     return () => clearTimeout(timeoutId);
   }, []);
+  useEffect(() => {
+    if(startChat && chats.length == 0) {
+      setTimeout(() => {
+        setShowSuggestions(true)
+      }, 5000);
+    }
+  },[startChat,chats])
   //for give value from chat in footer component
   // Callback function to receive the value from FooterComponent
   const handleSendVector = (value: string) => {
@@ -103,7 +111,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   },[isTalking,chats])
   const settingRef = useRef<HTMLDivElement>(null)
   const [showSetting,setShowSetting] = useState(false)
-
+  const navigate = useNavigate();
   useModalAutoClose({
     refrence:settingRef,
     close:() => {
@@ -114,7 +122,13 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     <>
     <div className={`${theme}-Presentation-Container`}>
       <div className={`${theme}-Presentation-PresentationSection`}>
-        <BackIcon theme="Carbon" title=""></BackIcon>
+        <BackIcon action={() => {
+          if(startChat){
+            setStartChat(false)
+          }else{
+            navigate(-1)
+          }
+        }} theme="Carbon" title=""></BackIcon>
       
         <div className={`${theme}-Presentation-Content`}>  
     

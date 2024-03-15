@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Button } from 'symphony-ui';
 import { useAuth } from '../../../hooks/useAuth';
 import QRCode from 'react-qr-code';
 import { toast } from 'react-toastify';
+import { TextField } from '../..';
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
 interface ShareContactProps {
     isOpen : boolean
@@ -11,11 +15,28 @@ interface ShareContactProps {
     theme?:string
     onAfterOpen?:() =>void
 }
-
+const initialValue = {
+  Phone: "",
+};
+const validationSchema = Yup.object().shape({
+  Phone: Yup.string()
+      .required('Phone is required')
+});
 
 const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,theme}) => {
     const [mode,setMode] = useState<'mainSection'|'smsSection'|'emailSection'>('mainSection')
     const authContext = useAuth()
+    const formik = useFormik({
+        initialValues: initialValue,
+        validationSchema,
+        onSubmit: (values) => {
+        console.log(values);
+        },
+    });    
+    const [country, setCountry] = useState<any>({
+        codeName: "us",
+        codePhone: "+1",
+    });    
     return (
         <>
         <Modal
@@ -30,7 +51,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             <>
             <div className={`${theme}-ShareContact-Container`}>
                 <div className={`${theme}-ShareContact-Title contactNameShadow`}>Share Contact</div>
-                <Button onClick={onClose} theme='Carbon-back'>
+                <Button onClick={() => {
+                    setMode('mainSection')
+                    onClose()
+                    }} theme='Carbon-back'>
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
             </div>
@@ -68,13 +92,25 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                         Copy to Clipboard
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems`}>
+                    <div onClick={() => {
+                        toast.warn("The download was not successful")
+                    }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-ImportVector`}></div>
                         </div>
                         Download QR Code
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems`}>
+                    <div onClick={() => {
+                        navigator.share({
+                            title:'Contact',
+                            text:authContext.currentUser.information?.lastName,
+                            url:authContext.currentUser.resolveLink()
+                        }).then(() => {
+                            toast.success("Successful share")
+                        }).catch((err) => {
+                            toast.error("Error sharing:"+err)
+                        })
+                    }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-LinkVector`}></div>
                         </div>
@@ -92,7 +128,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <Button onClick={() => {setMode('mainSection')}} theme={`${theme}-back`} >
                     <div className={`${theme}-back-Button-vector`}></div>
                 </Button>
-                <Button onClick={onClose} theme='Carbon-back'>
+                <Button onClick={() => {
+                    setMode('mainSection')
+                    onClose()
+                }} theme='Carbon-back'>
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
             </div>
@@ -130,19 +169,20 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                     </div>
                     <div className="mb-4">
-                        <div className="Carbon-TextField-container w-[100%]">
+                        {/* <div className="Carbon-TextField-container w-[100%]">
                             <label className="Carbon-TextField-label" >Phone</label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
                                 <div className="Carbon-TextField-selectPhone-container">
                                     <img src="https://flagcdn.com/w20/us.png"/>
                                     <img className="Carbon-TextField-selectPhone-container-icon" src="./Carbon/bottomVector.svg" alt=""/>
                                 </div>
-                            <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="Enter your phone number..." name="Phone" />
-                        </div>
+                                <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="Enter your phone number..." name="Phone" />
+                            </div>
+                        </div> */}
+                    <TextField phoneCountry={country}  setPhoneCountry={setCountry} {...formik.getFieldProps("Phone")} theme="Carbon" name="Phone" errorMessage={formik.errors?.Phone} placeholder="Enter your phone " type="phone" inValid={false}></TextField>
                     </div>
-                </div>
                 <div className="mt-8 mb-4">
-                    <button className="Carbon-Button-container">Share Contact</button>
+                    <button onClick={() => onClose()} className="Carbon-Button-container">Share Contact</button>
                 </div>
             </div>
             </>
@@ -156,7 +196,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <Button onClick={() => {setMode('mainSection')}} theme={`${theme}-back`} >
                     <div className={`${theme}-back-Button-vector`}></div>
                 </Button>
-                <Button onClick={onClose} theme='Carbon-back'>
+                <Button onClick={() => {
+                    setMode('mainSection')
+                    onClose()
+                }} theme='Carbon-back'>
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
             </div>
@@ -203,7 +246,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                     </div>
                 <div className="mt-8 mb-4">
-                    <button className="Carbon-Button-container">Share Contact</button>
+                    <button onClick={() => onClose()} className="Carbon-Button-container">Share Contact</button>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ import './index.scss';
 import { useState } from 'react';
 import { BackIcon, TextArea, TextField } from '../..';
 import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
+import { toast } from 'react-toastify';
 
 interface BookMarkProps {
     isOpen : boolean
@@ -48,6 +49,9 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
     )    
     const [time,selectTime] = useState<any>(null)
     const [day,selectedDay] = useState(new Date())
+    const [name,setName] = useState('')
+    const [email,setEmail] = useState('')
+    const [detail,setDetail] = useState('')
     return (
         <>
         <Modal
@@ -180,15 +184,18 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                             <div className='flex justify-center mt-4'>
                                 <div className='w-full'>
                                     <div className='mb-3'>
-                                        <TextField inValid={false} placeholder='Enter your full name...' name='name' label='Name' required onBlur={() => {}} onChange={() =>{}} type='text' value='' theme='Carbon'></TextField>
+                                        <TextField inValid={false} placeholder='Enter your full name...' name={name} label='Name' required onBlur={() => {}} onChange={(e) =>{setName(e.target.value)}} type='text' value={name} theme='Carbon'></TextField>
                                     </div>
                                     <div className='mb-3'>
-                                        <TextField inValid={false} placeholder='Enter your email address...' name='Email' label='Email' required onBlur={() => {}} onChange={() =>{}} type='text' value='' theme='Carbon'></TextField>
+                                        <TextField inValid={false} placeholder='Enter your email address...' name='Email' label='Email' required onBlur={() => {}} onChange={(e) =>{setEmail(e.target.value)}} type='email' value={email} theme='Carbon'></TextField>
                                     </div>
                                     <div className='mb-4'>
-                                        <TextArea inValid={false} placeholder='Write details to prepare our meeting  ...' name='Details' label='Details' theme='Carbon' textAreaHeight='136px' onBlur={() => {}} onChange={() => {}} value=''></TextArea>
+                                        <TextArea inValid={false} placeholder='Write details to prepare our meeting  ...' name='Details' label='Details' theme='Carbon' textAreaHeight='136px' onBlur={() => {}} onChange={(e) =>{setDetail(e.target.value)}} value={detail}></TextArea>
                                     </div>
-                                    <Button theme='Carbon'>Book Meeting</Button>
+                                    <Button onClick={() => {
+                                        toast.success("Booked Successfully!")
+                                        onClose()
+                                    }} theme='Carbon'>Book Meeting</Button>
                                 </div>
                             </div>
                         </div>    
