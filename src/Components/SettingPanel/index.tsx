@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { Button } from "symphony-ui";
-
+import PackageJson from '../../../package.json';
 import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
 import { useAuth } from "../../hooks/useAuth";
@@ -70,6 +70,8 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
             <div className={`${theme}-Setting-LogoutVector`}></div>
             <p onClick={() =>auth.logout()} className="text-cyan-500 ms-2">Log out</p>
           </div>
+
+          <div className="flex items-center text-slate-400 text-sm mt-5 justify-center">Version:{PackageJson.description}{PackageJson.version}</div>
         </div>
       </div>
     </>
