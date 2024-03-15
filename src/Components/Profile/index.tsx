@@ -14,6 +14,7 @@ import { useConstructor } from '../../help';
 import Share from '../../Api/Share';
 import { Spinners } from '..';
 import ToturialsBox from '../ToturialsBox';
+import { publish } from '../../utils/event';
 
 interface ProfileProps {
   theme?: string;
@@ -110,6 +111,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               <div className={`${theme}-Profile-BtnContainer`}>
                 <Button onClick={() => {
                   setMode('review')
+                  publish('profileIsReview',{})
+                  window.history.replaceState(null, "", "/#/?review=true")
                   }} theme="Carbon-Google" data-mode="profile-review-button">
                   <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
                   <div>Preview Profile</div>
@@ -124,7 +127,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <>
               {
                 mode == 'review' ?
-                <Button onClick={() => {setMode('profile')}} theme='Carbon-back'>
+                <Button onClick={() => {
+                  setMode('profile')
+                  publish('profileIsProfile',{})
+                  window.history.replaceState(null, "", "/#/")
+                  }} theme='Carbon-back'>
                   <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
                 :

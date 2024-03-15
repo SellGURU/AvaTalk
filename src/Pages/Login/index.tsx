@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -9,7 +10,7 @@ import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
 
 const initialValue = {
-  emailOrPhone: "+44",
+  emailOrPhone: "",
 };
 
 const validateEmail = (email: string | undefined) => {
