@@ -27,7 +27,7 @@ const EditGoogleMap =() => {
     };    
     let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'GoogleMapBox')[0] as GoogleMapBox    
     if(currentBox == undefined) {
-        currentBox = new GoogleMapBox('',{
+        currentBox = new GoogleMapBox('Google Map',{
             lan:auth.currentUser.information?.location.lat as number,
             lat:auth.currentUser.information?.location.lng as number
         })

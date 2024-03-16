@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { SharingModType } from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
@@ -38,6 +39,7 @@ class User {
     }
     public updateInformation(information:Information){
         this.information = information
+        toast.success("Done Successfully!")
         this.syncToLocalStorage()
     }
     public resolveBackImageUrl() {
@@ -88,11 +90,12 @@ class User {
             this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
         }
         this.boxs.push(newBox)
-        this.syncToLocalStorage()
+        toast.success("Done Successfully!")
+        // this.syncToLocalStorage()
     }
     public removeBox(newBox:Box) {
         this.boxs = this.boxs.filter((item) => item.getTypeName() != newBox.getTypeName())
-        this.syncToLocalStorage()
+        // this.syncToLocalStorage()
     }
     public setBox(newBoxs:Array<Box>,config?:Config){
         this.boxs = newBoxs
