@@ -1,5 +1,5 @@
 import { Button, TextField } from "symphony-ui";
-import { BackIcon, Select } from "../../../Components";
+import { BackIcon } from "../../../Components";
 import { useState } from "react";
 import { AddSocials } from "../../../Components/__Modal__";
 import { Social } from "../../../Model";
@@ -45,6 +45,7 @@ const EditSocials = () => {
   const [socials, setSocials] = useState<Array<Social>>(currentBox.getSocialMedias().map((item: Social) => Object.assign(new Social("Facebook", item.value), item)));
   const [selectItem, setSelectedItem] = useState<null | Social>(null);
   const [openNewSocial, setOpenNewSocial] = useState(false);
+  const [openaddNewSocial,setOpenAddNewSocial] = useState(false);
   const initialValue = {
     title: currentBox.getTitle(),
   };
@@ -125,8 +126,7 @@ const EditSocials = () => {
               </AnimateGroup>
             </>
           )}
-          <div className="px-6 mt-3">
-            {/* <Select valueElement="" label="Add Social Media" placeholder="Please select social media..." theme="Carbon" /> */}
+          {/* <div className="px-6 mt-3">
             <Select
               valueElement={
                 <>
@@ -157,6 +157,30 @@ const EditSocials = () => {
                 );
               })}
             </Select>
+          </div> */}
+          <div className="mt-6  px-6">     
+            <Button data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+              <div className="relative">
+                {openaddNewSocial ?
+                  <div className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
+                    {medias.map((item, index) => {
+                      return (
+                        <div
+                          onClick={() => {
+                            setSelectedItem(new Social(item.name, ""));
+                            setOpenNewSocial(true);
+                            setOpenAddNewSocial(false)
+                          }}
+                          className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index == medias.length - 1 ? " border-none" : ""}`}
+                        >
+                          <img className="h-4" src={"./icons/media/" + item.icon} alt="" />
+                          <div className="ml-1 text-gray-700 text-sm">{item.name}</div>
+                        </div>
+                      );
+                    })}           
+                  </div>
+                :undefined}
+              </div>   
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">

@@ -1,11 +1,14 @@
 import { Button, TextField } from "symphony-ui";
 import { BackIcon} from "../../../Components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LinkBox, Link } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { AddLink, Confirm } from "../../../Components/__Modal__";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 const validationSchema = Yup.object().shape({
     title:Yup.string().required(),
@@ -14,16 +17,16 @@ const validationSchema = Yup.object().shape({
 
 const EditLinks = () => {
   const auth = useAuth()
-  const [autoSave,setAutoSave] = useState(0)
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'LinkBox')[0] as LinkBox
   if(currentBox == undefined) {
       currentBox = new LinkBox('links',[])
   }   
-  const [links,setLinks] = useState<Array<Link>>(currentBox.getLinks().map(((item:Link) => Object.assign(new Link(''),item))))
+  const [links,setLinks] = useState<Array<Link>>(currentBox.getLinks().map(((item:Link) => Object.assign(new Link('',''),item))))
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)  
   const initialValue = {
         title:currentBox.getTitle(),
-        url: ''
+        url: '',
+        name: ''
   }; 
   const formik = useFormik({
       initialValues: initialValue,
@@ -32,17 +35,20 @@ const EditLinks = () => {
       console.log(values);
       },
   });    
-  useEffect(() => {
-    if(formik.values.url.length > 0) {
-      if(autoSave != formik.values.url.length){
-        const newLink = new Link(formik.values.url)
-        setLinks([...links,newLink])
-        formik.setFieldValue('url','')
-        setAutoSave(0)
-      }
-    }
-  })
+  const [editName,setEditName] = useState('')
+  const [editeValue,setEditeValue] = useState('')
 
+  const addLink = (name:string,url:string) => {
+      const newLink = new Link(url,name)
+      if(editName!= ''){
+        setLinks([...links.filter((el) =>el.getName() != editName),newLink])
+        setEditName('')
+        setEditeValue('')
+      }else{
+        setLinks([...links,newLink]) 
+      }
+  }
+  const [openaddlink,setOpenAddLink] = useState(false);
   const navigate = useNavigate();
   const submit = () => {
       auth.currentUser.addBox(
@@ -56,6 +62,7 @@ const EditLinks = () => {
     console.log(newArr)
     setLinks(newArr)
   }
+
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -77,24 +84,41 @@ const EditLinks = () => {
                   <div className="mt-3 px-6">
                     {index == 0 ?
                       <div className={`Carbon-Select-label mb-1 w-full text-left`} >
-                        Social Medias
+                       Links
                       </div>         
                       :undefined            
                     }
-                   <div className="Carbon-TextField-input ">
+                   <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
                     <div className="w-full flex items-center justify-between">
-                      <div className="flex justify-start items-center">
+                      <div className="flex justify-start ml-4 items-center">
                         {/* <img className="h-4" src={"./icons/media/"+item.miniIconUrl()} alt="" /> */}
-                        <a href="">
-                          <div className="ml-2 text-sm text-gray-700">{item.geturl().substring(0,30)}</div>
-                        </a>
+                        <div className="">
+                          <div className="text-[13px] mb-[-4px]">
+                            {item.getName()}
+                          </div>
+                          <a href="">
+                            <div className=" text-[10px] text-cyan-500">{item.geturl().substring(0,30)}</div>
+                          </a>
+
+                        </div>
                       </div>
                       <div className="flex justify-end gap-1 items-start">
                           <div onClick={() => {
-                            formik.setFieldValue('url',item.geturl())
+                            setEditName(item.getName())
+                            setEditeValue(item.geturl())
+                            setOpenAddLink(true)
                           }} className={`Carbon-ContactDetails-editIcon`}></div>
                           <div onClick={() => {
-                            deleteSocial(index)
+                            // setConfirmDelete(true)
+                            confirmAlert({
+                                customUI: ({ onClose }) => {
+                                        return (
+                                            <Confirm onConfirm={() => deleteSocial(index)} content="Are you sure you want to delete this link?" title="Delete Link" onClose={onClose}></Confirm>
+                                        );
+                                },
+                                overlayClassName:"dispalyOverLay"
+                            })
+                            // deleteSocial(index)
                           }} className={`Carbon-ContactDetails-recycleIcon`}></div>                      
                       </div>
                     </div>
@@ -105,7 +129,7 @@ const EditLinks = () => {
             </>
           }
           <div className="px-6 mt-3">
-            <TextField onClick={() => {
+            {/* <TextField onClick={() => {
               if(autoSave!= 0){
                 setTimeout(() => {
                   setAutoSave(0)
@@ -114,11 +138,23 @@ const EditLinks = () => {
             }} {...formik.getFieldProps("url")} theme="Carbon"  label="Add Link" inValid={false} name="url" onChange={(e) => {
               formik.setFieldValue('url',e.target.value)
               setAutoSave(e.target.value.length)
-            }} type="text" placeholder="Click to add your link "></TextField>
+            }} type="text" placeholder="Click to add your link "></TextField> */}
+            <Button onClick={() => setOpenAddLink(!openaddlink)} theme="Carbon-AddLink">Add Link</Button>
+              <div className="relative"></div>
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">Save Change</Button>
           </div>
+          <AddLink name={editName} value={editeValue} theme="Carbon" isOpen={openaddlink} onClose={() =>{
+            setEditName('')
+            setEditeValue('')
+            setOpenAddLink(false)
+          }} 
+          onComplete={(name:string,url:string) => {
+            formik.setFieldValue("url",url)
+            formik.setFieldValue("name",name)
+            addLink(name,url)
+          }} title="Link" ></AddLink>
         </div>
       </div>
     </>
