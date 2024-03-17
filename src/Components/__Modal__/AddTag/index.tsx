@@ -3,31 +3,32 @@ import Modal from "react-modal";
 
 import "./index.scss";
 
-import { ColorBox, Select, TextField } from "../..";
+import { ColorBox, TextField } from "../..";
 import { Button } from "symphony-ui";
-import { useConstructor } from "../../../help";
-import { Auth } from "../../../Api";
+import { generateSlugId, useConstructor } from "../../../help";
 import { useState } from "react";
-import { Contact } from "../../../Types";
+import { Tag } from "../../../Types";
 
 interface AddContactProps {
   isOpen: boolean;
   onClose: () => void;
   theme?: string;
+  addTag:(tag:Tag) =>void
   onAfterOpen?: () => void;
 }
 
-const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme }) => {
-  const [contacts, setContacts] = useState<Contact[]>([]);
-  const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen,addTag, onClose, theme }) => {
+  // const [contacts, setContacts] = useState<Contact[]>([]);
+  // const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [title,setTitle] = useState('')
+  const [colorCode,setColorCode] = useState('')
   useConstructor(() => {
-    setIsLoading(true);
-    Auth.getAllContacts((res) => {
-      setContacts(res);
-      setIsLoading(false);
-    });
+    // setIsLoading(true);
+    // Auth.getAllContacts((res) => {
+    //   // setContacts(res);
+    //   setIsLoading(false);
+    // });
   });
 
   return (
@@ -49,12 +50,14 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
           {/* <div className="h-[65vh] hiddenScrollBar overflow-y-scroll"> */}
           <div>
             <div className="my-4">
-              <TextField value="" onChange={() => {}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
+              <TextField value={title} onChange={(e) => {setTitle(e.target.value)}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
             </div>
             <div>
-              <ColorBox />
+              <ColorBox resolveColor={(color:string) => {
+                setColorCode(color)
+              }}/>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <Select label="Contacts" valueElement={<div></div>} placeholder="Select Contacts..." theme="Carbon">
                 {isLoading ? (
                   <p></p>
@@ -85,10 +88,21 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
                   </ul>
                 )}
               </Select>
-            </div>
+            </div> */}
 
             <div className="mt-10">
-              <Button onClick={onClose} theme="Carbon">
+              <Button onClick={() => {
+                const newTag:Tag = {
+                  color:colorCode,
+                  contacts:0,
+                  id:generateSlugId(),
+                  name:title
+                }
+                addTag(newTag)
+                setTitle('')
+                setColorCode('')
+                onClose()
+                }} theme="Carbon">
                 <div>Add Tag</div>
               </Button>
             </div>
