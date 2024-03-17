@@ -69,10 +69,15 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
       <div className={`${theme}-ContactsView-buttonsContainer `}>
-        <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
-        <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => setShowAddTagModal(true)} theme="Carbon">
-          {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
-        </Button>
+        <div className="w-[45%] min-w-[250px]">
+          <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
+        </div>
+        <div className="w-[30%] min-w-[100px]">
+          <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => setShowAddTagModal(true)} theme="Carbon">
+            {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
+          </Button>
+
+        </div>
       </div>
       {activeView === "Contact List" ? (
         <>

@@ -2,7 +2,7 @@ import { Tag } from "../../Types";
 
 const TagItem = ({ data, theme }: { data: Tag; theme: string | undefined }) => {
   return (
-    <div className={`${theme}-ContactItem-container `}>
+    <div className={`${theme}-ContactItem-container `} style={{height:'45px'}}>
       <div className="flex w-full justify-between items-center">
         <div style={{ backgroundColor: data.color }} className="flex items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px]  ">
           <p className={`${data.color === "#6366F1" ? "text-white" : "text-gray-700"}  leading-[20px] text-[14px] font-[500] tracking-tight`}>{data.name}</p>

@@ -33,9 +33,21 @@ const contacts: Array<Contact> = [
       {
         id: generateSlugId(),
         name: "Exhibition",
-        color: "#FBBF24",
+        color: "#16A34A",
         contacts: 12,
       },
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#14B8A6",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FBBF24",
+        contacts: 12,
+      },            
     ],
     isExchange: true,
     phone: "+44 (788)29 59 722",
@@ -67,6 +79,52 @@ const contacts: Array<Contact> = [
     addDate: "Added on 12.08.2023",
     job: "Digital Marketer",
   },
+  {
+    id: generateSlugId(),
+    fullName: "John Lee",
+    email: "John.lee@example.com",
+    mapLocation: { lat: 28.7523, lng: 4.35464 },
+    photo: "/Acord/person.png",
+    tags: [
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#16A34A",
+        contacts: 12,
+      },
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#14B8A6",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FBBF24",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FB923C",
+        contacts: 12,
+      },  
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#6D28D9",
+        contacts: 12,
+      },                      
+    ],
+    isExchange: true,
+    phone: "+44 (788)29 59 722",
+    location: "London, Street21, NO.124",
+    company: "Codie",
+    note: "Met at the exhibition",
+    addDate: "Added on 12.08.2023",
+    job: "Digital Marketer",
+  },  
 ];
 const useMoch = () => {
   Api.post("/login", { token: "ebdsjcdkosoqe3r4gnfvnwoe2g94nvsjka23f0vslvnsk39jsncje239" });

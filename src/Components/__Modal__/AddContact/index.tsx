@@ -187,7 +187,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, theme, onClose, mode, t
         <div className="mt-4">
           <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
         </div>
-        <div className="mt-4">
+        <div className="mt-10">
           <Button onClick={handleAction} theme="Carbon">
             <div>{mode === "add" ? "Add Contact" : "Save Changes"}</div>
           </Button>
