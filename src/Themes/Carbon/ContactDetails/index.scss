@@ -20,7 +20,7 @@
   @apply flex items-center relative gap-2 justify-between mb-[20px];
 }
 .Carbon-ContactDetails-exibitionconContainer {
-  @apply flex items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px] bg-amber-400;
+  @apply flex items-center overflow-x-hidden justify-center w-[108px] space-x-[2px] h-8 rounded-[47px] bg-amber-400;
 }
 .Carbon-ContactDetails-exibition {
   @apply text-gray-700 leading-[20px] text-[14px] font-[500] tracking-tight;

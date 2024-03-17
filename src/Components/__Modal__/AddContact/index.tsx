@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import "./index.scss";
 import { useState, useEffect } from "react";
 import { generateSlugId } from "../../../help";
-import { Contact } from "../../../Types";
+import { Contact, Tag } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
 import { Select, TextArea, TextField } from "../..";
@@ -19,10 +19,12 @@ interface AddContactProps {
   onAddContact: (formData: Contact) => void;
   onEditContact: (formData: Contact) => void;
   contactId?: string | undefined;
+  allTags:Array<Tag>
 }
 
-const AddContact: React.FC<AddContactProps> = ({ isOpen, theme, onClose, mode, title, contactData, onAddContact, onEditContact }) => {
+const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose, mode, title, contactData, onAddContact, onEditContact }) => {
   const auth = useAuth();
+  const [selectedTags,setSelectedTags] = useState<Array<Tag>>([])
   const [formData, setFormData] = useState<Contact>({
     fullName: "",
     email: "",
@@ -63,7 +65,11 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, theme, onClose, mode, t
   const handleAction = () => {
     if (mode === "add") {
       const id = generateSlugId();
-      const formDataWithId = { ...formData, id, mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] } };
+      const formDataWithId = { ...formData,
+         id,
+          mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] },
+          tags:selectedTags
+         };
       onAddContact(formDataWithId);
       // console.log(formDataWithId);
       // console.log(formData);
@@ -72,6 +78,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, theme, onClose, mode, t
       onEditContact(formDatawithMaplocation);
       // console.log(formDatawithMaplocation);
     }
+    setFormData({} as Contact)
     onClose();
   };
 
@@ -176,13 +183,38 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, theme, onClose, mode, t
           <Select
             valueElement={
               <div className={`${theme}-AddContact-selectItems`}>
-                <div className={`${theme}-AddContact-selectItem`}>dis</div>
+                {selectedTags.length == 0 && <div className={`text-[13px] text-gray-700 font-thin opacity-80`}>Select tag ...</div>}
+                {selectedTags.map((item) => {
+                  return (
+                    <div onClick={() => {
+                      setSelectedTags([...selectedTags.filter((el) =>el.id != item.id)])
+                    }} className={`${theme}-ContactDetails-exibitionconContainer mt-[-6px]`} style={{backgroundColor:item.color}}>
+                      <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                      <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
+                    </div>
+                  )
+                })}
               </div>
             }
             label="Tag"
             placeholder="Select tag..."
             theme="Carbon"
-          ></Select>
+          >
+            <div className="flex justify-start overflow-x-scroll max-h-[120px] items-baseline flex-wrap py-4 gap-2 px-2">
+              {allTags.filter((el) =>!selectedTags.includes(el)).map((item) => {
+                return (
+                  <>
+                    <div onClick={() => {
+                      setSelectedTags([...selectedTags,item])
+                    }} className={`${theme}-ContactDetails-exibitionconContainer cursor-pointer`} style={{backgroundColor:item.color}}>
+                        <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                    </div>
+                  </>
+                )
+              })}
+
+            </div>
+          </Select>
         </div>
         <div className="mt-4">
           <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
