@@ -9,7 +9,6 @@ import { BackIcon } from "..";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
-  const [showExhibition, setShowExhibition] = useState(true);
   const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
@@ -61,6 +60,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const handleShowLess = () => {
     setShowMore(false);
   };
+  const [showMoreTages,setShowMoreTags] = useState(false)
   if (isLoading) return <p></p>;
   return (
     <div>
@@ -80,14 +80,44 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </div>
         <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
-        <div className={`${theme}-ContactDetails-showExibitionconContainer`}>
-          {showExhibition && (
+        <div className={`${theme}-ContactDetails-showExibitionconContainer `}>
+          {/* {showExhibition && (
             <div className={`${theme}-ContactDetails-exibitionconContainer`}>
               <p className={`${theme}-ContactDetails-exibition`}>Exhibition</p>
               <div onClick={() => setShowExhibition(false)} className={` ${theme}-ContactDetails-crossIcon  `}></div>
             </div>
-          )}
-
+          )} */}
+          {contact?.tags.map((item,index) => {
+            return (
+              <>
+              {index < 2 ?
+              <div className={`${theme}-ContactDetails-exibitionconContainer`} style={{backgroundColor:item.color}}>
+                <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
+              </div>
+              :undefined}
+              {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center">
+                <div id="tags" className="text-gray-700 -mt-2">...</div>
+              </div>}
+              </>
+            )
+          })}
+          {showMoreTages && <div id="tags"  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll max-h-[110px] w-[123px]">
+            {contact?.tags.map((item,index) => {
+              return (
+                <>
+                  {index >= 2 ?
+                    <>
+                      <div className="w-full items-center justify-center flex">
+                        <div className={`${theme}-ContactItem-exhibition `} style={{backgroundColor:item.color}}>{item.name}</div>
+                      </div>
+                      {index < contact.tags.length -1 && <div className="w-full my-1 border-white  border-t" />}
+                    </>
+                  :undefined}
+                </>
+              )
+            })}
+          </div>}          
           <Button theme="Carbon-Show">Add Tag</Button>
         </div>
         <div className={`${theme}-ContactDetails-container4`}>

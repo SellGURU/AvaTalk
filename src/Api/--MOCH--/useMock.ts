@@ -33,9 +33,21 @@ const contacts: Array<Contact> = [
       {
         id: generateSlugId(),
         name: "Exhibition",
-        color: "#FBBF24",
+        color: "#16A34A",
         contacts: 12,
       },
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#14B8A6",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FBBF24",
+        contacts: 12,
+      },            
     ],
     isExchange: true,
     phone: "+44 (788)29 59 722",
@@ -67,7 +79,54 @@ const contacts: Array<Contact> = [
     addDate: "Added on 12.08.2023",
     job: "Digital Marketer",
   },
+  {
+    id: generateSlugId(),
+    fullName: "John Lee",
+    email: "John.lee@example.com",
+    mapLocation: { lat: 28.7523, lng: 4.35464 },
+    photo: "/Acord/person.png",
+    tags: [
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#16A34A",
+        contacts: 12,
+      },
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#14B8A6",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FBBF24",
+        contacts: 12,
+      },    
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#FB923C",
+        contacts: 12,
+      },  
+      {
+        id: generateSlugId(),
+        name: "Exhibition",
+        color: "#6D28D9",
+        contacts: 12,
+      },                      
+    ],
+    isExchange: true,
+    phone: "+44 (788)29 59 722",
+    location: "London, Street21, NO.124",
+    company: "Codie",
+    note: "Met at the exhibition",
+    addDate: "Added on 12.08.2023",
+    job: "Digital Marketer",
+  },  
 ];
+
 const useMoch = () => {
   Api.post("/login", { token: "ebdsjcdkosoqe3r4gnfvnwoe2g94nvsjka23f0vslvnsk39jsncje239" });
   Api.post("/get_Login_code", { message: "Mobile number is not registered" });
@@ -238,6 +297,43 @@ const useMoch = () => {
       },
     ],
   });
+  Api.post("/show_chat_list",[
+  {
+    id:'1',
+    name:'User0215784515',
+    date:'Yesterday',
+    time:'07:45 pm',
+    content:'Can you call me? It’s necessary to talk wit...',
+  },
+  {
+    id:'2',
+    name:'User0215784516',
+    date:'2024/01/18',
+    time:'06:33 pm',
+    content:'Can you call me? It’s necessary to talk wit...',
+  },
+  {
+    id:'3',
+    name:'User0215784517',
+    date:'2024/01/17',
+    time:'06:25 pm',
+    content:'Can you call me? It’s necessary to talk wit...',
+  },
+  {
+    id:'4',
+    name:'User0215784518',
+    date:'2024/01/16',
+    time:'06:15 pm',
+    content:'Can you call me? It’s necessary to talk wit...',
+  },
+  {
+    id:'5',
+    name:'User0215784519',
+    date:'2024/01/15',
+    time:'05:15 pm',
+    content:'Can you call me? It’s necessary to talk wit...',
+  },    
+  ])
 };
 
 export default useMoch;

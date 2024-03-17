@@ -87,7 +87,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme
               </Select>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-10">
               <Button onClick={onClose} theme="Carbon">
                 <div>Add Tag</div>
               </Button>
