@@ -6,7 +6,7 @@
   @apply leading-[24px] text-[16px] text-gray-700 mb-[22px] px-6  font-[600];
 }
 .Carbon-ContactsView-buttonsContainer {
-  @apply flex justify-between items-center px-6 space-x-[25px] w-3/4;
+  @apply flex justify-between items-center px-6 space-x-[25px] ;
 }
 .Carbon-ContactsView-box {
   @apply flex flex-col  relative w-[100%] px-6  gap-y-1;

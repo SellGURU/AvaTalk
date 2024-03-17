@@ -83,7 +83,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText `}>Chats</p>
-      <div className={`${theme}-ContactsView-buttonsContainer `}>
+      <div className={`${theme}-ContactsView-buttonsContainer w-3/4 `}>
         <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Visitors Chat History" rightText="Your Test History" theme="Carbon" />
 
       </div>
