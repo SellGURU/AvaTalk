@@ -17,7 +17,7 @@
   @apply flex flex-col items-center space-y-[9px];
 }
 .Carbon-ContactDetails-showExibitionconContainer {
-  @apply flex items-center justify-between mb-[20px];
+  @apply flex items-center relative gap-2 justify-between mb-[20px];
 }
 .Carbon-ContactDetails-exibitionconContainer {
   @apply flex items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px] bg-amber-400;
@@ -62,7 +62,7 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
-  @apply w-4 h-4 bg-slate-400 cursor-pointer;
+  @apply w-4 h-4 bg-gray-100 cursor-pointer;
 }
 .Carbon-ContactDetails-importIcon {
   mask-image: url(/Carbon/import.svg);
