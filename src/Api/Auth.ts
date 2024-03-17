@@ -73,9 +73,12 @@ class Auth extends Api {
   }
 
   static getContactDetails(_contactId: string, resolve: (data: Contact) => void) {
-    this.post("/contactDetails", {}).then((res) => {
-      resolve(res.data);
-    });
+    // this.post("/contactDetails", {id:_contactId}).then((res) => {
+    //   resolve(res.data);
+    // });
+    this.getAllContacts((data) => {
+      resolve(data.filter((item) =>item.id == _contactId)[0])
+    })
   }
 
   static editContact(_contactId: string, data: Partial<Contact>, submit: (res: any) => void) {

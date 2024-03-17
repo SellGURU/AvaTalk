@@ -128,6 +128,9 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         onClose={() => {
           setShowAddTagModal(false);
         }}
+        addTag={(tag) => {
+          setTags([...tags,tag])
+        }}
       ></AddTag>
     </div>
   );
