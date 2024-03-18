@@ -67,7 +67,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
-      <div className={`${theme}-ContactsView-buttonsContainer `}>
+      <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
         <div className="w-[45%] min-w-[250px]">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
         </div>
@@ -105,7 +105,12 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <TagList removeTag={(tag) => {
+            <TagList editTag={(tag) => {
+              const newTags = [...tags]
+              const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
+              newTags[indexTag] = tag
+              setTags([...newTags])
+            }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])
             }} data={filteredTags} theme={theme} />
           )}

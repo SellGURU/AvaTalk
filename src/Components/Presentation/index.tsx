@@ -111,6 +111,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   },[isTalking,chats])
   const settingRef = useRef<HTMLDivElement>(null)
   const [showSetting,setShowSetting] = useState(false)
+  const [showSettingIcon,setShowSettingIcon] = useState(false)
   const navigate = useNavigate();
   useModalAutoClose({
     refrence:settingRef,
@@ -123,6 +124,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     <div className={`${theme}-Presentation-Container`}>
       <div className={`${theme}-Presentation-PresentationSection`}>
         <BackIcon action={() => {
+          setShowSettingIcon(false)
           if(startChat){
             setStartChat(false)
           }else{
@@ -142,7 +144,10 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           </div>
           {
             !startChat?
-              <Button onClick={() => {setStartChat(true)}} theme="Carbon" data-mode="profile-review-button">
+              <Button onClick={() => {
+                setStartChat(true)
+                setShowSettingIcon(true)
+                }} theme="Carbon" data-mode="profile-review-button">
                 start to chat
               </Button>
             :
@@ -151,13 +156,13 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       
           {!startChat ?
             <div className={`${theme}-Presentation-InfoSection`}>
-              <div  className={`${theme}-Presentation-Info`}>
+              <div onClick={() => {
+                window.open("+447882959722"); 
+              }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-CallVector`}></div>
                 </div>
-                <div onClick={() => {
-                window.open("+447882959722"); 
-              }}>+44 (788)29 59 722</div>
+                <div className="cursor-pointer">+44 (788)29 59 722</div>
               </div>
               <div onClick={() => {
                 window.open("mailto:Azami@codie.ai"); 
@@ -165,7 +170,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-EmailVector`}></div>
                 </div>
-                <div>Azami@codie.ai</div>
+                <div className="cursor-pointer">Azami@codie.ai</div>
               </div>
               <div onClick={() => {
                 window.open("https://codie.ai/"); 
@@ -173,7 +178,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-WebsiteVector`}></div>
                 </div>
-                <div>codie.ai</div>
+                <div className="cursor-pointer">codie.ai</div>
               </div>
               <div onClick={() => {
                 window.open('https://www.linkedin.com/in/dr-farzin-azami-0919712b/')
@@ -181,7 +186,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-LinkedinVector`}></div>
                 </div>
-                <div>LinkedIn</div>
+                <div className="cursor-pointer">LinkedIn</div>
               </div>              
             </div>
           :
@@ -246,12 +251,15 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           }} 
           settingRef={settingRef}></Setting>
         }
-        <div
-          onClick={() => {
-            setShowSetting((prev) => !prev);
-          }}
-          className={`${theme}-Presentation-setting-icon`}
-        />          
+        {showSettingIcon &&
+            <div
+            onClick={() => {
+              setShowSetting((prev) => !prev);
+            }}
+            className={`${theme}-Presentation-setting-icon`}
+          /> 
+        }
+         
       </div>
     {
       startChat ? <FooterPresentation langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined

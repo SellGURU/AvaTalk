@@ -8,10 +8,10 @@ interface DataItem {
 }
 
 const initialData: DataItem[] = [
-  { name: "Link", value: 400, color: "#ad97ea" },
-  { name: "QR Code", value: 300, color: "#855CF8" },
-  { name: "Email", value: 300, color: "#000000" },
-  { name: "SMS", value: 200, color: "#263238" },
+  { name: "Link", value: 400, color: "rgba(133, 92, 248, 0.4)" },
+  { name: "QR Code", value: 300, color: "rgba(133, 92, 248, 0.8)" },
+  { name: "Email", value: 300, color: "rgba(38, 50, 56, 1)" },
+  { name: "SMS", value: 200, color: "rgba(38, 50, 56, 0.16)" },
 ];
 interface Props {
   theme?: string;
@@ -30,7 +30,7 @@ const PiChartComponent: React.FC<Props> = ({ theme }) => {
   };
 
   const renderLegend = () => (
-    <ul>
+    <ul className=" space-y-2">
       {initialData.map((entry, index) => (
         <li
           className={`${theme}-PiChartComponent-listItem `}
@@ -39,7 +39,7 @@ const PiChartComponent: React.FC<Props> = ({ theme }) => {
           style={{ textDecoration: legendItems[index] ? "" : "line-through", color: entry.color }}
         >
           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
-          <p>{entry.name}</p>
+          <p className="text-xs text-gray-400">{entry.name}</p>
         </li>
       ))}
     </ul>
@@ -56,7 +56,7 @@ const PiChartComponent: React.FC<Props> = ({ theme }) => {
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip/>
         </PieChart>
       </ResponsiveContainer>
     </div>
