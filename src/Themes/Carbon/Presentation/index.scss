@@ -31,7 +31,7 @@
     @apply w-10 h-10 absolute left-6 -top-2 ;
 }
 .Carbon-Presentation-ArrowLeftVector{
-    background:url(/Carbon/arrowLeftVector.svg) no-repeat;
+    background:url(/Carbon/leftVector.svg) no-repeat;
     background-size: cover;
     @apply w-6 h-6;
 }
@@ -41,7 +41,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;    
-    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2  btnInnerShadowsDark;
+    @apply w-10 h-10 rounded-full flex justify-center items-center mr-2 cursor-pointer btnInnerShadowsDark;
 }
 .Carbon-Presentation-CallVector{
     mask-image: url(/Carbon/callVector.svg);

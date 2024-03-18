@@ -46,6 +46,7 @@ const BarChartComponent: React.FC<Props> = ({ theme }) => {
             left: -30,
             bottom: 0,
           }}
+          barSize={28}
         >
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />

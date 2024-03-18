@@ -64,7 +64,64 @@
   .btnInnerShadowsDark {
     box-shadow: 4px 4px 14px 0px rgba(193, 213, 238, 1) inset, -4px -4px 9px 0px rgba(255, 255, 255, 0.88) inset !important;
   }
-
+  .borderBox-GrayBox {
+    border: 1px solid transparent;
+    background: linear-gradient(0deg, rgba(241, 245, 249) , rgba(241, 245, 249) ) padding-box, linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
+      linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
+  }
+  .litepicker {
+    @apply top-[116px] rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
+  }
+  .litepicker .container__months {
+    -webkit-box-shadow:none;
+    boxShadow:none;
+    @apply rounded-[27px] rounded-b-none bg-inherit !important;
+  }
+  
+  .litepicker .container__footer {
+    -webkit-box-shadow:none;
+    boxShadow:none;
+    @apply rounded-[27px] rounded-t-none m-0 bg-inherit grid grid-rows-2 grid-flow-col justify-center justify-items-center !important;
+  }
+  .litepicker .container__months .month-item-header div>.month-item-name{
+    @apply bg-inherit;
+  }
+  .litepicker .container__months .month-item-header div>.month-item-year {
+    @apply bg-inherit;
+  }
+  .litepicker .container__footer .button-apply{
+    @apply rounded-[27px] min-w-[68px] w-[113px] h-10 mt-1 boxShadow-purple boxShadow-Gray text-white  bg-primary-color !important;
+  }
+  .litepicker .container__footer .button-cancel{
+    @apply rounded-[27px] min-w-[68px] w-[113px] h-10 mt-1 boxShadow-Gray text-primary-color borderBox-primary !important;
+  }
+  .litepicker .container__footer .preview-date-range{
+    @apply col-span-2 mr-0 text-sm 	;
+  }
+  .litepicker .container__days .day-item.is-start-date.is-end-date{
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item.is-end-date {
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item.is-start-date {
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item:hover {
+    @apply text-black  rounded-full ring-1 ring-primary-color;
+  }
+  .litepicker .container__days .day-item.is-in-range{
+    @apply bg-primary-color bg-opacity-20;
+  }
+  .litepicker .container__days .day-item{
+    @apply rounded-full;
+  }
+  .litepicker .container__days .day-item.is-end-date.is-flipped {
+    @apply rounded-full ;
+  }
+  .litepicker .container__days .day-item.is-start-date.is-flipped {
+    @apply rounded-full ;
+  }
 /* read me */
   /* light: borderBox-Gray boxShadow-Gray   */
   /* dark box: borderBox-Gray boxsInnerShadows  */
