@@ -79,6 +79,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
       // console.log(formDatawithMaplocation);
     }
     setFormData({} as Contact)
+    setSelectedTags([])
     onClose();
   };
 
@@ -182,16 +183,23 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
         <div className="mt-4">
           <Select
             valueElement={
-              <div className={`${theme}-AddContact-selectItems`}>
+              <div className={`${theme}-AddContact-selectItems gap-2`}>
                 {selectedTags.length == 0 && <div className={`text-[13px] text-gray-700 font-thin opacity-80`}>Select tag ...</div>}
-                {selectedTags.map((item) => {
+                {selectedTags.map((item,index) => {
                   return (
-                    <div onClick={() => {
-                      setSelectedTags([...selectedTags.filter((el) =>el.id != item.id)])
-                    }} className={`${theme}-ContactDetails-exibitionconContainer mt-[-6px]`} style={{backgroundColor:item.color}}>
-                      <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
-                      <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
-                    </div>
+                    <>
+                    {index < 2 &&
+                      <div onClick={() => {
+                        setSelectedTags([...selectedTags.filter((el) =>el.id != item.id)])
+                      }} className={`${theme}-ContactDetails-exibitionconContainer gap-2 flex max-w-[120px] justify-between px-2 mt-[-6px]`} style={{backgroundColor:item.color}}>
+                        <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                        <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
+                      </div>
+                    }
+                    {index == 2 &&  <div className="w-8 h-8 rounded-full bg-gray-100 border-2 mt-[-6px] border-white flex items-center justify-center ">
+                            <div id="tags" className="text-gray-700 -mt-2">...</div>
+                          </div>}
+                    </>
                   )
                 })}
               </div>
@@ -206,7 +214,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
                   <>
                     <div onClick={() => {
                       setSelectedTags([...selectedTags,item])
-                    }} className={`${theme}-ContactDetails-exibitionconContainer cursor-pointer`} style={{backgroundColor:item.color}}>
+                    }} className={`${theme}-ContactDetails-exibitionconContainer cursor-pointer min-w-20`} style={{backgroundColor:item.color}}>
                         <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
                     </div>
                   </>
