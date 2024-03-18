@@ -37,6 +37,9 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => 
               <div onClick={() => {
                 auth.currentUser.removeBox(item)
                 navigate('/')
+              }}  onTouchStart={() => {
+                auth.currentUser.removeBox(item)
+                navigate('/')
               }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>

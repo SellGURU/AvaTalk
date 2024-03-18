@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Auth } from "../../Api";
 import { AddContact, DeleteContact } from "../__Modal__";
 import { useConstructor } from "../../help";
-import { Contact } from "../../Types";
+import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
@@ -56,7 +56,16 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const handleShowMore = () => {
     setShowMore(true);
   };
+  const removeTag = (tag:Tag) => {
+    const contac = contact
+    // confirm('delete tag')
+    if(contac?.tags) {
+     contac.tags = contac.tags.filter((el) =>el != tag)
+    }
+    setContact({...contac} as Contact)
 
+    // setShowEditContactModal(false)
+  }
   const handleShowLess = () => {
     setShowMore(false);
   };
@@ -91,7 +100,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             return (
               <>
               {index < 2 ?
-              <div className={`${theme}-ContactDetails-exibitionconContainer`} style={{backgroundColor:item.color}}>
+              <div onClick={() =>{removeTag(item)}} className={`${theme}-ContactDetails-exibitionconContainer px-2`} style={{backgroundColor:item.color}}>
                 <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
                 <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
               </div>
@@ -169,6 +178,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </div>
       </div>
       <AddContact
+        allTags={[]}
         mode="edit"
         onEditContact={handleEditContact}
         contactData={contact}

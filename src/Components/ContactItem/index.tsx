@@ -19,7 +19,7 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
           <div className={`${theme}-ContactItem-innerCard `}>
             <p  className={`${theme}-ContactItem-name `}>{data.fullName}</p>
             <div className={`${theme}-ContactItem-iconContainer  `}>
-              {data.tags.length == 1 && <p className={`${theme}-ContactItem-exhibition `}>{data.tags[0].name}</p>}
+              {data.tags.length == 1 && <p className={`${theme}-ContactItem-exhibition overflow-x-hidden `} style={{backgroundColor:data.tags[0].color}}>{data.tags[0].name}</p>}
               {data.tags.length > 1 ?
                 <div  onClick={() => {setShowMoreTags(!showMoreTages)}} className="flex items-center cursor-pointer justify-start">
                   {data.tags.map((item,index) => {
