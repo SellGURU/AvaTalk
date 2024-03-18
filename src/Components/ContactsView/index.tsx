@@ -105,7 +105,12 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <TagList removeTag={(tag) => {
+            <TagList editTag={(tag) => {
+              const newTags = [...tags]
+              const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
+              newTags[indexTag] = tag
+              setTags([...newTags])
+            }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])
             }} data={filteredTags} theme={theme} />
           )}

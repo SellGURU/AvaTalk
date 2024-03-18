@@ -14,14 +14,17 @@ interface AddContactProps {
   onClose: () => void;
   theme?: string;
   addTag:(tag:Tag) =>void
+  editTag?:(tag:Tag) => void
   onAfterOpen?: () => void;
+  mode?:'Edit' | 'Add'
+  tag?:Tag
 }
 
-const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen,addTag, onClose, theme }) => {
+const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag, onClose, theme,mode,tag }) => {
   // const [contacts, setContacts] = useState<Contact[]>([]);
   // const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   // const [isLoading, setIsLoading] = useState(false);
-  const [title,setTitle] = useState('')
+  const [title,setTitle] = useState(tag?tag.name:'')
   const [colorCode,setColorCode] = useState('')
   useConstructor(() => {
     // setIsLoading(true);
@@ -36,14 +39,23 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen,addTag, onClose
       <Modal
         isOpen={isOpen}
         onAfterOpen={onAfterOpen}
-        onRequestClose={onClose}
+        onRequestClose={() => {
+          if(tag) {
+            setTitle(tag.name)
+          }
+          onClose()}}
         style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
         contentLabel="Example Modal"
       >
         <>
           <div className="flex w-full justify-between items-center">
-            <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">Add Tag</div>
-            <Button onClick={onClose} theme="Carbon-back">
+            <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">{mode == 'Edit' ? 'Edit' : 'Add'} Tag</div>
+            <Button onClick={() => {
+              if(tag) {
+                setTitle(tag.name)
+              }
+              onClose()
+              }} theme="Carbon-back">
               <div className={`${theme}-Profile-closeIcon`}></div>
             </Button>
           </div>
@@ -53,7 +65,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen,addTag, onClose
               <TextField value={title} onChange={(e) => {setTitle(e.target.value)}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
             </div>
             <div>
-              <ColorBox resolveColor={(color:string) => {
+              <ColorBox color={tag?.color} resolveColor={(color:string) => {
                 setColorCode(color)
               }}/>
             </div>
@@ -98,12 +110,21 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, onAfterOpen,addTag, onClose
                   id:generateSlugId(),
                   name:title
                 }
-                addTag(newTag)
+                if(mode == 'Edit' && tag && editTag){
+                    editTag({
+                      color:colorCode,
+                      contacts:tag?.contacts,
+                      id:tag?.id,
+                      name:title
+                    })
+                }else{
+                  addTag(newTag)
+                }
                 setTitle('')
                 setColorCode('')
                 onClose()
                 }} theme="Carbon">
-                <div>Add Tag</div>
+                <div>{mode == 'Edit' ? 'Edit' : 'Add'} Tag</div>
               </Button>
             </div>
           </div>
