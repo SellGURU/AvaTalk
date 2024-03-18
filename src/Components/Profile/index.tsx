@@ -307,7 +307,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         setBackgroundUrl('')
       }}></CropperBox>      
       <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
-      <ExchangeContact theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>
+      <ExchangeContact mode='add' onAddContact={() => {}} onEditContact={() => {}} theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>
       <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       {showToturial ?
         <div className='bg-slate-950/80 w-full h-dvh z-40 absolute top-0'></div>
