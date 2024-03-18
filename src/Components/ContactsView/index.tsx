@@ -7,7 +7,6 @@ import ContactList from "../ContactList";
 import { Outlet } from "react-router";
 import { AddContact } from "../__Modal__";
 import { useConstructor } from "../../help";
-import { Auth } from "../../Api";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
 import { Tag, Contact } from "../../Types";
@@ -22,19 +21,19 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
 
   useConstructor(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    Promise.all([Auth.getAllContacts((data) => setContacts(data)), Auth.getAllTags((data) => setTags(data))])
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    // Promise.all([Auth.getAllContacts((data) => setContacts(data)), Auth.getAllTags((data) => setTags(data))])
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   })
+    //   .finally(() => {
+    //     setIsLoading(false);
+    //   });
   });
   const handleAddContact = (formData: Contact) => {
     const formDataWithPhoto = { ...formData, photo: "/Acord/person.png", isExchange: true };
@@ -84,7 +83,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           <div className="mt-8 px-6">
             <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search name or email..." />
           </div>
-          {!(contacts.length > 0) && isLoading ? (
+          {!(contacts.length > 0) && !isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
                 No contact yet
@@ -99,19 +98,22 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           <div className="mt-8 px-6">
             <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search tag..." />
           </div>
-          {!(tags.length > 0) && isLoading ? (
+          {!(tags.length > 0) && !isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
                 No tag yet
               </div>
             </div>
           ) : (
-            <TagList data={filteredTags} theme={theme} />
+            <TagList removeTag={(tag) => {
+              setTags([...tags.filter((item) =>item != tag)])
+            }} data={filteredTags} theme={theme} />
           )}
         </>
       )}
 
       <AddContact
+        allTags={tags}
         title="Add Contact"
         theme="Carbon"
         mode="add"
@@ -127,6 +129,9 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         isOpen={showAddTagModal}
         onClose={() => {
           setShowAddTagModal(false);
+        }}
+        addTag={(tag) => {
+          setTags([...tags,tag])
         }}
       ></AddTag>
     </div>

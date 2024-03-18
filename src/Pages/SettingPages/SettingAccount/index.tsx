@@ -61,7 +61,7 @@ const SettingAccount =() => {
 
                         <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
                         theme="Carbon" name="personlEmail"
-                        type="email" ></TextField>
+                        type="email" disabled></TextField>
 
                         <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={false} 
                         theme="Carbon" name="phone"

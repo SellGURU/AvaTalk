@@ -169,6 +169,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </div>
       </div>
       <AddContact
+        allTags={[]}
         mode="edit"
         onEditContact={handleEditContact}
         contactData={contact}

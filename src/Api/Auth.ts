@@ -77,7 +77,7 @@ class Auth extends Api {
     //   resolve(res.data);
     // });
     this.getAllContacts((data) => {
-      resolve(data.filter((item) =>item.id == _contactId)[0])
+      resolve(data.filter((item) =>item.id == _contactId)[0]?data.filter((item) =>item.id == _contactId)[0]:data[0])
     })
   }
 

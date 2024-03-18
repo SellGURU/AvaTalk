@@ -40,7 +40,7 @@
   @apply ml-2 w-[10px];
 }
 .Carbon-TextField-dropDown-container {
-  @apply absolute z-40 overflow-y-scroll  w-[70px]  bg-gray-100 h-24 top-10;
+  @apply absolute z-[1600] overflow-y-scroll  w-[70px]  bg-gray-100 h-24 top-10;
 }
 .Carbon-TextField-dropDown-item {
   @apply flex justify-between cursor-pointer px-2 border-b pb-2 border-gray-200 my-2 w-full;

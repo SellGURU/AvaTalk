@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button } from "symphony-ui"
 import ContentCard from '../ContentCard';
-import { BookMark } from '../__Modal__';
+import { BookMark, ExchangeContact } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
 import {Box, User} from '../../Model';
@@ -32,6 +32,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [isLoading,setIsLoading] = useState(mode == 'share'?true:false)
   const [showBookMark,setShowBookMark] = useState(false)
+  const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [showShareContact,setShowShareContact] = useState(false)
   const [avatarUrl,setAvatarUrl] = useState('')
   const [backgroundUrl,setBackgroundUrl] = useState('')
@@ -249,7 +250,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 :undefined}                 
               </div>
                 <div className={`${(showToturial && toturialStep == 4) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
-                  <div className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold  w-full'>Exchange Contact</div>
+                  <div className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold cursor-pointer w-full' onClick={() => {setShowExchangeContact(true)}}>Exchange Contact</div>
                   {(showToturial && toturialStep == 4) ?
                   <ToturialsBox theme='Carbon' left='-80' isLast position='top' skip={() => {
                     setShowToturial(false)
@@ -306,6 +307,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
         setBackgroundUrl('')
       }}></CropperBox>      
       <BookMark theme='Carbon' isOpen={showBookMark} onClose={() => {setShowBookMark(false)}}></BookMark>
+      <ExchangeContact theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>
       <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       {showToturial ?
         <div className='bg-slate-950/80 w-full h-dvh z-40 absolute top-0'></div>

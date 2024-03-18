@@ -45,16 +45,16 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       icon: "support.svg",
       link: "support",
     },
-    {
-      name: "Connected Accounts",
-      icon: "connected.svg",
-      link: "",
-    },
-    {
-      name: "payment-subscription",
-      icon: "payment.svg",
-      link: "",
-    },
+    // {
+    //   name: "Connected Accounts",
+    //   icon: "connected.svg",
+    //   link: "",
+    // },
+    // {
+    //   name: "payment-subscription",
+    //   icon: "payment.svg",
+    //   link: "",
+    // },
   ]);
   return (
     <>
