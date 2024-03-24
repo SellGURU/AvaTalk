@@ -76,7 +76,7 @@ const SettingAccount =() => {
                     </div>
                 </div>
 
-                <div className="mt-8 mb-4">
+                <div className="mt-4">
                     <Button onClick={() => {
                         navigate(-1)
                         context.currentUser.updateInformation({
@@ -98,8 +98,8 @@ const SettingAccount =() => {
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>
-                <div className="mt-5 flex items-center cursor-pointer">
-                    <p className="text-cyan-500 ms-2">Delete Your Account</p>
+                <div className="mt-4 flex items-center cursor-pointer">
+                    <p className="text-cyan-500 ms-2 text-sm font-medium">Delete Your Account</p>
                 </div>
             </div>         
         </div>
