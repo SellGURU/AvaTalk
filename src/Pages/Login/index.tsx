@@ -56,6 +56,15 @@ const Login = () => {
       navigate('/Verification')
     })
   }
+  const handleGoogleLogin = () => {
+    Auth.login({mobile_number:'',code:'1254368'}).then((res) => {
+        authContext.verificationHandler({
+          emailOrPhone: 'email@email.com'
+        })      
+        authContext.login(res.data.token)
+        navigate("/register");
+    })    
+  }
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
@@ -109,7 +118,7 @@ const Login = () => {
                 </div>
 
                 <div className="mt-11">
-                  <Button onClick={handleSubmit} theme="Carbon-Google">
+                  <Button onClick={handleGoogleLogin} theme="Carbon-Google">
                     <img className="mr-2" src="./Carbon/Google.png" alt="" />
                     <div>Continue with Google</div>
                   </Button>

@@ -20,6 +20,7 @@
     "cropperjs": "^1.6.1",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",
+    "html2canvas": "^1.4.1",
     "litepicker": "^2.0.12",
     "react": "^18.2.0",
     "react-animation": "^1.2.2",
