@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { TextField } from '../..';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import html2canvas from 'html2canvas';
 
 interface ShareContactProps {
     isOpen : boolean
@@ -62,7 +63,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
                 {/* <div className={`${theme}-ShareContact-QrCodeVector`}></div> */}
-                <div className={`${theme}-ShareContact-QrCodeVector`}>
+                <div id='qrCodeBox' className={`${theme}-ShareContact-QrCodeVector`}>
                     <QRCode
                         size={256}
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
@@ -92,8 +93,19 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                         Copy to Clipboard
                     </div>
-                    <div onClick={() => {
-                        toast.warn("The download was not successful")
+                    <div onClick={async () => {
+                        const element = document.getElementById('qrCodeBox')
+                        const canvas = await html2canvas(element as HTMLElement)
+                        const data = canvas.toDataURL('image/jpg')
+                        const link = document.createElement('a');
+
+                        link.href = data;
+                        link.download = 'downloaded-image.jpg';
+
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);                        
+                        {/* toast.warn("The download was not successful") */}
                     }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-ImportVector`}></div>
@@ -182,7 +194,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                     <TextField phoneCountry={country}  setPhoneCountry={setCountry} {...formik.getFieldProps("Phone")} theme="Carbon" name="Phone" errorMessage={formik.errors?.Phone} placeholder="Enter your phone " type="phone" inValid={false}></TextField>
                     </div>
                 <div className="mt-8 mb-4">
-                    <button onClick={() => onClose()} className="Carbon-Button-container">Share Contact</button>
+                    <button onClick={() => {
+                        setMode('mainSection')
+                        onClose()
+                        }} className="Carbon-Button-container">Share Contact</button>
                 </div>
             </div>
             </>
@@ -246,7 +261,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                     </div>
                 <div className="mt-8 mb-4">
-                    <button onClick={() => onClose()} className="Carbon-Button-container">Share Contact</button>
+                    <button onClick={() => {
+                        setMode('mainSection')
+                        onClose()
+                        }} className="Carbon-Button-container">Share Contact</button>
                 </div>
             </div>
 

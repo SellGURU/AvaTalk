@@ -68,7 +68,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
           })}
           <div className="mt-5 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>
-            <p onClick={() =>auth.logout()} className="text-cyan-500 ms-2">Log out</p>
+            <p onClick={() =>auth.logout()} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
           </div>
 
           <div className="flex items-center text-slate-400 text-sm mt-5 justify-center">Version:{PackageJson.description}{PackageJson.version}</div>
