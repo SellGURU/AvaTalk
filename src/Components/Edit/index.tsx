@@ -49,7 +49,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "AI Setting",
       icon: "aiSetting.svg",
-      link: "",
+      link: "ai-setting",
       description: "Customize AI settings.",
     },
     {
