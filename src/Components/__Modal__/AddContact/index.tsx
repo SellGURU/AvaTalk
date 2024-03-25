@@ -102,7 +102,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             <div className={`${theme}-Profile-closeIcon`}></div>
           </Button>
         </div>
-        <div className="my-4">
+        <div className="mb-4 mt-14">
           <TextField
             value={formData.fullName}
             onChange={handleInputChange}
@@ -149,6 +149,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
           ></TextField>
         </div>
         <div className="mt-4">
+          <p className="Carbon-TextField-label mb-1">Your Location</p>
           <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
         </div>
         <div className="mt-4">
@@ -208,7 +209,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             placeholder="Select tag..."
             theme="Carbon"
           >
-            <div className="flex justify-start overflow-x-scroll max-h-[120px] items-baseline flex-wrap py-4 gap-2 px-2">
+            <div className="flex hiddenScrollBar justify-start overflow-x-scroll max-h-[120px] items-baseline flex-wrap py-4 gap-2 px-2">
               {allTags.filter((el) =>!selectedTags.includes(el)).map((item) => {
                 return (
                   <>
@@ -227,7 +228,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
         <div className="mt-4">
           <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
         </div>
-        <div className="mt-10">
+        <div className="mt-10 mb-6">
           <Button onClick={handleAction} theme="Carbon">
             <div>{mode === "add" ? "Add Contact" : "Save Changes"}</div>
           </Button>

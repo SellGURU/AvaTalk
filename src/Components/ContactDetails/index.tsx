@@ -6,11 +6,14 @@ import { AddContact, DeleteContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
+import AddTag from "../__Modal__/AddTag";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
   const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
+  const [showAddTagModal, setShowAddTagModal] = useState(false);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
   const { contactId } = useParams();
@@ -74,12 +77,12 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   return (
     <div>
       <div className={`${theme}-ContactDetails-infoContainer`}>
-        <BackIcon theme={theme} title="Contact info"></BackIcon>
+        <BackIcon theme={theme} title="Contact info" ></BackIcon>
       </div>
       <div className={`${theme}-ContactDetails-container2`}>
-        <div className={`${theme}-ContactDetails-container3`}>
-          <div className={`${theme}-ContactDetails-contactImageContainer`}>
-            <img src={contact?.photo} alt={contact?.fullName} />
+        <div className={`${theme}-ContactDetails-container3`}>      
+          <div className={`${theme}-Profile-ProfilePictureSection`}>
+            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture`} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div className={`${theme}-ContactDetails-importIcon`}></div>
@@ -105,13 +108,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
               </div>
               :undefined}
-              {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center">
+              {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center cursor-pointer">
                 <div id="tags" className="text-gray-700 -mt-2">...</div>
               </div>}
               </>
             )
           })}
-          {showMoreTages && <div id="tags"  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll max-h-[110px] w-[123px]">
+          {showMoreTages && <div id="tags"  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll hiddenScrollBar max-h-[110px] w-[123px]">
             {contact?.tags.map((item,index) => {
               return (
                 <>
@@ -127,20 +130,24 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               )
             })}
           </div>}          
-          <Button theme="Carbon-Show">Add Tag</Button>
+          <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button>
         </div>
         <div className={`${theme}-ContactDetails-container4`}>
-          <div className={`${theme}-ContactDetails-container5`}>
+          <div className={`${theme}-ContactDetails-container5`} onClick={() => {
+                window.open(contact?.phone); 
+              }}>
             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
               <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
             </div>
-            <p className={`${theme}-ContactDetails-textItem`}>{contact?.phone}</p>
+            <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.phone}</p>
           </div>
-          <div className={`${theme}-ContactDetails-container5`}>
+          <div className={`${theme}-ContactDetails-container5`} onClick={() => {
+                window.open(contact?.email); 
+              }}>
             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
               <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
             </div>
-            <p className={`${theme}-ContactDetails-textItem`}>{contact?.email}</p>
+            <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.email}</p>
           </div>
 
           {showMore && (
@@ -199,6 +206,16 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           setShowDeleteContactModal(false);
         }}
       />
+      <AddTag
+        theme="Carbon"
+        isOpen={showAddTagModal}
+        onClose={() => {
+          setShowAddTagModal(false);
+        }}
+        addTag={(tag) => {
+          setTags([...tags,tag])
+        }}
+      ></AddTag>
     </div>
   );
 };
