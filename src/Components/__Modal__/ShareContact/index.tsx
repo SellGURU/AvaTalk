@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Button } from 'symphony-ui';
 import { useAuth } from '../../../hooks/useAuth';
-import QRCode from 'react-qr-code';
+// import QRCode from 'react-qr-code';
 import { toast } from 'react-toastify';
 import { TextField } from '../..';
 import { useFormik } from 'formik';
+import "@bitjson/qr-code"
 import * as Yup from "yup";
 import html2canvas from 'html2canvas';
-
+import QRCode from 'qrcode.react';
 interface ShareContactProps {
     isOpen : boolean
     onClose: () => void
@@ -69,7 +70,16 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                         value={authContext.currentUser.resolveLink()}
                         viewBox={`0 0 256 256`}
-                        />
+                        bgColor='#F3F4F6'
+                        fgColor='#534496'
+                        imageSettings={{
+                            src:'./icons/logo.png',
+                            excavate:true,
+                            width:65,
+                            height:65
+                        }}
+                        >
+                        </QRCode>                      
                 </div>
                 <div className={`${theme}-ShareContact-Cards`}>
                     <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('smsSection')}}>
