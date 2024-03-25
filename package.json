@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bitjson/qr-code": "^1.0.2",
     "@types/react-image-gallery": "^1.2.4",
     "@types/react-modal": "^3.16.3",
     "@types/sortablejs": "^1.15.7",
