@@ -49,7 +49,17 @@ const Login = () => {
     codePhone: "+1",
   });  
   function handleSubmit() {
-    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
+    let resolvePhoneOrEnail = null
+    if(formik.values.emailOrPhone.includes('@')){
+      resolvePhoneOrEnail = {
+        email:formik.values.emailOrPhone
+      }
+    }else {
+      resolvePhoneOrEnail = {
+        mobile_number:formik.values.emailOrPhone
+      }      
+    }
+    Auth.get_Login_code(resolvePhoneOrEnail).then(() => {
       authContext.verificationHandler({
         emailOrPhone: formik.values.emailOrPhone
       })
@@ -57,13 +67,13 @@ const Login = () => {
     })
   }
   const handleGoogleLogin = () => {
-    Auth.login({mobile_number:'',code:'1254368'}).then((res) => {
-        authContext.verificationHandler({
-          emailOrPhone: 'email@email.com'
-        })      
-        authContext.login(res.data.token)
-        navigate("/register");
-    })    
+    // Auth.login({mobile_number:'',code:'1254368'}).then((res) => {
+    //     authContext.verificationHandler({
+    //       emailOrPhone: 'email@email.com'
+    //     })      
+    //     authContext.login(res.data.token)
+    //     navigate("/register");
+    // })    
   }
   setTimeout(() => {
     setshowSplash(false)

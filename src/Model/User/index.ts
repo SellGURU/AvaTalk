@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { SharingModType } from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
+import { Auth } from "../../Api";
 
 interface Information {
     firstName:string;
@@ -32,7 +33,7 @@ class User {
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
     public resolveImageUrl() {
-        if(this.information?.imageurl!= ''){
+        if(this.information?.imageurl!= '' && this.information?.imageurl!= null){
             return this.information?.imageurl
         }
         return `https://ui-avatars.com/api/?name=${this.information?.firstName}+${this.information?.lastName}`
@@ -43,7 +44,7 @@ class User {
         this.syncToLocalStorage()
     }
     public resolveBackImageUrl() {
-        if(this.information?.banelImage!= ''){
+        if(this.information?.banelImage!= '' && this.information?.banelImage!= null){
             return this.information?.banelImage
         }
         return '/Carbon/BackgroundProfileImage.png'       
@@ -69,6 +70,7 @@ class User {
         }
     }    
     public updateImageurl(base64Image:string|ArrayBuffer|null) {
+        Auth.updateProfilePic(base64Image as string)
         if(this.information){
             this.information.imageurl= base64Image as string
             this.syncToLocalStorage()
@@ -76,6 +78,7 @@ class User {
     }
 
     public updateBackgroundurl(base64Image:string|ArrayBuffer|null) {
+        Auth.updateBackPic(base64Image as string)
         if(this.information){
             this.information.banelImage= base64Image as string
             this.syncToLocalStorage()
@@ -90,6 +93,7 @@ class User {
             this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
         }
         this.boxs.push(newBox)
+        Auth.addBox(newBox)
         toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }
