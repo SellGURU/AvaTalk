@@ -79,6 +79,7 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
+          <p className="Carbon-TextField-label mb-1">Your Location</p>
           <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
         </div>
         <div className="mt-3 px-6">

@@ -2,13 +2,13 @@
   @apply w-10 h-10 p-2 rounded-full cursor-pointer btnInnerShadowsDark;
 }
 .Carbon-ContactDetails-infoContainer {
-  @apply flex items-center w-full space-x-4 absolute px-6 top-8;
+  @apply flex items-center w-full space-x-4 absolute px-6 top-0;
 }
 .Carbon-ContactDetails-container2 {
   @apply hiddenScrollBar h-dvh overflow-y-scroll pb-[160px] flex flex-col   items-center mt-[60px];
 }
 .Carbon-ContactDetails-container3 {
-  @apply flex items-center space-x-4 mb-[8px] -mr-9;
+  @apply flex items-center space-x-4 mt-8 mb-[8px] -mr-9;
 }
 .Carbon-ContactDetails-contactImageContainer {
   @apply borderBox-Gray boxShadow-Gray rounded-full;
@@ -17,7 +17,7 @@
   @apply flex flex-col items-center space-y-[9px];
 }
 .Carbon-ContactDetails-showExibitionconContainer {
-  @apply flex items-center relative gap-2 justify-between mb-[20px];
+  @apply flex items-center relative gap-2 justify-between mb-[20px] ;
 }
 .Carbon-ContactDetails-exibitionconContainer {
   @apply flex items-center overflow-x-hidden justify-center w-auto space-x-[2px] h-8 rounded-[47px] bg-amber-400;
