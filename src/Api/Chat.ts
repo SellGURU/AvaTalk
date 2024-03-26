@@ -23,8 +23,8 @@ class Chat extends Api {
         return response.json()
     }
     public static showList(botid:string|null,submit:(res:any) => void) {
-        this.post('/show_chat_list',{botid:botid}).then(res => {
-            submit(res)
+        this.post('/show_chat_list',{botid:botid}).then(() => {
+            submit([])
         })
     }    
     public static async flowMock(data:any){

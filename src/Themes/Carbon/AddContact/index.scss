@@ -1,8 +1,9 @@
 .Carbon-AddContact-container {
-  @apply h-[80vh] hiddenScrollBar p-5 overflow-y-scroll;
+  @apply h-[80vh] hiddenScrollBar overflow-y-scroll;
 }
 .Carbon-AddContact-buttonContainer {
-  @apply flex justify-between items-center;
+  z-index: 2000;
+  @apply flex justify-between items-center fixed pb-2 bg-white w-[410px];
 }
 .Carbon-AddContact-title {
   @apply text-gray-700 text-left font-[600] text-[16px] leading-[24px];

@@ -1,7 +1,7 @@
 {
   "name": "card-visit",
   "private": true,
-  "version": "0.4.11",
+  "version": "0.5.0",
   "description": "Beta-",
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bitjson/qr-code": "^1.0.2",
     "@types/react-image-gallery": "^1.2.4",
     "@types/react-modal": "^3.16.3",
     "@types/sortablejs": "^1.15.7",
@@ -23,6 +24,7 @@
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",
     "litepicker": "^2.0.12",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-animation": "^1.2.2",
     "react-calendar": "^4.8.0",

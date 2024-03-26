@@ -49,7 +49,16 @@ const CreateAccount = () => {
     initialValues: initialValue,
     validationSchema,
     onSubmit: (values) => {
-      Auth.register({ first_name: values.FirstName, last_name: values.LastName, mobile_number: values.Phone, job_title: values.JobTitle, company_name: values.CompanyName, location: values.YourLocation, profile_pic: values.PrifileImage }).then(() => {
+      Auth.register(
+        { first_name: values.FirstName,
+          last_name: values.LastName,
+          mobile_number:authContext.varification.emailOrPhone.includes('@')? values.Phone:authContext.varification.emailOrPhone,
+          job_title: values.JobTitle,
+          company_name: values.CompanyName, 
+          location: values.YourLocation, 
+          profile_pic: values.PrifileImage,
+          email:authContext.varification.emailOrPhone.includes('@')? authContext.varification.emailOrPhone:values.email
+        }).then((res) => {
         const newUser = new User({
           firstName:values.FirstName,
           lastName:values.LastName,
@@ -64,6 +73,7 @@ const CreateAccount = () => {
           workPhone:''
         })
         authContext.setUser(newUser)
+        authContext.login(res.data.access_token)
         navigate('/?splash=false')
       });
     },
