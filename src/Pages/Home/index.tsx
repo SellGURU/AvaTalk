@@ -18,9 +18,6 @@ const Home = () => {
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
     useConstructor(() => {
-        // Auth.getBoxs((res) => {
-        //     authContext.currentUser.setBox(res)
-        // })
         const resolveSocial: Array<Box> = [];
         Auth.showProfile((data) => {
             data.boxs.map((item:any) => {
@@ -41,7 +38,8 @@ const Home = () => {
                     lng:33
                 },
                 workEmail:data.information.work_email,
-                workPhone:data.information.work_mobile_number
+                workPhone:data.information.work_mobile_number,
+                userId:data.information.created_userid
             })
             authContext.currentUser.setBox(resolveSocial)
         })

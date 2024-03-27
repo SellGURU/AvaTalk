@@ -10,7 +10,7 @@ import { Outlet, useNavigate,useSearchParams } from 'react-router-dom';
 // import { dragEnd, dragOver, dragStart, useConstructor} from '../../help';
 import ShareContact from '../__Modal__/ShareContact';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
-import { useConstructor } from '../../help';
+import { boxProvider, useConstructor } from '../../help';
 import Share from '../../Api/Share';
 import { Spinners } from '..';
 import ToturialsBox from '../ToturialsBox';
@@ -81,18 +81,51 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [shareUser,setShareUser] = useState(authContext.currentUser)
   useConstructor(() => {
     if(mode == 'share') {
-      Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
-        const shareUser = new User(res.information)
-        setShareUser(shareUser)
-        if(localStorage.getItem("showTotorial"+searchParams.get('user'))){
-          setShowToturial(false)
-        }else{
-          setShowToturial(true)
-          localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
-        }
-        setIsLoading(false)
-        shareUser.setBox(boxs,{isShare:true})
-      })      
+      // Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
+      //   const shareUser = new User(res.information)
+      //   setShareUser(shareUser)
+      //   if(localStorage.getItem("showTotorial"+searchParams.get('user'))){
+      //     setShowToturial(false)
+      //   }else{
+      //     setShowToturial(true)
+      //     localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
+      //   }
+      //   setIsLoading(false)
+      //   shareUser.setBox(boxs,{isShare:true})
+      // })      
+      const resolveSocial: Array<Box> = [];
+      Share.getShareData('/presentation_info/user='+searchParams.get('user'),(data) => {
+            data.boxs.map((item:any) => {
+                const newBox = boxProvider(item);
+                resolveSocial.push(newBox);
+            })
+            const information = {
+                firstName:data.information.first_name,
+                lastName:data.information.last_name,
+                phone:data.information.mobile_number,
+                personlEmail:data.information.email,
+                company:data.information.company_name,
+                job:data.information.job_title,
+                banelImage:data.information.back_ground_pic,
+                imageurl:data.information.profile_pic,
+                location:{
+                    lat:33,
+                    lng:33
+                },
+                workEmail:data.information.work_email,
+                workPhone:data.information.work_mobile_number
+            }
+            const shareUser = new User(information)
+            setShareUser(shareUser) 
+            if(localStorage.getItem("showTotorial"+searchParams.get('user'))){
+              setShowToturial(false)
+            }else{
+              setShowToturial(true)
+              localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
+            }                       
+            shareUser.setBox(resolveSocial,{isShare:true})
+            setIsLoading(false)
+      })
     }
   })
   return (

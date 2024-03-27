@@ -16,6 +16,7 @@ interface Information {
     personlEmail:string;
     workEmail:string;
     workPhone:string
+    userId?:string
 }
 
 interface Location {
@@ -99,6 +100,7 @@ class User {
     }
     public removeBox(newBox:Box) {
         this.boxs = this.boxs.filter((item) => item.getTypeName() != newBox.getTypeName())
+        Auth.deleteBox(newBox.getTypeName())
         // this.syncToLocalStorage()
     }
     public setBox(newBoxs:Array<Box>,config?:Config){
@@ -108,7 +110,7 @@ class User {
         }
     }
     public resolveLink() {
-        return location.hostname+'/#/share/?user='+this.information?.firstName
+        return location.hostname+':5173'+'/#/share/?user='+this.information?.userId
     }
 } 
 export default User

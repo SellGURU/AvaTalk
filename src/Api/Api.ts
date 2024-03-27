@@ -15,6 +15,12 @@ class Api {
     });
     return response;
   }
+
+  protected static get(url:string) {
+    toast.loading('pending ...')
+    const response = axios.get(this.base_url+url);
+    return response;    
+  }
 }
 
 export default Api;
