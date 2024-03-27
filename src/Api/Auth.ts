@@ -127,6 +127,12 @@ class Auth extends Api {
       console.log(res)
     })
   }
+
+  static deleteBox(boxType:string) {
+    this.post('/delete_more_info',{type_name:boxType}).then(() => {
+
+    })
+  }
 }
 
 export default Auth;

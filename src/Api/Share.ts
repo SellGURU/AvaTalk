@@ -14,6 +14,12 @@ class Share extends Api {
         resolve(res.data,resolveBoxs)
         })
     }
+
+    static getShareData(url:string,resolve:(res:any) => void) {
+        this.get(url).then((res) => {
+            resolve(res.data)
+        })
+    }
 }
 
 export default Share

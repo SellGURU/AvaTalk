@@ -45,7 +45,9 @@ const Verification = () => {
                             navigate("/register");
                         }else{
                             authContext.login(res.data.access_token)
-                            navigate("/?splash=false");
+                            setTimeout(() => {
+                                navigate("/?splash=false");
+                            }, 300);
                         }
                     })
                 }}
