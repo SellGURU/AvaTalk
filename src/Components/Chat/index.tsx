@@ -20,8 +20,8 @@ const Chat: React.FC<Props> = ({ theme }) => {
   const [activeView, setActiveView] = useState("Visitors Chat History");
 
   useConstructor(() => {
-    ChatApi.showList('115',(res) => {
-      setChats(res.data)
+    ChatApi.showList('115',() => {
+      setChats([])
     })
     // setIsLoading(false);
   });
@@ -74,8 +74,8 @@ const Chat: React.FC<Props> = ({ theme }) => {
   const handleToggleButtonClick = (buttonText: string) => {
     setActiveView(buttonText);
     setChats([])
-    ChatApi.showList('115',(res) => {
-      setChats(res.data)
+    ChatApi.showList('115',() => {
+      setChats([])
     })    
   };
   return (

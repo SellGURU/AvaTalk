@@ -6,8 +6,9 @@ import Api from "./Api";
 
 interface LoginData {
   // email: string | null;
-  mobile_number: string | null;
-  code?: string;
+  mobile_number?: string | null;
+  email?:string;
+  entered_code?: string;
 }
 interface Location {
   lat: number;
@@ -21,6 +22,7 @@ interface RegisterData {
   company_name: string | null;
   location: Location | null;
   profile_pic: string | null;
+  email:string | null
 }
 
 // interface ContactType {
@@ -38,7 +40,7 @@ interface RegisterData {
 
 class Auth extends Api {
   static login(data: LoginData) {
-    const response = this.post("/login", data);
+    const response = this.post("/check_Login_code", data);
     return response;
   }
   static get_Login_code(data: LoginData) {
@@ -64,6 +66,12 @@ class Auth extends Api {
       });
       resolve(resolveSocial);
     });
+  }
+
+  static showProfile(resolve: (data:any) => void){
+    this.post('/show_profile',{}).then(res => {
+      resolve(res.data)
+    })
   }
 
   static getAllContacts(resolve: (data: Array<Contact>) => void) {
@@ -96,6 +104,28 @@ class Auth extends Api {
     this.post("/tagDetails", {}).then((res) => {
       resolve(res.data);
     });
+  }
+
+  static updateProfilePic(profile_pic:string){
+    this.post('/change_profile_pic',{profile_pic:profile_pic}).then(res => {
+      console.log(res)
+    })
+  }
+
+  static updateBackPic(profile_pic:string){
+    this.post('/change_back_ground_pic',{back_ground_pic:profile_pic}).then(res => {
+      console.log(res)
+    })
+  }
+  
+  static addBox(box:Box) {
+    this.post('/update_more_info',{
+      title:box.getTitle(),
+      type_name:box.getTypeName(),
+      content:box
+    }).then(res => {
+      console.log(res)
+    })
   }
 }
 
