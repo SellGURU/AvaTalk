@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
@@ -5,6 +6,8 @@ import { useContext , useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Auth } from "../../../Api";
+import { Location } from "../../../Types";
 
 
 const validationSchema = Yup.object().shape({
@@ -79,22 +82,28 @@ const SettingAccount =() => {
                 <div className="mt-4">
                     <Button onClick={() => {
                         navigate(-1)
+                        Auth.updateYourAccount({
+                            user_id:context.currentUser.information?.userId as string,
+                            email:context.currentUser.information?.personlEmail as string,
+                            first_name:formik.values.firstname as string,
+                            last_name:formik.values.lastname as string,
+                            mobile_number:formik.values.phone as string,
+                            language:'English',
+                            state:true
+                        })
                         context.currentUser.updateInformation({
                             banelImage:context.currentUser.information?.banelImage as string,
-                            company:'',
+                            company:context.currentUser.information?.company as string,
                             firstName: formik.values.firstname as string,
-                            workPhone:'',
-                            imageurl:'',
-                            job:'',
+                            workPhone:context.currentUser.information?.workEmail as string,
+                            imageurl:context.currentUser.information?.imageurl as string,
+                            job:context.currentUser.information?.job as string,
                             lastName:formik.values.lastname as string,
-                            location:{
-                                lat:0,
-                                lng:0
-                            },
+                            location:context.currentUser.information?.location as Location,
                             personlEmail:formik.values.personlEmail as string,
                             phone:formik.values.phone as string,
-                            workEmail:''
-
+                            workEmail:context.currentUser.information?.workEmail as string,
+                            userId:context.currentUser.information?.userId as string
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>

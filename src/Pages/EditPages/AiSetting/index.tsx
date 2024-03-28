@@ -4,14 +4,16 @@ import { BackIcon, TextField } from "../../../Components";
 import { useFormik } from "formik";
 import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { Auth } from "../../../Api";
+import { useConstructor } from "../../../help";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
   // if (currentBox == undefined) {
   //   currentBox = new AboutBox("about", "");
   // }  
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [value, setValue] = useState<any>("**Hello world!!!**");
   const initialValue = {
     title: 'Ai Setting',
@@ -22,7 +24,11 @@ const EditAiSetting = () => {
       console.log(values);
     },
   });  
-
+  useConstructor(() => {
+    Auth.showAiSetting((res) => {
+      console.log(res)
+    })
+  })
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
@@ -53,7 +59,12 @@ const EditAiSetting = () => {
             />
           </div>
           <div className="px-6 mt-10">
-            <Button onClick={() => navigate(-1)} theme="Carbon">
+            <Button onClick={() => {
+              Auth.updateAiSetting({
+                name:formik.values.title,
+                ai_knowledge:value
+              })
+            }} theme="Carbon">
               Save Change
             </Button>
           </div>

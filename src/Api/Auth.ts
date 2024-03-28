@@ -25,6 +25,21 @@ interface RegisterData {
   email:string | null
 }
 
+
+interface AiSetting {
+  name:string,
+  ai_knowledge:string
+}
+
+interface AccountInfo {
+  user_id:string  
+  first_name:string
+  last_name:string
+  email:string
+  mobile_number:string
+  language:string
+  state:boolean
+}
 // interface ContactType {
 //   name: string;
 //   email: string;
@@ -132,6 +147,17 @@ class Auth extends Api {
     this.post('/delete_more_info',{type_name:boxType}).then(() => {
 
     })
+  }
+
+  static updateAiSetting(data:AiSetting) {
+    this.post('/update_ai_setting',data)
+  }
+  static showAiSetting(resolve:(data:any) =>void) {
+    this.post('/show_ai_setting',{}).then((res) => resolve(res.data))
+  }  
+
+  static updateYourAccount(data:AccountInfo){
+    this.post('/update_your_account',data)
   }
 }
 

@@ -39,4 +39,8 @@ type MenuType = "profile" | "contacts" | "chats" | "status" | "settings";
 
 type SharingModType = 'Default Mode'|'Lead Mode'|'Lead Mode'
 
-export type { PhoneCountry, MenuType, Tag, Contact, chat ,SharingModType};
+type Location = {
+    lat:number,
+    lng:number
+}
+export type { PhoneCountry, MenuType, Tag, Contact, chat ,SharingModType,Location};

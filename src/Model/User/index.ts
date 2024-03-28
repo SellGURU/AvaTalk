@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { SharingModType } from "../../Types";
+import { SharingModType ,Location} from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
 import { Auth } from "../../Api";
@@ -19,10 +19,10 @@ interface Information {
     userId?:string
 }
 
-interface Location {
-    lat:number,
-    lng:number
-}
+// interface Location {
+//     lat:number,
+//     lng:number
+// }
 
 interface Config {
     isShare:boolean

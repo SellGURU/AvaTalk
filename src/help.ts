@@ -52,6 +52,9 @@ const boxProvider = (box: any) => {
     case "GalleryBox": {
       return Object.assign(new GalleryBox("simple", []), box);
     }
+    case "GoogleMapBox": {
+      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0}), box);
+    }    
     default: {
       return Object.assign(new Box("simple"), box);
     }
