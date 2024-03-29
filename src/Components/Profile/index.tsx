@@ -15,6 +15,7 @@ import Share from '../../Api/Share';
 import { Spinners } from '..';
 import ToturialsBox from '../ToturialsBox';
 import { publish } from '../../utils/event';
+import { Auth } from '../../Api';
 
 interface ProfileProps {
   theme?: string;
@@ -82,6 +83,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [shareUser,setShareUser] = useState(authContext.currentUser)
   useConstructor(() => {
     if(mode == 'share') {
+
       // Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
       //   const shareUser = new User(res.information)
       //   setShareUser(shareUser)
@@ -114,7 +116,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                     lng:33
                 },
                 workEmail:data.information.work_email,
-                workPhone:data.information.work_mobile_number
+                workPhone:data.information.work_mobile_number,
+                userId:data.information.created_userid
             }
             const shareUser = new User(information)
             setShareUser(shareUser) 
@@ -125,6 +128,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
             }                       
             shareUser.setBox(resolveSocial,{isShare:true})
+            Auth.addEvent({
+              userid:shareUser.information?.userId as string,
+              event_type:'page_view',
+              sub_event_category:'view_link'
+            })            
             setIsLoading(false)
       })
     }

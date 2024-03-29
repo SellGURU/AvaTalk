@@ -41,6 +41,13 @@ interface AccountInfo {
   language:string
   state:boolean
 }
+
+interface AddEvent {
+  event_type: 'page_view' | 'add_contact' | 'exchange_contact' | 'more_info',
+  userid: string,
+  sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
+                      'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'
+}
 // interface ContactType {
 //   name: string;
 //   email: string;
@@ -161,6 +168,14 @@ class Auth extends Api {
 
   static updateYourAccount(data:AccountInfo){
     this.post('/update_your_account',data)
+  }
+
+  static addEvent(event:AddEvent) {
+    this.post('/add_event',event)
+  }
+
+  static getAnalytics(){
+    this.post('/analytics',{from_date:'2024-01-28',to_date:'2024-02-29'})
   }
 }
 
