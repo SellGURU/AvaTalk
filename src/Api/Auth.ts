@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "../Model";
+import { removeTokenFromLocalStorage } from "../Storage/Token";
 import { Contact, Tag } from "../Types";
 import { boxProvider } from "../help";
 import Api from "./Api";
@@ -69,7 +70,9 @@ class Auth extends Api {
   }
 
   static logout() {
-    this.post("/logout").then(() => {});
+    this.post("/logout").then(() => {
+      removeTokenFromLocalStorage();
+    });
   }
 
   static getBoxs(resolve: (data: Array<Box>) => void) {

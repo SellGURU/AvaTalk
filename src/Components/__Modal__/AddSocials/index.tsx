@@ -12,7 +12,7 @@ interface AddSocialsProps {
     title:string
     theme?:string
     label?:string
-    onComplete:() =>void
+    onComplete:(url:string) =>void
     onAfterOpen?:() =>void    
 }
 const validationSchema = Yup.object().shape({
@@ -59,7 +59,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,label,value,title,onComple
               <Button onClick={() => {
                 formik.setFieldValue('url','')
                 onClose()
-                onComplete()
+                onComplete(formik.values.url)
                 }} theme='Carbon'>save</Button>            
             </div>
         </Modal>        

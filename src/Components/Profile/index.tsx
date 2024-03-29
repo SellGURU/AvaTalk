@@ -74,6 +74,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
     setTimeout(() => {
         const el = document.getElementById('sortable');
         Sortable.create(el,{
+          animation: 150,
           filter: ".ignore-elements"
         });      
     }, 500);
@@ -229,7 +230,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <div className='flex gap-x-2 items-center w-full '>
               <div className={`${(showToturial && toturialStep == 0) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
                 <Button onClick={!showToturial?() => {
-                  navigate('/presentation')
+                  if(mode == 'share'){
+                    navigate('/presentation/?user='+authContext.currentUser.information?.userId)
+                  }else {
+                    navigate('/presentation')
+                  }
                 }:() =>{}} theme="Carbon">
                   <div className={`${theme}-Profile-StartPresentionBtnVector`}></div>
                   <div>

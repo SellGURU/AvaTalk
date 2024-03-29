@@ -2,9 +2,10 @@
 /* eslint-disable-next-line no-unused-vars*/
 
 import { createContext, PropsWithChildren, useState } from "react";
-import { removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage/Token";
+import {removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage/Token";
 import {User} from "../Model";
 import { reolveJsonToObject } from "../help";
+import { Auth } from "../Api";
 
 interface VerificationProps {
   emailOrPhone:string;
@@ -32,7 +33,8 @@ export const AuthContext = createContext<AuthContextProps>({
   verificationHandler: () => {},
   login: () => {},
   logout: () => {
-    localStorage.clear()
+    // Auth.logout()
+    // localStorage.clear()
   },
 });
 
@@ -53,6 +55,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const userIsLoggedIn = !!token && !!user.information;
 
   function logoutHandler() {
+    Auth.logout()
     setToken(null);
     // localStorage.removeItem("token");
     removeTokenFromLocalStorage();

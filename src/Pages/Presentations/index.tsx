@@ -1,6 +1,6 @@
 import { Presentation } from "../../Components";
 
-const Presentations = () => {
+const Presentations = () => { 
     return (
         <>
         <Presentation theme="Carbon"/>

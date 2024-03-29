@@ -12,6 +12,9 @@ interface ContentCardProps {
 }
 const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => {
   const [activeDrag,setActiveDrag] = useState(false)
+  const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
+  
+  console.log(os)
   useEffect(() => {
     setTimeout(() => {
       setActiveDrag(false)
@@ -27,11 +30,15 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => 
                 {item.getTitle()}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
-              <div onTouchStart={() => {
-                setActiveDrag(!activeDrag)
-              }} onClick={() => {
-                // setActiveDrag(!activeDrag)
-              }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
+              <div onClick={() => {
+                if(os == 'desctop'){
+                  setActiveDrag(!activeDrag)
+                }                
+              }} onTouchStart={() => {
+                if(os == 'mobile'){
+                  setActiveDrag(!activeDrag)
+                }
+              }} className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div onClick={() => {

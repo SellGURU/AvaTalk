@@ -110,7 +110,7 @@ class User {
         }
     }
     public resolveLink() {
-        return location.hostname+':5173'+'/#/share/?user='+this.information?.userId
+        return location.hostname+'/#/share/?user='+this.information?.userId
     }
 } 
 export default User

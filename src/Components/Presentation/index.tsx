@@ -5,11 +5,13 @@ import FooterPresentation from "../FooterPresentation";
 import { AiAvatar, AudioProvider, BackIcon } from "..";
 import { useAuth } from "../../hooks/useAuth";
 import { chat } from "../../Types";
-import { sendToApi } from "../../help";
+import { sendToApi, useConstructor } from "../../help";
 import { BeatLoader } from "react-spinners";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Setting from '../Setting'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Share from "../../Api/Share";
+import { User } from "../../Model";
 
 interface PresentationProps {
   theme?: string;
@@ -119,6 +121,37 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       setShowSetting(false)
     }
   })
+  const [searchParams] = useSearchParams();
+  const [shareUser,setShareUser] = useState(user.currentUser)
+  const [socials,setSocials] = useState([])
+  useConstructor(() => {
+    const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
+    Share.getShareData('/presentation_info/user='+userid,(data) => {
+        const socials = data.boxs.filter((el:any) => el.type_name == 'SocialBox')[0].socialMedias
+        setSocials(socials)
+        console.log(socials)
+        const information = {
+            firstName:data.information.first_name,
+            lastName:data.information.last_name,
+            phone:data.information.mobile_number,
+            personlEmail:data.information.email,
+            company:data.information.company_name,
+            job:data.information.job_title,
+            banelImage:data.information.back_ground_pic,
+            imageurl:data.information.profile_pic,
+            location:{
+                lat:33,
+                lng:33
+            },
+            workEmail:data.information.work_email,
+            workPhone:data.information.work_mobile_number
+        }
+        const shareUser = new User(information)
+        setShareUser(shareUser) 
+        setIsLoading(false)
+    })    
+  })
+
   return (
     <>
     <div className={`${theme}-Presentation-Container`}>
@@ -139,8 +172,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
           </div>
           <div>
-            <h1 className={`${theme}-Presentation-PresentationName`}>{user.currentUser.information?.firstName}</h1>
-            <p className={`${theme}-Presentation-SubTitle`}>{user.currentUser.information?.job}</p>
+            <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser.information?.firstName}</h1>
+            <p className={`${theme}-Presentation-SubTitle`}>{shareUser.information?.job}</p>
           </div>
           {
             !startChat?
@@ -157,37 +190,51 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           {!startChat ?
             <div className={`${theme}-Presentation-InfoSection`}>
               <div onClick={() => {
-                window.open("+447882959722"); 
+                window.open(shareUser.information?.phone); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-CallVector`}></div>
                 </div>
-                <div className="cursor-pointer">+44 (788)29 59 722</div>
+                <div className="cursor-pointer">{shareUser.information?.phone}</div>
               </div>
               <div onClick={() => {
-                window.open("mailto:Azami@codie.ai"); 
+                window.open("mailto:"+shareUser.information?.personlEmail); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-EmailVector`}></div>
                 </div>
-                <div className="cursor-pointer">Azami@codie.ai</div>
+                <div className="cursor-pointer">{shareUser.information?.personlEmail}</div>
               </div>
               <div onClick={() => {
-                window.open("https://codie.ai/"); 
+                window.open(); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-WebsiteVector`}></div>
                 </div>
                 <div className="cursor-pointer">codie.ai</div>
               </div>
-              <div onClick={() => {
-                window.open('https://www.linkedin.com/in/dr-farzin-azami-0919712b/')
+              {socials.map((item:any) => {
+                return (
+                  <>
+                    <div onClick={() => {
+                        window.open(item.value)
+                      }} className={`${theme}-Presentation-Info`}>
+                        <div className={`${theme}-Presentation-Vectors`}>
+                          <div className={`${theme}-Presentation-LinkedinVector`}></div>
+                        </div>
+                        <div className="cursor-pointer">{item.type}</div>
+                    </div>                 
+                  </>
+                )
+              })}
+              {/* <div onClick={() => {
+                window.open()
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-LinkedinVector`}></div>
                 </div>
                 <div className="cursor-pointer">LinkedIn</div>
-              </div>              
+              </div>               */}
             </div>
           :
             <div className={`${theme}-Presentation-MoreInfoSection ${showMoreInfoSection ? `${theme}-Presentation-fadeIn` : "" }`}>

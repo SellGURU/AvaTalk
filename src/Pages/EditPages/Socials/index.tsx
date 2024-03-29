@@ -193,8 +193,9 @@ const EditSocials = () => {
             isOpen={openNewSocial}
             label={"URL or Username"}
             value={selectItem?.resolveUrl() as string}
-            onComplete={() => {
+            onComplete={(url:string) => {
               const newSocial = selectItem as Social;
+              newSocial.value = url
               if (socials.filter((item) => item.getType() == newSocial.getType()).length == 0) {
                 setSocials([...socials, newSocial]);
               }
