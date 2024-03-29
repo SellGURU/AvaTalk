@@ -15,6 +15,7 @@ import Share from '../../Api/Share';
 import { Spinners } from '..';
 import ToturialsBox from '../ToturialsBox';
 import { publish } from '../../utils/event';
+import { Auth } from '../../Api';
 
 interface ProfileProps {
   theme?: string;
@@ -74,6 +75,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
     setTimeout(() => {
         const el = document.getElementById('sortable');
         Sortable.create(el,{
+          animation: 150,
           filter: ".ignore-elements"
         });      
     }, 500);
@@ -81,6 +83,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
   const [shareUser,setShareUser] = useState(authContext.currentUser)
   useConstructor(() => {
     if(mode == 'share') {
+
       // Share.getShare(searchParams.get('user') as string ,(res,boxs) => {
       //   const shareUser = new User(res.information)
       //   setShareUser(shareUser)
@@ -113,7 +116,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                     lng:33
                 },
                 workEmail:data.information.work_email,
-                workPhone:data.information.work_mobile_number
+                workPhone:data.information.work_mobile_number,
+                userId:data.information.created_userid
             }
             const shareUser = new User(information)
             setShareUser(shareUser) 
@@ -124,6 +128,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
             }                       
             shareUser.setBox(resolveSocial,{isShare:true})
+            Auth.addEvent({
+              userid:shareUser.information?.userId as string,
+              event_type:'page_view',
+              sub_event_category:'view_link'
+            })            
             setIsLoading(false)
       })
     }
@@ -229,7 +238,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <div className='flex gap-x-2 items-center w-full '>
               <div className={`${(showToturial && toturialStep == 0) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
                 <Button onClick={!showToturial?() => {
-                  navigate('/presentation')
+                  if(mode == 'share'){
+                    navigate('/presentation/?user='+authContext.currentUser.information?.userId)
+                  }else {
+                    navigate('/presentation')
+                  }
                 }:() =>{}} theme="Carbon">
                   <div className={`${theme}-Profile-StartPresentionBtnVector`}></div>
                   <div>

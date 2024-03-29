@@ -152,8 +152,10 @@ const sendToApi = (
   Chat.flow({
     text: text,
     language: language,
-    message_key: makeid(15),
-    apikey: "0e218a19f41b4eb689003fa634889a19",
+    // message_key: makeid(15),
+    // apikey: "0e218a19f41b4eb689003fa634889a19",
+    user_bot_id: '',
+    chat_user:'',
     is_silent: false,
     getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })

@@ -10,6 +10,7 @@ import { useConstructor } from "../../help";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
 import { Tag, Contact } from "../../Types";
+import { Contacts } from "../../Api";
 
 interface Props {
   theme?: string;
@@ -25,6 +26,17 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [activeView, setActiveView] = useState("Contact List");
 
   useConstructor(() => {
+    Contacts.showTags((resolveTags) => {
+      setTags(resolveTags.map((el) => {
+        const newTag:Tag = {
+          name:el.title,
+          color:el.color,
+          contacts:el.count,
+          id:'1'
+        }
+        return newTag
+      }))
+    })
     // setIsLoading(true);
 
     // Promise.all([Auth.getAllContacts((data) => setContacts(data)), Auth.getAllTags((data) => setTags(data))])
@@ -136,6 +148,11 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           setShowAddTagModal(false);
         }}
         addTag={(tag) => {
+          Contacts.addTag({
+            title:tag.name,
+            color:tag.color,
+            contact:[]
+          })
           setTags([...tags,tag])
         }}
       ></AddTag>
