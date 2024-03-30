@@ -1,66 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { Area, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, ResponsiveContainer } from "recharts";
-
-const data = [
-  {
-    name: "Jan",
-    view: 10,
-  },
-  {
-    name: "Feb",
-    view: 12,
-  },
-  {
-    name: "Mar",
-    view: 2,
-  },
-  {
-    name: "Apr",
-    view: 6,
-  },
-  {
-    name: "May",
-    view: 20,
-  },
-  {
-    name: "Jun",
-    view: 22,
-  },
-  {
-    name: "Jul",
-    view: 16,
-  },
-  {
-    name: "Aug",
-    view: 5,
-  },
-  {
-    name: "Sep",
-    view: 20,
-  },
-  {
-    name: "Oct",
-    view: 25,
-  },
-  {
-    name: "Nov",
-    view: 7,
-  },
-  {
-    name: "Dec",
-    view: 18,
-  },
-];
 
 interface Props {
   theme?: string;
+  data:Array<any>;
 }
-const AreaChartComponent: React.FC<Props> = ({ theme }) => {
+const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
+  const [resolvedData,setResolvedData] = useState<Array<any>>([])
+  useEffect(() => {
+    setResolvedData(data?.map((el:any) => {
+      return {
+        name:el.month,
+        view:el.count
+      }
+    }))
+  },[data])
   return (
     <div className={`${theme}-AreaChartComponent-container`}>
       <p className={`${theme}-AreaChartComponent-text`}>Page Views</p>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
-          data={data}
+          data={resolvedData}
           margin={{
             top: 10,
             right: 10,

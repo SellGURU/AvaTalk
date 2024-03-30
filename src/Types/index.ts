@@ -33,6 +33,7 @@ interface chat {
   currentconverationid: string;
   instanceid: string;
   audio_file: string;
+  chat_user?:string
 }
 
 type MenuType = "profile" | "contacts" | "chats" | "status" | "settings";

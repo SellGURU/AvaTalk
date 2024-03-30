@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Legend, ResponsiveContainer, Tooltip } from "recharts";
 
 interface DataItem {
@@ -7,31 +8,58 @@ interface DataItem {
   color: string;
 }
 
-const initialData: DataItem[] = [
-  { name: "Link", value: 400, color: "rgba(133, 92, 248, 0.4)" },
-  { name: "QR Code", value: 300, color: "rgba(133, 92, 248, 0.8)" },
-  { name: "Email", value: 300, color: "rgba(38, 50, 56, 1)" },
-  { name: "SMS", value: 200, color: "rgba(38, 50, 56, 0.16)" },
-];
+
 interface Props {
   theme?: string;
+  chartData:Array<any>
 }
-const PiChartComponent: React.FC<Props> = ({ theme }) => {
-  const [data, setData] = useState<DataItem[]>(initialData);
-  const [legendItems, setLegendItems] = useState<boolean[]>(initialData.map(() => true));
+const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
+  const resolveColor = () => {
+    return 'rgba(133, 92, 248, 0.4)'
+  }
+  // const initialData: DataItem[] = chartData.map(el => {
+  //   return {
+  //     name:el.type,
+  //     value:el.count,
+  //     color:resolveColor()
+  //   }
+  // }) 
+  // [
+    // { name: "Link", value: 400, color: "rgba(133, 92, 248, 0.4)" },
+    // { name: "QR Code", value: 300, color: "rgba(133, 92, 248, 0.8)" },
+    // { name: "Email", value: 300, color: "rgba(38, 50, 56, 1)" },
+    // { name: "SMS", value: 200, color: "rgba(38, 50, 56, 0.16)" },
+  // ];  
+  const [data, setData] = useState<DataItem[]>(chartData.map(el => {
+    return {
+      name:el.type,
+      value:el.count,
+      color:resolveColor()
+    }
+  }));
+  useEffect(() => {
+    setData(chartData.map(el => {
+    return {
+      name:el.type,
+      value:el.count,
+      color:resolveColor()
+    }
+  }))
+  },[chartData])
+  const [legendItems, setLegendItems] = useState<boolean[]>(data.map(() => true));
 
   const handleLegendClick = (index: number) => {
     const newLegendItems = [...legendItems];
     newLegendItems[index] = !newLegendItems[index];
     setLegendItems(newLegendItems);
 
-    const newData = initialData.filter((_, dataIndex) => newLegendItems[dataIndex]);
+    const newData = data.filter((_, dataIndex) => newLegendItems[dataIndex]);
     setData(newData);
   };
 
   const renderLegend = () => (
     <ul className=" space-y-2">
-      {initialData.map((entry, index) => (
+      {data.map((entry, index) => (
         <li
           className={`${theme}-PiChartComponent-listItem `}
           key={`legend-${index}`}

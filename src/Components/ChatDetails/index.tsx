@@ -1,5 +1,7 @@
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate} from "react-router-dom"
+import { useConstructor } from "../../help";
+import { Chat } from "../../Api";
 
 interface ChatDetailsProps {
     theme?:string
@@ -7,7 +9,11 @@ interface ChatDetailsProps {
 
 const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
     const navigate = useNavigate();
-
+    useConstructor(() => {
+      Chat.showSelectedChat(window.location.hash.split('/')[2],(res) => {
+        console.log(res)
+      })
+    })
     return (
         <>
           <div className={`${theme}-ChatDetails-container`}>

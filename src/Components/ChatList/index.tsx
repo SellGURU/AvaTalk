@@ -7,10 +7,10 @@ import ChatItem from "../ChatItem";
 // }
 interface DataProps {
   id: string;
-  name: string;
-  date: string;
-  time:string;
-  content:string
+  chat_list_id: string;
+  entry_date: string;
+  entry_time:string;
+  response:string;
 }
 const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
 

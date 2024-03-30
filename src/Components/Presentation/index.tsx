@@ -102,7 +102,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       setIsLoading(false)
     },() => {
       setIsLoading(false)
-    },selectedLang.lan,BLokedIdList)
+    },selectedLang.lan,BLokedIdList,shareUser.information?.userId as string)
   };
   
   useEffect(() => {

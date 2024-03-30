@@ -20,11 +20,22 @@ class Chat extends Api {
         );
         return response.json()
     }
-    public static showList(botid:string|null,submit:(res:any) => void) {
-        this.post('/show_chat_list',{botid:botid}).then(() => {
-            submit([])
+    public static showList(submit:(res:any) => void) {
+        this.post('/show_user_chat_list',{}).then((res) => {
+            submit(res.data)
         })
     }    
+    public static showTestList(submit:(res:any) => void) {
+        this.post('/show_test_chat_list',{}).then((res) => {
+            submit(res.data)
+        })
+    }      
+
+    public static showSelectedChat(chat_list_id:string,submit:(res:Array<any>) => void){
+        this.post('/show_selected_session_message',{chat_list_id:chat_list_id}).then((res) => {
+            submit(res.data)
+        })
+    }
     public static async flowMock(data:any){
        return this.post('/flow_uni',data)
     }
