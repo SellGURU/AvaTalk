@@ -1,12 +1,14 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Litepicker from "../../Litepicker";
 import { Button } from "symphony-ui";
 
-const DatePicker = () => {
-  const [day, setDay] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-  });
+const DatePicker = (props:any) => {
+  // const startDate = new Date()
+  // startDate.setMonth(startDate.getMonth() -1)
+  // const [day, setDay] = useState({
+  //   startDate: startDate,
+  //   endDate: new Date(),
+  // });
 
   return (
     <div className="flex mt-4 space-x-3  items-center ">
@@ -15,10 +17,11 @@ const DatePicker = () => {
           <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" />
           <Litepicker
             className="text-gray-700 text-sm w-56 pl-1 bg-inherit cursor-pointer"
-            value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
+            value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}
             onChange={(value) => {
+              console.log(value)
               const [startDateString, endDateString] = value.split(" - ");
-              setDay({
+              props.setDay({
                 startDate: new Date(startDateString),
                 endDate: new Date(endDateString),
               });
