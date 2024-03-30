@@ -174,8 +174,8 @@ class Auth extends Api {
     this.post('/add_event',event)
   }
 
-  static getAnalytics(resolve:(data:any) => void){
-    this.post('/analytics',{from_date:'2024-01-28',to_date:'2024-03-30'}).then(res => {
+  static getAnalytics(from:string,to:string,resolve:(data:any) => void){
+    this.post('/analytics',{from_date:from,to_date:to}).then(res => {
       resolve(res.data)
     })
   }
