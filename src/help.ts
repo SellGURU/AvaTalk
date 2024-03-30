@@ -135,7 +135,8 @@ const sendToApi = (
   onresolve: (res: any) => void,
   oncatch: () => void,
   language:string,
-  BLokedIdList:MutableRefObject<string[]>
+  BLokedIdList:MutableRefObject<string[]>,
+  userId:string
   ) => {
   const aiChats = chats.filter((item) => item.from == "Ai");
   const newChat: chat = {
@@ -144,18 +145,24 @@ const sendToApi = (
     text: text,
     instanceid: "",
     audio_file: "",
+    chat_user:'',
     currentconverationid: "",
   };
   setChats([...chats, newChat]);
   chats.push(newChat);
-  console.dir(BLokedIdList.current)
+  console.log(window.location.href.includes('?user='))
+  let chatUser = aiChats.length > 0 ? aiChats[aiChats.length - 1].chat_user : undefined
+  if(!window.location.href.includes('?user=')){
+    chatUser =userId
+  }
+  // console.dir(BLokedIdList.current)
   Chat.flow({
     text: text,
     language: language,
-    // message_key: makeid(15),
+    message_key: makeid(15),
     // apikey: "0e218a19f41b4eb689003fa634889a19",
-    user_bot_id: '',
-    chat_user:'',
+    user_bot_id: userId,
+    chat_user:chatUser,
     is_silent: false,
     getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })
@@ -171,6 +178,7 @@ const sendToApi = (
             audio_file: res.answer.audio_file,
             instanceid: res.instanceid,
             currentconverationid: res.currentconverationid,
+            chat_user:res.chat_user
           },
         ]);
         onresolve(res);
