@@ -7,13 +7,13 @@ import { Chat } from "./Api";
 const resolveMenuFromRoute = () => {
   console.log(window.location.pathname.replace("/", "").split("/")[0])
   // console.log(window.location.hash.replace('#/','').split('/')[0])
-  switch (window.location.pathname.replace("/", "").replace("?splash=false", "").split("/")[0]) {
+  switch (window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0]) {
     case "":
       return "profile";
     case "edit":
       return "profile";
     default:
-      return window.location.pathname.replace("/", "").replace("?splash=false", "").split("/")[0];
+      return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
   }
 };
 const resolveNavigation = (item: MenuType, navigate: (route: string) => void) => {
