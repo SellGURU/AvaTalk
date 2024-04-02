@@ -15,7 +15,7 @@ interface Props {
 }
 const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
   const resolveColor = (name:string) => {
-    if(name == 'qr_code') {
+    if(name == 'QR Code') {
       return 'rgba(133, 92, 248, 0.8)'
     }else {
       return 'rgba(133, 92, 248, 0.4)'
