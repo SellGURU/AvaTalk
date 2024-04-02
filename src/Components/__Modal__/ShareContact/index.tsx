@@ -83,13 +83,13 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </QRCode>                      
                 </div>
                 <div className={`${theme}-ShareContact-Cards`}>
-                    <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('smsSection')}}>
+                    <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`} >
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-SmsVector`}></div>
                         </div>
                         Share via SMS 
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems`} onClick={() => {setMode('emailSection')}}>
+                    <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-EmailVector`}></div>
                         </div>
