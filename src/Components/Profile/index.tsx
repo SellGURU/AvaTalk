@@ -264,7 +264,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                  }} next={() => setTotorialStep(1)} title='Presentation' content='By choosing this button, you can view the resume and ask your questions.'></ToturialsBox>
                 :undefined}
               </div>
-              {/* <div className={`${(showToturial && toturialStep == 2) ? 'relative z-50  bg-white p-2 rounded-full ' :''}`}>
+              <div className={`${(showToturial && toturialStep == 2) ? 'relative z-50  bg-white p-2 rounded-full ' :''}`}>
                 <Button onClick={() => {setShowBookMark(true)}} data-mode="calendar" theme='Carbon-back'>
                   <div className={`${theme}-Profile-CalenderBtnVector`}></div>
                 </Button>   
@@ -273,7 +273,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   setShowToturial(false)
                  }} next={() => setTotorialStep(3)} title='Book a Meeting' content='By choosing this button, you can easily set an appointment.'></ToturialsBox>
                 :undefined}                            
-              </div> */}
+              </div>
             </div>
             </>
           }
