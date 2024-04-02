@@ -107,7 +107,17 @@ const SettingAccount =() => {
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>
-                <div className="mt-4 flex items-center cursor-pointer">
+                <div onClick={() => {
+                    Auth.updateYourAccount({
+                        user_id:context.currentUser.information?.userId as string,
+                        email:context.currentUser.information?.personlEmail as string,
+                        first_name:formik.values.firstname as string,
+                        last_name:formik.values.lastname as string,
+                        mobile_number:formik.values.phone as string,
+                        language:'English',
+                        state:false
+                    })                    
+                }} className="mt-4 flex items-center cursor-pointer">
                     <p className="text-cyan-500 ms-2 text-sm font-medium">Delete Your Account</p>
                 </div>
             </div>         
