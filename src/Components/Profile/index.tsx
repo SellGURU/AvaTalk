@@ -338,7 +338,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       {mode == 'review' || mode == 'share' ?
         <div className=''>
           <Button onClick={() => {
-            window.open('https://ar-card-eight.vercel.app/#detect1')
+            window.open('https://ar.avatalk.me/#detect1')
           }} data-mode={(showToturial && toturialStep == 1)?"toturials":''} theme='Carbon-Ar'>
             <div>
               <div className={`${theme}-Ar-Button-icon`}></div>
