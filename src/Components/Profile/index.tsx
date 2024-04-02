@@ -128,11 +128,20 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
             }                       
             shareUser.setBox(resolveSocial,{isShare:true})
-            Auth.addEvent({
-              userid:shareUser.information?.userId as string,
-              event_type:'page_view',
-              sub_event_category:'view_link'
-            })            
+            console.log(searchParams.get('viewBy'))
+            if(searchParams.get('viewBy')){
+              Auth.addEvent({
+                userid:shareUser.information?.userId as string,
+                event_type:'page_view',
+                sub_event_category:searchParams.get('viewBy') as any
+              })   
+            }else{
+              Auth.addEvent({
+                userid:shareUser.information?.userId as string,
+                event_type:'page_view',
+                sub_event_category:'view_link'
+              })            
+            }
             setIsLoading(false)
       })
     }
@@ -318,7 +327,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
 
             {shareUser.boxs?.map((item:Box) => {
               return (
-                <ContentCard item={item} mod={mode} theme="Carbon" >
+                <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
                 </ContentCard>              
               )
             })}
