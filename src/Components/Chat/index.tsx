@@ -21,6 +21,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
 
   useConstructor(() => {
     ChatApi.showList((res) => {
+      // if(res.cha)
       setChats(res.chats)
     })
     // setIsLoading(false);
