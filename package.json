@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@bitjson/qr-code": "^1.0.2",
@@ -21,6 +22,7 @@
     "axios-mock-adapter": "^1.22.0",
     "cropperjs": "^1.6.1",
     "dayjs": "^1.11.10",
+    "express": "^4.19.2",
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",
     "litepicker": "^2.0.12",
