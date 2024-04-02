@@ -43,7 +43,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Google Map",
       icon: "location2.svg",
-      link: "googlemap",
+      link: "",
       description: "Share a store or office location.",
     },
     {
