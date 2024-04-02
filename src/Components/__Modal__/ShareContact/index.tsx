@@ -11,6 +11,7 @@ import "@bitjson/qr-code"
 import * as Yup from "yup";
 import html2canvas from 'html2canvas';
 import QRCode from 'qrcode.react';
+import { Auth } from '../../../Api';
 interface ShareContactProps {
     isOpen : boolean
     onClose: () => void
@@ -68,16 +69,16 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                     <QRCode
                         size={256}
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                        value={authContext.currentUser.resolveLink()}
+                        value={authContext.currentUser.resolveLink()+'&viewBy=view_qr_code'}
                         viewBox={`0 0 256 256`}
                         bgColor='#F3F4F6'
                         fgColor='#534496'
-                        imageSettings={{
-                            src:'./icons/logo.png',
-                            excavate:true,
-                            width:65,
-                            height:65
-                        }}
+                        // imageSettings={{
+                        //     src:'./icons/logo.png',
+                        //     excavate:true,
+                        //     width:65,
+                        //     height:65
+                        // }}
                         >
                         </QRCode>                      
                 </div>
@@ -96,6 +97,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                     </div>
                     <div onClick={() => {
                         navigator.clipboard.writeText(authContext.currentUser.resolveLink())
+                        Auth.addEvent({event_type:'share_link','sub_event_category':'clipboard','userid':authContext.currentUser.information?.userId as string})
                         toast.success("Copied Successfully")
                     }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
@@ -126,8 +128,9 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         navigator.share({
                             title:'Contact',
                             text:authContext.currentUser.information?.lastName,
-                            url:authContext.currentUser.resolveLink()
+                            url:authContext.currentUser.resolveLink()+'&viewBy=share_link'
                         }).then(() => {
+                             Auth.addEvent({event_type:'share_link','sub_event_category':'share_link','userid':authContext.currentUser.information?.userId as string})
                             toast.success("Successful share")
                         }).catch((err) => {
                             toast.error("Error sharing:"+err)

@@ -10,6 +10,15 @@ class Box {
         return this.typeName
     }
 
+    public getEventName() {
+        switch(this.typeName){
+            case 'AboutBox' :return 'more_info_about'
+            case 'GalleryBox': return 'more_info_gallery'
+            case 'SocialBox': return 'more_info_socials'
+            case 'LinkBox': return 'more_info_links'
+        }
+    }
+
     public getRouteAddress() {
         return ''
     }

@@ -43,7 +43,11 @@ const Analytics: React.FC<Props> = ({ theme }) => {
         }
       </div>
       <div className="mb-12">
-        <BarChartComponent theme={theme} />
+        {data.length > 0 ?
+        <BarChartComponent data={data.filter((el) => el.name == 'Clicks per Category')[0].value.data} theme={theme} />
+        :
+        <BarChartComponent data={[]} theme={theme} />
+         }
       </div>
     </div>
   );
