@@ -295,7 +295,11 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                       newLink.download = contact.name + ".vcf";
                       newLink.textContent = contact.name;
                       newLink.href = url;
-
+                      Auth.addEvent({
+                        event_type:'add_contact',
+                        sub_event_category:'share_link',
+                        userid:shareUser.information?.userId as string
+                      })
                       newLink.click();                  
                 }} className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm cursor-pointer font-semibold  w-full'>Save Contact</div>
                 {(showToturial && toturialStep == 3) ?
