@@ -1,20 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '../../Model';
 import { useAuth } from '../../hooks/useAuth';
+import { Auth } from '../../Api';
 
 interface ContentCardProps {
   theme?: string;
   item:Box
+  userId:string;
   children?: React.ReactNode;
   setAllowDrag?: (action:boolean) => void;
   mod?: 'profile'|'review'|'share'
 }
-const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => {
+const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userId}) => {
   const [activeDrag,setActiveDrag] = useState(false)
   const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
   
-  console.log(os)
+  // console.log(os)
   useEffect(() => {
     setTimeout(() => {
       setActiveDrag(false)
@@ -24,7 +27,15 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod}) => 
   const navigate = useNavigate();
   return (
     <>
-    <li draggable className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
+    <li draggable onClick={() => {
+      if(mod == 'share'){
+        Auth.addEvent({
+          userid:userId as string,
+          event_type:'more_info',
+          sub_event_category:item.getEventName() as any
+        })         
+      }
+    }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div className={`${theme}-ContentCard-Title`}>
                 {item.getTitle()}

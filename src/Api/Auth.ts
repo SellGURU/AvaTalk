@@ -50,10 +50,11 @@ interface AccountInfo {
 }
 
 interface AddEvent {
-  event_type: 'page_view' | 'add_contact' | 'exchange_contact' | 'more_info',
+  event_type: 'page_view' | 'add_contact' | 'exchange_contact' | 'more_info' |'share_link',
   userid: string,
   sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
-                      'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'
+                      'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'|
+                      'email'|'sms'|'clipboard'|'qr_code'|'share_link'
 }
 // interface ContactType {
 //   name: string;
@@ -187,7 +188,7 @@ class Auth extends Api {
   }
 
   static addEvent(event:AddEvent) {
-    this.post('/add_event',event)
+    this.post('/add_event',event,{noPending:true})
   }
 
   static getAnalytics(from:string,to:string,resolve:(data:any) => void){

@@ -14,8 +14,12 @@ interface Props {
   chartData:Array<any>
 }
 const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
-  const resolveColor = () => {
-    return 'rgba(133, 92, 248, 0.4)'
+  const resolveColor = (name:string) => {
+    if(name == 'qr_code') {
+      return 'rgba(133, 92, 248, 0.8)'
+    }else {
+      return 'rgba(133, 92, 248, 0.4)'
+    }
   }
   // const initialData: DataItem[] = chartData.map(el => {
   //   return {
@@ -34,17 +38,31 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
     return {
       name:el.type,
       value:el.count,
-      color:resolveColor()
+      color:resolveColor(el.type)
     }
   }));
-  useEffect(() => {
-    setData(chartData.map(el => {
+  const [filteredData,setFilterdData] = useState(chartData.map(el => {
     return {
       name:el.type,
       value:el.count,
-      color:resolveColor()
+      color:resolveColor(el.type)
     }
   }))
+  useEffect(() => {
+    setData(chartData.map(el => {
+      return {
+        name:el.type,
+        value:el.count,
+        color:resolveColor(el.type)
+      }
+    }))
+    setFilterdData(chartData.map(el => {
+      return {
+        name:el.type,
+        value:el.count,
+        color:resolveColor(el.type)
+      }
+    }))    
   },[chartData])
   const [legendItems, setLegendItems] = useState<boolean[]>(data.map(() => true));
 
@@ -54,7 +72,7 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
     setLegendItems(newLegendItems);
 
     const newData = data.filter((_, dataIndex) => newLegendItems[dataIndex]);
-    setData(newData);
+    setFilterdData(newData);
   };
 
   const renderLegend = () => (
@@ -79,8 +97,8 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
-          <Pie startAngle={-270} data={data} cx="50%" cy="50%" labelLine={false} dataKey="value">
-            {data.map((entry, index) => (
+          <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
+            {filteredData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
