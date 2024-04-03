@@ -144,7 +144,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 lng:33
             },
             workEmail:data.information.work_email,
-            workPhone:data.information.work_mobile_number
+            workPhone:data.information.work_mobile_number,
+            userId:data.information.created_userid
         }
         const shareUser = new User(information)
         setShareUser(shareUser) 

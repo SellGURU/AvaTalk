@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useContext  } from "react";
 import { AuthContext } from "../../../store/auth-context";
+import { Auth } from "../../../Api";
+
 
 
 const validationSchema = Yup.object().shape({
@@ -73,7 +75,23 @@ const SettingSupport =() => {
                     <TextArea inValid={false} onBlur={() => { } } onChange={() => { } } placeholder="Write your message ..." textAreaHeight="136px" theme="Carbon" label="Message" name="Message" value={""} ></TextArea>
                 </div> */}
                 <div className="mt-8">
-                    <button className="Carbon-Button-container">Send</button>
+                {/* <Button onClick={() => {
+              Auth.updateAiSetting({
+                name:formik.values.title,
+                ai_knowledge:value
+              })
+            }} theme="Carbon">
+              Save Change
+            </Button> */}
+                    <button  className="Carbon-Button-container" onClick={() => {
+                        Auth.support({
+                          name:formik.values.firstname as string,
+                          email:formik.values.personlEmail as string,
+                          message: formik.values.bio as string 
+                        })
+                      }} >
+                        Send
+                      </button>
                 </div>
             </div>
         </div>

@@ -12,6 +12,10 @@ import { Location } from "../../../Types";
 
 const validationSchema = Yup.object().shape({
 });
+interface SettingAccount {
+    value: any;
+    label: string;
+  }
 
 const SettingAccount =() => {
     const navigate = useNavigate();
@@ -35,7 +39,19 @@ const SettingAccount =() => {
         codeName: "us",
         codePhone: "+1",
     });
-    
+
+    // const languageOptions: SettingAccount[] = [
+    //     { value: 'javascript', label: 'JavaScript' },
+    //     { value: 'python', label: 'Python' },
+    //     { value: 'java', label: 'Java' },
+    //     { value: 'ruby', label: 'Ruby' },
+    // ];
+    // const [selectedLanguage, setSelectedLanguage] = useState<string>('');
+    // const handleLanguageChange = (event: any) => {
+    //     setSelectedLanguage(event.target.value);
+    // };
+
+
     // const [firstName,setFirstName] = useState(context.currentUser.information?.firstName as string);
     return (
         <>
@@ -62,9 +78,11 @@ const SettingAccount =() => {
                         type="text" 
                         ></TextField>
 
-                        <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
-                        theme="Carbon" name="personlEmail"
-                        type="email" disabled></TextField>
+                        <div className=" opacity-50">
+                            <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
+                            theme="Carbon" name="personlEmail"
+                            type="email" disabled></TextField>
+                        </div>
 
                         <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={false} 
                         theme="Carbon" name="phone"
@@ -75,6 +93,22 @@ const SettingAccount =() => {
                         <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
 
                         </Select>
+{/* 
+
+                        <Select
+                        label="Language"
+                        valueElement={<div></div>}
+                        placeholder="Select Language..."
+                        theme="Carbon"
+                        value={selectedLanguage}
+                        onChange={handleLanguageChange}
+                    >
+                        {languageOptions.map((language) => (
+                            <option key={language.value} value={language.value}>
+                                {language.label}
+                            </option>
+                        ))}
+                    </Select> */}
 
                     </div>
                 </div>

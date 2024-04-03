@@ -26,6 +26,13 @@ interface RegisterData {
   email:string | null
 }
 
+///
+interface SupportData {
+  name: string,
+  email: string,
+  message: string
+}
+///
 
 interface AiSetting {
   name:string,
@@ -154,6 +161,15 @@ class Auth extends Api {
     })
   }
 
+  ///
+  static support(data: SupportData) {
+    this.post('/support', data)
+      .then(res => {
+        console.log(res);
+      });
+  }
+  ///
+
   static deleteBox(boxType:string) {
     this.post('/delete_more_info',{type_name:boxType}).then(() => {
 
@@ -180,6 +196,8 @@ class Auth extends Api {
       resolve(res.data)
     })
   }
+
+
 
   static getInfoBox(from:string,to:string,resolve:(data:any) => void){
     this.post('/info_box',{from_date:from,to_date:to}).then(res => {

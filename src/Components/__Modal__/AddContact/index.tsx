@@ -8,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
 import { Select, TextArea, TextField } from "../..";
 import LocationPicker from "react-leaflet-location-picker";
+import { Contacts } from "../../../Api";
 
 interface AddContactProps {
   isOpen: boolean;
@@ -64,6 +65,14 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
 
   const handleAction = () => {
     if (mode === "add") {
+      Contacts.addContact({
+        full_name:formData.fullName as string,
+        email: formData.email as string,
+        phone: formData.phone as string,
+        company: formData.company as string,
+        job_title: formData.job as string,
+        note: formData.note as string
+      })
       const id = generateSlugId();
       const formDataWithId = { ...formData,
          id,
@@ -114,6 +123,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             type="text"
             errorMessage=""
             inValid={false}
+            required
           />
         </div>
 
@@ -129,6 +139,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             type="text"
             errorMessage=""
             inValid={false}
+            required
           />
         </div>
 
@@ -146,6 +157,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             setPhoneCountry={setCountry}
             errorMessage=""
             inValid=""
+            required
           ></TextField>
         </div>
         <div className="mt-4">

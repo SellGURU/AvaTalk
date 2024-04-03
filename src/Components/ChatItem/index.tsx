@@ -6,12 +6,16 @@ interface DataProps {
   entry_date: string;
   entry_time:string;
   response:string;
+  date_group:string; 
 }
 
-const ChatItem = ({data, theme }: { data: DataProps; theme: string | undefined }) => {
+const ChatItem = ({data, theme,visibleDate}: { data: DataProps; theme: string | undefined,visibleDate:boolean}) => {
+
   return (
     <>
-    <div className={`${theme}-ChatItem-date`}>{data.entry_date}</div>
+    {visibleDate ?
+      <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
+    :undefined}
     <Link to={`/chats/${data.chat_list_id}`} className={`${theme}-ChatItem-container`}>
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
