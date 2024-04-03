@@ -6,6 +6,19 @@ interface TagApi {
     color:string,
     contact:Array<any>
 }
+interface addContactData {
+    full_name: string,
+    email: string,
+    phone: string,
+    location?: {},
+    company?: string,
+    job_title?: string,
+    note?: string,
+    tag?: [
+      string
+    ],
+    adding_method?: string
+  }
 
 class Contacts extends Api {
     static addTag(tag:TagApi) {
@@ -17,6 +30,13 @@ class Contacts extends Api {
             resolve(res.data)
         })
     }
+
+    static addContact(data: addContactData) {
+        this.post('/add_contact', data)
+          .then(res => {
+            console.log(res);
+          });
+      }
 }
 
 export default Contacts
