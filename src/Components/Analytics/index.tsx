@@ -14,9 +14,13 @@ const Analytics: React.FC<Props> = ({ theme }) => {
     startDate: startDate,
     endDate: new Date(),
   });  
+  const [dataBox,setDataBox] = useState([])
   useEffect(() => {
     Auth.getAnalytics(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
       setData(data.reports)
+    })
+    Auth.getInfoBox(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
+      setDataBox(data.reports)
     })
   },[day])
   return (
@@ -26,7 +30,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
         <DatePicker day={day} setDay={setDay} />
       </div>
       <div className={`${theme}-Analytics-divider2`}>
-        <AnalyticsSummary theme={theme} />
+        <AnalyticsSummary data={dataBox} theme={theme} />
       </div>
       <div className={`${theme}-Analytics-divider2`}>
         {data.length > 0 ? 

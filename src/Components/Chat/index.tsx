@@ -21,6 +21,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
 
   useConstructor(() => {
     ChatApi.showList((res) => {
+      // if(res.cha)
       setChats(res.chats)
     })
     // setIsLoading(false);
@@ -65,7 +66,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
 //   // },
 // ];
 
-  const filteredData = chats.filter((item) => item.chat_list_id.toLowerCase().includes(searchQuery.toLowerCase()) || item.response.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredData = chats?.filter((item) => item.chat_list_id.toLowerCase().includes(searchQuery.toLowerCase()) || item.response.toLowerCase().includes(searchQuery.toLowerCase()));
   // const filteredTags = tags.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   // const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -199,6 +199,11 @@ class Auth extends Api {
 
 
 
+  static getInfoBox(from:string,to:string,resolve:(data:any) => void){
+    this.post('/info_box',{from_date:from,to_date:to}).then(res => {
+      resolve(res.data)
+    })
+  }  
 }
 
 export default Auth;

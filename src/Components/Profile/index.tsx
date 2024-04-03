@@ -265,7 +265,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 :undefined}
               </div>
               <div className={`${(showToturial && toturialStep == 2) ? 'relative z-50  bg-white p-2 rounded-full ' :''}`}>
-                <Button onClick={() => {setShowBookMark(true)}} data-mode="calendar" theme='Carbon-back'>
+                <Button disabled onClick={() => {setShowBookMark(true)}} data-mode="calendar" theme='Carbon-back'>
                   <div className={`${theme}-Profile-CalenderBtnVector`}></div>
                 </Button>   
                 {(showToturial && toturialStep == 2) ?
@@ -305,7 +305,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 :undefined}                 
               </div>
                 <div className={`${(showToturial && toturialStep == 4) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
-                  <div className='borderBox-Gray boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold cursor-pointer w-full' onClick={() => {setShowExchangeContact(true)}}>Exchange Contact</div>
+                  <div  className='borderBox-Gray opacity-50 cursor-not-allowed boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold  w-full' onClick={() => {setShowExchangeContact(false)}}>Exchange Contact</div>
                   {(showToturial && toturialStep == 4) ?
                   <ToturialsBox theme='Carbon' left='-80' isLast position='top' skip={() => {
                     setShowToturial(false)
@@ -338,7 +338,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       {mode == 'review' || mode == 'share' ?
         <div className=''>
           <Button onClick={() => {
-            window.open('https://ar-card-eight.vercel.app/#detect1')
+            window.open('https://ar.avatalk.me/#detect1/?user'+shareUser.information?.userId)
           }} data-mode={(showToturial && toturialStep == 1)?"toturials":''} theme='Carbon-Ar'>
             <div>
               <div className={`${theme}-Ar-Button-icon`}></div>
