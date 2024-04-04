@@ -5,12 +5,14 @@ import { AboutBox, Box, GalleryBox, GoogleMapBox, LinkBox, SocialBox } from "./M
 import { Chat } from "./Api";
 
 const resolveMenuFromRoute = () => {
-  console.log(window.location.pathname.replace("/", "").split("/")[0])
+  console.log(window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0])
   // console.log(window.location.hash.replace('#/','').split('/')[0])
   switch (window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0]) {
     case "":
       return "profile";
     case "edit":
+      return "profile";
+    case "?review=true":
       return "profile";
     default:
       return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
