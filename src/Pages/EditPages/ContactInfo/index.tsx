@@ -60,10 +60,11 @@ const EditContactInfo = () => {
         lat:pointVals[0][0] as number,
         lng:pointVals[0][1] as number
       },
-      phone:'',
+      phone:auth.currentUser.information?.phone as string,
       personlEmail:formik.values.personlEmail as string,
       workEmail:formik.values.workEmail as string,
-      workPhone:formik.values.workPhone as string
+      workPhone:formik.values.workPhone as string,
+      userId:auth.currentUser.information?.userId 
     })
     navigate('/')
   }
