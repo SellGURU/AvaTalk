@@ -17,10 +17,14 @@ const Analytics: React.FC<Props> = ({ theme }) => {
   const [dataBox,setDataBox] = useState([])
   useEffect(() => {
     Auth.getAnalytics(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
-      setData(data.reports)
+      if(data.reports){
+        setData(data.reports)
+      }
     })
     Auth.getInfoBox(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
-      setDataBox(data.reports)
+      if(data.reports){
+        setDataBox(data.reports)
+      }
     })
   },[day])
   return (
