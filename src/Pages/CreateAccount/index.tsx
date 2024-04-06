@@ -105,6 +105,7 @@ const CreateAccount = () => {
         // return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
     }
   };
+  const [showGudieLine] = useState(false)
   return (
     <>
       <div className="w-full px-4 h-max">
@@ -127,7 +128,14 @@ const CreateAccount = () => {
         <div className="">
           <StepController theme="Carbon" steps={3} currentStep={step}></StepController>
         </div>
-        {resolveStepContent()}
+        {showGudieLine? 
+        <>
+        </>
+        :
+        <>
+          {resolveStepContent()}
+        </>
+        }
       </div>
     </>
   );
@@ -293,8 +301,9 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
     [])  
   const [avatarVideo,setAvatarVideo] = useState('')
   const [selectedAvatar,setSelectedAvatar]= useState('')
+  const authContext = useAuth()
   useConstructor(() => {
-    Auth.avatarList({}).then(res => {
+    Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
       setSelectedAvatar(res.data[0])
       formik.setFieldValue('avatar_pic_url',res.data[0])
@@ -334,8 +343,30 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
           </div>
 
           <div className="flex flex-wrap gap-8 px-6 mt-2">
-            <div className="w-[85px]  boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
+            <div className="w-[85px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
               <img src="./icons/gallery-add.svg" alt="" />
+              <input  onChange={(res:any) => {
+                  // setisLoading(true)
+                  // getBase64(res.target.files[0],res.target.value)   
+                  setAvatarVideo('')
+                  const reader = new FileReader();
+                  reader.readAsDataURL(res.target.files[0]);
+                  reader.onload = function () {
+                    setSelectedAvatar(reader.result as string)
+                    formik.setFieldValue('avatar_pic_url',reader.result)   
+                    Auth.createAvatarVideo(reader.result as string).then((response) => {
+                      setAvatarVideo(response.data)
+                      formik.setFieldValue('silent_video_avatar',response.data)
+                    })                        
+                  };
+                  reader.onerror = function (error) {
+                      console.log('Error: ', error);
+                  };
+
+                  // setSelectedAvatar(res.target.files[0])
+                  // formik.setFieldValue('avatar_pic_url',res.target.files[0])
+              
+              }}  className={`Carbon-ImageUploader-uploader-input`} type="file" accept="*" />                   
             </div>
             {avatarList.map((el) => {
               return (

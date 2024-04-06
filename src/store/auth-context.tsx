@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
 /* eslint-disable-next-line no-unused-vars*/
 
@@ -9,6 +10,7 @@ import { Auth } from "../Api";
 
 interface VerificationProps {
   emailOrPhone:string;
+  googleJson:any;
 }
 
 interface AuthContextProps {
@@ -26,7 +28,8 @@ export const AuthContext = createContext<AuthContextProps>({
   token: "",
   isLoggedIn: false,
   varification:{
-    emailOrPhone:''
+    emailOrPhone:'',
+    googleJson:{},
   },
   setUser:() => {},
   currentUser: new User(),
@@ -49,7 +52,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
-      emailOrPhone:''
+      emailOrPhone:'',
+      googleJson: {}
     }
   )
   const userIsLoggedIn = !!token && !!user.information;

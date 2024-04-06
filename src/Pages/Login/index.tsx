@@ -63,7 +63,8 @@ const Login = () => {
     }
     Auth.get_Login_code(resolvePhoneOrEnail).then(() => {
       authContext.verificationHandler({
-        emailOrPhone: formik.values.emailOrPhone
+        emailOrPhone: formik.values.emailOrPhone,
+        googleJson:{}
       })
       navigate('/Verification')
     })
@@ -129,7 +130,7 @@ const Login = () => {
                         // setcertificate(credentialResponse);
                         // console.log(credentialResponse);
                         const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
-                        // console.log(prof)
+                        console.log(prof)
                         // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
                         Auth.loginWithGoogle(
                           {
@@ -137,7 +138,8 @@ const Login = () => {
                           },
                         ).then(() => {
                           authContext.verificationHandler({
-                            emailOrPhone: prof?.email
+                            emailOrPhone: prof?.email,
+                            googleJson:prof
                           })
                           navigate('/Verification')                          
                         });                          
