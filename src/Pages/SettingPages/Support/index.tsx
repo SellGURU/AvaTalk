@@ -17,10 +17,7 @@ const SettingSupport =() => {
     const initialValue = {
     firstname:context.currentUser.information?.firstName ,
     personlEmail:context.currentUser.information?.personlEmail ,
-    bio: context.currentUser.information?.company
-
-
-    
+    bio: ""
     };   
     const formik = useFormik({
         initialValues: initialValue,

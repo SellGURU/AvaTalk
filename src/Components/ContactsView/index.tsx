@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "symphony-ui";
+import { toast } from 'react-toastify';
 import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
 import ContactList from "../ContactList";
@@ -24,6 +25,16 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
+
+  useConstructor(() => {
+    Contacts.showContactList((res) => {
+      if (typeof res === 'object' && res.contacts) {
+        setContacts(res.contacts);
+      } else {
+        toast.warning(res);
+      }
+    })
+  });
 
   useConstructor(() => {
     Contacts.showTags((resolveTags) => {
