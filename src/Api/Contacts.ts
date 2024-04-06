@@ -32,11 +32,17 @@ class Contacts extends Api {
     }
 
     static addContact(data: addContactData) {
-        this.post('/add_contact', data)
-          .then(res => {
-            console.log(res);
-          });
-      }
+      this.post('/add_contact', data)
+        .then(res => {
+          console.log(res);
+        });
+    }
+
+    static showContactList(submit:(res:any) => void) {
+      this.post('/show_contact_list',{}).then((res) => {
+          submit(res.data)
+      })
+    } 
 }
 
 export default Contacts
