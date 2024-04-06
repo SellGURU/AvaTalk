@@ -64,6 +64,8 @@ const EditContactInfo = () => {
       personlEmail:formik.values.personlEmail as string,
       workEmail:formik.values.workEmail as string,
       workPhone:formik.values.workPhone as string,
+      silent_video_avatar:auth.currentUser.information?.silent_video_avatar,
+      talk_video_avater:auth.currentUser.information?.talk_video_avater,
       userId:auth.currentUser.information?.userId 
     })
     navigate('/')

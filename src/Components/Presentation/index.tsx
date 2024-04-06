@@ -35,7 +35,6 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const audioRef = useRef<HTMLAudioElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
-  const [videoUrl, setVideoUrl] = useState<string>('./videos/02.mp4');
   const [isTalking,setIsTalking] = useState(false)
   const [isLoading,setIsLoading] = useState(false);
   const [isRecording,setIsRecording] = useState(false)
@@ -43,11 +42,13 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   ])
   const user = useAuth()
   // const handleButtonClick = (text: string) => {
-  //   setShowSuggestions(false)
-  //   sendToApi(chats,setChats,text,(res) => {
-
-  //   })
-  // };
+    //   setShowSuggestions(false)
+    //   sendToApi(chats,setChats,text,(res) => {
+      
+      //   })
+      // };
+  const [shareUser,setShareUser] = useState(user.currentUser)
+  const [videoUrl, setVideoUrl] = useState<string>(shareUser.information?.silent_video_avatar as string);
   useEffect(() => {
       if(videoRef.current && !isRecording){
           const refren = videoRef.current  as any   
@@ -56,10 +57,11 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       }        
   })   
   useEffect(() => {
+    console.log(shareUser.information?.talk_video_avater)
       if(isTalking){
-        setVideoUrl('./videos/03.mp4')
+        setVideoUrl(shareUser.information?.talk_video_avater as string)
       }else{
-        setVideoUrl('./videos/02.mp4')
+        setVideoUrl(shareUser.information?.silent_video_avatar as string)
       }
   })
   const BLokedIdList =useRef<string[]>([]);
@@ -122,7 +124,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     }
   })
   const [searchParams] = useSearchParams();
-  const [shareUser,setShareUser] = useState(user.currentUser)
+  
   const [socials,setSocials] = useState([])
   useConstructor(() => {
     const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId

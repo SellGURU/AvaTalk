@@ -46,6 +46,9 @@ const Verification = () => {
                     }                    
                     Auth.login(resolvePhoneOrEnail).then((res) => {
                         console.log(res)
+                        if(res.data == null){
+                            navigate("/register");
+                        }
                         if(res.data == 'Not Registered'){
                             navigate("/register");
                         }else{
