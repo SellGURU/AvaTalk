@@ -8,12 +8,14 @@ import { useContext, useState } from "react";
 import { boxProvider, useConstructor } from "../../help";
 import { Timer } from "../../Components";
 import { Box } from "../../Model";
+import { toast } from "react-toastify";
 
 const Verification = () => {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext)
     const [completeTimer,setCompleteTimer] = useState(false)
     useConstructor(() => {
+        toast.info('your code : 12345')
         if(authContext.varification.emailOrPhone.length == 0){
         setTimeout(() => {
             navigate('/login')

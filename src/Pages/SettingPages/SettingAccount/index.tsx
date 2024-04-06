@@ -40,13 +40,14 @@ const SettingAccount =() => {
         codePhone: "+1",
     });
 
-    // const languageOptions: SettingAccount[] = [
-    //     { value: 'javascript', label: 'JavaScript' },
-    //     { value: 'python', label: 'Python' },
-    //     { value: 'java', label: 'Java' },
-    //     { value: 'ruby', label: 'Ruby' },
-    // ];
-    // const [selectedLanguage, setSelectedLanguage] = useState<string>('');
+    const languageOptions = [
+        { value: 'English', label: 'English' },
+        { value: 'Spanish', label: 'Spanish' },
+        { value: 'Turkish', label: 'Turkish' },
+        { value: 'Arabic', label: 'Arabic' },
+        { value: 'Persian', label: 'Persian'},
+    ];
+    const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]);
     // const handleLanguageChange = (event: any) => {
     //     setSelectedLanguage(event.target.value);
     // };
@@ -90,8 +91,19 @@ const SettingAccount =() => {
                         setPhoneCountry={setCountry}
                         type="phone" ></TextField>
 
-                        <Select label="Language" valueElement={<div></div>} placeholder="Select tag..." theme="Carbon">
-
+                        <Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">
+                            {languageOptions.map((language,index:number) => (
+                                <>
+                                <option key={language.value} onClick={() => {
+                                    setSelectedLanguage(language)
+                                }} className="ml-4 cursor-pointer" value={language.value}>
+                                    {language.label}
+                                </option>
+                                {index <= languageOptions.length -2 ?
+                                    <hr />
+                                :undefined}
+                                </>
+                            ))}
                         </Select>
 {/* 
 
@@ -122,7 +134,7 @@ const SettingAccount =() => {
                             first_name:formik.values.firstname as string,
                             last_name:formik.values.lastname as string,
                             mobile_number:formik.values.phone as string,
-                            language:'English',
+                            language:selectedLanguage.value,
                             state:true
                         })
                         context.currentUser.updateInformation({

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import {User} from "../../Model";
 import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
+import CropperBox from "../../Components/CropperBox";
 
 const initialValue = {
   FirstName: "",
@@ -246,6 +247,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
 };
 
 const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
+  const [avatarUrl,setAvatarUrl] = useState('')
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -259,7 +261,7 @@ const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
           <FileUploadr
             mod="profile"
             uploades={(res) => {
-              formik.setFieldValue('PrifileImage',res[0].url)
+              setAvatarUrl(res[0].url)
             }}
             theme="Carbon"
           ></FileUploadr>
@@ -270,6 +272,11 @@ const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
           </div>
         </div>
       </div>
+      <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+        // shareUser.updateImageurl(resolve)
+        formik.setFieldValue('PrifileImage',resolve)
+        setAvatarUrl('')
+      }}></CropperBox>        
     </>
   );
 };

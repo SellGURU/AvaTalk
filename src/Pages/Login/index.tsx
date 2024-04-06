@@ -8,6 +8,8 @@ import { AuthContext } from "../../store/auth-context";
 import { useContext, useState } from "react";
 import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
+import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const initialValue = {
   emailOrPhone: "",
@@ -118,7 +120,34 @@ const Login = () => {
                     <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                   </div>
                 </div> */}
+                <div className="flex items-center justify-center mt-4">
+                  <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
 
+                    <GoogleLogin
+                    
+                      onSuccess={credentialResponse => {
+                        // setcertificate(credentialResponse);
+                        // console.log(credentialResponse);
+                        const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
+                        // console.log(prof)
+                        // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
+                        Auth.loginWithGoogle(
+                          {
+                            google_json:prof
+                          },
+                        ).then(() => {
+                          authContext.verificationHandler({
+                            emailOrPhone: prof?.email
+                          })
+                          navigate('/Verification')                          
+                        });                          
+                      }}
+                      onError={() => {
+                        console.log('Login Failed');
+                      }}
+                    />                     
+                  </GoogleOAuthProvider>    
+                </div>
                 {/* <div className="mt-11">
                   <Button onClick={handleGoogleLogin} theme="Carbon-Google">
                     <img className="mr-2" src="./Carbon/Google.png" alt="" />
