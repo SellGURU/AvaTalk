@@ -17,6 +17,8 @@ interface Information {
     workEmail:string;
     workPhone:string
     userId?:string
+    silent_video_avatar?:string
+    talk_video_avater?:string
 }
 
 // interface Location {

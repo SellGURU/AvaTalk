@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-import { FileUploadr, StepController, TextField } from "../../Components";
+import { StepController, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 // import LocationPicker from "react-leaflet-location-picker";
 import styles from "./CreateAccount.module.css";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import {User} from "../../Model";
 import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
-import CropperBox from "../../Components/CropperBox";
+// import CropperBox from "../../Components/CropperBox";
 
 const initialValue = {
   FirstName: "",
@@ -26,6 +26,8 @@ const initialValue = {
     lat: 33,
     lng: 33,
   },
+  avatar_pic_url:'',
+  silent_video_avatar:'',
   PrifileImage: "",
 };
 const validationSchema = Yup.object().shape({
@@ -57,7 +59,9 @@ const CreateAccount = () => {
           job_title: values.JobTitle,
           company_name: values.CompanyName, 
           location: values.YourLocation, 
-          profile_pic: values.PrifileImage,
+          profile_pic: values.avatar_pic_url,
+          avatar_pic_url:values.avatar_pic_url,
+          silent_video_avatar:values.silent_video_avatar,
           email:authContext.varification.emailOrPhone.includes('@')? authContext.varification.emailOrPhone:values.email
         }).then((res) => {
         const newUser = new User({
@@ -66,12 +70,13 @@ const CreateAccount = () => {
           phone:values.Phone,
           banelImage:'',
           company:values.CompanyName,
-          imageurl:values.PrifileImage,
+          imageurl: values.avatar_pic_url,
           job:values.JobTitle,
           location:location,
           personlEmail:'',
           workEmail:'',
-          workPhone:''
+          workPhone:'',
+          silent_video_avatar:values.silent_video_avatar
         })
         authContext.setUser(newUser)
         authContext.login(res.data.access_token)
@@ -96,7 +101,8 @@ const CreateAccount = () => {
       case 2:
         return <LocationStep formik={formik} setLocation={setLocation} location={location} setStep={setStep}></LocationStep>;
       case 3:
-        return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
+        return <AvatarStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></AvatarStep>
+        // return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
     }
   };
   return (
@@ -246,39 +252,119 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
   );
 };
 
-const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
-  const [avatarUrl,setAvatarUrl] = useState('')
+// const ProfileImageStep:React.FC<UploadStepProps> = ({formik,onSubmit}) => {
+//   const [avatarUrl,setAvatarUrl] = useState('')
+
+//   return (
+//     <>
+//       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
+//         <div className="">
+//           <div className="text-gray-700 text-center font-semibold text-base">Upload Profile Image</div>
+//           <div className="w-full flex justify-center items-center mt-2 mb-6">
+//             <div className="text-sm text-gray-700 max-w-[228px] opacity-80 text-center">Here you’ll be able to upload your profile image</div>
+//           </div>
+//         </div>
+//         <div className="px-4">
+//           <FileUploadr
+//             mod="profile"
+//             uploades={(res) => {
+//               setAvatarUrl(res[0].url)
+//             }}
+//             theme="Carbon"
+//           ></FileUploadr>
+//           <div className="mt-8">
+//             <Button onClick={onSubmit} theme="Carbon">
+//               Continue
+//             </Button>
+//           </div>
+//         </div>
+//       </div>
+//       <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+//         // shareUser.updateImageurl(resolve)
+//         formik.setFieldValue('PrifileImage',resolve)
+//         setAvatarUrl('')
+//       }}></CropperBox>        
+//     </>
+//   );
+// };
+
+const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
+  const [avatarList,setAvaterList] = useState(
+    [])  
+  const [avatarVideo,setAvatarVideo] = useState('')
+  const [selectedAvatar,setSelectedAvatar]= useState('')
+  useConstructor(() => {
+    Auth.avatarList({}).then(res => {
+      setAvaterList(res.data)
+      setSelectedAvatar(res.data[0])
+      formik.setFieldValue('avatar_pic_url',res.data[0])
+    })
+  })
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
-        <div className="">
-          <div className="text-gray-700 text-center font-semibold text-base">Upload Profile Image</div>
-          <div className="w-full flex justify-center items-center mt-2 mb-6">
-            <div className="text-sm text-gray-700 max-w-[228px] opacity-80 text-center">Here you’ll be able to upload your profile image</div>
+       <div className="">
+          <div className="text-gray-700 text-center font-semibold text-base">Building Your Talking Profile</div>
+
+          <div className="mt-6 px-6 flex items-center justify-between">
+            {avatarVideo.length > 0 ?
+            <>
+              <div className="w-[80px] relative object-cover boxShadow-Gray borderBox-Gray h-[80px] rounded-[6.76px]  border border-white">
+                  <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
+                    <img src="./icons/Vector.svg" alt="" />
+                  </div>
+                  <img className=" w-full rounded-[6.76px] h-full" src={selectedAvatar} alt="" />          
+              </div>
+
+              <div>
+                <img className="w-10 h-10" src="./icons/fi-rr-arrow-right.svg" alt="" />
+              </div>
+
+              <div className="w-[160px] h-[160px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                <video id="dragAbleAi" playsInline  style={{}} width={'100%'} height={'50%'}  preload="auto" autoPlay={true} loop muted >
+                    <source id="videoPlayer"  src={avatarVideo} type="video/mp4"></source>
+                </video>               
+              </div>
+            </>
+            :undefined}
           </div>
-        </div>
-        <div className="px-4">
-          <FileUploadr
-            mod="profile"
-            uploades={(res) => {
-              setAvatarUrl(res[0].url)
-            }}
-            theme="Carbon"
-          ></FileUploadr>
-          <div className="mt-8">
-            <Button onClick={onSubmit} theme="Carbon">
-              Continue
-            </Button>
+
+          <div>
+            <div className="text-[#374151] text-[14px] opacity-80 mt-8 px-2">Upload image, or choose avatar, we will convert it to talking profile. <span className="text-[#06B6D4]"> learn more </span></div>
           </div>
+
+          <div className="flex flex-wrap gap-8 px-6 mt-2">
+            <div className="w-[85px]  boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
+              <img src="./icons/gallery-add.svg" alt="" />
+            </div>
+            {avatarList.map((el) => {
+              return (
+                <>
+                <div onClick={() => {
+                  setSelectedAvatar(el)
+                  formik.setFieldValue('avatar_pic_url',el)
+                  setAvatarVideo('')
+                  Auth.createAvatarVideo(el).then((res) => {
+                    setAvatarVideo(res.data)
+                    formik.setFieldValue('silent_video_avatar',res.data)
+                  })
+                }} className={`w-[85px] ${el == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] h-[73px]`}>
+                  <img src={el} className="w-full  h-full" alt="" />
+                </div>                
+                </>
+              )
+            })}
+          </div>
+
+        </div>        
+        <div className="mt-8 mb-3 px-12">
+          <Button disabled={avatarVideo.length == 0} onClick={onSubmit} theme="Carbon">
+            Submit AI Profile
+          </Button>
         </div>
       </div>
-      <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
-        // shareUser.updateImageurl(resolve)
-        formik.setFieldValue('PrifileImage',resolve)
-        setAvatarUrl('')
-      }}></CropperBox>        
     </>
-  );
-};
+  )
+}
 
 export default CreateAccount;

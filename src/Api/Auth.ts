@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { toast } from "react-toastify";
 import { Box } from "../Model";
 import { removeTokenFromLocalStorage } from "../Storage/Token";
 import { Contact, Tag } from "../Types";
@@ -24,6 +25,8 @@ interface RegisterData {
   location: Location | null;
   profile_pic: string | null;
   email:string | null
+  silent_video_avatar:string | null
+  avatar_pic_url:string | null
 }
 
 ///
@@ -40,13 +43,13 @@ interface AiSetting {
 }
 
 interface AccountInfo {
-  user_id:string  
-  first_name:string
-  last_name:string
-  email:string
-  mobile_number:string
-  language:string
-  state:boolean
+  user_id?:string  
+  first_name?:string
+  last_name?:string
+  email?:string
+  mobile_number?:string
+  language?:string
+  state?:boolean
 }
 
 interface AddEvent {
@@ -77,6 +80,15 @@ class Auth extends Api {
 
   static loginWithGoogle(data:any) {
     const response = this.post("/login_with_google",data)
+    return response
+  }
+
+  static avatarList(data:any) {
+    const response = this.post("/avatar_list",data)
+    return response
+  }
+  static createAvatarVideo(avatar_url:string) {
+    const response = this.post('/create_silent_avatar',{avatar_url:avatar_url})
     return response
   }
   static get_Login_code(data: LoginData) {
@@ -182,7 +194,9 @@ class Auth extends Api {
   }
 
   static updateAiSetting(data:AiSetting) {
-    this.post('/update_ai_setting',data)
+    this.post('/update_ai_setting',data).then((res) => {
+      toast.info(res.data)
+    })
   }
   static showAiSetting(resolve:(data:any) =>void) {
     this.post('/show_ai_setting',{}).then((res) => resolve(res.data))
