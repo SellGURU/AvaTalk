@@ -13,7 +13,8 @@ import { useNavigate } from "react-router";
 import {User} from "../../Model";
 import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
-// import CropperBox from "../../Components/CropperBox";
+import { toast } from "react-toastify";
+import CropperBox from "../../Components/CropperBox";
 
 const initialValue = {
   FirstName: "",
@@ -78,6 +79,9 @@ const CreateAccount = () => {
           workPhone:'',
           silent_video_avatar:values.silent_video_avatar
         })
+        if(!res.data.access_token){
+          toast.warning(res.data)
+        }
         authContext.setUser(newUser)
         authContext.login(res.data.access_token)
         navigate('/?splash=false')
@@ -93,7 +97,7 @@ const CreateAccount = () => {
     lat: 51.5072,
     lng: 0.1276,
   });
-  
+  const [showGudieLine,setShowGudieLine] = useState(false)
   const resolveStepContent = () => {
     switch (step) {
       case 1:
@@ -101,38 +105,107 @@ const CreateAccount = () => {
       case 2:
         return <LocationStep formik={formik} setLocation={setLocation} location={location} setStep={setStep}></LocationStep>;
       case 3:
-        return <AvatarStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></AvatarStep>
+        return <AvatarStep setshowGudie={(action) => setShowGudieLine(action)} formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></AvatarStep>
         // return <ProfileImageStep formik={formik} setStep={setStep} onSubmit={formik.handleSubmit}></ProfileImageStep>;
     }
   };
-  const [showGudieLine] = useState(false)
+  
   return (
     <>
       <div className="w-full px-4 h-max">
-        <div className={`mb-10`}>
-          {step > 1 ? (
-            <Button
-              onClick={() => {
-                if (step >= 2) {
-                  setStep(step - 1);
-                }
-              }}
-              theme="Carbon-back"
-            >
-              <div className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}></div>
-            </Button>
-          ) : (
-            <div className=" h-10 mb-10"></div>
-          )}
-        </div>
-        <div className="">
-          <StepController theme="Carbon" steps={3} currentStep={step}></StepController>
-        </div>
+        {!showGudieLine ?
+          <div className={`mb-10`}>
+            {step > 1 && !showGudieLine? (
+              <Button
+                onClick={() => {
+                  if (step >= 2) {
+                    setStep(step - 1);
+                  }
+                }}
+                theme="Carbon-back"
+              >
+                <div className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}></div>
+              </Button>
+            ) : (
+              <div className=" h-10 mb-10"></div>
+            )}
+          </div>
+        :undefined}
+
         {showGudieLine? 
         <>
+          <div className="w-full relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll">
+            <div>
+              <div className="absolute right-6 top-6">
+                <Button onClick={() => {
+                  setShowGudieLine(false)
+                }} theme="Carbon-back">
+                  <div className={`Carbon-Profile-closeIcon`}></div>
+                </Button>
+              </div>
+              <div className={`text-gray-700 ${window.innerWidth < 332 ?'mt-12':'mt-2'} ${window.innerWidth < 420 ? 'text-left':'text-center'} font-semibold text-base`}>Photo Guidelines for AI Profile</div>
+              <div className="mt-6 flex relative justify-center">
+                <div className="relative">
+                  <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full -right-3 -top-3">
+                    <img src="./icons/Vector2.svg" alt="" />
+                  </div>
+                  <img src="./icons/gudei1.png" alt="" />
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <div className="text-gray-700 text-left font-semibold text-base">Common Mistakes </div>
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/1.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">Not Neutral Expression</div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">Your photo must feature a neutral facial expression. Ensure your mouth is closed and avoid smiling or frowning.</div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/2.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">Distracting Background</div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">Use a simple, uncluttered background to avoid any distractions from the primary focus—your face.</div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/3.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">Indirect Camera Gaze </div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">Look directly into the camera lens to establish a clear, forward-facing base for your AI profile.</div>
+                  </div>
+                </div>                                
+              </div>
+
+              <div className={`mt-5 ${window.innerWidth < 400 ? 'px-2':'px-6'}`}>
+                <Button onClick={() => setShowGudieLine(false)} theme="Carbon">Got it</Button>
+              </div>
+            </div>
+          </div>
         </>
         :
         <>
+          <div className="">
+            <StepController theme="Carbon" steps={3} currentStep={step}></StepController>
+          </div>        
           {resolveStepContent()}
         </>
         }
@@ -162,6 +235,7 @@ interface InfoStepProps extends stepsProps {
 
 interface UploadStepProps extends stepsProps {
   onSubmit: () => void
+  setshowGudie:(action:boolean) => void
 }
 
 const InfoStep: React.FC<InfoStepProps> = ({ setStep, formik, country, setCountry }) => {
@@ -296,11 +370,13 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
 //   );
 // };
 
-const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
+const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) => {
   const [avatarList,setAvaterList] = useState(
     [])  
   const [avatarVideo,setAvatarVideo] = useState('')
   const [selectedAvatar,setSelectedAvatar]= useState('')
+  const [uploadedAvater,setUploadedAvater]= useState('')
+  const [Cropper,setCropper]= useState('')
   const authContext = useAuth()
   useConstructor(() => {
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
@@ -339,12 +415,17 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
           </div>
 
           <div>
-            <div className="text-[#374151] text-[14px] opacity-80 mt-8 px-2">Upload image, or choose avatar, we will convert it to talking profile. <span className="text-[#06B6D4]"> learn more </span></div>
+            <div className="text-[#374151] text-[14px] opacity-80 mt-8 px-2">Upload image, or choose avatar, we will convert it to talking profile. <span onClick={() => {
+              setshowGudie(true)
+            }} className="text-[#06B6D4] cursor-pointer"> learn more </span></div>
           </div>
 
           <div className="flex flex-wrap gap-8 px-6 mt-2">
-            <div className="w-[85px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
-              <img src="./icons/gallery-add.svg" alt="" />
+            <div className="w-[85px]  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
+              <img className={`${uploadedAvater.length > 0 ?'absolute right-1 top-1':''}`} src="./icons/gallery-add.svg" alt="" />
+              {uploadedAvater.length > 0 ?
+                <img className="w-full h-full" src={uploadedAvater} alt="" />
+              :undefined}
               <input  onChange={(res:any) => {
                   // setisLoading(true)
                   // getBase64(res.target.files[0],res.target.value)   
@@ -352,12 +433,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
                   const reader = new FileReader();
                   reader.readAsDataURL(res.target.files[0]);
                   reader.onload = function () {
-                    setSelectedAvatar(reader.result as string)
-                    formik.setFieldValue('avatar_pic_url',reader.result)   
-                    Auth.createAvatarVideo(reader.result as string).then((response) => {
-                      setAvatarVideo(response.data)
-                      formik.setFieldValue('silent_video_avatar',response.data)
-                    })                        
+                    setCropper(reader.result as string)       
                   };
                   reader.onerror = function (error) {
                       console.log('Error: ', error);
@@ -393,6 +469,19 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik}) => {
             Submit AI Profile
           </Button>
         </div>
+       <CropperBox url={Cropper} onResolve={(resolve: string | ArrayBuffer | null) => {
+         // shareUser.updateImageurl(resolve)
+        //  formik.setFieldValue('PrifileImage',resolve)
+        // setAvatarUrl('')
+          setCropper('')
+          setSelectedAvatar(resolve as string)
+          setUploadedAvater(resolve as string)          
+          formik.setFieldValue('avatar_pic_url',resolve)   
+          Auth.createAvatarVideo(resolve as string).then((response) => {
+            setAvatarVideo(response.data)
+            formik.setFieldValue('silent_video_avatar',response.data)
+          })           
+       }}></CropperBox>          
       </div>
     </>
   )
