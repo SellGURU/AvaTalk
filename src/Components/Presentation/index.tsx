@@ -189,7 +189,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             !startChat?
               <Button onClick={() => {
                 setStartChat(true)
-                setShowSettingIcon(true)
+                setShowSettingIcon(false)
                 }} theme="Carbon" data-mode="profile-review-button">
                 start to chat
               </Button>
