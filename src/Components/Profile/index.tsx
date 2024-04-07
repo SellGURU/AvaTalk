@@ -248,7 +248,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               <div className={`${(showToturial && toturialStep == 0) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
                 <Button onClick={!showToturial?() => {
                   if(mode == 'share'){
-                    navigate('/presentation/?user='+authContext.currentUser.information?.userId)
+                    navigate('/presentation/?user='+shareUser.information?.userId)
                   }else {
                     navigate('/presentation')
                   }
