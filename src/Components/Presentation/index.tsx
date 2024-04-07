@@ -155,7 +155,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         const shareUser = new User(information)
         setShareUser(shareUser) 
         setIsLoading(false)
-        setSuggestionList(data.information.suggestion_list)
+        setSuggestionList(data?.information?.suggestion_list)
         setTimeout(() => {
           forceUpdate()
         }, 300);

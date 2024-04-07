@@ -381,7 +381,11 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
   useConstructor(() => {
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
-      setSelectedAvatar(res.data[0])
+      setSelectedAvatar(res.data[0])   
+      Auth.createAvatarVideo(res.data[0] as string).then((response) => {
+        setAvatarVideo(response.data)
+        formik.setFieldValue('silent_video_avatar',response.data)
+      })       
       formik.setFieldValue('avatar_pic_url',res.data[0])
     })
   })
