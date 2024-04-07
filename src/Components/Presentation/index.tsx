@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React , {useState , useEffect, useRef} from "react";
+import React , {useState , useEffect, useRef, useReducer} from "react";
 import { Button, Suggestions } from "symphony-ui";
 import FooterPresentation from "../FooterPresentation";
 import { AiAvatar, AudioProvider, BackIcon } from "..";
@@ -47,8 +47,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       
       //   })
       // };
-  const [shareUser,setShareUser] = useState(user.currentUser)
-  const [videoUrl, setVideoUrl] = useState<string>(shareUser.information?.silent_video_avatar as string);
+  const [shareUser,setShareUser] = useState<null | User>(null)
+  const [videoUrl, setVideoUrl] = useState<string>(shareUser? shareUser.information?.silent_video_avatar as string:'');
   useEffect(() => {
       if(videoRef.current && !isRecording){
           const refren = videoRef.current  as any   
@@ -57,11 +57,12 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       }        
   })   
   useEffect(() => {
-    console.log(shareUser.information?.talk_video_avater)
+    console.log(shareUser)
+    // console.log(shareUser.information?.talk_video_avater)
       if(isTalking){
-        setVideoUrl(shareUser.information?.talk_video_avater as string)
+        setVideoUrl(shareUser?.information?.talk_video_avater as string)
       }else{
-        setVideoUrl(shareUser.information?.silent_video_avatar as string)
+        setVideoUrl(shareUser?.information?.silent_video_avatar as string)
       }
   })
   const BLokedIdList =useRef<string[]>([]);
@@ -72,11 +73,12 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     setChats(newChats);
     BLokedIdList.current = [...BLokedIdList.current, id];
   };  
-  const [suggestionList] = useState([
+  const [suggestionList,setSuggestionList] = useState([
     'Can you introduce yourself?',
     'Tell me more about your business',
     'What services do you provide in Codie?'
   ])
+  const [,forceUpdate] = useReducer(x => x + 1, 0);
   // for show with delay and fade
   const [showMoreInfoSection, setShowMoreInfoSection] = useState(false);
   useEffect(() => {
@@ -104,7 +106,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       setIsLoading(false)
     },() => {
       setIsLoading(false)
-    },selectedLang.lan,BLokedIdList,shareUser.information?.userId as string)
+    },selectedLang.lan,BLokedIdList,shareUser?.information?.userId as string)
   };
   
   useEffect(() => {
@@ -129,9 +131,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   useConstructor(() => {
     const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
     Share.getShareData('/presentation_info/user='+userid,(data) => {
-        const socials = data.boxs.filter((el:any) => el.type_name == 'SocialBox')[0].socialMedias
+        const socials = data.boxs.filter((el:any) => el.type_name == 'SocialBox')[0]?.socialMedias
         setSocials(socials)
-        console.log(socials)
         const information = {
             firstName:data.information.first_name,
             lastName:data.information.last_name,
@@ -147,11 +148,17 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             },
             workEmail:data.information.work_email,
             workPhone:data.information.work_mobile_number,
-            userId:data.information.created_userid
+            userId:data.information.created_userid,
+            silent_video_avatar:data.information.silent_video_url,
+            talk_video_avater:data.information.talking_video_avatar           
         }
         const shareUser = new User(information)
         setShareUser(shareUser) 
         setIsLoading(false)
+        setSuggestionList(data.information.suggestion_list)
+        setTimeout(() => {
+          forceUpdate()
+        }, 300);
     })    
   })
 
@@ -167,7 +174,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             navigate(-1)
           }
         }} theme="Carbon" title=""></BackIcon>
-      
+
         <div className={`${theme}-Presentation-Content`}>  
     
           <div className={`${theme}-Presentation-PictureSection`}>
@@ -175,8 +182,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
           </div>
           <div>
-            <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser.information?.firstName}</h1>
-            <p className={`${theme}-Presentation-SubTitle`}>{shareUser.information?.job}</p>
+            <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser?.information?.firstName}</h1>
+            <p className={`${theme}-Presentation-SubTitle`}>{shareUser?.information?.job}</p>
           </div>
           {
             !startChat?
@@ -193,20 +200,20 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           {!startChat ?
             <div className={`${theme}-Presentation-InfoSection`}>
               <div onClick={() => {
-                window.open(shareUser.information?.phone); 
+                window.open(shareUser?.information?.phone); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-CallVector`}></div>
                 </div>
-                <div className="cursor-pointer">{shareUser.information?.phone}</div>
+                <div className="cursor-pointer">{shareUser?.information?.phone}</div>
               </div>
               <div onClick={() => {
-                window.open("mailto:"+shareUser.information?.personlEmail); 
+                window.open("mailto:"+shareUser?.information?.personlEmail); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-EmailVector`}></div>
                 </div>
-                <div className="cursor-pointer">{shareUser.information?.personlEmail}</div>
+                <div className="cursor-pointer">{shareUser?.information?.personlEmail}</div>
               </div>
               <div onClick={() => {
                 window.open(); 
@@ -216,7 +223,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 </div>
                 <div className="cursor-pointer">codie.ai</div>
               </div>
-              {socials.map((item:any) => {
+              {socials?.map((item:any) => {
                 return (
                   <>
                     <div onClick={() => {
@@ -284,6 +291,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           }
 
         </div>
+
         {showSetting &&
           <Setting 
           theme="Carbon"
