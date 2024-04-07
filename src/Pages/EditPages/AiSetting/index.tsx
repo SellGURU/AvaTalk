@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui";
-import { BackIcon, TextField } from "../../../Components";
+import { BackIcon, Select, TextField } from "../../../Components";
 import { useFormik } from "formik";
 import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
@@ -15,6 +15,7 @@ const EditAiSetting = () => {
   // }  
   // const navigate = useNavigate();
   const [value, setValue] = useState<any>("**Hello world!!!**");
+  const [gender,setGender] = useState('female')
   const initialValue = {
     title: 'Ai Setting',
   };
@@ -26,7 +27,9 @@ const EditAiSetting = () => {
   });  
   useConstructor(() => {
     Auth.showAiSetting((res) => {
-      console.log(res)
+      formik.setFieldValue("title",res.ai_setting.Name)
+      setValue(res.ai_setting["AI Knowledge"])
+      setGender(res.gender)
     })
   })
   return (
@@ -58,11 +61,23 @@ const EditAiSetting = () => {
               onChange={setValue}
             />
           </div>
+          <div className="px-6 mt-6">
+            <Select label="Gender" valueElement={<div>{gender}</div>} placeholder="Select tag..." theme="Carbon">
+              <option className="cursor-pointer" onClick={() => {
+                setGender('male')
+              }}>male</option>
+              <hr />
+              <option className="cursor-pointer"  onClick={() => {
+                setGender('female')
+              }}>female</option>
+            </Select>          
+          </div>
           <div className="px-6 mt-10">
             <Button onClick={() => {
               Auth.updateAiSetting({
                 name:formik.values.title,
-                ai_knowledge:value
+                ai_knowledge:value,
+                gender:gender
               })
             }} theme="Carbon">
               Save Change

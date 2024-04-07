@@ -39,7 +39,8 @@ interface SupportData {
 
 interface AiSetting {
   name:string,
-  ai_knowledge:string
+  ai_knowledge:string,
+  gender:string
 }
 
 interface AccountInfo {

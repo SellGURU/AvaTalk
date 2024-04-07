@@ -197,7 +197,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             ""
           }
       
-          {!startChat ?
+          {!startChat && shareUser?
             <div className={`${theme}-Presentation-InfoSection`}>
               <div onClick={() => {
                 window.open(shareUser?.information?.phone); 
@@ -215,14 +215,14 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 </div>
                 <div className="cursor-pointer">{shareUser?.information?.personlEmail}</div>
               </div>
-              <div onClick={() => {
+              {/* <div onClick={() => {
                 window.open(); 
               }} className={`${theme}-Presentation-Info`}>
                 <div className={`${theme}-Presentation-Vectors`}>
                   <div className={`${theme}-Presentation-WebsiteVector`}></div>
                 </div>
                 <div className="cursor-pointer">codie.ai</div>
-              </div>
+              </div> */}
               {socials?.map((item:any) => {
                 return (
                   <>
