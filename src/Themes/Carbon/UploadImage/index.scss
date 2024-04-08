@@ -14,7 +14,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-image: url('./src/assets/Acord/Uploadicon.svg');
+    mask-image: url('/Acord/Uploadicon.svg');
 }
 .Carbon-ImageUploader-uploadBox-fileExist {
     // @apply h-[202px] #{!important};
@@ -43,7 +43,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-image: url('./src/assets/Carbon/Trash.svg');    
+    mask-image: url('./src/assets/Carbon/trash.svg');    
     @apply w-4 h-4 flex justify-center items-center cursor-pointer opacity-100 bg-[#5A6571] rounded-full
 }
 

@@ -96,7 +96,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                         <input  onChange={(res:any) => {
                             setisLoading(true)
                             getBase64(res.target.files[0],res.target.value)    
-                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button" multiple accept="*" />                        
+                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept="*" />                        
                     </div>
               }
               {files.length > 0 && mod=='files'? 

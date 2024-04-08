@@ -199,8 +199,12 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
             <img className={`${theme}-Profile-ProfilePicture`} src={shareUser.resolveImageUrl()} alt="" />
             {mode == 'profile' ?
               <>
-                <div className={`${theme}-Profile-GalleryVectorContainer`}>
-                  <Button onClick={() => {setShowChangePhoto(true)}} theme='Carbon-back'>
+                <div className={`${theme}-Profile-GalleryVectorContainer`} style={{
+                  top:'4.5rem',
+                  right:'13rem'
+                }}>
+                  <Button  theme='Carbon-back'>
+                     <input onChange={getNewBackGroundUrl} className='w-full cursor-pointer h-full rounded-full absolute z-10 opacity-0 top-0 left-0' type="file" id='profileUploader' accept="image/png, image/jpeg, image/jpg"/>
                     <div className={`${theme}-Profile-GalleryVector ${theme}-Profile-EditGalleryVector`}></div>
                   </Button> 
                 </div>
