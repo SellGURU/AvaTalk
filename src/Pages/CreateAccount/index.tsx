@@ -379,7 +379,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
     [])  
   const [avatarVideo,setAvatarVideo] = useState('')
   const [selectedAvatar,setSelectedAvatar]= useState('')
-  const [uploadedAvater,setUploadedAvater]= useState('')
+  const [uploadedAvater]= useState('')
   const [Cropper,setCropper]= useState('')
   const authContext = useAuth()
   useConstructor(() => {
@@ -387,7 +387,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
       setAvaterList(res.data)
       if(res.data[res.data.length -1].video == ''){
         setSelectedAvatar(res.data[res.data.length -1].photo)   
-        setUploadedAvater(res.data[res.data.length -1].photo)
+        // setUploadedAvater(res.data[res.data.length -1].photo)
         formik.setFieldValue('avatar_pic_url',res.data[res.data.length -1].photo)
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
           setAvatarVideo(response.data)
@@ -505,9 +505,13 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
         // setAvatarUrl('')
           setCropper('')
           setSelectedAvatar(resolve as string)
-          setUploadedAvater(resolve as string)          
+          // setUploadedAvater(resolve as string)   
           formik.setFieldValue('avatar_pic_url',resolve)   
           Auth.createAvatarVideo(resolve as string).then((response) => {
+            setAvaterList([{
+              photo:resolve as string,
+              video:response.data,
+            },...avatarList])       
             setAvatarVideo(response.data)
             formik.setFieldValue('silent_video_avatar',response.data)
           })           
