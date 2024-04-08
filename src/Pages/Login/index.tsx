@@ -127,7 +127,9 @@ const Login = () => {
                   <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
 
                     <GoogleLogin
-                    
+                      size="large"
+                      width={'100%'}
+                      text="continue_with"
                       onSuccess={credentialResponse => {
                         // setcertificate(credentialResponse);
                         // console.log(credentialResponse);
