@@ -3,6 +3,7 @@ import { MutableRefObject, useState } from "react";
 import { MenuType, chat } from "./Types";
 import { AboutBox, Box, GalleryBox, GoogleMapBox, LinkBox, SocialBox } from "./Model";
 import { Chat } from "./Api";
+import { toast } from "react-toastify";
 
 const resolveMenuFromRoute = () => {
   console.log(window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0])
@@ -130,7 +131,6 @@ const generateSlugId = () => {
 
   return slugId;
 };
-
 const sendToApi = (
   chats: Array<chat>, 
   setChats: (chats: Array<chat>) => void,
@@ -171,6 +171,9 @@ const sendToApi = (
   })
     .then((res) => {
       console.dir(BLokedIdList.current)
+      if(res == "No bot has been created"){
+        toast.warning(res)
+      }
       if(!BLokedIdList.current.includes(res.message_key as never)){
         setChats([
           ...chats,

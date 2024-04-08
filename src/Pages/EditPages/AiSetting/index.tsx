@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui";
-import { BackIcon, Select, TextField } from "../../../Components";
+import { BackIcon, Select, TextArea, TextField } from "../../../Components";
 import { useFormik } from "formik";
-import MDEditor from "@uiw/react-md-editor";
+// import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
@@ -55,11 +55,14 @@ const EditAiSetting = () => {
             <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>
             </div>
-            <MDEditor
+            <TextArea inValid={false} name="ai" onBlur={() => {}} onChange={(event) => {
+              setValue(event.target.value)
+            }} value={value} theme="Carbon" textAreaHeight='100px'></TextArea>
+            {/* <MDEditor
               value={value}
               data-color-mode="light"
               onChange={setValue}
-            />
+            /> */}
           </div>
           <div className="px-6 mt-6">
             <Select label="Gender" valueElement={<div>{gender}</div>} placeholder="Select tag..." theme="Carbon">
