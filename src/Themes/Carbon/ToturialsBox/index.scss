@@ -9,9 +9,9 @@
 }
 
 .Carbon-ToturialsBox-text {
-    @apply text-sm font-medium cursor-pointer
+    @apply text-sm font-medium cursor-pointer 
 }
 
 .Carbon-ToturialsBox-content {
-    @apply text-xs text-left font-light max-w-[176px]
+    @apply text-xs text-left font-light max-w-[176px] opacity-60
 }

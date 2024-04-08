@@ -34,7 +34,7 @@ const EditAiSetting = () => {
   })
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+      <div className="absolute w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
         <div className="relative top-4">
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
@@ -63,13 +63,13 @@ const EditAiSetting = () => {
           </div>
           <div className="px-6 mt-6">
             <Select label="Gender" valueElement={<div>{gender}</div>} placeholder="Select tag..." theme="Carbon">
-              <option className="cursor-pointer" onClick={() => {
+              <div  className="cursor-pointer h-10 flex items-center justify-center" onClick={() => {
                 setGender('male')
-              }}>male</option>
+              }}>male</div>
               <hr />
-              <option className="cursor-pointer"  onClick={() => {
+              <div   className="cursor-pointer h-10 flex items-center justify-center"  onClick={() => {
                 setGender('female')
-              }}>female</option>
+              }}>female</div>
             </Select>          
           </div>
           <div className="px-6 mt-10">

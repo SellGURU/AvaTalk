@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Auth } from "../../../Api";
 import { Location } from "../../../Types";
+import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 
 
 const validationSchema = Yup.object().shape({
@@ -159,6 +160,9 @@ const SettingAccount =() => {
                     Auth.updateYourAccount({
                         user_id:context.currentUser.information?.userId as string,
                         state:false
+                    }).then(() => {
+                        removeTokenFromLocalStorage()
+                        navigate('/login')
                     })                    
                 }} className="mt-4 flex items-center cursor-pointer">
                     <p className="text-cyan-500 ms-2 text-sm font-medium">Delete Your Account</p>

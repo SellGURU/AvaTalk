@@ -204,7 +204,8 @@ class Auth extends Api {
   }  
 
   static updateYourAccount(data:AccountInfo){
-    this.post('/update_your_account',data)
+    const response = this.post('/update_your_account',data)
+    return response
   }
 
   static addEvent(event:AddEvent) {
