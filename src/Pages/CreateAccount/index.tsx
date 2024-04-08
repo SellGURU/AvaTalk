@@ -369,9 +369,13 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
 //     </>
 //   );
 // };
+interface Avatars {
+  photo:string
+  video:string
+}
 
 const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) => {
-  const [avatarList,setAvaterList] = useState(
+  const [avatarList,setAvaterList] = useState<Array<Avatars>>(
     [])  
   const [avatarVideo,setAvatarVideo] = useState('')
   const [selectedAvatar,setSelectedAvatar]= useState('')
@@ -381,12 +385,22 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
   useConstructor(() => {
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
-      setSelectedAvatar(res.data[0])   
-      Auth.createAvatarVideo(res.data[0] as string).then((response) => {
-        setAvatarVideo(response.data)
-        formik.setFieldValue('silent_video_avatar',response.data)
-      })       
-      formik.setFieldValue('avatar_pic_url',res.data[0])
+      if(res.data[res.data.length -1].video == ''){
+        setSelectedAvatar(res.data[res.data.length -1].photo)   
+        setUploadedAvater(res.data[res.data.length -1].photo)
+        formik.setFieldValue('avatar_pic_url',res.data[res.data.length -1].photo)
+        Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
+          setAvatarVideo(response.data)
+          formik.setFieldValue('silent_video_avatar',response.data)
+        })           
+      }else{
+        setSelectedAvatar(res.data[0].photo)   
+        setAvatarVideo(res.data[0].video)
+        formik.setFieldValue('silent_video_avatar',res.data[0].video)
+        formik.setFieldValue('avatar_pic_url',res.data[0].photo)
+      }
+      // Auth.createAvatarVideo(res.data[0] as string).then((response) => {
+      // })       
     })
   })
   return (
@@ -452,15 +466,27 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
               return (
                 <>
                 <div onClick={() => {
-                  setSelectedAvatar(el)
-                  formik.setFieldValue('avatar_pic_url',el)
-                  setAvatarVideo('')
-                  Auth.createAvatarVideo(el).then((res) => {
-                    setAvatarVideo(res.data)
-                    formik.setFieldValue('silent_video_avatar',res.data)
-                  })
-                }} className={`w-[85px] ${el == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] h-[73px]`}>
-                  <img src={el} className="w-full  h-full" alt="" />
+                  setSelectedAvatar(el.photo)
+                  formik.setFieldValue('avatar_pic_url',el.photo)
+                  setAvatarVideo("")
+                  if(el.video == ''){
+                      Auth.createAvatarVideo(el.photo as string).then((response) => {
+                        setAvatarVideo(response.data)
+                        formik.setFieldValue('silent_video_avatar',response.data)
+                      })  
+                  }else {
+                    setTimeout(() => {
+                      setAvatarVideo(el.video)
+                      formik.setFieldValue('silent_video_avatar',el.video)                  
+                      
+                    }, 200);
+                  }
+                  // Auth.createAvatarVideo(el).then((res) => {
+                  //   setAvatarVideo(res.data)
+                  //   formik.setFieldValue('silent_video_avatar',res.data)
+                  // })
+                }} className={`w-[85px] ${el.photo == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] h-[73px]`}>
+                  <img src={el.photo} className="w-full  h-full" alt="" />
                 </div>                
                 </>
               )
