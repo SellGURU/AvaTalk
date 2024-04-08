@@ -62,7 +62,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 </Button>
             </div>
             <div className={`${theme}-ShareContact-Body`}>
-                <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}</h1>
+                <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}  {authContext.currentUser.information?.lastName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
                 {/* <div className={`${theme}-ShareContact-QrCodeVector`}></div> */}
                 <div id='qrCodeBox' className={`${theme}-ShareContact-QrCodeVector`}>

@@ -23,7 +23,7 @@ class GalleryBox extends Box{
                 renderLeftNav={(onClick, disabled) => {
                     return (
                         <>
-                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(-50%, -50%)'}} data-mode="gallery">
+                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(30%, -50%)'}} data-mode="gallery">
                                 <Button onClick={onClick} disabled={disabled} theme={`${theme}-back`}>
                                     <div className={`${theme}-back-Button-vector`}></div>
                                 </Button>
@@ -34,7 +34,7 @@ class GalleryBox extends Box{
                 renderRightNav={(onClick, disabled) => {
                     return (
                         <>
-                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(50%, -50%)',right:'0%'}}  data-mode="gallery">
+                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(-30%, -50%)',right:'0%'}}  data-mode="gallery">
                                 <Button onClick={onClick} disabled={disabled}  theme={`${theme}-back`} style={{rotate:'180deg'}}>
                                     <div className={`${theme}-back-Button-vector`}></div>
                                 </Button>

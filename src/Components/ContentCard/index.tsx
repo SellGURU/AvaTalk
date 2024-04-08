@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box } from '../../Model';
 import { useAuth } from '../../hooks/useAuth';
 import { Auth } from '../../Api';
+import { Confirm } from '../__Modal__';
 
 interface ContentCardProps {
   theme?: string;
@@ -25,6 +26,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   })
   const auth = useAuth()
   const navigate = useNavigate();
+  const [showConfirm,setShowConfirm] = useState(false)
   return (
     <>
     <li draggable onClick={() => {
@@ -53,11 +55,13 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div onClick={() => {
-                auth.currentUser.removeBox(item)
-                navigate('/')
+                setShowConfirm(true)
+                // auth.currentUser.removeBox(item)
+                // navigate('/')
               }}  onTouchStart={() => {
-                auth.currentUser.removeBox(item)
-                navigate('/')
+                setShowConfirm(true)
+                // auth.currentUser.removeBox(item)
+                // navigate('/')
               }} className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
@@ -75,6 +79,17 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
         <div className={`${theme}-ContentCard-Children`}>{item.resolveRender(theme)}</div>
         
     </li>
+    {showConfirm ?
+      <div className='fixed top-0 left-0 w-full h-dvh flex justify-center items-center'>
+        <Confirm title={"Delete "+item.getTypeName()} content={"Are you sure want to delete this card"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+          auth.currentUser.removeBox(item)
+          setShowConfirm(false)
+          navigate('/')
+        }}></Confirm>
+      </div>
+    :
+     undefined
+    }
     </>
     
   );

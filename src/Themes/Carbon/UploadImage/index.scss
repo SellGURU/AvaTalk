@@ -14,21 +14,21 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-image: url('./src/assets/Acord/Uploadicon.svg');
+    mask-image: url('/Acord/Uploadicon.svg');
 }
 .Carbon-ImageUploader-uploadBox-fileExist {
     // @apply h-[202px] #{!important};
 }
 
 .Carbon-ImageUploader-uploadBox-container{
-    @apply mb-[12px] relative mt-2 rounded-[5px] cursor-pointer px-0  w-auto max-w-[555px] min-h-[90px]
+    @apply mb-[12px] relative mt-2 rounded-[5px] px-0  w-auto max-w-[555px] min-h-[90px]
 }
 .Carbon-ImageUploader-uploadBox-loading{
     @apply w-full flex justify-center h-full items-center
 }
 .Carbon-ImageUploader-uploadBox-box{
 
-    @apply w-full cursor-pointer relative h-full bg-gray-50 border-dashed rounded-[4px]  border border-slate-300
+    @apply w-full relative h-full bg-gray-50 border-dashed rounded-[4px] cursor-pointer border border-slate-300
 }
 .Carbon-ImageUploader-uploadBox-file{
     box-shadow: inset -4px -4px 9px 0px rgba(255 ,255 ,255,0.6) ,inset 1px 1px 8px 0px rgba(14 ,160 ,11, 0.2);
@@ -43,7 +43,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-image: url('./src/assets/Carbon/Trash.svg');    
+    mask-image: url('./src/assets/Carbon/trash.svg');    
     @apply w-4 h-4 flex justify-center items-center cursor-pointer opacity-100 bg-[#5A6571] rounded-full
 }
 
@@ -59,7 +59,7 @@
 }
 
 .Carbon-ImageUploader-uploader-input{
-    @apply opacity-0 w-full h-full absolute top-0
+    @apply opacity-0 w-full h-full absolute top-0 cursor-pointer;
 }
 
 .Carbon-ImageUploader-uploader-suportText{
