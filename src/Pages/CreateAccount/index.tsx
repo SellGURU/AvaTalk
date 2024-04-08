@@ -470,7 +470,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
         </div>        
         <div className="mt-8 mb-3 px-12">
           <Button disabled={avatarVideo.length == 0} onClick={onSubmit} theme="Carbon">
-            Submit AI Profile
+            Get Started
           </Button>
         </div>
        <CropperBox url={Cropper} onResolve={(resolve: string | ArrayBuffer | null) => {

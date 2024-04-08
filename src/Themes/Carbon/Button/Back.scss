@@ -15,7 +15,7 @@
 }
 
 .Carbon-back-Button-container-box[data-mode ='gallery'] {
-  @apply flex px-0 items-center space-x-4 z-10 absolute top-[50%]  #{!important}
+  @apply flex px-0 items-center space-x-4 z-[2] absolute top-[50%]  #{!important}
 }
 
 .Carbon-back-Button-container[data-mode = 'calendar'] {
