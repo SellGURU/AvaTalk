@@ -140,51 +140,43 @@ const Login = () => {
                           {
                             google_json:prof
                           },
-                        ).then(() => {
+                        ).then((res) => {
                           authContext.verificationHandler({
                             emailOrPhone: prof?.email,
                             googleJson:prof
                           })
-                          Auth.login({
-                            email:prof?.email,
-                            entered_code:'12345'
-                          }).then((res) => {
-                              if(res.data == null){
-                                  navigate("/register");
-                              }
-                              if(res.data == 'Not Registered'){
-                                  navigate("/register");
-                              }else{
-                                  localStorage.setItem("token",res.data.access_token)
-                                  authContext.login(res.data.access_token)
-                                  const resolveSocial: Array<Box> = [];
-                                  Auth.showProfile((data) => {
-                                      data.boxs.map((item:any) => {
-                                          const newBox = boxProvider(item);
-                                          resolveSocial.push(newBox);
-                                      })
-                                      authContext.currentUser.updateInformation({
-                                          firstName:data.information.first_name,
-                                          lastName:data.information.last_name,
-                                          phone:data.information.mobile_number,
-                                          personlEmail:data.information.email,
-                                          company:data.information.company_name,
-                                          job:data.information.job_title,
-                                          banelImage:data.information.back_ground_pic,
-                                          imageurl:data.information.profile_pic,
-                                          location:{
-                                              lat:33,
-                                              lng:33
-                                          },
-                                          workEmail:data.information.work_email,
-                                          workPhone:data.information.work_mobile_number,
-                                          userId:data.information.created_userid
-                                      })
-                                      authContext.currentUser.setBox(resolveSocial)
-                                      navigate("/?splash=true");
-                                  })                            
-                              }
-                          })                                                 
+                          if(res.data.access_token){
+                            localStorage.setItem("token",res.data.access_token)
+                            authContext.login(res.data.access_token)
+                            const resolveSocial: Array<Box> = [];
+                            Auth.showProfile((data) => {
+                                data.boxs.map((item:any) => {
+                                    const newBox = boxProvider(item);
+                                    resolveSocial.push(newBox);
+                                })
+                                authContext.currentUser.updateInformation({
+                                    firstName:data.information.first_name,
+                                    lastName:data.information.last_name,
+                                    phone:data.information.mobile_number,
+                                    personlEmail:data.information.email,
+                                    company:data.information.company_name,
+                                    job:data.information.job_title,
+                                    banelImage:data.information.back_ground_pic,
+                                    imageurl:data.information.profile_pic,
+                                    location:{
+                                        lat:33,
+                                        lng:33
+                                    },
+                                    workEmail:data.information.work_email,
+                                    workPhone:data.information.work_mobile_number,
+                                    userId:data.information.created_userid
+                                })
+                                authContext.currentUser.setBox(resolveSocial)
+                                navigate("/?splash=true");
+                            })                                                   
+                          }else {
+                            navigate("/register")
+                          }
                         });                          
                       }}
                       onError={() => {

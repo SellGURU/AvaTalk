@@ -372,6 +372,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
 interface Avatars {
   photo:string
   video:string
+  type:'Api'|'Local'
 }
 
 const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) => {
@@ -486,6 +487,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                   //   formik.setFieldValue('silent_video_avatar',res.data)
                   // })
                 }} className={`w-[85px] ${el.photo == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] h-[73px]`}>
+                  {/* <img src="" alt="" /> */}
                   <img src={el.photo} className="w-full  h-full" alt="" />
                 </div>                
                 </>
@@ -511,6 +513,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
             setAvaterList([{
               photo:resolve as string,
               video:response.data,
+              type:'Local'
             },...avatarList])       
             setAvatarVideo(response.data)
             formik.setFieldValue('silent_video_avatar',response.data)
