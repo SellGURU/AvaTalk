@@ -11,6 +11,12 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
   const navigate = useNavigate();
   const [editCards] = useState([
     {
+      name: "AI Setting",
+      icon: "aiSetting.svg",
+      link: "ai-setting",
+      description: "Customize AI settings.",
+    },    
+    {
       name: "Contact Info",
       icon: "book.svg",
       link: "contact-info",
@@ -45,12 +51,6 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       icon: "location2.svg",
       link: "",
       description: "Share a store or office location.",
-    },
-    {
-      name: "AI Setting",
-      icon: "aiSetting.svg",
-      link: "ai-setting",
-      description: "Customize AI settings.",
     },
     {
       name: "Videos",
