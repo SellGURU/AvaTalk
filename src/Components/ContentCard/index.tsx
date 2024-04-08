@@ -80,7 +80,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
         
     </li>
     {showConfirm ?
-      <div className='fixed top-0 left-0 w-full h-dvh flex justify-center items-center'>
+      <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
         <Confirm title={"Delete "+item.getTypeName()} content={"Are you sure want to delete this card"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
           auth.currentUser.removeBox(item)
           setShowConfirm(false)
