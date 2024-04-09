@@ -14,7 +14,7 @@ const EditAiSetting = () => {
   //   currentBox = new AboutBox("about", "");
   // }  
   // const navigate = useNavigate();
-  const [value, setValue] = useState<any>("**Hello world!!!**");
+  const [value, setValue] = useState<any>("");
   const [gender,setGender] = useState('female')
   const initialValue = {
     title: 'Ai Setting',
