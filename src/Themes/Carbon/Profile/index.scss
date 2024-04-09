@@ -121,3 +121,19 @@
     background-image: url(/Carbon/calendar-2.svg);
     @apply w-6 h-6  bg-cover bg-no-repeat;
 }
+.Carbon-Profile-EditProfileBtnVector2{
+    background-image: url(/Carbon/user-edit.svg);
+    @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
+}
+.Carbon-Profile-LanguageSquareVector{
+    background-image: url(/Carbon/language-square.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat;
+}
+.Carbon-Profile-VolumeHighVector{
+    background-image: url(/Carbon/volume-high.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat;
+}
+.Carbon-ContentCard-AddVector{
+    background-image: url(/Carbon/addVector.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat;
+}

@@ -1,4 +1,4 @@
-import Profile from "./Profile";
+import Profile2 from "./Profile2";
 import Select from "./Select";
 import Spinners from "./Spinner";
 import ContentCard from "./ContentCard";
@@ -24,7 +24,7 @@ import TagList from "./TagList";
 import TagItem from "./TagItem";
 
 export {
-  Profile,
+  Profile2,
   Spinners,
   ContentCard,
   StepController,

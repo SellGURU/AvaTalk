@@ -1,22 +1,22 @@
 import { createHashRouter } from "react-router-dom";
-import { Home, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
+import { Home2, Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import { Chat, ContactsView, Profile } from "../Components";
+import { Chat, ContactsView, Profile2 } from "../Components";
 import { EditGallery, EditGoogleMap, EditVideos } from "../Pages/EditPages";
 
 const route = createHashRouter([
   {
     path: "/",
-    element: <ProtectedRoute Component={Home} />,
+    element: <ProtectedRoute Component={Home2} />,
 
     children: [
       {
         path: "/",
-        element: <Profile theme="Carbon"></Profile>,
+        element: <Profile2 theme="Carbon"></Profile2>,
         children:[
           {
             path:'edit',
