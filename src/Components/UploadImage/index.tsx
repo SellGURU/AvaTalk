@@ -4,14 +4,16 @@ import React, { HtmlHTMLAttributes, useState } from "react";
 
 type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   theme?: string;
+  value?:Array<any>
   uploades?: (files:Array<any>) => void
+  mod?:'files' | 'profile',
   label?:string
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme, uploades, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
-  const [files,setFiles] = useState<Array<any>>([]);
+  const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -21,10 +23,21 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme, uplo
             name:name
           }])
           if(uploades){
-            uploades([...files,{
+            if(mod == 'files'){
+              uploades([...files,{
+                url:reader.result,
+                name:name
+              }])
+            }else{
+            setFiles([{
               url:reader.result,
               name:name
-            }])
+            }])              
+              uploades([{
+                url:reader.result,
+                name:name
+              }])              
+            }
           }
           setisLoading(false)       
       };
@@ -36,6 +49,9 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme, uplo
     const newArr = [...files]
     newArr.splice(index,1)
     setFiles(newArr)
+    if(uploades){
+      uploades(newArr)
+    }    
   }
   return (
     <>
@@ -59,7 +75,11 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme, uplo
                           height:'100%'
                         }}>
                             <div style={{display:'grid'}}>
-                              <div className={`${theme}-ImageUploader-icon`}></div>
+                              {files.length > 0 && mod == 'profile'?
+                                <img className="w-[66px] justify-self-center my-2 h-[66px] rounded-full " src={files[0].url} alt="" />
+                              :
+                                <div className={`${theme}-ImageUploader-icon`}></div>
+                              }                              
                                 <div style={{
                                   fontSize:'12px',
                                   textAlign:'center',
@@ -76,10 +96,10 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme, uplo
                         <input  onChange={(res:any) => {
                             setisLoading(true)
                             getBase64(res.target.files[0],res.target.value)    
-                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button" multiple accept="*" />                        
+                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept="*" />                        
                     </div>
               }
-              {files.length > 0 ? 
+              {files.length > 0 && mod=='files'? 
                 <>
                   <div>
                     <div className={`${theme}-ImageUploader-itemList-titleBox`}>Uploaded</div>

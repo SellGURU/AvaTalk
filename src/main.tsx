@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import './Api/axios.ts';
 import 'react-calendar/dist/Calendar.css';
 import "cropperjs/dist/cropper.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 Modal.setAppElement('#root');
 

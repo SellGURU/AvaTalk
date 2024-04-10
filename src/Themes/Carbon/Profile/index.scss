@@ -1,5 +1,5 @@
 .Carbon-Profile-Container {
-    @apply w-full h-screen relative flex justify-center text-gray-700 text-center;
+    @apply w-full h-svh relative flex justify-center text-gray-700 text-center;
 }
 .Carbon-Profile-ProfileSection {
     /* Hide scrollbar for IE, Edge and Firefox */
@@ -9,39 +9,25 @@
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .Carbon-Profile-ProfileSection::-webkit-scrollbar{
-    display: none;
+    display: block;
 }
 .Carbon-Profile-Background{
     // background-image: url(/Carbon/BackgroundProfileImage.png) ;
-    border: 1px solid transparent;
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-    2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-
-    margin: 0 auto;
-    @apply absolute bg-cover bg-no-repeat -top-[26px] w-full h-[218px];
+    margin: 0 ;
+    @apply absolute borderBox-Gray boxShadow-Gray bg-cover bg-no-repeat -top-[26px] w-full h-[218px];
 }
 .Carbon-Profile-Content {
     @apply relative flex flex-col gap-4 justify-center items-center mt-11 px-4 pb-20;
 }
 .Carbon-Profile-ProfilePictureSection {
-    box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1);
-    @apply w-40 h-40 rounded-full relative;
+    @apply w-40 h-40 rounded-full relative borderBox-Gray boxShadow-Gray  ;
 }
 .Carbon-Profile-ProfilePicture {
-    @apply w-full h-full bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full border-2 border-gray-100;
+    @apply w-full h-full bg-stone-200 bg-cover bg-no-repeat bg-center inset-0 rounded-full border;
     // background-image: url(/Carbon/profileImage.png);
 }
 .Carbon-Profile-GalleryVectorContainer {
-    box-shadow: 2px 2px 20px 0px #6F8CB036,
-     2px 2px 4px 0px #728EAB1A;
-
-    border: 1px solid transparent;
-
-    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)padding-box,
-    linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box;
-
-    @apply absolute w-10 h-10 cursor-pointer bg-slate-50 right-32 top-24 rounded-full flex justify-center items-center border;
+    @apply absolute w-10 h-10 cursor-pointer right-32 top-24  flex justify-center items-center ;
 }
 .Carbon-Profile-GalleryVector{
     mask-size: 100%;
@@ -63,21 +49,13 @@
     @apply left-52 top-16;
 }
 .Carbon-Profile-ScanBarcode{
-    /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-                    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                        2px 2px 4px 0px rgba(114, 142, 171, 0.1);     */
-    border: 1px solid transparent;
-    background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-                linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
-                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-    @apply absolute w-10 h-10 boxShadow-Gray bg-gray-100 rounded-full flex justify-center items-center left-52 -top-[58px] ;
+    @apply absolute w-10 h-10 flex justify-center items-center right-7 ;
 }
 .Carbon-Profile-ProfileName {
-    text-shadow: 0px 1px 1px currentColor;
-    @apply font-medium text-lg;
+    @apply text-gray-700 text-lg font-semibold;
 }
 .Carbon-Profile-SubTitle {
-    @apply text-sm;
+    @apply text-gray-700 text-sm;
 }
 .Carbon-Profile-PreviewProfileBtnVector{
     background: url(/Carbon/eyeVector.svg);
@@ -88,7 +66,7 @@
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-BtnContainer{
-    @apply w-48 h-[40px];  
+    @apply flex;  
 }
 .Carbon-Profile-InstagramVector{
     background: url(/Carbon/instagram.png) no-repeat;
@@ -98,15 +76,25 @@
     background: url(/Carbon/linkedin.png) no-repeat;
     background-size: cover;
 }
+.Carbon-Profile-faceBookVector{
+    background: url(/Carbon/faceBook.svg) no-repeat;
+    background-size: cover;
+}
+.Carbon-Profile-tweeterVector{
+    background: url(/Carbon/x-tweeter.svg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.Carbon-Profile-youtubeVector{
+    background: url(/Carbon/youtube.svg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
 .Carbon-Profile-Vectors{
     @apply flex flex-row flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    /* box-shadow:
-    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-    2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
-    @apply bg-gray-100 w-16 h-16 flex justify-center boxShadow-Gray items-center rounded-full p-2 border border-white ; 
+    @apply bg-gray-100 w-16 h-16 flex justify-center borderBox-Gray boxShadow-Gray  items-center rounded-full p-2 cursor-pointer; 
 }
 
 .Carbon-Profile-closeIcon{

@@ -1,4 +1,5 @@
 import Profile2 from "./Profile2";
+import Profile from "./Profile";
 import Select from "./Select";
 import Spinners from "./Spinner";
 import ContentCard from "./ContentCard";
@@ -22,7 +23,18 @@ import Footer from "./Footer";
 import FooterPresentation from "./FooterPresentation";
 import TagList from "./TagList";
 import TagItem from "./TagItem";
-
+import ColorBox from "./ColorBox";
+import SettingPanel from "./SettingPanel";
+import SettingCard from "./SettingCard";
+import AudioProvider from "./AudioProvider";
+import AiAvatar from "./AiAvatar";
+import Timer from "./Timer";
+import Analytics from "./Analytics";
+import AreaChartComponent from "./AreaChartComponent";
+import PiChartComponent from "./PiChartComponent";
+import BarChartComponent from "./BarChartComponent";
+import AnalyticsSummary from "./AnalyticsSummary";
+import DatePicker from "./DatePicker";
 export {
   Profile2,
   Spinners,
@@ -46,6 +58,19 @@ export {
   TagItem,
   Edit,
   Card,
+  ColorBox,
   Chat,
   BackIcon,
+  SettingPanel,
+  SettingCard,
+  AudioProvider,
+  AiAvatar,
+  Timer,
+  Analytics,
+  AreaChartComponent,
+  PiChartComponent,
+  BarChartComponent,
+  AnalyticsSummary,
+  DatePicker,
+  Profile
 };

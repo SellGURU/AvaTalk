@@ -1,25 +1,9 @@
 .Carbon-FooterPresentation-Container {
-  /* border: 1px solid transparent;
-  background: linear-gradient(0deg, #E2E8F0, #E2E8F0) padding-box,
-  linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box,
-  linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) border-box; */
-
-  /* box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-                -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                  2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
-
-  @apply h-16 sticky rounded-xl border-b-0 bottom-0 boxShadow-Gray borderBox-Gray2 bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
+  @apply h-16 absolute w-full rounded-xl border-b-0 bottom-0 borderBox-Gray boxShadow-Gray bg-slate-100 py-3 px-4 gap-3 flex items-center justify-start;
 }
 .Carbon-FooterPresentation-BackgroundItems {
-  background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-    linear-gradient(122.51deg, rgba(227, 227, 238, 0.5) 16.62%, rgba(255, 255, 255, 0.5) 56.74%)border-box,
-    linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
-
-  box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1) inset,
-              4px -4px 9px 0px rgba(255, 255, 255, 0.6) inset;
-  border: 1px solid transparent;
   border-radius: 27px;
-  @apply bg-gray-100 flex justify-center items-center w-full h-full;
+  @apply bg-gray-100 borderBox-Gray btnInnerShadowsDark flex justify-center items-center w-full h-full;
 }
 
 .Carbon-FooterPresentation-Vectors{
@@ -56,4 +40,8 @@
 input:focus {
   outline: none;
   border: none;
+}
+.Carbon-FooterPresentation-BackgroundInput{
+  border-radius: 27px;
+  @apply bg-gray-100 borderBox-Gray boxShadow-Gray flex justify-center items-center w-full h-full;
 }

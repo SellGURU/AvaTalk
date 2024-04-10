@@ -8,7 +8,7 @@
   @apply absolute top-0 left-4 bg-primary-color text-[white] leading-[20px] text-[10px] font-[400]  py-[1px] px-[8px] rounded-[4px];
 }
 .Carbon-ContactItem-card {
-  @apply w-full pl-3 pr-10;
+  @apply w-full pl-3 ;
 }
 .Carbon-ContactItem-innerCard {
   @apply flex items-center  w-full justify-between;
@@ -27,4 +27,12 @@
 }
 .Carbon-ContactItem-email {
   @apply text-gray-700/80  leading-[21px] text-[14px] font-[400];
+}
+.Carbon-ContactItem-Vector {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url(/Vector.svg);
+  @apply w-[10px] h-[24px] bg-slate-400;    
 }

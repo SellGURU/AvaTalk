@@ -1,11 +1,47 @@
+.Carbon-ChatItem-container {
+  @apply mb-6 mt-2 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
+}
+
 
 .Carbon-ChatItem-section {
   @apply flex w-full  items-center ;
 }
 
 .Carbon-ChatItem-iconContainer {
-  @apply flex items-center  space-x-3;
+  @apply flex items-center text-xs space-x-3;
+}
+.Carbon-ChatItem-innerCard {
+  @apply flex items-center  w-full justify-between;
+}
+.Carbon-ChatItem-name {
+  @apply leading-[21px] text-[14px] font-[600]  text-gray-700;
 }
 .Carbon-ChatItem-card {
   @apply w-full px-3 ;
 }
+
+.Carbon-ChatItem-content {
+  @apply text-gray-700/80  leading-[21px] text-[14px] font-[400];
+}
+.Carbon-ChatItem-date {
+  @apply text-xs text-gray-500 pl-4 mt-4;
+}
+.Carbon-ChatDetails-container {
+  @apply w-full h-full top-8 z-10 bg-white
+}
+
+.Carbon-ChatDetails-title {
+  @apply text-gray-700 leading-[24px] text-[16px] font-[600] 
+}
+
+.Carbon-ChatItem-Vector {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-image: url(/Vector.svg);
+  @apply w-[10px] h-[24px] bg-slate-400;    
+}
+
+
+

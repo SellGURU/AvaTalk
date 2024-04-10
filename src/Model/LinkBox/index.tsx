@@ -1,7 +1,7 @@
 import { Box } from "..";
 
 class Link {
-    constructor(protected url:string){
+    constructor(protected url:string,protected name:string){
 
     }
     public resolveRender(theme:string) {
@@ -13,6 +13,14 @@ class Link {
             </div>       
         )
     }    
+
+    public geturl(){
+        return this.url
+    }
+
+    public getName(){
+        return this.name
+    }
 }
 
 class LinkBox extends Box{
@@ -24,7 +32,7 @@ class LinkBox extends Box{
         return (
             <div className={`${theme}-Profile-Vectors`}>
                 {this.links.map((item) => {
-                    const newSocal = Object.assign(new Link('htps://some.com'),item)
+                    const newSocal = Object.assign(new Link('htps://some.com',''),item)
                     return (
                         <>
                             {newSocal.resolveRender(theme)}
@@ -34,6 +42,11 @@ class LinkBox extends Box{
             </div>            
         )
     }    
-    
+    public getRouteAddress(): string {
+        return 'links'
+    }
+    public getLinks() {
+        return this.links
+    }    
 }
-export default LinkBox
+export {LinkBox,Link}

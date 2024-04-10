@@ -4,6 +4,8 @@
 
 :root {
   font-family: Poppins;
+  overflow: hidden;
+  height: 100%;
 }
 
 @font-face {
@@ -11,55 +13,118 @@
   src: url("../src/assets/Fonts/Poppins-Regular.ttf") format("truetype");
 }
 @font-face {
-  font-family: Poppins-Bold;
-  src: url("../src/assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-family: Poppins;
+  font-weight: 500;
+  src: url("../src/assets/Fonts/Poppins-Medium.ttf") format("truetype");
 }
-
+.dispalyOverLay {
+ background: none;
+}
 @layer utilities {
-  .boxsInnerShadows{
-    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6),inset 4px 4px 14px 2px rgba(226,232,240,1) !important;
+  .boxsInnerShadows {
+    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6), inset 4px 4px 14px 2px rgba(226, 232, 240, 1) !important;
   }
 
   .hiddenScrollBar::-webkit-scrollbar {
     display: none !important;
   }
-
-
   .boxShadow-Gray {
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-                -6px -6px 20px 0px rgba(255, 255, 255, 1),
-                2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
   }
 
   .boxShadow-purple {
     background: linear-gradient(35deg, rgba(232, 225, 218, 1) -100%, #6432c9 50%, rgba(100, 50, 201, 1) 100%);
   }
-
-  .textShadow-sm {
-    text-shadow: 0px 1px 1px currentColor;
-  }
-
   .borderBox-Gray {
     border: 1px solid transparent;
-    background: linear-gradient(0deg,rgba(243,244,246),rgba(243,244,246)) padding-box,linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box, linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;  
+    background: linear-gradient(0deg, rgba(243, 244, 246), rgba(243, 244, 246)) padding-box, linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
+      linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
   }
 
   /* mina-soheilifar border box*/
   .borderBox-Gray2 {
     border: 1px solid transparent;
-    background: linear-gradient(0deg, #F3F4F6, #F3F4F6)padding-box,
-                linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%)border-box,
-                linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;    
+    background: linear-gradient(0deg, #f3f4f6, #f3f4f6) padding-box, linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box,
+      linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%) border-box;
   }
 
   .borderBox-primary {
-    border: 1px solid transparent;
-    background: linear-gradient(0deg,rgba(255,255,255),rgba(255,255,255)) padding-box,linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box, linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box; 
+    border: 3px solid transparent;
+    background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255)) padding-box, linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box,
+      linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box;
   }
 
   .inputBorderBox {
-    border: 1px solid transparent;
+    border: 1px solid transparent ;
     background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
-                linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+      linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
   }
+
+
+  .btnInnerShadowsDark {
+    box-shadow: 4px 4px 14px 0px rgba(193, 213, 238, 1) inset, -4px -4px 9px 0px rgba(255, 255, 255, 0.88) inset !important;
+  }
+  .borderBox-GrayBox {
+    border: 1px solid transparent;
+    background: linear-gradient(0deg, rgba(241, 245, 249) , rgba(241, 245, 249) ) padding-box, linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
+      linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
+  }
+  .litepicker {
+    @apply top-[116px] rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
+  }
+  .litepicker .container__months {
+    -webkit-box-shadow:none;
+    boxShadow:none;
+    @apply rounded-[27px] rounded-b-none bg-inherit !important;
+  }
+  
+  .litepicker .container__footer {
+    -webkit-box-shadow:none;
+    boxShadow:none;
+    @apply rounded-[27px] rounded-t-none m-0 bg-inherit grid grid-rows-2 grid-flow-col justify-center justify-items-center !important;
+  }
+  .litepicker .container__months .month-item-header div>.month-item-name{
+    @apply bg-inherit;
+  }
+  .litepicker .container__months .month-item-header div>.month-item-year {
+    @apply bg-inherit;
+  }
+  .litepicker .container__footer .button-apply{
+    @apply rounded-[27px] min-w-[68px] w-[113px] h-10 mt-1 boxShadow-purple boxShadow-Gray text-white  bg-primary-color !important;
+  }
+  .litepicker .container__footer .button-cancel{
+    @apply rounded-[27px] min-w-[68px] w-[113px] h-10 mt-1 boxShadow-Gray text-primary-color borderBox-primary !important;
+  }
+  .litepicker .container__footer .preview-date-range{
+    @apply col-span-2 mr-0 text-sm 	;
+  }
+  .litepicker .container__days .day-item.is-start-date.is-end-date{
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item.is-end-date {
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item.is-start-date {
+    @apply rounded-full bg-primary-color;
+  }
+  .litepicker .container__days .day-item:hover {
+    @apply text-black  rounded-full ring-1 ring-primary-color;
+  }
+  .litepicker .container__days .day-item.is-in-range{
+    @apply bg-primary-color bg-opacity-20;
+  }
+  .litepicker .container__days .day-item{
+    @apply rounded-full;
+  }
+  .litepicker .container__days .day-item.is-end-date.is-flipped {
+    @apply rounded-full ;
+  }
+  .litepicker .container__days .day-item.is-start-date.is-flipped {
+    @apply rounded-full ;
+  }
+/* read me */
+  /* light: borderBox-Gray boxShadow-Gray   */
+  /* dark box: borderBox-Gray boxsInnerShadows  */
+  /* dark btn: borderBox-Gray btnInnerShadowsDark */
+
 }

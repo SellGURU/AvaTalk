@@ -52,7 +52,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
         setPhone(contactDetails?.phone || "");
         setCompany(contactDetails?.company || "");
         setJobTitle(contactDetails?.job || "");
-        setNote(contactDetails?.meetDate || "");
+        setNote(contactDetails?.note || "");
       });
     }
   });
@@ -181,7 +181,16 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
               </div>
 
               <div className="mt-4">
-                <Select valueElement={<><div></div></>} label="Tag" placeholder="Select tag..." theme="Carbon" />
+                <Select
+                  valueElement={
+                    <>
+                      <div></div>
+                    </>
+                  }
+                  label="Tag"
+                  placeholder="Select tag..."
+                  theme="Carbon"
+                />
               </div>
               <div className="mt-4">
                 <TextArea

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "symphony-ui";
-import ContentCard from "../ContentCard";
 
 interface ProfileProps {
   theme?: string;
@@ -48,48 +47,6 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </Button>
               </div>
             </div>
-            <ContentCard mod={"profile"} theme="Carbon" title={"Social"}>
-              <div className=" flex gap-4">
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-              </div>
-            </ContentCard>  
-            <ContentCard mod={"profile"} theme="Carbon" title={"Links"}>
-              <div className=" flex gap-4">
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-              </div>
-            </ContentCard> 
-            <ContentCard mod={"profile"} theme="Carbon" title={"File"}>
-              <div className=" flex gap-4">
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-                <div className={`${theme}-Profile-BackgroundVectors`}>
-                  <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-AddVector`}></div>
-                  </div>
-                </div>
-              </div>
-            </ContentCard>  
 
             <Button  theme="Carbon-Show">
               Show more              

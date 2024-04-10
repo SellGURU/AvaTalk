@@ -1,0 +1,17 @@
+.Carbon-ToturialsBox-container {
+    @apply absolute z-50  w-[250px] text-white
+}
+.Carbon-ToturialsBox-container[data-position='top'] {
+    @apply top-[80px]
+}
+.Carbon-ToturialsBox-container[data-position='bottom'] {
+    @apply bottom-[80px] right-[130px]
+}
+
+.Carbon-ToturialsBox-text {
+    @apply text-sm font-medium cursor-pointer 
+}
+
+.Carbon-ToturialsBox-content {
+    @apply text-xs text-left font-light max-w-[176px] opacity-60
+}

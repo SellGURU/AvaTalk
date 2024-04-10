@@ -1,13 +1,11 @@
-// import dummyData from "../../data/dummy_data";
-// import { useEffect, useState } from "react";
-import { TagsData } from "../../Api/Auth";
+import { Tag } from "../../Types";
 import TagItem from "../TagItem";
 
-const TagList = ({ data, theme }: { data: TagsData[]; theme: string | undefined }) => {
+const TagList = ({ data, theme ,removeTag ,editTag}: { data: Tag[]; theme: string | undefined ,removeTag:(tag:Tag) => void,editTag:(tag:Tag) => void}) => {
   return (
-    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-[-webkit-fill-available] pb-[220px]">
+    <div className=" w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-dvh pb-[220px]">
       {data.map((items, index) => (
-        <TagItem theme={theme} key={index} data={items} />
+        <TagItem editTag={editTag} removeTag={removeTag}  theme={theme} key={index} data={items} />
       ))}
     </div>
   );

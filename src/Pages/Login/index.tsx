@@ -1,4 +1,5 @@
-import { Button, TextField } from "symphony-ui";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,11 @@ import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useState } from "react";
 import Splash from "../../Components/Splash";
+import { TextField } from "../../Components";
+import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { Box } from "../../Model";
+import { boxProvider } from "../../help";
 
 const initialValue = {
   emailOrPhone: "",
@@ -27,7 +33,7 @@ const validationSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
       .required('Email / Phone is required')
       .test('email_or_phone', 'Email / Phone is invalid', (value) => {
-         return validateEmail(value) || validatePhone(parseInt(value ?? '0'));
+         return validateEmail(value) || validatePhone(parseInt(value.replace('+','').replace(' ','') ?? '0'));
       })
 });
 
@@ -42,14 +48,30 @@ const Login = () => {
       console.log(values);
     },
   });
+  const [country, setCountry] = useState<any>({
+    codeName: "us",
+    codePhone: "+1",
+  });  
   function handleSubmit() {
-    Auth.get_Login_code({ mobile_number: formik.values.emailOrPhone }).then(() => {
+    let resolvePhoneOrEnail = null
+    if(formik.values.emailOrPhone.includes('@')){
+      resolvePhoneOrEnail = {
+        email:formik.values.emailOrPhone
+      }
+    }else {
+      resolvePhoneOrEnail = {
+        mobile_number:formik.values.emailOrPhone
+      }      
+    }
+    Auth.get_Login_code(resolvePhoneOrEnail).then(() => {
       authContext.verificationHandler({
-        emailOrPhone: formik.values.emailOrPhone
+        emailOrPhone: formik.values.emailOrPhone,
+        googleJson:{}
       })
       navigate('/Verification')
     })
   }
+
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
@@ -63,21 +85,36 @@ const Login = () => {
                 <div className="w-full flex justify-center">
                   <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Phone Number or Email Address to Login</div>
                 </div>
-                <div className="mb-8">
-                  <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
-                </div>
+
+                {
+                  formik.values.emailOrPhone[0] == '+'?
+                  <div className="mb-8">
+                    <TextField 
+                    {...formik.getFieldProps("emailOrPhone")} 
+                    // value={country.codePhone + formik.values.emailOrPhone}
+                    phoneCountry={country} 
+                    setValue={(value) => {
+                      formik.setFieldValue('emailOrPhone',value)
+                    }}
+                    setPhoneCountry={setCountry} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="phone" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                  </div>                
+                  :
+                  <div className="mb-8">
+                    <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                  </div>
+                }
                 <Button
                   onClick={handleSubmit}
                   //     () => {
                   //     navigate("/Verification");
                   //   }
                   // }
-                  disabled={!formik.isValid || formik.values.emailOrPhone.length ==0}
+                  disabled={!formik.isValid || formik.values.emailOrPhone.length <= 4}
                   theme="Carbon"
                 >
                   Continue
                 </Button>
-                <div className="flex w-full items-center mt-11">
+                <div className="flex w-full items-center mt-6">
                   <div style={{ background: "linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
                     <div style={{ background: "linear-gradient(to top,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                   </div>
@@ -86,13 +123,75 @@ const Login = () => {
                     <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                   </div>
                 </div>
+                
+                <div className="flex items-center justify-center mt-4">
+                  <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
 
-                <div className="mt-11">
-                  <Button onClick={handleSubmit} theme="Carbon-Google">
+                    <GoogleLogin
+                      size="large"
+                      width={'100%'}
+                      text="continue_with"
+                      onSuccess={credentialResponse => {
+                        // setcertificate(credentialResponse);
+                        // console.log(credentialResponse);
+                        const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
+                        console.log(prof)
+                        // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
+                        Auth.loginWithGoogle(
+                          {
+                            google_json:prof
+                          },
+                        ).then((res) => {
+                          authContext.verificationHandler({
+                            emailOrPhone: prof?.email,
+                            googleJson:prof
+                          })
+                          if(res.data.access_token){
+                            localStorage.setItem("token",res.data.access_token)
+                            authContext.login(res.data.access_token)
+                            const resolveSocial: Array<Box> = [];
+                            Auth.showProfile((data) => {
+                                data.boxs.map((item:any) => {
+                                    const newBox = boxProvider(item);
+                                    resolveSocial.push(newBox);
+                                })
+                                authContext.currentUser.updateInformation({
+                                    firstName:data.information.first_name,
+                                    lastName:data.information.last_name,
+                                    phone:data.information.mobile_number,
+                                    personlEmail:data.information.email,
+                                    company:data.information.company_name,
+                                    job:data.information.job_title,
+                                    banelImage:data.information.back_ground_pic,
+                                    imageurl:data.information.profile_pic,
+                                    location:{
+                                        lat:33,
+                                        lng:33
+                                    },
+                                    workEmail:data.information.work_email,
+                                    workPhone:data.information.work_mobile_number,
+                                    userId:data.information.created_userid
+                                })
+                                authContext.currentUser.setBox(resolveSocial)
+                                navigate("/?splash=true");
+                            })                                                   
+                          }else {
+                            navigate("/register")
+                          }
+                        });                          
+                      }}
+                      onError={() => {
+                        console.log('Login Failed');
+                      }}
+                    />                     
+                  </GoogleOAuthProvider>    
+                </div>
+                {/* <div className="mt-11">
+                  <Button onClick={handleGoogleLogin} theme="Carbon-Google">
                     <img className="mr-2" src="./Carbon/Google.png" alt="" />
                     <div>Continue with Google</div>
                   </Button>
-                </div>
+                </div> */}
               </div>
         </>
       }

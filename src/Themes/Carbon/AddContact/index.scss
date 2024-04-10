@@ -1,0 +1,16 @@
+.Carbon-AddContact-container {
+  @apply h-[80vh] hiddenScrollBar overflow-y-scroll;
+}
+.Carbon-AddContact-buttonContainer {
+  z-index: 2000;
+  @apply flex justify-between items-center fixed pb-2 bg-white w-[410px];
+}
+.Carbon-AddContact-title {
+  @apply text-gray-700 text-left font-[600] text-[16px] leading-[24px];
+}
+.Carbon-AddContact-selectItems {
+  @apply cursor-pointer mt-[2px] flex justify-start items-center;
+}
+.Carbon-AddContact-selectItem {
+  @apply ml-1 text-gray-700 text-sm;
+}

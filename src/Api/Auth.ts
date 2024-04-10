@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { toast } from "react-toastify";
 import { Box } from "../Model";
+import { removeTokenFromLocalStorage } from "../Storage/Token";
+import { Contact, Tag } from "../Types";
 import { boxProvider } from "../help";
 import Api from "./Api";
 
 interface LoginData {
   // email: string | null;
-  mobile_number: string | null;
-  code?: string;
+  mobile_number?: string | null;
+  email?:string;
+  entered_code?: string;
 }
 interface Location {
   lat: number;
@@ -20,39 +24,73 @@ interface RegisterData {
   company_name: string | null;
   location: Location | null;
   profile_pic: string | null;
-}
-export interface ContactData {
-  id: string;
-  fullName: string;
-  email: string;
-  image: string;
-  Exhibition: boolean;
-  Exchange: boolean;
-  phone: string;
-  location: string;
-  company: string;
-  meetDate: string;
-  addDate: string;
-  job: string;
+  email:string | null
+  silent_video_avatar:string | null
+  avatar_pic_url:string | null
 }
 
-interface ContactType {
-  name: string;
-  email: string;
-  phone: string;
+///
+interface SupportData {
+  name: string,
+  email: string,
+  message: string
+}
+///
+
+interface AiSetting {
+  name:string,
+  ai_knowledge:string,
+  gender:string
 }
 
-export interface TagsData {
-  id: string;
-  tag: string;
-  color: string;
-  contacts: ContactType[];
+interface AccountInfo {
+  user_id?:string  
+  first_name?:string
+  last_name?:string
+  email?:string
+  mobile_number?:string
+  language?:string
+  state?:boolean
 }
+
+interface AddEvent {
+  event_type: 'page_view' | 'add_contact' | 'exchange_contact' | 'more_info' |'share_link',
+  userid: string,
+  sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
+                      'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'|
+                      'email'|'sms'|'clipboard'|'qr_code'|'share_link'
+}
+// interface ContactType {
+//   name: string;
+//   email: string;
+//   phone: string;
+// }
+
+// export interface TagsData {
+//   id: string;
+//   tag: string;
+//   color: string;
+//   contacts: ContactType[];
+// }
 
 class Auth extends Api {
   static login(data: LoginData) {
-    const response = this.post("/login", data);
+    const response = this.post("/check_Login_code", data);
     return response;
+  }
+
+  static loginWithGoogle(data:any) {
+    const response = this.post("/login_with_google",data)
+    return response
+  }
+
+  static avatarList(data:any) {
+    const response = this.post("/avatar_list",data)
+    return response
+  }
+  static createAvatarVideo(avatar_url:string) {
+    const response = this.post('/create_silent_avatar',{avatar_url:avatar_url})
+    return response
   }
   static get_Login_code(data: LoginData) {
     const response = this.post("/get_Login_code", data);
@@ -65,7 +103,9 @@ class Auth extends Api {
   }
 
   static logout() {
-    this.post("/logout").then(() => {});
+    this.post("/logout").then(() => {
+      removeTokenFromLocalStorage();
+    });
   }
 
   static getBoxs(resolve: (data: Array<Box>) => void) {
@@ -79,102 +119,112 @@ class Auth extends Api {
     });
   }
 
-  static getAllContacts(callBack: (data: Array<ContactData>) => void) {
+  static showProfile(resolve: (data:any) => void){
+    this.post('/show_profile',{}).then(res => {
+      resolve(res.data)
+    })
+  }
+
+  static getAllContacts(resolve: (data: Array<Contact>) => void) {
     this.post("/contactsInfo", {}).then((res) => {
-      const contactDataArray: Array<ContactData> = res.data.map((item: any) => ({
-        id: item.id,
-        fullName: item.fullName,
-        email: item.email,
-        image: item.image,
-        Exhibition: item.Exhibition,
-        Exchange: item.Exchange,
-        phone: item.phone,
-        location: item.location,
-        company: item.company,
-        meetDate: item.meetDate,
-        addDate: item.addDate,
-        job: item.job,
-      }));
-      callBack(contactDataArray);
+      resolve(res.data);
     });
   }
 
-  static getContactDetails(_contactId: string, callBack: (data: ContactData | null) => void) {
-    this.post("/contactDetails", {}).then((res) => {
-      // const contact = res.data.find((item: any) => item.id === contactId);
-      const contact = res.data[0];
-
-      if (contact) {
-        const contactDetails: ContactData = {
-          id: contact.id,
-          fullName: contact.fullName,
-          email: contact.email,
-          image: contact.image,
-          Exhibition: contact.Exhibition,
-          Exchange: contact.Exchange,
-          phone: contact.phone,
-          location: contact.location,
-          company: contact.company,
-          meetDate: contact.meetDate,
-          addDate: contact.addDate,
-          job: contact.job,
-        };
-        callBack(contactDetails);
-      } else {
-        callBack(null);
-      }
-    });
+  static getContactDetails(_contactId: string, resolve: (data: Contact) => void) {
+    // this.post("/contactDetails", {id:_contactId}).then((res) => {
+    //   resolve(res.data);
+    // });
+    this.getAllContacts((data) => {
+      resolve(data.filter((item) =>item.id == _contactId)[0]?data.filter((item) =>item.id == _contactId)[0]:data[0])
+    })
   }
 
-  static getAllTags(callBack: (data: Array<TagsData>) => void) {
+  static editContact(_contactId: string, data: Partial<Contact>, submit: (res: any) => void) {
+    const endpoint = "/contactDetails";
+    this.post(endpoint, data).then((res) => submit(res));
+  }
+
+  static getAllTags(resolve: (data: Array<Tag>) => void) {
     this.post("/tagsInfo").then((res) => {
-      const tagDataArray: Array<TagsData> = res.data.map((item: any) => ({
-        id: item.id,
-        tag: item.tag,
-        color: item.color,
-        contacts: item.contacts.map((contact: any) => ({
-          name: contact.name,
-          email: contact.email,
-          phone: contact.phone,
-        })),
-      }));
-
-      callBack(tagDataArray);
+      resolve(res.data);
     });
   }
 
-  static getTagDetails(_tagId: string, callBack: (data: TagsData | null) => void) {
+  static getTagDetails(_tagId: string, resolve: (data: Tag) => void) {
     this.post("/tagDetails", {}).then((res) => {
-      // const tag = res.data.find((item: any) => item.id === tagId);
-      const tag = res.data[0];
-
-      if (tag) {
-        const tagDetails: TagsData = {
-          id: tag.id,
-          tag: tag.tag,
-          color: tag.color,
-          contacts: tag.contacts.map((contact: any) => ({
-            name: contact.name,
-            email: contact.email,
-            phone: contact.phone,
-          })),
-        };
-        callBack(tagDetails);
-      } else {
-        callBack(null);
-      }
+      resolve(res.data);
     });
   }
+
+  static updateProfilePic(profile_pic:string){
+    this.post('/change_profile_pic',{profile_pic:profile_pic}).then(res => {
+      console.log(res)
+    })
+  }
+
+  static updateBackPic(profile_pic:string){
+    this.post('/change_back_ground_pic',{back_ground_pic:profile_pic}).then(res => {
+      console.log(res)
+    })
+  }
+  
+  static addBox(box:Box) {
+    this.post('/update_more_info',{
+      title:box.getTitle(),
+      type_name:box.getTypeName(),
+      content:box
+    }).then(res => {
+      console.log(res)
+    })
+  }
+
+  ///
+  static support(data: SupportData) {
+    this.post('/support', data)
+      .then(res => {
+        console.log(res);
+      });
+  }
+  ///
+
+  static deleteBox(boxType:string) {
+    this.post('/delete_more_info',{type_name:boxType}).then(() => {
+
+    })
+  }
+
+  static updateAiSetting(data:AiSetting) {
+    this.post('/update_ai_setting',data).then((res) => {
+      toast.info(res.data)
+    })
+  }
+  static showAiSetting(resolve:(data:any) =>void) {
+    this.post('/show_ai_setting',{}).then((res) => resolve(res.data))
+  }  
+
+  static updateYourAccount(data:AccountInfo){
+    const response = this.post('/update_your_account',data)
+    return response
+  }
+
+  static addEvent(event:AddEvent) {
+    this.post('/add_event',event,{noPending:true})
+  }
+
+  static getAnalytics(from:string,to:string,resolve:(data:any) => void){
+    this.post('/analytics',{from_date:from,to_date:to}).then(res => {
+      resolve(res.data)
+    })
+  }
+
+
+
+  static getInfoBox(from:string,to:string,resolve:(data:any) => void){
+    this.post('/info_box',{from_date:from,to_date:to}).then(res => {
+      resolve(res.data)
+    })
+  }  
 }
-
-// static updateContact(contactId: string, updatedData: Partial<ContactData>, callBack: () => void) {
-//   const requestData = {
-//     contactId,
-//     updatedData,
-//   };
-
-//   this.post("/contactDetails", requestData).then(() => {
-//     callBack();
-//   });
 
 export default Auth;

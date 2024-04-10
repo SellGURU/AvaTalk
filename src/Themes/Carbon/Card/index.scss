@@ -2,6 +2,10 @@
     @apply w-full min-h-[89px] cursor-pointer mb-4 relative pt-[20px] px-5  pb-2 boxShadow-Gray borderBox-Gray rounded-[24px]
 }
 
+.Carbon-Card-container[aria-disabled ='true']{
+    @apply opacity-50
+}
+
 .Carbon-Card-icon{
     mask-size: 100%;
     -webkit-mask-repeat: no-repeat;
@@ -18,4 +22,7 @@
     mask-position: center;
     mask-image: url(/Vector.svg);
     @apply w-[10px] h-[24px] bg-slate-400;    
+}
+.Carbon-Card-container[aria-disabled ='true']{
+    @apply opacity-50;
 }

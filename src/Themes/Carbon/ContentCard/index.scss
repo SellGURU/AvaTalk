@@ -7,22 +7,26 @@
 .Carbon-ContentCard-Vectors[data-mode='review']{
     @apply invisible ;
 }
+.Carbon-ContentCard-Vectors[data-mode='share']{
+    @apply invisible ;
+}
 .Carbon-ContentCard-CardVector{
-    /* box-shadow:
-    4px 4px 20px 0px rgba(111, 140, 176, 0.41),
-    -6px -6px 20px 0px rgba(255, 255, 255, 1),
-    2px 2px 4px 0px rgba(114, 142, 171, 0.1); */
-    @apply bg-gray-100 w-10 h-10 flex justify-center  boxShadow-Gray items-center rounded-full border border-white ; 
+    @apply bg-gray-100 w-10 h-10 flex justify-center borderBox-Gray boxShadow-Gray items-center rounded-full cursor-pointer ; 
+}
+.Carbon-ContentCard-CardVector[data-active='true']{
+    @apply bg-primary-color boxShadow-purple #{!important} ; 
+}
+.Carbon-ContentCard-CardVector[data-active='true'] .Carbon-ContentCard-MaskVector{
+    @apply bg-white #{!important} ; 
 }
 .Carbon-ContentCard-Title {
-    text-shadow: 0px 1px 1px currentColor;
-    @apply text-sm font-medium;
+    @apply text-sm font-semibold;
 }
 .Carbon-ContentCard-Section {
     @apply flex flex-row justify-between w-full mb-4;
 }
 .Carbon-ContentCard-Children {
-    @apply text-left text-sm;
+    @apply text-left w-full text-sm;
 }
 .Carbon-ContentCard-CVector{
     background: url(/Carbon/cLinksVector.svg) no-repeat center;
@@ -46,5 +50,5 @@
     mask-image: url(/Carbon/trashVector.svg);
 }
 .Carbon-ContentCard-EditVector{
-    mask-image: url(/Carbon/editContentCard.svg);
+    mask-image: url(/Carbon/edit.svg);
 }

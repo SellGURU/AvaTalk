@@ -1,0 +1,47 @@
+.Carbon-VoiceRecorder-WaveBox {
+  @apply z-[-1] top-0 absolute block opacity-50 w-[100px] h-[var(--Acord-voiceRecorder-width)] rounded-full bg-primary-color;
+}
+
+.Carbon-VoiceRecorder-container { 
+  margin: 0 auto;
+  @apply relative cursor-pointer rounded-full bg-gray-100 flex justify-center items-center w-14 h-14 p-2  ;
+}
+.Carbon-VoiceRecorder-containerBox {
+  @apply borderBox-Gray btnInnerShadowsDark ;
+}
+
+.Carbon-VoiceRecorder-icon {
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+   mask-image: url(/Carbon/microphone.svg);
+  @apply w-6 h-6 bg-violet-700;
+}
+.Carbon-VoiceRecorder-stop {
+  @apply bg-[url('/Carbon/stop.svg')] w-[36px] h-[17.1px];
+}
+.Carbon-VoiceRecorder-Wave1 {
+  animation: waves 2.5s linear 0.1s infinite;
+}
+.Carbon-VoiceRecorder-Wave2 {
+  animation: waves 2.5s linear 0.7s infinite;
+}
+.Carbon-VoiceRecorder-Wave3 {
+  animation: waves 2.5s linear 1.3s infinite;
+}
+.Carbon-VoiceRecorder-Wave4 {
+  animation: waves 2.5s linear 1.9s infinite;
+}
+
+@keyframes waves {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}

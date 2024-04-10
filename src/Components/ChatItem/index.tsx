@@ -2,27 +2,35 @@ import { Link } from "react-router-dom";
 
 interface DataProps {
   id: string;
-  name: string;
-  content:string;
+  chat_list_id: string;
+  entry_date: string;
+  entry_time:string;
+  response:string;
+  date_group:string; 
 }
 
-const ChatItem = ({ theme }: { data: DataProps; theme: string | undefined }) => {
+const ChatItem = ({data, theme,visibleDate}: { data: DataProps; theme: string | undefined,visibleDate:boolean}) => {
+
   return (
-    <Link to={`/chats`} className={`${theme}-ContactItem-container `}>
-      <div className={`${theme}-ContactItem-section ${theme}-ChatItem-section`}>
-        <div className={`${theme}-ChatItem-card `}>
-          <div className={`${theme}-ContactItem-innerCard `}>
-            <p className={`${theme}-ContactItem-name `}>User0215784515</p>
+    <>
+    {visibleDate ?
+      <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
+    :undefined}
+    <Link to={`/chats/${data.chat_list_id}`} className={`${theme}-ChatItem-container`}>
+      <div className={`${theme}-ChatItem-section`}>
+        <div className={`${theme}-ChatItem-card`}>
+          <div className={`${theme}-ChatItem-innerCard `}>
+            <p className={`${theme}-ChatItem-name`}>{data.chat_list_id}</p>
             <div className={`${theme}-ChatItem-iconContainer `}>
-              <div className="text-xs	">06:45 pm</div>
-              <img src="../../../Vector.svg" alt="" />
-              {/* <div className={`${theme}-ContactItem-vectorIcon `}></div> */}
+              <div>{data.entry_time.substring(0,5)}</div>
+              <div className={`${theme}-ChatItem-Vector`}></div>
             </div>
           </div>
-          <p className={`${theme}-ContactItem-email `}>Can you call me? It’s necessary to talk wit...</p>
+          <p className={`${theme}-ChatItem-content`}>{data.response.substring(0,80)}</p>
         </div>
       </div>
     </Link>
+    </>
   );
 };
 

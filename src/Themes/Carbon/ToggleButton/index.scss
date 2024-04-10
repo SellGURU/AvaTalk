@@ -1,12 +1,21 @@
 .Carbon-ToggleButton-container {
-  @apply w-full disabled:cursor-not-allowed boxShadow-Gray flex borderBox-Gray   justify-around space-x-4 bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
+  border: 1px, 1px, 0px, 1px solid transparent;
+
+// background:linear-gradient(267.62deg, rgba(239, 239, 240, 0.46) 8.2%, rgba(243, 236, 236, 0.46) 82.68%) border-box,linear-gradient(180deg, #FFFFFF 0%, rgba(239, 237, 237, 0.929) 100%)border-box;
+
+
+  box-shadow: 4px 4px 14px 2px rgba(226, 232, 240, 1) inset, -4px -4px 9px 2px rgba(255, 255, 255, 0.6) inset;
+  background:linear-gradient(), linear-gradient(267.62deg, rgba(214, 227, 243, 0.46) 8.2%, rgba(255, 255, 255, 0.46) 82.68%)border-box,linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)border-box;
+
+  @apply w-full disabled:cursor-not-allowed flex justify-around items-center rounded-[21px] h-[44px] bg-slate-50 #{!important};
+  // @apply w-full disabled:cursor-not-allowed boxShadow-Gray flex borderBox-Gray justify-around  bg-slate-100 items-center    rounded-[21px] h-[44px] #{!important};
 }
 .Carbon-ToggleButton-notActiveButton {
   // border: 1px solid transparent;
   @apply text-gray-700 leading-[21px] text-[14px] font-[500];
 }
 .Carbon-ToggleButton-ActiveButton {
-  box-shadow: 4px 4px 14px 0px #c1d5ee inset, -4px -4px 9px 0px #ffffffe0 inset;
-  border: 1px solid white;
-  @apply rounded-[27px] h-[32px] flex items-center justify-center   #{!important};
+  box-shadow: 4px 4px 12px 0px rgba(111, 140, 176, 0.41), -6px -6px 12px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+
+  @apply rounded-[27px] h-[32px] flex items-center justify-center overflow-hidden borderBox-Gray  #{!important};
 }

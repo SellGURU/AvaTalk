@@ -1,5 +1,9 @@
 .Carbon-Ar-Button-container {
-  @apply flex absolute bottom-16 right-6 justify-center boxShadow-purple boxShadow-Gray  items-center tracking-tighter text-white w-[65px] h-[65px] disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-full #{!important};
+  @apply flex absolute bottom-16 right-6 justify-center boxShadow-purple boxShadow-Gray z-20  items-center tracking-tighter text-white w-[65px] h-[65px] disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-full #{!important};
+}
+
+.Carbon-Ar-Button-container[data-mode='toturials'] {
+  @apply flex absolute bottom-16 right-6 justify-center boxShadow-purple shadow-none z-50  items-center tracking-tighter text-white w-[85px] h-[85px]  border-white border-[10px] disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-full #{!important};
 }
 
 .Carbon-Ar-Button-icon {
