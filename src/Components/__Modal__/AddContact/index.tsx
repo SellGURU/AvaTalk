@@ -71,7 +71,8 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
         phone: formData.phone as string,
         company: formData.company as string,
         job_title: formData.job as string,
-        note: formData.note as string
+        note: formData.note as string,
+        tag:selectedTags.map(el => el.id)
       })
       const id = generateSlugId();
       const formDataWithId = { ...formData,

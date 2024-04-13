@@ -131,13 +131,13 @@ class Auth extends Api {
     });
   }
 
-  static getContactDetails(_contactId: string, resolve: (data: Contact) => void) {
-    // this.post("/contactDetails", {id:_contactId}).then((res) => {
-    //   resolve(res.data);
-    // });
-    this.getAllContacts((data) => {
-      resolve(data.filter((item) =>item.id == _contactId)[0]?data.filter((item) =>item.id == _contactId)[0]:data[0])
-    })
+  static getContactDetails(_contactId: string, resolve: (data: any) => void) {
+    this.post("/show_contacts_information", {created_contact_id:_contactId}).then((res) => {
+      resolve(res.data);
+    });
+    // this.getAllContacts((data) => {
+    //   resolve(data.filter((item) =>item.id == _contactId)[0]?data.filter((item) =>item.id == _contactId)[0]:data[0])
+    // })
   }
 
   static editContact(_contactId: string, data: Partial<Contact>, submit: (res: any) => void) {
