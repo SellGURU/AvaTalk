@@ -11,9 +11,10 @@ interface AddContactProps {
   theme?: string;
   onAfterOpen?: () => void;
   contactId: string | undefined;
+  onDelete:() =>void
 }
 
-const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose, theme }) => {
+const DeleteContact: React.FC<AddContactProps> = ({ isOpen,onDelete, onAfterOpen, onClose, theme }) => {
   return (
     <>
       <Modal
@@ -30,7 +31,7 @@ const DeleteContact: React.FC<AddContactProps> = ({ isOpen, onAfterOpen, onClose
               <p className={`${theme}-DeleteContact-question`}>Are you sure you want to delete this Contact?</p>
             </div>
             <div className={`${theme}-DeleteContact-buttonContainer`}>
-              <Button onClick={onClose} theme="Carbon-Outline">
+              <Button onClick={onDelete} theme="Carbon-Outline">
                 Delete
               </Button>
               <Button onClick={onClose} theme="Carbon">

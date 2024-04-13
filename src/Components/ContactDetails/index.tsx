@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { useState } from "react";
-import { Auth } from "../../Api";
+import { Auth, Contacts } from "../../Api";
 import { AddContact, DeleteContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
@@ -17,12 +18,37 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
   const { contactId } = useParams();
+  const navigate = useNavigate()
 
   useConstructor(() => {
     setIsLoading(true);
     if (contactId) {
       Auth.getContactDetails(contactId, (contactDetails) => {
-        setContact(contactDetails);
+        const newContact:Contact = {
+          id:contactId,
+          company:contactDetails.company,
+          email:contactDetails.email,
+          fullName:contactDetails.full_name,
+          job:contactDetails.job_title,
+          note:contactDetails.note,
+          mapLocation:{
+            lat:0,
+            lng:0
+          },
+          phone:contactDetails.phone,
+          tags:contactDetails?.tag_list.map((el:any) => {
+            const newTag:Tag = {
+              color:el.color,
+              contacts:0,
+              id:el.created_tag_id,
+              name:el.title
+            }
+            return newTag
+          }),
+          photo:contactDetails.profile_pic? contactDetails.profile_pic :'https://ui-avatars.com/api/?name='+contactDetails.full_name,
+          addDate:contactDetails.date_added
+        }        
+        setContact(newContact);
         setIsLoading(false);
       });
     }
@@ -66,7 +92,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
      contac.tags = contac.tags.filter((el) =>el != tag)
     }
     setContact({...contac} as Contact)
-
+    Contacts.updateContact(contac as Contact)
     // setShowEditContactModal(false)
   }
   const handleShowLess = () => {
@@ -85,8 +111,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture`} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
-            <div className={`${theme}-ContactDetails-importIcon`}></div>
-            <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
+            <div className={`${theme}-ContactDetails-importIcon cursor-not-allowed opacity-50`}></div>
+            <div onClick={() => setShowEditContactModal(false)} className={`${theme}-ContactDetails-editIcon cursor-not-allowed opacity-50`}></div>
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
@@ -130,52 +156,64 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               )
             })}
           </div>}          
-          <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button>
+          {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
         <div className={`${theme}-ContactDetails-container4`}>
-          <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                window.open(contact?.phone); 
-              }}>
-            <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
-              <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+          {contact?.phone ?
+            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
+                  window.open(contact?.phone); 
+                }}>
+              <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
+                <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+              </div>
+              <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.phone}</p>
             </div>
-            <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.phone}</p>
-          </div>
-          <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                window.open(contact?.email); 
-              }}>
-            <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
-              <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+          :undefined}
+          {contact?.email?
+            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
+                  window.open(contact?.email); 
+                }}>
+              <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
+                <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+              </div>
+              <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.email}</p>
             </div>
-            <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.email}</p>
-          </div>
+          :undefined}
 
           {showMore && (
             <>
+            {contact?.location ?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-locationIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.location}</p>
               </div>
+            :undefined}
+            {contact?.company?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-buildingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.company}</p>
               </div>
+            :undefined}
+            {contact?.note?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-meetingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.note}</p>
               </div>
+            :undefined}
+            {contact?.addDate?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-calendarIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
                 <p className={`${theme}-ContactDetails-textItem`}>{contact?.addDate}</p>
               </div>
+            :undefined}
             </>
           )}
 
@@ -200,6 +238,12 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       ></AddContact>
       <DeleteContact
         theme="Carbon"
+        onDelete={() => {
+          Contacts.deleteContact(contactId as string).then(() => {
+            navigate('/contacts')
+          })
+          setShowDeleteContactModal(false);
+        }}
         contactId={contactId}
         isOpen={showDeleteContactModal}
         onClose={() => {
