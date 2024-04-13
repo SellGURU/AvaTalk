@@ -14,7 +14,7 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
     } } className={`${theme}-ContactItem-container relative `}>
       <div className={`${theme}-ContactItem-section `}>
         {data.isExchange && <p className={`${theme}-ContactItem-exchange `}>Exchange</p>}
-        <img src={data.photo} alt={data.fullName} className="w-[50px] h-[50px]" />
+        <img src={'https://ui-avatars.com/api/?name='+data.fullName} alt={data.fullName} className="w-[50px] h-[50px] rounded-full" />
         <div className={`${theme}-ContactItem-card `}>
           <div className={`${theme}-ContactItem-innerCard `}>
             <p  className={`${theme}-ContactItem-name `}>{data.fullName}</p>
