@@ -26,6 +26,7 @@ const Verification = () => {
         <>
         <div className="text-center px-4 text-gray-700 flex justify-center">
             <div className="container py-32">
+            <img src="/Avatalk Logo.svg" alt="logo" className="w-[49px] h-[54px] mx-auto mb-[30px]" />
             <p className="font-semibold mb-4">verification</p>
             <p className="text-gray-500 text-sm mb-1">Enter the 5-digit code we send to</p>
             <p className="text-sm mb-6 font-medium">{authContext.varification.emailOrPhone}</p>

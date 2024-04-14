@@ -4,7 +4,7 @@ import { Button } from "symphony-ui";
 import { boxProvider, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { Auth } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
 import ContentCard from "../ContentCard";
@@ -94,95 +94,103 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   })  
   return (
     <>
-      <div className={`${theme}-Profile-Container`}>
-        <div className={`${theme}-Profile-ProfileSection`}>
-          <div className="relative flex flex-col gap-3 justify-center items-center mt-11 px-4">
-            {mode == 'profile' ?
-              <div className=" w-48 h-[40px] ">
-                <Button onClick={() => {
-                  setMode('review')
-                  publish('profileIsReview',{})
-                  window.history.replaceState(null, "", "/#/?review=true")                
-                }} theme="Carbon-Google" data-mode="profile-review-button">
-                  <div className={`${theme}-Profile-PreviewProfileBtnVector`} ></div>
-                  <div>Preview Profile</div>
-                </Button>
-              </div>
-            :
-                <>
-                  {mode == 'review' ?
-                    <Button onClick={() => {
-                      setMode('profile')
-                      publish('profileIsProfile',{})
-                      window.history.replaceState(null, "", "/#/")
-                      }} theme='Carbon-back'>
-                      <div className={`${theme}-Profile-closeIcon`}></div>
-                    </Button>                  
-                  :undefined}
-                </>
-            }
+      <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
+        <Outlet></Outlet>
 
-            <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
-              <div className="h-[261px] relative overflow-y-hidden">
-                <video id="dragAbleAi" playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
-                    <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                </video>           
-                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                  <div
-                    className={`${theme}-Profile-LanguageSquareVector`}
-                  ></div>
-                </div>
-              </div>
-              {/* <div
-                className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"
-                style={{ backgroundImage: 'url("./Carbon/women.jpg")' }}
-              >
-                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                  <div
-                    className={`${theme}-Profile-LanguageSquareVector`}
-                  ></div>
-                </div>
-              </div> */}
-              <div>
-                <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
-                <p className={`${theme}-Profile-SubTitle`}>
-                  {shareUser.information?.job} @ {shareUser.information?.company}
-                </p>
-              </div>
-              <div className="flex justify-evenly gap-4 ">
-                <Button onClick={() => {
-                  navigate('/edit')
-                }} theme="Carbon-Google" data-mode="profile-review-button">
-                  <div
-                    className={`${theme}-Profile-EditProfileBtnVector2`}
-                  ></div>
-                  <div>Edit Profile</div>
-                </Button>
-                <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
-                  Share profile
-                </Button>
+        <div className="relative flex flex-col gap-3 justify-center items-center mt-11 px-4 sticky">
+          {mode == 'profile' ?
+            <div className=" w-48 h-[40px] ">
+              <Button onClick={() => {
+                setMode('review')
+                publish('profileIsReview',{})
+                window.history.replaceState(null, "", "/#/?review=true")                
+              }} theme="Carbon-Google" data-mode="profile-review-button">
+                <div className={`${theme}-Profile-PreviewProfileBtnVector`} ></div>
+                <div>Preview Profile</div>
+              </Button>
+            </div>
+          :
+              <>
+                {mode == 'review' ?
+                  <Button onClick={() => {
+                    setMode('profile')
+                    publish('profileIsProfile',{})
+                    window.history.replaceState(null, "", "/#/")
+                    }} theme='Carbon-back'>
+                    <div className={`${theme}-Profile-closeIcon`}></div>
+                  </Button>                  
+                :undefined}
+              </>
+          }
+
+          <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
+            <div className="h-[261px] relative overflow-y-hidden">
+              <video id="dragAbleAi" playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
+                  <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+              </video>           
+              <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
+                <div className={`${theme}-Profile-VolumeHighVector`}></div>
+                <div
+                  className={`${theme}-Profile-LanguageSquareVector`}
+                ></div>
               </div>
             </div>
-{/* 
-            <Button  theme="Carbon-Show">
-              Show more              
-            </Button>  */}
+            {/* <div
+              className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"
+              style={{ backgroundImage: 'url("./Carbon/women.jpg")' }}
+            >
+              <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
+                <div className={`${theme}-Profile-VolumeHighVector`}></div>
+                <div
+                  className={`${theme}-Profile-LanguageSquareVector`}
+                ></div>
+              </div>
+            </div> */}
+            <div>
+              <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
+              <p className={`${theme}-Profile-SubTitle`}>
+                {shareUser.information?.job} @ {shareUser.information?.company}
+              </p>
+            </div>
+            <div className="flex justify-evenly gap-4 ">
+              <Button onClick={() => {
+                navigate('/edit')
+              }} theme="Carbon-Google" data-mode="profile-review-button">
+                <div
+                  className={`${theme}-Profile-EditProfileBtnVector2`}
+                ></div>
+                <div>Edit Profile</div>
+              </Button>
+              <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                Share profile
+              </Button>
+            </div>
           </div>
-          <div className={`${theme}-Profile-Content mt-4`}>
-            <ul style={{width:'100%'}} id="sortable">
-
-              {shareUser.boxs?.map((item:Box) => {
-                return (
-                  <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
-                  </ContentCard>              
-                )
-              })}
-
-            </ul>        
-          </div> 
+{/* 
+          <Button  theme="Carbon-Show">
+            Show more              
+          </Button>  */}
         </div>
+        <div className={`${theme}-Profile-ProfileSection`}>
+          <div className={`${theme}-Profile-Content mt-4`}>
+            {shareUser.boxs && shareUser.boxs.length > 0 ? (
+              <ul style={{ width: '100%' }} id="sortable">
+                {shareUser.boxs.map((item: Box) => {
+                  return (
+                    <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
+                    </ContentCard>
+                  )
+                })}
+              </ul>
+            ) : (
+              <>
+                <img src="/Carbon/Not-Found.svg" alt="Not Found" className="w-[97px] h-[96px]" />
+                <p className="text-sm	">You haven't added any info yet.</p>
+              </>
+            )}
+          </div>
+        </div>
+
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       </div>
     </>

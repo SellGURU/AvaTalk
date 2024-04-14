@@ -82,6 +82,7 @@ const Login = () => {
           :
         <>
               <div className="w-full px-4">
+                <img src="/Avatalk Logo.svg" alt="logo" className="w-[49px] h-[54px] mx-auto mb-[30px]" />
                 <div className="w-full flex justify-center">
                   <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Phone Number or Email Address to Login</div>
                 </div>

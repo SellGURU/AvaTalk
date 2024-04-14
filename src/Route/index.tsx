@@ -20,7 +20,7 @@ const route = createHashRouter([
     children: [
       {
         path: "/",
-        element: <Profile theme="Carbon"></Profile>,
+        element: <Profile2 theme="Carbon"></Profile2>,
         children: [
           {
             path: "edit",
@@ -62,10 +62,10 @@ const route = createHashRouter([
           },
         ],
       },
-      {
-        path: "/home",
-        element: <Profile2 theme="Carbon"></Profile2>,
-      },      
+      // {
+      //   path: "/home",
+      //   element: <Profile2 theme="Carbon"></Profile2>,
+      // },      
       {
         path: "/contacts",
         element: <ContactsView theme="Carbon"></ContactsView>,
