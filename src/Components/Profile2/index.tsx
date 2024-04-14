@@ -11,6 +11,7 @@ import ContentCard from "../ContentCard";
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import { publish } from "../../utils/event";
 import ShareContact from "../__Modal__/ShareContact";
+import Spinners from "../Spinner";
 
 interface ProfileProps {
   theme?: string;
@@ -28,7 +29,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
   const [shareUser,setShareUser] = useState(authContext.currentUser)
-  const [,setIsLoading] = useState(mode == 'share'?true:false)
+  const [isLoading,setIsLoading] = useState(mode == 'share'?true:false)
   const navigate = useNavigate();
   const [showShareContact,setShowShareContact] = useState(false)
   useConstructor(() => {
@@ -94,6 +95,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   })  
   return (
     <>
+    {isLoading ?
+    <div className='h-dvh flex justify-center items-center'>
+      <Spinners theme='Carbon'></Spinners>
+    </div>
+    :
       <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
         <Outlet></Outlet>
 
@@ -152,19 +158,21 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 {shareUser.information?.job} @ {shareUser.information?.company}
               </p>
             </div>
-            <div className="flex justify-evenly gap-4 ">
-              <Button onClick={() => {
-                navigate('/edit')
-              }} theme="Carbon-Google" data-mode="profile-review-button">
-                <div
-                  className={`${theme}-Profile-EditProfileBtnVector2`}
-                ></div>
-                <div>Edit Profile</div>
-              </Button>
-              <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
-                Share profile
-              </Button>
-            </div>
+            {mode == 'profile' ?
+              <div className="flex justify-evenly gap-4 ">
+                <Button onClick={() => {
+                  navigate('/edit')
+                }} theme="Carbon-Google" data-mode="profile-review-button">
+                  <div
+                    className={`${theme}-Profile-EditProfileBtnVector2`}
+                  ></div>
+                  <div>Edit Profile</div>
+                </Button>
+                <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                  Share profile
+                </Button>
+              </div>
+            :<></>}
           </div>
 {/* 
           <Button  theme="Carbon-Show">
@@ -193,6 +201,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       </div>
+    }    
     </>
   );
 };
