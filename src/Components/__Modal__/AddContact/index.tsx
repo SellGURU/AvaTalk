@@ -238,7 +238,9 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
                   </>
                 )
               })}
-
+              {allTags.length == 0 ?
+              <option className={`text-sm text-gray-700`}>No tag yet...</option>
+              :undefined}
             </div>
           </Select>
         </div>

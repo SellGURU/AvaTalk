@@ -158,7 +158,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </div>}          
           {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
-        <div className={`${theme}-ContactDetails-container4`}>
+        <div className={`${theme}-ContactDetails-container4 min-w-64`}>
           {contact?.phone ?
             <div className={`${theme}-ContactDetails-container5`} onClick={() => {
                   window.open(contact?.phone); 
