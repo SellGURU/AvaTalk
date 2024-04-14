@@ -13,6 +13,7 @@ import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
 import { Tag, Contact } from "../../Types";
 import { Contacts } from "../../Api";
+import { subscribe } from "../../utils/event";
 
 interface Props {
   theme?: string;
@@ -26,43 +27,49 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
-
+  const getContacts = () => {
+      Contacts.showContactList((res) => {
+        if (typeof res === 'object') {
+          console.log(res)
+          setContacts(res.map((el:any) => {
+            const newContact:Contact = {
+              company:el.company,
+              email:el.email,
+              fullName:el.full_name,
+              id:el.created_contact_id,
+              job:'',
+              mapLocation:{
+                lat:0,
+                lng:0
+              },
+              note:'',
+              phone:'',
+              tags:el.tags.map((val:any) => {
+                const newTag:Tag = {
+                  color:val.color,
+                  contacts:0,
+                  id:val.created_tag_id,
+                  name:val.title
+                }
+                return newTag
+              }),
+              addDate:el.date_added
+            }
+            return newContact
+          }));
+        } else {
+          toast.warning(res);
+        }
+      })
+  }
   useConstructor(() => {
-    Contacts.showContactList((res) => {
-      if (typeof res === 'object') {
-        console.log(res)
-        setContacts(res.map((el:any) => {
-          const newContact:Contact = {
-            company:el.company,
-            email:el.email,
-            fullName:el.full_name,
-            id:el.created_contact_id,
-            job:'',
-            mapLocation:{
-              lat:0,
-              lng:0
-            },
-            note:'',
-            phone:'',
-            tags:el.tags.map((val:any) => {
-              const newTag:Tag = {
-                color:val.color,
-                contacts:0,
-                id:val.created_tag_id,
-                name:val.title
-              }
-              return newTag
-            }),
-            addDate:el.date_added
-          }
-          return newContact
-        }));
-      } else {
-        toast.warning(res);
-      }
-    })
+    getContacts()
   });
 
+  subscribe('contactChange',() => {
+    setContacts([])
+    getContacts()
+  })
   useConstructor(() => {
     Contacts.showTags((resolveTags) => {
       setTags(resolveTags.map((el) => {

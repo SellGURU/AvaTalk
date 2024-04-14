@@ -8,6 +8,7 @@ import { useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
 import AddTagContact from "../__Modal__/AddTagContact";
+import { publish } from "../../utils/event";
 
 
 const ContactDetails = ({ theme }: { theme: string }) => {
@@ -93,6 +94,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     }
     setContact({...contac} as Contact)
     Contacts.updateContact(contac as Contact)
+    publish('contactChange',{})
     // setShowEditContactModal(false)
   }
   const handleShowLess = () => {
@@ -240,6 +242,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         theme="Carbon"
         onDelete={() => {
           Contacts.deleteContact(contactId as string).then(() => {
+            publish('contactChange',{})
             navigate('/contacts')
           })
           setShowDeleteContactModal(false);
@@ -269,6 +272,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         const newContact = contact  as Contact
         newContact.tags = newTags
         Contacts.updateContact(newContact)
+        publish('contactChange',{})
       }}
       ></AddTagContact>
     </div>

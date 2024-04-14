@@ -62,7 +62,7 @@ class Contacts extends Api {
     }
 
     static showContactList(submit:(res:any) => void) {
-      this.post('/show_contact_list',{}).then((res) => {
+      this.post('/show_contact_list',{},{noPending:true}).then((res) => {
           submit(res.data)
       })
     } 
