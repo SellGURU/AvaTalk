@@ -30,6 +30,16 @@ class Contacts extends Api {
         })
     }
 
+    static updateTag(tag:Tag,contacts:Array<Contact>) {
+      const response = this.post('/update_tag',{
+          title: tag.name,
+          color: tag.color,
+          contacts: contacts.map((el) =>el.id),
+          state: true,
+          created_tag_id:tag.id      
+      })
+      return response
+    }
     static updateContact(contact:Contact){
       const response =this.post('/update_contact',
       {

@@ -166,6 +166,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               const newTags = [...tags]
               const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
               newTags[indexTag] = tag
+              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id)))
               setTags([...newTags])
             }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])             

@@ -25,7 +25,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
   // const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   // const [isLoading, setIsLoading] = useState(false);
   const [title,setTitle] = useState(tag?tag.name:'')
-  const [colorCode,setColorCode] = useState('')
+  const [colorCode,setColorCode] = useState(tag?tag.color:'')
   useConstructor(() => {
     // setIsLoading(true);
     // Auth.getAllContacts((res) => {
