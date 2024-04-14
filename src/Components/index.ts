@@ -7,6 +7,7 @@ import FileUploadr from "./UploadImage";
 import TextField from "./TextField";
 import StepController from "./StepController";
 import ToggleButton from "./ToggleButton";
+import ToggleButton2 from "./ToggleButton2";
 import SearchBox from "./SearchBox";
 import Presentation from "./Presentation";
 import ContactDetails from "./ContactDetails";
@@ -43,6 +44,7 @@ export {
   TextField,
   FileUploadr,
   ToggleButton,
+  ToggleButton2,
   Select,
   SearchBox,
   Presentation,

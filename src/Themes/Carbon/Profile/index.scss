@@ -125,3 +125,15 @@
     background-image: url(/Carbon/addVector.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
 }
+.Carbon-Profile-BoxVector{
+    mask-image: url(/Carbon/box.svg);
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-6 h-6 bg-current;
+}
+.Carbon-Profile-Box{
+    
+    @apply  w-10 h-10 flex justify-center items-center  ;
+}
