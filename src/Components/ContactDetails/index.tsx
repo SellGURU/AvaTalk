@@ -7,14 +7,14 @@ import { AddContact, DeleteContact } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
-import AddTag from "../__Modal__/AddTag";
+import AddTagContact from "../__Modal__/AddTagContact";
+
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   const [showMore, setShowMore] = useState(false);
   const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
   const [showAddTagModal, setShowAddTagModal] = useState(false);
-  const [tags, setTags] = useState<Tag[]>([]);
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
   const { contactId } = useParams();
@@ -156,7 +156,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               )
             })}
           </div>}          
-          {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
+          <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button>
         </div>
         <div className={`${theme}-ContactDetails-container4 min-w-64`}>
           {contact?.phone ?
@@ -250,7 +250,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           setShowDeleteContactModal(false);
         }}
       />
-      <AddTag
+      {/* <AddTag
         theme="Carbon"
         isOpen={showAddTagModal}
         onClose={() => {
@@ -259,7 +259,18 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         addTag={(tag) => {
           setTags([...tags,tag])
         }}
-      ></AddTag>
+      ></AddTag> */}
+      <AddTagContact 
+      theme="Carbon"
+      selected={contact?.tags as Array<Tag>}
+      isOpen={showAddTagModal} 
+      onClose={() => {setShowAddTagModal(false);}}
+      onSubmit={(newTags:Array<Tag>) => {
+        const newContact = contact  as Contact
+        newContact.tags = newTags
+        Contacts.updateContact(newContact)
+      }}
+      ></AddTagContact>
     </div>
   );
 };
