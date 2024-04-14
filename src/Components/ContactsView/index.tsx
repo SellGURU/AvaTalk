@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { Button } from "symphony-ui";
 import { toast } from 'react-toastify';
@@ -28,8 +29,34 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
 
   useConstructor(() => {
     Contacts.showContactList((res) => {
-      if (typeof res === 'object' && res.contacts) {
-        setContacts(res.contacts);
+      if (typeof res === 'object') {
+        console.log(res)
+        setContacts(res.map((el:any) => {
+          const newContact:Contact = {
+            company:el.company,
+            email:el.email,
+            fullName:el.full_name,
+            id:el.created_contact_id,
+            job:'',
+            mapLocation:{
+              lat:0,
+              lng:0
+            },
+            note:'',
+            phone:'',
+            tags:el.tags.map((val:any) => {
+              const newTag:Tag = {
+                color:val.color,
+                contacts:0,
+                id:val.created_tag_id,
+                name:val.title
+              }
+              return newTag
+            }),
+            addDate:el.date_added
+          }
+          return newContact
+        }));
       } else {
         toast.warning(res);
       }
@@ -43,7 +70,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           name:el.title,
           color:el.color,
           contacts:el.count,
-          id:'1'
+          id:el.created_tag_id
         }
         return newTag
       }))
@@ -59,7 +86,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     //   });
   });
   const handleAddContact = (formData: Contact) => {
-    const formDataWithPhoto = { ...formData, photo: "/Acord/person.png", isExchange: true };
+    const formDataWithPhoto = { ...formData, photo: "/Acord/person.png", isExchange: false };
 
     setContacts([...contacts, formDataWithPhoto]);
   };
@@ -134,7 +161,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               newTags[indexTag] = tag
               setTags([...newTags])
             }} removeTag={(tag) => {
-              setTags([...tags.filter((item) =>item != tag)])
+              setTags([...tags.filter((item) =>item != tag)])             
+              Contacts.deleteTag(tag)
             }} data={filteredTags} theme={theme} />
           )}
         </>
@@ -161,8 +189,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         addTag={(tag) => {
           Contacts.addTag({
             title:tag.name,
-            color:tag.color,
-            contact:[]
+            color:tag.color
           })
           setTags([...tags,tag])
         }}

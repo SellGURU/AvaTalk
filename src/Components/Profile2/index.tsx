@@ -28,7 +28,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
   const [shareUser,setShareUser] = useState(authContext.currentUser)
-  const [isLoading,setIsLoading] = useState(mode == 'share'?true:false)
+  const [,setIsLoading] = useState(mode == 'share'?true:false)
   const navigate = useNavigate();
   const [showShareContact,setShowShareContact] = useState(false)
   useConstructor(() => {
