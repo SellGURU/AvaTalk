@@ -182,7 +182,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <ToggleButton2  leftText="Profile" rightText="Chat" onButtonClick={() => {}} theme="Carbon"></ToggleButton2>
                 </div>
                 <div className={`${theme}-Profile-Box`}>
-                  <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
+                  <Button onClick={() => {
+                    window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
+                  }} theme='Carbon-back'>
                     <div className={`${theme}-Profile-BoxVector`}></div>
                   </Button> 
                 </div>
