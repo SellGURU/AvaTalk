@@ -12,6 +12,7 @@ import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import { publish } from "../../utils/event";
 import ShareContact from "../__Modal__/ShareContact";
 import Spinners from "../Spinner";
+import ToggleButton from "../ToggleButton";
 
 interface ProfileProps {
   theme?: string;
@@ -55,7 +56,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 },
                 workEmail:data.information.work_email,
                 workPhone:data.information.work_mobile_number,
-                userId:data.information.created_userid
+                userId:data.information.created_userid,
+                silent_video_avatar:data.information.silent_video_url,
+                talking_video_avatar:data.information.talking_video_avatar
             }
             const shareUser = new User(information)
             setShareUser(shareUser) 
@@ -172,7 +175,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   Share profile
                 </Button>
               </div>
-            :<></>}
+            :
+            <>
+              <div className="w-[50%]">
+                <ToggleButton  leftText="Profile" rightText="Chat" onButtonClick={() => {}} theme="Carbon"></ToggleButton>
+              </div>
+            </>
+            }
           </div>
 {/* 
           <Button  theme="Carbon-Show">
