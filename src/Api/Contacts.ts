@@ -20,7 +20,8 @@ interface addContactData {
 
 class Contacts extends Api {
     static addTag(tag:TagApi) {
-        this.post('/add_tag',tag).then(res =>console.log(res))
+      const response = this.post('/add_tag',tag)
+      return response
     }
 
     static showTags(resolve:(tags:Array<any>) => void){
@@ -56,10 +57,8 @@ class Contacts extends Api {
     }    
 
     static addContact(data: addContactData) {
-      this.post('/add_contact', data)
-        .then(res => {
-          console.log(res);
-        });
+      const response = this.post('/add_contact', data);
+      return response
     }
 
     static showContactList(submit:(res:any) => void) {

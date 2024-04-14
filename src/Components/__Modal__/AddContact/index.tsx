@@ -2,7 +2,6 @@
 import Modal from "react-modal";
 import "./index.scss";
 import { useState, useEffect } from "react";
-import { generateSlugId } from "../../../help";
 import { Contact, Tag } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
@@ -73,24 +72,29 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
         job_title: formData.job as string,
         note: formData.note as string,
         tag:selectedTags.map(el => el.id)
+      }).then((res:any) => {
+        const id = res.data;
+        const formDataWithId = { ...formData,
+           id,
+            mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] },
+            tags:selectedTags
+           };
+        onAddContact(formDataWithId);
+        setFormData({} as Contact)
+        setSelectedTags([])
+        onClose();        
       })
-      const id = generateSlugId();
-      const formDataWithId = { ...formData,
-         id,
-          mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] },
-          tags:selectedTags
-         };
-      onAddContact(formDataWithId);
       // console.log(formDataWithId);
       // console.log(formData);
     } else if (mode === "edit") {
       const formDatawithMaplocation = { ...formData, mapLocation: { lat: pointVals[0][1], lng: pointVals[0][0] } };
       onEditContact(formDatawithMaplocation);
+      setFormData({} as Contact)
+      setSelectedTags([])
+      onClose();      
       // console.log(formDatawithMaplocation);
     }
-    setFormData({} as Contact)
-    setSelectedTags([])
-    onClose();
+
   };
 
   const [country, setCountry] = useState<any>({
