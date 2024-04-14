@@ -97,7 +97,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
         <Outlet></Outlet>
 
-        <div className="relative flex flex-col gap-3 justify-center items-center mt-11 px-4 sticky">
+        <div className="flex flex-col gap-3 justify-center items-center mt-11 px-4 sticky">
           {mode == 'profile' ?
             <div className=" w-48 h-[40px] ">
               <Button onClick={() => {

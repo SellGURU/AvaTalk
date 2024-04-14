@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Profile, Splash } from "../../Components"
+import { Profile2, Splash } from "../../Components"
 import { useSearchParams } from "react-router-dom";
 
 const Share:React.FC = () => {
@@ -13,7 +13,7 @@ const Share:React.FC = () => {
             {showSplash ?
                 <Splash theme="Carbon"></Splash>
             :        
-            <Profile theme="Carbon"></Profile>
+            <Profile2 theme="Carbon"></Profile2>
             }   
         </>
     )
