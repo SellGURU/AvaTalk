@@ -389,10 +389,10 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
       if(res.data[res.data.length -1].video == ''){
         setSelectedAvatar(res.data[res.data.length -1].photo)   
         // setUploadedAvater(res.data[res.data.length -1].photo)
-        formik.setFieldValue('avatar_pic_url',res.data[res.data.length -1].photo)
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
-          setAvatarVideo(response.data)
-          formik.setFieldValue('silent_video_avatar',response.data)
+          formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+          setAvatarVideo(response.data.silent_video_link)
+          formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
         })           
       }else{
         setSelectedAvatar(res.data[0].photo)   
@@ -468,12 +468,12 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                 <>
                 <div onClick={() => {
                   setSelectedAvatar(el.photo)
-                  formik.setFieldValue('avatar_pic_url',el.photo)
                   setAvatarVideo("")
                   if(el.video == ''){
-                      Auth.createAvatarVideo(el.photo as string).then((response) => {
-                        setAvatarVideo(response.data)
-                        formik.setFieldValue('silent_video_avatar',response.data)
+                    Auth.createAvatarVideo(el.photo as string).then((response) => {
+                        formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+                        setAvatarVideo(response.data.silent_video_link)
+                        formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
                       })  
                   }else {
                     setTimeout(() => {
@@ -508,15 +508,15 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           setCropper('')
           setSelectedAvatar(resolve as string)
           // setUploadedAvater(resolve as string)   
-          formik.setFieldValue('avatar_pic_url',resolve)   
           Auth.createAvatarVideo(resolve as string).then((response) => {
+            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)   
             setAvaterList([{
-              photo:resolve as string,
-              video:response.data,
+              photo:response.data.avatar_pic_link,
+              video:response.data.silent_video_link,
               type:'Local'
             },...avatarList])       
-            setAvatarVideo(response.data)
-            formik.setFieldValue('silent_video_avatar',response.data)
+            setAvatarVideo(response.data.silent_video_link)
+            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
           })           
        }}></CropperBox>          
       </div>
