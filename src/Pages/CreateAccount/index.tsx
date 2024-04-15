@@ -389,10 +389,10 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
       if(res.data[res.data.length -1].video == ''){
         setSelectedAvatar(res.data[res.data.length -1].photo)   
         // setUploadedAvater(res.data[res.data.length -1].photo)
-        formik.setFieldValue('avatar_pic_url',res.data[res.data.length -1].photo)
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
-          setAvatarVideo(response.data)
-          formik.setFieldValue('silent_video_avatar',response.data)
+          formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+          setAvatarVideo(response.data.silent_video_link)
+          formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
         })           
       }else{
         setSelectedAvatar(res.data[0].photo)   
@@ -413,7 +413,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           <div className="mt-6 px-6 flex items-center justify-between">
             {avatarVideo.length > 0 ?
             <>
-              <div className="w-[80px] relative object-cover boxShadow-Gray borderBox-Gray h-[80px] rounded-[6.76px]  border border-white">
+              <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                   <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
                     <img src="./icons/Vector.svg" alt="" />
                   </div>
@@ -424,8 +424,8 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                 <img className="w-10 h-10" src="./icons/fi-rr-arrow-right.svg" alt="" />
               </div>
 
-              <div className="w-[160px] h-[160px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
-                <video id="dragAbleAi" playsInline  style={{}} width={'100%'} height={'50%'}  preload="auto" autoPlay={true} loop muted >
+              <div className="w-[160px]  overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                <video id="dragAbleAi" playsInline  style={{}} width={'100%'}  preload="auto" autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={avatarVideo} type="video/mp4"></source>
                 </video>               
               </div>
@@ -440,7 +440,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           </div>
 
           <div className="flex flex-wrap gap-8 px-6 mt-2">
-            <div className="w-[85px]  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] h-[73px]">
+            <div className="w-[85px]  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] ">
               <img className={`${uploadedAvater.length > 0 ?'absolute right-1 top-1':''}`} src="./icons/gallery-add.svg" alt="" />
               {uploadedAvater.length > 0 ?
                 <img className="w-full h-full" src={uploadedAvater} alt="" />
@@ -468,12 +468,12 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                 <>
                 <div onClick={() => {
                   setSelectedAvatar(el.photo)
-                  formik.setFieldValue('avatar_pic_url',el.photo)
                   setAvatarVideo("")
                   if(el.video == ''){
-                      Auth.createAvatarVideo(el.photo as string).then((response) => {
-                        setAvatarVideo(response.data)
-                        formik.setFieldValue('silent_video_avatar',response.data)
+                    Auth.createAvatarVideo(el.photo as string).then((response) => {
+                        formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+                        setAvatarVideo(response.data.silent_video_link)
+                        formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
                       })  
                   }else {
                     setTimeout(() => {
@@ -486,7 +486,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                   //   setAvatarVideo(res.data)
                   //   formik.setFieldValue('silent_video_avatar',res.data)
                   // })
-                }} className={`w-[85px] ${el.photo == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] h-[73px]`}>
+                }} className={`w-[85px] ${el.photo == selectedAvatar ?'borderBox-primary' :'borderBox-Gray '} boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] `}>
                   {/* <img src="" alt="" /> */}
                   <img src={el.photo} className="w-full  h-full" alt="" />
                 </div>                
@@ -508,15 +508,15 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           setCropper('')
           setSelectedAvatar(resolve as string)
           // setUploadedAvater(resolve as string)   
-          formik.setFieldValue('avatar_pic_url',resolve)   
           Auth.createAvatarVideo(resolve as string).then((response) => {
+            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)   
             setAvaterList([{
-              photo:resolve as string,
-              video:response.data,
+              photo:response.data.avatar_pic_link,
+              video:response.data.silent_video_link,
               type:'Local'
             },...avatarList])       
-            setAvatarVideo(response.data)
-            formik.setFieldValue('silent_video_avatar',response.data)
+            setAvatarVideo(response.data.silent_video_link)
+            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
           })           
        }}></CropperBox>          
       </div>
