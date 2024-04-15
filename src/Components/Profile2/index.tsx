@@ -28,7 +28,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     return 'profile'
   }  
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
-  const [panel,setPanel] = useState<'profile'|'chat'>('profile')
+  const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
   const [shareUser,setShareUser] = useState(authContext.currentUser)
@@ -108,7 +108,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
         <Outlet></Outlet>
 
-        <div className="flex flex-col gap-3 justify-center items-center mt-11 px-4 sticky">
+        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} px-4 sticky`}>
           {mode == 'profile' ?
             <div className=" w-48 h-[40px] ">
               <Button onClick={() => {
@@ -181,8 +181,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <>
               <div className="flex items-center justify-between px-8">
                 <div className="w-[65%] flex items-center">
-                  <ToggleButton2  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
-                    setPanel(el.toLowerCase() as any)
+                  <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                    setPanel(el as any)
                   }} theme="Carbon"></ToggleButton2>
                 </div>
                 <div className={`${theme}-Profile-Box`}>
@@ -201,7 +201,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             Show more              
           </Button>  */}
         </div>
-        {panel == 'profile' ?
+        {panel == 'Profile' || mode=='profile' ?
           <div className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
@@ -238,7 +238,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </div>
               <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
-                  <Button theme="Carbon-Google" data-mode="profile-review-button">Exchange Contact</Button>
+                  <Button theme="Carbon-Google">Exchange Contact</Button>
                   <Button theme="Carbon">Save Contact</Button>
                 </div>
               </div>
