@@ -13,6 +13,7 @@ import { publish } from "../../utils/event";
 import ShareContact from "../__Modal__/ShareContact";
 import Spinners from "../Spinner";
 import ToggleButton2 from "../ToggleButton2";
+import Presentition2 from "../Presentition2";
 
 interface ProfileProps {
   theme?: string;
@@ -27,6 +28,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     return 'profile'
   }  
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
+  const [panel,setPanel] = useState<'profile'|'chat'>('profile')
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
   const [shareUser,setShareUser] = useState(authContext.currentUser)
@@ -179,7 +181,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <>
               <div className="flex items-center justify-between px-8">
                 <div className="w-[65%] flex items-center">
-                  <ToggleButton2  leftText="Profile" rightText="Chat" onButtonClick={() => {}} theme="Carbon"></ToggleButton2>
+                  <ToggleButton2  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                    setPanel(el.toLowerCase() as any)
+                  }} theme="Carbon"></ToggleButton2>
                 </div>
                 <div className={`${theme}-Profile-Box`}>
                   <Button onClick={() => {
@@ -197,49 +201,53 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             Show more              
           </Button>  */}
         </div>
-        <div className={`${theme}-Profile-ProfileSection`}>
-          <div className={`${theme}-Profile-Content mt-4`}>
-            {shareUser.boxs && shareUser.boxs.length > 0 ? (
-              <ul style={{ width: '100%' }} id="sortable">
-                {shareUser.boxs.map((item: Box) => {
-                  return (
-                    <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
-                    </ContentCard>
-                  )
-                })}
-              </ul>
-            ) : (
-              <>
-                <img src="/Carbon/Not-Found.svg" alt="Not Found" className="w-[97px] h-[96px]" />
-                <p className="text-sm	">You haven't added any info yet.</p>
-              </>
-            )}
+        {panel == 'profile' ?
+          <div className={`${theme}-Profile-ProfileSection`}>
+            <div className={`${theme}-Profile-Content mt-4`}>
+              {shareUser.boxs && shareUser.boxs.length > 0 ? (
+                <ul style={{ width: '100%' }} id="sortable">
+                  {shareUser.boxs.map((item: Box) => {
+                    return (
+                      <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
+                      </ContentCard>
+                    )
+                  })}
+                </ul>
+              ) : (
+                <>
+                  <img src="/Carbon/Not-Found.svg" alt="Not Found" className="w-[97px] h-[96px]" />
+                  <p className="text-sm	">You haven't added any info yet.</p>
+                </>
+              )}
+            </div>
+            {mode != 'profile' ?
+            <>
+              <div className="flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
+                <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
+                <p>Pricing</p>
+                <p>FAQ</p>
+                <p>Legals</p>
+                <div className="flex gap-3">
+                  <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
+                  <img className="w-4 h-4 cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
+                  <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
+
+
+                </div>
+
+              </div>
+              <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
+                <div className="flex justify-evenly gap-4 ">
+                  <Button theme="Carbon-Google" data-mode="profile-review-button">Exchange Contact</Button>
+                  <Button theme="Carbon">Save Contact</Button>
+                </div>
+              </div>
+            </>
+            :undefined}
           </div>
-          {mode != 'profile' ?
-          <>
-            <div className="flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
-              <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
-              <p>Pricing</p>
-              <p>FAQ</p>
-              <p>Legals</p>
-              <div className="flex gap-3">
-                <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-                <img className="w-4 h-4 cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
-                <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
-
-
-              </div>
-
-            </div>
-            <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
-              <div className="flex justify-evenly gap-4 ">
-                <Button theme="Carbon-Google" data-mode="profile-review-button">Exchange Contact</Button>
-                <Button theme="Carbon">Save Contact</Button>
-              </div>
-            </div>
-          </>
-          :undefined}
-        </div>
+        :
+          <Presentition2></Presentition2>
+        }
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       </div>
