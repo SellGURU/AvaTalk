@@ -145,7 +145,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="ml-3">
                     <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
                     <p className={`${theme}-Profile-SubTitle`}>
-                      {shareUser.information?.job} @ {shareUser.information?.company}
+                      {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                     </p>                    
                   </div>
                 </div>
@@ -210,7 +210,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               <div>
                 <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>
-                  {shareUser.information?.job} @ {shareUser.information?.company}
+                  {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                 </p>
               </div>
               {mode == 'profile' ?
