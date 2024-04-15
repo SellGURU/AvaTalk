@@ -238,8 +238,29 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </div>
               <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
-                  <Button theme="Carbon-Google">Exchange Contact</Button>
-                  <Button theme="Carbon">Save Contact</Button>
+                  <Button disabled  theme="Carbon-Google">Exchange Contact</Button>
+                  <Button onClick={() => {
+                      const contact = {
+                        name: shareUser.information?.lastName as string,
+                        phone: shareUser.information?.phone as string,
+                        email: shareUser.information?.personlEmail as string };
+
+                      // create a vcard file
+                      const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nEMAIL:" + contact.email + "\nEND:VCARD";
+                      const blob = new Blob([vcard], { type: "text/vcard" });
+                      const url = URL.createObjectURL(blob);
+
+                      const newLink = document.createElement('a');
+                      newLink.download = contact.name + ".vcf";
+                      newLink.textContent = contact.name;
+                      newLink.href = url;
+                      Auth.addEvent({
+                        event_type:'add_contact',
+                        sub_event_category:'share_link',
+                        userid:shareUser.information?.userId as string
+                      })
+                      newLink.click();                  
+                }} theme="Carbon">Save Contact</Button>
                 </div>
               </div>
             </>
