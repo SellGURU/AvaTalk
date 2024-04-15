@@ -478,6 +478,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                   }else {
                     setTimeout(() => {
                       setAvatarVideo(el.video)
+                      formik.setFieldValue('avatar_pic_url',el.photo)
                       formik.setFieldValue('silent_video_avatar',el.video)                  
                       
                     }, 200);
