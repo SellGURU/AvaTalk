@@ -224,7 +224,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
-                    Share profile
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector3`}
+                    ></div>     
+                    <div>
+                      Share profile
+                    </div>               
                   </Button>
                 </div>
               :
@@ -255,10 +260,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         </div>
         {panel == 'Profile' || mode=='profile' ?
           <div id="scrollBoxProfile" onScroll={(event:any) => {
-            if(event.nativeEvent.srcElement.scrollTop == 0) {
-              setScrolled(false)
-            }else{
+            if(event.nativeEvent.srcElement.scrollTop >= 100) {
               setScrolled(true)
+            }else if(event.nativeEvent.srcElement.scrollTop == 0){
+              setScrolled(false)
             }        
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
