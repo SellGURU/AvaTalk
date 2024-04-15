@@ -215,26 +215,30 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </>
             )}
           </div>
-          <div className="flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
-            <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
-            <p>Pricing</p>
-            <p>FAQ</p>
-            <p>Legals</p>
-            <div className="flex gap-3">
-              <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-              <img className="w-4 h-4 cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
-              <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
+          {mode != 'profile' ?
+          <>
+            <div className="flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
+              <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
+              <p>Pricing</p>
+              <p>FAQ</p>
+              <p>Legals</p>
+              <div className="flex gap-3">
+                <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
+                <img className="w-4 h-4 cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
+                <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
 
+
+              </div>
 
             </div>
-
-          </div>
-          <div className=" bg-[#E2E8F0] px-5 pt-3 pb-6 rounded-t-2xl">
-            <div className="flex justify-evenly gap-4 ">
-              <Button theme="Carbon-Google" data-mode="profile-review-button">Exchange Contact</Button>
-              <Button theme="Carbon">Save Contact</Button>
+            <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
+              <div className="flex justify-evenly gap-4 ">
+                <Button theme="Carbon-Google" data-mode="profile-review-button">Exchange Contact</Button>
+                <Button theme="Carbon">Save Contact</Button>
+              </div>
             </div>
-          </div>
+          </>
+          :undefined}
         </div>
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
