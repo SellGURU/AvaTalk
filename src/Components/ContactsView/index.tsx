@@ -13,6 +13,7 @@ import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
 import { Tag, Contact } from "../../Types";
 import { Contacts } from "../../Api";
+import { subscribe } from "../../utils/event";
 
 interface Props {
   theme?: string;
@@ -26,43 +27,49 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
-
+  const getContacts = () => {
+      Contacts.showContactList((res) => {
+        if (typeof res === 'object') {
+          console.log(res)
+          setContacts(res.map((el:any) => {
+            const newContact:Contact = {
+              company:el.company,
+              email:el.email,
+              fullName:el.full_name,
+              id:el.created_contact_id,
+              job:'',
+              mapLocation:{
+                lat:0,
+                lng:0
+              },
+              note:'',
+              phone:'',
+              tags:el.tags.map((val:any) => {
+                const newTag:Tag = {
+                  color:val.color,
+                  contacts:0,
+                  id:val.created_tag_id,
+                  name:val.title
+                }
+                return newTag
+              }),
+              addDate:el.date_added
+            }
+            return newContact
+          }));
+        } else {
+          toast.warning(res);
+        }
+      })
+  }
   useConstructor(() => {
-    Contacts.showContactList((res) => {
-      if (typeof res === 'object') {
-        console.log(res)
-        setContacts(res.map((el:any) => {
-          const newContact:Contact = {
-            company:el.company,
-            email:el.email,
-            fullName:el.full_name,
-            id:el.created_contact_id,
-            job:'',
-            mapLocation:{
-              lat:0,
-              lng:0
-            },
-            note:'',
-            phone:'',
-            tags:el.tags.map((val:any) => {
-              const newTag:Tag = {
-                color:val.color,
-                contacts:0,
-                id:val.created_tag_id,
-                name:val.title
-              }
-              return newTag
-            }),
-            addDate:el.date_added
-          }
-          return newContact
-        }));
-      } else {
-        toast.warning(res);
-      }
-    })
+    getContacts()
   });
 
+  subscribe('contactChange',() => {
+    setContacts([])
+    getContacts()
+  })
   useConstructor(() => {
     Contacts.showTags((resolveTags) => {
       setTags(resolveTags.map((el) => {
@@ -159,6 +166,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               const newTags = [...tags]
               const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
               newTags[indexTag] = tag
+              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id)))
               setTags([...newTags])
             }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])             
@@ -190,8 +198,11 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           Contacts.addTag({
             title:tag.name,
             color:tag.color
+          }).then(el => {
+            const newTag = tag
+            tag.id = el.data
+            setTags([...tags,newTag])
           })
-          setTags([...tags,tag])
         }}
       ></AddTag>
     </div>

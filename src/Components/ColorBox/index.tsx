@@ -25,7 +25,7 @@ const ColorBox = (props:ColorBoxProps) => {
               <div key={index} className={`relative w-8 h-8 mb-2 rounded-full cursor-pointer `} style={{ backgroundColor: color }} onClick={() => handleCircleClick(color)}>
                 {selectedColor === color && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <img src="../../../public/Carbon/checkMark.svg" alt="" />
+                    <img src="./Carbon/checkMark.svg" alt="" />
                   </div>
                 )}
               </div>

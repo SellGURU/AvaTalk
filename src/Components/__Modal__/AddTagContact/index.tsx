@@ -3,30 +3,42 @@ import Modal from "react-modal";
 
 import "./index.scss";
 
-import { ColorBox, TextField } from "../..";
 import { Button } from "symphony-ui";
-import { generateSlugId, useConstructor } from "../../../help";
+import { useConstructor } from "../../../help";
+import Select from "../../Select";
 import { useState } from "react";
 import { Tag } from "../../../Types";
+import { Contacts } from "../../../Api";
 
 interface AddContactProps {
   isOpen: boolean;
   onClose: () => void;
   theme?: string;
-  addTag:(tag:Tag) =>void
-  editTag?:(tag:Tag) => void
+  onSubmit:(tags:Array<Tag>) =>void;
   onAfterOpen?: () => void;
   mode?:'Edit' | 'Add'
-  tag?:Tag
+  selected:Array<Tag>
 }
 
-const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag, onClose, theme,mode,tag }) => {
+const AddTagContact: React.FC<AddContactProps> = ({ isOpen,onAfterOpen,onSubmit,selected, onClose, theme,mode }) => {
   // const [contacts, setContacts] = useState<Contact[]>([]);
   // const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   // const [isLoading, setIsLoading] = useState(false);
-  const [title,setTitle] = useState(tag?tag.name:'')
-  const [colorCode,setColorCode] = useState(tag?tag.color:'')
+//   const [title,setTitle] = useState(tag?tag.name:'')
+  const [selectedTags,setSelectedTags] = useState<Array<Tag>>(selected)
+  const [allTags,setAllTags] = useState<Array<Tag>>([])
   useConstructor(() => {
+    Contacts.showTags((resolveTags) => {
+      setAllTags(resolveTags.map((el) => {
+        const newTag:Tag = {
+          name:el.title,
+          color:el.color,
+          contacts:el.count,
+          id:el.created_tag_id
+        }
+        return newTag
+      }))
+    })    
     // setIsLoading(true);
     // Auth.getAllContacts((res) => {
     //   // setContacts(res);
@@ -40,9 +52,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
         isOpen={isOpen}
         onAfterOpen={onAfterOpen}
         onRequestClose={() => {
-          if(tag) {
-            setTitle(tag.name)
-          }
+            setSelectedTags(selected)
           onClose()}}
         style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
         contentLabel="Example Modal"
@@ -51,9 +61,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
           <div className="flex w-full justify-between items-center">
             <div className="text-gray-700 text-left font-[600] text-[16px] leading-[24px]">{mode == 'Edit' ? 'Edit' : 'Add'} Tag</div>
             <Button onClick={() => {
-              if(tag) {
-                setTitle(tag.name)
-              }
+                setSelectedTags(selected)
               onClose()
               }} theme="Carbon-back">
               <div className={`${theme}-Profile-closeIcon`}></div>
@@ -61,14 +69,14 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
           </div>
           {/* <div className="h-[65vh] hiddenScrollBar overflow-y-scroll"> */}
           <div>
-            <div className="my-4">
+            {/* <div className="my-4">
               <TextField value={title} onChange={(e) => {setTitle(e.target.value)}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <ColorBox color={tag?.color} resolveColor={(color:string) => {
                 setColorCode(color)
               }}/>
-            </div>
+            </div> */}
             {/* <div className="mt-4">
               <Select label="Contacts" valueElement={<div></div>} placeholder="Select Contacts..." theme="Carbon">
                 {isLoading ? (
@@ -101,27 +109,55 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
                 )}
               </Select>
             </div> */}
-
+            <div className="mt-4">
+            <Select
+                valueElement={
+                <div className={`${theme}-AddContact-selectItems gap-2`}>
+                    {selectedTags.length == 0 && <div className={`text-[13px] text-gray-700 font-thin opacity-80`}>Select tag ...</div>}
+                    {selectedTags.map((item,index) => {
+                    return (
+                        <>
+                        {index < 2 &&
+                        <div onClick={() => {
+                            setSelectedTags([...selectedTags.filter((el) =>el.id != item.id)])
+                        }} className={`${theme}-ContactDetails-exibitionconContainer gap-2 flex max-w-[120px] justify-between px-2 mt-[-6px]`} style={{backgroundColor:item.color}}>
+                            <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                            <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
+                        </div>
+                        }
+                        {index == 2 &&  <div className="w-8 h-8 rounded-full bg-gray-100 border-2 mt-[-6px] border-white flex items-center justify-center ">
+                                <div id="tags" className="text-gray-700 -mt-2">...</div>
+                            </div>}
+                        </>
+                    )
+                    })}
+                </div>
+                }
+                label="Tag"
+                placeholder="Select tag..."
+                theme="Carbon"
+            >
+                <div className="flex hiddenScrollBar justify-start overflow-x-scroll max-h-[120px] items-baseline flex-wrap py-4 gap-2 px-2">
+                {allTags.filter((el) =>!selectedTags.map(va =>va.id).includes(el.id)).map((item) => {
+                    return (
+                    <>
+                        <div onClick={() => {
+                        setSelectedTags([...selectedTags,item])
+                        }} className={`${theme}-ContactDetails-exibitionconContainer cursor-pointer min-w-20`} style={{backgroundColor:item.color}}>
+                            <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
+                        </div>
+                    </>
+                    )
+                })}
+                {allTags.length == 0 ?
+                <option className={`text-sm text-gray-700`}>No tag yet...</option>
+                :undefined}
+                </div>
+            </Select>
+            </div>
             <div className="mt-10">
               <Button onClick={() => {
-                const newTag:Tag = {
-                  color:colorCode,
-                  contacts:0,
-                  id:generateSlugId(),
-                  name:title
-                }
-                if(mode == 'Edit' && tag && editTag){
-                    editTag({
-                      color:colorCode,
-                      contacts:tag?.contacts,
-                      id:tag?.id,
-                      name:title
-                    })
-                }else{
-                  addTag(newTag)
-                }
-                setTitle('')
-                setColorCode('')
+                onSubmit(selectedTags)
                 onClose()
                 }} theme="Carbon">
                 <div>{mode == 'Edit' ? 'Edit' : 'Add'} Tag</div>
@@ -135,4 +171,4 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
   );
 };
 
-export default AddTag;
+export default AddTagContact;

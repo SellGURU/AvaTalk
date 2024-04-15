@@ -15,6 +15,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
 import { toast } from "react-toastify";
 import CropperBox from "../../Components/CropperBox";
+import { BeatLoader } from "react-spinners";
 
 const initialValue = {
   FirstName: "",
@@ -378,12 +379,14 @@ interface Avatars {
 const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) => {
   const [avatarList,setAvaterList] = useState<Array<Avatars>>(
     [])  
+  const [isLoading,setIsLoading] = useState(false)
   const [avatarVideo,setAvatarVideo] = useState('')
   const [selectedAvatar,setSelectedAvatar]= useState('')
   const [uploadedAvater]= useState('')
   const [Cropper,setCropper]= useState('')
   const authContext = useAuth()
   useConstructor(() => {
+    setIsLoading(true)
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
       if(res.data[res.data.length -1].video == ''){
@@ -392,9 +395,11 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
           formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
           setAvatarVideo(response.data.silent_video_link)
+          setIsLoading(false)
           formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
         })           
       }else{
+        setIsLoading(false)
         setSelectedAvatar(res.data[0].photo)   
         setAvatarVideo(res.data[0].video)
         formik.setFieldValue('silent_video_avatar',res.data[0].video)
@@ -470,14 +475,17 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
                   setSelectedAvatar(el.photo)
                   setAvatarVideo("")
                   if(el.video == ''){
+                    setIsLoading(true)
                     Auth.createAvatarVideo(el.photo as string).then((response) => {
                         formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
                         setAvatarVideo(response.data.silent_video_link)
                         formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+                        setIsLoading(false)
                       })  
                   }else {
                     setTimeout(() => {
                       setAvatarVideo(el.video)
+                      formik.setFieldValue('avatar_pic_url',el.photo)
                       formik.setFieldValue('silent_video_avatar',el.video)                  
                       
                     }, 200);
@@ -501,6 +509,14 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
             Get Started
           </Button>
         </div>
+        {isLoading ?
+        <>
+          <div className="absolute z-50 w-full h-full left-0 top-0 flex justify-center items-center">
+            <BeatLoader size={8} color="#FFFFFF"></BeatLoader>
+          </div>
+          <div className="absolute w-full h-full bg-black opacity-60 top-0 left-0"></div>
+        </>
+        :undefined}
        <CropperBox url={Cropper} onResolve={(resolve: string | ArrayBuffer | null) => {
          // shareUser.updateImageurl(resolve)
         //  formik.setFieldValue('PrifileImage',resolve)
@@ -508,6 +524,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           setCropper('')
           setSelectedAvatar(resolve as string)
           // setUploadedAvater(resolve as string)   
+          setIsLoading(true)
           Auth.createAvatarVideo(resolve as string).then((response) => {
             formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)   
             setAvaterList([{
@@ -517,6 +534,7 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
             },...avatarList])       
             setAvatarVideo(response.data.silent_video_link)
             formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+            setIsLoading(false)
           })           
        }}></CropperBox>          
       </div>
