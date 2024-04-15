@@ -5,10 +5,11 @@ interface ToggleProps {
   theme?: string;
   leftText: string;
   rightText: string;
+  value:string;
   onButtonClick: (buttonText: string) => void;
 }
-const ToggleButton2: React.FC<ToggleProps> = ({ theme, leftText, rightText, onButtonClick }) => {
-  const [activeButton, setActiveButton] = useState(leftText);
+const ToggleButton2: React.FC<ToggleProps> = ({ theme,value, leftText, rightText, onButtonClick }) => {
+  const [activeButton, setActiveButton] = useState(value);
 
   const handleButtonClick = (buttonText: string) => {
     setActiveButton(buttonText);
