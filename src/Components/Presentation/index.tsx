@@ -179,7 +179,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
 
         <div className={`${theme}-Presentation-Content`}>  
     
-          <div className={`${theme}-Presentation-PictureSection`}>
+          <div className={`${theme}-Presentation-PictureSection overflow-hidden`}>
             {/* <div className={`${theme}-Presentation-PresentationPicture`}></div> */}
             <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
           </div>
