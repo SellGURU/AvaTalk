@@ -186,8 +186,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   </div>
                 :
                   <>
-                    <div className="flex items-center mt-4 justify-between px-8">
-                      <div className="w-[65%] flex items-center">
+                    <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-8':'px-2'}`}>
+                      <div className="w-[65%] max-w-[75%] flex items-center justify-between">
                         <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
                           setPanel(el as any)
                         }} theme="Carbon"></ToggleButton2>
@@ -255,8 +255,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
               :
               <>
-                <div className="flex items-center justify-between px-8">
-                  <div className="w-[65%] flex items-center">
+                <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-8':'px-2'}`}>
+                  <div className="min-w-[65%] max-w-[72%] flex items-center justify-between">
                     <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
                       setPanel(el as any)
                     }} theme="Carbon"></ToggleButton2>

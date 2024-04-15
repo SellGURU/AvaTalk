@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef, useState  } from "react"
+import { useEffect, useRef, useState  } from "react"
 import FooterPresentation from "../FooterPresentation"
 import { sendToApi, useConstructor } from "../../help";
 import { chat } from "../../Types";
@@ -42,6 +42,13 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
         'Tell me more about your business',
         'What services do you provide in Codie?'
     ])    
+    useEffect(() => {
+        if(chats.length == 0) {
+        setTimeout(() => {
+            setShowSuggestions(true)
+        }, 5000);
+        }
+    },[chats])    
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
         // const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
@@ -98,7 +105,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
     };       
     return (
         <>
-        <div  className={`${theme}-Presentation-MoreInfoSection pb-24 ${theme}-Presentation-fadeIn`}>
+        <div  className={`${theme}-Presentation-MoreInfoSection pt-2 pb-24 ${theme}-Presentation-fadeIn`}>
         {
             showSuggestions  && chats.length ==0 ?
             <>
