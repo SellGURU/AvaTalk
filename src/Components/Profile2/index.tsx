@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
 import { boxProvider, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
@@ -14,6 +14,8 @@ import ShareContact from "../__Modal__/ShareContact";
 import Spinners from "../Spinner";
 import ToggleButton2 from "../ToggleButton2";
 import Presentition2 from "../Presentition2";
+import AudioProvider from "../AudioProvider";
+import { chat } from "../../Types";
 
 interface ProfileProps {
   theme?: string;
@@ -27,6 +29,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     }
     return 'profile'
   }  
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [audioUrl, setAudioUrl] = useState<string>('');
+  const audioRef = useRef<HTMLAudioElement>(null)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
   const [searchParams] = useSearchParams();
@@ -36,6 +41,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const navigate = useNavigate();
   const [showShareContact,setShowShareContact] = useState(false)
   const [scrolled,setScrolled] = useState(false)
+  const [isTalking,setIsTalking] = useState(false)
+  const [chats,setChats] = useState<Array<chat>>([
+  ])      
   useConstructor(() => {
     if(mode == 'share') {
       const resolveSocial: Array<Box> = [];
@@ -90,6 +98,19 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       })
     }
   })  
+  useEffect(() => {
+      if(videoRef.current){
+          const refren = videoRef.current  as any   
+          // setShowOpacity(true)
+          refren.load()
+      }        
+  },[isTalking])     
+  useEffect(() => {
+    if(audioRef.current){
+        const refren = audioRef.current  as any   
+        refren.load()
+    }           
+  },[isTalking])  
   useEffect(() => {
     setTimeout(() => {
         const el = document.getElementById('sortable');
@@ -186,8 +207,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :
             <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
               <div className="h-[261px] relative overflow-y-hidden">
-                <video id="dragAbleAi" playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
-                    <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
+                    <source id="videoPlayer"  src={isTalking?shareUser.information?.talk_video_avater :shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>           
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
                   <div className={`${theme}-Profile-VolumeHighVector`}></div>
@@ -330,12 +351,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2></Presentition2>
+          <Presentition2 chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       </div>
     }    
+    <AudioProvider autoPlay={isTalking} onEnd={() => {
+      setAudioUrl('')
+      setIsTalking(false)
+    }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
     </>
   );
 };

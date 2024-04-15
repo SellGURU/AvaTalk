@@ -141,6 +141,7 @@ const sendToApi = (
   BLokedIdList:MutableRefObject<string[]>,
   userId:string
   ) => {
+    console.log(userId)
   const aiChats = chats.filter((item) => item.from == "Ai");
   const newChat: chat = {
     from: "user",
