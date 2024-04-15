@@ -35,6 +35,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isLoading,setIsLoading] = useState(mode == 'share'?true:false)
   const navigate = useNavigate();
   const [showShareContact,setShowShareContact] = useState(false)
+  const [scrolled,setScrolled] = useState(false)
   useConstructor(() => {
     if(mode == 'share') {
       const resolveSocial: Array<Box> = [];
@@ -133,76 +134,133 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 :undefined}
               </>
           }
-
-          <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
-            <div className="h-[261px] relative overflow-y-hidden">
-              <video id="dragAbleAi" playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
-                  <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-              </video>           
-              <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                <div
-                  className={`${theme}-Profile-LanguageSquareVector`}
-                ></div>
-              </div>
-            </div>
-            {/* <div
-              className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"
-              style={{ backgroundImage: 'url("./Carbon/women.jpg")' }}
-            >
-              <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                <div
-                  className={`${theme}-Profile-LanguageSquareVector`}
-                ></div>
-              </div>
-            </div> */}
-            <div>
-              <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
-              <p className={`${theme}-Profile-SubTitle`}>
-                {shareUser.information?.job} @ {shareUser.information?.company}
-              </p>
-            </div>
-            {mode == 'profile' ?
-              <div className="flex justify-evenly gap-4 ">
-                <Button onClick={() => {
-                  navigate('/edit')
-                }} theme="Carbon-Google" data-mode="profile-review-button">
-                  <div
-                    className={`${theme}-Profile-EditProfileBtnVector2`}
-                  ></div>
-                  <div>Edit Profile</div>
-                </Button>
-                <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
-                  Share profile
-                </Button>
-              </div>
-            :
+          {
+            scrolled?
             <>
-              <div className="flex items-center justify-between px-8">
-                <div className="w-[65%] flex items-center">
-                  <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
-                    setPanel(el as any)
-                  }} theme="Carbon"></ToggleButton2>
+              <div className="w-full pb-4 bg-white">
+                <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start">
+                  <div className="ml-2">
+                    <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
+                  </div>
+                  <div className="ml-3">
+                    <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
+                    <p className={`${theme}-Profile-SubTitle`}>
+                      {shareUser.information?.job} @ {shareUser.information?.company}
+                    </p>                    
+                  </div>
                 </div>
-                <div className={`${theme}-Profile-Box`}>
-                  <Button onClick={() => {
-                    window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
-                  }} theme='Carbon-back'>
-                    <div className={`${theme}-Profile-BoxVector`}></div>
-                  </Button> 
-                </div>
+                {mode == 'profile' ?
+                  <div className="flex justify-evenly mt-4 gap-4 ">
+                    <Button onClick={() => {
+                      navigate('/edit')
+                    }} theme="Carbon-Google" data-mode="profile-review-button">
+                      <div
+                        className={`${theme}-Profile-EditProfileBtnVector2`}
+                      ></div>
+                      <div>Edit Profile</div>
+                    </Button>
+                    <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                      Share profile
+                    </Button>
+                  </div>
+                :
+                  <>
+                    <div className="flex items-center mt-4 justify-between px-8">
+                      <div className="w-[65%] flex items-center">
+                        <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                          setPanel(el as any)
+                        }} theme="Carbon"></ToggleButton2>
+                      </div>
+                      <div className={`${theme}-Profile-Box`}>
+                        <Button onClick={() => {
+                          window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
+                        }} theme='Carbon-back'>
+                          <div className={`${theme}-Profile-BoxVector`}></div>
+                        </Button> 
+                      </div>
+                    </div>
+                  </>
+                }                
               </div>
             </>
-            }
-          </div>
+            :
+            <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
+              <div className="h-[261px] relative overflow-y-hidden">
+                <video id="dragAbleAi" playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
+                    <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                </video>           
+                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
+                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
+                  <div
+                    className={`${theme}-Profile-LanguageSquareVector`}
+                  ></div>
+                </div>
+              </div>
+              {/* <div
+                className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"
+                style={{ backgroundImage: 'url("./Carbon/women.jpg")' }}
+              >
+                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
+                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
+                  <div
+                    className={`${theme}-Profile-LanguageSquareVector`}
+                  ></div>
+                </div>
+              </div> */}
+              <div>
+                <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
+                <p className={`${theme}-Profile-SubTitle`}>
+                  {shareUser.information?.job} @ {shareUser.information?.company}
+                </p>
+              </div>
+              {mode == 'profile' ?
+                <div className="flex justify-evenly gap-4 ">
+                  <Button onClick={() => {
+                    navigate('/edit')
+                  }} theme="Carbon-Google" data-mode="profile-review-button">
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector2`}
+                    ></div>
+                    <div>Edit Profile</div>
+                  </Button>
+                  <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                    Share profile
+                  </Button>
+                </div>
+              :
+              <>
+                <div className="flex items-center justify-between px-8">
+                  <div className="w-[65%] flex items-center">
+                    <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                      setPanel(el as any)
+                    }} theme="Carbon"></ToggleButton2>
+                  </div>
+                  <div className={`${theme}-Profile-Box`}>
+                    <Button onClick={() => {
+                      window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
+                    }} theme='Carbon-back'>
+                      <div className={`${theme}-Profile-BoxVector`}></div>
+                    </Button> 
+                  </div>
+                </div>
+              </>
+              }
+            </div>
+
+          }
 {/* 
           <Button  theme="Carbon-Show">
             Show more              
           </Button>  */}
         </div>
         {panel == 'Profile' || mode=='profile' ?
-          <div className={`${theme}-Profile-ProfileSection`}>
+          <div id="scrollBoxProfile" onScroll={(event:any) => {
+            if(event.nativeEvent.srcElement.scrollTop == 0) {
+              setScrolled(false)
+            }else{
+              setScrolled(true)
+            }        
+          }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
                 <ul style={{ width: '100%' }} id="sortable">
