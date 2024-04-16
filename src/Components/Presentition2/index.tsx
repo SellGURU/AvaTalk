@@ -15,8 +15,9 @@ interface PresentationProps {
   shareUser:User
   chats:Array<chat>
   setChats:(cat:Array<chat>) => void
+  isSilent:boolean
 }
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareUser,setAudioUrl,setIsTalking}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareUser,setAudioUrl,setIsTalking,isSilent}) => {
     // const user = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -90,11 +91,13 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
         setIsLoading(true)
         sendToApi(chats,setChats,value,(res) => {
         setAudioUrl(res.answer.audio_file)
-        setIsTalking(true)
+        if(!isSilent){
+            setIsTalking(true)
+        }
         setIsLoading(false)
         },() => {
         setIsLoading(false)
-        },selectedLang.lan,BLokedIdList,shareUser?.information?.userId as string)
+        },selectedLang.lan,BLokedIdList,shareUser?.information?.userId as string,isSilent)
     };    
     const handleStop = (id: string) => {
         setIsLoading(false);
@@ -102,10 +105,17 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
         newChats.pop();
         setChats(newChats);
         BLokedIdList.current = [...BLokedIdList.current, id];
-    };       
+    };    
+    const messagesEndRef = useRef<null | HTMLDivElement>(null)
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }       
+    useEffect(() => {
+        scrollToBottom()
+    }, [chats]);    
     return (
         <>
-        <div  className={`${theme}-Presentation-MoreInfoSection pt-2 pb-24 ${theme}-Presentation-fadeIn`}>
+        <div  className={`${theme}-Presentation-MoreInfoSection px-4 pt-2 pb-24 ${theme}-Presentation-fadeIn`}>
         {
             showSuggestions  && chats.length ==0 ?
             <>
@@ -128,6 +138,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
                 )
             })
             }
+            <div ref={messagesEndRef} />
             {
             isLoading ?
                 <>

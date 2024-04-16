@@ -139,7 +139,8 @@ const sendToApi = (
   oncatch: () => void,
   language:string,
   BLokedIdList:MutableRefObject<string[]>,
-  userId:string
+  userId:string,
+  isSilent?:boolean
   ) => {
     console.log(userId)
   const aiChats = chats.filter((item) => item.from == "Ai");
@@ -167,7 +168,7 @@ const sendToApi = (
     // apikey: "0e218a19f41b4eb689003fa634889a19",
     user_bot_id: userId,
     chat_user:chatUser,
-    is_silent: false,
+    is_silent: isSilent?isSilent:false,
     getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })
     .then((res) => {

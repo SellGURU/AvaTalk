@@ -111,6 +111,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         refren.load()
     }           
   },[isTalking])  
+  const [isMuted,setISMuted] = useState(false)
   useEffect(() => {
     setTimeout(() => {
         const el = document.getElementById('sortable');
@@ -211,10 +212,18 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <source id="videoPlayer"  src={isTalking?shareUser.information?.talk_video_avater :shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>           
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                  <div
+                  {isMuted?
+                    <div onClick={() => {
+                      setISMuted(false)
+                    }} className={`${theme}-Profile-mutedVector`}></div>
+                  :
+                    <div onClick={() => {
+                      setISMuted(true)
+                    }} className={`${theme}-Profile-VolumeHighVector`}></div>
+                  }
+                  {/* <div
                     className={`${theme}-Profile-LanguageSquareVector`}
-                  ></div>
+                  ></div> */}
                 </div>
               </div>
               {/* <div
@@ -284,7 +293,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             if(event.nativeEvent.srcElement.scrollTop >= 100) {
               setScrolled(true)
             }else if(event.nativeEvent.srcElement.scrollTop == 0){
-              setScrolled(false)
+              setTimeout(() => {
+                setScrolled(false)
+              }, 1000);
             }        
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
@@ -351,7 +362,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+          <Presentition2 isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
