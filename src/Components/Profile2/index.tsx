@@ -111,6 +111,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         refren.load()
     }           
   },[isTalking])  
+  const [isMuted,setISMuted] = useState(false)
   useEffect(() => {
     setTimeout(() => {
         const el = document.getElementById('sortable');
@@ -158,7 +159,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {
             scrolled?
             <>
-              <div className="w-full pb-4 bg-white">
+              <div className="w-full pb-4 bg-white ">
                 <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start">
                   <div className="ml-2">
                     <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
@@ -205,16 +206,24 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </div>
             </>
             :
-            <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
+            <div className="w-full profileAimation1 h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
               <div className="h-[261px] relative overflow-y-hidden">
                 <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={isTalking?shareUser.information?.talk_video_avater :shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>           
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
-                  <div
+                  {isMuted?
+                    <div onClick={() => {
+                      setISMuted(false)
+                    }} className={`${theme}-Profile-mutedVector`}></div>
+                  :
+                    <div onClick={() => {
+                      setISMuted(true)
+                    }} className={`${theme}-Profile-VolumeHighVector`}></div>
+                  }
+                  {/* <div
                     className={`${theme}-Profile-LanguageSquareVector`}
-                  ></div>
+                  ></div> */}
                 </div>
               </div>
               {/* <div
@@ -284,7 +293,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             if(event.nativeEvent.srcElement.scrollTop >= 100) {
               setScrolled(true)
             }else if(event.nativeEvent.srcElement.scrollTop == 0){
-              setScrolled(false)
+              setTimeout(() => {
+                setScrolled(false)
+              }, 1000);
             }        
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
@@ -320,7 +331,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
 
               </div>
-              <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
+              <div className=" bg-[#E2E8F0] sticky z-50 bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
                   <Button disabled  theme="Carbon-Google">Exchange Contact</Button>
                   <Button onClick={() => {
@@ -351,7 +362,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+          <Presentition2 isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>

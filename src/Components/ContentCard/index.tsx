@@ -76,7 +76,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
             </div>
         </div>
 
-        <div className={`${theme}-ContentCard-Children`}>{item.resolveRender(theme)}</div>
+        <div className={`${theme}-ContentCard-Children`}>{item.resolveRender(theme,mod)}</div>
         
     </li>
     {showConfirm ?

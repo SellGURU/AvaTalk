@@ -61,18 +61,25 @@ class SocialBox extends Box{
         super(title)
         this.typeName = 'SocialBox'
     }
-    public resolveRender(theme: string): JSX.Element {
+    public resolveRender(theme: string,mode?:string): JSX.Element {
         return (
-            <div className={`${theme}-Profile-Vectors`}>
-                {this.socialMedias.map((item) => {
-                    const newSocal = Object.assign(new Social('Facebook',''),item)
-                    return (
-                        <>
-                            {newSocal.resolveRender(theme)}
-                        </>
-                    )
-                })}
-            </div>            
+            <>
+                {
+                    this.socialMedias.length > 0 ?
+                        <div className={`${theme}-Profile-Vectors`}>
+                            {this.socialMedias.map((item) => {
+                                const newSocal = Object.assign(new Social('Facebook',''),item)
+                                return (
+                                    <>
+                                        {newSocal.resolveRender(theme)}
+                                    </>
+                                )
+                            })}
+                        </div>            
+                    :
+                        this.resolveAddRender(theme,mode)
+                }
+            </>
         )
     }
     public getRouteAddress(): string {

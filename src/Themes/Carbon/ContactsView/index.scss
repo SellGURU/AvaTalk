@@ -3,7 +3,7 @@
 }
 
 .Carbon-ContactsView-contactText {
-  @apply leading-[24px] text-[16px] text-gray-700 mb-[22px] px-6  font-[600];
+  @apply leading-[24px] text-[16px] text-gray-700 px-6  font-[600];
 }
 .Carbon-ContactsView-buttonsContainer {
   @apply flex justify-between items-center px-6 space-x-[25px]  min-w-[380px];
@@ -24,4 +24,21 @@
 /* Hide scrollbar for Chrome, Safari and Opera */
 .Carbon-ContactsView-Section::-webkit-scrollbar {
   display: none;
+}
+
+.Carbon-ContactsView-exportIcon {
+    mask-image: url(/Carbon/export.svg);
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-6 h-6 bg-gray-700;  
+}
+.Carbon-ContactsView-scan {
+    mask-image: url(/Carbon/scan.svg);
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply w-6 h-6 bg-gray-700;  
 }

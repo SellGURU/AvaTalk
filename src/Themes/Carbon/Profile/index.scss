@@ -125,6 +125,10 @@
     background-image: url(/Carbon/volume-high.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
 }
+.Carbon-Profile-mutedVector{
+    background-image: url(/Carbon/muted.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat;
+}
 .Carbon-ContentCard-AddVector{
     background-image: url(/Carbon/addVector.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
