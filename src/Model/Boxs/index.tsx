@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 class Box {
     protected static boxCounter:number = 0
     protected typeName:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'GalleryBox'|'GoogleMapBox' = 'Box'
@@ -44,11 +46,11 @@ class Box {
         return (
             <>
                 {mode == 'profile' ?
-                <div className={`${theme}-Profile-BackgroundVectors`}>
+                <Link  to={'/edit/'+this.getRouteAddress()} className={`${theme}-Profile-BackgroundVectors`}>
                     <div className="w-10 h-10 flex justify-center items-center bg-gray-100  rounded-full boxShadow-mini-Gray">
                         <img src="./Carbon/fi-rr-add.svg" alt="" />
                     </div>
-                </div>            
+                </Link>            
                 :
                 undefined
                 }
