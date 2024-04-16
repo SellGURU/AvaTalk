@@ -22,6 +22,7 @@
     "axios-mock-adapter": "^1.22.0",
     "cropperjs": "^1.6.1",
     "dayjs": "^1.11.10",
+    "export-to-csv": "^1.2.4",
     "express": "^4.19.2",
     "formik": "^2.4.5",
     "html2canvas": "^1.4.1",

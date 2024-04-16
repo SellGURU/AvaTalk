@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "symphony-ui";
 import { toast } from 'react-toastify';
 import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
 import ContactList from "../ContactList";
+import { mkConfig, generateCsv, download } from "export-to-csv";
 // import dummyData from "../../data/dummy_data";
 import { Outlet } from "react-router";
 import { AddContact } from "../__Modal__";
@@ -14,6 +15,7 @@ import AddTag from "../__Modal__/AddTag";
 import { Tag, Contact } from "../../Types";
 import { Contacts } from "../../Api";
 import { subscribe } from "../../utils/event";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 interface Props {
   theme?: string;
@@ -21,11 +23,13 @@ interface Props {
 
 const ContactsView: React.FC<Props> = ({ theme }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
+  const csvConfig = mkConfig({ useKeysAsHeaders: true });
   const [showAddTagModal, setShowAddTagModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
+  const [showMoreModal,setShowMoreModal] = useState(false);
   const [activeView, setActiveView] = useState("Contact List");
   const getContacts = () => {
       Contacts.showContactList((res) => {
@@ -120,10 +124,51 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const handleToggleButtonClick = (buttonText: string) => {
     setActiveView(buttonText);
   };
+  const moreModalRef= useRef<HTMLDivElement>(null)
+  useModalAutoClose({
+    refrence:moreModalRef,
+    close:() => {
+      setShowMoreModal(false)
+    }
+  })
   return (
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
-      <p className={`${theme}-ContactsView-contactText `}>Contacts</p>
+      <div className="flex w-full items-center relative justify-between mb-[22px] pr-6">
+        <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
+        <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
+          <img src="./Carbon/more.svg" alt="" />
+        </Button>
+        {
+          showMoreModal ?
+            <>
+              <div ref={moreModalRef} className="w-[210px] top-8 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
+                <div className="flex opacity-50 items-center justify-start px-4 py-2 border-b border-b-white">
+                  <img className={`${theme}-ContactsView-scan`} alt="" />
+                  <div className="text-gray-700 ml-2">Scan Business Card</div>
+                </div>   
+                <div onClick={() => {
+                  const csv = generateCsv(csvConfig)(contacts.map((el) => {
+                    return {
+                      name:el.fullName,
+                      email:el.email,
+                      phone:el.phone,
+                      note:el.note,
+                      company:el.company,                      
+                    }
+                  }));
+                  download(csvConfig)(csv)
+                  setShowMoreModal(false)
+                }} className="flex items-center cursor-pointer justify-start px-4 py-2">
+                  <img className={`${theme}-ContactsView-exportIcon`} alt="" />
+                  <div className="text-gray-700 ml-2">Export As CSV</div>
+                </div>                
+              </div>
+            </>
+          :
+          undefined
+        }        
+      </div>
       <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
         <div className="w-[45%] min-w-[250px]">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
