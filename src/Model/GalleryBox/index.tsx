@@ -15,34 +15,38 @@ class GalleryBox extends Box{
     public getContents() {
         return this.contents
     }
-    public resolveRender(theme: string): JSX.Element {
+    public resolveRender(theme: string,mode?:string): JSX.Element {
         return (
-            <div className={`${theme}-Profile-Vectors justify-center relative`}>
-                <ImageGallery 
-                items={this.contents} 
-                renderLeftNav={(onClick, disabled) => {
-                    return (
-                        <>
-                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(30%, -50%)'}} data-mode="gallery">
-                                <Button onClick={onClick} disabled={disabled} theme={`${theme}-back`}>
-                                    <div className={`${theme}-back-Button-vector`}></div>
-                                </Button>
-                            </div>
-                        </>
-                    )
-                }} 
-                renderRightNav={(onClick, disabled) => {
-                    return (
-                        <>
-                            <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(-30%, -50%)',right:'0%'}}  data-mode="gallery">
-                                <Button onClick={onClick} disabled={disabled}  theme={`${theme}-back`} style={{rotate:'180deg'}}>
-                                    <div className={`${theme}-back-Button-vector`}></div>
-                                </Button>
-                            </div>
-                        </>
-                    )
-                }}
-                />                
+            <div className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'} relative`}>
+                {this.contents.length > 0 ?
+                    <ImageGallery 
+                    items={this.contents} 
+                    renderLeftNav={(onClick, disabled) => {
+                        return (
+                            <>
+                                <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(30%, -50%)'}} data-mode="gallery">
+                                    <Button onClick={onClick} disabled={disabled} theme={`${theme}-back`}>
+                                        <div className={`${theme}-back-Button-vector`}></div>
+                                    </Button>
+                                </div>
+                            </>
+                        )
+                    }} 
+                    renderRightNav={(onClick, disabled) => {
+                        return (
+                            <>
+                                <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(-30%, -50%)',right:'0%'}}  data-mode="gallery">
+                                    <Button onClick={onClick} disabled={disabled}  theme={`${theme}-back`} style={{rotate:'180deg'}}>
+                                        <div className={`${theme}-back-Button-vector`}></div>
+                                    </Button>
+                                </div>
+                            </>
+                        )
+                    }}
+                    />                
+                :
+                    this.resolveAddRender(theme,mode)
+                }
             </div>            
         )
     }

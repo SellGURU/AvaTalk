@@ -159,7 +159,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {
             scrolled?
             <>
-              <div className="w-full profileAimation1 pb-4 bg-white ">
+              <div className="w-full pb-4 bg-white ">
                 <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start">
                   <div className="ml-2">
                     <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />

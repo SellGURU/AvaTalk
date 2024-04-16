@@ -32,10 +32,26 @@ class Box {
         return ''
     }
 
-    public resolveRender(theme:string) {
+    public resolveRender(theme:string,mode?:string) {
         return (
             <>
-                <div className={theme}></div>
+                <div className={theme} data-mode={mode}></div>
+            </>
+        )
+    }
+
+    protected resolveAddRender(theme:string,mode?:string) {
+        return (
+            <>
+                {mode == 'profile' ?
+                <div className={`${theme}-Profile-BackgroundVectors`}>
+                    <div className="w-10 h-10 flex justify-center items-center bg-gray-100  rounded-full boxShadow-mini-Gray">
+                        <img src="./Carbon/fi-rr-add.svg" alt="" />
+                    </div>
+                </div>            
+                :
+                undefined
+                }
             </>
         )
     }

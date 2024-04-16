@@ -8,9 +8,15 @@ class AboutBox extends Box {
     public getBio() {
         return this.text
     }
-    public resolveRender() {
+    public resolveRender(theme:string,mode?:string) {
         return (
-            <h1>{this.text}</h1>          
+            <>
+                {this.text == '' ?
+                    this.resolveAddRender(theme,mode)
+                :
+                    <h1>{this.text}</h1>          
+                }
+            </>
         )
     }    
     public getRouteAddress(): string {
