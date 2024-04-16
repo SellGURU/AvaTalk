@@ -53,6 +53,11 @@
     background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255)) padding-box, linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box,
       linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box;
   }
+  .borderBox-primary2 {
+    border: 1px solid transparent;
+    background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255)) padding-box, linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box,
+      linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box;
+  }
 
   .inputBorderBox {
     border: 1px solid transparent ;
