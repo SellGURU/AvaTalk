@@ -14,7 +14,7 @@ class Api {
       headers: {
         Authorization: "Bearer " + getTokenFromLocalStorage(),
       },
-      timeout:15000
+      // timeout:15000
     });
     return response;
   }

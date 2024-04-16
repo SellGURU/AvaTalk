@@ -392,12 +392,23 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
       if(res.data[res.data.length -1].video == ''){
         // setUploadedAvater(res.data[res.data.length -1].photo)
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
-            setSelectedAvatar(res.data[res.data.length -1].photo)   
-            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-            setAvatarVideo(response.data.silent_video_link)
-  
-            setIsLoading(false)
-            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+            if(response.data == 'No face detected'){
+              setIsLoading(false)
+              toast.dismiss()
+              setSelectedAvatar(res.data[0].photo)   
+              setAvatarVideo(res.data[0].video)
+              formik.setFieldValue('silent_video_avatar',res.data[0].video)
+              formik.setFieldValue('avatar_pic_url',res.data[0].photo)   
+              setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))   
+            }else{
+              setSelectedAvatar(res.data[res.data.length -1].photo)   
+              formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+              setAvatarVideo(response.data.silent_video_link)
+    
+              setIsLoading(false)
+              formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+
+            }
         }).catch(() => {
           setIsLoading(false)
           toast.dismiss()
