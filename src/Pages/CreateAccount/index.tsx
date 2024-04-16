@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState } from "react";
+import {useState } from "react";
 import { StepController, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 // import LocationPicker from "react-leaflet-location-picker";
@@ -390,13 +390,22 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
       if(res.data[res.data.length -1].video == ''){
-        setSelectedAvatar(res.data[res.data.length -1].photo)   
         // setUploadedAvater(res.data[res.data.length -1].photo)
         Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
-          formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-          setAvatarVideo(response.data.silent_video_link)
+            setSelectedAvatar(res.data[res.data.length -1].photo)   
+            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+            setAvatarVideo(response.data.silent_video_link)
+  
+            setIsLoading(false)
+            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+        }).catch(() => {
           setIsLoading(false)
-          formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+          toast.dismiss()
+          setSelectedAvatar(res.data[0].photo)   
+          setAvatarVideo(res.data[0].video)
+          formik.setFieldValue('silent_video_avatar',res.data[0].video)
+          formik.setFieldValue('avatar_pic_url',res.data[0].photo)   
+          setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))       
         })           
       }else{
         setIsLoading(false)
@@ -409,6 +418,18 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
       // })       
     })
   })
+  // useEffect(() => {
+  //   const vid = document.getElementById('dragAbleAi')
+  //   if(vid) {
+  //     vid.addEventListener('error',() => {
+  //       alert('error');
+  //       setSelectedAvatar('')   
+  //       formik.setFieldValue('avatar_pic_url','')
+  //       setAvatarVideo('')
+  //       formik.setFieldValue('silent_video_avatar','')        
+  //     },true)
+  //   }
+  // })
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">

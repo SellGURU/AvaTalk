@@ -14,6 +14,7 @@ class Api {
       headers: {
         Authorization: "Bearer " + getTokenFromLocalStorage(),
       },
+      timeout:15000
     });
     return response;
   }
@@ -22,6 +23,20 @@ class Api {
     toast.loading('pending ...')
     const response = axios.get(this.base_url+url);
     return response;    
+  }
+
+  protected static getCheck(value:string) {
+    const response = axios.get(value,{
+      method:'GET',
+      headers:{
+        Accept: 'video/mp4;charset=UTF-8',
+        responseType: 'blob',
+        "Access-Control-Allow-Headers":"*",
+        "Access-Control-Allow-Origin":"*"
+      },
+      
+    });
+    return response;        
   }
 }
 
