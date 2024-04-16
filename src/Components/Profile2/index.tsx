@@ -159,7 +159,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {
             scrolled?
             <>
-              <div className="w-full pb-4 bg-white">
+              <div className="w-full profileAimation1 pb-4 bg-white ">
                 <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start">
                   <div className="ml-2">
                     <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
@@ -206,7 +206,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </div>
             </>
             :
-            <div className="w-full h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
+            <div className="w-full profileAimation1 h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
               <div className="h-[261px] relative overflow-y-hidden">
                 <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={isTalking?shareUser.information?.talk_video_avater :shareUser.information?.silent_video_avatar} type="video/mp4"></source>
