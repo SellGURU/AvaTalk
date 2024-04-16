@@ -331,7 +331,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
 
               </div>
-              <div className=" bg-[#E2E8F0] sticky bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
+              <div className=" bg-[#E2E8F0] sticky z-50 bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
                   <Button disabled  theme="Carbon-Google">Exchange Contact</Button>
                   <Button onClick={() => {
