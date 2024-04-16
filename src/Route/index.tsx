@@ -5,7 +5,7 @@ import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import { Chat, ContactsView, Profile2 } from "../Components";
+import { Chat, ContactsView, Profile } from "../Components";
 import { EditAiSetting, EditContactInfo, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
@@ -20,7 +20,7 @@ const route = createHashRouter([
     children: [
       {
         path: "/",
-        element: <Profile2 theme="Carbon"></Profile2>,
+        element: <Profile theme="Carbon"></Profile>,
         children: [
           {
             path: "edit",
