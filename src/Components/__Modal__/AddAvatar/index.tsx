@@ -1,8 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Modal from 'react-modal';
-import { useFormik } from 'formik';
-import * as Yup from "yup";
-import { useEffect, useState } from 'react';
-
 interface AddSocialsProps {
     isOpen: boolean;
     onClose: () => void;
@@ -10,38 +7,12 @@ interface AddSocialsProps {
     title: string;
     theme?: string;
     name: string;
-    onComplete: (name: string, value: string) => void;
+    onComplete: (res:string) => void;
     onAfterOpen?: () => void;
 }
 
-const validationSchema = Yup.object().shape({
-    url: Yup.string().required(),
-});
 
-const AddSocials: React.FC<AddSocialsProps> = ({ isOpen, name, value, title, onComplete, onAfterOpen, onClose, theme }) => {
-    const initialValue = {
-        name: name ? name : '',
-        url: value ? value : '',
-    };
-
-    const formik = useFormik({
-        initialValues: initialValue,
-        validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    });
-
-    useEffect(() => {
-        formik.setFieldValue('name', name)
-    }, [name]);
-
-    useEffect(() => {
-        formik.setFieldValue('url', value)
-    }, [value]);
-
-    const [avatarVideo, setAvatarVideo] = useState("");
-    const [Cropper, setCropper] = useState("");
+const AddSocials: React.FC<AddSocialsProps> = ({ isOpen, onComplete,onAfterOpen, onClose,}) => {
 
     const handleChooseFromLibrary = () => {
         // Programmatically trigger the file input click
@@ -82,16 +53,8 @@ const AddSocials: React.FC<AddSocialsProps> = ({ isOpen, name, value, title, onC
                     </div>
                     <input
                         id="file-input"
-                        onChange={(res: any) => {
-                            setAvatarVideo("");
-                            const reader = new FileReader();
-                            reader.readAsDataURL(res.target.files[0]);
-                            reader.onload = function () {
-                                setCropper(reader.result as string);
-                            };
-                            reader.onerror = function (error) {
-                                console.log("Error: ", error);
-                            };
+                        onChange={(res:any) => {
+                            onComplete(res.target.files[0])
                         }}
                         className={`Carbon-ImageUploader-uploader-input`}
                         type="file"

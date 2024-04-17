@@ -853,9 +853,19 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           onClose={() => {
             setAddAvatar(false);
           }}
-          onComplete={(name: string, url: string) => {
-            formik.setFieldValue("url", url);
-            formik.setFieldValue("name", name);
+          onComplete={(data:any) => {
+
+                  setAvatarVideo("");
+                  const reader = new FileReader();
+                  reader.readAsDataURL(data);
+                  reader.onload = function () {
+                    setCropper(reader.result as string);
+                  };
+                  reader.onerror = function (error) {
+                    console.log("Error: ", error);
+                  };
+                  setAddAvatar(false)
+          
           }}
           title="Link"
         ></AddAvatar>
