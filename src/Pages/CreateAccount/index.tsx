@@ -558,15 +558,30 @@ const AvatarStep:React.FC<UploadStepProps> = ({onSubmit,formik,setshowGudie}) =>
           // setUploadedAvater(resolve as string)   
           setIsLoading(true)
           Auth.createAvatarVideo(resolve as string).then((response) => {
-            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)   
-            setAvaterList([{
-              photo:response.data.avatar_pic_link,
-              video:response.data.silent_video_link,
-              type:'Local'
-            },...avatarList])       
-            setAvatarVideo(response.data.silent_video_link)
-            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
-            setIsLoading(false)
+              if(response.data == 'No face detected'){
+                setIsLoading(false)
+                toast.dismiss() 
+              }else{
+                formik.setFieldValue(
+                  "avatar_pic_url",
+                  response.data.avatar_pic_link
+                );
+                setAvaterList([
+                  {
+                    photo: response.data.avatar_pic_link,
+                    video: response.data.silent_video_link,
+                    type: "Local",
+                  },
+                  ...avatarList,
+                ]);
+                setAvatarVideo(response.data.silent_video_link);
+                formik.setFieldValue(
+                  "silent_video_avatar",
+                  response.data.silent_video_link
+                );
+                setIsLoading(false);
+                
+              }      
           })           
        }}></CropperBox>          
       </div>
