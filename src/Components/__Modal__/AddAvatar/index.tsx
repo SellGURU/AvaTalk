@@ -2,17 +2,19 @@
 import Modal from 'react-modal';
 interface AddSocialsProps {
     isOpen: boolean;
+    isCanRemove:boolean;
     onClose: () => void;
     value: string;
     title: string;
     theme?: string;
     name: string;
     onComplete: (res:string) => void;
+    onRemove:() => void
     onAfterOpen?: () => void;
 }
 
 
-const AddSocials: React.FC<AddSocialsProps> = ({ isOpen, onComplete,onAfterOpen, onClose,}) => {
+const AddSocials: React.FC<AddSocialsProps> = ({ isOpen,isCanRemove ,onRemove,onComplete,onAfterOpen, onClose,}) => {
 
     const handleChooseFromLibrary = () => {
         // Programmatically trigger the file input click
@@ -41,15 +43,19 @@ const AddSocials: React.FC<AddSocialsProps> = ({ isOpen, onComplete,onAfterOpen,
                             Choose From Library
                         </button>
 
-                        <div className='flex items-center gap-2 cursor-pointer'>
+                        <div className='flex opacity-50 items-center gap-2 cursor-not-allowed'>
                             <img className='w-8 h-8' src='./Carbon/camera.svg' />
                             Take Photo
                         </div>
-
-                        <div className='flex items-center gap-2 cursor-pointer'>
-                            <img className='w-8 h-8' src='./Carbon/gallery-remove.svg' />
-                            Remove Photo
-                        </div>
+                        {
+                            isCanRemove?
+                                <div onClick={onRemove} className='flex items-center gap-2 cursor-pointer'>
+                                    <img className='w-8 h-8' src='./Carbon/gallery-remove.svg' />
+                                    Remove Photo
+                                </div>
+                            :
+                            undefined
+                        }
                     </div>
                     <input
                         id="file-input"

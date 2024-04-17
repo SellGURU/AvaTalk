@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StepController,Select, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 // import LocationPicker from "react-leaflet-location-picker";
@@ -21,7 +21,6 @@ import { AddAvatar } from "../../Components/__Modal__";
 const initialValue = {
   FirstName: "",
   LastName: "",
-  Gender: "",
   Phone: "",
   JobTitle: "",
   CompanyName: "",
@@ -37,7 +36,6 @@ const initialValue = {
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("Required"),
   LastName: Yup.string().required("Required"),
-  Gender: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
   email: Yup.string().email(),
@@ -60,7 +58,6 @@ const CreateAccount = () => {
       Auth.register({
         first_name: values.FirstName,
         last_name: values.LastName,
-        Gender: values.Gender,
         mobile_number: authContext.varification.emailOrPhone.includes("@")
           ? values.Phone
           : authContext.varification.emailOrPhone,
@@ -577,68 +574,74 @@ const AvatarStep: React.FC<UploadStepProps> = ({
 }) => {
   const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [avatarVideo, setAvatarVideo] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("");
-  const [uploadedAvater] = useState("");
+  // const [avatarVideo, setAvatarVideo] = useState("");
+  // const [selectedAvatar, setSelectedAvatar] = useState("");
+  const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
+    photo:"",
+    type:'Local',
+    video:''
+  });
+  const [currentAvatar,setCurrentAvatr] = useState<Avatars>({
+    photo:"",
+    type:'Local',
+    video:''
+  })
   const [Cropper, setCropper] = useState("");
   const authContext = useAuth();
   const [addAvatar,setAddAvatar] =useState(false)
+  const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
+      Auth.createAvatarVideo(photo).then((response) => {
+          if(response.data == 'No face detected'){
+            setIsLoading(false)
+            toast.dismiss()
+            formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+            formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
+          }else{
+            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+            setUploadedAvater({
+              photo:response.data.avatar_pic_link,
+              video:response.data.silent_video_link,
+              type:'Api'
+            })
+            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+            setIsLoading(false)
+          }
+      }).catch(() => {
+        setIsLoading(false)
+        toast.dismiss()
+        formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
+             
+      })     
+  }
   useConstructor(() => {
     setIsLoading(true)
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       setAvaterList(res.data)
       if(res.data[res.data.length -1].video == ''){
-        // setUploadedAvater(res.data[res.data.length -1].photo)
-        Auth.createAvatarVideo(res.data[res.data.length -1].photo as string).then((response) => {
-            if(response.data == 'No face detected'){
-              setIsLoading(false)
-              toast.dismiss()
-              setSelectedAvatar(res.data[0].photo)   
-              setAvatarVideo(res.data[0].video)
-              formik.setFieldValue('silent_video_avatar',res.data[0].video)
-              formik.setFieldValue('avatar_pic_url',res.data[0].photo)   
-              setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))   
-            }else{
-              setSelectedAvatar(res.data[res.data.length -1].photo)   
-              formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-              setAvatarVideo(response.data.silent_video_link)
-    
-              setIsLoading(false)
-              formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
-
-            }
-        }).catch(() => {
-          setIsLoading(false)
-          toast.dismiss()
-          setSelectedAvatar(res.data[0].photo)   
-          setAvatarVideo(res.data[0].video)
-          formik.setFieldValue('silent_video_avatar',res.data[0].video)
-          formik.setFieldValue('avatar_pic_url',res.data[0].photo)   
-          setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))       
-        })           
+        createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
       }else{
         setIsLoading(false)
-        setSelectedAvatar(res.data[0].photo)   
-        setAvatarVideo(res.data[0].video)
         formik.setFieldValue('silent_video_avatar',res.data[0].video)
         formik.setFieldValue('avatar_pic_url',res.data[0].photo)
-      }
-      // Auth.createAvatarVideo(res.data[0] as string).then((response) => {
-      // })       
+      }     
     })
   })
-  // useEffect(() => {
-  //   const vid = document.getElementById('dragAbleAi')
-  //   if(vid) {
-  //     vid.addEventListener('error',() => {
-  //       alert('error');
-  //       setSelectedAvatar('')   
-  //       formik.setFieldValue('avatar_pic_url','')
-  //       setAvatarVideo('')
-  //       formik.setFieldValue('silent_video_avatar','')        
-  //     },true)
-  //   }
-  // })
+  useEffect(() => {
+    setCurrentAvatr({
+      photo:"",
+      type:"Api",
+      video:""
+    })
+    setTimeout(() => {
+      setCurrentAvatr({
+        photo:formik.values.avatar_pic_url,
+        type:'Api',
+        video:formik.values.silent_video_avatar
+      })      
+    }, 300);
+  },[formik.values.avatar_pic_url, formik.values.silent_video_avatar])
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -648,7 +651,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           </div>
 
           <div className="mt-6 flex items-center justify-between">
-            {avatarVideo.length > 0 ? (
+            {currentAvatar.video.length > 0 ? (
               <>
                 <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                   <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
@@ -656,7 +659,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                   </div>
                   <img
                     className=" w-full rounded-[6.76px] h-full"
-                    src={selectedAvatar}
+                    src={formik.values.avatar_pic_url}
                     alt=""
                   />
                 </div>
@@ -682,7 +685,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                   >
                     <source
                       id="videoPlayer"
-                      src={avatarVideo}
+                      src={formik.values.silent_video_avatar}
                       type="video/mp4"
                     ></source>
                   </video>
@@ -709,18 +712,35 @@ const AvatarStep: React.FC<UploadStepProps> = ({
 
           <div className="w-full gap-8 mt-5 grid grid-cols-4 grid-flow-row">
             <div
-              className="w-full  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
-              onClick={() => setAddAvatar(true)}
+              className="w-full  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
+              onClick={() => {
+                if(uploadedAvater.photo.length != 0){
+                    // setAvatarVideo("")
+                    setTimeout(() => {
+                      // setAvatarVideo(uploadedAvater.video)
+                      formik.setFieldValue("avatar_pic_url",uploadedAvater.photo);
+                      formik.setFieldValue("silent_video_avatar",uploadedAvater.video);                      
+                    }, 300);
+                    // setSelectedAvatar(uploadedAvater.photo)
+                }else{
+                  setAddAvatar(true)
+
+                }
+              }}
             >
-              <img
-                className={`${
-                  uploadedAvater.length > 0 ? "absolute right-1 top-1" : ""
-                }`}
-                src="./icons/gallery-add.svg"
-                alt=""
-              />
-              {uploadedAvater.length > 0 ? (
-                <img className="w-full h-full" src={uploadedAvater} alt="" />
+                <div onClick={() => {
+                  setAddAvatar(true)
+                }} className={`${
+                    uploadedAvater.photo.length > 0 ? "absolute rounded-[8px] w-[24px] h-[24px] bg-white flex justify-center items-center -right-1 -top-1" : ""
+                  }`}>
+                <img
+                  className="w-[13px] h-[13px]"
+                  src="./icons/gallery-add.svg"
+                  alt=""
+                />
+              </div>
+              {uploadedAvater.photo.length > 0 ? (
+                <img className="w-full h-full rounded-[12px]" src={uploadedAvater.photo} alt="" />
               ) : undefined}
 
               {/* // */}
@@ -752,8 +772,8 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                 <>
                   <div
                     onClick={() => {
-                      setSelectedAvatar(el.photo);
-                      setAvatarVideo("");
+                      // setSelectedAvatar(el.photo);
+                      // setAvatarVideo("");
                       if (el.video == "") {
                         setIsLoading(true);
                         Auth.createAvatarVideo(el.photo as string).then(
@@ -762,7 +782,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                               "avatar_pic_url",
                               response.data.avatar_pic_link
                             );
-                            setAvatarVideo(response.data.silent_video_link);
+                            // setAvatarVideo(response.data.silent_video_link);
                             formik.setFieldValue(
                               "silent_video_avatar",
                               response.data.silent_video_link
@@ -772,7 +792,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                         );
                       } else {
                         setTimeout(() => {
-                          setAvatarVideo(el.video);
+                          // setAvatarVideo(el.video);
                           formik.setFieldValue("avatar_pic_url", el.photo);
                           formik.setFieldValue("silent_video_avatar", el.video);
                         }, 200);
@@ -783,7 +803,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                       // })
                     }}
                     className={`w-full ${
-                      el.photo == selectedAvatar
+                      el.photo == formik.values.avatar_pic_url
                         ? "borderBox-primary"
                         : "borderBox-Gray "
                     } boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] `}
@@ -798,7 +818,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
         </div>
         <div className="mt-8 mb-3 px-11">
           <Button
-            disabled={avatarVideo.length == 0}
+            disabled={formik.values.silent_video_avatar.length == 0}
             onClick={onSubmit}
             theme="Carbon"
           >
@@ -820,32 +840,48 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             //  formik.setFieldValue('PrifileImage',resolve)
             // setAvatarUrl('')
             setCropper("");
-            setSelectedAvatar(resolve as string);
-            // setUploadedAvater(resolve as string)
+            // setSelectedAvatar(resolve as string);
+            
             setIsLoading(true);
             Auth.createAvatarVideo(resolve as string).then((response) => {
+            if(response.data == 'No face detected'){
+              toast.warn(response.data )
+              setIsLoading(false)
+            }else{
               formik.setFieldValue(
                 "avatar_pic_url",
                 response.data.avatar_pic_link
               );
-              setAvaterList([
-                {
-                  photo: response.data.avatar_pic_link,
-                  video: response.data.silent_video_link,
-                  type: "Local",
-                },
-                ...avatarList,
-              ]);
-              setAvatarVideo(response.data.silent_video_link);
+              setUploadedAvater({
+                photo:response.data.avatar_pic_link as string,
+                type:'Local',
+                video:response.data.silent_video_link
+              })
+              // setAvatarVideo(response.data.silent_video_link);
               formik.setFieldValue(
                 "silent_video_avatar",
                 response.data.silent_video_link
               );
               setIsLoading(false);
+
+            }              
             });
           }}
         ></CropperBox>
         <AddAvatar
+          isCanRemove={uploadedAvater.photo.length>0}
+          onRemove={() => {
+            // setSelectedAvatar("")
+            setUploadedAvater({
+              photo:'',
+              type:'Local',
+              video:""
+            })
+            setAddAvatar(false)
+            // setAvatarVideo("")
+            formik.setFieldValue("avatar_pic_url","")
+            formik.setFieldValue("silent_video_avatar","")
+          }}
           name={"modal name"}
           value={"editeValue"}
           theme="Carbon"
@@ -855,7 +891,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           }}
           onComplete={(data:any) => {
 
-                  setAvatarVideo("");
+                  // setAvatarVideo("");
                   const reader = new FileReader();
                   reader.readAsDataURL(data);
                   reader.onload = function () {
