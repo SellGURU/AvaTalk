@@ -20,6 +20,13 @@ class Share extends Api {
             resolve(res.data)
         })
     }
+
+    static getqrcode(){
+        const response = this.post('/get_links',{
+            type:'QR_Code'
+        })
+        return response
+    }
 }
 
 export default Share

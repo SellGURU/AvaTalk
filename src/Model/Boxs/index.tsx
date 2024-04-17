@@ -48,7 +48,7 @@ class Box {
                 {mode == 'profile' ?
                 <Link  to={'/edit/'+this.getRouteAddress()} className={`${theme}-Profile-BackgroundVectors`}>
                     <div className="w-10 h-10 flex justify-center items-center bg-gray-100  rounded-full boxShadow-mini-Gray">
-                        <img src="./Carbon/fi-rr-add.svg" alt="" />
+                        <img src="./Carbon/plusVector.svg" alt="" />
                     </div>
                 </Link>            
                 :

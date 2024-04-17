@@ -10,8 +10,9 @@ import { useFormik } from 'formik';
 import "@bitjson/qr-code"
 import * as Yup from "yup";
 import html2canvas from 'html2canvas';
-import QRCode from 'qrcode.react';
 import { Auth } from '../../../Api';
+import { useConstructor } from '../../../help';
+import Share from '../../../Api/Share';
 interface ShareContactProps {
     isOpen : boolean
     onClose: () => void
@@ -40,6 +41,12 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
         codeName: "us",
         codePhone: "+1",
     });    
+    const [qrcodeValue,setQrcodeValue] = useState('')
+    useConstructor(() => {
+        Share.getqrcode().then((res:any) => {
+            setQrcodeValue(res.data)
+        })
+    })
     return (
         <>
         <Modal
@@ -65,7 +72,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}  {authContext.currentUser.information?.lastName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
                 {/* <div className={`${theme}-ShareContact-QrCodeVector`}></div> */}
-                <div id='qrCodeBox' className={`${theme}-ShareContact-QrCodeVector`}>
+                {/* <div id='qrCodeBox' className={`${theme}-ShareContact-QrCodeVector`}>
                     <QRCode
                         size={256}
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
@@ -73,14 +80,11 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         viewBox={`0 0 256 256`}
                         bgColor='#F3F4F6'
                         fgColor='#534496'
-                        // imageSettings={{
-                        //     src:'./icons/logo.png',
-                        //     excavate:true,
-                        //     width:65,
-                        //     height:65
-                        // }}
                         >
                         </QRCode>                      
+                </div> */}
+                <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
+                    <img src={qrcodeValue} alt="" />
                 </div>
                 <div className={`${theme}-ShareContact-Cards`}>
                     <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`} >

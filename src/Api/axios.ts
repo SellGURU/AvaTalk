@@ -7,6 +7,7 @@ axios.interceptors.response.use((response) => {
     }
     if(response.status ==401 || response.status ==498 || response.data.detail == 'Unauthorized - User Not Found'||response.data.detail == 'Invalid or logged out token'||response.data.detail == 'Missing Authorization Header'||response.data.detail == 'Unauthorized - User does not match token'){
         localStorage.clear()
+        window.location.reload(); 
     }    
     return response;
 }, (error) => {

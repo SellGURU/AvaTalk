@@ -226,6 +226,11 @@ class Auth extends Api {
       resolve(res.data)
     })
   }  
+
+  static checkVideo(video:string) {
+    const response = Api.getCheck(video)
+    return response
+  }
 }
 
 export default Auth;
