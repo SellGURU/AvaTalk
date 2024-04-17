@@ -26,6 +26,7 @@ class Link {
 class LinkBox extends Box{
     constructor(protected title:string,protected links:Array<Link>){
         super(title)
+        this.order = 3
         this.typeName= 'LinkBox'
     }
     public resolveRender(theme: string,mode?:string): JSX.Element {

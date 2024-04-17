@@ -59,6 +59,7 @@ class Social {
 class SocialBox extends Box{
     constructor(protected title:string,protected socialMedias:Array<Social>){
         super(title)
+        this.order = 2
         this.typeName = 'SocialBox'
     }
     public resolveRender(theme: string,mode?:string): JSX.Element {

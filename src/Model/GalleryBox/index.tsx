@@ -10,6 +10,7 @@ class GalleryBox extends Box{
     
     constructor(protected title:string,protected contents:Array<galleryImage>){
         super(title)
+        this.order = 4
         this.typeName = 'GalleryBox'
     }
     public getContents() {
