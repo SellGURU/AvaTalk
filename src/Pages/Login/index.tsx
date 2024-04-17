@@ -187,7 +187,7 @@ const Login = () => {
                     />                     
                   </GoogleOAuthProvider>    
                 </div>
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                     <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
                     <div>Continue with LinkedIn</div>
@@ -204,7 +204,7 @@ const Login = () => {
                     <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
                     <div>Continue with Apple</div>
                   </Button>
-                </div>
+                </div> */}
               </div>
         </>
       }
