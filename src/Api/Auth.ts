@@ -73,6 +73,16 @@ interface AddEvent {
 //   contacts: ContactType[];
 // }
 
+interface UpdateContactInfo {
+  job_title:string,
+  company_name:string,
+  location:string,
+  email?:string,
+  work_email:string,
+  phone?:string,
+  work_phone:string
+}
+
 class Auth extends Api {
   static login(data: LoginData) {
     const response = this.post("/check_Login_code", data);
@@ -228,6 +238,11 @@ class Auth extends Api {
 
   static checkVideo(video:string) {
     const response = Api.getCheck(video)
+    return response
+  }
+
+  static updateContactInfo(data:UpdateContactInfo) {
+    const response = this.post('/update_contact_info',data)
     return response
   }
 }

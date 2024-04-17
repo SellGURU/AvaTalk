@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Auth } from "../../../Api";
 
 const validationSchema = Yup.object().shape({
   job:Yup.string(),
@@ -68,6 +69,13 @@ const EditContactInfo = () => {
       talk_video_avater:auth.currentUser.information?.talk_video_avater,
       userId:auth.currentUser.information?.userId 
     })
+    Auth.updateContactInfo({
+      company_name:formik.values.company as string,
+      job_title:formik.values.job as string,
+      location:'',
+      work_email:formik.values.workEmail as string,
+      work_phone:formik.values.workPhone as string
+    })
     navigate('/')
   }
   return (
@@ -89,6 +97,7 @@ const EditContactInfo = () => {
           <TextField
             {...formik.getFieldProps("personlEmail")}
             theme="Carbon"
+            disabled
             label="Personl Email"
             inValid={false}
             name="personlEmail"

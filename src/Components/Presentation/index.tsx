@@ -190,7 +190,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
           </div>
           <div>
-            <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser?.information?.firstName}</h1>
+            <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser?.information?.firstName +'  '+shareUser?.information?.lastName}</h1>
             <p className={`${theme}-Presentation-SubTitle`}>{shareUser?.information?.job}</p>
           </div>
           {
