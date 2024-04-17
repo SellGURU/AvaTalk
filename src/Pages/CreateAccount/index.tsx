@@ -196,7 +196,7 @@ const CreateAccount = () => {
                   </div>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-8 px-6">
                   <div className="text-gray-700 text-left font-semibold text-base">
                     Common Mistakes{" "}
                   </div>
@@ -642,12 +642,12 @@ const AvatarStep: React.FC<UploadStepProps> = ({
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
-        <div className="">
+        <div className="px-5">
           <div className="text-gray-700 text-center font-semibold text-base">
             Building Your Talking Profile
           </div>
 
-          <div className="mt-6 px-6 flex items-center justify-between">
+          <div className="mt-6 flex items-center justify-between">
             {avatarVideo.length > 0 ? (
               <>
                 <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
@@ -692,7 +692,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           </div>
 
           <div>
-            <div className="text-[#374151] text-[14px] opacity-80 mt-8 px-2">
+            <div className="text-[#374151] text-[14px] opacity-80 mt-8 text-justify">
               Upload image, or choose avatar, we will convert it to talking
               profile.{" "}
               <span
@@ -707,9 +707,9 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-8 px-6 mt-2">
+          <div className="w-full gap-8 mt-5 grid grid-cols-4 grid-flow-row">
             <div
-              className="w-[85px]  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
+              className="w-full  relative boxShadow-Gray flex overflow-hidden justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
               onClick={() => setAddAvatar(true)}
             >
               <img
@@ -724,7 +724,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
               ) : undefined}
 
               {/* // */}
-              <input
+              {/* <input
                 onChange={(res: any) => {
                   // setisLoading(true)
                   // getBase64(res.target.files[0],res.target.value)
@@ -744,7 +744,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                 className={`Carbon-ImageUploader-uploader-input invisible`}
                 type="file"
                 accept="*"
-              />
+              /> */}
               {/* // */}
             </div>
             {avatarList.map((el) => {
@@ -782,7 +782,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                       //   formik.setFieldValue('silent_video_avatar',res.data)
                       // })
                     }}
-                    className={`w-[85px] ${
+                    className={`w-full ${
                       el.photo == selectedAvatar
                         ? "borderBox-primary"
                         : "borderBox-Gray "
@@ -796,7 +796,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             })}
           </div>
         </div>
-        <div className="mt-8 mb-3 px-12">
+        <div className="mt-8 mb-3 px-11">
           <Button
             disabled={avatarVideo.length == 0}
             onClick={onSubmit}
