@@ -21,6 +21,7 @@ import { AddAvatar } from "../../Components/__Modal__";
 const initialValue = {
   FirstName: "",
   LastName: "",
+  gender:"Female",
   Phone: "",
   JobTitle: "",
   CompanyName: "",
@@ -58,6 +59,7 @@ const CreateAccount = () => {
       Auth.register({
         first_name: values.FirstName,
         last_name: values.LastName,
+        gender:values.gender,
         mobile_number: authContext.varification.emailOrPhone.includes("@")
           ? values.Phone
           : authContext.varification.emailOrPhone,
@@ -333,7 +335,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
     { value: 'Male', label: 'Male' },
     { value: 'Female', label: 'Female' },
 ];
-  const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
+  // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
 
   return (
     <>
@@ -379,7 +381,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
           <div className="mb-4">
             <Select
               label="Gender"
-              valueElement={<div>{selectedGender.label}</div>}
+              valueElement={<div>{formik.values.gender}</div>}
               placeholder="Select your gender ..."
               theme="Carbon"
             >
@@ -388,9 +390,9 @@ const InfoStep: React.FC<InfoStepProps> = ({
                   <option
                     key={Gender.value}
                     onClick={() => {
-                      setSelectedGender(Gender);
+                      formik.setFieldValue("gender",Gender.value)
                     }}
-                    className="ml-4 cursor-pointer"
+                    className="ml-4 my-2 cursor-pointer"
                     value={Gender.value}
                   >
                     {Gender.label}
