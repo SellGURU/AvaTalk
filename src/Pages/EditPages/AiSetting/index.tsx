@@ -7,13 +7,14 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
+import { useNavigate } from "react-router-dom";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
   // if (currentBox == undefined) {
   //   currentBox = new AboutBox("about", "");
   // }  
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [value, setValue] = useState<any>("");
   const [gender,setGender] = useState('female')
   const initialValue = {
@@ -113,6 +114,9 @@ const EditAiSetting = () => {
                 ai_knowledge:value,
                 gender:gender
               })
+              setTimeout(() => {
+                navigate('/')
+              }, 600);
             }} theme="Carbon">
               Save Change
             </Button>
