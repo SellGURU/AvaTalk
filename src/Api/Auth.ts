@@ -19,6 +19,7 @@ interface Location {
 interface RegisterData {
   first_name: string;
   last_name: string;
+  Gender: string;
   mobile_number: string | null;
   job_title: string | null;
   company_name: string | null;

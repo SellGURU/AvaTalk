@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-import { StepController, TextField } from "../../Components";
+import { StepController,Select, TextField } from "../../Components";
 import { Button } from "symphony-ui";
 // import LocationPicker from "react-leaflet-location-picker";
 import styles from "./CreateAccount.module.css";
@@ -21,6 +21,7 @@ import { AddAvatar } from "../../Components/__Modal__";
 const initialValue = {
   FirstName: "",
   LastName: "",
+  Gender: "",
   Phone: "",
   JobTitle: "",
   CompanyName: "",
@@ -36,6 +37,7 @@ const initialValue = {
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("Required"),
   LastName: Yup.string().required("Required"),
+  Gender: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
   email: Yup.string().email(),
@@ -58,6 +60,7 @@ const CreateAccount = () => {
       Auth.register({
         first_name: values.FirstName,
         last_name: values.LastName,
+        Gender: values.Gender,
         mobile_number: authContext.varification.emailOrPhone.includes("@")
           ? values.Phone
           : authContext.varification.emailOrPhone,
@@ -328,6 +331,13 @@ const InfoStep: React.FC<InfoStepProps> = ({
   setCountry,
 }) => {
   const authContext = useAuth();
+  
+  const GenderOptions = [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+];
+  const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
+
   return (
     <>
       <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
@@ -368,6 +378,31 @@ const InfoStep: React.FC<InfoStepProps> = ({
               errorMessage={formik.errors.LastName}
               inValid={formik.errors.LastName && formik.touched?.LastName}
             ></TextField>
+          </div>
+          <div className="mb-4">
+            <Select
+              label="Gender"
+              valueElement={<div>{selectedGender.label}</div>}
+              placeholder="Select your gender ..."
+              theme="Carbon"
+            >
+              {GenderOptions.map((Gender, index: number) => (
+                <>
+                  <option
+                    key={Gender.value}
+                    onClick={() => {
+                      setSelectedGender(Gender);
+                    }}
+                    className="ml-4 cursor-pointer"
+                    value={Gender.value}
+                  >
+                    {Gender.label}
+                  </option>
+                  {index <= GenderOptions.length - 2 ? <hr /> : undefined}
+                </>
+              ))}
+            
+            </Select>
           </div>
           {/* {authContext.varification.emailOrPhone} */}
           {authContext.varification.emailOrPhone.includes("@") ? (
