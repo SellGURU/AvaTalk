@@ -144,9 +144,10 @@ const sendToApi = (
   ) => {
     console.log(userId)
   const aiChats = chats.filter((item) => item.from == "Ai");
+  const massageKey =  makeid(15)
   const newChat: chat = {
     from: "user",
-    message_key: makeid(15),
+    message_key:massageKey,
     text: text,
     instanceid: "",
     audio_file: "",
@@ -164,7 +165,7 @@ const sendToApi = (
   Chat.flow({
     text: text,
     language: language,
-    message_key: makeid(15),
+    message_key: massageKey,
     // apikey: "0e218a19f41b4eb689003fa634889a19",
     user_bot_id: userId,
     chat_user:chatUser,
@@ -172,11 +173,13 @@ const sendToApi = (
     getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })
     .then((res) => {
+      console.log(res)
       console.dir(BLokedIdList.current)
+      console.log(BLokedIdList.current)
       if(res == "No bot has been created"){
         toast.warning(res)
       }
-      if(!BLokedIdList.current.includes(res.message_key as never)){
+      if(!BLokedIdList.current.includes(res.message_key as string)){
         setChats([
           ...chats,
           {

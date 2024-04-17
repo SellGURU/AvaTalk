@@ -136,8 +136,8 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         }).then(() => {
                              Auth.addEvent({event_type:'share_link','sub_event_category':'share_link','userid':authContext.currentUser.information?.userId as string})
                             toast.success("Successful share")
-                        }).catch((err) => {
-                            toast.error("Error sharing:"+err)
+                        }).catch(() => {
+                            // toast.error("Error sharing:"+err)
                         })
                     }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
