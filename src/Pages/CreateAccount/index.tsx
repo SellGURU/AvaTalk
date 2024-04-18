@@ -21,7 +21,7 @@ import { AddAvatar } from "../../Components/__Modal__";
 const initialValue = {
   FirstName: "",
   LastName: "",
-  gender:"Female",
+  gender:"female",
   Phone: "",
   JobTitle: "",
   CompanyName: "",
@@ -332,8 +332,8 @@ const InfoStep: React.FC<InfoStepProps> = ({
   const authContext = useAuth();
   
   const GenderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
 ];
   // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
 
@@ -395,7 +395,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
                     className="ml-4 my-2 cursor-pointer"
                     value={Gender.value}
                   >
-                    {Gender.label}
+                    {Gender.value}
                   </option>
                   {index <= GenderOptions.length - 2 ? <hr /> : undefined}
                 </>
