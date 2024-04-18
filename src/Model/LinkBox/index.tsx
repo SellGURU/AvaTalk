@@ -1,4 +1,5 @@
 import { Box } from "..";
+import { Tooltip } from 'react-tooltip'
 
 class Link {
     constructor(protected url:string,protected name:string){
@@ -6,11 +7,14 @@ class Link {
     }
     public resolveRender(theme:string) {
         return (
-            <div onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
+            <>
+            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     <div className={`${theme}-ContentCard-GlobalVector`}></div>
                 </div>
-            </div>       
+            </div>  
+            <Tooltip id={"link"+this.url} />     
+            </>
         )
     }    
 

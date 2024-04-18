@@ -21,6 +21,10 @@ class Box {
         return this.typeName
     }
 
+    public getCardName() {
+        return this.getTypeName().replace("Box",' Card')
+    }
+
     public getEventName() {
         switch(this.typeName){
             case 'AboutBox' :return 'more_info_about'

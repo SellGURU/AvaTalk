@@ -736,7 +736,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                     uploadedAvater.photo.length > 0 ? "absolute rounded-[8px] w-[24px] h-[24px] bg-white flex justify-center items-center -right-1 -top-1" : ""
                   }`}>
                 <img
-                  className="w-[13px] h-[13px]"
+                  className="w-[24px] h-[24px]"
                   src="./icons/gallery-add.svg"
                   alt=""
                 />
@@ -793,11 +793,8 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                           }
                         );
                       } else {
-                        setTimeout(() => {
-                          // setAvatarVideo(el.video);
-                          formik.setFieldValue("avatar_pic_url", el.photo);
-                          formik.setFieldValue("silent_video_avatar", el.video);
-                        }, 200);
+                        formik.setFieldValue("avatar_pic_url", el.photo);
+                        formik.setFieldValue("silent_video_avatar", el.video);
                       }
                       // Auth.createAvatarVideo(el).then((res) => {
                       //   setAvatarVideo(res.data)
@@ -818,7 +815,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             })}
           </div>
         </div>
-        <div className="mt-8 mb-3 px-11">
+        <div className="mt-8 mb-3 px-4">
           <Button
             disabled={formik.values.silent_video_avatar.length == 0}
             onClick={onSubmit}

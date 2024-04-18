@@ -10,6 +10,7 @@ import './Api/axios.ts';
 import 'react-calendar/dist/Calendar.css';
 import "cropperjs/dist/cropper.css";
 import "react-image-gallery/styles/css/image-gallery.css";
+import 'react-tooltip/dist/react-tooltip.css'
 
 Modal.setAppElement('#root');
 

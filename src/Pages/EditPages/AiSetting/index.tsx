@@ -85,11 +85,11 @@ const EditAiSetting = () => {
           </div>
           <div className="px-6 mt-6">
             <Select label="Voice Gender" valueElement={<div>{gender}</div>} placeholder="Select tag..." theme="Carbon">
-              <div  className="cursor-pointer h-10 flex items-center justify-center" onClick={() => {
+              <div  className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('male')
               }}>male</div>
               <hr />
-              <div   className="cursor-pointer h-10 flex items-center justify-center"  onClick={() => {
+              <div   className="cursor-pointer h-10 flex items-center justify-start px-4"  onClick={() => {
                 setGender('female')
               }}>female</div>
             </Select>          

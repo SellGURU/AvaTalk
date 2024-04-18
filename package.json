@@ -1,7 +1,7 @@
 {
   "name": "card-visit",
   "private": true,
-  "version": "0.10.5",
+  "version": "0.10.6",
   "description": "Beta-",
   "type": "module",
   "scripts": {
@@ -46,6 +46,7 @@
     "react-spinners": "^0.13.8",
     "react-timezone-select": "^3.2.3",
     "react-toastify": "^10.0.4",
+    "react-tooltip": "^5.26.3",
     "react-verification-code-input": "^1.2.9",
     "react-verification-input": "^4.1.0",
     "recharts": "^2.12.0",
