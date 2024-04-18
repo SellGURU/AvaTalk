@@ -209,6 +209,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       
           {!startChat && shareUser?
             <div className={`${theme}-Presentation-InfoSection`}>
+              {shareUser.information?.phone ?
               <div onClick={() => {
                 window.open(shareUser?.information?.phone); 
               }} className={`${theme}-Presentation-Info`}>
@@ -217,14 +218,17 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
                 </div>
                 <div className="cursor-pointer">{shareUser?.information?.phone}</div>
               </div>
-              <div onClick={() => {
-                window.open("mailto:"+shareUser?.information?.personlEmail); 
-              }} className={`${theme}-Presentation-Info`}>
-                <div className={`${theme}-Presentation-Vectors`}>
-                  <div className={`${theme}-Presentation-EmailVector`}></div>
+              :undefined}
+              {shareUser.information?.personlEmail ?
+                <div onClick={() => {
+                  window.open("mailto:"+shareUser?.information?.personlEmail); 
+                }} className={`${theme}-Presentation-Info`}>
+                  <div className={`${theme}-Presentation-Vectors`}>
+                    <div className={`${theme}-Presentation-EmailVector`}></div>
+                  </div>
+                  <div className="cursor-pointer">{shareUser?.information?.personlEmail}</div>
                 </div>
-                <div className="cursor-pointer">{shareUser?.information?.personlEmail}</div>
-              </div>
+              :undefined}
               {/* <div onClick={() => {
                 window.open(); 
               }} className={`${theme}-Presentation-Info`}>
