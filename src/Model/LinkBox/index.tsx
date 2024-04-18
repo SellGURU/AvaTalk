@@ -4,7 +4,7 @@ import { Tooltip } from 'react-tooltip'
 class Link {
     constructor(protected url:string,protected name:string){
 
-    }
+    } 
     public resolveRender(theme:string) {
         return (
             <>
@@ -33,6 +33,13 @@ class LinkBox extends Box{
         this.order = 3
         this.typeName= 'LinkBox'
     }
+    public isShareAble(): boolean {
+        if(this.links.length == 0) {
+            return false
+        }else{
+            return true
+        }
+    }       
     public resolveRender(theme: string,mode?:string): JSX.Element {
         return (
             <>

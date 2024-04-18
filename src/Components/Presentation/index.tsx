@@ -175,6 +175,8 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     <div className={`${theme}-Presentation-Container`}>
       <div className={`${theme}-Presentation-PresentationSection`}>
         <BackIcon action={() => {
+          setIsTalking(false)
+          setAudioUrl('')
           setShowSettingIcon(false)
           if(startChat){
             setStartChat(false)

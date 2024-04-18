@@ -62,6 +62,13 @@ class SocialBox extends Box{
         this.order = 2
         this.typeName = 'SocialBox'
     }
+    public isShareAble(): boolean {
+        if(this.socialMedias.length == 0) {
+            return false
+        }else{
+            return true
+        }
+    }    
     public resolveRender(theme: string,mode?:string): JSX.Element {
         return (
             <>

@@ -16,6 +16,13 @@ class GalleryBox extends Box{
     public getContents() {
         return this.contents
     }
+    public isShareAble(): boolean {
+        if(this.contents.length == 0) {
+            return false
+        }else{
+            return true
+        }
+    }    
     public resolveRender(theme: string,mode?:string): JSX.Element {
         return (
             <div className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'} relative`}>

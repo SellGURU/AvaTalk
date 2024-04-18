@@ -335,8 +335,14 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
 
             {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item:Box) => {
               return (
-                <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
-                </ContentCard>              
+                <>
+                {item.isShareAble() || mode=='profile' ?
+                    <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
+                    </ContentCard>              
+                  :
+                  undefined
+                }
+                </>
               )
             })}
 

@@ -38,6 +38,10 @@ class Box {
         return ''
     }
 
+    public isShareAble() {
+        return true
+    }
+
     public resolveRender(theme:string,mode?:string) {
         return (
             <>

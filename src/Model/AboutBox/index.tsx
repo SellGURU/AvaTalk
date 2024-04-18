@@ -20,6 +20,13 @@ class AboutBox extends Box {
             </>
         )
     }    
+    public isShareAble(): boolean {
+        if(this.text.length == 0) {
+            return false
+        }else{
+            return true
+        }
+    }
     public getRouteAddress(): string {
         return 'about'
     }    
