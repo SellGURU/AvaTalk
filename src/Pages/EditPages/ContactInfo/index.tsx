@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
+import { useConstructor } from "../../../help";
 
 const validationSchema = Yup.object().shape({
   job:Yup.string(),
@@ -72,12 +73,22 @@ const EditContactInfo = () => {
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
       job_title:formik.values.job as string,
-      location:'',
+      location:{
+        lat:pointMode.control.values[0][0],
+        lng:pointMode.control.values[0][1]
+      },
       work_email:formik.values.workEmail as string,
       work_phone:formik.values.workPhone as string
     })
     navigate('/')
   }
+  useConstructor(() => {
+    Auth.getContactInfo().then(res => {
+      formik.setFieldValue("job",res.data.job_title)
+      formik.setFieldValue("company",res.data.company_name)
+      setPointVals([[res.data.location.lat,res.data.location.lng]])
+    })
+  })
   return (
     <>
       <div className=" absolute  hiddenScrollBar  h-dvh pb-[100px] hiddenScrollBar overflow-y-scroll w-full hiddenScrollBar  top-[30px] bg-white z-[12]">

@@ -78,7 +78,7 @@ interface AddEvent {
 interface UpdateContactInfo {
   job_title:string,
   company_name:string,
-  location:string,
+  location:any,
   email?:string,
   work_email:string,
   phone?:string,
@@ -245,6 +245,11 @@ class Auth extends Api {
 
   static updateContactInfo(data:UpdateContactInfo) {
     const response = this.post('/update_contact_info',data)
+    return response
+  }
+
+  static getContactInfo(){
+    const response = this.post('/show_contact_info',{})
     return response
   }
 }
