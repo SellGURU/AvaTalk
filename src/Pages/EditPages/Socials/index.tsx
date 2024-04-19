@@ -1,7 +1,7 @@
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
 import { useState } from "react";
-import { AddSocials } from "../../../Components/__Modal__";
+import { AddSocials, Confirm } from "../../../Components/__Modal__";
 import { Social } from "../../../Model";
 import { SocialBox, initialSocials } from "../../../Model/SocialBox";
 import { useAuth } from "../../../hooks/useAuth";
@@ -57,6 +57,7 @@ const EditSocials = () => {
     },
   });
   const navigate = useNavigate();
+  const [showConfirm,setShowConfirm] = useState(-1)
   const submit = () => {
     auth.currentUser.addBox(new SocialBox(formik.values.title, socials));
     navigate("/");
@@ -64,7 +65,6 @@ const EditSocials = () => {
   const deleteSocial = (index: number) => {
     const newArr = [...socials];
     newArr.splice(index, 1);
-    console.log(newArr);
     setSocials(newArr);
   };
   return (
@@ -94,32 +94,44 @@ const EditSocials = () => {
               <AnimateGroup animation="popIn" durationOut="500">
                 {socials.map((item: Social, index) => {
                   return (
-                    <div className="mt-3 px-6">
-                      {index == 0 ? <div className={`Carbon-Select-label mb-1 w-full text-left`}>Social Medias</div> : undefined}
-                      <div className="Carbon-TextField-input ">
-                        <div className="w-full flex items-center justify-between">
-                          <div className="flex justify-start items-center">
-                            <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
-                            <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
-                          </div>
-                          <div className="flex justify-end gap-1 items-start">
-                            <div
-                              onClick={() => {
-                                setSelectedItem(item);
-                                setOpenNewSocial(true);
-                              }}
-                              className={`Carbon-ContactDetails-editIcon`}
-                            ></div>
-                            <div
-                              onClick={() => {
-                                deleteSocial(index);
-                              }}
-                              className={`Carbon-ContactDetails-recycleIcon`}
-                            ></div>
+                    <>
+                      <div className="mt-3 px-6">
+                        {index == 0 ? <div className={`Carbon-Select-label mb-1 w-full text-left`}>Social Medias</div> : undefined}
+                        <div className="Carbon-TextField-input ">
+                          <div className="w-full flex items-center justify-between">
+                            <div className="flex justify-start items-center">
+                              <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
+                              <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
+                            </div>
+                            <div className="flex justify-end gap-1 items-start">
+                              <div
+                                onClick={() => {
+                                  setSelectedItem(item);
+                                  setOpenNewSocial(true);
+                                }}
+                                className={`Carbon-ContactDetails-editIcon`}
+                              ></div>
+                              <div
+                                onClick={() => {
+                                  setShowConfirm(index)
+                                }}
+                                className={`Carbon-ContactDetails-recycleIcon`}
+                              ></div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                      {showConfirm == index ?
+                        <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
+                          <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
+                            deleteSocial(index);
+                            setShowConfirm(-1)
+                          }}></Confirm>
+                        </div>
+                      :
+                      undefined
+                      }                          
+                    </>
                   );
                 })}
 
@@ -165,17 +177,20 @@ const EditSocials = () => {
                   <div className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
                     {medias.map((item, index) => {
                       return (
-                        <div
-                          onClick={() => {
-                            setSelectedItem(new Social(item.name, ""));
-                            setOpenNewSocial(true);
-                            setOpenAddNewSocial(false)
-                          }}
-                          className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index == medias.length - 1 ? " border-none" : ""}`}
-                        >
-                          <img className="h-4" src={"./icons/media/" + item.icon} alt="" />
-                          <div className="ml-1 text-gray-700 text-sm">{item.name}</div>
-                        </div>
+                        <>
+                          <div
+                            onClick={() => {
+                              setSelectedItem(new Social(item.name, ""));
+                              setOpenNewSocial(true);
+                              setOpenAddNewSocial(false)
+                            }}
+                            className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index == medias.length - 1 ? " border-none" : ""}`}
+                          >
+                            <img className="h-4" src={"./icons/media/" + item.icon} alt="" />
+                            <div className="ml-1 text-gray-700 text-sm">{item.name}</div>
+                          </div>
+                      
+                        </>
                       );
                     })}           
                   </div>

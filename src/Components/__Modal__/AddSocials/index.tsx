@@ -32,8 +32,8 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,label,value,title,onComple
         },
     });
     useEffect(() => {
-        console.log(value)
-    })             
+        formik.setFieldValue("url",value)
+    },[value])             
     return (
         <>
         <Modal
