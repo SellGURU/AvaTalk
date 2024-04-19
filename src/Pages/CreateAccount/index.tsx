@@ -167,7 +167,7 @@ const CreateAccount = () => {
           <>
             <div className="w-full relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll">
               <div>
-                <div className="absolute right-6 top-6">
+                {/* <div className="absolute right-6 top-6">
                   <Button
                     onClick={() => {
                       setShowGudieLine(false);
@@ -176,7 +176,7 @@ const CreateAccount = () => {
                   >
                     <div className={`Carbon-Profile-closeIcon`}></div>
                   </Button>
-                </div>
+                </div> */}
                 <div
                   className={`text-gray-700 ${
                     window.innerWidth < 332 ? "mt-12" : "mt-2"
@@ -619,11 +619,11 @@ const AvatarStep: React.FC<UploadStepProps> = ({
   useConstructor(() => {
     setIsLoading(true)
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
-      setAvaterList(res.data)
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
         setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
       }else{
+        setAvaterList(res.data)
         setIsLoading(false)
         formik.setFieldValue('silent_video_avatar',res.data[0].video)
         formik.setFieldValue('avatar_pic_url',res.data[0].photo)

@@ -145,7 +145,7 @@ const EditContact: React.FC<EditContactProps> = ({ isOpen, contactId, onAfterOpe
                 <SearchBox onChange={() => {}} label="Your Location" inputHeight="44px" value="" theme="Carbon" placeholder="Search your location..." />
               </div>
               <div className="mt-4">
-                <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
+                <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} />
               </div>
               <div className="mt-4">
                 <TextField

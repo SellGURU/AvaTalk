@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
-import LocationPicker from "react-leaflet-location-picker";
+import LocationPicker, { PointMode } from "react-leaflet-location-picker";
 import { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { GoogleMapBox } from "../../../Model";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { LatLngTuple } from "leaflet";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -16,22 +17,20 @@ const validationSchema = Yup.object().shape({
 const EditGoogleMap =() => {
     const auth = useAuth()
     const navigate = useNavigate();
-    const [pointVals, setPointVals] = useState([[auth.currentUser.information?.location.lat, auth.currentUser.information?.location.lng]]);
-    const pointMode = {
+    let currentBox:GoogleMapBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GoogleMapBox")[0] as GoogleMapBox;
+    if (currentBox == undefined) {
+        currentBox = new GoogleMapBox("google map", {lan:33,lat:33});
+    }
+    const [pointVals, setPointVals] = useState([[currentBox.location.lan,currentBox.location.lat]]);
+    const pointMode:PointMode = {
         banner: false,
         control: {
-        values: pointVals,
+        values: pointVals as LatLngTuple[],
         onClick: (point: any) => setPointVals([...[point]]),
         onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
         },
     };    
-    let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'GoogleMapBox')[0] as GoogleMapBox    
-    if(currentBox == undefined) {
-        currentBox = new GoogleMapBox('Google Map',{
-            lan:auth.currentUser.information?.location.lat as number,
-            lat:auth.currentUser.information?.location.lng as number
-        })
-    }
+     
     const initialValue = {
         title:currentBox.getTitle(),
     };    

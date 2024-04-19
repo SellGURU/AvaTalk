@@ -48,7 +48,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
   const pointMode = {
     banner: false,
     control: {
-      values: pointVals,
+      values: pointVals as any,
       onClick: (point: any) => setPointVals([...[point]]),
       onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
     },
