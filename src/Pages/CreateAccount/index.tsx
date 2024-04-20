@@ -748,10 +748,10 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                 <div onClick={() => {
                   setAddAvatar(true)
                 }} className={`${
-                    uploadedAvater.photo.length > 0 ? "absolute rounded-[8px] w-[24px] h-[24px] bg-white flex justify-center items-center -right-1 -top-1" : ""
+                    uploadedAvater.photo.length > 0 ? "absolute rounded-full w-[30px] h-[30px] bg-white flex justify-center items-center -right-1 -top-1" : ""
                   }`}>
                 <img
-                  className="w-[24px] h-[24px]"
+                  className="w-[20px] h-[20px]"
                   src="./icons/gallery-add.svg"
                   alt=""
                 />
