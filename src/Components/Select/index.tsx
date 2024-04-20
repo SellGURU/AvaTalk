@@ -5,12 +5,13 @@ interface SelectProps extends HtmlHTMLAttributes<HTMLDivElement> {
   label?: string;
   valueElement: React.ReactNode;
   placeholder?: string;
+  required?:boolean
 }
 function inputId(): string {
   return "Select" + Math.floor(Math.random() * 100000).toString();
 }
 
-const Select: React.FC<SelectProps> = ({ children, theme, label, placeholder, valueElement, ...props }) => {
+const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeholder, valueElement, ...props }) => {
   const [showSelect, setShowSelect] = useState(false);
   useEffect(() => {
     setShowSelect(false);
@@ -20,6 +21,10 @@ const Select: React.FC<SelectProps> = ({ children, theme, label, placeholder, va
       <div className={`${theme}-Select-container w-[100%]`}>
         <label className={`${theme}-Select-label text-left`} htmlFor={inputId()}>
           {label}
+          {required ? 
+              <span className={`${theme}-TextField-label-required`} >*</span>
+          :undefined
+          }          
         </label>
         <div
           data-testid="input-container"

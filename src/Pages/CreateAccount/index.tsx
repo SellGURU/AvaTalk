@@ -383,6 +383,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
           <div className="mb-4">
             <Select
               label="Gender"
+              required
               valueElement={<div>{formik.values.gender}</div>}
               placeholder="Select your gender ..."
               theme="Carbon"
