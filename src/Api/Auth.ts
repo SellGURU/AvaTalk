@@ -29,6 +29,7 @@ interface RegisterData {
   email:string | null
   silent_video_avatar:string | null
   avatar_pic_url:string | null
+  referral_code?:string|null
 }
 
 ///

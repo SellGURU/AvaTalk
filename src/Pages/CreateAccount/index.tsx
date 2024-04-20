@@ -30,6 +30,7 @@ const initialValue = {
     lat: 33,
     lng: 33,
   },
+  ReferralCode:"",
   avatar_pic_url: "",
   silent_video_avatar: "",
   PrifileImage: "",
@@ -69,6 +70,7 @@ const CreateAccount = () => {
         profile_pic: values.avatar_pic_url,
         avatar_pic_url: values.avatar_pic_url,
         silent_video_avatar: values.silent_video_avatar,
+        referral_code:values.ReferralCode,
         email: authContext.varification.emailOrPhone.includes("@")
           ? authContext.varification.emailOrPhone
           : values.email,
@@ -434,6 +436,18 @@ const InfoStep: React.FC<InfoStepProps> = ({
               ></TextField>
             </div>
           )}
+          <div className="mb-4">
+            <TextField
+              {...formik.getFieldProps("ReferralCode")}
+              label="Referral Code"
+              placeholder="Enter your referral code..."
+              theme="Carbon"
+              name="ReferralCode"
+              type="text"
+              errorMessage={formik.errors.ReferralCode}
+              inValid={formik.errors.ReferralCode && formik.touched?.ReferralCode}
+            ></TextField>
+          </div>          
           <div className="mt-8">
             <Button
               disabled={
