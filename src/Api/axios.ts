@@ -9,6 +9,9 @@ axios.interceptors.response.use((response) => {
         localStorage.clear()
         window.location.reload(); 
     }    
+    if(response.data.detail){
+       toast.error(response.data.detail) 
+    }
     return response;
 }, (error) => {
     if (error.response && error.response.data) {
