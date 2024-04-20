@@ -26,6 +26,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       case '' :return 'profile'
       case 'share' :return 'share'
       case'?review=true' : return 'review'
+       case'?review=true&splash=false' : return 'review'
     }
     return 'profile'
   }

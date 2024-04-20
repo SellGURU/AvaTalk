@@ -189,7 +189,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           if(startChat){
             setStartChat(false)
           }else{
-            navigate(-1)
+            navigate('/?review=true&splash=false')
           }
         }} theme="Carbon" title=""></BackIcon>
 
