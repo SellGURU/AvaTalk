@@ -34,6 +34,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
   const [showSuggestions,setShowSuggestions] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef2 = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
   const [isTalking,setIsTalking] = useState(false)
   const [isLoading,setIsLoading] = useState(false);
@@ -48,14 +49,21 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       //   })
       // };
   const [shareUser,setShareUser] = useState<null | User>(null)
-  const [videoUrl, setVideoUrl] = useState<string>(shareUser? shareUser.information?.silent_video_avatar as string:'');
+  const [,setVideoUrl] = useState<string>(shareUser? shareUser.information?.silent_video_avatar as string:'');
   useEffect(() => {
-      if(videoRef.current && !isRecording){
+      if(videoRef.current && !isRecording && !isTalking &&!showSuggestions ){
           const refren = videoRef.current  as any   
           // setShowOpacity(true)
           refren.load()
       }        
-  })   
+  },)   
+  useEffect(() => {
+    if(videoRef2.current && !isRecording && !isTalking &&!showSuggestions ){
+        const refren = videoRef2.current  as any   
+        // setShowOpacity(true)
+        refren.load()
+    }        
+})   
   useEffect(() => {
     console.log(shareUser)
     // console.log(shareUser.information?.talk_video_avater)
@@ -186,10 +194,16 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         }} theme="Carbon" title=""></BackIcon>
 
         <div className={`${theme}-Presentation-Content`}>  
-    
-          <div className={`${theme}-Presentation-PictureSection overflow-hidden`}>
-            {/* <div className={`${theme}-Presentation-PresentationPicture`}></div> */}
-            <AiAvatar videoref={videoRef} videoUrl={videoUrl}></AiAvatar>    
+
+          <div className={`${theme}-Presentation-PictureSection relative`}>
+            <div className={`${theme}-Presentation-PictureSection absolute left-0  overflow-hidden `}>
+              {/* <div className={`${theme}-Presentation-PresentationPicture`}></div> */}
+              <AiAvatar videoref={videoRef2} videoUrl={shareUser? shareUser.information?.talk_video_avater as string:''}></AiAvatar>    
+            </div>          
+            <div className={`${theme}-Presentation-PictureSection absolute left-0 ${!isTalking?'visible':'invisible'} overflow-hidden`}>
+              {/* <div className={`${theme}-Presentation-PresentationPicture`}></div> */}
+              <AiAvatar videoref={videoRef} videoUrl={shareUser? shareUser.information?.silent_video_avatar as string:''}></AiAvatar>    
+            </div>
           </div>
           <div>
             <h1 className={`${theme}-Presentation-PresentationName`}>{shareUser?.information?.firstName +'  '+shareUser?.information?.lastName}</h1>
