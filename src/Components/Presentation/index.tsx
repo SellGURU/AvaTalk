@@ -56,14 +56,14 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
           // setShowOpacity(true)
           refren.load()
       }        
-  },)   
+  },[shareUser])   
   useEffect(() => {
     if(videoRef2.current && !isRecording && !isTalking &&!showSuggestions ){
         const refren = videoRef2.current  as any   
         // setShowOpacity(true)
         refren.load()
     }        
-})   
+  })   
   useEffect(() => {
     console.log(shareUser)
     // console.log(shareUser.information?.talk_video_avater)
@@ -72,7 +72,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
       }else{
         setVideoUrl(shareUser?.information?.silent_video_avatar as string)
       }
-  })
+  },[shareUser])
   const BLokedIdList =useRef<string[]>([]);
   const handleStop = (id: string) => {
     setIsLoading(false);
