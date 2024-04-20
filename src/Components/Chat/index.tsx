@@ -22,7 +22,9 @@ const Chat: React.FC<Props> = ({ theme }) => {
   useConstructor(() => {
     ChatApi.showList((res) => {
       // if(res.cha)
-      setChats(res.chats)
+        if(res.chats){
+          setChats(res.chats)
+        }
     })
     // setIsLoading(false);
   });
@@ -77,11 +79,15 @@ const Chat: React.FC<Props> = ({ theme }) => {
     setChats([])
     if(buttonText == 'Your Test History'){
       ChatApi.showTestList((res) => {
-        setChats(res.chats)
+        if(res.chats){
+          setChats(res.chats)
+        }
       })
     }else{
       ChatApi.showList((res) => {
-        setChats(res.chats)
+        if(res.chats){
+          setChats(res.chats)
+        }
       })    
     }
   };
@@ -89,7 +95,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
     
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
-      <p className={`${theme}-ContactsView-contactText `}>Chats</p>
+      <p className={`${theme}-ContactsView-contactText mb-4`}>Chats</p>
       <div className={`${theme}-ContactsView-buttonsContainer w-3/4 `}>
         <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Visitors Chat History" rightText="Your Test History" theme="Carbon" />
 
@@ -99,7 +105,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
           {/* <div className="mt-8 px-6">
             <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search chat history..." />
           </div> */}
-          {chats.length == 0? (
+          {chats?.length == 0? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
                 No chats yet
