@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
 import { useEffect, useState } from "react";
@@ -107,7 +108,17 @@ const EditSocials = () => {
                   {socials.map((item: Social, index) => {
                     return (
                       <>
-                        <li draggable  className={`mt-3 px-6 ${socials.length> 2?'':'ignore-elements'}`}>
+                        <li data-mame={item.getType()} draggable onDrag={() => {
+                          const element = document.getElementById('sortable2')?.children
+                          const resolve =socials.map((_el,index) =>{
+                            return element?.item(index)?.attributes[0].value
+                          })
+                          resolve.forEach((elem,ind) => {
+                            if(socials.find(e=>e.getType() == elem)){
+                              socials.filter(e=>e.getType() == elem)[0].order = ind
+                            }
+                          })
+                        }}  className={`mt-3 px-6 ${socials.length> 1?'':'ignore-elements'}`}>
                           <div className="Carbon-TextField-input ">
                             <div className="w-full flex items-center justify-between">
                               <div className="flex justify-start items-center">
@@ -116,7 +127,7 @@ const EditSocials = () => {
                               </div>
                               <div className="flex justify-end gap-1 items-start">     
                                 {
-                                  socials.length> 2 ?
+                                  socials.length> 1 ?
                                     <div>
                                       <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
                                     </div>

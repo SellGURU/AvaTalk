@@ -4,6 +4,7 @@ import Box from "../Boxs"
 type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube'
 
 class Social {
+    public order:number = -1
     constructor(protected type:initialSocials,public value:string){
 
     }
@@ -75,7 +76,7 @@ class SocialBox extends Box{
                 {
                     this.socialMedias.length > 0 ?
                         <div className={`${theme}-Profile-Vectors`}>
-                            {this.socialMedias.map((item) => {
+                            {this.socialMedias.sort((a,b) => a.order -b.order).map((item) => {
                                 const newSocal = Object.assign(new Social('Facebook',''),item)
                                 return (
                                     <>
