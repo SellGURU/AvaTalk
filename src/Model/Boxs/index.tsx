@@ -17,6 +17,9 @@ class Box {
         return this.order
     }
 
+    public setOrder(order:number) {
+        this.order =order
+    }
     public getTypeName() {
         return this.typeName
     }

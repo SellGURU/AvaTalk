@@ -37,7 +37,15 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
           sub_event_category:item.getEventName() as any
         })         
       }
-    }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
+    }} data-mame={item.getTypeName()}  onDrag={() => {
+        const element = document.getElementById('sortable')?.children
+        const resolve =Array(element?.length).map((_el,index) => {
+          return element?.item(index)?.attributes[0].value
+        } )
+        resolve.forEach((_,ind) => {
+          item.setOrder(ind)
+        })
+        }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div className={`${theme}-ContentCard-Title`}>
                 {item.getTitle()}
