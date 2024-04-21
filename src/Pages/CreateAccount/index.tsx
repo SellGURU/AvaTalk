@@ -15,7 +15,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
 import { toast } from "react-toastify";
 import CropperBox from "../../Components/CropperBox";
-import { BeatLoader } from "react-spinners";
+import { BeatLoader, RingLoader, } from "react-spinners";
 import { AddAvatar } from "../../Components/__Modal__";
 
 const initialValue = {
@@ -668,7 +668,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           </div>
 
           <div className="mt-6 flex items-center justify-between">
-            {currentAvatar.video.length > 0 ? (
+            {currentAvatar.video.length > 0 && !isLoading ? (
               <>
                 <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                   <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
@@ -689,7 +689,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                   />
                 </div>
 
-                <div className="w-[160px]  overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                <div className="w-[160px] h-[103px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                   <video
                     id="dragAbleAi"
                     playsInline
@@ -708,7 +708,25 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                   </video>
                 </div>
               </>
-            ) : undefined}
+            ) : 
+              <>
+                <div className="w-[90px] h-[57px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                  <RingLoader size={30}></RingLoader>
+                </div>
+
+                <div>
+                  <img
+                    className="w-10 h-10"
+                    src="./icons/fi-rr-arrow-right.svg"
+                    alt=""
+                  />
+                </div>
+
+                <div className="w-[160px] h-[103px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <RingLoader></RingLoader>
+                </div>
+              </>            
+            }
           </div>
 
           <div>
