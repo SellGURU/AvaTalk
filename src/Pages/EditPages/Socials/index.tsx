@@ -1,6 +1,6 @@
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddSocials, Confirm } from "../../../Components/__Modal__";
 import { Social } from "../../../Model";
 import { SocialBox, initialSocials } from "../../../Model/SocialBox";
@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AnimateGroup } from 'react-animation'
+import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -67,6 +68,15 @@ const EditSocials = () => {
     newArr.splice(index, 1);
     setSocials(newArr);
   };
+  useEffect(() => {
+    setTimeout(() => {
+        const el = document.getElementById('sortable2');
+        Sortable.create(el,{
+          animation: 150,
+          filter: ".ignore-elements"
+        });      
+    }, 500);
+  })
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -91,51 +101,61 @@ const EditSocials = () => {
             </div>
           ) : (
             <>
-              <AnimateGroup animation="popIn" durationOut="500">
-                {socials.map((item: Social, index) => {
-                  return (
-                    <>
-                      <div className="mt-3 px-6">
-                        {index == 0 ? <div className={`Carbon-Select-label mb-1 w-full text-left`}>Social Medias</div> : undefined}
-                        <div className="Carbon-TextField-input ">
-                          <div className="w-full flex items-center justify-between">
-                            <div className="flex justify-start items-center">
-                              <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
-                              <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
-                            </div>
-                            <div className="flex justify-end gap-1 items-start">
-                              <div
-                                onClick={() => {
-                                  setSelectedItem(item);
-                                  setOpenNewSocial(true);
-                                }}
-                                className={`Carbon-ContactDetails-editIcon`}
-                              ></div>
-                              <div
-                                onClick={() => {
-                                  setShowConfirm(index)
-                                }}
-                                className={`Carbon-ContactDetails-recycleIcon`}
-                              ></div>
+                <AnimateGroup animation="popIn" durationOut="500">
+                <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Social Medias</div>
+                <ul style={{width:'100%'}} id="sortable2">
+                  {socials.map((item: Social, index) => {
+                    return (
+                      <>
+                        <li draggable  className={`mt-3 px-6 ${socials.length> 2?'':'ignore-elements'}`}>
+                          <div className="Carbon-TextField-input ">
+                            <div className="w-full flex items-center justify-between">
+                              <div className="flex justify-start items-center">
+                                <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
+                                <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
+                              </div>
+                              <div className="flex justify-end gap-1 items-start">     
+                                {
+                                  socials.length> 2 ?
+                                    <div>
+                                      <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
+                                    </div>
+                                  :
+                                  undefined
+                                }                      
+                                <div
+                                  onClick={() => {
+                                    setSelectedItem(item);
+                                    setOpenNewSocial(true);
+                                  }}
+                                  className={`Carbon-ContactDetails-editIcon`}
+                                ></div>
+                                <div
+                                  onClick={() => {
+                                    setShowConfirm(index)
+                                  }}
+                                  className={`Carbon-ContactDetails-recycleIcon`}
+                                ></div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      {showConfirm == index ?
-                        <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                          <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
-                            deleteSocial(index);
-                            setShowConfirm(-1)
-                          }}></Confirm>
-                        </div>
-                      :
-                      undefined
-                      }                          
-                    </>
-                  );
-                })}
+                        </li>
+                        {showConfirm == index ?
+                          <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
+                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
+                              deleteSocial(index);
+                              setShowConfirm(-1)
+                            }}></Confirm>
+                          </div>
+                        :
+                        undefined
+                        }                          
+                      </>
+                    );
+                  })}
 
-              </AnimateGroup>
+              </ul>
+                </AnimateGroup>         
             </>
           )}
           {/* <div className="px-6 mt-3">
