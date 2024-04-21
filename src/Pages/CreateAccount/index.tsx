@@ -165,137 +165,135 @@ const CreateAccount = () => {
           </div>
         ) : undefined}
 
-        {showGudieLine ? (
-          <>
-            <div className="w-full relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll">
-              <div>
-                {/* <div className="absolute right-6 top-6">
-                  <Button
-                    onClick={() => {
-                      setShowGudieLine(false);
-                    }}
-                    theme="Carbon-back"
-                  >
-                    <div className={`Carbon-Profile-closeIcon`}></div>
-                  </Button>
-                </div> */}
-                <div
-                  className={`text-gray-700 ${
-                    window.innerWidth < 332 ? "mt-12" : "mt-2"
-                  } ${
-                    window.innerWidth < 420 ? "text-left" : "text-center"
-                  } font-semibold text-base`}
+        <>
+          <div className={`w-full ${showGudieLine?'visible':'hidden'} relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}>
+            <div>
+              {/* <div className="absolute right-6 top-6">
+                <Button
+                  onClick={() => {
+                    setShowGudieLine(false);
+                  }}
+                  theme="Carbon-back"
                 >
-                  Photo Guidelines for AI Profile
-                </div>
-                <div className="mt-6 flex relative justify-center">
-                  <div className="relative">
-                    <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full -right-3 -top-3">
-                      <img src="./icons/Vector2.svg" alt="" />
-                    </div>
-                    <img src="./icons/gudei1.png" alt="" />
+                  <div className={`Carbon-Profile-closeIcon`}></div>
+                </Button>
+              </div> */}
+              <div
+                className={`text-gray-700 ${
+                  window.innerWidth < 332 ? "mt-12" : "mt-2"
+                } ${
+                  window.innerWidth < 420 ? "text-left" : "text-center"
+                } font-semibold text-base`}
+              >
+                Photo Guidelines for AI Profile
+              </div>
+              <div className="mt-6 flex relative justify-center">
+                <div className="relative">
+                  <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full -right-3 -top-3">
+                    <img src="./icons/Vector2.svg" alt="" />
                   </div>
-                </div>
-
-                <div className="mt-8 px-6">
-                  <div className="text-gray-700 text-left font-semibold text-base">
-                    Common Mistakes{" "}
-                  </div>
-                  <div className="mt-4 flex justify-start items-start">
-                    <div className="relative min-w-[60px]">
-                      <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                        <img
-                          className="ml-[1px]"
-                          src="./icons/Add.svg"
-                          alt=""
-                        />
-                      </div>
-                      <img src="./icons/1.png" alt="" />
-                    </div>
-                    <div className="ml-3 max-w-[283px]">
-                      <div className=" text-[#374151] text-[13px] font-medium font-poppins">
-                        Not Neutral Expression
-                      </div>
-                      <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                        Your photo must feature a neutral facial expression.
-                        Ensure your mouth is closed and avoid smiling or
-                        frowning.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex justify-start items-start">
-                    <div className="relative min-w-[60px]">
-                      <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                        <img
-                          className="ml-[1px]"
-                          src="./icons/Add.svg"
-                          alt=""
-                        />
-                      </div>
-                      <img src="./icons/2.png" alt="" />
-                    </div>
-                    <div className="ml-3 max-w-[283px]">
-                      <div className=" text-[#374151] text-[13px] font-medium font-poppins">
-                        Distracting Background
-                      </div>
-                      <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                        Use a simple, uncluttered background to avoid any
-                        distractions from the primary focus—your face.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex justify-start items-start">
-                    <div className="relative min-w-[60px]">
-                      <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                        <img
-                          className="ml-[1px]"
-                          src="./icons/Add.svg"
-                          alt=""
-                        />
-                      </div>
-                      <img src="./icons/3.png" alt="" />
-                    </div>
-                    <div className="ml-3 max-w-[283px]">
-                      <div className=" text-[#374151] text-[13px] font-medium font-poppins">
-                        Indirect Camera Gaze{" "}
-                      </div>
-                      <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                        Look directly into the camera lens to establish a clear,
-                        forward-facing base for your AI profile.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  className={`mt-5 ${
-                    window.innerWidth < 400 ? "px-2" : "px-6"
-                  }`}
-                >
-                  <Button
-                    onClick={() => setShowGudieLine(false)}
-                    theme="Carbon"
-                  >
-                    Got it
-                  </Button>
+                  <img src="./icons/gudei1.png" alt="" />
                 </div>
               </div>
+
+              <div className="mt-8 px-6">
+                <div className="text-gray-700 text-left font-semibold text-base">
+                  Common Mistakes{" "}
+                </div>
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img
+                        className="ml-[1px]"
+                        src="./icons/Add.svg"
+                        alt=""
+                      />
+                    </div>
+                    <img src="./icons/1.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                      Not Neutral Expression
+                    </div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                      Your photo must feature a neutral facial expression.
+                      Ensure your mouth is closed and avoid smiling or
+                      frowning.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img
+                        className="ml-[1px]"
+                        src="./icons/Add.svg"
+                        alt=""
+                      />
+                    </div>
+                    <img src="./icons/2.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                      Distracting Background
+                    </div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                      Use a simple, uncluttered background to avoid any
+                      distractions from the primary focus—your face.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img
+                        className="ml-[1px]"
+                        src="./icons/Add.svg"
+                        alt=""
+                      />
+                    </div>
+                    <img src="./icons/3.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                      Indirect Camera Gaze{" "}
+                    </div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                      Look directly into the camera lens to establish a clear,
+                      forward-facing base for your AI profile.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`mt-5 ${
+                  window.innerWidth < 400 ? "px-2" : "px-6"
+                }`}
+              >
+                <Button
+                  onClick={() => setShowGudieLine(false)}
+                  theme="Carbon"
+                >
+                  Got it
+                </Button>
+              </div>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="">
-              <StepController
-                theme="Carbon"
-                steps={3}
-                currentStep={step}
-              ></StepController>
-            </div>
-            {resolveStepContent()}
-          </>
-        )}
+          </div>
+        </>
+
+        <div className={`${showGudieLine?'invisible hidden':'visible'}`}>
+          <div className="">
+            <StepController
+              theme="Carbon"
+              steps={3}
+              currentStep={step}
+            ></StepController>
+          </div>
+          {resolveStepContent()}
+        </div>
       </div>
     </>
   );
