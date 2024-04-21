@@ -353,7 +353,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       {mode == 'review' || mode == 'share' ?
         <div className=''>
           <Button onClick={() => {
-            window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
+            window.open('https://ar.avatalk.me/#detect5/?user='+shareUser.information?.userId+'&view='+mode)
           }} data-mode={(showToturial && toturialStep == 1)?"toturials":''} theme='Carbon-Ar'>
             <div>
               <div className={`${theme}-Ar-Button-icon`}></div>
