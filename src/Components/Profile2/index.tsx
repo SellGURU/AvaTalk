@@ -98,13 +98,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       })
     }
   })  
-  useEffect(() => {
-      if(videoRef.current){
-          const refren = videoRef.current  as any   
-          // setShowOpacity(true)
-          refren.load()
-      }        
-  },[isTalking])     
+  // useEffect(() => {
+  //     if(videoRef.current){
+  //         const refren = videoRef.current  as any   
+  //         // setShowOpacity(true)
+  //         refren.load()
+  //     }        
+  // },[isTalking])     
   useEffect(() => {
     if(audioRef.current){
         const refren = audioRef.current  as any   
@@ -208,9 +208,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :
             <div className="w-full profileAimation1 h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden">
               <div className="h-[261px] relative overflow-y-hidden">
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className="pk_video" preload="auto"  autoPlay={true} loop muted >
-                    <source id="videoPlayer"  src={isTalking?shareUser.information?.talk_video_avater :shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                </video>           
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'}`} preload="auto"  autoPlay={true} loop muted >
+                    <source id="videoPlayer"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                </video>        
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'}`} preload="auto"  autoPlay={true} loop muted >
+                    <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                </video>                      
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
                   {isMuted?
                     <div onClick={() => {
