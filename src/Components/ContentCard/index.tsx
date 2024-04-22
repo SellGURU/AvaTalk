@@ -39,9 +39,11 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
       }
     }} data-mame={item.getTypeName()}  onDrag={() => {
         const element = document.getElementById('sortable')?.children
-        const resolve =Array(element?.length).map((_el,index) => {
-          return element?.item(index)?.attributes[0].value
+        // console.log(element?.item(0)?.attributes[1].value)
+        const resolve =Array(element?.length).fill(1).map((_el,index) => {
+          return element?.item(index)?.attributes[1].value
         } )
+        console.log(resolve)
         resolve.forEach((_,ind) => {
           item.setOrder(ind)
         })
