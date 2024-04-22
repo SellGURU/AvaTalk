@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react"
+import { useReducer, useState } from "react"
 import { MenuType } from "../../Types"
 import {Splash ,Footer} from "../../Components"
 import { Outlet, useNavigate} from "react-router-dom"
@@ -13,9 +13,11 @@ const Home2 = () => {
     const authContext = useAuth()
     const [menu,setMenu] = useState<MenuType>(resolveMenuFromRoute() as MenuType)
     const [showSplash,setshowSplash] = useState(true);
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
         Auth.getBoxs((res) => {
             authContext.currentUser.setBox(res)
+            forceUpdate()
         })
 
     })

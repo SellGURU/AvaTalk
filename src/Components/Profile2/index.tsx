@@ -131,7 +131,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
         <Outlet></Outlet>
 
-        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} px-4 sticky`}>
+        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
           {mode == 'profile' ?
             <div className=" w-48 h-[40px] ">
               <Button onClick={() => {
@@ -159,7 +159,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {
             scrolled?
             <>
-              <div className="w-full pb-4 bg-white ">
+              <div className="w-full py-4 px-4 bg-white " style={{boxShadow:'0px 4px 12px -4px rgba(111, 140, 176, 0.41)'}}>
                 <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start">
                   <div className="ml-2">
                     <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
@@ -195,7 +195,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       </div>
                       <div className={`${theme}-Profile-Box`}>
                         <Button onClick={() => {
-                          window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
+                          window.open('https://ar.avatalk.me/#detect5/?user='+shareUser.information?.userId+'&view='+mode)
                         }} theme='Carbon-back'>
                           <div className={`${theme}-Profile-BoxVector`}></div>
                         </Button> 
@@ -304,10 +304,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className={`${theme}-Profile-Content mt-4`}>
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
                 <ul style={{ width: '100%' }} id="sortable">
-                  {shareUser.boxs.map((item: Box) => {
+                  {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item: Box) => {
                     return (
-                      <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
-                      </ContentCard>
+                      <>
+                        {item.isShareAble() || mode=='profile' ?
+                          <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
+                          </ContentCard>
+                          :undefined
+                        }
+                      </>
                     )
                   })}
                 </ul>
@@ -327,7 +332,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <p>Legals</p>
                 <div className="flex gap-3">
                   <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-                  <img className="w-4 h-4 cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
+                  <img className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
                   <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
 
 
