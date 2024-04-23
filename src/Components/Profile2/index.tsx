@@ -190,8 +190,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   </div>
                 :
                   <>
-                    <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-8':'px-2'}`}>
-                      <div className="w-[65%] max-w-[75%] flex items-center justify-between">
+                    <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-0':'px-2'}`}>
+                      <div className="w-[75%] max-w-[85%] flex items-center justify-between">
                         <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
                           setPanel(el as any)
                         }} theme="Carbon"></ToggleButton2>
@@ -270,20 +270,20 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
               :
               <>
-                <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-8':'px-2'}`}>
-                  <div className="min-w-[65%] max-w-[72%] flex items-center justify-between">
-                    <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
-                      setPanel(el as any)
-                    }} theme="Carbon"></ToggleButton2>
-                  </div>
-                  <div className={`${theme}-Profile-Box`}>
-                    <Button onClick={() => {
-                      window.open('https://ar.avatalk.me/#detect4/?user='+shareUser.information?.userId+'&view='+mode)
-                    }} theme='Carbon-back'>
-                      <div className={`${theme}-Profile-BoxVector`}></div>
-                    </Button> 
-                  </div>
-                </div>
+                    <div className={`flex items-center mt-4 justify-between ${window.innerWidth>=500?'px-4':'px-2'}`}>
+                      <div className="w-[75%] max-w-[85%] flex items-center justify-between">
+                        <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                          setPanel(el as any)
+                        }} theme="Carbon"></ToggleButton2>
+                      </div>
+                      <div className={`${theme}-Profile-Box`}>
+                        <Button onClick={() => {
+                          window.open('https://ar.avatalk.me/#detect5/?user='+shareUser.information?.userId+'&view='+mode)
+                        }} theme='Carbon-back'>
+                          <div className={`${theme}-Profile-BoxVector`}></div>
+                        </Button> 
+                      </div>
+                    </div>
               </>
               }
             </div>
