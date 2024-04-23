@@ -42,6 +42,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               fullName:el.full_name,
               id:el.created_contact_id,
               job:'',
+              isExchange:el.adding_method == 'exchange'?el.adding_method:'',
               mapLocation:{
                 lat:0,
                 lng:0
@@ -170,7 +171,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         }        
       </div>
       <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
-        <div className="w-[45%] min-w-[250px]">
+        <div className="w-[45%] min-w-[205px]">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
         </div>
         <div className="w-[30%] min-w-[100px]">
