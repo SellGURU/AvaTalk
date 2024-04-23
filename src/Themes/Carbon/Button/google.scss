@@ -9,3 +9,7 @@
 .Carbon-Google-Button-container[data-mode ='profile-review-button'] {
   @apply h-10 w-48 #{!important};
 }
+
+.Carbon-Google-Button-container[data-mode ='profile-edit-button'] {
+  @apply h-10 w-full  #{!important};
+}

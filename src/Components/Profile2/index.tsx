@@ -175,13 +175,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="flex justify-evenly mt-4 gap-4 ">
                     <Button onClick={() => {
                       navigate('/edit')
-                    }} theme="Carbon-Google" data-mode="profile-review-button">
+                    }} theme="Carbon-Google" data-mode="profile-edit-button">
                       <div
                         className={`${theme}-Profile-EditProfileBtnVector2`}
                       ></div>
                       <div>Edit Profile</div>
                     </Button>
-                    <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                    <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
+                      <div
+                        className={`${theme}-Profile-EditProfileBtnVector3`}
+                      ></div>     
                       Share profile
                     </Button>
                   </div>
@@ -247,16 +250,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </p>
               </div>
               {mode == 'profile' ?
-                <div className="flex justify-evenly gap-4 ">
+                <div className="flex justify-evenly gap-4 px-4 ">
                   <Button onClick={() => {
                     navigate('/edit')
-                  }} theme="Carbon-Google" data-mode="profile-review-button">
+                  }} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2`}
                     ></div>
                     <div>Edit Profile</div>
                   </Button>
-                  <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button">
+                  <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3`}
                     ></div>     
