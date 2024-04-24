@@ -30,9 +30,89 @@
     opacity: 100%;
   }
 }
+
+@keyframes profileAnimition2{
+  0%{
+    opacity: 100%;
+  }
+  80%{
+    height: 398;
+  }
+  100%{
+    margin-top: 0px;
+    height: 0px;
+    opacity: 0%;
+  }
+}
+@keyframes profileAnimition2-backWard{
+  0%{
+    margin-top: 0px;
+    height: 0px;
+    opacity: 0%;    
+  }
+  80%{
+    height: 398;
+  }
+  100%{
+    opacity: 100%;
+  }
+}
+
+@keyframes profileAnimition3{
+  20%{
+    visibility: visible;  
+  }
+
+  100%{
+    visibility: visible;
+    margin-top: 0px;
+  }
+}
+@keyframes profileAnimition3-backWard{
+  0%{
+    margin-top: 0px; 
+    visibility: visible;
+  }
+  60%{
+    visibility: hidden;
+  }
+
+  100%{
+    visibility: hidden;
+    margin-top: -320px;
+  }
+}
+
 .profileAimation1 {
   animation-name:profileAnimition ;
   animation-duration: 2s;
+  /* animation-play-state: paused; */
+  animation-fill-mode: both;
+}
+
+.profileAimation2 {
+  animation-name:profileAnimition2 ;
+  animation-duration: 2s;
+  /* animation-play-state: paused; */
+  animation-fill-mode: forwards;
+}
+.profileAimation3 {
+  animation-name:profileAnimition3 ;
+  animation-duration: 2s;
+  /* animation-play-state: paused; */
+  animation-fill-mode: forwards;
+}
+.profileAimation2-backward {
+  animation-name:profileAnimition2-backWard ;
+  animation-duration: 2s;
+  /* animation-play-state: paused; */
+  animation-fill-mode: forwards;
+}
+.profileAimation3-backward {
+  animation-name:profileAnimition3-backWard;
+  animation-duration: 4s;
+  /* animation-play-state: paused; */
+  animation-fill-mode: forwards;
 }
 
 @layer utilities {
