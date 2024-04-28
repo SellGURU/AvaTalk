@@ -53,7 +53,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             isOpen={isOpen}
             onAfterOpen={onAfterOpen}
             onRequestClose={onClose}
-            style={{content:{borderRadius:'24px',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
+            style={{content:{borderRadius:'24px',overflowY:'scroll',maxHeight:'90svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         >
             {
@@ -69,8 +69,8 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 </Button>
             </div>
             <div className={`${theme}-ShareContact-Body`}>
-                <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}  {authContext.currentUser.information?.lastName}</h1>
-                <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p>
+                {/* <h1 className={`${theme}-Profile-ProfileName mb-1`}>{authContext.currentUser.information?.firstName}  {authContext.currentUser.information?.lastName}</h1>
+                <p className={`${theme}-Profile-SubTitle`}>{authContext.currentUser.information?.job}</p> */}
                 {/* <div className={`${theme}-ShareContact-QrCodeVector`}></div> */}
                 {/* <div id='qrCodeBox' className={`${theme}-ShareContact-QrCodeVector`}>
                     <QRCode
@@ -83,10 +83,26 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         >
                         </QRCode>                      
                 </div> */}
-                <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
-                    <img src={qrcodeValue} alt="" />
-                </div>
                 <div className={`${theme}-ShareContact-Cards`}>
+                    <div className='w-full py-4 bg-gray-200 mt-11 relative btnInnerShadowsDark flex justify-center rounded-[27px] '>
+                        <div className=' absolute w-[70px] h-[70px] p-[6px] top-[-45px] bg-gray-200 border border-gray-100 rounded-full'>
+                           <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
+                        </div>   
+                        <div>
+                            <div>
+                                <div className='text-gray-700 mt-4 font-poppins text-sm text-center font-semibold'>{authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}</div>
+                                {authContext.currentUser.information?.job && authContext.currentUser.information.company ?
+                                 <div className='text-gray-700 opacity-80 font-poppins text-[11px] text-center'>{authContext.currentUser.information?.job +'@'+authContext.currentUser.information?.company}</div>
+                                :
+                                undefined
+                                }
+                            </div>
+                            <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
+                                <img src={qrcodeValue} alt="" />
+                            </div>
+
+                        </div>
+                    </div>
                     <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`} >
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-SmsVector`}></div>
