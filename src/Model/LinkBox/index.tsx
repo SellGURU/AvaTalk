@@ -2,6 +2,7 @@ import { Box } from "..";
 import { Tooltip } from 'react-tooltip'
 
 class Link {
+    public order:number = -1
     constructor(protected url:string,protected name:string){
 
     } 
@@ -45,7 +46,7 @@ class LinkBox extends Box{
             <>
                 {this.links.length> 0 ?
                 <div className={`${theme}-Profile-Vectors`}>
-                    {this.links.map((item) => {
+                    {this.links.sort((a,b) => a.order -b.order).map((item) => {
                         const newSocal = Object.assign(new Link('htps://some.com',''),item)
                         return (
                             <>

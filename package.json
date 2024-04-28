@@ -1,7 +1,7 @@
 {
   "name": "card-visit",
   "private": true,
-  "version": "0.10.11",
+  "version": "0.10.12",
   "description": "Beta-",
   "type": "module",
   "scripts": {

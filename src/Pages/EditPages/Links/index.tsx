@@ -1,6 +1,6 @@
 import { Button, TextField } from "symphony-ui";
 import { BackIcon} from "../../../Components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LinkBox, Link } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth"
 import { useFormik } from "formik";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { AddLink, Confirm } from "../../../Components/__Modal__";
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 
 const validationSchema = Yup.object().shape({
     title:Yup.string().required(),
@@ -62,7 +63,15 @@ const EditLinks = () => {
     console.log(newArr)
     setLinks(newArr)
   }
-
+  useEffect(() => {
+    setTimeout(() => {
+        const el = document.getElementById('sortable2');
+        Sortable.create(el,{
+          animation: 150,
+          filter: ".ignore-elements"
+        });      
+    }, 500);
+  })
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -79,53 +88,66 @@ const EditLinks = () => {
             </div>
           :
             <>
-            {links.map((item:Link,index) => {
-                return (
-                  <div className="mt-3 px-6">
-                    {index == 0 ?
-                      <div className={`Carbon-Select-label mb-1 w-full text-left`} >
-                       Links
-                      </div>         
-                      :undefined            
-                    }
-                   <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
-                    <div className="w-full flex items-center justify-between">
-                      <div className="flex justify-start ml-4 items-center">
-                        {/* <img className="h-4" src={"./icons/media/"+item.miniIconUrl()} alt="" /> */}
-                        <div className="">
-                          <div className="text-[13px] mb-[-4px]">
-                            {item.getName()}
-                          </div>
-                          <a href="">
-                            <div className=" text-[10px] text-cyan-500">{item.geturl().substring(0,30)}</div>
-                          </a>
+            <ul style={{width:'100%'}} id="sortable2">
+               <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Links</div>
+              {links.map((item:Link,index) => {
+                  return (
+                    <li data-mame={item.getName()} draggable onDrag={() => {
+                          const element = document.getElementById('sortable2')?.children
+                          const resolve =links.map((_el,index) =>{
+                            return element?.item(index)?.attributes[0].value
+                          })
+                          resolve.forEach((elem,ind) => {
+                            if(links.find(e=>e.getName() == elem)){
+                              links.filter(e=>e.getName() == elem)[0].order = ind
+                            }
+                          })
+                        }}  className="mt-3 px-6">
+                      {/* {index == 0 ?
+                        <div className={`Carbon-Select-label mb-1 w-full text-left`} >
+                        Links
+                        </div>         
+                        :undefined            
+                      } */}
+                    <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
+                      <div className="w-full flex items-center justify-between">
+                        <div className="flex justify-start ml-4 items-center">
+                          {/* <img className="h-4" src={"./icons/media/"+item.miniIconUrl()} alt="" /> */}
+                          <div className="">
+                            <div className="text-[13px] mb-[-4px]">
+                              {item.getName()}
+                            </div>
+                            <a href="">
+                              <div className=" text-[10px] text-cyan-500">{item.geturl().substring(0,30)}</div>
+                            </a>
 
+                          </div>
+                        </div>
+                        <div className="flex justify-end gap-1 items-start">
+                            <div onClick={() => {
+                              setEditName(item.getName())
+                              setEditeValue(item.geturl())
+                              setOpenAddLink(true)
+                            }} className={`Carbon-ContactDetails-editIcon`}></div>
+                            <div onClick={() => {
+                              // setConfirmDelete(true)
+                              confirmAlert({
+                                  customUI: ({ onClose }) => {
+                                          return (
+                                              <Confirm onConfirm={() => deleteSocial(index)} content="Are you sure you want to delete this link?" title="Delete Link" onClose={onClose}></Confirm>
+                                          );
+                                  },
+                                  overlayClassName:"dispalyOverLay"
+                              })
+                              // deleteSocial(index)
+                            }} className={`Carbon-ContactDetails-recycleIcon`}></div>                      
                         </div>
                       </div>
-                      <div className="flex justify-end gap-1 items-start">
-                          <div onClick={() => {
-                            setEditName(item.getName())
-                            setEditeValue(item.geturl())
-                            setOpenAddLink(true)
-                          }} className={`Carbon-ContactDetails-editIcon`}></div>
-                          <div onClick={() => {
-                            // setConfirmDelete(true)
-                            confirmAlert({
-                                customUI: ({ onClose }) => {
-                                        return (
-                                            <Confirm onConfirm={() => deleteSocial(index)} content="Are you sure you want to delete this link?" title="Delete Link" onClose={onClose}></Confirm>
-                                        );
-                                },
-                                overlayClassName:"dispalyOverLay"
-                            })
-                            // deleteSocial(index)
-                          }} className={`Carbon-ContactDetails-recycleIcon`}></div>                      
-                      </div>
                     </div>
-                   </div>
-                  </div>                 
-                )
-            })}
+                    </li>                 
+                  )
+              })}
+            </ul>
             </>
           }
           <div className="px-6 mt-3">
