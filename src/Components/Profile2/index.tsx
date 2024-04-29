@@ -158,7 +158,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </>
           }
 
-            <div className={`w-full mt-[-320px] invisible py-4 px-4 bg-white ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `} style={{boxShadow:'0px 4px 12px -4px rgba(111, 140, 176, 0.41)'}}>
+            <div className={`w-full mt-[-320px] invisible py-4 px-4  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
                 <div className="ml-2">
                   <img className="w-[129px] border-[8px] border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
@@ -218,10 +218,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   {isMuted?
                     <div onClick={() => {
                       setISMuted(false)
-                    }} className={`${theme}-Profile-mutedVector`}></div>
+                    // }} className={`${theme}-Profile-mutedVector`}></div>
+                  }} className={`${theme}-Profile-mutedVector`}></div>
                   :
-                    <div onClick={() => {
+                    <div onClick={() => {{isTalking &&
+
                       setISMuted(true)
+                    }
+                      setIsTalking(false)
+
                     }} className={`${theme}-Profile-VolumeHighVector`}></div>
                   }
                   {/* <div

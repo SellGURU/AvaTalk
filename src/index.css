@@ -36,7 +36,7 @@
     opacity: 100%;
   }
   80%{
-    height: 398;
+    height: 398px;
   }
   100%{
     margin-top: 0px;
@@ -51,7 +51,7 @@
     opacity: 0%;    
   }
   80%{
-    height: 398;
+    height: 398px;
   }
   100%{
     opacity: 100%;
@@ -85,32 +85,37 @@
 
 .profileAimation1 {
   animation-name:profileAnimition ;
-  animation-duration: 2s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: both;
 }
 
 .profileAimation2 {
   animation-name:profileAnimition2 ;
-  animation-duration: 2s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
 .profileAimation3 {
   animation-name:profileAnimition3 ;
-  animation-duration: 2s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
 .profileAimation2-backward {
   animation-name:profileAnimition2-backWard ;
-  animation-duration: 2s;
-  /* animation-play-state: paused; */
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
+/* animation-play-state: paused; */
 .profileAimation3-backward {
   animation-name:profileAnimition3-backWard;
-  animation-duration: 4s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
