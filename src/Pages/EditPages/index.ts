@@ -7,4 +7,5 @@ import EditLinks from "./Links";
 import EditAiSetting from "./AiSetting";
 import EditContactInfo from "./ContactInfo";
 import EditFile from "./File";
-export { EditAbout, EditGallery, EditGoogleMap,EditFile, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };
+import EditAvater from "./Avater";
+export { EditAbout, EditGallery,EditAvater ,EditGoogleMap,EditFile, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };
