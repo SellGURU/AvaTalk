@@ -6,4 +6,5 @@ import EditSocials from "./Socials";
 import EditLinks from "./Links";
 import EditAiSetting from "./AiSetting";
 import EditContactInfo from "./ContactInfo";
-export { EditAbout, EditGallery, EditGoogleMap, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };
+import EditFile from "./File";
+export { EditAbout, EditGallery, EditGoogleMap,EditFile, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };

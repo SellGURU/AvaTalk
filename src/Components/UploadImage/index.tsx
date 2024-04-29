@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { HtmlHTMLAttributes, useState } from "react";
+import React, { HtmlHTMLAttributes, useEffect, useState } from "react";
 
 
 type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -53,6 +53,9 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
       uploades(newArr)
     }    
   }
+  useEffect(() => {
+    console.log(files)
+  })
   return (
     <>
     <div className="w-full text-left">
@@ -107,7 +110,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                       {files.map((item,index) => {
                         return (
                           <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                            <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(15)}</div>
+                            <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
                             <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
                             </div>
                           </div>

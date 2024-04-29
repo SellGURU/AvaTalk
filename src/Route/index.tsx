@@ -50,6 +50,10 @@ const route = createHashRouter([
                 element: <EditGoogleMap></EditGoogleMap>,
               },
               {
+                path:"files",
+                element:<EditFile></EditFile>
+              },
+              {
                 path: "ai-setting",
                 element: <EditAiSetting></EditAiSetting>,
               },

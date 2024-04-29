@@ -47,6 +47,12 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Add websites to your profile.",
     },
     {
+      name: "File",
+      icon: "link.svg",
+      link: "Files",
+      description: "Add files to your profile.",
+    },    
+    {
       name: "Google Map",
       icon: "location2.svg",
       link: "googlemap",

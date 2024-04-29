@@ -5,6 +5,8 @@ import  Box from './Boxs'
 import AboutBox from "./AboutBox";
 import GalleryBox from "./GalleryBox";
 import GoogleMapBox from "./GoogleMap";
+import FileBox from "./File";
+import { File } from "./File";
 
 export {
     User,
@@ -15,5 +17,7 @@ export {
     LinkBox,
     AboutBox,
     GalleryBox,
-    GoogleMapBox
+    GoogleMapBox,
+    FileBox,
+    File
 }

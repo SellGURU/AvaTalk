@@ -36,6 +36,10 @@
     background: url(/Carbon/globalLinksVector.svg) no-repeat center;
     @apply w-6 h-6;
 }
+.Carbon-ContentCard-PdfVector{
+    background: url(/Carbon/filePdf.svg) no-repeat center;
+    @apply w-6 h-6;
+}
 .Carbon-ContentCard-MaskVector{
     mask-size: 100%;
     -webkit-mask-repeat: no-repeat;
