@@ -5,11 +5,13 @@ import { useConstructor } from "../../../help";
 import { Auth } from "../../../Api";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { BeatLoader, RingLoader } from "react-spinners";
+import { RingLoader } from "react-spinners";
 import { Button } from "symphony-ui";
 import CropperBox from "../../../Components/CropperBox";
 import { AddAvatar } from "../../../Components/__Modal__";
 import { BackIcon } from "../../../Components";
+import { useNavigate } from "react-router-dom";
+import { publish } from "../../../utils/event";
 interface Avatars {
   photo: string;
   video: string;
@@ -70,6 +72,7 @@ const EditAvater: React.FC = () => {
       })     
   }
   const context = useAuth()
+  const navigate = useNavigate();
   useConstructor(() => {
     setIsLoading(true)
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
@@ -84,6 +87,13 @@ const EditAvater: React.FC = () => {
       }     
     })
   })
+  useEffect(() => {
+    if(isLoading) {
+      publish('isLoading-start',{})
+    }else{
+      publish('isLoading-stop',{})
+    }
+  },[isLoading])
   useEffect(() => {
     setCurrentAvatr({
       photo:"",
@@ -294,7 +304,9 @@ const EditAvater: React.FC = () => {
                 disabled={formik.values.silent_video_avatar.length == 0}
                 onClick={() =>{
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
-                    context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)            
+                    context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
+                    publish('refreshPage',{})
+                    navigate(-1)         
                   })
                 }}
                 theme="Carbon"
@@ -303,14 +315,6 @@ const EditAvater: React.FC = () => {
             </Button>
             </div>
         </div>
-        {isLoading ? (
-          <>
-            <div className="absolute z-50 w-full h-full left-0 top-0 flex justify-center items-center">
-              <BeatLoader size={8} color="#FFFFFF"></BeatLoader>
-            </div>
-            <div className="absolute w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
-          </>
-        ) : undefined}
         <CropperBox
           url={Cropper}
           onResolve={(resolve: string | ArrayBuffer | null) => {

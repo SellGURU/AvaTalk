@@ -133,7 +133,7 @@ class Auth extends Api {
   }
 
   static showProfile(resolve: (data:any) => void){
-    this.post('/show_profile',{}).then(res => {
+    this.post('/show_profile',{},{noPending:true}).then(res => {
       resolve(res.data)
     })
   }

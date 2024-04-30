@@ -43,7 +43,7 @@ class User {
     }
     public updateInformation(information:Information){
         this.information = information
-        toast.success("Done Successfully!")
+        // toast.success("Done Successfully!")
         this.syncToLocalStorage()
     }
     public updateAvater(pic:string,silent:string){
