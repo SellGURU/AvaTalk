@@ -98,7 +98,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                                 }
                             </div>
                             <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
-                                <img src={qrcodeValue} alt="" />
+                                <img src={qrcodeValue} alt="" className='mt-5 mb-6'/>
                             </div>
 
                         </div>

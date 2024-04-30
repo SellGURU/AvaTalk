@@ -215,10 +215,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                      
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  {isMuted?
+                  {isTalking||isMuted ||chats.length>0 ?
+                  <div>
+                  {isMuted  ?
                     <div onClick={() => {
                       setISMuted(false)
-                    // }} className={`${theme}-Profile-mutedVector`}></div>
                   }} className={`${theme}-Profile-mutedVector`}></div>
                   :
                     <div onClick={() => {{isTalking &&
@@ -229,6 +230,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
                     }} className={`${theme}-Profile-VolumeHighVector`}></div>
                   }
+                  </div>
+                :undefined  
+                }
+
                   {/* <div
                     className={`${theme}-Profile-LanguageSquareVector`}
                   ></div> */}
@@ -329,7 +334,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
             {mode != 'profile' ?
             <>
-              <div className="flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
+            <div className=" absolute w-full z-50 bottom-0">
+            <div className=" flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
                 <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
                 <p>Pricing</p>
                 <p>FAQ</p>
@@ -343,7 +349,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
 
               </div>
-              <div className=" bg-[#E2E8F0] sticky z-50 bottom-0 px-5 pt-3 pb-6 rounded-t-2xl">
+              <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
                   <Button disabled  theme="Carbon-Google">Exchange Contact</Button>
                   <Button onClick={() => {
@@ -370,6 +376,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 }} theme="Carbon">Save Contact</Button>
                 </div>
               </div>
+            </div>
+
             </>
             :undefined}
           </div>

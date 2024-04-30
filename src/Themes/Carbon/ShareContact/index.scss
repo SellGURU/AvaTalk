@@ -7,8 +7,9 @@
 }
 
 .Carbon-ShareContact-QrCodeVector{
+    margin: 0 auto ;
     // background-image: url(/Carbon/qrCode.svg);
-    @apply w-28 h-28  mt-5 mb-6;
+    @apply w-28 h-28  ;
 }
 .Carbon-ShareContact-VectorMainSection {
     @apply w-6 h-6 p-1 flex justify-center items-center rounded-full cursor-pointer borderBox-Gray ;
