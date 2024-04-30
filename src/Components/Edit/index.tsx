@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "symphony-ui";
 import { Card } from "..";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 interface EditProps {
   theme?: string;
@@ -71,6 +72,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Make your page come to life with a video.",
     },
   ]);
+  const authContext = useAuth()
   return (
     <>
       <Outlet></Outlet>
@@ -86,8 +88,24 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
           </Button>
           <p className={`${theme}-Edit-title`}>Edit Profile</p>
         </div>
-
         <div className="px-6 mt-[120px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+          <div className="w-full flex justify-center mb-5">
+            <div className="text-center relative">
+                <div onClick={() => {
+                  navigate('/edit/avatars')
+                }} className={`${
+                    "absolute rounded-full w-[30px] h-[30px] bg-gray-100  flex justify-center items-center border border-white borderBox-Gray  cursor-pointer -right-0 -top-2"
+                  }`}>
+                <img
+                  className="w-[20px] h-[20px]"
+                  src="./icons/gallery-edit.svg"
+                  alt=""
+                />
+              </div>              
+              <img className="w-[80px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
+              <div className="text-gray-700 mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
+            </div>
+          </div>
           {editCards.map((item) => {
             return <Card linkTo={item.link} content={item} theme="Carbon"></Card>;
           })}

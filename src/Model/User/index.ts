@@ -43,7 +43,16 @@ class User {
     }
     public updateInformation(information:Information){
         this.information = information
-        toast.success("Done Successfully!")
+        // toast.success("Done Successfully!")
+        this.syncToLocalStorage()
+    }
+    public updateAvater(pic:string,silent:string){
+        if(this.information?.silent_video_avatar){
+            this.information.silent_video_avatar = silent
+        }
+        if(this.information?.imageurl){
+            this.information.imageurl = pic
+        }
         this.syncToLocalStorage()
     }
     public resolveBackImageUrl() {

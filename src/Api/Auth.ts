@@ -133,7 +133,7 @@ class Auth extends Api {
   }
 
   static showProfile(resolve: (data:any) => void){
-    this.post('/show_profile',{}).then(res => {
+    this.post('/show_profile',{},{noPending:true}).then(res => {
       resolve(res.data)
     })
   }
@@ -170,10 +170,9 @@ class Auth extends Api {
     });
   }
 
-  static updateProfilePic(profile_pic:string){
-    this.post('/change_profile_pic',{profile_pic:profile_pic}).then(res => {
-      console.log(res)
-    })
+  static updateProfilePic(profile_pic:string,silent_video_avatar?:string){
+    const response = this.post('/change_profile_pic',{profile_pic_url:profile_pic,silent_video_avatar:silent_video_avatar})
+    return response
   }
 
   static updateBackPic(profile_pic:string){
