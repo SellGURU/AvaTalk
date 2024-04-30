@@ -6,9 +6,10 @@ import { Button } from "symphony-ui"
 interface CropperBoxProps {
     url:string
     onResolve: (base64:string|ArrayBuffer|null) => void
+    onCancel:() => void
 }
 
-const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve}) => {
+const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
     const [cropper,setCropper] = useState<any>()
     const getCropData = async () => {
         if (cropper) {
@@ -27,6 +28,9 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve}) => {
             }
         }
     };    
+    const cancel =() => {
+        onCancel()
+    }
     return (
         <>
         {
@@ -45,7 +49,8 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve}) => {
                                 setCropper(instance);
                             }}
                             />
-                            <div className="mt-2">
+                            <div className="mt-2 flex gap-8">
+                                <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>cancel</Button> 
                                 <Button onClick={getCropData} theme="Carbon-Crop">crop</Button> 
                             </div>
 

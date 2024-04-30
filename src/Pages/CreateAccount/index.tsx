@@ -908,6 +908,9 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             }              
             });
           }}
+          onCancel={() => {
+            setCropper("");
+          }}
         ></CropperBox>
         <AddAvatar
           onTakePhoto={() => {
