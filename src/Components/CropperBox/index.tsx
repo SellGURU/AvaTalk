@@ -36,7 +36,9 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve}) => {
                     <div className='absolute w-full top-0 left-0 h-full flex z-30 justify-center items-center'>
                         <div>
                             <Cropper
+                            // autoCropArea={80}
                             src={url}
+                            aspectRatio={1.5}
                             style={{ height: 400, width: 400 }}
                             onInitialized={(instance) => {
                                 console.log(instance)

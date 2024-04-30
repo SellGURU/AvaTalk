@@ -100,6 +100,14 @@ class User {
         toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }
+
+    public updateBoxs(orderBoxs:Array<string>) {
+        this.boxs.forEach((box:Box) => {
+            box.setOrder(orderBoxs.indexOf(box.getTypeName())+1)
+        })
+        Auth.updateBox(this.boxs)
+        this.syncToLocalStorage()
+    }
     public removeBox(newBox:Box) {
         this.boxs = this.boxs.filter((item) => item.getTypeName() != newBox.getTypeName())
         Auth.deleteBox(newBox.getTypeName())

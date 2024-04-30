@@ -885,7 +885,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             
             setIsLoading(true);
             Auth.createAvatarVideo(resolve as string).then((response) => {
-            if(response.data == 'No face detected'){
+            if(response.data == 'No face detected' || !response.data.avatar_pic_link){
               toast.warn(response.data )
               setIsLoading(false)
             }else{
