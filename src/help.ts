@@ -43,7 +43,7 @@ const useConstructor = (callBack = () => {}) => {
 };
 
 const boxProvider = (box: any) => {
-  switch (box.typeName) {
+  switch (box.type_name) {
     case "SocialBox": {
       return Object.assign(new SocialBox("simple", []), box);
     }
