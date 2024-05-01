@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
-  URL: Yup.string().required(),
+  url: Yup.string().required(),
 });
 
 const EditAvailability = () => {
@@ -20,7 +20,7 @@ const EditAvailability = () => {
   }
   const initialValue = {
     title: currentBox.getTitle(),
-    URL: currentBox.getBio(),
+    url: currentBox.getUrl(),
   };
   const formik = useFormik({
     initialValues: initialValue,
@@ -30,7 +30,7 @@ const EditAvailability = () => {
     },
   });
   const submit = () => {
-    auth.currentUser.addBox(new AvailabilityBox(formik.values.title, formik.values.URL));
+    auth.currentUser.addBox(new AvailabilityBox(formik.values.title, formik.values.url));
     navigate("/");
   };
   return (
@@ -55,14 +55,14 @@ const EditAvailability = () => {
           </div>
           <div className="px-6 mt-3 text-left">
             <TextField
-              {...formik.getFieldProps("URL")}
-              errorMessage={formik.errors?.URL}
+              {...formik.getFieldProps("url")}
+              errorMessage={formik.errors?.url}
               placeholder="https://example.com"
-              inValid={formik.errors?.URL != undefined && (formik.touched?.URL as boolean)}
+              inValid={formik.errors?.url != undefined && (formik.touched?.url as boolean)}
               theme="Carbon"
-              label="URL"
+              label="url"
               type="text"
-              name="URL"
+              name="url"
             ></TextField>
           </div>
           <div className="px-6 mt-10">

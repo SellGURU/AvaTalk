@@ -55,7 +55,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     },
     {
       name: "File",
-      icon: "link.svg",
+      icon: "copy.svg",
       link: "Files",
       description: "Add files to your profile.",
     },    
