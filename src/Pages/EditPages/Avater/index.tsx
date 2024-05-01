@@ -12,6 +12,7 @@ import { AddAvatar } from "../../../Components/__Modal__";
 import { BackIcon } from "../../../Components";
 import { useNavigate } from "react-router-dom";
 import { publish } from "../../../utils/event";
+import Camera from "react-html5-camera-photo";
 interface Avatars {
   photo: string;
   video: string;
@@ -71,6 +72,7 @@ const EditAvater: React.FC = () => {
              
       })     
   }
+  const [openCamera,setOpenCamera] = useState(false);
   const context = useAuth()
   const navigate = useNavigate();
   useConstructor(() => {
@@ -87,6 +89,14 @@ const EditAvater: React.FC = () => {
       }     
     })
   })
+  const handleTakePhoto =  (dataUri:string) => {
+    // Do stuff with the photo...
+    console.log(dataUri);
+    setTimeout(() => {
+      setOpenCamera(false)
+      setCropper(dataUri)
+    }, 1000);
+  }    
   useEffect(() => {
     if(isLoading) {
       publish('isLoading-start',{})
@@ -327,7 +337,7 @@ const EditAvater: React.FC = () => {
             
             setIsLoading(true);
             Auth.createAvatarVideo(resolve as string).then((response) => {
-            if(response.data == 'No face detected'){
+            if(response.data == 'No face detected' || !response.data.avatar_pic_link){
               toast.warn(response.data )
               setIsLoading(false)
             }else{
@@ -350,8 +360,15 @@ const EditAvater: React.FC = () => {
             }              
             });
           }}
+          onCancel={() => {
+            setCropper("");
+          }}
         ></CropperBox>
         <AddAvatar
+          onTakePhoto={() => {
+            setAddAvatar(false)
+            setOpenCamera(true)
+          }}
           isCanRemove={uploadedAvater.photo.length>0}
           onRemove={() => {
             // setSelectedAvatar("")
@@ -389,6 +406,17 @@ const EditAvater: React.FC = () => {
           title="Link"
         ></AddAvatar>
       </div>
+      {openCamera?
+      <>
+        <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
+            <Camera
+              onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+            />      
+        </div>
+        <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
+      </>
+      :
+      undefined}
     </>
   );
 };
