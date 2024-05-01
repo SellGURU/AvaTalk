@@ -306,7 +306,8 @@ const EditAvater: React.FC = () => {
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
                     context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
                     publish('refreshPage',{})
-                    navigate(-1)         
+                    navigate('/')
+                    window.location.reload()         
                   })
                 }}
                 theme="Carbon"
