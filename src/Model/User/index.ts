@@ -19,6 +19,7 @@ interface Information {
     userId?:string
     silent_video_avatar?:string
     talk_video_avater?:string
+    referral_code?:string
 }
 
 // interface Location {

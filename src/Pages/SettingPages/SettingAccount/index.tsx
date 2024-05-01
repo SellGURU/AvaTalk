@@ -152,7 +152,8 @@ const SettingAccount =() => {
                             silent_video_avatar:context.currentUser.information?.silent_video_avatar,
                             talk_video_avater:context.currentUser.information?.talk_video_avater,
                             workEmail:context.currentUser.information?.workEmail as string,
-                            userId:context.currentUser.information?.userId as string
+                            userId:context.currentUser.information?.userId as string,
+                            referral_code:context.currentUser.information?.referral_code as string
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>

@@ -97,6 +97,14 @@ class Auth extends Api {
     return response
   }
 
+  static check_user_existence(mobile_number?:string,email?:string) {
+    const response = this.post('/check_user_existence',{
+      email:email,
+      mobile_number:mobile_number
+    })
+    return response
+  }
+
   static avatarList(data:any) {
     const response = this.post("/avatar_list",data)
     return response

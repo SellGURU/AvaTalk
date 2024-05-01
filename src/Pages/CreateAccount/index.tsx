@@ -459,7 +459,14 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 !formik.touched.LastName
               }
               onClick={() => {
-                setStep(2);
+                Auth.check_user_existence(formik.values.Phone,formik.values.email).then((res) => {
+                  console.log(res)
+                  if(res.data == false){
+                    setStep(2);
+                  }else{
+                    toast.error('User exists')
+                  }
+                })
               }}
               theme="Carbon"
             >
