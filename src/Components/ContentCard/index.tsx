@@ -17,7 +17,7 @@ interface ContentCardProps {
 const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userId}) => {
   const [activeDrag,setActiveDrag] = useState(false)
   const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
-  
+  const context = useAuth()
   // console.log(os)
   useEffect(() => {
     setTimeout(() => {
@@ -37,16 +37,19 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
           sub_event_category:item.getEventName() as any
         })         
       }
-    }} data-mame={item.getTypeName()}  onDrag={() => {
+    }} data-mame={item.getTypeName()}  onDragEnd={() => {
         const element = document.getElementById('sortable')?.children
         // console.log(element?.item(0)?.attributes[1].value)
         const resolve =Array(element?.length).fill(1).map((_el,index) => {
           return element?.item(index)?.attributes[1].value
         } )
         console.log(resolve)
-        resolve.forEach((_,ind) => {
-          item.setOrder(ind)
+        resolve.forEach((el,ind) => {
+          if(item.getTypeName() == el){
+            item.setOrder(ind)
+          }
         })
+        context.currentUser.updateBoxs(resolve as Array<string>)
         }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div className={`${theme}-ContentCard-Title`}>

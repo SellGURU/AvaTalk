@@ -17,6 +17,8 @@ import { toast } from "react-toastify";
 import CropperBox from "../../Components/CropperBox";
 import { BeatLoader, RingLoader, } from "react-spinners";
 import { AddAvatar } from "../../Components/__Modal__";
+import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
 
 const initialValue = {
   FirstName: "",
@@ -589,6 +591,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
 }) => {
   const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [openCamera,setOpenCamera] = useState(false);
   // const [avatarVideo, setAvatarVideo] = useState("");
   // const [selectedAvatar, setSelectedAvatar] = useState("");
   const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
@@ -602,6 +605,14 @@ const AvatarStep: React.FC<UploadStepProps> = ({
     video:''
   })
   const [Cropper, setCropper] = useState("");
+  const handleTakePhoto =  (dataUri:string) => {
+    // Do stuff with the photo...
+    console.log(dataUri);
+    setTimeout(() => {
+      setOpenCamera(false)
+      setCropper(dataUri)
+    }, 1000);
+  }  
   const authContext = useAuth();
   const [addAvatar,setAddAvatar] =useState(false)
   const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
@@ -874,7 +885,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             
             setIsLoading(true);
             Auth.createAvatarVideo(resolve as string).then((response) => {
-            if(response.data == 'No face detected'){
+            if(response.data == 'No face detected' || !response.data.avatar_pic_link){
               toast.warn(response.data )
               setIsLoading(false)
             }else{
@@ -897,8 +908,15 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             }              
             });
           }}
+          onCancel={() => {
+            setCropper("");
+          }}
         ></CropperBox>
         <AddAvatar
+          onTakePhoto={() => {
+            setAddAvatar(false)
+            setOpenCamera(true)
+          }}
           isCanRemove={uploadedAvater.photo.length>0}
           onRemove={() => {
             // setSelectedAvatar("")
@@ -936,6 +954,17 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           title="Link"
         ></AddAvatar>
       </div>
+      {openCamera?
+      <>
+        <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
+            <Camera
+              onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+            />      
+        </div>
+        <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
+      </>
+      :
+      undefined}
     </>
   );
 };

@@ -9,12 +9,13 @@ interface AddSocialsProps {
     theme?: string;
     name: string;
     onComplete: (res:string) => void;
+    onTakePhoto:() => void
     onRemove:() => void
     onAfterOpen?: () => void;
 }
 
 
-const AddSocials: React.FC<AddSocialsProps> = ({ isOpen,isCanRemove ,onRemove,onComplete,onAfterOpen, onClose,}) => {
+const AddSocials: React.FC<AddSocialsProps> = ({ isOpen,onTakePhoto,isCanRemove ,onRemove,onComplete,onAfterOpen, onClose,}) => {
 
     const handleChooseFromLibrary = () => {
         // Programmatically trigger the file input click
@@ -43,7 +44,7 @@ const AddSocials: React.FC<AddSocialsProps> = ({ isOpen,isCanRemove ,onRemove,on
                             Choose From Library
                         </button>
 
-                        <div className='flex opacity-50 items-center gap-2 cursor-not-allowed'>
+                        <div onClick={onTakePhoto} className='flex  items-center gap-2 cursor-pointer'>
                             <img className='w-8 h-8' src='./Carbon/camera.svg' />
                             Take Photo
                         </div>

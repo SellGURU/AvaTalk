@@ -191,6 +191,9 @@ class Auth extends Api {
     })
   }
 
+  static updateBox(allBoxs:Array<Box>){
+    this.post('/save_boxes',{box_data:allBoxs},{noPending:true})
+  }
   ///
   static support(data: SupportData) {
     this.post('/support', data)

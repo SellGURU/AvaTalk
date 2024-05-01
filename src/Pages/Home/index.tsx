@@ -82,7 +82,7 @@ const Home = () => {
                         resolveNavigation(element,navigate)
                     }} theme="Carbon"/>
                 :
-                <div className="sticky bottom-0"></div>
+                <div className="sticky h-16 bottom-0"></div>
                 }
                 {isLoading ?
                 <>
