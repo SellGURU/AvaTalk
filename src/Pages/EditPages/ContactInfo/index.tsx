@@ -68,7 +68,8 @@ const EditContactInfo = () => {
       workPhone:formik.values.workPhone as string,
       silent_video_avatar:auth.currentUser.information?.silent_video_avatar,
       talk_video_avater:auth.currentUser.information?.talk_video_avater,
-      userId:auth.currentUser.information?.userId 
+      userId:auth.currentUser.information?.userId,
+      referral_code:auth.currentUser.information?.referral_code
     })
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
