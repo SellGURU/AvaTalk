@@ -36,7 +36,7 @@ class FileBox extends Box{
     constructor(protected title:string,protected contents:Array<File>){
         super(title)
         this.order = 5
-        this.typeName = 'FileBox'
+        this.type_name = 'FileBox'
     }
     public getContents() {
         return this.contents

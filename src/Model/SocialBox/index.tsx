@@ -61,7 +61,7 @@ class SocialBox extends Box{
     constructor(protected title:string,protected socialMedias:Array<Social>){
         super(title)
         this.order = 2
-        this.typeName = 'SocialBox'
+        this.type_name = 'SocialBox'
     }
     public isShareAble(): boolean {
         if(this.socialMedias.length == 0) {
