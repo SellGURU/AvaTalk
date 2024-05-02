@@ -335,7 +335,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             {mode != 'profile' ?
             <>
             <div className=" absolute w-full z-50 bottom-0">
-            <div className=" flex px-5 py-6 flex-row gap-6 justify-between items-center text-xs w-full	">
+            <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
                 <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
                 <p>Pricing</p>
                 <p>FAQ</p>
@@ -348,7 +348,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
                 </div>
 
-              </div>
+            </div>
               <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
                   <Button disabled  theme="Carbon-Google">Exchange Contact</Button>

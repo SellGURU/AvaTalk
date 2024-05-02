@@ -216,13 +216,13 @@ const reolveJsonToObject = (jsonuser: string) => {
 
 const resolveBoxsJson = (jsonBox: Array<any>) => {
   return jsonBox.map((item) => {
-    switch (item.typeName) {
+    switch (item.type_name) {
       case "GoogleMapBox":
         return new GoogleMapBox(item.title, item.location);
       case "AboutBox":
         return new AboutBox(item.title, item.text);
       case "AvailabilityBox":
-        return new AvailabilityBox(item.title, item.text);
+        return new AvailabilityBox(item.title, item.url);
       case "GalleryBox":
         return new GalleryBox(item.title, item.contents);
       case "SocialBox":

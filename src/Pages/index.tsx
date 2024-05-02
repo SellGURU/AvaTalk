@@ -1,5 +1,5 @@
 import CreateAccount from "./CreateAccount";
-import Home2 from "./Home";
+import Home2 from "./Home2";
 import Login from "./Login";
 import Verification from "./Verification";
 import Spinner from "./Spinner";
