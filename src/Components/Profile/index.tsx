@@ -367,12 +367,12 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           :undefined}          
         </div>
       :undefined}
-      <CropperBox url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+      <CropperBox onCancel={() => {}} url={avatarUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
         shareUser.updateImageurl(resolve)
         setAvatarUrl('')
       }}></CropperBox>
 
-      <CropperBox url={backgroundUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
+      <CropperBox onCancel={() =>{}} url={backgroundUrl} onResolve={(resolve: string | ArrayBuffer | null) => {
         shareUser.updateBackgroundurl(resolve)
         setBackgroundUrl('')
       }}></CropperBox>      
