@@ -29,6 +29,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     }
     return 'profile'
   }  
+  const isEditPage = () => {
+    if(window.location.hash.includes('edit')){
+      return true 
+    }else{
+      return false
+    }
+  }
   const videoRef = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -316,7 +323,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item: Box) => {
                     return (
                       <>
-                        {item.isShareAble() || mode=='profile' ?
+                        {item?.isShareAble() || mode=='profile' ?
                           <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon">
                           </ContentCard>
                           :undefined
@@ -332,7 +339,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </>
               )}
             </div>
-            {mode != 'profile' ?
+            {mode != 'profile' && !isEditPage()?
             <>
             <div className=" absolute w-full z-50 bottom-0">
             <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
