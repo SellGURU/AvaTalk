@@ -15,6 +15,8 @@ const resolveMenuFromRoute = () => {
       return "profile";
     case "?review=true":
       return "profile";
+    case "?splash=true":
+      return 'profile';
     default:
       return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
   }
