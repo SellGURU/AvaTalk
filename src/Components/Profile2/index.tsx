@@ -5,7 +5,7 @@ import { boxProvider, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { Auth } from "../../Api";
+import { Auth, Contacts } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
 import ContentCard from "../ContentCard";
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
@@ -16,6 +16,7 @@ import ToggleButton2 from "../ToggleButton2";
 import Presentition2 from "../Presentition2";
 import AudioProvider from "../AudioProvider";
 import { chat } from "../../Types";
+import { ExchangeContact } from "../__Modal__";
 
 interface ProfileProps {
   theme?: string;
@@ -39,7 +40,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement>(null)
+  const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
+  const [showMuiteController,setShowMuiteController] = useState(false)
   const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
@@ -222,24 +225,25 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                      
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                  {isTalking||isMuted ||chats.length>0 ?
-                  <div>
-                  {isMuted  ?
-                    <div onClick={() => {
-                      setISMuted(false)
-                  }} className={`${theme}-Profile-mutedVector`}></div>
-                  :
-                    <div onClick={() => {{isTalking &&
+                 {
+                  showMuiteController?
+                    <div>
+                    {isMuted  ?
+                      <div onClick={() => {
+                        setISMuted(false)
+                    }} className={`${theme}-Profile-mutedVector`}></div>
+                    :
+                      <div onClick={() => {{isTalking &&
 
-                      setISMuted(true)
+                        setISMuted(true)
+                      }
+                        setIsTalking(false)
+
+                      }} className={`${theme}-Profile-VolumeHighVector`}></div>
                     }
-                      setIsTalking(false)
-
-                    }} className={`${theme}-Profile-VolumeHighVector`}></div>
-                  }
-                  </div>
-                :undefined  
-                }
+                    </div>
+                  :undefined
+                 }
 
                   {/* <div
                     className={`${theme}-Profile-LanguageSquareVector`}
@@ -341,7 +345,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
             {mode != 'profile' && !isEditPage()?
             <>
-            <div className=" absolute w-full z-50 bottom-0">
+            <div className=" absolute w-full z-20 bottom-0">
             <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
                 <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
                 <p>Pricing</p>
@@ -358,7 +362,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
               <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
-                  <Button disabled  theme="Carbon-Google">Exchange Contact</Button>
+                  <Button onClick={() => {
+                    setShowExchangeContact(true)
+                  }}  theme="Carbon-Google">Exchange Contact</Button>
                   <Button onClick={() => {
                       const contact = {
                         name: shareUser.information?.lastName as string,
@@ -389,16 +395,28 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+          <Presentition2 setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
 
         <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
       </div>
     }    
+
     <AudioProvider autoPlay={isTalking} onEnd={() => {
       setAudioUrl('')
+      setShowMuiteController(false)
       setIsTalking(false)
     }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
+
+    <ExchangeContact mode='add' onAddContact={(data) => {
+        Contacts.addContact({
+          email:data.email,
+          full_name:data.fullName,
+          phone:data.phone,
+          note:data.note,
+          adding_method:'exchange'
+        })
+    }} onEditContact={() => {}} theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>    
     </>
   );
 };
