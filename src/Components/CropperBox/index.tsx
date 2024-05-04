@@ -50,8 +50,8 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                             }}
                             />
                             <div className="mt-2 flex gap-8">
-                                <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>cancel</Button> 
-                                <Button onClick={getCropData} theme="Carbon-Crop">crop</Button> 
+                                <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>Cancel</Button> 
+                                <Button onClick={getCropData} theme="Carbon-Crop">Crop</Button> 
                             </div>
 
                         </div>

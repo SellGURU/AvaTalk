@@ -362,6 +362,7 @@ const EditAvater: React.FC = () => {
           }}
           onCancel={() => {
             setCropper("");
+            setOpenCamera(true)
           }}
         ></CropperBox>
         <AddAvatar
