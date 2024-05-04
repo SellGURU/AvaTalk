@@ -8,10 +8,11 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   uploades?: (files:Array<any>) => void
   mod?:'files' | 'profile',
   label?:string
+  accept?:string
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
@@ -92,14 +93,14 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                                     Drag & drop image or <span style={{color:'#00B5FB',cursor:'pointer'}}>Browse</span> 
                                 </div>
                                 <div className={`${theme}-ImageUploader-uploader-suportText-container`}>
-                                    <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: JPEG, PNG</div>
+                                    <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: {accept}</div>
                                 </div>
                             </div>
                         </div>
                         <input  onChange={(res:any) => {
                             setisLoading(true)
                             getBase64(res.target.files[0],res.target.value)    
-                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept="*" />                        
+                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept={accept} />                        
                     </div>
               }
               {files.length > 0 && mod=='files'? 
@@ -130,6 +131,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
 
 ImageUploadr.defaultProps = {
   theme: "Carbon",
+  accept:"*"
 };
 
 export default ImageUploadr;

@@ -40,7 +40,7 @@ const EditFile = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-4">
-          <BackIcon title="Gallery" theme="Carbon"></BackIcon>
+          <BackIcon title="File" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="mt-24 px-6">
@@ -57,6 +57,7 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-3">
             <ImageUploadr
+              accept=".pdf,.doc,.xls,.pptx,.psd,.ai,.zip,.id,.rap"
               value={files.map((item, index) => {
                 return {
                   url: item.geturl(),
