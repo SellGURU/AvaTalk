@@ -459,11 +459,18 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 !formik.touched.LastName
               }
               onClick={() => {
-                Auth.check_user_existence(formik.values.Phone,formik.values.email).then((res) => {
-                  console.log(res)
+                console.log(authContext.varification.emailOrPhone)
+                let localEmail=formik.values.email
+                let localPhone=formik.values.Phone
+                if(authContext.varification.emailOrPhone.includes('@')){
+                  localEmail = undefined
+                }else{
+                  localPhone = undefined
+                }
+                Auth.check_user_existence(localPhone,localEmail).then((res) => {
                   if(res.data == false){
                     setStep(2);
-                  }else{
+                  }else if(res.data == true){
                     toast.error('User exists')
                   }
                 })
