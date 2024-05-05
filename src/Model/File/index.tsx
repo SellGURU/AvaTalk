@@ -1,5 +1,6 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
+import { Link } from "react-router-dom";
 // interface File {
 //     name:string
 //     url:string
@@ -34,11 +35,11 @@ export class File {
     public resolveRender(theme:string) {
         return (
             <>
-            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
+            <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
                 </div>
-            </div>  
+            </Link>  
             <Tooltip id={"link"+this.name} />     
             </>
         )
