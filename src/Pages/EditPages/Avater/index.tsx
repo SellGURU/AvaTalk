@@ -72,6 +72,7 @@ const EditAvater: React.FC = () => {
              
       })     
   }
+  const [asktakePhoto,setAskTakePhoto] = useState(false)
   const [openCamera,setOpenCamera] = useState(false);
   const context = useAuth()
   const navigate = useNavigate();
@@ -336,7 +337,7 @@ const EditAvater: React.FC = () => {
             // setAvatarUrl('')
             setCropper("");
             // setSelectedAvatar(resolve as string);
-            
+            setAskTakePhoto(false)
             setIsLoading(true);
             Auth.createAvatarVideo(resolve as string).then((response) => {
             if(response.data == 'No face detected' || !response.data.avatar_pic_link){
@@ -364,13 +365,16 @@ const EditAvater: React.FC = () => {
           }}
           onCancel={() => {
             setCropper("");
-            setOpenCamera(true)
+            if(asktakePhoto){
+              setOpenCamera(true)
+            }            
           }}
         ></CropperBox>
         <AddAvatar
           onTakePhoto={() => {
             setAddAvatar(false)
             setOpenCamera(true)
+            setAskTakePhoto(true)
           }}
           isCanRemove={uploadedAvater.photo.length>0}
           onRemove={() => {
