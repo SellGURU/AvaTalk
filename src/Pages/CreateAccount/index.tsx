@@ -618,6 +618,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
     type:'Local',
     video:''
   })
+  const [asktakePhoto,setAskTakePhoto] = useState(false)
   const [Cropper, setCropper] = useState("");
   const handleTakePhoto =  (dataUri:string) => {
     // Do stuff with the photo...
@@ -895,6 +896,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             //  formik.setFieldValue('PrifileImage',resolve)
             // setAvatarUrl('')
             setCropper("");
+            setAskTakePhoto(false)
             // setSelectedAvatar(resolve as string);
             
             setIsLoading(true);
@@ -924,13 +926,16 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           }}
           onCancel={() => {
             setCropper("");
-            setOpenCamera(true)
+            if(asktakePhoto){
+              setOpenCamera(true)
+            }
           }}
         ></CropperBox>
         <AddAvatar
           onTakePhoto={() => {
             setAddAvatar(false)
             setOpenCamera(true)
+            setAskTakePhoto(true)
           }}
           isCanRemove={uploadedAvater.photo.length>0}
           onRemove={() => {

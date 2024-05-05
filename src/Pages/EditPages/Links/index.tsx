@@ -124,6 +124,14 @@ const EditLinks = () => {
                           </div>
                         </div>
                         <div className="flex justify-end gap-1 items-start">
+                              {
+                                links.length> 1 ?
+                                  <div>
+                                    <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
+                                  </div>
+                                :
+                                undefined
+                              }                            
                             <div onClick={() => {
                               setEditName(item.getName())
                               setEditeValue(item.geturl())
