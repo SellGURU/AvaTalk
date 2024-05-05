@@ -167,8 +167,8 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   publish('profileIsReview',{})
                   window.history.replaceState(null, "", "/#/?review=true")
                   }} theme="Carbon-Google" data-mode="profile-review-button">
-                  <div className={`${theme}-Profile-PreviewProfileBtnVector`}></div>
-                  <div>Preview Profile</div>
+                  <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors`}></div>
+                  <div className='text-[#94A3B8]'>Preview Profile</div>
                 </Button>
                 <div className={`${theme}-Profile-ScanBarcode`}>
                   <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
@@ -243,7 +243,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               navigate('/edit')
             }} theme="Carbon">
               <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
-              <div>
+              <div className=' text-slate-400'>
                 Edit Profile
               </div>
             </Button>

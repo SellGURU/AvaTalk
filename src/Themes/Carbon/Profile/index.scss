@@ -58,7 +58,7 @@
     @apply text-gray-700 text-sm;
 }
 .Carbon-Profile-PreviewProfileBtnVector{
-    background: url(/Carbon/eyeVector.svg);
+    mask-image: url(/Carbon/eyeVector.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;  
 }
 .Carbon-Profile-EditProfileBtnVector{
@@ -94,7 +94,6 @@
     @apply flex flex-row flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    
     @apply bg-white borderBox-Gray boxShadow-Gray text-slate-800 w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
 }
 
@@ -111,7 +110,7 @@
     @apply w-6 h-6  bg-cover bg-no-repeat;
 }
 .Carbon-Profile-EditProfileBtnVector2{
-    background-image: url(/Carbon/user-edit.svg);
+    mask-image: url(/Carbon/user-edit.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-EditProfileBtnVector4{
@@ -119,7 +118,11 @@
     @apply w-5 h-5 mr-1 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-EditProfileBtnVector3{
-    background-image: url(/Carbon/share3.svg);
+    mask-image: url(/Carbon/share3.svg);
+    @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
+}
+.Carbon-Profile-EditProfileBtnVector5{
+    mask-image: url(/Carbon/plusVector.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-LanguageSquareVector{

@@ -60,7 +60,8 @@ class Box {
                 {mode == 'profile' ?
                 <Link  to={'/edit/'+this.getRouteAddress()} className={`${theme}-Profile-BackgroundVectors`}>
                     <div className="w-10 h-10 flex justify-center items-center bg-white borderBox-Gray boxShadow-Gray text-slate-800  rounded-full ">
-                        <img src="./Carbon/plusVector.svg" alt="" />
+                        {/* <img src="./Carbon/plusVector.svg" alt="" /> */}
+                        <div className={`${theme}-Profile-EditProfileBtnVector5 ${theme}-Footer-Vectors text-[#94A3B8] m-auto`}></div>
                     </div>
                 </Link>            
                 :

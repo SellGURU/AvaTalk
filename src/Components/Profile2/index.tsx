@@ -150,8 +150,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 publish('profileIsReview',{})
                 window.history.replaceState(null, "", "/#/?review=true")                
               }} theme="Carbon-Google" data-mode="profile-review-button">
-                <div className={`${theme}-Profile-PreviewProfileBtnVector`} ></div>
-                <div>Preview Profile</div>
+                <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors`} ></div>
+                <div className="text-[#94A3B8]">Preview Profile</div>
               </Button>
             </div>
           :
@@ -186,15 +186,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     navigate('/edit')
                   }} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector2`}
+                      className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors`}
                     ></div>
-                    <div>Edit Profile</div>
+                    <div  className=' text-[#94A3B8]'>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector3`}
-                    ></div>     
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#94A3B8]`}
+                    ></div>  
+                    <span className="text-[#94A3B8]">
                     Share profile
+                      </span>   
                   </Button>
                 </div>
               :
@@ -273,15 +275,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     navigate('/edit')
                   }} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector2`}
+                      className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors`}
                     ></div>
-                    <div>Edit Profile</div>
+                    <div  className=' text-[#94A3B8]'>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector3`}
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#94A3B8]`}
                     ></div>     
-                    <div>
+                    <div className="text-[#94A3B8]">
                       Share profile
                     </div>               
                   </Button>

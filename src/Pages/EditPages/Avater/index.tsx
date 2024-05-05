@@ -367,6 +367,8 @@ const EditAvater: React.FC = () => {
             setOpenCamera(true)
           }}
         ></CropperBox>
+        <div className=" bottom-0 absolute">
+
         <AddAvatar
           onTakePhoto={() => {
             setAddAvatar(false)
@@ -408,6 +410,7 @@ const EditAvater: React.FC = () => {
           }}
           title="Link"
         ></AddAvatar>
+        </div>
       </div>
       {openCamera?
       <>
