@@ -20,7 +20,7 @@ const EditFile = () => {
   if (currentBox == undefined) {
     currentBox = new FileBox("File", []);
   }
-  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('',''),item))))
+  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','',''),item))))
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -62,11 +62,13 @@ const EditFile = () => {
                 return {
                   url: item.geturl(),
                   name: "itembox " + index * 2000,
+                  type:item.getType()
                 };
               })}
               uploades={(files: Array<any>) => {
+                console.log(files)
                 const converted:Array<File> = files.map((item) => {
-                  const newFile:File = new File(item.url,item.name)
+                  const newFile:File = new File(item.url,item.name,item.type)
                   return newFile
                 });
                 setFiles(converted)

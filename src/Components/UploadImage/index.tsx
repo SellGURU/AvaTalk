@@ -18,25 +18,30 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
   const getBase64 = (file:any,name:string) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
+      console.log(file)
       reader.onload = function () {
           setFiles([...files,{
             url:reader.result,
-            name:name
+            name:name,
+            type:file.type
           }])
           if(uploades){
             if(mod == 'files'){
               uploades([...files,{
                 url:reader.result,
-                name:name
+                name:name,
+                type:file.type
               }])
             }else{
             setFiles([{
               url:reader.result,
-              name:name
+              name:name,
+              type:file.type
             }])              
               uploades([{
                 url:reader.result,
-                name:name
+                name:name,
+                type:file.type
               }])              
             }
           }
