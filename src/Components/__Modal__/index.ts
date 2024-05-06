@@ -4,7 +4,7 @@ import EditContact from "./EditContact";
 import DeleteContact from "./DeleteContact";
 import AddSocials from "./AddSocials";
 import AddLink from "./AddLink";
-import AddAvatar from "./AddAvatar";
+import AddAvatar from "./AddAvatar/index2";
 import Confirm from './Confirm';
 import ExchangeContact from "./ExchangeContact";
 

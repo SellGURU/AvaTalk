@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { useConstructor } from "../../../help";
 import { Auth } from "../../../Api";
@@ -13,6 +13,7 @@ import { BackIcon } from "../../../Components";
 import { useNavigate } from "react-router-dom";
 import { publish } from "../../../utils/event";
 import Camera from "react-html5-camera-photo";
+import useModalAutoClose from "../../../hooks/useModalAutoClose";
 interface Avatars {
   photo: string;
   video: string;
@@ -119,6 +120,13 @@ const EditAvater: React.FC = () => {
       })      
     }, 300);
   },[formik.values.avatar_pic_url, formik.values.silent_video_avatar])
+  const addAvatarRef =useRef<HTMLDivElement>(null)
+  useModalAutoClose({
+    refrence:addAvatarRef,
+    close:() => {
+      setAddAvatar(false)
+    }
+  })    
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -370,51 +378,58 @@ const EditAvater: React.FC = () => {
             }            
           }}
         ></CropperBox>
-        <div className=" bottom-0 absolute">
+        {addAvatar?
+          <div className="fixed z-40 left-0  bottom-[50px] w-full flex justify-center items-center">
+            <AddAvatar
+              refEl={addAvatarRef}
+              onTakePhoto={() => {
+                setAddAvatar(false)
+                setOpenCamera(true)
+                setAskTakePhoto(true)
+              }}
+              isCanRemove={uploadedAvater.photo.length>0}
+              onRemove={() => {
+                // setSelectedAvatar("")
+                setUploadedAvater({
+                  photo:'',
+                  type:'Local',
+                  video:""
+                })
+                setAddAvatar(false)
+                // setAvatarVideo("")
+                formik.setFieldValue("avatar_pic_url","")
+                formik.setFieldValue("silent_video_avatar","")
+              }}
+              name={"modal name"}
+              value={"editeValue"}
+              theme="Carbon"
+              isOpen={addAvatar}
+              onClose={() => {
+                setAddAvatar(false);
+              }}
+              onComplete={(data:any) => {
 
-        <AddAvatar
-          onTakePhoto={() => {
-            setAddAvatar(false)
-            setOpenCamera(true)
-            setAskTakePhoto(true)
-          }}
-          isCanRemove={uploadedAvater.photo.length>0}
-          onRemove={() => {
-            // setSelectedAvatar("")
-            setUploadedAvater({
-              photo:'',
-              type:'Local',
-              video:""
-            })
-            setAddAvatar(false)
-            // setAvatarVideo("")
-            formik.setFieldValue("avatar_pic_url","")
-            formik.setFieldValue("silent_video_avatar","")
-          }}
-          name={"modal name"}
-          value={"editeValue"}
-          theme="Carbon"
-          isOpen={addAvatar}
-          onClose={() => {
-            setAddAvatar(false);
-          }}
-          onComplete={(data:any) => {
+                      // setAvatarVideo("");
+                      const reader = new FileReader();
+                      reader.readAsDataURL(data);
+                      reader.onload = function () {
+                        setCropper(reader.result as string);
+                      };
+                      reader.onerror = function (error) {
+                        console.log("Error: ", error);
+                      };
+                      setAddAvatar(false)
+              
+              }}
+              title="Link"
+            ></AddAvatar>
 
-                  // setAvatarVideo("");
-                  const reader = new FileReader();
-                  reader.readAsDataURL(data);
-                  reader.onload = function () {
-                    setCropper(reader.result as string);
-                  };
-                  reader.onerror = function (error) {
-                    console.log("Error: ", error);
-                  };
-                  setAddAvatar(false)
-          
-          }}
-          title="Link"
-        ></AddAvatar>
-        </div>
+          </div>
+        :
+        undefined}
+        {addAvatar?
+            <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>          
+        :undefined}
       </div>
       {openCamera?
       <>
@@ -422,6 +437,9 @@ const EditAvater: React.FC = () => {
             <Camera
               onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
             />      
+        </div>
+        <div className="relative z-50 top-4">
+          <BackIcon title="" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
         </div>
         <div className="absolute w-full z-20 h-full bg-black opacity-60 top-0 left-0"></div>
       </>
