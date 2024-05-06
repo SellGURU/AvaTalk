@@ -18,13 +18,13 @@ export class File {
                 return 'PdfVector';
             case 'application/psd':
                 return 'PhotoShopVector';
-            case 'application/doc':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
                 return 'wordVector';
-            case 'application/ai':
+            case 'application/postscript':
                 return 'idVector';
-            case 'application/pptx':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
                 return 'powerpointVector';
-            case 'application/xls':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                 return 'ExelVector'
             case 'application/x-zip-compressed':
                 return 'wordVector';
