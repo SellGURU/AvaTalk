@@ -57,7 +57,7 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-3">
             <ImageUploadr
-              accept=".pdf,.doc,.xls,.xlsx,.pptx,.psd,.ai,.zip,.id,.rap,.docx"
+              accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id"
               value={files.map((item, index) => {
                 return {
                   url: item.geturl(),
