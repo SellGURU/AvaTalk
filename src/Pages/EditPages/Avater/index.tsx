@@ -423,7 +423,7 @@ const EditAvater: React.FC = () => {
               onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
             />      
         </div>
-        <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
+        <div className="absolute w-full z-20 h-full bg-black opacity-60 top-0 left-0"></div>
       </>
       :
       undefined}

@@ -1,5 +1,6 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
+import { Link } from "react-router-dom";
 // interface File {
 //     name:string
 //     url:string
@@ -17,13 +18,13 @@ export class File {
                 return 'PdfVector';
             case 'application/psd':
                 return 'PhotoShopVector';
-            case 'application/doc':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
                 return 'wordVector';
-            case 'application/ai':
+            case 'application/postscript':
                 return 'idVector';
-            case 'application/pptx':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
                 return 'powerpointVector';
-            case 'application/xls':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                 return 'ExelVector'
             case 'application/x-zip-compressed':
                 return 'wordVector';
@@ -34,11 +35,11 @@ export class File {
     public resolveRender(theme:string) {
         return (
             <>
-            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
+            <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
                 </div>
-            </div>  
+            </Link>  
             <Tooltip id={"link"+this.name} />     
             </>
         )
