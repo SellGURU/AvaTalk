@@ -14,7 +14,10 @@ const DatePicker = (props:any) => {
     <div className="flex mt-4 space-x-3  items-center ">
       <div className=" h-[44px] flex justify-center rounded-[21px] w-4/6 borderBox-GrayBox boxShadow-Gray ">
         <div className="h-full flex items-center justify-start">
-          <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" />
+        <div className={`Carbon-Profile-EditProfileBtnVector6 Carbon-Footer-Vectors
+                         text-[#8290a3] w-6 h-6 ms-2
+                        `}></div>
+          {/* <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" /> */}
           <Litepicker
             className="text-gray-700 text-sm w-56 pl-1 bg-inherit cursor-pointer"
             value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}

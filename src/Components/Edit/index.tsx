@@ -96,11 +96,14 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
                 }} className={`${
                     "absolute rounded-full w-[32px] h-[32px] bg-gray-100  flex justify-center items-center border border-white borderBox-Gray  cursor-pointer -right-2 -top-2"
                   }`}>
-                <img
+                  <div className={`${theme}-Profile-EditProfileBtnVector7 ${theme}-Footer-Vectors
+                         text-[#8290a3] w-[20px] h-[20px]
+                          m-auto`}></div>
+                {/* <img
                   className="w-[20px] h-[20px]"
                   src="./icons/gallery-edit.svg"
                   alt=""
-                />
+                /> */}
               </div>              
               <img className="w-[120px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
               <div className="text-gray-700 mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>

@@ -151,7 +151,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 window.history.replaceState(null, "", "/#/?review=true")                
               }} theme="Carbon-Google" data-mode="profile-review-button">
                 <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors`} ></div>
-                <div className="text-[#94A3B8]">Preview Profile</div>
+                <div className="text-[#8290a3]">Preview Profile</div>
               </Button>
             </div>
           :
@@ -188,13 +188,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors`}
                     ></div>
-                    <div  className=' text-[#94A3B8]'>Edit Profile</div>
+                    <div  className='  text-[#8290a3]'>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#94A3B8]`}
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#8290a3]
+                      `}
                     ></div>  
-                    <span className="text-[#94A3B8]">
+                    <span className="text-[#8290a3]">
                     Share profile
                       </span>   
                   </Button>
@@ -277,13 +278,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors`}
                     ></div>
-                    <div  className=' text-[#94A3B8]'>Edit Profile</div>
+                    <div  className=' text-[#8290a3]'>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
-                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#94A3B8]`}
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors text-[#8290a3]`}
                     ></div>     
-                    <div className="text-[#94A3B8]">
+                    <div className="text-[#8290a3]">
                       Share profile
                     </div>               
                   </Button>
@@ -341,7 +342,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               ) : (
                 <>
                   <img src="/Carbon/Not-Found.svg" alt="Not Found" className="w-[97px] h-[96px]" />
-                  <p className="text-sm	">You haven't added any info yet.</p>
+                  <p className="text-sm	text-[#8290a3]">You haven't added any info yet.</p>
                 </>
               )}
               {mode != 'profile'

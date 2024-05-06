@@ -25,7 +25,7 @@ class AvailabilityBox extends Box {
               data-mode="profile-edit-button"
             >
               <div className={`${theme}-Profile-EditProfileBtnVector4`}></div>
-              <div className="text-[#94A3B8]">Book an appointment</div>
+              <div className="   text-[#8290a3]">Book an appointment</div>
             </Button>
 
             {/* <Button
@@ -36,7 +36,7 @@ class AvailabilityBox extends Box {
               data-mode="profile-edit-button"
             >
               <div className={`${theme}-Profile-EditProfileBtnVector4`}></div>
-              <div className="text-[#94A3B8]">Book an appointment</div>
+              <div className="text-[#8290a3]">Book an appointment</div>
             </Button> */}
           </>
         )}

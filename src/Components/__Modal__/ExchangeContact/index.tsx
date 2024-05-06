@@ -139,7 +139,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
         </div>
         <div className="mt-10">
           <Button onClick={handleAction} theme="Carbon">
-            <div>Exchange Contact</div>
+            <div className="text-[#8290a3]">Exchange Contact</div>
           </Button>
         </div>
       </div>

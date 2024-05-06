@@ -168,7 +168,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                   window.history.replaceState(null, "", "/#/?review=true")
                   }} theme="Carbon-Google" data-mode="profile-review-button">
                   <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors`}></div>
-                  <div className='text-[#94A3B8]'>Preview Profile</div>
+                  <div className='text-[#8290a3]'>Preview Profile</div>
                 </Button>
                 <div className={`${theme}-Profile-ScanBarcode`}>
                   <Button onClick={() => {setShowShareContact(true)}} theme='Carbon-back'>
@@ -243,7 +243,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
               navigate('/edit')
             }} theme="Carbon">
               <div className={`${theme}-Profile-EditProfileBtnVector`}></div>
-              <div className=' text-slate-400'>
+              <div className=' text-[#8290a3]'>
                 Edit Profile
               </div>
             </Button>
@@ -314,7 +314,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 :undefined}                 
               </div>
                 <div className={`${(showToturial && toturialStep == 4) ? 'relative z-50  bg-white p-2 rounded-[20px] ' :''} w-full`}>
-                  <div  className='borderBox-Gray  cursor-pointer boxShadow-Gray h-11 flex justify-center items-center rounded-[27px] text-gray-700 text-sm font-semibold  w-full' onClick={() => {setShowExchangeContact(true)}}>Exchange Contact</div>
+                  <div  className='borderBox-Gray  cursor-pointer boxShadow-Gray h-11 flex justify-center items-center rounded-[27px]  text-[#8290a3] text-sm font-semibold  w-full' onClick={() => {setShowExchangeContact(true)}}>Exchange Contact</div>
                   {(showToturial && toturialStep == 4) ?
                   <ToturialsBox theme='Carbon' left='-80' isLast position='top' skip={() => {
                     setShowToturial(false)

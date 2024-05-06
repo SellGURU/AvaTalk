@@ -158,7 +158,7 @@ const CreateAccount = () => {
                 theme="Carbon-back"
               >
                 <div
-                  className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}
+                  className={styles.backIcon + " w-[8px] h-[20px]  bg-[#8290a3]"}
                 ></div>
               </Button>
             ) : (
@@ -931,48 +931,51 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             }
           }}
         ></CropperBox>
-        <AddAvatar
-          onTakePhoto={() => {
-            setAddAvatar(false)
-            setOpenCamera(true)
-            setAskTakePhoto(true)
-          }}
-          isCanRemove={uploadedAvater.photo.length>0}
-          onRemove={() => {
-            // setSelectedAvatar("")
-            setUploadedAvater({
-              photo:'',
-              type:'Local',
-              video:""
-            })
-            setAddAvatar(false)
-            // setAvatarVideo("")
-            formik.setFieldValue("avatar_pic_url","")
-            formik.setFieldValue("silent_video_avatar","")
-          }}
-          name={"modal name"}
-          value={"editeValue"}
-          theme="Carbon"
-          isOpen={addAvatar}
-          onClose={() => {
-            setAddAvatar(false);
-          }}
-          onComplete={(data:any) => {
+        <div className="absolute bottom-0 ">
+          <AddAvatar
+            onTakePhoto={() => {
+              setAddAvatar(false)
+              setOpenCamera(true)
+              setAskTakePhoto(true)
+            }}
+            isCanRemove={uploadedAvater.photo.length>0}
+            onRemove={() => {
+              // setSelectedAvatar("")
+              setUploadedAvater({
+                photo:'',
+                type:'Local',
+                video:""
+              })
+              setAddAvatar(false)
+              // setAvatarVideo("")
+              formik.setFieldValue("avatar_pic_url","")
+              formik.setFieldValue("silent_video_avatar","")
+            }}
+            name={"modal name"}
+            value={"editeValue"}
+            theme="Carbon"
+            isOpen={addAvatar}
+            onClose={() => {
+              setAddAvatar(false);
+            }}
+            onComplete={(data:any) => {
 
-                  // setAvatarVideo("");
-                  const reader = new FileReader();
-                  reader.readAsDataURL(data);
-                  reader.onload = function () {
-                    setCropper(reader.result as string);
-                  };
-                  reader.onerror = function (error) {
-                    console.log("Error: ", error);
-                  };
-                  setAddAvatar(false)
-          
-          }}
-          title="Link"
-        ></AddAvatar>
+                    // setAvatarVideo("");
+                    const reader = new FileReader();
+                    reader.readAsDataURL(data);
+                    reader.onload = function () {
+                      setCropper(reader.result as string);
+                    };
+                    reader.onerror = function (error) {
+                      console.log("Error: ", error);
+                    };
+                    setAddAvatar(false)
+            
+            }}
+            title="Link"
+          ></AddAvatar>
+        </div>
+
       </div>
       {openCamera?
       <>

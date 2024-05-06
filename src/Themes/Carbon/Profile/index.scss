@@ -94,7 +94,7 @@
     @apply flex flex-row flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    @apply bg-white borderBox-Gray boxShadow-Gray text-slate-800 w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
+    @apply bg-white borderBox-Gray boxShadow-Gray text-[#8290a3] w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
 }
 
 .Carbon-Profile-closeIcon{
@@ -123,7 +123,16 @@
 }
 .Carbon-Profile-EditProfileBtnVector5{
     mask-image: url(/Carbon/plusVector.svg);
-    @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
+    @apply w-6 h-6 bg-cover bg-no-repeat bg-[#8290a3];
+}
+.Carbon-Profile-EditProfileBtnVector6{
+    mask-image: url(/Carbon/Calendar-new.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat bg-[#8290a3];
+}
+.Carbon-Profile-EditProfileBtnVector7{
+
+    mask-image: url(/icons/gallery-edit.svg);
+    @apply w-5 h-5 bg-cover bg-no-repeat bg-[#8290a3];
 }
 .Carbon-Profile-LanguageSquareVector{
     background-image: url(/Carbon/language-square.svg);
@@ -147,7 +156,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    @apply w-6 h-6 bg-current;
+    @apply w-6 h-6 bg-current bg-[#8290a3];
 }
 .Carbon-Profile-Box{
     
