@@ -55,6 +55,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isTalking,setIsTalking] = useState(false)
   const [chats,setChats] = useState<Array<chat>>([
   ])      
+  useEffect(() =>{
+    if(shareUser.boxs.length == 0){
+      publish("refreshPage",{})
+    }
+  })
   useConstructor(() => {
     if(mode == 'share') {
       const resolveSocial: Array<Box> = [];

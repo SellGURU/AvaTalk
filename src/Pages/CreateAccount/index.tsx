@@ -997,13 +997,16 @@ const AvatarStep: React.FC<UploadStepProps> = ({
       {openCamera?
       <>
         <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
-            <Camera
-              onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-            />      
+            <div className="max-w-md relative">
+              <Camera
+                onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+              />      
+              <div className="absolute z-50 top-[-20px] left-[-15px]">
+                <BackIcon title="" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
+              </div>        
+
+            </div>
         </div>
-        <div className="absolute z-50 top-0 left-1">
-          <BackIcon title="" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
-        </div>        
         <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
       </>
       :
