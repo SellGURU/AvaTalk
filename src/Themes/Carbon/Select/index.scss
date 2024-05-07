@@ -25,7 +25,7 @@
   // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1),inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
-  @apply rounded-[27px] flex items-center borderBox-Gray boxsInnerShadows justify-between bg-gray-100;
+  @apply rounded-[27px] flex items-center borderBox-Gray boxsInnerShadows text-[14px] font-normal justify-between bg-gray-100;
 }
 .Carbon-Select-togglePassword {
   @apply cursor-pointer;
