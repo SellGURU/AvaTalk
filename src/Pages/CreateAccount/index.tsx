@@ -183,10 +183,10 @@ const CreateAccount = () => {
                 </Button>
               </div> */}
               <div
-                className={`text-gray-700 ${
+                className={`text-gray-700  ${
                   window.innerWidth < 332 ? "mt-12" : "mt-2"
                 } ${
-                  window.innerWidth < 420 ? "text-left" : "text-center"
+                  window.innerWidth < 420 ? "text-center" : "text-center"
                 } font-semibold text-base`}
               >
                 Photo Guidelines for AI Profile

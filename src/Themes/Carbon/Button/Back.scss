@@ -1,6 +1,6 @@
 .Carbon-back-Button-container {
   
-  @apply w-10 disabled:cursor-not-allowed flex bg-white borderBox-Gray boxShadow-Gray text-[#8290a3] justify-center items-center  leading-[19.36px] text-[14px] font-[500]  rounded-full h-10 #{!important}
+  @apply w-10 disabled:cursor-not-allowed flex bg-white borderBox-Gray text-[#8290a3] justify-center items-center  leading-[19.36px] text-[14px] font-[500]  rounded-full h-10 #{!important}
 }
 
 .Carbon-back-Button-container:hover {
