@@ -136,7 +136,7 @@ const TextField: React.FC<InputProps> = ({
           {...props}
           className={`${theme}-TextField-input`}
           type={getInputType()}
-          id={inputId()}
+          id={props.id?props.id:inputId()}
           placeholder={placeholder}
           name={name}
           onChange={onChange}
