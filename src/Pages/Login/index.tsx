@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
 import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
@@ -20,7 +20,13 @@ const initialValue = {
 const validateEmail = (email: string | undefined) => {
    return Yup.string().email().isValidSync(email)
 };
-
+const PosEnd = (id:string) => {
+    const input:HTMLInputElement = document.getElementById(id)  as HTMLInputElement
+    input?.focus()
+    const val = input.value; //sttore the value of the element
+    input.value = ''; //clear the value of the element
+    input.value = val; //set that value back.      
+}
 const validatePhone = (phone: number | undefined) => {
    return Yup.number().integer().positive().test(
       (phone) => {
@@ -75,6 +81,12 @@ const Login = () => {
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
+  useEffect(() => {
+    if(document.getElementById("phoneField")){
+      PosEnd("phoneField")
+      // alert("posEnd")
+    }
+  })
   return (
     <>
       {showSplash ?
@@ -91,7 +103,9 @@ const Login = () => {
                   formik.values.emailOrPhone[0] == '+'?
                   <div className="mb-8">
                     <TextField 
+                    id="phoneField"
                     {...formik.getFieldProps("emailOrPhone")} 
+
                     // value={country.codePhone + formik.values.emailOrPhone}
                     phoneCountry={country} 
                     setValue={(value) => {
@@ -101,9 +115,7 @@ const Login = () => {
                   </div>                
                   :
                   <div className="mb-8">
-                    <TextField onFocus={() => {
-                      formik.setFieldValue("emailOrPhone",formik.values.emailOrPhone)
-                    }} {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                    <TextField  {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
                   </div>
                 }
                 <Button
