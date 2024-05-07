@@ -37,7 +37,7 @@ const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeh
           <div data-testid="input-id" data-showSelect={showSelect ? "true" : "false"} deta-selectBox="true" {...props} className={`${theme}-Select-input`} id={inputId()}>
             {valueElement ? (
               <div className="flex   ">
-                <p className="text-gray-700 leading-[20px] text-[14px] font-[500] tracking-tight">{valueElement}</p>
+                <p className="text-gray-700 leading-[20px] text-[14px] font-[400] tracking-tight">{valueElement}</p>
               </div>
             ) : (
               <span className="leading-[27.25px]  text-[13px]  font-[300]     text-gray-400 flex justify-start">{placeholder}</span>

@@ -395,7 +395,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
                     onClick={() => {
                       formik.setFieldValue("gender",Gender.value)
                     }}
-                    className="ml-4 my-2 cursor-pointer"
+                    className="ml-4 my-2 cursor-pointer font-normal text-[14px]"
                     value={Gender.value}
                   >
                     {Gender.value}
