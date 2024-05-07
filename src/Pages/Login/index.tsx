@@ -101,7 +101,9 @@ const Login = () => {
                   </div>                
                   :
                   <div className="mb-8">
-                    <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                    <TextField onFocus={() => {
+                      formik.setFieldValue("emailOrPhone",formik.values.emailOrPhone)
+                    }} {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
                   </div>
                 }
                 <Button
