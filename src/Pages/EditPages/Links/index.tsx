@@ -84,7 +84,7 @@ const EditLinks = () => {
           </div>
           {links.length == 0 ?
             <div className="mt-3 px-6">
-              <TextField theme="Carbon" disabled label="links" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Link"></TextField>
+              <TextField theme="Carbon" disabled label="Links" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Link"></TextField>
             </div>
           :
             <>

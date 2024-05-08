@@ -151,7 +151,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                             url:authContext.currentUser.resolveLink()+'&viewBy=share_link'
                         }).then(() => {
                              Auth.addEvent({event_type:'share_link','sub_event_category':'share_link','userid':authContext.currentUser.information?.userId as string})
-                            toast.success("Successful share")
+                            // toast.success("Successful share")
                         }).catch(() => {
                             // toast.error("Error sharing:"+err)
                         })

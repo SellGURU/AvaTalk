@@ -153,7 +153,7 @@ const EditSocials = () => {
                         </li>
                         {showConfirm == index ?
                           <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
+                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social?"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
                               deleteSocial(index);
                               setShowConfirm(-1)
                             }}></Confirm>

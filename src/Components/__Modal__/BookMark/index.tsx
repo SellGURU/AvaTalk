@@ -193,7 +193,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                                         <TextArea inValid={false} placeholder='Write details to prepare our meeting  ...' name='Details' label='Details' theme='Carbon' textAreaHeight='136px' onBlur={() => {}} onChange={(e) =>{setDetail(e.target.value)}} value={detail}></TextArea>
                                     </div>
                                     <Button onClick={() => {
-                                        toast.success("Booked Successfully!")
+                                        // toast.success("Booked Successfully!")
                                         onClose()
                                     }} theme='Carbon'>Book Meeting</Button>
                                 </div>

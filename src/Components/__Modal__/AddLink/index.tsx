@@ -61,7 +61,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
                 <TextField  {...formik.getFieldProps("name")}  label={'Name'} placeholder="website" theme="Carbon" name="name" type="text" errorMessage="" inValid={false} />
               </div>  
               <div className="my-4">
-                <TextField  {...formik.getFieldProps("url")}  label={'Url'} placeholder="https://facebook.com/" theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
+                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder="https://facebook.com/" theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
               </div>                 
               <Button onClick={() => {
                 onComplete(formik.values.name,formik.values.url)

@@ -107,7 +107,7 @@ class User {
         }
         this.boxs.push(newBox)
         Auth.addBox(newBox)
-        toast.success("Done Successfully!")
+        // toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }
 
