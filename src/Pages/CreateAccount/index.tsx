@@ -472,8 +472,8 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 Auth.check_user_existence(localPhone,localEmail).then((res) => {
                   if(res.data == false){
                     setStep(2);
-                  }else if(res.data == true){
-                    toast.error('User exists')
+                  }else if(res.data){
+                    toast.error(res.data)
                   }
                 })
               }}
