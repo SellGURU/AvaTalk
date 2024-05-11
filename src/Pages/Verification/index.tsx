@@ -99,9 +99,10 @@ const Verification = () => {
                 }}
             />
             </div>
-            <p onClick={() => {
-                completeTimer ? setCompleteTimer(false) : undefined
-            }} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
+            <p onClick={completeTimer ?() => {
+                    setCompleteTimer(false) 
+                    toast.info("code is 12345")
+            }:undefined} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
                 {
                     !completeTimer?
                         <span className="ml-2"><Timer oncomplete={() => {
