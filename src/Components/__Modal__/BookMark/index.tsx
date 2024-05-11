@@ -71,7 +71,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                 step == 1 ?
                     <div>
                         <div className='text-gray-700 text-base font-semibold contactNameShadow'>Book a Meeting</div>
-                        <div className='text-gray-400 text-xs font-medium'>with Farzin Azami</div>
+                        {/* <div className='text-gray-400 text-xs font-medium'>with Farzin Azami</div> */}
                     </div>
                 :
                 <>

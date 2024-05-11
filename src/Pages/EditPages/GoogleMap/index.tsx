@@ -19,7 +19,7 @@ const EditGoogleMap =() => {
     const navigate = useNavigate();
     let currentBox:GoogleMapBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GoogleMapBox")[0] as GoogleMapBox;
     if (currentBox == undefined) {
-        currentBox = new GoogleMapBox("google map", {lan:33,lat:33});
+        currentBox = new GoogleMapBox("Google Map", {lan:33,lat:33});
     }
     const [pointVals, setPointVals] = useState([[currentBox.location.lan,currentBox.location.lat]]);
     const pointMode:PointMode = {

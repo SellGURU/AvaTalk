@@ -80,7 +80,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
         <div className='flex w-full justify-between items-start'>
             <div>
                 <div className='text-gray-700 text-base font-semibold contactNameShadow'>{title}</div>
-                <div className='text-gray-400 text-xs font-medium'>Farzin Azami</div>
+                <div className='text-gray-400 text-xs font-medium'>{formData.fullName}</div>
             </div>
             <Button onClick={onClose} theme="Carbon-back">
                 <div className={`${theme}-Profile-closeIcon`}></div>
