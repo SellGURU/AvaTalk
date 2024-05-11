@@ -242,7 +242,7 @@ const EditSocials = () => {
             onComplete={(url:string) => {
               const newSocial = selectItem as Social;
               newSocial.value = url
-              if (socials.filter((item) => item.getType() == newSocial.getType()).length == 0) {
+              if (socials.filter((item) => item.getType() == newSocial.getType()).length == 0 && url.length>0) {
                 setSocials([...socials, newSocial]);
               }
               setSelectedItem(null);
