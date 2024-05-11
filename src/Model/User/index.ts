@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { SharingModType ,Location} from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
@@ -130,7 +130,7 @@ class User {
         }
     }
     public resolveLink() {
-        return location.hostname+'/#/share/?user='+this.information?.userId
+        return '/#/share/?user='+this.information?.userId
     }
 } 
 export default User
