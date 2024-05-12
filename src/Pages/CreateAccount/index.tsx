@@ -457,7 +457,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 formik.errors.Phone ||
                 formik.errors.LastName ||
                 formik.errors.FirstName ||
-                formik.errors.email||
+                (formik.errors.email&&!authContext.varification.emailOrPhone.includes("@"))||
                 !formik.touched.FirstName ||
                 !formik.touched.LastName
               }
