@@ -1,5 +1,6 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
+import { Link } from "react-router-dom";
 // interface File {
 //     name:string
 //     url:string
@@ -7,17 +8,38 @@ import { Box } from ".."
 // }
 export class File {
     public order:number = -1
-    constructor(protected url:string,protected name:string){
+    constructor(protected url:string,protected name:string,protected type:string){
 
     } 
+    private resolveSvg() {
+        console.log(this.type)
+        switch(this.type) {
+            case 'application/pdf':
+                return 'PdfVector';
+            case 'application/psd':
+                return 'PhotoShopVector';
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                return 'wordVector';
+            case 'application/postscript':
+                return 'idVector';
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                return 'powerpointVector';
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                return 'ExelVector'
+            case 'application/x-zip-compressed':
+                return 'wordVector';
+            default :
+                return 'PhotoShopVector'
+        }
+    }
     public resolveRender(theme:string) {
         return (
             <>
-            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
+            <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-PdfVector`}></div>
+                    <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
                 </div>
-            </div>  
+            </Link>  
             <Tooltip id={"link"+this.name} />     
             </>
         )
@@ -25,6 +47,10 @@ export class File {
 
     public geturl(){
         return this.url
+    }
+
+    public getType(){
+        return this.type
     }
 
     public getName(){
@@ -36,7 +62,7 @@ class FileBox extends Box{
     constructor(protected title:string,protected contents:Array<File>){
         super(title)
         this.order = 5
-        this.typeName = 'FileBox'
+        this.type_name = 'FileBox'
     }
     public getContents() {
         return this.contents
@@ -55,7 +81,7 @@ class FileBox extends Box{
                     <>
                         <div className={`${theme}-Profile-Vectors`}>
                             {this.contents.sort((a,b) => a.order -b.order).map((item) => {
-                                const newSocal = Object.assign(new File('file',''),item)
+                                const newSocal = Object.assign(new File('file','',''),item)
                                 return (
                                     <>
                                         {newSocal.resolveRender(theme)}

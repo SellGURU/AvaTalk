@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
 import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
@@ -20,7 +20,13 @@ const initialValue = {
 const validateEmail = (email: string | undefined) => {
    return Yup.string().email().isValidSync(email)
 };
-
+const PosEnd = (id:string) => {
+    const input:HTMLInputElement = document.getElementById(id)  as HTMLInputElement
+    input?.focus()
+    const val = input.value; //sttore the value of the element
+    input.value = ''; //clear the value of the element
+    input.value = val; //set that value back.      
+}
 const validatePhone = (phone: number | undefined) => {
    return Yup.number().integer().positive().test(
       (phone) => {
@@ -75,6 +81,12 @@ const Login = () => {
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
+  useEffect(() => {
+    if(document.getElementById("phoneField")){
+      PosEnd("phoneField")
+      // alert("posEnd")
+    }
+  })
   return (
     <>
       {showSplash ?
@@ -91,7 +103,9 @@ const Login = () => {
                   formik.values.emailOrPhone[0] == '+'?
                   <div className="mb-8">
                     <TextField 
+                    id="phoneField"
                     {...formik.getFieldProps("emailOrPhone")} 
+
                     // value={country.codePhone + formik.values.emailOrPhone}
                     phoneCountry={country} 
                     setValue={(value) => {
@@ -101,7 +115,7 @@ const Login = () => {
                   </div>                
                   :
                   <div className="mb-8">
-                    <TextField {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                    <TextField  {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
                   </div>
                 }
                 <Button
@@ -119,7 +133,7 @@ const Login = () => {
                   <div style={{ background: "linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
                     <div style={{ background: "linear-gradient(to top,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                   </div>
-                  <div className="px-3 text-slate-800 text-sm font-medium">or</div>
+                  <div className="px-3 text-[#8290a3] text-sm font-medium">or</div>
                   <div style={{ background: "linear-gradient(to right,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
                     <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                   </div>

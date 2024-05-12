@@ -8,34 +8,40 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   uploades?: (files:Array<any>) => void
   mod?:'files' | 'profile',
   label?:string
+  accept?:string
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
+      console.log(file)
       reader.onload = function () {
           setFiles([...files,{
             url:reader.result,
-            name:name
+            name:name,
+            type:file.type
           }])
           if(uploades){
             if(mod == 'files'){
               uploades([...files,{
                 url:reader.result,
-                name:name
+                name:name,
+                type:file.type
               }])
             }else{
             setFiles([{
               url:reader.result,
-              name:name
+              name:name,
+              type:file.type
             }])              
               uploades([{
                 url:reader.result,
-                name:name
+                name:name,
+                type:file.type
               }])              
             }
           }
@@ -92,14 +98,14 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                                     Drag & drop image or <span style={{color:'#00B5FB',cursor:'pointer'}}>Browse</span> 
                                 </div>
                                 <div className={`${theme}-ImageUploader-uploader-suportText-container`}>
-                                    <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: JPEG, PNG</div>
+                                    <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: {accept}</div>
                                 </div>
                             </div>
                         </div>
                         <input  onChange={(res:any) => {
                             setisLoading(true)
                             getBase64(res.target.files[0],res.target.value)    
-                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept="*" />                        
+                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept={accept} />                        
                     </div>
               }
               {files.length > 0 && mod=='files'? 
@@ -111,8 +117,9 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                         return (
                           <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
                             <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
-                            <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                            </div>
+                            {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                            </div> */}
+                            <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash.svg" alt="" />
                           </div>
                         )
                       })}
@@ -130,6 +137,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
 
 ImageUploadr.defaultProps = {
   theme: "Carbon",
+  accept:"*"
 };
 
 export default ImageUploadr;

@@ -1,26 +1,25 @@
 import {createHashRouter } from "react-router-dom";
-import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share } from "../Pages";
+import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2 } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
 import Presentations from "../Pages/Presentations";
 import ProtectedRoute from "./ProtectedRoute";
-import { Chat, ContactsView, Profile } from "../Components";
-import { EditAiSetting, EditContactInfo, EditFile, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
+import { Chat, ContactsView, Profile2 } from "../Components";
+import { EditAiSetting, EditAvater,EditAvailability, EditContactInfo, EditFile, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
 import { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
-import Home from "../Pages/Home";
 
 const route = createHashRouter([
   {
     path: "/",
-    element: <ProtectedRoute Component={Home} />,
+    element: <ProtectedRoute Component={Home2} />,
 
     children: [
       {
         path: "/",
-        element: <Profile theme="Carbon"></Profile>,
+        element: <Profile2 theme="Carbon"></Profile2>,
         children: [
           {
             path: "edit",
@@ -31,8 +30,16 @@ const route = createHashRouter([
                 element: <EditContactInfo></EditContactInfo>,
               },
               {
+                path: "avatars",
+                element: <EditAvater></EditAvater>,
+              },              
+              {
                 path: "about",
                 element: <EditAbout></EditAbout>,
+              },
+              {
+                path: "availability",
+                element: <EditAvailability></EditAvailability>
               },
               {
                 path: "links",

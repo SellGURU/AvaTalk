@@ -40,6 +40,26 @@
     background: url(/Carbon/filePdf.svg) no-repeat center;
     @apply w-6 h-6;
 }
+.Carbon-ContentCard-PhotoShopVector{
+    background: url(/Carbon/photoshop.svg) no-repeat center;
+    @apply w-6 h-6;
+}
+.Carbon-ContentCard-ExelVector{
+    background: url(/Carbon/exel.svg) no-repeat center;
+    @apply w-6 h-6;
+}
+.Carbon-ContentCard-idVector{
+    background: url(/Carbon/id.svg) no-repeat center;
+    @apply w-6 h-6;
+}
+.Carbon-ContentCard-powerpointVector{
+    background: url(/Carbon/powerpoint.svg) no-repeat center;
+    @apply w-6 h-6;
+}
+.Carbon-ContentCard-wordVector{
+    background: url(/Carbon/word.svg) no-repeat center;
+    @apply w-6 h-6;
+}
 .Carbon-ContentCard-MaskVector{
     mask-size: 100%;
     -webkit-mask-repeat: no-repeat;

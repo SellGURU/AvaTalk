@@ -19,16 +19,17 @@ const Confirm: React.FC<ConfirmProps> = ({title,content,onClose,onConfirm}) => {
             <p className={`${theme}-Cofirm-question`}>{content}</p>
         </div>
         <div className={`${theme}-Cofirm-buttonContainer`}>
+            <Button onClick={onClose}  theme="Carbon-Outline">
+            Cancel
+            </Button>
             <Button onClick={() => {
             // onCompelete()
                 onConfirm()
                 onClose()
-            }} theme="Carbon-Outline">
+            }} theme="Carbon">
             Delete
             </Button>
-            <Button onClick={onClose}  theme="Carbon">
-            Cancel
-            </Button>
+
         </div>
         </div>
     </>

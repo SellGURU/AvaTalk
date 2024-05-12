@@ -27,6 +27,7 @@ const AddSocials: React.FC<AddSocialsProps> = ({ isOpen,onTakePhoto,isCanRemove 
 
     return (
         <>
+        
             <Modal
                 isOpen={isOpen}
                 onAfterOpen={onAfterOpen}

@@ -75,7 +75,7 @@ const EditLinks = () => {
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
-        <div className="relative top-4">
+        <div className="relative top-8">
           <BackIcon title="Links" theme="Carbon"></BackIcon>
         </div>        
         <div className="mt-[120px] hiddenScrollBar h-full">
@@ -84,7 +84,7 @@ const EditLinks = () => {
           </div>
           {links.length == 0 ?
             <div className="mt-3 px-6">
-              <TextField theme="Carbon" disabled label="links" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Link"></TextField>
+              <TextField theme="Carbon" disabled label="Links" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Link"></TextField>
             </div>
           :
             <>
@@ -124,6 +124,14 @@ const EditLinks = () => {
                           </div>
                         </div>
                         <div className="flex justify-end gap-1 items-start">
+                              {
+                                links.length> 1 ?
+                                  <div>
+                                    <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
+                                  </div>
+                                :
+                                undefined
+                              }                            
                             <div onClick={() => {
                               setEditName(item.getName())
                               setEditeValue(item.geturl())

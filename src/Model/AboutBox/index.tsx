@@ -4,7 +4,7 @@ class AboutBox extends Box {
     constructor(protected title:string,protected text:string){
         super(title)
         this.order = 1
-        this.typeName = 'AboutBox'
+        this.type_name= 'AboutBox'
     }
     public getBio() {
         return this.text

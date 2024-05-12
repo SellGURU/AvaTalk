@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 class Box {
     protected static boxCounter:number = 0
-    protected typeName:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'GalleryBox'|'GoogleMapBox' | 'FileBox' = 'Box'
+    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'GoogleMapBox' | 'FileBox' = 'Box'
     protected order:number = -1;
     constructor(protected title:string){}
     
@@ -21,7 +21,7 @@ class Box {
         this.order =order
     }
     public getTypeName() {
-        return this.typeName
+        return this.type_name
     }
 
     public getCardName() {
@@ -29,8 +29,9 @@ class Box {
     }
 
     public getEventName() {
-        switch(this.typeName){
+        switch(this.type_name){
             case 'AboutBox' :return 'more_info_about'
+            case 'MeetingBox' :return 'more_info_availability'
             case 'GalleryBox': return 'more_info_gallery'
             case 'SocialBox': return 'more_info_socials'
             case 'LinkBox': return 'more_info_links'
@@ -58,8 +59,11 @@ class Box {
             <>
                 {mode == 'profile' ?
                 <Link  to={'/edit/'+this.getRouteAddress()} className={`${theme}-Profile-BackgroundVectors`}>
-                    <div className="w-10 h-10 flex justify-center items-center bg-gray-100  rounded-full boxShadow-mini-Gray">
-                        <img src="./Carbon/plusVector.svg" alt="" />
+                    <div className="w-10 h-10 flex justify-center items-center bg-white borderBox-Gray boxShadow-Gray text-[#8290a3]  rounded-full ">
+                        {/* <img src="./Carbon/plusVector.svg" alt="" /> */}
+                        <div className={`${theme}-Profile-EditProfileBtnVector5 ${theme}-Footer-Vectors
+                         text-[#8290a3]
+                          m-auto`}></div>
                     </div>
                 </Link>            
                 :

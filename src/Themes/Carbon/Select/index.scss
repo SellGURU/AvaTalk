@@ -25,7 +25,7 @@
   // box-shadow: 4px 4px 14px 0px rgba(225, 225, 255, 1),inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: inset -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
   // box-shadow: -4px -4px 9px 0px rgba(255, 255, 255, 0.6);
-  @apply rounded-[27px] flex items-center borderBox-Gray boxsInnerShadows justify-between bg-gray-100;
+  @apply rounded-[27px] flex items-center borderBox-Gray boxsInnerShadows text-[14px] font-normal justify-between bg-gray-100;
 }
 .Carbon-Select-togglePassword {
   @apply cursor-pointer;
@@ -57,7 +57,7 @@
   @apply leading-[27.25px]  text-[13px]  font-[300]     text-gray-400;
 }
 .Carbon-Select-icon {
-  @apply w-4 absolute right-4 h-5 mt-2 bg-slate-400 justify-self-center mb-1;
+  @apply w-4 absolute right-4 h-5 mt-2 bg-[#8290a3] justify-self-center mb-1;
   mask-size: 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;

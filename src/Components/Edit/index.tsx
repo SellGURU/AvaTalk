@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "symphony-ui";
 import { Card } from "..";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 interface EditProps {
   theme?: string;
@@ -29,6 +30,12 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share something about yourself.",
     },
     {
+      name: "Set Your Availability",
+      icon: "calendar-2.svg",
+      link: "availability",
+      description: "Share something about your availability.",
+    },
+    {
       name: "Gallery",
       icon: "gallery.svg",
       link: "gallery",
@@ -48,7 +55,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     },
     {
       name: "File",
-      icon: "link.svg",
+      icon: "copy.svg",
       link: "Files",
       description: "Add files to your profile.",
     },    
@@ -65,6 +72,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Make your page come to life with a video.",
     },
   ]);
+  const authContext = useAuth()
   return (
     <>
       <Outlet></Outlet>
@@ -80,8 +88,27 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
           </Button>
           <p className={`${theme}-Edit-title`}>Edit Profile</p>
         </div>
-
         <div className="px-6 mt-[120px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+          <div className="w-full flex justify-center mb-5">
+            <div className="text-center relative">
+                <div onClick={() => {
+                  navigate('/edit/avatars')
+                }} className={`${
+                    "absolute rounded-full w-[32px] h-[32px] bg-gray-100  flex justify-center items-center border border-white borderBox-Gray  cursor-pointer -right-2 -top-2"
+                  }`}>
+                  <div className={`${theme}-Profile-EditProfileBtnVector7 ${theme}-Footer-Vectors
+                         text-[#8290a3] w-[20px] h-[20px]
+                          m-auto`}></div>
+                {/* <img
+                  className="w-[20px] h-[20px]"
+                  src="./icons/gallery-edit.svg"
+                  alt=""
+                /> */}
+              </div>              
+              <img className="w-[120px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
+              <div className="text-gray-700 mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
+            </div>
+          </div>
           {editCards.map((item) => {
             return <Card linkTo={item.link} content={item} theme="Carbon"></Card>;
           })}

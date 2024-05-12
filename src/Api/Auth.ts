@@ -97,8 +97,16 @@ class Auth extends Api {
     return response
   }
 
+  static check_user_existence(mobile_number?:string,email?:string) {
+    const response = this.post('/check_user_existence',{
+      email:email,
+      mobile_number:mobile_number
+    })
+    return response
+  }
+
   static avatarList(data:any) {
-    const response = this.post("/avatar_list",data)
+    const response = this.post("/avatar_list",data,{noPending:true})
     return response
   }
   static createAvatarVideo(avatar_url:string) {
@@ -133,7 +141,7 @@ class Auth extends Api {
   }
 
   static showProfile(resolve: (data:any) => void){
-    this.post('/show_profile',{}).then(res => {
+    this.post('/show_profile',{},{noPending:true}).then(res => {
       resolve(res.data)
     })
   }
@@ -170,10 +178,14 @@ class Auth extends Api {
     });
   }
 
-  static updateProfilePic(profile_pic:string){
-    this.post('/change_profile_pic',{profile_pic:profile_pic}).then(res => {
-      console.log(res)
-    })
+  static updateProfilePic(profile_pic:string,silent_video_avatar?:string){
+    const response = this.post('/change_profile_pic',{profile_pic_url:profile_pic,silent_video_avatar:silent_video_avatar})
+    return response
+  }
+
+  static avatarState(){
+    const response = this.post('/avatar_video_state',{})
+    return response    
   }
 
   static updateBackPic(profile_pic:string){

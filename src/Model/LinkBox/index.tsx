@@ -32,7 +32,7 @@ class LinkBox extends Box{
     constructor(protected title:string,protected links:Array<Link>){
         super(title)
         this.order = 3
-        this.typeName= 'LinkBox'
+        this.type_name= 'LinkBox'
     }
     public isShareAble(): boolean {
         if(this.links.length == 0) {

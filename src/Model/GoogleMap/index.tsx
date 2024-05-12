@@ -13,7 +13,7 @@ interface Location {
 class GoogleMapBox extends Box {
     constructor(protected title:string,public location:Location){
         super(title)
-        this.typeName = 'GoogleMapBox'
+        this.type_name = 'GoogleMapBox'
         this.order = 5
     }
     public resolveRender(theme: string,mode:string): JSX.Element {

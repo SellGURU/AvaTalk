@@ -20,7 +20,7 @@ const EditFile = () => {
   if (currentBox == undefined) {
     currentBox = new FileBox("File", []);
   }
-  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('',''),item))))
+  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','',''),item))))
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -39,8 +39,8 @@ const EditFile = () => {
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
-        <div className="relative top-4">
-          <BackIcon title="Gallery" theme="Carbon"></BackIcon>
+        <div className="relative top-8">
+          <BackIcon title="File" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="mt-24 px-6">
@@ -57,15 +57,18 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-3">
             <ImageUploadr
+              accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id"
               value={files.map((item, index) => {
                 return {
                   url: item.geturl(),
                   name: "itembox " + index * 2000,
+                  type:item.getType()
                 };
               })}
               uploades={(files: Array<any>) => {
+                console.log(files)
                 const converted:Array<File> = files.map((item) => {
-                  const newFile:File = new File(item.url,item.name)
+                  const newFile:File = new File(item.url,item.name,item.type)
                   return newFile
                 });
                 setFiles(converted)

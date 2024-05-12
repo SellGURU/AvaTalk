@@ -43,7 +43,11 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
         <Modal
             isOpen={isOpen}
             onAfterOpen={onAfterOpen}
-            onRequestClose={onClose}
+            onRequestClose={() =>{
+                formik.setFieldValue("name",'')
+                formik.setFieldValue("url",'')
+                onClose()
+            }}
             style={{content:{borderRadius:'24px',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         >
@@ -52,7 +56,11 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
                     <div className='text-gray-700 text-base font-semibold contactNameShadow'>{title}</div>
                     {/* <div className='text-gray-400 text-xs font-medium'>with Farzin Azami</div> */}
                 </div>
-                <Button onClick={onClose} theme='Carbon-back'>
+                <Button onClick={() =>{
+                    formik.setFieldValue("name",'')
+                    formik.setFieldValue("url",'')
+                    onClose()
+                    }} theme='Carbon-back'>
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
             </div>
@@ -61,7 +69,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
                 <TextField  {...formik.getFieldProps("name")}  label={'Name'} placeholder="website" theme="Carbon" name="name" type="text" errorMessage="" inValid={false} />
               </div>  
               <div className="my-4">
-                <TextField  {...formik.getFieldProps("url")}  label={'Url'} placeholder="https://facebook.com/" theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
+                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder="https://facebook.com/" theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
               </div>                 
               <Button onClick={() => {
                 onComplete(formik.values.name,formik.values.url)

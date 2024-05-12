@@ -5,7 +5,7 @@
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    @apply relative overflow-auto w-full;
+    @apply  overflow-auto w-full;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .Carbon-Profile-ProfileSection::-webkit-scrollbar{
@@ -58,7 +58,7 @@
     @apply text-gray-700 text-sm;
 }
 .Carbon-Profile-PreviewProfileBtnVector{
-    background: url(/Carbon/eyeVector.svg);
+    mask-image: url(/Carbon/eyeVector.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;  
 }
 .Carbon-Profile-EditProfileBtnVector{
@@ -94,7 +94,7 @@
     @apply flex flex-row flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    @apply bg-gray-100 w-16 h-16 flex justify-center borderBox-Gray boxShadow-Gray  items-center rounded-full p-2 cursor-pointer; 
+    @apply bg-white borderBox-Gray boxShadow-Gray text-[#8290a3] w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
 }
 
 .Carbon-Profile-closeIcon{
@@ -110,12 +110,29 @@
     @apply w-6 h-6  bg-cover bg-no-repeat;
 }
 .Carbon-Profile-EditProfileBtnVector2{
-    background-image: url(/Carbon/user-edit.svg);
+    mask-image: url(/Carbon/user-edit.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
 }
+.Carbon-Profile-EditProfileBtnVector4{
+    background-image: url(/Carbon/calendar-3.svg);
+    @apply w-5 h-5 mr-1 bg-cover bg-no-repeat;
+}
 .Carbon-Profile-EditProfileBtnVector3{
-    background-image: url(/Carbon/share3.svg);
+    mask-image: url(/Carbon/share3.svg);
     @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;
+}
+.Carbon-Profile-EditProfileBtnVector5{
+    mask-image: url(/Carbon/plusVector.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat bg-[#8290a3];
+}
+.Carbon-Profile-EditProfileBtnVector6{
+    mask-image: url(/Carbon/Calendar-new.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat bg-[#8290a3];
+}
+.Carbon-Profile-EditProfileBtnVector7{
+
+    mask-image: url(/icons/gallery-edit.svg);
+    @apply w-5 h-5 bg-cover bg-no-repeat bg-[#8290a3];
 }
 .Carbon-Profile-LanguageSquareVector{
     background-image: url(/Carbon/language-square.svg);
@@ -139,7 +156,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    @apply w-6 h-6 bg-current;
+    @apply w-6 h-6 bg-current bg-[#8290a3];
 }
 .Carbon-Profile-Box{
     

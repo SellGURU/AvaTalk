@@ -38,7 +38,7 @@ const EditAiSetting = () => {
   return (
     <>
       <div className="absolute w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
-        <div className="relative top-4">
+        <div className="relative top-8">
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">

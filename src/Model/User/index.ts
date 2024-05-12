@@ -1,8 +1,10 @@
-import { toast } from "react-toastify";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { toast } from "react-toastify";
 import { SharingModType ,Location} from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
 import { Auth } from "../../Api";
+import { boxProvider } from "../../help";
 
 interface Information {
     firstName:string;
@@ -19,6 +21,7 @@ interface Information {
     userId?:string
     silent_video_avatar?:string
     talk_video_avater?:string
+    referral_code?:string
 }
 
 // interface Location {
@@ -31,7 +34,39 @@ interface Config {
 }
 
 class User {
-    public boxs:Array<Box> = []
+    private defultBoxs = [
+        {
+            "text": "",
+            "order": 1,
+            "title": "About",
+            "typeName": "AboutBox",
+            "type_name": "AboutBox"
+        },
+        {
+            "order": 2,
+            "title": "Social",
+            "typeName": "SocialBox",
+            "type_name": "SocialBox",
+            "socialMedias": []
+        },
+        {
+            "links": [],
+            "order": 3,
+            "title": "Links",
+            "typeName": "LinkBox",
+            "type_name": "LinkBox"
+        },
+        {
+            "order": 4,
+            "title": "Book with me",
+            "contents": [],
+            "typeName": "MeetingBox",
+            "type_name": "MeetingBox"
+        }        
+    ]
+    public boxs:Array<Box> = this.defultBoxs.map((item:any) => {
+                return boxProvider(item);
+            })
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
@@ -43,7 +78,16 @@ class User {
     }
     public updateInformation(information:Information){
         this.information = information
-        toast.success("Done Successfully!")
+        // toast.success("Done Successfully!")
+        this.syncToLocalStorage()
+    }
+    public updateAvater(pic:string,silent:string){
+        if(this.information?.silent_video_avatar){
+            this.information.silent_video_avatar = silent
+        }
+        if(this.information?.imageurl){
+            this.information.imageurl = pic
+        }
         this.syncToLocalStorage()
     }
     public resolveBackImageUrl() {
@@ -97,7 +141,7 @@ class User {
         }
         this.boxs.push(newBox)
         Auth.addBox(newBox)
-        toast.success("Done Successfully!")
+        // toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }
 
@@ -120,7 +164,7 @@ class User {
         }
     }
     public resolveLink() {
-        return location.hostname+'/#/share/?user='+this.information?.userId
+        return '/#/share/?user='+this.information?.userId
     }
 } 
 export default User

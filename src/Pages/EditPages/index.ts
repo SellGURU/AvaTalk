@@ -1,4 +1,5 @@
 import EditAbout from "./About";
+import EditAvailability from "./Availability";
 import EditGallery from "./Gallery";
 import EditGoogleMap from "./GoogleMap";
 import EditVideos from "./Videos";
@@ -7,4 +8,5 @@ import EditLinks from "./Links";
 import EditAiSetting from "./AiSetting";
 import EditContactInfo from "./ContactInfo";
 import EditFile from "./File";
-export { EditAbout, EditGallery, EditGoogleMap,EditFile, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };
+import EditAvater from "./Avater";
+export { EditAbout,EditAvailability, EditGallery,EditAvater ,EditGoogleMap,EditFile, EditVideos, EditSocials, EditLinks, EditAiSetting, EditContactInfo };

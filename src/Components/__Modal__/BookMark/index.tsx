@@ -6,7 +6,6 @@ import './index.scss';
 import { useState } from 'react';
 import { BackIcon, TextArea, TextField } from '../..';
 import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
-import { toast } from 'react-toastify';
 
 interface BookMarkProps {
     isOpen : boolean
@@ -71,7 +70,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                 step == 1 ?
                     <div>
                         <div className='text-gray-700 text-base font-semibold contactNameShadow'>Book a Meeting</div>
-                        <div className='text-gray-400 text-xs font-medium'>with Farzin Azami</div>
+                        {/* <div className='text-gray-400 text-xs font-medium'>with Farzin Azami</div> */}
                     </div>
                 :
                 <>
@@ -193,7 +192,7 @@ const BookMark:React.FC<BookMarkProps> = ({isOpen,onAfterOpen,onClose,theme}) =>
                                         <TextArea inValid={false} placeholder='Write details to prepare our meeting  ...' name='Details' label='Details' theme='Carbon' textAreaHeight='136px' onBlur={() => {}} onChange={(e) =>{setDetail(e.target.value)}} value={detail}></TextArea>
                                     </div>
                                     <Button onClick={() => {
-                                        toast.success("Booked Successfully!")
+                                        // toast.success("Booked Successfully!")
                                         onClose()
                                     }} theme='Carbon'>Book Meeting</Button>
                                 </div>

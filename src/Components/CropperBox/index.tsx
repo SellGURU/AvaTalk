@@ -36,7 +36,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
         {
             url.length > 0 ?
             <>
-                    <div className="absolute w-full top-0 left-0 h-screen z-[22] bg-black opacity-60"></div>     
+                    <div className="absolute w-full top-0 left-0 h-screen z-[22] bg-black opacity-[0.9]"></div>     
                     <div className='absolute w-full top-0 left-0 h-full flex z-30 justify-center items-center'>
                         <div>
                             <Cropper
@@ -49,9 +49,9 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 setCropper(instance);
                             }}
                             />
-                            <div className="mt-2 flex gap-8">
-                                <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>cancel</Button> 
-                                <Button onClick={getCropData} theme="Carbon-Crop">crop</Button> 
+                            <div className="mt-2 flex gap-8 px-4">
+                                <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>Cancel</Button> 
+                                <Button onClick={getCropData} theme="Carbon-Crop">Crop</Button> 
                             </div>
 
                         </div>

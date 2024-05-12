@@ -12,12 +12,13 @@ interface PresentationProps {
   isTalking:boolean;
   setIsTalking:(action:boolean) =>void;
   setAudioUrl:(value:string) =>void;
+  setShowMuiteController: (action:boolean) =>void
   shareUser:User
   chats:Array<chat>
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
 }
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareUser,setAudioUrl,setIsTalking,isSilent}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent}) => {
     // const user = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -94,6 +95,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
         if(!isSilent){
             setIsTalking(true)
         }
+        setShowMuiteController(true)
         setIsLoading(false)
         },() => {
         setIsLoading(false)
@@ -144,7 +146,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setChats,shareU
                 <>
                 <div className="  w-full px-4 flex justify-between items-center h-10 borderBox-Gray2 bg-slate-100 ">
                     <BeatLoader size={10} color="#702CDA" />
-                    <div onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
+                    <div className="cursor-pointer" onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
                 </div>
                 </>
             :

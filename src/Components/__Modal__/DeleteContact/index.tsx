@@ -31,12 +31,13 @@ const DeleteContact: React.FC<AddContactProps> = ({ isOpen,onDelete, onAfterOpen
               <p className={`${theme}-DeleteContact-question`}>Are you sure you want to delete this Contact?</p>
             </div>
             <div className={`${theme}-DeleteContact-buttonContainer`}>
-              <Button onClick={onDelete} theme="Carbon-Outline">
-                Delete
-              </Button>
-              <Button onClick={onClose} theme="Carbon">
+              <Button onClick={onClose} theme="Carbon-Outline">
                 Cancel
               </Button>
+              <Button onClick={onDelete} theme="Carbon">
+                Delete
+              </Button>
+
             </div>
           </div>
         </>

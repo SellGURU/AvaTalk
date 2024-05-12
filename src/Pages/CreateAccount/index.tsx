@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useEffect, useState } from "react";
-import { StepController,Select, TextField } from "../../Components";
+import { useEffect, useRef, useState } from "react";
+import { StepController,Select, TextField, BackIcon } from "../../Components";
 import { Button } from "symphony-ui";
 // import LocationPicker from "react-leaflet-location-picker";
 import styles from "./CreateAccount.module.css";
@@ -19,6 +19,7 @@ import { BeatLoader, RingLoader, } from "react-spinners";
 import { AddAvatar } from "../../Components/__Modal__";
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 const initialValue = {
   FirstName: "",
@@ -109,6 +110,7 @@ const CreateAccount = () => {
     lat: 51.5072,
     lng: 0.1276,
   });
+ 
   const [showGudieLine, setShowGudieLine] = useState(false);
   const resolveStepContent = () => {
     switch (step) {
@@ -158,7 +160,7 @@ const CreateAccount = () => {
                 theme="Carbon-back"
               >
                 <div
-                  className={styles.backIcon + " w-[8px] h-[20px] bg-slate-400"}
+                  className={styles.backIcon + " w-[8px] h-[20px]  bg-[#8290a3]"}
                 ></div>
               </Button>
             ) : (
@@ -181,10 +183,10 @@ const CreateAccount = () => {
                 </Button>
               </div> */}
               <div
-                className={`text-gray-700 ${
+                className={`text-gray-700  ${
                   window.innerWidth < 332 ? "mt-12" : "mt-2"
                 } ${
-                  window.innerWidth < 420 ? "text-left" : "text-center"
+                  window.innerWidth < 420 ? "text-center" : "text-center"
                 } font-semibold text-base`}
               >
                 Photo Guidelines for AI Profile
@@ -337,6 +339,11 @@ const InfoStep: React.FC<InfoStepProps> = ({
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
 ];
+useConstructor(() => {
+  if(!authContext.varification.emailOrPhone.includes("@")){
+    formik.getFieldValue("email",authContext.varification.emailOrPhone)
+  }
+})
   // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
 
   return (
@@ -395,7 +402,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
                     onClick={() => {
                       formik.setFieldValue("gender",Gender.value)
                     }}
-                    className="ml-4 my-2 cursor-pointer"
+                    className="ml-4 my-2 cursor-pointer font-normal text-[14px]"
                     value={Gender.value}
                   >
                     {Gender.value}
@@ -455,11 +462,26 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 formik.errors.Phone ||
                 formik.errors.LastName ||
                 formik.errors.FirstName ||
+                (formik.errors.email&&!authContext.varification.emailOrPhone.includes("@"))||
                 !formik.touched.FirstName ||
                 !formik.touched.LastName
               }
               onClick={() => {
-                setStep(2);
+                console.log(authContext.varification.emailOrPhone)
+                let localEmail=formik.values.email
+                let localPhone=formik.values.Phone
+                if(authContext.varification.emailOrPhone.includes('@')){
+                  localEmail = undefined
+                }else{
+                  localPhone = undefined
+                }
+                Auth.check_user_existence(localPhone,localEmail).then((res) => {
+                  if(res.data == false){
+                    setStep(2);
+                  }else if(res.data){
+                    toast.error(res.data)
+                  }
+                })
               }}
               theme="Carbon"
             >
@@ -604,6 +626,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
     type:'Local',
     video:''
   })
+  const [asktakePhoto,setAskTakePhoto] = useState(false)
   const [Cropper, setCropper] = useState("");
   const handleTakePhoto =  (dataUri:string) => {
     // Do stuff with the photo...
@@ -668,9 +691,16 @@ const AvatarStep: React.FC<UploadStepProps> = ({
       })      
     }, 300);
   },[formik.values.avatar_pic_url, formik.values.silent_video_avatar])
+  const addAvatarRef =useRef<HTMLDivElement>(null)
+  useModalAutoClose({
+    refrence:addAvatarRef,
+    close:() => {
+      setAddAvatar(false)
+    }
+  })   
   return (
     <>
-      <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
+      <div className="h-[65vh]  hiddenScrollBar overflow-y-scroll">
         <div className="px-5">
           <div className="text-gray-700 text-center font-semibold text-base">
             Building Your Talking Profile
@@ -859,7 +889,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
         </div>
         <div className="mt-8 mb-3 px-4">
           <Button
-            disabled={formik.values.silent_video_avatar.length == 0}
+            // disabled={formik.values.silent_video_avatar.length == 0}
             onClick={onSubmit}
             theme="Carbon"
           >
@@ -881,6 +911,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             //  formik.setFieldValue('PrifileImage',resolve)
             // setAvatarUrl('')
             setCropper("");
+            setAskTakePhoto(false)
             // setSelectedAvatar(resolve as string);
             
             setIsLoading(true);
@@ -910,56 +941,77 @@ const AvatarStep: React.FC<UploadStepProps> = ({
           }}
           onCancel={() => {
             setCropper("");
+            if(asktakePhoto){
+              setOpenCamera(true)
+            }
           }}
         ></CropperBox>
-        <AddAvatar
-          onTakePhoto={() => {
-            setAddAvatar(false)
-            setOpenCamera(true)
-          }}
-          isCanRemove={uploadedAvater.photo.length>0}
-          onRemove={() => {
-            // setSelectedAvatar("")
-            setUploadedAvater({
-              photo:'',
-              type:'Local',
-              video:""
-            })
-            setAddAvatar(false)
-            // setAvatarVideo("")
-            formik.setFieldValue("avatar_pic_url","")
-            formik.setFieldValue("silent_video_avatar","")
-          }}
-          name={"modal name"}
-          value={"editeValue"}
-          theme="Carbon"
-          isOpen={addAvatar}
-          onClose={() => {
-            setAddAvatar(false);
-          }}
-          onComplete={(data:any) => {
+        {addAvatar?
+          <div className="absolute z-40 left-0  bottom-0 w-full flex justify-center items-center">
+            <AddAvatar
+              refEl={addAvatarRef}
+              onTakePhoto={() => {
+                setAddAvatar(false)
+                setOpenCamera(true)
+                setAskTakePhoto(true)
+              }}
+              isCanRemove={uploadedAvater.photo.length>0}
+              onRemove={() => {
+                // setSelectedAvatar("")
+                setUploadedAvater({
+                  photo:'',
+                  type:'Local',
+                  video:""
+                })
+                setAddAvatar(false)
+                // setAvatarVideo("")
+                formik.setFieldValue("avatar_pic_url","")
+                formik.setFieldValue("silent_video_avatar","")
+              }}
+              name={"modal name"}
+              value={"editeValue"}
+              theme="Carbon"
+              isOpen={addAvatar}
+              onClose={() => {
+                setAddAvatar(false);
+              }}
+              onComplete={(data:any) => {
 
-                  // setAvatarVideo("");
-                  const reader = new FileReader();
-                  reader.readAsDataURL(data);
-                  reader.onload = function () {
-                    setCropper(reader.result as string);
-                  };
-                  reader.onerror = function (error) {
-                    console.log("Error: ", error);
-                  };
-                  setAddAvatar(false)
-          
-          }}
-          title="Link"
-        ></AddAvatar>
+                      // setAvatarVideo("");
+                      const reader = new FileReader();
+                      reader.readAsDataURL(data);
+                      reader.onload = function () {
+                        setCropper(reader.result as string);
+                      };
+                      reader.onerror = function (error) {
+                        console.log("Error: ", error);
+                      };
+                      setAddAvatar(false)
+              
+              }}
+              title="Link"
+            ></AddAvatar>
+
+          </div>
+        :
+        undefined}
+        {addAvatar?
+            <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>          
+        :undefined}
+
       </div>
       {openCamera?
       <>
         <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
-            <Camera
-              onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-            />      
+            <div className="max-w-xl relative h-dvh flex justify-center items-center">
+              <Camera
+                onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+              />      
+              <div className="absolute z-50 top-7 left-[-4px]">
+                <BackIcon title="" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
+              </div>        
+
+            </div>
         </div>
         <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
       </>

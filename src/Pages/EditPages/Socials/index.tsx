@@ -81,7 +81,7 @@ const EditSocials = () => {
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
-        <div className="relative top-4">
+        <div className="relative top-8">
           <BackIcon title="Socials" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
@@ -153,7 +153,7 @@ const EditSocials = () => {
                         </li>
                         {showConfirm == index ?
                           <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
+                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social?"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
                               deleteSocial(index);
                               setShowConfirm(-1)
                             }}></Confirm>
@@ -242,7 +242,7 @@ const EditSocials = () => {
             onComplete={(url:string) => {
               const newSocial = selectItem as Social;
               newSocial.value = url
-              if (socials.filter((item) => item.getType() == newSocial.getType()).length == 0) {
+              if (socials.filter((item) => item.getType() == newSocial.getType()).length == 0 && url.length>0) {
                 setSocials([...socials, newSocial]);
               }
               setSelectedItem(null);

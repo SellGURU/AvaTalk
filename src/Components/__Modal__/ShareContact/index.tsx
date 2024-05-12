@@ -53,7 +53,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             isOpen={isOpen}
             onAfterOpen={onAfterOpen}
             onRequestClose={onClose}
-            style={{content:{borderRadius:'24px',overflowY:'scroll',maxHeight:'90svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
+            style={{content:{borderRadius:'24px',overflowY:'hidden',maxHeight:'90svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         >
             {
@@ -98,7 +98,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                                 }
                             </div>
                             <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
-                                <img src={qrcodeValue} alt="" />
+                                <img src={qrcodeValue} alt="" className='mt-5 mb-6'/>
                             </div>
 
                         </div>
@@ -151,7 +151,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                             url:authContext.currentUser.resolveLink()+'&viewBy=share_link'
                         }).then(() => {
                              Auth.addEvent({event_type:'share_link','sub_event_category':'share_link','userid':authContext.currentUser.information?.userId as string})
-                            toast.success("Successful share")
+                            // toast.success("Successful share")
                         }).catch(() => {
                             // toast.error("Error sharing:"+err)
                         })

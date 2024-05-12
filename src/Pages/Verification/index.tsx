@@ -16,11 +16,11 @@ const Verification = () => {
     const [completeTimer,setCompleteTimer] = useState(false)
     useConstructor(() => {
         toast.info('your code : 12345')
-        if(authContext.varification.emailOrPhone.length == 0){
-        setTimeout(() => {
-            navigate('/login')
-        }, 500);
-        }
+        // if(authContext.varification.emailOrPhone.length == 0){
+        // setTimeout(() => {
+        //     navigate('/login')
+        // }, 500);
+        // }
     })    
     return (
         <>
@@ -47,9 +47,12 @@ const Verification = () => {
                     }                    
                     Auth.login(resolvePhoneOrEnail).then((res) => {
                         console.log(res)
+                        if(res.data == 'The code you have entered is wrong'){
+                            toast.error(res.data)
+                        }else
                         if(res.data == null){
                             navigate("/register");
-                        }
+                        }else
                         if(res.data == 'Not Registered'){
                             navigate("/register");
                         }else{
@@ -99,9 +102,10 @@ const Verification = () => {
                 }}
             />
             </div>
-            <p onClick={() => {
-                completeTimer ? setCompleteTimer(false) : undefined
-            }} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
+            <p onClick={completeTimer ?() => {
+                    setCompleteTimer(false) 
+                    toast.info("code is 12345")
+            }:undefined} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
                 {
                     !completeTimer?
                         <span className="ml-2"><Timer oncomplete={() => {
