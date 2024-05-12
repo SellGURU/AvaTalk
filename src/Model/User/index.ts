@@ -38,6 +38,7 @@ class User {
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
+
     public resolveImageUrl() {
         if(this.information?.imageurl!= '' && this.information?.imageurl!= null){
             return this.information?.imageurl
