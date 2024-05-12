@@ -106,7 +106,7 @@ class Auth extends Api {
   }
 
   static avatarList(data:any) {
-    const response = this.post("/avatar_list",data)
+    const response = this.post("/avatar_list",data,{noPending:true})
     return response
   }
   static createAvatarVideo(avatar_url:string) {

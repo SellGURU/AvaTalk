@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
   LastName: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
-  email: Yup.string().email(),
+  email: Yup.string().required("Required").email(),
 });
 
 const CreateAccount = () => {
@@ -457,6 +457,7 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 formik.errors.Phone ||
                 formik.errors.LastName ||
                 formik.errors.FirstName ||
+                formik.errors.email||
                 !formik.touched.FirstName ||
                 !formik.touched.LastName
               }
