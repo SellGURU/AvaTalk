@@ -884,7 +884,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
         </div>
         <div className="mt-8 mb-3 px-4">
           <Button
-            disabled={formik.values.silent_video_avatar.length == 0}
+            // disabled={formik.values.silent_video_avatar.length == 0}
             onClick={onSubmit}
             theme="Carbon"
           >

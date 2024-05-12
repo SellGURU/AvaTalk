@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
     url:Yup.string().required(),
 });
 
-const AddSocials:React.FC<AddSocialsProps> = ({isOpen,label,value,title,onComplete,onAfterOpen,onClose,theme}) => {
+const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onAfterOpen,onClose,theme}) => {
     const initialValue= {
         url:value? value :'',
     };

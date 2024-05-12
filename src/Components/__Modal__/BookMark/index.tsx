@@ -6,7 +6,6 @@ import './index.scss';
 import { useState } from 'react';
 import { BackIcon, TextArea, TextField } from '../..';
 import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
-import { toast } from 'react-toastify';
 
 interface BookMarkProps {
     isOpen : boolean
