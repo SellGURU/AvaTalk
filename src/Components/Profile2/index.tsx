@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
 import { boxProvider, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
@@ -55,13 +55,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isTalking,setIsTalking] = useState(false)
   const [chats,setChats] = useState<Array<chat>>([
   ])      
-  const [,forceUpdate] = useReducer(x => x+1,0)
-  useEffect(() =>{
-    if(shareUser.boxs.length == 0){
-      publish("refreshPage",{})
-      forceUpdate()
-    }
-  })
+  // const [,forceUpdate] = useReducer(x => x+1,0)
+  // const [loadPage,setLaodPage] = useState(false)
+  // useEffect(() =>{
+  //   if(shareUser.boxs.length == 0 && !loadPage){
+  //     publish("refreshPage",{})
+  //     forceUpdate()
+  //     setLaodPage(true)
+  //   }
+  // })
   useConstructor(() => {
     if(mode == 'share') {
       const resolveSocial: Array<Box> = [];

@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
   LastName: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
-  email: Yup.string().required("Required").email(),
+  email: Yup.string().email(),
 });
 
 const CreateAccount = () => {
@@ -339,6 +339,11 @@ const InfoStep: React.FC<InfoStepProps> = ({
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
 ];
+useConstructor(() => {
+  if(!authContext.varification.emailOrPhone.includes("@")){
+    formik.getFieldValue("email",authContext.varification.emailOrPhone)
+  }
+})
   // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
 
   return (
