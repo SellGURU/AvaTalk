@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
 const EditAvailability = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "AvailabilityBox")[0] as AvailabilityBox;
+  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "MeetingBox")[0] as AvailabilityBox;
   if (currentBox == undefined) {
     currentBox = new AvailabilityBox("", "");
   }

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 class Box {
     protected static boxCounter:number = 0
-    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'AvailabilityBox'|'GalleryBox'|'GoogleMapBox' | 'FileBox' = 'Box'
+    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'GoogleMapBox' | 'FileBox' = 'Box'
     protected order:number = -1;
     constructor(protected title:string){}
     
@@ -31,7 +31,7 @@ class Box {
     public getEventName() {
         switch(this.type_name){
             case 'AboutBox' :return 'more_info_about'
-            case 'AvailabilityBox' :return 'more_info_availability'
+            case 'MeetingBox' :return 'more_info_availability'
             case 'GalleryBox': return 'more_info_gallery'
             case 'SocialBox': return 'more_info_socials'
             case 'LinkBox': return 'more_info_links'

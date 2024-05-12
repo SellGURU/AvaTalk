@@ -55,7 +55,7 @@ const boxProvider = (box: any) => {
     case "AboutBox": {
       return Object.assign(new AboutBox("simple", ""), box);
     }
-    case "AvailabilityBox": {
+    case "MeetingBox": {
       return Object.assign(new AvailabilityBox("simple", ""), box);
     }
     case "GalleryBox": {

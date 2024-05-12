@@ -5,7 +5,7 @@ class AvailabilityBox extends Box {
   constructor(protected title: string, protected url: string) {
     super(title);
     this.order = 7;
-    this.type_name = "AvailabilityBox";
+    this.type_name = "MeetingBox";
   }
   public getUrl() {
     return this.url;

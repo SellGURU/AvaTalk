@@ -47,6 +47,7 @@ const Home2 = () => {
                 referral_code:data.information. referral_code
             })
             authContext.currentUser.setBox(resolveSocial)
+
         })        
     }
     useConstructor(() => {
