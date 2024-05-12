@@ -322,13 +322,17 @@ const EditAvater: React.FC = () => {
             <Button
                 disabled={formik.values.silent_video_avatar.length == 0}
                 onClick={() =>{
+                  setIsLoading(true)
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
                     context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
                     setTimeout(() => {
-                      navigate('/?splash=false')
-                      publish('refreshPage',{})
-                      window.location.reload()         
-                    }, 500);
+                      Auth.avatarState().then(() => {
+                        setIsLoading(false)
+                          navigate('/?splash=false')
+                          publish('refreshPage',{})
+                          window.location.reload()         
+                      })        
+                    }, 3000);
                   })
                 }}
                 theme="Carbon"

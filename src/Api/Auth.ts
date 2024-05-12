@@ -183,6 +183,11 @@ class Auth extends Api {
     return response
   }
 
+  static avatarState(){
+    const response = this.post('/avatar_video_state',{})
+    return response    
+  }
+
   static updateBackPic(profile_pic:string){
     this.post('/change_back_ground_pic',{back_ground_pic:profile_pic}).then(res => {
       console.log(res)

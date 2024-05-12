@@ -171,7 +171,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }} theme='Carbon-back' style={{position:'sticky',zIndex:20}}>
                     <div className={`${theme}-Profile-closeIcon`}></div>
                   </Button>                  
-                :undefined}
+                :<>
+                  <Button onClick={() => {
+                    setMode('profile')
+                    publish('profileIsProfile',{})
+                    window.history.replaceState(null, "", "/#/")
+                    }} theme='Carbon-back' style={{position:'sticky',zIndex:20,visibility:'hidden'}}>
+                    <div className={`${theme}-Profile-closeIcon`}></div>
+                  </Button>                  
+                </>}
               </>
           }
 
