@@ -130,7 +130,7 @@ const EditAvater: React.FC = () => {
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
-        <div className="relative top-4">
+        <div className="relative top-8">
           <BackIcon title="" theme="Carbon"></BackIcon>
         </div>        
         <div className="px-5 mt-[120px] hiddenScrollBar h-full">

@@ -138,8 +138,8 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
           <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
         </div>
         <div className="mt-10">
-          <Button onClick={handleAction} theme="Carbon">
-            <div className="text-[#8290a3]">Exchange Contact</div>
+          <Button disabled={formData.fullName == '' || formData.email == ''} onClick={handleAction} theme="Carbon">
+            <div >Exchange Contact</div>
           </Button>
         </div>
       </div>
