@@ -16,11 +16,11 @@ const Verification = () => {
     const [completeTimer,setCompleteTimer] = useState(false)
     useConstructor(() => {
         toast.info('your code : 12345')
-        if(authContext.varification.emailOrPhone.length == 0){
-        setTimeout(() => {
-            navigate('/login')
-        }, 500);
-        }
+        // if(authContext.varification.emailOrPhone.length == 0){
+        // setTimeout(() => {
+        //     navigate('/login')
+        // }, 500);
+        // }
     })    
     return (
         <>
@@ -47,9 +47,12 @@ const Verification = () => {
                     }                    
                     Auth.login(resolvePhoneOrEnail).then((res) => {
                         console.log(res)
+                        if(res.data == 'The code you have entered is wrong'){
+                            toast.error(res.data)
+                        }else
                         if(res.data == null){
                             navigate("/register");
-                        }
+                        }else
                         if(res.data == 'Not Registered'){
                             navigate("/register");
                         }else{
