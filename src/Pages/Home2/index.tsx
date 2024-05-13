@@ -56,7 +56,6 @@ const Home2 = () => {
     })
     useEffect(() => {
         if(parametr.get("force") == 'true'){
-            window.location.href =window.location.href.replace("&force=true",'')
             publish("ForceReload",{})
         }        
     })
@@ -76,7 +75,7 @@ const Home2 = () => {
         setIsLoading(false)
     })    
     subscribe('ForceReload',() => {
-        window.location.reload()
+        window.location.replace(window.location.href.replace('&force=true',''))
     })
     setTimeout(() => {
         setshowSplash(false)
