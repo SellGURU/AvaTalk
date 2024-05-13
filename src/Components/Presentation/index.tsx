@@ -12,6 +12,7 @@ import Setting from '../Setting'
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Share from "../../Api/Share";
 import { User } from "../../Model";
+import { subscribe } from "../../utils/event";
 
 interface PresentationProps {
   theme?: string;
@@ -63,7 +64,12 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
         // setShowOpacity(true)
         refren.load()
     }        
-  })   
+  },[shareUser])   
+  subscribe('ForceReload',() => {
+      const refren = videoRef2.current  as any   
+      // setShowOpacity(true)
+      refren.load()    
+  })
   useEffect(() => {
     console.log(shareUser)
     // console.log(shareUser.information?.talk_video_avater)

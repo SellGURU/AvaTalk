@@ -75,7 +75,11 @@ const Home2 = () => {
         setIsLoading(false)
     })    
     subscribe('ForceReload',() => {
-        window.location.replace(window.location.href.replace('&force=true',''))
+        // window.location.reload()
+        // setshowSplash(true)
+        navigate(0)
+        // window.location.replace(window.location.href.replace('&force=true',''))
+
     })
     setTimeout(() => {
         setshowSplash(false)

@@ -14,7 +14,7 @@ import { BackIcon } from "../../../Components";
 import { publish } from "../../../utils/event";
 import Camera from "react-html5-camera-photo";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 interface Avatars {
   photo: string;
   video: string;
@@ -107,7 +107,7 @@ const EditAvater: React.FC = () => {
       publish('isLoading-stop',{})
     }
   },[isLoading])
-  const navigate = useNavigate();  
+  // const navigate = useNavigate();  
   useEffect(() => {
     setCurrentAvatr({
       photo:"",
@@ -328,8 +328,11 @@ const EditAvater: React.FC = () => {
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
                     context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
                     setIsLoading(false)
-                    navigate('/?splash=false&force=true')
-                    // publish('ForceReload',{})
+                    // publish("refreshPage",{})
+                    // window.location.reload()
+                    // publish('isLoading-stop',{})
+                    // navigate('/?splash=false&force=true')
+                    publish('ForceReload',{})
 
                   // history.go(0);
                   })
