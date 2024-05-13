@@ -11,7 +11,7 @@ import { TextField } from "../../Components";
 import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
-import { boxProvider } from "../../help";
+import { boxProvider, useConstructor } from "../../help";
 
 const initialValue = {
   emailOrPhone: "",
@@ -81,6 +81,9 @@ const Login = () => {
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
+  useConstructor(() => {
+    localStorage.clear()
+  })
   useEffect(() => {
     if(document.getElementById("phoneField")){
       PosEnd("phoneField")
