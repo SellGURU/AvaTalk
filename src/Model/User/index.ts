@@ -4,6 +4,7 @@ import { SharingModType ,Location} from "../../Types";
 import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
 import { Auth } from "../../Api";
+import { boxProvider } from "../../help";
 
 interface Information {
     firstName:string;
@@ -33,8 +34,39 @@ interface Config {
 }
 
 class User {
-
-    public boxs:Array<Box> =[]
+    private defaultBoxs =[
+        {
+            "text": "",
+            "order": 1,
+            "title": "About",
+            "typeName": "AboutBox",
+            "type_name": "AboutBox"
+        },
+        {
+            "order": 2,
+            "title": "Social",
+            "typeName": "SocialBox",
+            "type_name": "SocialBox",
+            "socialMedias": []
+        },
+        {
+            "links": [],
+            "order": 3,
+            "title": "Links",
+            "typeName": "LinkBox",
+            "type_name": "LinkBox"
+        },
+        {
+            "order": 4,
+            "title": "Book with me",
+            "contents": [],
+            "typeName": "MeetingBox",
+            "type_name": "MeetingBox"
+        }        
+    ]
+    public boxs:Array<Box> =this.defaultBoxs.map((item:any) => {
+        return boxProvider(item);
+    })
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}

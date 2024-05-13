@@ -26,6 +26,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   })
   const auth = useAuth()
   const navigate = useNavigate();
+  console.log(item)
   const [showConfirm,setShowConfirm] = useState(false)
   return (
     <>

@@ -22,6 +22,7 @@ const Home2 = () => {
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
         Auth.showProfile((data) => {
+            console.log(data.boxs)
             data.boxs.map((item:any) => {
                 const newBox = boxProvider(item);
                 resolveSocial.push(newBox);

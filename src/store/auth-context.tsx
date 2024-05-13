@@ -44,6 +44,7 @@ export const AuthContext = createContext<AuthContextProps>({
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
   const localuser = localStorage.getItem('authUser')
+
   reolveJsonToObject(localuser as string)
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
