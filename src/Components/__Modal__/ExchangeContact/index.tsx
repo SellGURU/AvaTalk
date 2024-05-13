@@ -97,6 +97,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
             theme="Carbon"
             name="fullName"
             type="text"
+            required
             errorMessage=""
             inValid={false}
           />
@@ -108,6 +109,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
             onChange={handleInputChange}
             onBlur={() => {}}
             label="Email Address"
+            required
             placeholder="Enter your email address..."
             theme="Carbon"
             name="email"
