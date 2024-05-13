@@ -60,7 +60,7 @@ const EditAvailability = () => {
               placeholder="https://example.com"
               inValid={formik.errors?.url != undefined && (formik.touched?.url as boolean)}
               theme="Carbon"
-              label="url"
+              label="URL"
               type="text"
               name="url"
             ></TextField>

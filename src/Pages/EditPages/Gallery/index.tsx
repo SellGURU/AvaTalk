@@ -17,7 +17,7 @@ const EditGallery = () => {
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GalleryBox")[0] as GalleryBox;
   if (currentBox == undefined) {
-    currentBox = new GalleryBox("gallery", []);
+    currentBox = new GalleryBox("Gallery", []);
   }
   const initialValue = {
     title: currentBox.getTitle(),

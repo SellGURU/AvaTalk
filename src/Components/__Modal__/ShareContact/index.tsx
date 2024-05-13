@@ -60,7 +60,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             mode == 'mainSection' ?
             <>
             <div className={`${theme}-ShareContact-Container`}>
-                <div className={`${theme}-ShareContact-Title contactNameShadow`}>Share Contact</div>
+                <div className={`${theme}-ShareContact-Title contactNameShadow`}>Share Profile</div>
                 <Button onClick={() => {
                     setMode('mainSection')
                     onClose()
