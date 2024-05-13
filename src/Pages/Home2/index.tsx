@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { MenuType } from "../../Types"
 import {Splash ,Footer} from "../../Components"
 import { Outlet, useNavigate,useSearchParams } from "react-router-dom"
 import { boxProvider, resolveMenuFromRoute, resolveNavigation, useConstructor } from "../../help"
-import { subscribe } from "../../utils/event"
+import { publish, subscribe } from "../../utils/event"
 import { Auth } from "../../Api"
 import { useAuth } from "../../hooks/useAuth"
 import { Box } from "../../Model"
@@ -54,6 +54,12 @@ const Home2 = () => {
     useConstructor(() => {
         getProfile()
     })
+    useEffect(() => {
+        if(parametr.get("force") == 'true'){
+            window.location.href =window.location.href.replace("&force=true",'')
+            publish("ForceReload",{})
+        }        
+    })
     subscribe('profileIsReview',() => {
         setShowFooter(false)
     })
@@ -69,6 +75,9 @@ const Home2 = () => {
     subscribe('isLoading-stop',() => {
         setIsLoading(false)
     })    
+    subscribe('ForceReload',() => {
+        window.location.reload()
+    })
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);

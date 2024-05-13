@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function subscribe(eventName:string, listener:()=>void) {
   document.addEventListener(eventName, listener);
 }

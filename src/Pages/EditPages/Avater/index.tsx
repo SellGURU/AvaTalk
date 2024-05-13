@@ -10,10 +10,11 @@ import { Button } from "symphony-ui";
 import CropperBox from "../../../Components/CropperBox";
 import { AddAvatar } from "../../../Components/__Modal__";
 import { BackIcon } from "../../../Components";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { publish } from "../../../utils/event";
 import Camera from "react-html5-camera-photo";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
+import { useNavigate } from "react-router-dom";
 interface Avatars {
   photo: string;
   video: string;
@@ -76,7 +77,7 @@ const EditAvater: React.FC = () => {
   const [asktakePhoto,setAskTakePhoto] = useState(false)
   const [openCamera,setOpenCamera] = useState(false);
   const context = useAuth()
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useConstructor(() => {
     setIsLoading(true)
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
@@ -106,6 +107,7 @@ const EditAvater: React.FC = () => {
       publish('isLoading-stop',{})
     }
   },[isLoading])
+  const navigate = useNavigate();  
   useEffect(() => {
     setCurrentAvatr({
       photo:"",
@@ -325,14 +327,11 @@ const EditAvater: React.FC = () => {
                   setIsLoading(true)
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
                     context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
-                    setTimeout(() => {
-                      Auth.avatarState().then(() => {
-                        setIsLoading(false)
-                          navigate('/?splash=false')
-                          publish('refreshPage',{})
-                          window.location.reload()         
-                      })        
-                    }, 3000);
+                    setIsLoading(false)
+                    navigate('/?splash=false&force=true')
+                    // publish('ForceReload',{})
+
+                  // history.go(0);
                   })
                 }}
                 theme="Carbon"

@@ -179,7 +179,7 @@ class Auth extends Api {
   }
 
   static updateProfilePic(profile_pic:string,silent_video_avatar?:string){
-    const response = this.post('/change_profile_pic',{profile_pic_url:profile_pic,silent_video_avatar:silent_video_avatar})
+    const response = this.post('/change_profile_pic',{profile_pic_url:profile_pic,silent_video_avatar:silent_video_avatar},{noPending:true})
     return response
   }
 
