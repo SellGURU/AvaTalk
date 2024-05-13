@@ -341,7 +341,9 @@ const InfoStep: React.FC<InfoStepProps> = ({
 ];
 useConstructor(() => {
   if(!authContext.varification.emailOrPhone.includes("@")){
-    formik.getFieldValue("email",authContext.varification.emailOrPhone)
+    formik.setFieldValue("email",'') 
+  }else if(authContext.varification.emailOrPhone.includes("@")){
+    formik.setFieldValue("email",authContext.varification.emailOrPhone) 
   }
 })
   // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
