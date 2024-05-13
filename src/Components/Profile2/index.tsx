@@ -17,6 +17,7 @@ import Presentition2 from "../Presentition2";
 import AudioProvider from "../AudioProvider";
 import { chat } from "../../Types";
 import { ExchangeContact } from "../__Modal__";
+import { toast } from "react-toastify";
 
 interface ProfileProps {
   theme?: string;
@@ -439,6 +440,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           phone:data.phone,
           note:data.note,
           adding_method:'exchange'
+        }).then(() => {
+          toast.success("contact is exchanged")
         })
     }} onEditContact={() => {}} theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>    
     </>
