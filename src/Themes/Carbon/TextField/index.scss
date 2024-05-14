@@ -10,10 +10,11 @@
 .Carbon-TextField-input:-webkit-autofill,
 .Carbon-TextField-input:-webkit-autofill:hover, 
 .Carbon-TextField-input:-webkit-autofill:focus{
-  border: 1px solid unset;
-  -webkit-text-fill-color: unset;
-  -webkit-box-shadow: 0 0 inset;
+  /* border: 1px solid unset; */
+  /* -webkit-text-fill-color: unset; */
+  /* -webkit-box-shadow: 0 0 inset; */
   transition: background-color 5000s ease-in-out 0s;
+  @apply text-gray-700 bg-gray-100 leading-[21px]  text-[14px] font-[400]  focus:outline-none w-full h-[44px]   rounded-[27px]  placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
 }
 
 .Carbon-TextField-inValid {
