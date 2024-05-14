@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
   LastName: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
-  email: Yup.string().email(),
+  email: Yup.string().required("Required").email(),
 });
 
 const CreateAccount = () => {
@@ -459,12 +459,43 @@ useConstructor(() => {
             ></TextField>
           </div>          
           <div className="mt-8">
+            {!authContext.varification.emailOrPhone.includes("@")?
+              <Button
+                disabled={
+                  formik.errors.Phone ||
+                  formik.errors.LastName ||
+                  formik.errors.FirstName ||
+                  formik.errors.email||
+                  !formik.touched.FirstName ||
+                  !formik.touched.LastName ||
+                  !formik.touched.email
+                }
+                onClick={() => {
+                  let localEmail=formik.values.email
+                  let localPhone=formik.values.Phone
+                  if(authContext.varification.emailOrPhone.includes('@')){
+                    localEmail = undefined
+                  }else{
+                    localPhone = undefined
+                  }
+                  Auth.check_user_existence(localPhone,localEmail).then((res) => {
+                    if(res.data == false){
+                      setStep(2);
+                    }else if(res.data){
+                      toast.error(res.data)
+                    }
+                  })
+                }}
+                theme="Carbon"
+              >
+                Continue
+              </Button> 
+              :
             <Button
               disabled={
                 formik.errors.Phone ||
                 formik.errors.LastName ||
                 formik.errors.FirstName ||
-                (formik.errors.email&&!authContext.varification.emailOrPhone.includes("@"))||
                 !formik.touched.FirstName ||
                 !formik.touched.LastName
               }
@@ -489,6 +520,7 @@ useConstructor(() => {
             >
               Continue
             </Button>
+            }
           </div>
         </div>
       </div>
