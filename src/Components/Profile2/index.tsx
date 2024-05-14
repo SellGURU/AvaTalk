@@ -239,10 +239,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
             <div className={`w-full ${mode!='share'?'mt-[70px] ':'mt-[0px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[261px] relative overflow-y-hidden">
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'}`} preload="auto"  autoPlay={true} loop muted >
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
                 </video>        
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'}`} preload="auto"  autoPlay={true} loop muted >
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                      
                 <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
