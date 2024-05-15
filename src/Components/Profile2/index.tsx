@@ -366,16 +366,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {mode != 'profile'
               ?
               <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
-                  <img className="w-20 h-8" src="/Carbon/splashImage.svg" alt="logo" />
-                  <p>Pricing</p>
-                  <p>FAQ</p>
-                  <p>Legals</p>
+                  <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
+                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Pricing</p>
+                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >FAQ</p>
+                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Legals</p>
                   <div className="flex gap-3">
-                    <img className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-                    <img className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
-                    <img className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
-
-
+                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
+                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
+                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
                   </div>
 
               </div>              
