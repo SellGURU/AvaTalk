@@ -466,9 +466,9 @@ useConstructor(() => {
                   formik.errors.LastName ||
                   formik.errors.FirstName ||
                   formik.errors.email||
-                  !formik.touched.FirstName ||
-                  !formik.touched.LastName ||
-                  !formik.touched.email
+                  formik.values.FirstName == ''||
+                  formik.values.lastName=='' ||
+                  formik.values.email==''
                 }
                 onClick={() => {
                   let localEmail=formik.values.email
@@ -496,8 +496,8 @@ useConstructor(() => {
                 formik.errors.Phone ||
                 formik.errors.LastName ||
                 formik.errors.FirstName ||
-                !formik.touched.FirstName ||
-                !formik.touched.LastName
+                formik.values.FirstName == ''||
+                formik.values.lastName == ''              
               }
               onClick={() => {
                 console.log(authContext.varification.emailOrPhone)
