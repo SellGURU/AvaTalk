@@ -399,16 +399,19 @@ useConstructor(() => {
             >
               {GenderOptions.map((Gender, index: number) => (
                 <>
-                  <option
+                  <div
                     key={Gender.value}
                     onClick={() => {
                       formik.setFieldValue("gender",Gender.value)
                     }}
+                    onTouchEnd={() => {
+                      formik.setFieldValue("gender",Gender.value)
+                    }}
                     className="ml-4 my-2 cursor-pointer font-normal text-[14px]"
-                    value={Gender.value}
+                    // value={Gender.value}
                   >
                     {Gender.value}
-                  </option>
+                  </div>
                   {index <= GenderOptions.length - 2 ? <hr /> : undefined}
                 </>
               ))}
