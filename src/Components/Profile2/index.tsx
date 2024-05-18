@@ -91,7 +91,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 workPhone:data.information.work_mobile_number,
                 userId:data.information.created_userid,
                 silent_video_avatar:data.information.silent_video_url,
-                talking_video_avatar:data.information.talking_video_avatar
+                talk_video_avater:data.information.talking_video_avatar
             }
             const shareUser = new User(information)
             setShareUser(shareUser) 
