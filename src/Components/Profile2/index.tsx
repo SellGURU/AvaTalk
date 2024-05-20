@@ -421,8 +421,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         :
           <Presentition2 setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
-
-        <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
+        {showShareContact?
+          <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
+        :undefined}
       </div>
     }    
 
