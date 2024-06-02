@@ -157,7 +157,8 @@ const SettingAccount =() => {
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>
-                <div onClick={() => {
+                <div  className="mt-4 flex items-center ">
+                    <p onClick={() => {
                     Auth.updateYourAccount({
                         user_id:context.currentUser.information?.userId as string,
                         state:false
@@ -165,8 +166,7 @@ const SettingAccount =() => {
                         removeTokenFromLocalStorage()
                         navigate('/login')
                     })                    
-                }} className="mt-4 flex items-center cursor-pointer">
-                    <p className="text-cyan-500 ms-2 text-sm font-medium">Delete Your Account</p>
+                }} className="text-cyan-500 ms-2 cursor-pointer text-sm font-medium">Delete Your Account</p>
                 </div>
             </div>         
         </div>
