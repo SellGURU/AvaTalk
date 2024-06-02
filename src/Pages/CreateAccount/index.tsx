@@ -147,9 +147,9 @@ const CreateAccount = () => {
 
   return (
     <>
-      <div className="w-full px-4 h-max">
+      <div className="w-full pt-8 px-4 h-max ">
         {!showGudieLine ? (
-          <div className={`mb-10`}>
+          <div className={`mb-4 absolute top-3`}>
             {step > 1 && !showGudieLine ? (
               <Button
                 onClick={() => {
@@ -164,7 +164,7 @@ const CreateAccount = () => {
                 ></div>
               </Button>
             ) : (
-              <div className=" h-10 mb-10"></div>
+              <div className=" h-10 mb-10 "></div>
             )}
           </div>
         ) : undefined}
@@ -350,7 +350,7 @@ useConstructor(() => {
 
   return (
     <>
-      <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
+      <div className="h-[75vh]  hiddenScrollBar overflow-y-scroll">
         <div className="">
           <div className="text-gray-700 text-center font-semibold text-base">
             Create Your Account
@@ -543,7 +543,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
   // };
   return (
     <>
-      <div className="h-[65vh] hiddenScrollBar overflow-y-scroll">
+      <div className="h-[75vh] hiddenScrollBar overflow-y-scroll">
         <div className="">
           <div className="text-gray-700 text-center font-semibold text-base">
             Create Your Profile
@@ -737,7 +737,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
   })   
   return (
     <>
-      <div className="h-[65vh]  hiddenScrollBar overflow-y-scroll">
+      <div className="h-[75vh]  hiddenScrollBar overflow-y-scroll">
         <div className="px-5">
           <div className="text-gray-700 text-center font-semibold text-base">
             Building Your Talking Profile
@@ -821,7 +821,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             </div>
           </div>
 
-          <div className="w-full gap-8 mt-5 grid grid-cols-4 grid-flow-row">
+          <div className="w-full gap-8 mt-5 grid grid-cols-3 md:grid-cols-4 grid-flow-row">
             <div
               className="w-full  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
               onClick={() => {
