@@ -110,7 +110,7 @@ const CreateAccount = () => {
     lat: 51.5072,
     lng: 0.1276,
   });
- 
+
   const [showGudieLine, setShowGudieLine] = useState(false);
   const resolveStepContent = () => {
     switch (step) {

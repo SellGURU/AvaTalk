@@ -1,4 +1,5 @@
-import { HtmlHTMLAttributes, useEffect, useState } from "react";
+import { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 interface SelectProps extends HtmlHTMLAttributes<HTMLDivElement> {
   theme?: string;
@@ -16,6 +17,13 @@ const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeh
   useEffect(() => {
     setShowSelect(false);
   }, [valueElement]);
+  const selectRef = useRef<HTMLDivElement>(null)
+  useModalAutoClose({
+    refrence:selectRef,
+    close:() => {
+      setShowSelect(false)
+    }
+  })  
   return (
     <>
       <div className={`${theme}-Select-container w-[100%]`}>
@@ -45,7 +53,7 @@ const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeh
           </div>
           <div className={`${theme}-Select-icon `} style={{ rotate: showSelect == true ? "180deg" : "0deg" }}></div>
         </div>
-        {showSelect && <div className={`${theme}-Select-dropDown-container`}>{children}</div>}
+        {showSelect && <div ref={selectRef} className={`${theme}-Select-dropDown-container`}>{children}</div>}
       </div>
     </>
   );
