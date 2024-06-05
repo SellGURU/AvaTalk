@@ -38,24 +38,29 @@ const initialValue = {
   silent_video_avatar: "",
   PrifileImage: "",
 };
+const validateEmail = (value:string|undefined) =>{
+   if (!value) {
+      return false
+    //  error = 'Required';
+   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    //  error = 'Invalid email address';
+    return false
+   }
+   return true
+ }
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("Required"),
   LastName: Yup.string().required("Required"),
   JobTitle: Yup.string(),
   CompanyName: Yup.string(),
-  email: Yup.string().required("Required").email(),
+  email: Yup.string().required("Required").test('Invalid email address',(value) => {
+    return validateEmail(value)
+  }),
 });
 
 const CreateAccount = () => {
   const navigate = useNavigate();
   const authContext = useAuth();
-  useConstructor(() => {
-    if (authContext.varification.emailOrPhone.length == 0) {
-      setTimeout(() => {
-        navigate("/login");
-      }, 200);
-    }
-  });
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -100,7 +105,27 @@ const CreateAccount = () => {
         navigate("/?splash=false");
       });
     },
+  });  
+  useConstructor(() => {
+    if (authContext.varification.emailOrPhone.length == 0) {
+      setTimeout(() => {
+        navigate("/login");
+      }, 200);
+    }
+  if(!authContext.varification.emailOrPhone.includes("@")){
+    formik.setFieldValue("email",'') 
+  }else if(authContext.varification.emailOrPhone.includes("@")){
+    formik.setFieldValue("email",authContext.varification.emailOrPhone) 
+  }    
   });
+// useConstructor(() => {
+//   if(!authContext.varification.emailOrPhone.includes("@")){
+//     formik.setFieldValue("email",'') 
+//   }else if(authContext.varification.emailOrPhone.includes("@")){
+//     formik.setFieldValue("email",authContext.varification.emailOrPhone) 
+//   }
+// })  
+
   const [country, setCountry] = useState<any>({
     codeName: "us",
     codePhone: "+1",
@@ -339,13 +364,13 @@ const InfoStep: React.FC<InfoStepProps> = ({
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
 ];
-useConstructor(() => {
-  if(!authContext.varification.emailOrPhone.includes("@")){
-    formik.setFieldValue("email",'') 
-  }else if(authContext.varification.emailOrPhone.includes("@")){
-    formik.setFieldValue("email",authContext.varification.emailOrPhone) 
-  }
-})
+// useConstructor(() => {
+//   if(!authContext.varification.emailOrPhone.includes("@")){
+//     formik.setFieldValue("email",'') 
+//   }else if(authContext.varification.emailOrPhone.includes("@")){
+//     formik.setFieldValue("email",authContext.varification.emailOrPhone) 
+//   }
+// })
   // const [selectedGender, setSelectedGender] = useState(GenderOptions[0]);
 
   return (
