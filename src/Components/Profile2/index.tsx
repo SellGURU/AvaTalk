@@ -41,6 +41,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const videoRef2 = useRef<HTMLVideoElement>(null)
   const [audioUrl, setAudioUrl] = useState<string>('');
+  const [VideoUrl, setVideoUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement>(null)
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
@@ -57,6 +58,20 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isTalking,setIsTalking] = useState(false)
   const [chats,setChats] = useState<Array<chat>>([
   ])      
+  useEffect(() => {
+    if(isTalking){
+      if(videoRef2.current){
+          const refren = videoRef2.current  as any   
+          // setShowOpacity(true)
+          refren.load()
+      }             
+      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+      video?.play()
+    }else {
+      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+      video?.load()
+    }
+  })
   // const [,forceUpdate] = useReducer(x => x+1,0)
   // const [loadPage,setLaodPage] = useState(false)
   // useEffect(() =>{
@@ -126,7 +141,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           // setShowOpacity(true)
           refren.load()
       }        
-  },[isTalking])     
+  },[isTalking])    
+  // useEffect(() => {
+  //     if(videoRef2.current){
+  //         const refren = videoRef2.current  as any   
+  //         // setShowOpacity(true)
+  //         refren.load()
+  //     }        
+  // },[isTalking])      
   useEffect(() => {
     if(audioRef.current){
         const refren = audioRef.current  as any   
@@ -240,8 +262,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
             <div className={`w-full ${mode!='share'?'mt-[70px] ':'mt-[0px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[261px] relative overflow-y-hidden">
-                <video id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
-                    <source id="videoPlayer2"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                <video onEnded={() => {
+                  setIsTalking(false)
+                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  >
+                    <source id="videoPlayer2"  src={VideoUrl} type="video/mp4"></source>
                 </video>        
                 <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
@@ -256,11 +280,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }} className={`${theme}-Profile-mutedVector`}></div>
                     :
                       <div onClick={() => {{isTalking &&
-
                         setISMuted(true)
                       }
                         setIsTalking(false)
-
                       }} className={`${theme}-Profile-VolumeHighVector`}></div>
                     }
                     </div>
@@ -419,7 +441,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+          <Presentition2 setVideoUrl={setVideoUrl} setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
         {showShareContact?
           <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>

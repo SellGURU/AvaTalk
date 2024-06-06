@@ -12,13 +12,14 @@ interface PresentationProps {
   isTalking:boolean;
   setIsTalking:(action:boolean) =>void;
   setAudioUrl:(value:string) =>void;
+  setVideoUrl:(value:string) =>void;
   setShowMuiteController: (action:boolean) =>void
   shareUser:User
   chats:Array<chat>
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
 }
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent}) => {
     // const user = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -92,6 +93,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setShowMuiteCon
         setIsLoading(true)
         sendToApi(chats,setChats,value,(res) => {
         setAudioUrl(res.answer.audio_file)
+        setVideoUrl(res.answer.video_file)
         if(!isSilent){
             setIsTalking(true)
         }
