@@ -571,7 +571,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
       <div className="h-[75vh] hiddenScrollBar overflow-y-scroll">
         <div className="">
           <div className="text-gray-700 text-center font-semibold text-base">
-            Create Your Profile
+            Create Your Talking Avatar
           </div>
           <div className="w-full flex justify-center items-center mt-2 mb-6">
             <div className="text-sm text-gray-700 max-w-[228px] opacity-80 text-center">
@@ -730,12 +730,12 @@ const AvatarStep: React.FC<UploadStepProps> = ({
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender ==formik.values.gender))  
       }else{
-        setAvaterList(res.data)
+        setAvaterList(res.data.filter((el:any) => el.gender ==formik.values.gender))
         setIsLoading(false)
-        formik.setFieldValue('silent_video_avatar',res.data[0].video)
-        formik.setFieldValue('avatar_pic_url',res.data[0].photo)
+        formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].video)
+        formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].photo)
       }     
     })
   })
@@ -765,7 +765,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
       <div className="h-[75vh]  hiddenScrollBar overflow-y-scroll">
         <div className="px-5">
           <div className="text-gray-700 text-center font-semibold text-base">
-            Building Your Talking Profile
+            Building Your Talking Avatar
           </div>
 
           <div className="mt-6 flex items-center justify-between">
@@ -832,7 +832,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
 
           <div>
             <div className="text-[#374151] text-[14px] opacity-80 mt-8 text-justify">
-              Upload image, or choose avatar, we will convert it to talking
+              Upload an image of yourself or choose among default picture
               profile.{" "}
               <span
                 onClick={() => {
