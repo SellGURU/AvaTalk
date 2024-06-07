@@ -260,7 +260,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </>
               }                
             </div>
-            <div className={`w-full ${mode!='share'?'mt-[70px] ':'mt-[0px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
+            <div className={`w-full ${mode!='share'?'mt-[0px] ':'mt-[0px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[261px] relative overflow-y-hidden">
                 <video onEnded={() => {
                   setIsTalking(false)

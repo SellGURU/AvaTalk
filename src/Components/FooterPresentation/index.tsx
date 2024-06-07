@@ -19,6 +19,8 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme ,langCode
   },[langCode])
   const startSpeetchToText = () => {
     // setResolveText('')
+    const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+    video?.load()    
     annyang.start({ autoRestart: true, continuous: false });
     setIsRecording(true)
     // console.log(annyang.isListening())
@@ -36,14 +38,19 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme ,langCode
   };
   const handleKeyPress = (event: any) => {
       // setIsTalking(false)
-      if (event.key === "Enter" && inputValue.length > 0) {
+   
+      if (event.key === "Enter" && inputValue.length > 0 && !isLoading) {
           setInputValue('') 
+          const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+          video?.load()             
           onSendVector(inputValue)
       }
   };  
   const handleSendClick = () => {
     // Call the callback function from the parent component with the input value
     if(onSendVector && inputValue.length > 0 && !isLoading){
+      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+      video?.load()         
       onSendVector(inputValue);
     }
 
