@@ -20,6 +20,7 @@ import { AddAvatar } from "../../Components/__Modal__";
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import useModalAutoClose from "../../hooks/useModalAutoClose";
+import { getTokenFromLocalStorage } from "../../Storage/Token";
 
 const initialValue = {
   FirstName: "",
@@ -112,12 +113,20 @@ const CreateAccount = () => {
         navigate("/login");
       }, 200);
     }
+    if(getTokenFromLocalStorage() != null && getTokenFromLocalStorage() != ''){
+      navigate('/?splash=false')
+    }
   if(!authContext.varification.emailOrPhone.includes("@")){
     formik.setFieldValue("email",'') 
   }else if(authContext.varification.emailOrPhone.includes("@")){
     formik.setFieldValue("email",authContext.varification.emailOrPhone) 
   }    
   });
+  useEffect(() => {
+    if(getTokenFromLocalStorage() != null && getTokenFromLocalStorage() != ''){
+      navigate('/?splash=false')
+    }
+  })
 // useConstructor(() => {
 //   if(!authContext.varification.emailOrPhone.includes("@")){
 //     formik.setFieldValue("email",'') 
