@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  Button } from "symphony-ui";
-import { BackIcon, TextField } from "../../../Components";
-import LocationPicker from "react-leaflet-location-picker";
+import { BackIcon, TextArea, TextField } from "../../../Components";
+// import LocationPicker from "react-leaflet-location-picker";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,6 +21,7 @@ const EditContactInfo = () => {
     job:auth.currentUser.information?.job,
     company:auth.currentUser.information?.company,
     personlEmail:auth.currentUser.information?.personlEmail,
+    address :'',
     workEmail:auth.currentUser.information?.workEmail,
     phone:auth.currentUser.information?.phone,
     workPhone:auth.currentUser.information?.workPhone
@@ -104,8 +105,9 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
-          <p className="Carbon-TextField-label mb-1">Your Location</p>
-          <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} />
+          {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}
+          <TextArea disabled inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>
+          {/* <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} /> */}
         </div>
         <div className="mt-3 px-6">
           <TextField

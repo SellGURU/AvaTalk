@@ -211,11 +211,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
             <div className={`w-full mt-[-320px] invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
-                <div className="ml-2">
+                <div className="ml-2 min-w-[129px]">
                   <img className="w-[129px] border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                 </div>
-                <div className="ml-3">
-                  <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
+                <div className="ml-3 max-w-[320px] overflow-hidden">
+                  <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
                   <p className={`${theme}-Profile-SubTitle`}>
                     {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                   </p>                    
