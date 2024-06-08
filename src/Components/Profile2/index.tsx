@@ -18,6 +18,8 @@ import AudioProvider from "../AudioProvider";
 import { chat } from "../../Types";
 import { ExchangeContact } from "../__Modal__";
 import { toast } from "react-toastify";
+import ShowUser from "../__Modal__/ShowUser";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 interface ProfileProps {
   theme?: string;
@@ -43,6 +45,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [audioUrl, setAudioUrl] = useState<string>('');
   const [VideoUrl, setVideoUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement>(null)
+  const ShowProfileRef =useRef<HTMLDivElement>(null)
+  const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
+  useModalAutoClose({
+    refrence:ShowProfileRef,
+    close:() => {
+      setShowIsProfileOpen(false)
+    }
+  })     
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [showMuiteController,setShowMuiteController] = useState(false)
@@ -412,27 +422,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     setShowExchangeContact(true)
                   }}  theme="Carbon-Google">Exchange Contact</Button>
                   <Button onClick={() => {
-                      const contact = {
-                        name: shareUser.information?.lastName as string,
-                        phone: shareUser.information?.phone as string,
-                        email: shareUser.information?.personlEmail as string };
-
-                      // create a vcard file
-                      const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nEMAIL:" + contact.email + "\nEND:VCARD";
-                      const blob = new Blob([vcard], { type: "text/vcard" });
-                      const url = URL.createObjectURL(blob);
-
-                      const newLink = document.createElement('a');
-                      newLink.download = contact.name + ".vcf";
-                      newLink.textContent = contact.name;
-                      newLink.href = url;
-                      Auth.addEvent({
-                        event_type:'add_contact',
-                        sub_event_category:'share_link',
-                        userid:shareUser.information?.userId as string
-                      })
-                      newLink.click();                  
-                }} theme="Carbon">Save Contact</Button>
+                    setShowIsProfileOpen(true)
+                }} theme="Carbon">Show Contact</Button>
                 </div>
               </div>
             </div>
@@ -446,6 +437,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         {showShareContact?
           <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
         :undefined}
+        {isShowProfileOpen?
+        <>
+          <div className="absolute z-40 left-0  bottom-[-20px] w-full flex justify-center items-center">
+            <ShowUser user={shareUser} isOpen={true} onClose={() => {setShowIsProfileOpen(false)}} refEl={ShowProfileRef} theme="Carbon"></ShowUser>
+          </div>      
+          <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>  
+        </>
+        :undefined
+        }
       </div>
     }    
 
