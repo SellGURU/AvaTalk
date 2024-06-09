@@ -12,6 +12,7 @@ import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
+import { toast } from "react-toastify";
 
 const initialValue = {
   emailOrPhone: "",
@@ -69,7 +70,8 @@ const Login = () => {
         mobile_number:formik.values.emailOrPhone
       }      
     }
-    Auth.get_Login_code(resolvePhoneOrEnail).then(() => {
+    Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
+      toast.info(res.data)
       authContext.verificationHandler({
         emailOrPhone: formik.values.emailOrPhone,
         googleJson:{}

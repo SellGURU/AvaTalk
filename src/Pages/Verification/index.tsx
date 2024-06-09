@@ -15,7 +15,7 @@ const Verification = () => {
     const authContext = useContext(AuthContext)
     const [completeTimer,setCompleteTimer] = useState(false)
     useConstructor(() => {
-        toast.info('your code : 12345')
+        // toast.info('your code : 12345')
         // if(authContext.varification.emailOrPhone.length == 0){
         // setTimeout(() => {
         //     navigate('/login')

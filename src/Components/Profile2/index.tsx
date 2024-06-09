@@ -55,7 +55,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   })     
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
-  const [showMuiteController,setShowMuiteController] = useState(false)
+  const [,setShowMuiteController] = useState(false)
   const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
   const [searchParams] = useSearchParams();
   const authContext = useAuth()
@@ -186,7 +186,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         <Outlet></Outlet>
 
         <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
-          {mode == 'profile' ?
+          {/* {mode == 'profile' ?
             <div className=" w-48 h-[40px] sticky z-20">
               <Button onClick={() => {
                 setMode('review')
@@ -217,10 +217,83 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   </Button>                  
                 </>}
               </>
+          } */}
+          {
+            mode == 'profile' ?
+            <>
+              <div className="absolute top-4 right-6 z-20">
+              <Button onClick={() => {
+                setMode('review')
+                publish('profileIsReview',{})
+                window.history.replaceState(null, "", "/#/?review=true")                
+              }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors m-0`} ></div>
+              </Button>                
+              </div>
+            </>
+            :
+            <>
+              <div className="absolute top-4 right-6 z-20">
+              <Button onClick={() => {
+                  setMode('profile')
+                  publish('profileIsProfile',{})
+                  window.history.replaceState(null, "", "/#/")             
+              }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className={`${theme}-Profile-closeIcon ${theme}-Footer-Vectors m-0`} ></div>
+              </Button>                
+              </div>            
+            </>
           }
-
+          {
+            mode != 'profile' ?
+            <>
+              {
+                isMuted?
+                  <div className="absolute top-16 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()         
+                      setIsTalking(false)            
+                      setISMuted(false)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-mutedVector`} ></div>
+                    </Button>                
+                  </div>       
+                :
+                  <div className="absolute top-16 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()    
+                      setIsTalking(false)                    
+                      setISMuted(true)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-VolumeHighVector`} ></div>
+                    </Button>                
+                  </div>  
+              }
+            </>
+            :
+            undefined
+          }
+                {/* {
+                showMuiteController?
+                  <div>
+                  {isMuted  ?
+                    <div onClick={() => {
+                      setISMuted(false)
+                  }} className={`${theme}-Profile-mutedVector`}></div>
+                  :
+                    <div onClick={() => {{isTalking &&
+                      setISMuted(true)
+                    }
+                      setIsTalking(false)
+                    }} className={`${theme}-Profile-VolumeHighVector`}></div>
+                  }
+                  </div>
+                :undefined
+                }     */}
             <div className={`w-full mt-[-320px] invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
-              <div className="w-full bg-[#E2E8F0] h-[148px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
+              <div className="w-full bg-[#E2E8F0] h-[148px] -mt-[16px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
                 <div className="ml-2 min-w-[129px]">
                   <img className="w-[129px] border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                 </div>
@@ -268,41 +341,20 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </div>
                   </div>
                 </>
-              }                
+              }  
+                        
             </div>
-            <div className={`w-full ${mode!='share'?'mt-[0px] ':'mt-[0px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
+            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[261px] relative overflow-y-hidden">
                 <video onEnded={() => {
                   setIsTalking(false)
-                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  >
+                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  >
                     <source id="videoPlayer2"  src={VideoUrl} type="video/mp4"></source>
                 </video>        
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[-20px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                      
-                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
-                 {
-                  showMuiteController?
-                    <div>
-                    {isMuted  ?
-                      <div onClick={() => {
-                        setISMuted(false)
-                    }} className={`${theme}-Profile-mutedVector`}></div>
-                    :
-                      <div onClick={() => {{isTalking &&
-                        setISMuted(true)
-                      }
-                        setIsTalking(false)
-                      }} className={`${theme}-Profile-VolumeHighVector`}></div>
-                    }
-                    </div>
-                  :undefined
-                 }
 
-                  {/* <div
-                    className={`${theme}-Profile-LanguageSquareVector`}
-                  ></div> */}
-                </div>
               </div>
               {/* <div
                 className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"

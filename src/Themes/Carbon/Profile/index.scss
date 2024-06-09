@@ -59,7 +59,7 @@
 }
 .Carbon-Profile-PreviewProfileBtnVector{
     mask-image: url(/Carbon/eyeVector.svg);
-    @apply w-6 h-6 mr-2 bg-cover bg-no-repeat;  
+    @apply w-6 h-6  bg-cover bg-no-repeat;  
 }
 .Carbon-Profile-EditProfileBtnVector{
     background-image: url(/Carbon/editProfile.svg);
@@ -143,7 +143,7 @@
     @apply w-6 h-6 bg-cover bg-no-repeat;
 }
 .Carbon-Profile-mutedVector{
-    background-image: url(/Carbon/muted.svg);
+    background-image: url(/Carbon/volume-slash.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
 }
 .Carbon-ContentCard-AddVector{
