@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 
 class Box {
     protected static boxCounter:number = 0
     protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'GoogleMapBox' | 'FileBox' = 'Box'
     protected order:number = -1;
+
     constructor(protected title:string){}
     
     protected assignOrder() {

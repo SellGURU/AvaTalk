@@ -1,4 +1,5 @@
 import { Box } from "..";
+import AboutComponent from "./AboutComponet";
 
 class AboutBox extends Box {
     constructor(protected title:string,protected text:string){
@@ -15,7 +16,7 @@ class AboutBox extends Box {
                 {this.text == '' ?
                     this.resolveAddRender(theme,mode)
                 :
-                    <h1>{this.text}</h1>          
+                    <AboutComponent text={this.text}></AboutComponent>
                 }
             </>
         )
