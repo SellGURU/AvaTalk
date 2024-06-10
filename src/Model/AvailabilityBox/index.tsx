@@ -21,11 +21,11 @@ class AvailabilityBox extends Box {
               onClick={() => {
                 window.open(this.url, "_blank");
               }}
-              theme="Carbon-Google"
+              theme="Carbon"
               data-mode="profile-edit-button"
             >
               <div className={`${theme}-Profile-EditProfileBtnVector4`}></div>
-              <div className="   text-[#8290a3]">Book an appointment</div>
+              <div className="   text-white">Book an appointment</div>
             </Button>
 
             {/* <Button

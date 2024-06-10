@@ -30,7 +30,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share something about yourself.",
     },
     {
-      name: "Set Your Availability",
+      name: "Appointments",
       icon: "calendar-2.svg",
       link: "availability",
       description: "Share something about your availability.",
