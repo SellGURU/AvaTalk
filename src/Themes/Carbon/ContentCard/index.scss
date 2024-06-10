@@ -2,7 +2,7 @@
     @apply w-[-webkit-fill-available] borderBox-Gray boxShadow-Gray flex flex-col mb-4 items-start text-gray-700 text-center rounded-3xl min-h-44 p-5 bg-gray-100;
 }
 .Carbon-ContentCard-Vectors{
-    @apply flex flex-row gap-[6px] ;
+    @apply flex flex-row gap-[8px] ;
 }
 .Carbon-ContentCard-Vectors[data-mode='review']{
     @apply invisible ;
