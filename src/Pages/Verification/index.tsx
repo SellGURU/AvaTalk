@@ -104,7 +104,19 @@ const Verification = () => {
             </div>
             <p onClick={completeTimer ?() => {
                     setCompleteTimer(false) 
-                    toast.info("code is 12345")
+                    let resolvePhoneOrEnail = null
+                    if(authContext.varification.emailOrPhone.includes('@')){
+                    resolvePhoneOrEnail = {
+                        email:authContext.varification.emailOrPhone
+                    }
+                    }else {
+                    resolvePhoneOrEnail = {
+                        mobile_number:authContext.varification.emailOrPhone
+                    }      
+                    }                    
+                    Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
+                        toast.info(res.data)
+                    })
             }:undefined} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
                 {
                     !completeTimer?
