@@ -37,7 +37,7 @@ const EditAvailability = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Set Yor Availability" theme="Carbon"></BackIcon>
+          <BackIcon title="Appointments" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <p className="mt-24 px-6 text-sm font-medium">To create appointment scheduling access, please enter your Calendly Account URL</p>
