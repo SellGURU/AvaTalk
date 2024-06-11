@@ -357,7 +357,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
     {
       startChat ? <FooterPresentation langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/> : undefined
     }
-      <AudioProvider autoPlay={isTalking} onEnd={() => {
+      <AudioProvider setStartVideoTalking={() => {}} autoPlay={isTalking} onEnd={() => {
         setAudioUrl('')
         setIsTalking(false)
       }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>     
