@@ -73,9 +73,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   useEffect(() => {
     if(isTalking){
       if(videoRef2.current){
+          // videoRef2.current.currentTime = 10
           const refren = videoRef2.current  as any   
           // setShowOpacity(true)
           refren.load()
+          // refren.currentTime = 20 
       }             
       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
       video?.play()
@@ -83,7 +85,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
       video?.load()
     }
-  })
+  },[isTalking])
   // const [,forceUpdate] = useReducer(x => x+1,0)
   // const [loadPage,setLaodPage] = useState(false)
   // useEffect(() =>{
