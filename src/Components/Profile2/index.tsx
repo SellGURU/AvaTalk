@@ -47,7 +47,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const audioRef = useRef<HTMLAudioElement>(null)
   const ShowProfileRef =useRef<HTMLDivElement>(null)
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
-  const [prisentMode,setPrisentMode] = useState('video')
+  const [prisentMode,setPrisentMode] = useState('audio')
   useModalAutoClose({
     refrence:ShowProfileRef,
     close:() => {
@@ -67,6 +67,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [scrolled,setScrolled] = useState(false)
   const [isFirstScrol,setIsFirstScrol] = useState(false);
   const [isTalking,setIsTalking] = useState(false)
+  const [startVideoTalk,setStartVideoTalk] = useState(false);
   const [chats,setChats] = useState<Array<chat>>([
   ])      
   useEffect(() => {
@@ -352,14 +353,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <source id="videoPlayer2"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
                 </video>                 
                 :undefined}
-                <video onLoad={() => {
-                  // alert('isLoading')
-                }} onEnded={() => {
-                  setIsTalking(false)
-                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true}  >
+                <video onEnded={() => {
+                  if(prisentMode == 'video'){
+                    setIsTalking(false)
+                  }
+                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking && startVideoTalk?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
                     <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
                 </video>        
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                     <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                      
 
@@ -509,10 +510,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       </div>
     }    
 
-    <AudioProvider autoPlay={isTalking} onEnd={() => {
+    <AudioProvider setStartVideoTalking={setStartVideoTalk} autoPlay={isTalking} onEnd={() => {
       setAudioUrl('')
       setShowMuiteController(false)
       setIsTalking(false)
+      setStartVideoTalk(false)
     }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
 
     <ExchangeContact mode='add' onAddContact={(data) => {
