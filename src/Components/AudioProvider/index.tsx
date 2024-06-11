@@ -13,7 +13,7 @@ const AudioProvider:React.FC<AudioProviderProps> = ({audioref,setStartVideoTalki
         <>
           <div style={{visibility:'hidden',top:0,left:0,position:'absolute',width:'0px',height:'0px'}}>
               <div style={{position:'absolute',zIndex:300}}>
-              <audio ref={audioref} onLoadedData={() => {
+              <audio  ref={audioref} onLoadedData={() => {
                 setStartVideoTalking(true)
               }}  controls onEnded={onEnd} autoPlay={autoPlay}>
                   <source id="audioPlayer" src={url} type="audio/mpeg"/>

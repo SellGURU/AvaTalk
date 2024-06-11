@@ -79,11 +79,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           refren.load()
           // refren.currentTime = 20 
       }             
-      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-      video?.play()
+      if(prisentMode == 'video'){
+        const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+        video?.load()
+      }
     }else {
-      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-      video?.load()
+      if(prisentMode == 'video'){
+        const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+        video?.load()
+      }
     }
   },[isTalking])
   // const [,forceUpdate] = useReducer(x => x+1,0)
@@ -149,13 +153,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       })
     }
   })  
-  useEffect(() => {
-      if(videoRef.current){
-          const refren = videoRef.current  as any   
-          // setShowOpacity(true)
-          refren.load()
-      }        
-  },[isTalking])    
+  
   // useEffect(() => {
   //     if(videoRef2.current){
   //         const refren = videoRef2.current  as any   
