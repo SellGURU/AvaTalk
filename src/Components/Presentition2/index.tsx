@@ -93,10 +93,11 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
         setShowSuggestions(false)
         setIsLoading(true)
         sendToApi(chats,setChats,value,(res) => {
-            if(res.answer.audio_file!= ''){
+            if(res.answer.audio_file != null){
                 setAudioUrl(res.answer.audio_file)
                 setPrisentMode('audio')
             }else{
+                // alert('Video')
                 setVideoUrl(res.answer.video_file)
                 setPrisentMode('video')
             }

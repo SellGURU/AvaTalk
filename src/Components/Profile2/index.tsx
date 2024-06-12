@@ -70,26 +70,44 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [startVideoTalk,setStartVideoTalk] = useState(false);
   const [chats,setChats] = useState<Array<chat>>([
   ])      
+  // useEffect(() => {
+  //   if(isTalking){
+  //     if(videoRef2.current){
+  //         // videoRef2.current.currentTime = 10
+  //         const refren = videoRef2.current  as any   
+  //         // setShowOpacity(true)
+  //         refren.load()
+  //         // refren.currentTime = 20 
+  //     }             
+  //     if(prisentMode == 'video'){
+  //       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+  //       video?.load()
+  //     }
+  //   }else {
+  //     if(prisentMode == 'video'){
+  //       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+  //       video?.load()
+  //     }
+  //   }
+  // },[isTalking])
   useEffect(() => {
-    if(isTalking){
+    if(isTalking ){
       if(videoRef2.current){
-          // videoRef2.current.currentTime = 10
           const refren = videoRef2.current  as any   
           // setShowOpacity(true)
           refren.load()
-          // refren.currentTime = 20 
-      }             
+      }         
       if(prisentMode == 'video'){
         const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-        video?.load()
-      }
+        video?.play()
+      }    
     }else {
       if(prisentMode == 'video'){
         const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
         video?.load()
       }
     }
-  },[isTalking])
+  })  
   // const [,forceUpdate] = useReducer(x => x+1,0)
   // const [loadPage,setLaodPage] = useState(false)
   // useEffect(() =>{
@@ -154,13 +172,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     }
   })  
   
-  // useEffect(() => {
-  //     if(videoRef2.current){
-  //         const refren = videoRef2.current  as any   
-  //         // setShowOpacity(true)
-  //         refren.load()
-  //     }        
-  // },[isTalking])      
+  useEffect(() => {
+      if(videoRef2.current && prisentMode== 'Video'){
+            const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+            video?.play()
+          const refren = videoRef2.current  as any   
+          // setShowOpacity(true)
+          refren.load()
+      }        
+  },[isTalking])      
   useEffect(() => {
     if(audioRef.current){
         const refren = audioRef.current  as any   
@@ -348,21 +368,34 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </div>
             <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[261px] relative overflow-y-hidden">
-                {prisentMode == 'video'?
-                <video  id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
-                    <source id="videoPlayer2"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
+
+                <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
+                    <source id="videoPlayer3"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
                 </video>                 
-                :undefined}
-                <video onEnded={() => {
-                  if(prisentMode == 'video'){
-                    setIsTalking(false)
-                  }
-                }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking && startVideoTalk?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
-                    <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
-                </video>        
-                <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
-                    <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                </video>                      
+
+                {prisentMode == 'video' ?
+                  <>
+                    <video onEnded={() => {
+                      if(prisentMode == 'video'){
+                        setIsTalking(false)
+                      }
+                    }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking  ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
+                        <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                    </video>      
+                    <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                        <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                    </video>                         
+                  </>
+                :
+                    <>
+                    <video id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking && startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
+                        <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                    </video>                 
+                    <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                        <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                    </video>                      
+                    </>
+                }
 
               </div>
               {/* <div
