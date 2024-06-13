@@ -155,7 +155,8 @@ const Login = () => {
                         // setcertificate(credentialResponse);
                         // console.log(credentialResponse);
                         const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
-                        console.log(prof)
+                        // console.log(prof)
+                        authContext.setGoogleInformation(prof)
                         // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
                         Auth.loginWithGoogle(
                           {

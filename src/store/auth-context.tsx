@@ -19,6 +19,8 @@ interface AuthContextProps {
   varification:VerificationProps;
   currentUser:User;
   needReload:boolean
+  googleInformation:any
+  setGoogleInformation:(info:any) => void
   setNeedReload:(action:boolean) => void;
   setUser:(user:User) => void;
   login: (token: string) => void;
@@ -33,11 +35,13 @@ export const AuthContext = createContext<AuthContextProps>({
     emailOrPhone:'',
     googleJson:{},
   },
+  googleInformation:{},
   needReload :false,
   setNeedReload:() => {},
   setUser:() => {},
   currentUser: new User(),
   verificationHandler: () => {},
+ setGoogleInformation:() => {}, 
   login: () => {},
   logout: () => {
     // Auth.logout()
@@ -53,7 +57,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
   resolveUser.setBox(reolveJsonToObject(localuser as string))
-
+  const [googleInformation,setGoogleInformation] = useState({})
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [verification,setVerification] = useState<VerificationProps>(
     {
@@ -87,6 +91,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     currentUser: user,
     needReload:needReload,
     setNeedReload:setNeedReload,
+    setGoogleInformation:setGoogleInformation,
+    googleInformation:googleInformation,
     setUser:(user:User) => {
       localStorage.setItem('authUser',JSON.stringify(user))
       // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))

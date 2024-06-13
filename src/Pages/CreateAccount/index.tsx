@@ -22,23 +22,7 @@ import 'react-html5-camera-photo/build/css/index.css';
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import { getTokenFromLocalStorage } from "../../Storage/Token";
 
-const initialValue = {
-  FirstName: "",
-  LastName: "",
-  gender:"female",
-  Phone: "",
-  JobTitle: "",
-  CompanyName: "",
-  email: "",
-  YourLocation: {
-    lat: 33,
-    lng: 33,
-  },
-  ReferralCode:"",
-  avatar_pic_url: "",
-  silent_video_avatar: "",
-  PrifileImage: "",
-};
+
 const validateEmail = (value:string|undefined) =>{
    if (!value) {
       return false
@@ -62,6 +46,23 @@ const validationSchema = Yup.object().shape({
 const CreateAccount = () => {
   const navigate = useNavigate();
   const authContext = useAuth();
+  const initialValue = {
+    FirstName: authContext.googleInformation.given_name? authContext.googleInformation.given_name: '',
+    LastName: authContext.googleInformation.family_name? authContext.googleInformation.family_name: '',
+    gender:"female",
+    Phone: "",
+    JobTitle: "",
+    CompanyName: "",
+    email: "",
+    YourLocation: {
+      lat: 33,
+      lng: 33,
+    },
+    ReferralCode:"",
+    avatar_pic_url: "",
+    silent_video_avatar: "",
+    PrifileImage: "",
+  };  
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
