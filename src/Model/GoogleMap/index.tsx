@@ -78,11 +78,26 @@ class GoogleMapBox extends Box {
             <div className={`${theme}-Profile-Vectors justify-center relative`}>
                 <div className="px-0 mt-3 w-full">
                     {/* <LocationPicker  showInputs={false} pointMode={pointMode} mapStyle={{ height: "211px", borderRadius: "27px",zIndex:0 }}  /> */}
-                <LeafletMapLoader
-                    mapRef={mapRef}
-                    init={init}
-                    className="h-[210px] z-[5]  rounded-md bg-slate-200"
-                />             
+                    <LeafletMapLoader
+                        mapRef={mapRef}
+                        init={init}
+                        draggable={false}
+                        className="h-[210px] z-[5]  rounded-md bg-slate-200"
+                    />  
+                    <div className="w-full absolute z-10 bottom-8 flex justify-center">
+                        <div className=" w-[281px] flex justify-start px-4 items-center borderBox-Gray boxShadow-Gray h-[51px] bg-[#F3F4F6] rounded-[27px]">
+                            <div className="borderBox-Gray flex justify-center items-center boxShadow-Gray w-[37px] h-[37px] rounded-[5px]">
+                                <img src="./Carbon/map.svg" alt="" />
+                            </div>
+                            <div onClick={() => {
+                                window.open(`https://www.google.com/maps/@${this.location.lan},${this.location.lat}16z?entry=ttu`)
+                            }} className="ml-6">
+                                <div className="text-[#94A3B8] text-sm">Current Location</div>
+                                {/* <div className="text-[#94A3B8] text-sm">1164, San Lorenzo 43</div> */}
+                            </div>
+                        </div>  
+                    
+                    </div>         
                 </div>            
             </div>            
         )
