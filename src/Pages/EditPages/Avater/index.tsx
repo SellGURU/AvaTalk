@@ -14,6 +14,7 @@ import { BackIcon } from "../../../Components";
 import { publish } from "../../../utils/event";
 import Camera from "react-html5-camera-photo";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 interface Avatars {
   photo: string;
@@ -77,16 +78,22 @@ const EditAvater: React.FC = () => {
   const [asktakePhoto,setAskTakePhoto] = useState(false)
   const [openCamera,setOpenCamera] = useState(false);
   const context = useAuth()
-  // const navigate = useNavigate();
+  const [firstLoading,setFirstLoading] = useState(false)
+  const navigate = useNavigate();
   useConstructor(() => {
-    setIsLoading(true)
+    // setIsLoading(true)
+    setFirstLoading(true)
+    formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
+    formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)    
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
+        setFirstLoading(false)
         setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
       }else{
         setAvaterList(res.data)
-        setIsLoading(false)
+        // setIsLoading(false)
+        setFirstLoading(false)
         formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
         formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)
       }     
@@ -101,12 +108,12 @@ const EditAvater: React.FC = () => {
     }, 1000);
   }    
   useEffect(() => {
-    if(isLoading) {
+    if(firstLoading) {
       publish('isLoading-start',{})
     }else{
       publish('isLoading-stop',{})
     }
-  },[isLoading])
+  },[firstLoading])
   // const navigate = useNavigate();  
   useEffect(() => {
     setCurrentAvatr({
@@ -325,14 +332,19 @@ const EditAvater: React.FC = () => {
                 disabled={formik.values.silent_video_avatar.length == 0}
                 onClick={() =>{
                   setIsLoading(true)
+                  setFirstLoading(true)
                   Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
                     context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
                     setIsLoading(false)
+                    setFirstLoading(false)
                     // publish("refreshPage",{})
                     // window.location.reload()
                     // publish('isLoading-stop',{})
-                    // navigate('/?splash=false&force=true')
-                    publish('ForceReload',{})
+                    setTimeout(() => {
+                      // publish('ForceReload',{})
+                      context.setNeedReload(true)
+                      navigate('/?splash=false')
+                    }, 200);
 
                   // history.go(0);
                   })

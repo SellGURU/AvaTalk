@@ -108,6 +108,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       }
     }
   })  
+  useEffect(() => {
+    if(authContext.needReload){
+      window.location.reload()
+    }
+  })
   // const [,forceUpdate] = useReducer(x => x+1,0)
   // const [loadPage,setLaodPage] = useState(false)
   // useEffect(() =>{
@@ -370,7 +375,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               <div className="h-[261px] relative overflow-y-hidden">
 
                 <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
-                    <source id="videoPlayer3"  src={shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                    <source id="videoPlayer3"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                 </video>                 
 
                 {prisentMode == 'video' ?
