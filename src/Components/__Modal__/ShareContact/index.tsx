@@ -116,7 +116,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         Share via Email
                     </div>
                     <div onClick={() => {
-                        navigator.clipboard.writeText(authContext.currentUser.resolveLink())
+                        navigator.clipboard.writeText(window.location.host+authContext.currentUser.resolveLink())
                         Auth.addEvent({event_type:'share_link','sub_event_category':'clipboard','userid':authContext.currentUser.information?.userId as string})
                         toast.success("Copied Successfully")
                     }} className={`${theme}-ShareContact-CardItems`}>
