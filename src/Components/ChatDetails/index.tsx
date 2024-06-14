@@ -25,7 +25,7 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
                 <Button onClick={() => {navigate(-1)}} theme={`${theme}-back`}>
                     <div className={`${theme}-back-Button-vector`}></div>
                 </Button>
-                <p className={`${theme}-ChatDetails-title`}>{window.location.hash.split('/')[2]}</p>
+                <p className={`${theme}-ChatDetails-title max-w-[280px] `}>{window.location.hash.split('/')[2]}</p>
             </div>            
 
             <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
