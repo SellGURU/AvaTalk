@@ -53,7 +53,8 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
             isOpen={isOpen}
             onAfterOpen={onAfterOpen}
             onRequestClose={onClose}
-            style={{content:{borderRadius:'24px',overflowY:'hidden',maxHeight:'90svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
+            // className="hiddenScrollBar"
+            style={{content:{borderRadius:'24px',overflowY:'scroll',maxHeight:'95svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         >
             {

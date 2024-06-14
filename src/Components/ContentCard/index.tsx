@@ -61,27 +61,17 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
                 if(os == 'desctop'){
                   setActiveDrag(!activeDrag)
                 }                
-              }} onTouchStart={() => {
-                if(os == 'mobile'){
-                  setActiveDrag(!activeDrag)
-                }
-              }} className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
+              }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
               <div onClick={() => {
                 setShowConfirm(true)
                 // auth.currentUser.removeBox(item)
                 // navigate('/')
-              }}  onTouchStart={() => {
-                setShowConfirm(true)
-                // auth.currentUser.removeBox(item)
-                // navigate('/')
-              }} className={`${theme}-ContentCard-CardVector`}>
+              }}  className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
-              <button onTouchStart={() => {
-                navigate('/edit/'+item.getRouteAddress())
-              }} onClick={() => {
+              <button onClick={() => {
                 // alert('clicked')
                 navigate('/edit/'+item.getRouteAddress())
               }} className={`${theme}-ContentCard-CardVector`}>
