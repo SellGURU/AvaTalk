@@ -471,7 +471,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             }else if(event.nativeEvent.srcElement.scrollTop == 0){
               setTimeout(() => {
                 setScrolled(false)
-              }, 1000);
+              }, 50);
             }        
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
