@@ -108,6 +108,37 @@ const CreateAccount = () => {
       });
     },
   });  
+  const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
+  const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
+    photo:"",
+    type:'Local',
+    video:''
+  });  
+  const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
+      Auth.createAvatarVideo(photo).then((response) => {
+          if(response.data == 'No face detected'){
+            // setIsLoading(false)
+            toast.dismiss()
+            formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+            formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
+          }else{
+            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+            setUploadedAvater({
+              photo:response.data.avatar_pic_link,
+              video:response.data.silent_video_link,
+              type:'Api'
+            })
+            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+            // setIsLoading(false)
+          }
+      }).catch(() => {
+        // setIsLoading(false)
+        toast.dismiss()
+        formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
+             
+      })     
+  }  
   useConstructor(() => {
     if (authContext.varification.emailOrPhone.length == 0) {
       setTimeout(() => {
@@ -117,11 +148,22 @@ const CreateAccount = () => {
     if(getTokenFromLocalStorage() != null && getTokenFromLocalStorage() != ''){
       navigate('/?splash=false')
     }
-  if(!authContext.varification.emailOrPhone.includes("@")){
-    formik.setFieldValue("email",'') 
-  }else if(authContext.varification.emailOrPhone.includes("@")){
-    formik.setFieldValue("email",authContext.varification.emailOrPhone) 
-  }    
+    if(!authContext.varification.emailOrPhone.includes("@")){
+      formik.setFieldValue("email",'') 
+    }else if(authContext.varification.emailOrPhone.includes("@")){
+      formik.setFieldValue("email",authContext.varification.emailOrPhone) 
+    }    
+    Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
+      if(res.data[res.data.length -1].video == ''){
+        createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender ==formik.values.gender))  
+      }else{
+        setAvaterList(res.data.filter((el:any) => el.gender ==formik.values.gender))
+        // setIsLoading(false)
+        formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].video)
+        formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].photo)
+      }     
+    })    
   });
   useEffect(() => {
     if(getTokenFromLocalStorage() != null && getTokenFromLocalStorage() != ''){
@@ -170,6 +212,11 @@ const CreateAccount = () => {
       case 3:
         return (
           <AvatarStep
+            avatarList={avatarList}
+            createAvatarVideo={createAvatarVideo}
+            setAvaterList={setAvaterList}
+            setUploadedAvater={setUploadedAvater}
+            uploadedAvater={uploadedAvater}
             setshowGudie={(action) => setShowGudieLine(action)}
             formik={formik}
             setStep={setStep}
@@ -360,6 +407,11 @@ interface InfoStepProps extends stepsProps {
 interface UploadStepProps extends stepsProps {
   onSubmit: () => void;
   setshowGudie: (action: boolean) => void;
+  avatarList:Array<Avatars>
+  setAvaterList:(avatars:Array<Avatars>) => void
+  setUploadedAvater:(avatar:Avatars) => void
+  createAvatarVideo:(photo:string,replaceAvatar:Avatars) => void
+  uploadedAvater:Avatars
 }
 
 const InfoStep: React.FC<InfoStepProps> = ({
@@ -682,17 +734,20 @@ const AvatarStep: React.FC<UploadStepProps> = ({
   onSubmit,
   formik,
   setshowGudie,
+  avatarList,
+  setUploadedAvater,
+  uploadedAvater
 }) => {
-  const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
+  // const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [openCamera,setOpenCamera] = useState(false);
   // const [avatarVideo, setAvatarVideo] = useState("");
   // const [selectedAvatar, setSelectedAvatar] = useState("");
-  const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
-    photo:"",
-    type:'Local',
-    video:''
-  });
+  // const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
+  //   photo:"",
+  //   type:'Local',
+  //   video:''
+  // });
   const [currentAvatar,setCurrentAvatr] = useState<Avatars>({
     photo:"",
     type:'Local',
@@ -708,46 +763,46 @@ const AvatarStep: React.FC<UploadStepProps> = ({
       setCropper(dataUri)
     }, 1000);
   }  
-  const authContext = useAuth();
+  // const authContext = useAuth();
   const [addAvatar,setAddAvatar] =useState(false)
-  const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
-      Auth.createAvatarVideo(photo).then((response) => {
-          if(response.data == 'No face detected'){
-            setIsLoading(false)
-            toast.dismiss()
-            formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-            formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
-          }else{
-            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-            setUploadedAvater({
-              photo:response.data.avatar_pic_link,
-              video:response.data.silent_video_link,
-              type:'Api'
-            })
-            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
-            setIsLoading(false)
-          }
-      }).catch(() => {
-        setIsLoading(false)
-        toast.dismiss()
-        formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
+  // const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
+  //     Auth.createAvatarVideo(photo).then((response) => {
+  //         if(response.data == 'No face detected'){
+  //           setIsLoading(false)
+  //           toast.dismiss()
+  //           formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+  //           formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
+  //         }else{
+  //           formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+  //           setUploadedAvater({
+  //             photo:response.data.avatar_pic_link,
+  //             video:response.data.silent_video_link,
+  //             type:'Api'
+  //           })
+  //           formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+  //           setIsLoading(false)
+  //         }
+  //     }).catch(() => {
+  //       setIsLoading(false)
+  //       toast.dismiss()
+  //       formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+  //       formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
              
-      })     
-  }
+  //     })     
+  // }
   useConstructor(() => {
-    setIsLoading(true)
-    Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
-      if(res.data[res.data.length -1].video == ''){
-        createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender ==formik.values.gender))  
-      }else{
-        setAvaterList(res.data.filter((el:any) => el.gender ==formik.values.gender))
-        setIsLoading(false)
-        formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].video)
-        formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].photo)
-      }     
-    })
+    // setIsLoading(true)
+    // Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
+    //   if(res.data[res.data.length -1].video == ''){
+    //     createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
+    //     setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender ==formik.values.gender))  
+    //   }else{
+    //     setAvaterList(res.data.filter((el:any) => el.gender ==formik.values.gender))
+    //     setIsLoading(false)
+    //     formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].video)
+    //     formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].photo)
+    //   }     
+    // })
   })
   useEffect(() => {
     setCurrentAvatr({
