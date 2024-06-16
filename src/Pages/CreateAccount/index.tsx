@@ -140,6 +140,7 @@ const CreateAccount = () => {
              
       })     
   }  
+  // const [AllAvatar,setAllAvatar] = useState<Array<Avatars>>([])
   useConstructor(() => {
     if (authContext.varification.emailOrPhone.length == 0) {
       setTimeout(() => {
@@ -155,14 +156,15 @@ const CreateAccount = () => {
       formik.setFieldValue("email",authContext.varification.emailOrPhone) 
     }    
     Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
+      // setAllAvatar(res.data)
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender ==formik.values.gender))  
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
       }else{
-        setAvaterList(res.data.filter((el:any) => el.gender ==formik.values.gender))
+        setAvaterList(res.data)
         // setIsLoading(false)
-        formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].video)
-        formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) => el.gender ==formik.values.gender)[0].photo)
+        formik.setFieldValue('silent_video_avatar',res.data)
+        formik.setFieldValue('avatar_pic_url',res.data)
       }     
     })    
   });
@@ -728,6 +730,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
 interface Avatars {
   photo: string;
   video: string;
+  gender?:string
   type: "Api" | "Local";
 }
 
@@ -969,7 +972,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
               /> */}
               {/* // */}
             </div>
-            {avatarList.map((el) => {
+            {avatarList.filter(e => e.gender == formik.values.gender).map((el) => {
               return (
                 <>
                   <div
