@@ -16,7 +16,7 @@ interface ContentCardProps {
 }
 const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userId}) => {
   const [activeDrag,setActiveDrag] = useState(false)
-  const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
+  // const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
   const context = useAuth()
   // console.log(os)
   useEffect(() => {
@@ -58,9 +58,9 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
               <div onClick={() => {
-                if(os == 'desctop'){
+                // if(os == 'desctop'){
                   setActiveDrag(!activeDrag)
-                }                
+                // }                
               }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
               </div>

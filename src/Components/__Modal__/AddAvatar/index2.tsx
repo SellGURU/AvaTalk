@@ -56,7 +56,8 @@ const AddSocials: React.FC<AddSocialsProps> = ({ refEl,onTakePhoto,isCanRemove ,
                     }}
                     className={`Carbon-ImageUploader-uploader-input`}
                     type="file"
-                    accept="*"
+                    // accept="*"
+                     accept="image/*"
                     style={{ display: 'none' }}
                 />
             </div>
