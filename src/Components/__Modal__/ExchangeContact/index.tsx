@@ -32,6 +32,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     note: "",
     tags: [],
     id: "",
+    address :'',
   });
 
   useEffect(() => {

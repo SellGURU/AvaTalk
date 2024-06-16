@@ -42,6 +42,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               fullName:el.full_name,
               id:el.created_contact_id,
               job:'',
+              address :'',
               isExchange:el.adding_method == 'exchange'?el.adding_method:'',
               mapLocation:{
                 lat:0,

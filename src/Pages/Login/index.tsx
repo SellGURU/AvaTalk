@@ -2,7 +2,7 @@
 import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
@@ -46,6 +46,7 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const [parametr] = useSearchParams() 
   const [showSplash,setshowSplash] = useState(true);
   const authContext = useContext(AuthContext)
   const formik = useFormik({
@@ -85,6 +86,8 @@ const Login = () => {
   }, 3000);
   useConstructor(() => {
     localStorage.clear()
+    // localStorage.setItem("token",'')
+    authContext.setNfc_id(parametr.get('nfc_id'))
   })
   useEffect(() => {
     if(document.getElementById("phoneField")){

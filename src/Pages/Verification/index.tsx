@@ -82,7 +82,9 @@ const Verification = () => {
                                     userId:data.information.created_userid
                                 })
                                 authContext.currentUser.setBox(resolveSocial)
-                                navigate("/?splash=true");
+                                setTimeout(() => {
+                                    navigate("/?splash=true");
+                                }, 200);
                             })                            
                         }
                     })

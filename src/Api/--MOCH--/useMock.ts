@@ -29,6 +29,7 @@ const contacts: Array<Contact> = [
     email: "John.lee@example.com",
     mapLocation: { lat: 28.7523, lng: 4.35464 },
     photo: "/Acord/person.png",
+    address :'',
     tags: [
       {
         id: generateSlugId(),
@@ -60,6 +61,7 @@ const contacts: Array<Contact> = [
   {
     id: generateSlugId(),
     fullName: "Sara Doe",
+    address :'',
     mapLocation: { lat: 80, lng: 75.6 },
     email: "sonia.doe@example.com",
     photo: "/Acord/person.png",
@@ -85,6 +87,7 @@ const contacts: Array<Contact> = [
     email: "John.lee@example.com",
     mapLocation: { lat: 28.7523, lng: 4.35464 },
     photo: "/Acord/person.png",
+    address :'',
     tags: [
       {
         id: generateSlugId(),

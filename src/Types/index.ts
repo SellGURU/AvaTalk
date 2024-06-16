@@ -19,6 +19,7 @@ interface Contact {
   isExchange?: boolean;
   phone: string;
   location?: string;
+  address:string;
   mapLocation: { lat: number | undefined; lng: number | undefined };
   company: string;
   note: string;

@@ -6,7 +6,7 @@ import { Contact, Tag } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
 import { Select, TextArea, TextField } from "../..";
-import LocationPicker from "react-leaflet-location-picker";
+// import LocationPicker from "react-leaflet-location-picker";
 import { Contacts } from "../../../Api";
 
 interface AddContactProps {
@@ -31,6 +31,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
     phone: "",
     company: "",
     mapLocation: { lat: 0, lng: 0 },
+    address:'', 
     job: "",
     note: "",
     tags: [],
@@ -45,14 +46,14 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
   }, [mode, contactData]);
   console.log("formData", formData);
   const [pointVals, setPointVals] = useState([[auth.currentUser.information?.location.lat, auth.currentUser.information?.location.lng]]);
-  const pointMode = {
-    banner: false,
-    control: {
-      values: pointVals as any,
-      onClick: (point: any) => setPointVals([...[point]]),
-      onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
-    },
-  };
+  // const pointMode = {
+  //   banner: false,
+  //   control: {
+  //     values: pointVals as any,
+  //     onClick: (point: any) => setPointVals([...[point]]),
+  //     onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
+  //   },
+  // };
   // console.log("pointVals", pointVals);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -165,9 +166,12 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
             required
           ></TextField>
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <p className="Carbon-TextField-label mb-1">Your Location</p>
           <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
+        </div> */}
+        <div className="mt-4">
+            <TextArea inValid="" placeholder="Enter your address ..." textAreaHeight="136px" name="address " value={formData.address} onBlur={() => {}} label="Address " theme="Carbon" onChange={handleInputChange} />          
         </div>
         <div className="mt-4">
           <TextField
@@ -248,7 +252,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
           <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
         </div>
         <div className="mt-10 mb-6">
-          <Button onClick={handleAction} theme="Carbon">
+          <Button disabled={formData.email =='' || formData.fullName == '' || formData.phone ==''} onClick={handleAction} theme="Carbon">
             <div>{mode === "add" ? "Add Contact" : "Save Changes"}</div>
           </Button>
         </div>

@@ -20,6 +20,8 @@ interface AuthContextProps {
   currentUser:User;
   needReload:boolean
   googleInformation:any
+  nfc_id:string | null
+  setNfc_id:(id:string| null) => void
   setGoogleInformation:(info:any) => void
   setNeedReload:(action:boolean) => void;
   setUser:(user:User) => void;
@@ -35,6 +37,8 @@ export const AuthContext = createContext<AuthContextProps>({
     emailOrPhone:'',
     googleJson:{},
   },
+  nfc_id:'',
+  setNfc_id:() =>{},
   googleInformation:{},
   needReload :false,
   setNeedReload:() => {},
@@ -59,13 +63,14 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   resolveUser.setBox(reolveJsonToObject(localuser as string))
   const [googleInformation,setGoogleInformation] = useState({})
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
+  const [nfc_id,setNfc_id] = useState<string|null>('')
   const [verification,setVerification] = useState<VerificationProps>(
     {
       emailOrPhone:'',
       googleJson: {}
     }
   )
-  const userIsLoggedIn = !!token && !!user.information;
+  // const userIsLoggedIn = !!token && !!user.information;
 
   function logoutHandler() {
     Auth.logout()
@@ -86,13 +91,15 @@ function AuthContextProvider({ children }: PropsWithChildren) {
 
   const contextValue: AuthContextProps = {
     token,
-    isLoggedIn: userIsLoggedIn,
+    isLoggedIn: !!token ,
     varification:verification,
     currentUser: user,
     needReload:needReload,
     setNeedReload:setNeedReload,
     setGoogleInformation:setGoogleInformation,
     googleInformation:googleInformation,
+    nfc_id:nfc_id,
+    setNfc_id:setNfc_id,
     setUser:(user:User) => {
       localStorage.setItem('authUser',JSON.stringify(user))
       // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))

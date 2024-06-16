@@ -75,6 +75,7 @@ const CreateAccount = () => {
           ? values.Phone
           : authContext.varification.emailOrPhone,
         job_title: values.JobTitle,
+        nfc_id:authContext.nfc_id,
         company_name: values.CompanyName,
         location: values.YourLocation,
         profile_pic: values.avatar_pic_url,
