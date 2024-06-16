@@ -33,7 +33,22 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
     });
     useEffect(() => {
         formik.setFieldValue("url",value)
-    },[value])             
+    },[value])          
+    const resolvePlaceholder =() => {
+        if(title == 'Linkedin') {
+            return 'https://linkedin.com/username'
+        }
+        if(title == 'Twitter/ X'){
+            return 'https://twitter.com/username'
+        }
+        if(title == 'Facebook'){
+            return 'https://facebook.com/username'
+        }
+        if(title == 'Instagram'){
+            return 'https://instagram.com/username'
+        }
+        return 'https://youtube.com.com/username'
+    }   
     return (
         <>
         <Modal
@@ -54,9 +69,9 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
             </div>
             <div>
               <div className="my-4">
-                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder="https://facebook.com/" theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
+                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder={resolvePlaceholder()} theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
               </div>    
-              <Button onClick={() => {
+              <Button disabled={formik.values.url?.length == 0} onClick={() => {
                 formik.setFieldValue('url','')
                 onClose()
                 onComplete(formik.values.url)

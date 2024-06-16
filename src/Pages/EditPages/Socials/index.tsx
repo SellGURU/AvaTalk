@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { AddSocials, Confirm } from "../../../Components/__Modal__";
 import { Social } from "../../../Model";
 import { SocialBox, initialSocials } from "../../../Model/SocialBox";
@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
 
 const EditSocials = () => {
   const auth = useAuth();
+  const confirmRef = createRef<HTMLDivElement>()
   const medias: Array<{ name: initialSocials; icon: string }> = [
     {
       name: "Linkedin",
@@ -126,14 +127,14 @@ const EditSocials = () => {
                                 <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
                               </div>
                               <div className="flex justify-end gap-1 items-start">     
-                                {
+                                {/* {
                                   socials.length> 1 ?
                                     <div>
                                       <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
                                     </div>
                                   :
                                   undefined
-                                }                      
+                                }                       */}
                                 <div
                                   onClick={() => {
                                     setSelectedItem(item);
@@ -153,7 +154,7 @@ const EditSocials = () => {
                         </li>
                         {showConfirm == index ?
                           <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                            <Confirm title={"Delete Social"} content={"Are you sure want to delete this Social?"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
+                            <Confirm refrence={confirmRef} title={"Delete Social"} content={"Are you sure want to delete this Social?"} onClose={() => {setShowConfirm(-1)}} onConfirm={() => {
                               deleteSocial(index);
                               setShowConfirm(-1)
                             }}></Confirm>

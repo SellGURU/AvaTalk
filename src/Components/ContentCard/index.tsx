@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '../../Model';
 import { useAuth } from '../../hooks/useAuth';
@@ -19,6 +19,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   // const os =navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) ? 'mobile':'desctop'
   const context = useAuth()
   // console.log(os)
+  const confirmRef = createRef<HTMLDivElement>()
   useEffect(() => {
     setTimeout(() => {
       setActiveDrag(false)
@@ -85,7 +86,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
     </li>
     {showConfirm ?
       <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-        <Confirm title={"Delete "+item.getCardName()} content={"Are you sure want to delete this card?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+        <Confirm refrence={confirmRef} title={"Delete "+item.getCardName()} content={"Are you sure want to delete this card?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
           auth.currentUser.removeBox(item)
           setShowConfirm(false)
           navigate('/')

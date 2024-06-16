@@ -1,6 +1,6 @@
 import { Button, TextField } from "symphony-ui";
 import { BackIcon} from "../../../Components";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { LinkBox, Link } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth"
 import { useFormik } from "formik";
@@ -22,6 +22,7 @@ const EditLinks = () => {
   if(currentBox == undefined) {
       currentBox = new LinkBox('links',[])
   }   
+  const confirmRef = createRef<HTMLDivElement>()
   const [links,setLinks] = useState<Array<Link>>(currentBox.getLinks().map(((item:Link) => Object.assign(new Link('',''),item))))
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)  
   const initialValue = {
@@ -88,7 +89,7 @@ const EditLinks = () => {
             </div>
           :
             <>
-            <ul style={{width:'100%'}} id="sortable2">
+            <ul style={{width:'100%'}} >
                <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Links</div>
               {links.map((item:Link,index) => {
                   return (
@@ -142,7 +143,7 @@ const EditLinks = () => {
                               confirmAlert({
                                   customUI: ({ onClose }) => {
                                           return (
-                                              <Confirm onConfirm={() => deleteSocial(index)} content="Are you sure you want to delete this link?" title="Delete Link" onClose={onClose}></Confirm>
+                                              <Confirm refrence={confirmRef} onConfirm={() => deleteSocial(index)} content="Are you sure you want to delete this link?" title="Delete Link" onClose={onClose}></Confirm>
                                           );
                                   },
                                   overlayClassName:"dispalyOverLay"
