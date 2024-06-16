@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
 axios.interceptors.response.use((response) => {
@@ -9,6 +10,12 @@ axios.interceptors.response.use((response) => {
         localStorage.clear()
         window.location.reload(); 
     }    
+    // if(response.data.error){
+    //     // alert("login")
+        
+    //     // redirect('https://portal.avatalk.me/#/login?nfc_id=nfc_3aa92bf1cc')
+    // }
+    
     if(response.data.detail){
        toast.error(response.data.detail) 
     }

@@ -126,6 +126,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     if(mode == 'share') {
       const resolveSocial: Array<Box> = [];
       Share.getShareData('/presentation_info/user='+searchParams.get('user'),(data) => {
+            if(data.error){
+              navigate('/login?nfc_id='+searchParams.get('user'))
+                // window.open(window.location.hostname+'/#/login?nfc_id='+searchParams.get('user'))    
+            }
             data.boxs.map((item:any) => {
                 const newBox = boxProvider(item);
                 resolveSocial.push(newBox);
