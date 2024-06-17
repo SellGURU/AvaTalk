@@ -8,6 +8,7 @@ const Share:React.FC = () => {
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);    
+
     return (
         <>
             {showSplash ?

@@ -183,6 +183,10 @@ const route = createHashRouter([
     element:<Share></Share>
   },
   {
+    path:'/A/:id',
+    element:<Share></Share>
+  },  
+  {
     path: "/presentation",
     element: <Presentations />,
   },

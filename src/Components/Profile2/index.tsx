@@ -4,7 +4,7 @@ import { Button } from "symphony-ui";
 import { boxProvider, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Auth, Contacts } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
 import ContentCard from "../ContentCard";
@@ -29,6 +29,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     switch(window.location.hash.replace('#/','').split('/')[0]){
       case '' :return 'profile'
       case 'share' :return 'share'
+      case 'A' :return 'share'
       case'?review=true' : return 'review'
     }
     return 'profile'
@@ -59,6 +60,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [,setShowMuiteController] = useState(false)
   const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
   const [searchParams] = useSearchParams();
+  const {id} = useParams();  
   const authContext = useAuth()
   const [shareUser,setShareUser] = useState(authContext.currentUser)
   const [isLoading,setIsLoading] = useState(mode == 'share'?true:false)
@@ -123,7 +125,65 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //   }
   // })
   useConstructor(() => {
-    if(mode == 'share') {
+    console.log(id)
+    console.log(mode)
+    if(id){
+      const resolveSocial: Array<Box> = [];
+      Share.getShareData('/presentation_info/user='+id,(data) => {
+            if(data.error){
+              navigate('/login?nfc_id='+id)
+                // window.open(window.location.hostname+'/#/login?nfc_id='+searchParams.get('user'))    
+            }
+            data.boxs.map((item:any) => {
+                const newBox = boxProvider(item);
+                resolveSocial.push(newBox);
+            })
+            const information = {
+                firstName:data.information.first_name,
+                lastName:data.information.last_name,
+                phone:data.information.mobile_number,
+                personlEmail:data.information.email,
+                company:data.information.company_name,
+                job:data.information.job_title,
+                banelImage:data.information.back_ground_pic,
+                imageurl:data.information.profile_pic,
+                location:{
+                    lat:33,
+                    lng:33
+                },
+                workEmail:data.information.work_email,
+                workPhone:data.information.work_mobile_number,
+                userId:data.information.created_userid,
+                silent_video_avatar:data.information.silent_video_url,
+                talk_video_avater:data.information.talking_video_avatar
+            }
+            const shareUser = new User(information)
+            setShareUser(shareUser) 
+            if(localStorage.getItem("showTotorial"+id)){
+              // setShowToturial(false)
+            }else{
+              // setShowToturial(true)
+              localStorage.setItem("showTotorial"+id,'true')
+            }                       
+            shareUser.setBox(resolveSocial,{isShare:true})
+            console.log(searchParams.get('viewBy'))
+            if(searchParams.get('viewBy')){
+              Auth.addEvent({
+                userid:shareUser.information?.userId as string,
+                event_type:'page_view',
+                sub_event_category:searchParams.get('viewBy') as any
+              })   
+            }else{
+              Auth.addEvent({
+                userid:shareUser.information?.userId as string,
+                event_type:'page_view',
+                sub_event_category:'view_link'
+              })            
+            }
+            setIsLoading(false)
+      })
+    }else if(mode == 'share') {
+      // alert(mode)
       const resolveSocial: Array<Box> = [];
       Share.getShareData('/presentation_info/user='+searchParams.get('user'),(data) => {
             if(data.error){
@@ -264,6 +324,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </>
             :
             <>
+              {mode == "review"?
               <div className="absolute top-4 right-6 z-20">
               <Button onClick={() => {
                   setMode('profile')
@@ -273,6 +334,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <div className={`${theme}-Profile-closeIcon ${theme}-Footer-Vectors m-0`} ></div>
               </Button>                
               </div>            
+              :
+              <></>
+              }
             </>
           }
           {
