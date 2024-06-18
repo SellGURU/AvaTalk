@@ -911,7 +911,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                 className="text-[#06B6D4] cursor-pointer"
               >
                 {" "}
-                learn more{" "}
+                picture guidline{" "}
               </span>
             </div>
           </div>

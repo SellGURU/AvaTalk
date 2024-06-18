@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { AddSocials, Confirm } from "../../../Components/__Modal__";
 import { Social } from "../../../Model";
 import { SocialBox, initialSocials } from "../../../Model/SocialBox";
@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { AnimateGroup } from 'react-animation'
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
+import useModalAutoClose from "../../../hooks/useModalAutoClose";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -65,11 +66,18 @@ const EditSocials = () => {
     auth.currentUser.addBox(new SocialBox(formik.values.title, socials));
     navigate("/");
   };
+  const addSocialRef = useRef(null)
   const deleteSocial = (index: number) => {
     const newArr = [...socials];
     newArr.splice(index, 1);
     setSocials(newArr);
   };
+  useModalAutoClose({
+    refrence:addSocialRef,
+    close:() => {
+      setOpenAddNewSocial(false)
+    }
+  })
   useEffect(() => {
     setTimeout(() => {
         const el = document.getElementById('sortable2');
@@ -203,11 +211,11 @@ const EditSocials = () => {
             </Select>
           </div> */}
           <div className="mt-6  px-6">     
-            <Button data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+            <Button disabled={socials.length >= 5} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
               <div className="relative">
                 {openaddNewSocial ?
-                  <div className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
-                    {medias.map((item, index) => {
+                  <div ref={addSocialRef} className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
+                    {medias.filter(e => !socials.map(v =>v.getType()).includes(e.name)).map((item, index) => {
                       return (
                         <>
                           <div
