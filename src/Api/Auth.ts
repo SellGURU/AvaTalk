@@ -111,7 +111,7 @@ class Auth extends Api {
     return response
   }
   static createAvatarVideo(avatar_url:string) {
-    const response = this.post('/create_silent_avatar',{avatar_url:avatar_url})
+    const response = this.post('/create_silent_avatar',{avatar_url:avatar_url},{noPending:true})
     return response
   }
   static get_Login_code(data: LoginData) {

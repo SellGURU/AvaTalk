@@ -116,6 +116,7 @@ const CreateAccount = () => {
     video:''
   });  
   const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
+      toast.loading('Creating your Avatalk')
       Auth.createAvatarVideo(photo).then((response) => {
           if(response.data == 'No face detected'){
             // setIsLoading(false)
@@ -163,8 +164,8 @@ const CreateAccount = () => {
       }else{
         setAvaterList(res.data)
         // setIsLoading(false)
-        formik.setFieldValue('silent_video_avatar',res.data)
-        formik.setFieldValue('avatar_pic_url',res.data)
+        formik.setFieldValue('silent_video_avatar',res.data[0].video)
+        formik.setFieldValue('avatar_pic_url',res.data[0].photo)
       }     
     })    
   });
@@ -981,6 +982,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
                       // setAvatarVideo("");
                       if (el.video == "") {
                         setIsLoading(true);
+                        toast.loading('Creating your Avatalk')
                         Auth.createAvatarVideo(el.photo as string).then(
                           (response) => {
                             formik.setFieldValue(
@@ -1046,6 +1048,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
             // setSelectedAvatar(resolve as string);
             
             setIsLoading(true);
+            toast.loading('Creating your Avatalk')
             Auth.createAvatarVideo(resolve as string).then((response) => {
             if(response.data == 'No face detected' || !response.data.avatar_pic_link){
               toast.warn(response.data )
