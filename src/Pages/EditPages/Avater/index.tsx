@@ -453,6 +453,7 @@ const EditAvater: React.FC = () => {
       <>
         <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
             <Camera
+              isImageMirror 
               onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
             />      
         </div>

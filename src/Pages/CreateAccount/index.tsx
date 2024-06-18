@@ -1139,6 +1139,7 @@ const AvatarStep: React.FC<UploadStepProps> = ({
         <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
             <div className="max-w-xl relative h-dvh flex justify-center items-center">
               <Camera
+                isImageMirror
                 onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
               />      
               <div className="absolute z-50 top-7 left-[-4px]">
