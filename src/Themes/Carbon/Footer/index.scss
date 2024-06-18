@@ -11,6 +11,14 @@
   mask-position: center;
   @apply w-6 h-6 bg-[#8290a3]; 
 }
+.Carbon-Footer-Vectors2{
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  @apply w-6 h-6 bg-primary-color; 
+}
+
 .Carbon-Footer-UserVector {
   mask-image: url(/Carbon/userVector.svg);
 }
@@ -30,6 +38,6 @@
   @apply flex justify-center items-center borderBox-Gray;
 }
 .Carbon-Footer-ActiveVectors{
-  @apply bg-violet-700;
+  @apply bg-primary-color;
 }
 
