@@ -84,7 +84,7 @@ class GoogleMapBox extends Box {
                         draggable={false}
                         className="h-[210px] z-[5]  rounded-md bg-slate-200"
                     />  
-                    <div className="w-full absolute z-10 bottom-8 flex justify-center">
+                    <div className="w-full absolute z-[5] bottom-8 flex justify-center">
                         <div className=" w-[281px] flex justify-start px-4 items-center borderBox-Gray boxShadow-Gray h-[51px] bg-[#F3F4F6] rounded-[27px]">
                             <div className="borderBox-Gray flex justify-center items-center boxShadow-Gray w-[37px] h-[37px] rounded-[5px]">
                                 <img src="./Carbon/map.svg" alt="" />
