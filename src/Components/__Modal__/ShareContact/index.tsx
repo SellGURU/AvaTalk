@@ -20,16 +20,30 @@ interface ShareContactProps {
     onAfterOpen?:() =>void
 }
 const initialValue = {
-  Phone: "",
+  firstName:'',
+  lastName:'',
+  email:''
+};
+const initialValue2 = {
+  firstName: "",
+  lastName:"",
+  phone:""
 };
 const validationSchema = Yup.object().shape({
-  Phone: Yup.string()
-      .required('Phone is required')
+  firstName: Yup.string().required().nonNullable().max(12),
+  lastName:Yup.string().required().max(12),
+  email:Yup.string().email()
+});
+const validationSchema2 = Yup.object().shape({
+  firstName: Yup.string().required().nonNullable().max(12),
+  lastName:Yup.string().required().max(12),
+  phone:Yup.string().required().min(8).max(15)
 });
 
 const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,theme}) => {
     const [mode,setMode] = useState<'mainSection'|'smsSection'|'emailSection'>('mainSection')
     const authContext = useAuth()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const formik = useFormik({
         initialValues: initialValue,
         validationSchema,
@@ -46,6 +60,11 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
         Share.getqrcode().then((res:any) => {
             setQrcodeValue(res.data)
         })
+    })
+    const formik2 = useFormik({
+        initialValues:initialValue2,
+        validationSchema:validationSchema2,
+        onSubmit:() => {}
     })
     return (
         <>
@@ -104,13 +123,17 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
 
                         </div>
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`} >
+                    <div onClick={() => {
+                        setMode('smsSection')
+                    }} className={`${theme}-ShareContact-CardItems `} >
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-SmsVector`}></div>
                         </div>
                         Share via SMS 
                     </div>
-                    <div className={`${theme}-ShareContact-CardItems opacity-50 cursor-not-allowed`}>
+                    <div onClick={() => {
+                        setMode('emailSection')
+                    }} className={`${theme}-ShareContact-CardItems `}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-EmailVector`}></div>
                         </div>
@@ -187,31 +210,33 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 </div>
                 <div className="text-gray-700 text-center font-semibold text-base mt-2">Share via SMS</div>
                 <div className="w-full flex justify-center items-center mt-2 mb-6">
-                    <div className="text-sm text-gray-700 opacity-80 text-center">We will send a text message with your contact info and profile to:</div>
+                    <div className="text-sm text-gray-700 opacity-50 text-center">We will send a text message with your contact info and profile to:</div>
                 </div>
             </div>
             <div className="px-4">
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
-                            <label className="Carbon-TextField-label ">
+                            {/* <label className="Carbon-TextField-label ">
                                 First Name
                                 <span className="Carbon-TextField-label-required">*</span>
                             </label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                                <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield76297" placeholder="Enter your first name..." name="FirstName" />
-                            </div>
+                                <input {...formik2.getFieldProps("firstName")} data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text"  placeholder="Enter your first name..."  />
+                            </div> */}
+                            <TextField {...formik2.getFieldProps("firstName")} theme='Carbon' label='First Name' errorMessage={formik2.errors.firstName} placeholder='Enter your first name...' required type='text' inValid={formik2.errors.firstName?.length? true:false}></TextField>
                         </div>
                     </div>
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
-                            <label className="Carbon-TextField-label">
+                            {/* <label className="Carbon-TextField-label">
                                 Last Name
                                 <span className="Carbon-TextField-label-required">*</span>
                             </label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
-                                <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield42095" placeholder="Enter your last name..." name="LastName" />
+                                <input {...formik2.getFieldProps("lastName")} data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text"  placeholder="Enter your last name..."/>
 
-                            </div>
+                            </div> */}
+                            <TextField {...formik2.getFieldProps("lastName")} theme='Carbon' label='Last Name' errorMessage={formik2.errors.lastName} placeholder='Enter your last name...' required type='text' inValid={formik2.errors.lastName?.length? true:false}></TextField>                            
                         </div>
                     </div>
                     <div className="mb-4">
@@ -225,13 +250,19 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="Enter your phone number..." name="Phone" />
                             </div>
                         </div> */}
-                    <TextField phoneCountry={country}  setPhoneCountry={setCountry} {...formik.getFieldProps("Phone")} theme="Carbon" name="Phone" errorMessage={formik.errors?.Phone} placeholder="Enter your phone " type="phone" inValid={false}></TextField>
+                    <TextField {...formik2.getFieldProps("phone")} label='Phone' phoneCountry={country}  setPhoneCountry={setCountry}  theme="Carbon"  errorMessage={formik2.errors?.phone} placeholder="Enter your phone " type="phone" inValid={formik2.errors.phone?.length?true:false}></TextField>
                     </div>
                 <div className="mt-8 mb-4">
-                    <button onClick={() => {
+                    <Button disabled={!formik2.isValid || (!formik2.touched.firstName)} onClick={() => {
                         setMode('mainSection')
+                        Share.sharelink({
+                            type:'sms',
+                            first_name:formik2.values.firstName,
+                            last_name:formik2.values.lastName,
+                            recipient:formik2.values.phone
+                        })
                         onClose()
-                        }} className="Carbon-Button-container">Share Contact</button>
+                        }} theme="Carbon">Share Contact</Button>
                 </div>
             </div>
             </>
@@ -264,41 +295,48 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                 <div className="px-4">
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
-                            <label className="Carbon-TextField-label ">
+                            {/* <label className="Carbon-TextField-label ">
                                 First Name
                                 <span className="Carbon-TextField-label-required">*</span>
                             </label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield76297" placeholder="Enter your first name..." name="FirstName" />
-                            </div>
+                            </div> */}
+                            <TextField {...formik.getFieldProps("firstName")} theme='Carbon' label='First Name' errorMessage={formik.errors.firstName} placeholder='Enter your first name...' required type='text' inValid={formik.errors.firstName?.length? true:false}></TextField>                            
                         </div>
                     </div>
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
-                            <label className="Carbon-TextField-label">
+                            {/* <label className="Carbon-TextField-label">
                                 Last Name
                                 <span className="Carbon-TextField-label-required">*</span>
                             </label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="text" id="textfield42095" placeholder="Enter your last name..." name="LastName" />
 
-                            </div>
+                            </div> */}
+                            <TextField {...formik.getFieldProps("lastName")} theme='Carbon' label='Last Name' errorMessage={formik.errors.lastName} placeholder='Enter your last name...' required type='text' inValid={formik.errors.lastName?.length? true:false}></TextField>                            
                         </div>
                     </div>
                     <div className="mb-4">
                         <div className="Carbon-TextField-container w-[100%]">
-                            <label className="Carbon-TextField-label" >Email</label>
+                            {/* <label className="Carbon-TextField-label" >Email</label>
                             <div data-testid="input-container" deta-selectbox="false" className=" w-[100%] Carbon-TextField-box ">
 
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="email" id="textfield28972" placeholder="Enter your email address..." name="Email" />
-                            </div>
+                            </div> */}
+                            <TextField {...formik.getFieldProps("email")} theme='Carbon' label='Email' errorMessage={formik.errors.email} placeholder='Enter your email address...'  type='text' inValid={formik.errors.email?.length? true:false}></TextField>                            
                         </div>
                     </div>
                 <div className="mt-8 mb-4">
-                    <button onClick={() => {
+                    <Button disabled={!formik.isValid || (!formik.touched.firstName)} onClick={() => {
                         setMode('mainSection')
+                        Share.sharelink({
+                            type:'email',
+                            email:formik.values.email
+                        })
                         onClose()
-                        }} className="Carbon-Button-container">Share Contact</button>
+                        }} theme='Carbon'>Share Contact</Button>
                 </div>
             </div>
 

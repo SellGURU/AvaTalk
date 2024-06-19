@@ -28,6 +28,11 @@ class Share extends Api {
         })
         return response
     }
+
+    static sharelink(data:any){
+        const response = this.post('/get_links',data)
+        return response        
+    }
 }
 
 export default Share
