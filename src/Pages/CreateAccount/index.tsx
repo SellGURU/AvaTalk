@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { PhoneCountry } from "../../Types";
 import { Auth } from "../../Api";
-import { useNavigate } from "react-router";
+import { useNavigate} from "react-router";
 import { User } from "../../Model";
 import { useAuth } from "../../hooks/useAuth";
 import { useConstructor } from "../../help";
@@ -105,6 +105,8 @@ const CreateAccount = () => {
         }
         authContext.setUser(newUser);
         authContext.login(res.data.access_token);
+        // browserHistory.replace('/?splash=false')
+        // history
         navigate("/?splash=false");
       });
     },
@@ -115,6 +117,11 @@ const CreateAccount = () => {
     type:'Local',
     video:''
   });  
+  useEffect(() => {
+    if(authContext.isLoggedIn){
+      navigate('/?splash=false')
+    }
+  })
   const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
       toast.loading('Creating your Avatalk')
       Auth.createAvatarVideo(photo).then((response) => {
