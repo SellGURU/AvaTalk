@@ -18,7 +18,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
   const getBase64 = (file:any,name:string) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      console.log(file)
+      // console.log(file)
       reader.onload = function () {
           setFiles([...files,{
             url:reader.result,
@@ -104,8 +104,13 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                         </div>
                         <input  onChange={(res:any) => {
                             setisLoading(true)
-                            getBase64(res.target.files[0],res.target.value)    
-                        }}  className={`${theme}-ImageUploader-uploader-input`} type="file" id="upload-button"  accept={accept} />                        
+                            console.log(res.target.files.length)
+                            // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
+                              // })
+                                getBase64(res.target.files[0],res.target.value.split('\\')[2])    
+                            // res.target.files.map(element => {
+                            // });
+                        }}  className={`${theme}-ImageUploader-uploader-input`} multiple type="file" id="upload-button"  accept={accept} />                        
                     </div>
               }
               {files.length > 0 && mod=='files'? 

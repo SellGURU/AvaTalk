@@ -6,9 +6,11 @@ import { useAuth } from "../../../hooks/useAuth";
 import { AvailabilityBox } from "../../../Model";
 import { useNavigate } from "react-router";
 
+const re = new RegExp("https://calendly.com/");
+
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
-  url: Yup.string().required(),
+  url: Yup.string().required().matches(re),
 });
 
 const EditAvailability = () => {
@@ -57,7 +59,7 @@ const EditAvailability = () => {
             <TextField
               {...formik.getFieldProps("url")}
               errorMessage={formik.errors?.url}
-              placeholder="https://example.com"
+              placeholder="https://calendly.com/username"
               inValid={formik.errors?.url != undefined && (formik.touched?.url as boolean)}
               theme="Carbon"
               label="URL"

@@ -55,6 +55,7 @@ const EditGallery = () => {
           </div>
           <div className="px-6 mt-3">
             <ImageUploadr
+              accept="image/*"
               value={formik.values.files.map((item, index) => {
                 return {
                   url: item.original,
@@ -62,6 +63,7 @@ const EditGallery = () => {
                 };
               })}
               uploades={(files: Array<any>) => {
+                console.log(files)
                 const converted = files.map((item) => {
                   return {
                     original: item.url,
