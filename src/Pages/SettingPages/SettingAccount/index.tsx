@@ -2,13 +2,14 @@
 import { Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
-import { useContext , useState } from "react";
+import { createRef, useContext , useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Auth } from "../../../Api";
 import { Location } from "../../../Types";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
+import { Confirm } from "../../../Components/__Modal__";
 
 
 const validationSchema = Yup.object().shape({
@@ -21,6 +22,8 @@ interface SettingAccount {
 const SettingAccount =() => {
     const navigate = useNavigate();
     const context=useContext(AuthContext)
+    const [showConfirm,setShowConfirm] = useState(false)
+    const confirmRef = createRef<HTMLDivElement>()
     const initialValue = {
     firstname:context.currentUser.information?.firstName ,
     lastname:context.currentUser.information?.lastName ,
@@ -157,20 +160,38 @@ const SettingAccount =() => {
                         })
                     }} className="Carbon-Button-container">Save Changes</Button>
                 </div>
-                <div  className="mt-4 flex items-center ">
+                <div  className="mt-6 flex items-center ">
                     <p onClick={() => {
+                        setShowConfirm(true)
+                    // Auth.updateYourAccount({
+                    //     user_id:context.currentUser.information?.userId as string,
+                    //     state:false
+                    // }).then(() => {
+                    //     removeTokenFromLocalStorage()
+                    //     navigate('/login')
+                    // })                    
+                }} className="text-cyan-500 ms-2 cursor-pointer text-sm font-medium">Delete Your Account</p>
+                </div>
+            </div>         
+        </div>
+        {showConfirm ?
+        <>
+            <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
+                <Confirm refrence={confirmRef} title={"Delete Your Account"} content={"Are you sure want to delete your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                     Auth.updateYourAccount({
                         user_id:context.currentUser.information?.userId as string,
                         state:false
                     }).then(() => {
                         removeTokenFromLocalStorage()
                         navigate('/login')
-                    })                    
-                }} className="text-cyan-500 ms-2 cursor-pointer text-sm font-medium">Delete Your Account</p>
-                </div>
-            </div>         
-        </div>
-
+                    })  
+                }}></Confirm>
+            </div>
+            {/* <div className="absolute w-full z-30 h-full bg-black opacity-60 top-0 left-0"></div> */}
+        </>
+        :
+        undefined
+        }
         </>
     )
 }
