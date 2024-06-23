@@ -68,7 +68,7 @@ const Login = () => {
       }
     }else {
       resolvePhoneOrEnail = {
-        mobile_number:formik.values.emailOrPhone
+        mobile_number:formik.values.emailOrPhone.split(' ').join('')
       }      
     }
     Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
