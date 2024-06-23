@@ -29,9 +29,15 @@ const PosEnd = (id:string) => {
     input.value = val; //set that value back.      
 }
 const validatePhone = (phone: number | undefined) => {
+  // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
+  //   (phone) => {
+  //     return 
+  //   }
+  // )
    return Yup.number().integer().positive().test(
       (phone) => {
-        return (phone && phone.toString().length >= 8 && phone.toString().length <= 14) ? true : false;
+        return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
       }
     ).isValidSync(phone);
 };
