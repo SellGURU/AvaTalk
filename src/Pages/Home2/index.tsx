@@ -45,7 +45,8 @@ const Home2 = () => {
                 userId:data.information.created_userid,
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
-                referral_code:data.information. referral_code
+                referral_code:data.information. referral_code,
+                address:''
             })
             authContext.currentUser.setBox(resolveSocial)
 

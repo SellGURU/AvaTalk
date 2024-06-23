@@ -21,7 +21,7 @@ const EditContactInfo = () => {
     job:auth.currentUser.information?.job,
     company:auth.currentUser.information?.company,
     personlEmail:auth.currentUser.information?.personlEmail,
-    address :'',
+    address :auth.currentUser.information?.address,
     workEmail:auth.currentUser.information?.workEmail,
     phone:auth.currentUser.information?.phone,
     workPhone:auth.currentUser.information?.workPhone
@@ -70,7 +70,8 @@ const EditContactInfo = () => {
       silent_video_avatar:auth.currentUser.information?.silent_video_avatar,
       talk_video_avater:auth.currentUser.information?.talk_video_avater,
       userId:auth.currentUser.information?.userId,
-      referral_code:auth.currentUser.information?.referral_code
+      referral_code:auth.currentUser.information?.referral_code,
+      address:auth.currentUser.information?.address
     })
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
@@ -80,6 +81,7 @@ const EditContactInfo = () => {
         lng:pointMode.control.values[0][1]
       },
       work_email:formik.values.workEmail as string,
+      address:formik.values.address,
       work_phone:formik.values.workPhone as string
     })
     navigate('/')
@@ -88,6 +90,7 @@ const EditContactInfo = () => {
     Auth.getContactInfo().then(res => {
       formik.setFieldValue("job",res.data.job_title)
       formik.setFieldValue("company",res.data.company_name)
+      formik.setFieldValue("address",res.data.address)
       setPointVals([[res.data.location.lat,res.data.location.lng]])
     })
   })
@@ -106,7 +109,7 @@ const EditContactInfo = () => {
 
         <div className="mt-3 px-6">
           {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}
-          <TextArea disabled inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>
+          <TextArea inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>
           {/* <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} /> */}
         </div>
         <div className="mt-3 px-6">

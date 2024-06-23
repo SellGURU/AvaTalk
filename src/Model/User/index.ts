@@ -21,6 +21,7 @@ interface Information {
     userId?:string
     silent_video_avatar?:string
     talk_video_avater?:string
+    address?:string
     referral_code?:string
 }
 
