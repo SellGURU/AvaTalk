@@ -42,7 +42,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Add images to your profile.",
     },
     {
-      name: "Socials",
+      name: "My Social Network",
       icon: "social.svg",
       link: "socials",
       description: "Share your social media profiles.",

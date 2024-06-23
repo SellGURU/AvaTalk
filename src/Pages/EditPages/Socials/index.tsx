@@ -91,7 +91,7 @@ const EditSocials = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Socials" theme="Carbon"></BackIcon>
+          <BackIcon title="My Social Network" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="mt-24 px-6">
@@ -107,12 +107,12 @@ const EditSocials = () => {
           </div>
           {socials.length == 0 ? (
             <div className="mt-3 px-6">
-              <TextField theme="Carbon" disabled label="Social Medias" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Social"></TextField>
+              <TextField theme="Carbon" disabled label="Social Media" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Social"></TextField>
             </div>
           ) : (
             <>
                 <AnimateGroup animation="popIn" durationOut="500">
-                <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Social Medias</div>
+                <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Social Media</div>
                 <ul style={{width:'100%'}} id="sortable2">
                   {socials.map((item: Social, index) => {
                     return (
