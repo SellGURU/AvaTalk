@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { createRef, useState } from "react";
 // import { Button } from "symphony-ui";
 import PackageJson from '../../../package.json';
 import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
 import { useAuth } from "../../hooks/useAuth";
+import { Confirm } from "../__Modal__";
 
 interface SettingPanelProps {
   theme?: string;
@@ -11,6 +12,8 @@ interface SettingPanelProps {
 
 const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
   //   const navigate = useNavigate();
+  const confirmRef = createRef<HTMLDivElement>()
+  const [showConfirm,setShowConfirm] = useState(false)
   const auth =useAuth()
   const [settingCards] = useState([
     {
@@ -68,12 +71,24 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
           })}
           <div className="mt-5 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>
-            <p onClick={() =>auth.logout()} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
+            <p onClick={() =>setShowConfirm(true)} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
           </div>
 
           <div className="flex items-center text-[#8290a3] text-sm mt-5 justify-center">Version:{PackageJson.description}{PackageJson.version}</div>
         </div>
       </div>
+        {showConfirm ?
+        <>
+            <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
+                <Confirm confirmTitle="logout" refrence={confirmRef} title={"LogOut"} content={"Are you sure want to logout your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+                  auth.logout()
+                }}></Confirm>
+            </div>
+            {/* <div className="absolute w-full z-30 h-full bg-black opacity-60 top-0 left-0"></div> */}
+        </>
+        :
+        undefined
+        }      
     </>
   );
 };

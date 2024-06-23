@@ -10,9 +10,10 @@ interface ConfirmProps {
     content:string
     onClose:() =>void   
     onConfirm:() =>void
+    confirmTitle?:string
 }
 
-const Confirm: React.FC<ConfirmProps> = ({title,content,refrence,onClose,onConfirm}) => {
+const Confirm: React.FC<ConfirmProps> = ({title,content,refrence,onClose,onConfirm,confirmTitle}) => {
   const theme = 'Carbon'
   useModalAutoClose({
     refrence:refrence,
@@ -36,7 +37,7 @@ const Confirm: React.FC<ConfirmProps> = ({title,content,refrence,onClose,onConfi
                 onConfirm()
                 onClose()
             }} theme="Carbon">
-            Delete
+              {confirmTitle?confirmTitle:'Delete'}
             </Button>
 
         </div>

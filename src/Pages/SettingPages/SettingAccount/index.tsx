@@ -11,8 +11,10 @@ import { Location } from "../../../Types";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 
+const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
 const validationSchema = Yup.object().shape({
+    phone:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 });
 interface SettingAccount {
     value: any;
@@ -29,8 +31,6 @@ const SettingAccount =() => {
     lastname:context.currentUser.information?.lastName ,
     personlEmail:context.currentUser.information?.personlEmail ,
     phone:context.currentUser.information?.phone ,
-
-    
     };    
     const formik = useFormik({
         initialValues: initialValue,
@@ -89,10 +89,11 @@ const SettingAccount =() => {
                             type="email" disabled></TextField>
                         </div>
 
-                        <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={false} 
+                        <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={formik.errors.phone?true:false} 
                         theme="Carbon" name="phone"
                         phoneCountry={country}
                         setPhoneCountry={setCountry}
+                        errorMessage={formik.errors.phone}
                         type="phone" ></TextField>
 
                         <Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">
@@ -158,7 +159,7 @@ const SettingAccount =() => {
                             userId:context.currentUser.information?.userId as string,
                             referral_code:context.currentUser.information?.referral_code as string
                         })
-                    }} className="Carbon-Button-container">Save Changes</Button>
+                    }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>
                 <div  className="mt-6 flex items-center ">
                     <p onClick={() => {
