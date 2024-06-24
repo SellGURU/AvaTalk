@@ -176,6 +176,9 @@ const Login = () => {
                             emailOrPhone: prof?.email,
                             googleJson:prof
                           })
+                          if(res.data == 'Not Registered'){
+                             navigate("/register")
+                          }
                           if(res.data.access_token){
                             localStorage.setItem("token",res.data.access_token)
                             authContext.login(res.data.access_token)
