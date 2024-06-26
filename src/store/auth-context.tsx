@@ -49,6 +49,7 @@ export const AuthContext = createContext<AuthContextProps>({
   login: () => {},
   logout: () => {
     // Auth.logout()
+    
     // localStorage.clear()
   },
 });
