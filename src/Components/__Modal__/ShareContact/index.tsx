@@ -32,7 +32,7 @@ const initialValue2 = {
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required().nonNullable().max(12),
   lastName:Yup.string().required().max(12),
-  email:Yup.string().email()
+  email:Yup.string().required().email()
 });
 const validationSchema2 = Yup.object().shape({
   firstName: Yup.string().required().nonNullable().max(12),
@@ -250,7 +250,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="phone" id="textfield28972" placeholder="Enter your phone number..." name="Phone" />
                             </div>
                         </div> */}
-                    <TextField {...formik2.getFieldProps("phone")} label='Phone' phoneCountry={country}  setPhoneCountry={setCountry}  theme="Carbon"  errorMessage={formik2.errors?.phone} placeholder="Enter your phone " type="phone" inValid={formik2.errors.phone?.length?true:false}></TextField>
+                    <TextField required {...formik2.getFieldProps("phone")} label='Phone' phoneCountry={country}  setPhoneCountry={setCountry}  theme="Carbon"  errorMessage={formik2.errors?.phone} placeholder="Enter your phone " type="phone" inValid={formik2.errors.phone?.length?true:false}></TextField>
                     </div>
                 <div className="mt-8 mb-4">
                     <Button disabled={!formik2.isValid || (!formik2.touched.firstName)} onClick={() => {
@@ -325,7 +325,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
 
                                 <input data-testid="input-id" deta-selectbox="true" className="Carbon-TextField-input" type="email" id="textfield28972" placeholder="Enter your email address..." name="Email" />
                             </div> */}
-                            <TextField {...formik.getFieldProps("email")} theme='Carbon' label='Email' errorMessage={formik.errors.email} placeholder='Enter your email address...'  type='text' inValid={formik.errors.email?.length? true:false}></TextField>                            
+                            <TextField required {...formik.getFieldProps("email")} theme='Carbon' label='Email' errorMessage={formik.errors.email} placeholder='Enter your email address...'  type='text' inValid={formik.errors.email?.length? true:false}></TextField>                            
                         </div>
                     </div>
                 <div className="mt-8 mb-4">
