@@ -47,6 +47,9 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
         if(title == 'Instagram'){
             return 'https://instagram.com/username'
         }
+        if(title == 'Telegram'){
+            return 'https://telegram.com/username'
+        }        
         return 'https://youtube.com.com/username'
     }   
     return (

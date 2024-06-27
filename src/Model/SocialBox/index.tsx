@@ -1,7 +1,7 @@
 import { JSX } from "react/jsx-runtime"
 import Box from "../Boxs"
 
-type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube'
+type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube' | 'Telegram'
 
 class Social {
     public order:number = -1
@@ -25,6 +25,7 @@ class Social {
             case 'Linkedin' : return 'devicon_linkdin.svg'
             case 'Twitter/ X': return 'devicon_twitter.svg'
             case 'Youtube': return 'devicon_youtube.svg'
+            case 'Telegram': return 'devicon_telegram.svg'
         }
     }
 
@@ -53,6 +54,7 @@ class Social {
             case 'Linkedin' : return 'LinkedinVector'
             case 'Twitter/ X' : return 'tweeterVector'
             case 'Youtube' : return 'youtubeVector'
+            case 'Telegram' : return 'telegramVector'
         }
     }
 }

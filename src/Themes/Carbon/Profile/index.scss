@@ -90,6 +90,11 @@
     background-size: contain;
     background-position: center;
 }
+.Carbon-Profile-telegramVector{
+    background: url(/Carbon/telegram.svg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
 .Carbon-Profile-Vectors{
     @apply flex flex-row flex-wrap gap-4;
 }

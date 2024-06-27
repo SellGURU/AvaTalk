@@ -41,6 +41,10 @@ const EditSocials = () => {
       name: "Youtube",
       icon: "devicon_youtube.svg",
     },
+    {
+      name:"Telegram",
+      icon:'devicon_telegram.svg'
+    }
   ];
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "SocialBox")[0] as SocialBox;
   if (currentBox == undefined) {
