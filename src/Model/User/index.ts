@@ -166,7 +166,7 @@ class User {
         }
     }
     public resolveLink() {
-        return '/#/share/?user='+this.information?.userId
+        return '/#/A/'+this.information?.userId
     }
 } 
 export default User
