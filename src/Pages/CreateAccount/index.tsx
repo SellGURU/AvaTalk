@@ -33,6 +33,24 @@ const validateEmail = (value:string|undefined) =>{
    }
    return true
  }
+  const validatePhone = (phone: number | undefined) => {
+
+    return Yup.number().integer().positive().test(
+        (phone) => {
+          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+        }
+      ).isValidSync(phone);
+  };
+  const validatePhoneType = (phone: string ) => {
+    console.log(phone?.split(" ").length )
+
+    return Yup.string().test(
+        (phone) => {
+          return (phone && phone.split(" ").length == 2) ? true : false;
+        }
+      ).isValidSync(phone);
+  };
+
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("Required"),
   LastName: Yup.string().required("Required"),
@@ -41,6 +59,11 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().required("Required").test('Invalid email address',(value) => {
     return validateEmail(value)
   }),
+  Phone:Yup.string().test('phone', 'Phone is invalid', (value) => {
+         return validatePhone(parseInt(value?.replace('+','').replace(" ",'') ?? '0')) || value == null;
+      }).test('phone', 'phone type (+1 123456)',(value) => {
+        return validatePhoneType(value?value:'') || value == null
+      })
 });
 
 const CreateAccount = () => {

@@ -41,12 +41,25 @@ const validatePhone = (phone: number | undefined) => {
       }
     ).isValidSync(phone);
 };
+const validatePhoneType = (phone: string ) => {
+  console.log(phone?.split(" ").length )
+
+   return Yup.string().test(
+      (phone) => {
+        return (phone && phone.split(" ").length == 2) ? true : false;
+      }
+    ).isValidSync(phone);
+};
 
 const validationSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
       .required('Email / Phone is required')
       .test('email_or_phone', 'Email / Phone is invalid', (value) => {
-         return validateEmail(value) || validatePhone(parseInt(value.replace('+','').replace(' ','') ?? '0'));
+         return validateEmail(value) || (
+          validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0')));
+      }).test('email_or_phone', 'invalid phone type (+1 123456)',(value) => {
+        console.log(value)
+        return validatePhoneType(value) || validateEmail(value)
       })
 });
 
@@ -74,7 +87,7 @@ const Login = () => {
       }
     }else {
       resolvePhoneOrEnail = {
-        mobile_number:formik.values.emailOrPhone.split(' ').join('')
+        mobile_number:formik.values.emailOrPhone
       }      
     }
     Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
