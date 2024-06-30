@@ -11,10 +11,30 @@ import { Location } from "../../../Types";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+// const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+  const validatePhone = (phone: number | undefined) => {
 
+    return Yup.number().integer().positive().test(
+        (phone) => {
+          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+        }
+      ).isValidSync(phone);
+  };
+  const validatePhoneType = (phone: string ) => {
+    console.log(phone?.split(" ").length )
+
+    return Yup.string().test(
+        (phone) => {
+          return (phone && phone.split(" ").length == 2) ? true : false;
+        }
+      ).isValidSync(phone);
+  };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+    phone:Yup.string().test('phone', 'Phone is invalid', (value) => {
+         return validatePhone(parseInt(value?.replace('+','').replace(" ",'') ?? '0')) || value == null;
+      }).test('phone', 'phone type (+1 123456)',(value) => {
+        return validatePhoneType(value?value:'') || value == null
+      })
 });
 interface SettingAccount {
     value: any;

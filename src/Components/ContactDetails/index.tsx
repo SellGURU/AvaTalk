@@ -114,8 +114,19 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture`} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
-            <div className={`${theme}-ContactDetails-importIcon cursor-not-allowed opacity-50`}></div>
-            <div onClick={() => setShowEditContactModal(false)} className={`${theme}-ContactDetails-editIcon cursor-not-allowed opacity-50`}></div>
+            <div onClick={() => {
+                      const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact?.fullName + "\nTEL;TYPE=work,voice:" + contact?.phone+ "\nEMAIL:" + contact?.email+ "\nEND:VCARD";
+                      const blob = new Blob([vcard], { type: "text/vcard" });
+                      const url = URL.createObjectURL(blob);
+
+                      const newLink = document.createElement('a');
+                      newLink.download = contact?.fullName + ".vcf";
+                      newLink.textContent = contact?.fullName+"";
+                      newLink.href = url;
+                      newLink.click();              
+                      // onClose()                  
+            }} className={`${theme}-ContactDetails-importIcon `}></div>
+            <div onClick={() => setShowEditContactModal(true)} className={`${theme}-ContactDetails-editIcon`}></div>
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
