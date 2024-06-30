@@ -22,9 +22,13 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           </p>
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer`}>
-          <p className={`${theme}-AnalyticsSummary-text`}>Save Contact</p>
-          <p className={`${theme}-AnalyticsSummary-number`}>{data.length>0? data.filter((el) =>el.name== 'Save Contact')[0].value : 0}</p>
+          <p className={`${theme}-AnalyticsSummary-text`}>AR Usage</p>
+          <p className={`${theme}-AnalyticsSummary-number`}>{0}</p>
         </div>
+        <div className={`${theme}-AnalyticsSummary-cardContainer`}>
+          <p className={`${theme}-AnalyticsSummary-text`}>Chat Count</p>
+          <p className={`${theme}-AnalyticsSummary-number`}>{0}</p>
+        </div>        
       </div>
       <div className={`${theme}-AnalyticsSummary-rowContainer`}>
         <div className={`${theme}-AnalyticsSummary-cardContainer`}>
@@ -32,9 +36,13 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           <p className={`${theme}-AnalyticsSummary-number`}>{data.length>0? data.filter((el) =>el.name== 'CTR')[0].value :'0%'}</p>
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer`}>
-          <p className={`${theme}-AnalyticsSummary-text`}>Exchange Contact</p>
-          <p className={`${theme}-AnalyticsSummary-number`}>{data.length>0? data.filter((el) =>el.name== 'Exchange Contact')[0].value :'0%'}</p>
+          <p className={`${theme}-AnalyticsSummary-text`}>Link Click</p>
+          <p className={`${theme}-AnalyticsSummary-number`}>{'0'}</p>
         </div>
+        <div className={`${theme}-AnalyticsSummary-cardContainer`}>
+          <p className={`${theme}-AnalyticsSummary-text`}>File Click</p>
+          <p className={`${theme}-AnalyticsSummary-number`}>{'0'}</p>
+        </div>        
       </div>
     </div>
   );

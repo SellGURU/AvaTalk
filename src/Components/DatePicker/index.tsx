@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Litepicker from "../../Litepicker";
-import { Button } from "symphony-ui";
+// import { Button } from "symphony-ui";
 
 const DatePicker = (props:any) => {
   // const startDate = new Date()
@@ -12,15 +12,18 @@ const DatePicker = (props:any) => {
 
   return (
     <div className="flex mt-4 space-x-3  items-center ">
-      <div className=" h-[44px] flex justify-between rounded-[21px] w-4/6 borderBox-GrayBox boxShadow-Gray ">
+      <div onClick={() => {
+        document.getElementById("dataPicker")?.click()
+       }} className=" h-[44px] flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray ">
         <div className="h-full flex items-center justify-between w-full px-2">
-       <div className=" flex justify-start items-center">
+       <div  className=" flex justify-start items-center">
           <div className={`Carbon-Profile-EditProfileBtnVector6  px-3 Carbon-Footer-Vectors
                           text-[#8290a3] w-6 h-6 ms-2
                           `}></div>
             {/* <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" /> */}
             <Litepicker
-              className="text-gray-700 text-sm w-40 pl-1 bg-inherit cursor-pointer"
+              id="dataPicker"
+              className="text-gray-700 text-sm w-full pl-1 bg-inherit cursor-pointer"
               value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}
               onChange={(value) => {
                 console.log(value)
@@ -51,14 +54,14 @@ const DatePicker = (props:any) => {
         </div>
 
       </div>
-      <div className=" w-2/6">
+      {/* <div className=" w-2/6">
         <Button theme="Carbon">
           <div className="space-x-1 flex items-center">
             <img src="../../../Carbon/export.svg" alt="" />
             <p>Export</p>
           </div>
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

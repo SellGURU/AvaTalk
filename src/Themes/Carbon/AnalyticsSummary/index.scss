@@ -9,7 +9,7 @@
   @apply  rounded-[24px] w-full h-[97px] borderBox-Gray boxShadow-Gray;
 }
 .Carbon-AnalyticsSummary-text {
-  @apply leading-[21px] text-[14px] font-[600] text-gray-700 pt-[13px] pl-3 md:pl-6 whitespace-nowrap  pb-2;
+  @apply leading-[21px] text-center text-[14px] font-[600] text-gray-700 pt-[13px]  whitespace-nowrap  pb-2;
 }
 .Carbon-AnalyticsSummary-number {
   @apply leading-[36px] text-[24px] font-[600]  flex justify-center text-primary-color/80;
