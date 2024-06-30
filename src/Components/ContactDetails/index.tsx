@@ -27,7 +27,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       Auth.getContactDetails(contactId, (contactDetails) => {
         const newContact:Contact = {
           id:contactId,
-          address :contactDetails.address,
+          address :contactDetails.Address,
           company:contactDetails.company,
           email:contactDetails.email,
           fullName:contactDetails.full_name,
