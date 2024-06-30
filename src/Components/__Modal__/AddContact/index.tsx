@@ -70,6 +70,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
         email: formData.email as string,
         phone: formData.phone as string,
         company: formData.company as string,
+        address:formData.address,
         job_title: formData.job as string,
         note: formData.note as string,
         tag:selectedTags.map(el => el.id)
@@ -171,7 +172,7 @@ const AddContact: React.FC<AddContactProps> = ({ isOpen, allTags,theme, onClose,
           <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode} />
         </div> */}
         <div className="mt-4">
-            <TextArea inValid="" placeholder="Enter your address ..." textAreaHeight="136px" name="address " value={formData.address} onBlur={() => {}} label="Address " theme="Carbon" onChange={handleInputChange} />          
+            <TextArea inValid="" placeholder="Enter your address ..." textAreaHeight="136px" name="address" value={formData.address} onBlur={() => {}} label="Address " theme="Carbon" onChange={handleInputChange} />          
         </div>
         <div className="mt-4">
           <TextField

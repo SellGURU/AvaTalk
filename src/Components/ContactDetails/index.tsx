@@ -27,7 +27,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       Auth.getContactDetails(contactId, (contactDetails) => {
         const newContact:Contact = {
           id:contactId,
-          address :'',
+          address :contactDetails.address,
           company:contactDetails.company,
           email:contactDetails.email,
           fullName:contactDetails.full_name,
@@ -193,17 +193,17 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.email}</p>
             </div>
           :undefined}
-
-          {showMore && (
-            <>
-            {contact?.location ?
+            {contact?.address ?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-locationIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.location}</p>
+                <p className={`${theme}-ContactDetails-textItem`}>{contact?.address}</p>
               </div>
             :undefined}
+          {showMore && (
+            <>
+
             {contact?.company?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
