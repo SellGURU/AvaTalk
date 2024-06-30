@@ -164,9 +164,9 @@ const sendToApi = (
   };
   setChats([...chats, newChat]);
   chats.push(newChat);
-  console.log(window.location.href.includes('?user='))
+  // console.log(window.location.href.includes('?user='))
   let chatUser = aiChats.length > 0 ? aiChats[aiChats.length - 1].chat_user : undefined
-  if(!window.location.href.includes('?user=')){
+  if(!window.location.href.includes("/A/")){
     chatUser =userId
   }
   // console.dir(BLokedIdList.current)
