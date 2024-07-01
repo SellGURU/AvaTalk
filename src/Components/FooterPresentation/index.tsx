@@ -9,9 +9,10 @@ interface FooterPresentationProps {
   langCode:string
   isLoading: boolean
   isRecording:boolean
+  setShowSuggestions?:(action:boolean) => void
   setIsRecording:(record:boolean) => void
 }
-const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme ,langCode, onSendVector,isLoading,isRecording,setIsRecording}) => {
+const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme,setShowSuggestions ,langCode, onSendVector,isLoading,isRecording,setIsRecording}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [resolvedText,setResolvedText] = useState('');
   useEffect(() => {
@@ -38,7 +39,9 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme ,langCode
   };
   const handleKeyPress = (event: any) => {
       // setIsTalking(false)
-   
+      if(setShowSuggestions){
+        setShowSuggestions(false)
+      }
       if (event.key === "Enter" && inputValue.length > 0 && !isLoading) {
           setInputValue('') 
           const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement

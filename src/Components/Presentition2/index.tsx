@@ -153,7 +153,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
             {
             isLoading ?
                 <>
-                <div className="  w-full px-4 flex justify-between items-center h-10 borderBox-Gray2 bg-slate-100 ">
+                <div className="  w-full px-4 flex justify-between items-center rounded-full h-10 borderBox-Gray2 bg-slate-100 ">
                     <BeatLoader size={10} color="#702CDA" />
                     <div className="cursor-pointer" onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
                 </div>
@@ -164,7 +164,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
             </>
         }
         </div> 
-        <FooterPresentation langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
+        <FooterPresentation setShowSuggestions={setShowSuggestions} langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
         </>
     )
 }
