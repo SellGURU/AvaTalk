@@ -84,7 +84,7 @@ const SettingService =() => {
                         )
                     })}
                     <div className="mt-8 mb-4">
-                        <button className="Carbon-Button-container">Continue to payment</button>
+                        <button className="Carbon-Button-container">Continue to Payment</button>
                     </div>
                 </div>
             </div>
