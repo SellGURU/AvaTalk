@@ -94,7 +94,7 @@ const EditAiSetting = () => {
               }}>female</div>
             </Select>          
           </div>
-          <div className="flex justify-between items-center mt-10 px-6 ">
+          {/* <div className="flex justify-between items-center mt-10 px-6 ">
                 <div className="flex gap-2 items-center">
                   Additional Settings
                   <div className="bg-primary-color text-white py-1 px-4 text-sm rounded-full">Pro</div>
@@ -106,7 +106,7 @@ const EditAiSetting = () => {
                         </div>
                     </div>
                 </div>
-          </div>          
+          </div>           */}
           <div className="px-6 mt-10">
             <Button onClick={() => {
               Auth.updateAiSetting({

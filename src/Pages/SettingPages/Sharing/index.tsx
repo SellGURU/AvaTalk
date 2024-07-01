@@ -103,7 +103,7 @@ const SettingSharing =() => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-between items-center ">
+                        {/* <div className="flex justify-between items-center ">
                             <div className="flex gap-2 items-center">
                                 Additional Settings
                                 <p className="flex justify-center items-center text-white leading-[20px] text-[12px] font-[400] bg-primary-color border border-white w-[47px] rounded-[47px] h-5 ">Pro</p>
@@ -118,7 +118,7 @@ const SettingSharing =() => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
