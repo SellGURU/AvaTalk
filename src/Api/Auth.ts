@@ -163,8 +163,8 @@ class Auth extends Api {
     // })
   }
 
-  static editContact(_contactId: string, data: Partial<Contact>, submit: (res: any) => void) {
-    const endpoint = "/contactDetails";
+  static editContact(_contactId: string, data: Partial<any>, submit: (res: any) => void) {
+    const endpoint = "/update_contact";
     this.post(endpoint, data).then((res) => submit(res));
   }
 

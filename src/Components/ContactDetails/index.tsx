@@ -19,6 +19,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const [showEditContactModal, setShowEditContactModal] = useState(false);
   const [showDeleteContactModal, setShowDeleteContactModal] = useState(false);
   const { contactId } = useParams();
+  const [tags, setTags] = useState<Tag[]>([]);
   const navigate = useNavigate()
 
   useConstructor(() => {
@@ -54,33 +55,48 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         setIsLoading(false);
       });
     }
+    Contacts.showTags((resolveTags) => {
+      setTags(resolveTags.map((el) => {
+        const newTag:Tag = {
+          name:el.title,
+          color:el.color,
+          contacts:el.count,
+          id:el.created_tag_id
+        }
+        return newTag
+      }))
+    })    
   });
 
   const handleEditContact = (updatedContactData: Contact) => {
     setContact(updatedContactData);
     // console.log(updatedContactData);
+    console.log(updatedContactData.tags)
     if (contactId) {
       Auth.editContact(
         contactId,
         {
-          fullName: updatedContactData.fullName,
+          full_name:updatedContactData.fullName,
           email: updatedContactData.email,
-          photo: updatedContactData.photo,
-          address:updatedContactData.address,
-          tags: updatedContactData.tags,
-          isExchange: updatedContactData.isExchange,
           phone: updatedContactData.phone,
-          location: updatedContactData.location,
-          mapLocation: updatedContactData.mapLocation,
+          address: updatedContactData.address,
           company: updatedContactData.company,
+          job_title: updatedContactData.job,
           note: updatedContactData.note,
-          addDate: updatedContactData.addDate,
-          job: updatedContactData.job,
+          tags: updatedContactData.tags,
+          profile_pic:updatedContactData.photo,
+          state:true,
+          created_contact_id:contactId
         },
         (res) => {
           console.log(res);
         }
       );
+      // const contact2 = contact
+      // if(contact2){
+      //   contact2.tags = updatedContactData.tags
+      // }
+      // setContact(contact2)
     }
     setShowEditContactModal(false);
   };
@@ -171,7 +187,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               )
             })}
           </div>}          
-          <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button>
+          {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
         <div className={`${theme}-ContactDetails-container4 min-w-64`}>
           {contact?.phone ?
@@ -238,7 +254,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         </div>
       </div>
       <AddContact
-        allTags={[]}
+        allTags={tags}
         mode="edit"
         onEditContact={handleEditContact}
         contactData={contact}
