@@ -12,6 +12,7 @@ interface DataProps {
   entry_time:string;
   response:string;
   date_group:string; 
+  title:string;
 }
 const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
   const lastDateRender: Array<string> = [];

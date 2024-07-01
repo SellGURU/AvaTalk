@@ -6,6 +6,7 @@ interface DataProps {
   entry_date: string;
   entry_time:string;
   response:string;
+  title:string;
   date_group:string; 
 }
 
@@ -20,7 +21,7 @@ const ChatItem = ({data, theme,visibleDate}: { data: DataProps; theme: string | 
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
           <div className={`${theme}-ChatItem-innerCard `}>
-            <p className={`${theme}-ChatItem-name`}>{data.chat_list_id.substring(0,22)+' ...'}</p>
+            <p className={`${theme}-ChatItem-name`}>{data.title?data.title: data.chat_list_id.substring(0,22)+' ...'}</p>
             <div className={`${theme}-ChatItem-iconContainer `}>
               <div>{data.entry_time.substring(0,5)}</div>
               <div className={`${theme}-ChatItem-Vector`}></div>
