@@ -23,7 +23,7 @@ const DatePicker = (props:any) => {
             {/* <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" /> */}
             <Litepicker
               id="dataPicker"
-              className="text-gray-700 text-sm w-full pl-1 bg-inherit cursor-pointer"
+              className="text-gray-700 text-sm lg:min-w-[230px] w-full pl-1 bg-inherit cursor-pointer"
               value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}
               onChange={(value) => {
                 console.log(value)
