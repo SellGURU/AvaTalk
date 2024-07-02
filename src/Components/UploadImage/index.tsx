@@ -95,7 +95,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                                   color:'#0F0F0F',
                                   fontWeight:'500'
                                 }}>
-                                    <span style={{color:'#00B5FB',cursor:'pointer'}}>Browse</span> 
+                                    <span style={{color:'#00B5FB',cursor:'pointer'}}>Choose File</span> 
                                 </div>
                                 <div className={`${theme}-ImageUploader-uploader-suportText-container`}>
                                     <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: {accept}</div>
