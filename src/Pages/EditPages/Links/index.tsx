@@ -10,10 +10,11 @@ import { AddLink, Confirm } from "../../../Components/__Modal__";
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
+const regex = /^.*Test.*$/
 
 const validationSchema = Yup.object().shape({
     title:Yup.string().required(),
-    url:Yup.string()
+    url:Yup.string().matches((regex))
 });
 
 const EditLinks = () => {
