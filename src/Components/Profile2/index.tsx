@@ -568,7 +568,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <p className="text-sm	text-[#8290a3]">You haven't added any info yet.</p>
                 </>
               )}
-              {mode != 'profile'
+              {mode != 'profile' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length > 0
               ?
               <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
                   <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
