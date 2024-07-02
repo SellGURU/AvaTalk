@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react"
-import { Cropper } from "react-cropper"
+// import { Cropper } from "react-cropper"
+import { CropperRef, Cropper } from 'react-advanced-cropper';
+import 'react-advanced-cropper/dist/style.css'
+
 import { Button } from "symphony-ui"
 
 interface CropperBoxProps {
@@ -11,26 +14,35 @@ interface CropperBoxProps {
 
 const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
     const [cropper,setCropper] = useState<any>()
-    const getCropData = async () => {
-        if (cropper) {
-            const file = await fetch(cropper.getCroppedCanvas().toDataURL())
-                .then((res) => res.blob())
-                .then((blob) => {
-                return new File([blob], "newAvatar.png", { type: "image/png" });
-                });
-            if (file) {
-                console.log(file)
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => {
-                    onResolve(reader.result)
-                };                
-            }
+    // const getCropData = async () => {
+    //     if (cropper) {
+    //         const file = await fetch(cropper.getCroppedCanvas().toDataURL())
+    //             .then((res) => res.blob())
+    //             .then((blob) => {
+    //             return new File([blob], "newAvatar.png", { type: "image/png" });
+    //             });
+    //         if (file) {
+    //             console.log(file)
+    //             const reader = new FileReader();
+    //             reader.readAsDataURL(file);
+    //             reader.onload = () => {
+    //                 onResolve(reader.result)
+    //             };                
+    //         }
+    //     }
+    // };    
+    const getData2 = () => {
+        if(cropper){
+            onResolve(cropper)
         }
-    };    
+    }
     const cancel =() => {
         onCancel()
     }
+	const onChange = (cropper: CropperRef) => {
+		// console.log(cropper.getCanvas()?.toDataURL());
+        setCropper(cropper.getCanvas()?.toDataURL())
+	};    
     return (
         <>
         {
@@ -39,7 +51,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                     <div className="absolute w-full top-0 left-0 h-screen z-[22] bg-black opacity-[0.9]"></div>     
                     <div className='absolute w-full top-0 left-0 h-full flex z-30 justify-center items-center'>
                         <div>
-                            <Cropper
+                            {/* <Cropper
                             // autoCropArea={80}
                             src={url}
                             aspectRatio={1.5}
@@ -48,10 +60,23 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 console.log(instance)
                                 setCropper(instance);
                             }}
-                            />
+                            /> */}
+                            <Cropper
+                                src={url}
+                                onChange={onChange}
+                                // stencilComponent={{
+                                //     aspectRatio: 1/1,
+                                //     movable: false,
+                                //     resizable: false                                    
+                                // }}
+                                stencilProps={{
+                                    aspectRatio: 2/1,
+                                }}
+                                style={{ height: 400, width: 400 }}
+                            />                            
                             <div className="mt-2 flex gap-8 px-4">
                                 <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>Cancel</Button> 
-                                <Button onClick={getCropData} theme="Carbon-Crop">Crop</Button> 
+                                <Button onClick={getData2} theme="Carbon-Crop">Crop</Button> 
                             </div>
 
                         </div>
