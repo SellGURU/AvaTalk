@@ -11,8 +11,8 @@ import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 
 const validationSchema = Yup.object().shape({
-  job:Yup.string(),
-  company:Yup.string(),
+  job:Yup.string().max(15),
+  company:Yup.string().max(15),
 });
 
 const EditContactInfo = () => {
@@ -162,7 +162,7 @@ const EditContactInfo = () => {
           ></TextField>
         </div>
         <div className="px-6 mt-10">
-          <Button onClick={submit} theme="Carbon">Save Change</Button>
+          <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">Save Change</Button>
         </div>
       </div>
     </>

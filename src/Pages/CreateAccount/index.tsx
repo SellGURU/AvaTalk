@@ -709,6 +709,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
           </div> */}
           <div className="mt-8">
             <Button
+              disabled={formik.values.CompanyName.length > 15 || formik.values.JobTitle.length> 15 }
               onClick={() => {
                 setStep(3);
               }}
