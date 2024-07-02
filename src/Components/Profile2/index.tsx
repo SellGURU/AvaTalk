@@ -439,8 +439,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               }  
                         
             </div>
-            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[398px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
-              <div className="h-[261px] relative overflow-y-hidden">
+            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[370px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
+              <div className="h-[300px] relative overflow-y-hidden">
 
                 <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
                     <source id="videoPlayer3"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
@@ -509,7 +509,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
               :
               <>
-                    <div className={`flex items-center mt-4  justify-around ${window.innerWidth>=500?'px-4':'px-2'}`}>
+                    <div className={`flex items-center mt-0  justify-around ${window.innerWidth>=500?'px-4':'px-2'}`}>
                       <div className="w-[75%] max-w-[85%] flex items-center justify-between">
                         <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
                           setPanel(el as any)
