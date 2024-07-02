@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "..";
 import { Tooltip } from 'react-tooltip'
 
@@ -9,7 +10,10 @@ class Link {
     public resolveRender(theme:string) {
         return (
             <>
-            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() => window.open(this.url)} className={`${theme}-Profile-BackgroundVectors`}>
+            <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() =>{
+ 
+            window.open(this.url)
+            }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     <div className={`${theme}-ContentCard-GlobalVector`}></div>
                 </div>

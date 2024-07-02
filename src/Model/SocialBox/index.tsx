@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSX } from "react/jsx-runtime"
 import Box from "../Boxs"
+import { Auth } from "../../Api"
 
 type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube' | 'Telegram'
 
@@ -33,9 +35,14 @@ class Social {
         return ''
     }
 
-    public resolveRender(theme:string) {
+    public resolveRender(theme:string,userID:string) {
         return (
             <div onClick={() => {
+                Auth.addEvent({
+                event_type:"link_click",
+                userid:userID,
+                sub_event_category:'view_link'
+                })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div>
@@ -72,7 +79,7 @@ class SocialBox extends Box{
             return true
         }
     }    
-    public resolveRender(theme: string,mode?:string): JSX.Element {
+    public resolveRender(theme: string,mode?:string,options?:any): JSX.Element {
         return (
             <>
                 {
@@ -82,7 +89,7 @@ class SocialBox extends Box{
                                 const newSocal = Object.assign(new Social('Facebook',''),item)
                                 return (
                                     <>
-                                        {newSocal.resolveRender(theme)}
+                                        {newSocal.resolveRender(theme,options.userId)}
                                     </>
                                 )
                             })}

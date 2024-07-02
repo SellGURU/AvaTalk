@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 
@@ -48,7 +49,7 @@ class Box {
         return true
     }
 
-    public resolveRender(theme:string,mode?:string) {
+    public resolveRender(theme:string,mode?:string,_options?:any) {
         return (
             <>
                 <div className={theme} data-mode={mode}></div>

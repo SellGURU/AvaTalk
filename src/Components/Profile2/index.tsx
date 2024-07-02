@@ -517,6 +517,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       </div>
                       <div className={`${theme}-Profile-Box`}>
                         <Button onClick={() => {
+                          Auth.addEvent({
+                            event_type:"ar_usage",
+                            userid:shareUser.information?.userId as string,
+                            sub_event_category:'view_link'
+                          })
                           window.open('https://ar.avatalk.me/#detect5/?user='+shareUser.information?.userId+'&view='+mode)
                         }} theme='Carbon-back'>
                           <div className={`${theme}-Profile-BoxVector`}></div>

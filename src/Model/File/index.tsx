@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
 import { Link } from "react-router-dom";
+import { Auth } from "../../Api";
 // interface File {
 //     name:string
 //     url:string
@@ -32,10 +35,16 @@ export class File {
                 return 'PhotoShopVector'
         }
     }
-    public resolveRender(theme:string) {
+    public resolveRender(theme:string,userID:string) {
         return (
             <>
-            <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
+            <Link onClick={() => {
+             Auth.addEvent({
+                event_type:"file_click ",
+                userid:userID,
+                sub_event_category:'view_link'
+            })                  
+            }} to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
                 </div>
@@ -74,7 +83,7 @@ class FileBox extends Box{
             return true
         }
     }    
-    public resolveRender(theme: string,mode?:string): JSX.Element {
+    public resolveRender(theme: string,mode?:string,options?:any): JSX.Element {
         return (
             <div className={`${theme}-Profile-Vectors justify-start relative`}>
                 {this.contents.length > 0 ?
@@ -84,7 +93,7 @@ class FileBox extends Box{
                                 const newSocal = Object.assign(new File('file','',''),item)
                                 return (
                                     <>
-                                        {newSocal.resolveRender(theme)}
+                                        {newSocal.resolveRender(theme,options.userId)}
                                     </>
                                 )
                             })}
