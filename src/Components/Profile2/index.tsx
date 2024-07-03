@@ -439,7 +439,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               }  
                         
             </div>
-            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2' :'profileAimation2-backward'}  h-[370px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
+            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2-mobile md:profileAimation2:' :'profileAimation2-backward-mobile md:profileAimation2-backward'} h-[320px] md:h-[370px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
               <div className="h-[300px] relative overflow-y-hidden">
 
                 <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
