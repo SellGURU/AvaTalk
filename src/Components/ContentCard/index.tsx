@@ -31,7 +31,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   const [showConfirm,setShowConfirm] = useState(false)
   return (
     <>
-    <li draggable onClick={() => {
+    <li  onClick={() => {
       if(mod == 'share'){
         Auth.addEvent({
           userid:userId as string,
@@ -58,13 +58,13 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
                 {item.getTitle()}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
-              <div onClick={() => {
+              {/* <div onClick={() => {
                 // if(os == 'desctop'){
-                  setActiveDrag(!activeDrag)
+                  // setActiveDrag(!activeDrag)
                 // }                
               }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
-              </div>
+              </div> */}
               <div onClick={() => {
                 setShowConfirm(true)
                 // auth.currentUser.removeBox(item)
