@@ -34,7 +34,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
       <div className={`${theme}-AnalyticsSummary-rowContainer`}>
         <div className={`${theme}-AnalyticsSummary-cardContainer`}>
           <p className={`${theme}-AnalyticsSummary-text`}>CTR</p>
-          <div className="text-[12px] mt-[-8px] w-full text-center">(Click-Through Rate)</div>
+          <div className="text-[10px] md:text-[12px] mt-[-8px] w-full text-center">(Click-Through Rate)</div>
           <p className={`${theme}-AnalyticsSummary-number`}>{data.length> 0?data.filter(el => el.name == 'CTR')[0].value:'0%'}</p>
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer`}>
