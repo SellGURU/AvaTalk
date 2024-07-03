@@ -22,11 +22,19 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "profile" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div
-          className={`${theme}-Footer-Vectors ${theme}-Footer-UserVector ${
-            activeItem === "profile" ? `${theme}-Footer-ActiveVectors` : ""
-          }`}
-        ></div>
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className={`${theme}-Footer-Vectors ${theme}-Footer-UserVector ${
+              activeItem === "profile" ? `${theme}-Footer-ActiveVectors` : ""
+            }`}
+          >
+
+          </div>
+          {activeItem!= 'profile'?
+            <div className={`${theme}-Footer-Text`}>Profile</div>
+          :
+          undefined}
+        </div>
       </div>
       <div
         onClick={() => handleItemClick("contacts")}
@@ -34,11 +42,18 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "contacts" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div
-          className={`${theme}-Footer-Vectors ${theme}-Footer-BookVector ${
-            activeItem === "contacts" ? `${theme}-Footer-ActiveVectors` : ""
-          }`}
-        ></div>
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className={`${theme}-Footer-Vectors ${theme}-Footer-BookVector ${
+              activeItem === "contacts" ? `${theme}-Footer-ActiveVectors` : ""
+            }`}
+          ></div>
+          {activeItem!= 'contacts'?
+            <div className={`${theme}-Footer-Text`}>Contact</div>
+          :
+          undefined}
+
+        </div>
       </div>
       <div
         onClick={() => handleItemClick("chats")}
@@ -46,11 +61,17 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "chats" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div
-          className={`${theme}-Footer-Vectors ${theme}-Footer-ChatVector ${
-            activeItem === "chats" ? `${theme}-Footer-ActiveVectors` : ""
-          }`}
-        ></div>
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className={`${theme}-Footer-Vectors ${theme}-Footer-ChatVector ${
+              activeItem === "chats" ? `${theme}-Footer-ActiveVectors` : ""
+            }`}
+          ></div>
+            {activeItem!= 'chats'?
+              <div className={`${theme}-Footer-Text`}>Chats</div>
+            :
+            undefined}        
+        </div>
       </div>
       <div
         onClick={() => handleItemClick("status")}
@@ -58,11 +79,17 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "status" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div
-          className={`${theme}-Footer-Vectors ${theme}-Footer-StatusVector ${
-            activeItem === "status" ? `${theme}-Footer-ActiveVectors` : ""
-          }`}
-        ></div>
+         <div className="flex flex-col justify-center items-center">
+          <div
+            className={`${theme}-Footer-Vectors ${theme}-Footer-StatusVector ${
+              activeItem === "status" ? `${theme}-Footer-ActiveVectors` : ""
+            }`}
+          ></div>
+              {activeItem!= 'status'?
+                <div className={`${theme}-Footer-Text`}>Analysis</div>
+              :
+              undefined}           
+         </div>
       </div>
       <div
         onClick={() => handleItemClick("settings")}
@@ -70,11 +97,18 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "settings" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div
-          className={`${theme}-Footer-Vectors ${theme}-Footer-SettingVector ${
-            activeItem === "settings" ? `${theme}-Footer-ActiveVectors` : ""
-          }`}
-        ></div>
+        <div className="flex flex-col justify-center items-center">
+          <div
+            className={`${theme}-Footer-Vectors ${theme}-Footer-SettingVector ${
+              activeItem === "settings" ? `${theme}-Footer-ActiveVectors` : ""
+            }`}
+          ></div>
+            {activeItem!= 'settings'?
+              <div className={`${theme}-Footer-Text`}>Setting</div>
+            :
+            undefined}            
+
+        </div>
       </div>
     </div>
   );
