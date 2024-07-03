@@ -291,7 +291,7 @@ const EditAvater: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-[160px] h-[103px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <div className="w-[160px] h-[80px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                     <video
                       id="dragAbleAi"
                       playsInline
