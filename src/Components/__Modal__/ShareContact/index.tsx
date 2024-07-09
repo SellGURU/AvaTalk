@@ -157,7 +157,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
 
                         link.href = data;
                         link.download = 'downloaded-image.jpg';
-
+                        Auth.addEvent({event_type:'share_link','sub_event_category':'qr_code','userid':authContext.currentUser.information?.userId as string})
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);                        
@@ -261,6 +261,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                             last_name:formik2.values.lastName,
                             recipient:formik2.values.phone
                         })
+                        Auth.addEvent({event_type:'share_link','sub_event_category':'sms','userid':authContext.currentUser.information?.userId as string})
                         onClose()
                         }} theme="Carbon">Share Contact</Button>
                 </div>
@@ -335,6 +336,7 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                             type:'email',
                             email:formik.values.email
                         })
+                        Auth.addEvent({event_type:'share_link','sub_event_category':'email','userid':authContext.currentUser.information?.userId as string})                        
                         onClose()
                         }} theme='Carbon'>Share Contact</Button>
                 </div>
