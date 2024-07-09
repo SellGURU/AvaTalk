@@ -9,7 +9,7 @@ import { Chat, ContactsView, Profile2 } from "../Components";
 import { EditAiSetting, EditAvater,EditAvailability, EditContactInfo, EditFile, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
-import { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
+import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
 
 const route = createHashRouter([
   {
@@ -133,6 +133,10 @@ const route = createHashRouter([
             path: "support",
             element: <SettingSupport></SettingSupport>,
           },
+          {
+            path: "refer",
+            element: <ReferYourFriends></ReferYourFriends>,
+          },          
         ],
         // children:[
         //   {

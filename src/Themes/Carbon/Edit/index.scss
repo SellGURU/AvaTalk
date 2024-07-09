@@ -5,3 +5,21 @@
 .Carbon-Edit-title {
     @apply text-gray-700 leading-[24px] text-[16px] font-[600] 
 }
+
+.Carbon-Edit-shareIcon{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url(/Carbon/share3.svg);    
+    @apply w-[18px] h-5 bg-white;    
+}
+
+.Carbon-Edit-copyIcon{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url(/Carbon/document-copy.svg);    
+    @apply w-[18px] h-5 bg-primary-color;    
+}

@@ -6,4 +6,6 @@ import SettingService from "./Service";
 import SettingSharing from "./Sharing";
 import SettingSupport from "./Support";
 import SettingTermsService from "./TermsService";
-export { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService };
+import ReferYourFriends from "./ReferYourFriends";
+
+export { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService,ReferYourFriends };

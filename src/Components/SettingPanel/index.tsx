@@ -32,7 +32,11 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       icon: "service.svg",
       link: "service",
     },
-
+    {
+      name: "Refer Your Friends",
+      icon: "profile-add.svg",
+      link: "refer",
+    },
     {
       name: "Privacy Policy",
       icon: "policy.svg",
