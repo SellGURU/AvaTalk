@@ -39,9 +39,9 @@ class Social {
         return (
             <div onClick={() => {
                 Auth.addEvent({
-                event_type:"link_click",
+                event_type:"more_info",
                 userid:userID,
-                sub_event_category:'view_link'
+                sub_event_category:'more_info_socials'
                 })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>

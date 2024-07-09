@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "..";
 import AboutComponent from "./AboutComponet";
 
@@ -10,13 +11,13 @@ class AboutBox extends Box {
     public getBio() {
         return this.text
     }
-    public resolveRender(theme:string,mode?:string) {
+    public resolveRender(theme:string,mode?:string,options?:any) {
         return (
             <>
                 {this.text == '' ?
                     this.resolveAddRender(theme,mode)
                 :
-                    <AboutComponent text={this.text}></AboutComponent>
+                    <AboutComponent userID={options.userId} text={this.text}></AboutComponent>
                 }
             </>
         )

@@ -1,15 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react"
+import { Auth } from "../../Api"
 
 interface AboutComponentProps  {
     text:string,
+    userID:string
 }
 
-const AboutComponent:React.FC<AboutComponentProps> = ({text}) => {
+const AboutComponent:React.FC<AboutComponentProps> = ({text,userID}) => {
     const [isShowMore,setIsShowMore] =useState(false)
     return (
         <>
-            <h1>{text.length> 130?
+            <h1 onClick={() => {
+                Auth.addEvent({
+                    event_type:"more_info",
+                    userid:userID,
+                    sub_event_category:'more_info_about'
+                })                   
+            }}>{text.length> 130?
             <div>
                 {isShowMore?
                     <div >
