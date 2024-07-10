@@ -19,6 +19,8 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
       return 'rgba(133, 92, 248, 0.8)'
     }else  if(name == 'SMS'){
       return 'rgba(133, 92, 248, 0.4)'
+    }else  if(name == 'Email'){
+      return '#c8f7ab'
     }else {
       return '#e4bbfc'
     }
