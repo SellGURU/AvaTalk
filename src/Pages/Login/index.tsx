@@ -96,6 +96,7 @@ const Login = () => {
         emailOrPhone: formik.values.emailOrPhone,
         googleJson:{}
       })
+      authContext.setReferalCode(parametr.get("referral") as string)
       navigate('/Verification')
     })
   }
@@ -189,6 +190,7 @@ const Login = () => {
                             emailOrPhone: prof?.email,
                             googleJson:prof
                           })
+                          authContext.setReferalCode(parametr.get("referral") as string)
                           if(res.data == 'Not Registered'){
                              navigate("/register")
                           }else {

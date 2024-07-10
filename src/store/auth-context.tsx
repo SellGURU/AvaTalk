@@ -21,6 +21,8 @@ interface AuthContextProps {
   needReload:boolean
   googleInformation:any
   nfc_id:string | null
+  refrealCode:string| null
+  setReferalCode:(referal:string) => void
   setNfc_id:(id:string| null) => void
   setGoogleInformation:(info:any) => void
   setNeedReload:(action:boolean) => void;
@@ -37,6 +39,8 @@ export const AuthContext = createContext<AuthContextProps>({
     emailOrPhone:'',
     googleJson:{},
   },
+  refrealCode:'',
+  setReferalCode:() =>{},
   nfc_id:'',
   setNfc_id:() =>{},
   googleInformation:{},
@@ -57,6 +61,7 @@ export const AuthContext = createContext<AuthContextProps>({
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
   const localuser = localStorage.getItem('authUser')
+  const [referalCode,setReferalCode] = useState('')
   const [needReload,setNeedReload] = useState(false)
   reolveJsonToObject(localuser as string)
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
@@ -93,6 +98,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const contextValue: AuthContextProps = {
     token,
     isLoggedIn: !!token ,
+    refrealCode:referalCode,
+    setReferalCode:setReferalCode,
     varification:verification,
     currentUser: user,
     needReload:needReload,

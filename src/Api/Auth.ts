@@ -270,6 +270,11 @@ class Auth extends Api {
     const response = this.post('/show_contact_info',{})
     return response
   }
+
+  static getReferalNumber() {
+    const response = this.post('/referral_shownumber',{})
+    return response
+  }
 }
 
 export default Auth;

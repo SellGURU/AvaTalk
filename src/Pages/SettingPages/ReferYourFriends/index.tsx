@@ -2,10 +2,18 @@ import { Button } from "symphony-ui"
 import { BackIcon } from "../../../Components"
 import { useAuth } from "../../../hooks/useAuth"
 import { toast } from "react-toastify"
+import { useConstructor } from "../../../help"
+import { Auth } from "../../../Api"
+import { useState } from "react"
 
 const ReferYourFriends = () => {
     const application = useAuth()
-
+    const [referalValue,setReferalValue] = useState(0)
+    useConstructor(() => {
+        Auth.getReferalNumber().then(res => {
+            setReferalValue(res.data.count_referral_code)
+        })
+    })
     return (
         <>
            <div className=" w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
@@ -20,7 +28,7 @@ const ReferYourFriends = () => {
                     <div className="w-full relative h-[96px] overflow-hidden bg-[#0000001A] mt-4 rounded-[24px]">
                         <div className="w-full absolute top-0 left-0 z-10">
                             <div className="text-sm text-center font-medium mt-5 text-white">Total No. of Referral</div>
-                            <div className="text-[20px] text-center font-semibold mt-2 text-white">0</div>
+                            <div className="text-[20px] text-center font-semibold mt-2 text-white">{referalValue}</div>
                         </div>
                         <div className="w-full h-full absolute">
                             <img className="w-full" src="./icons/Image.png" alt="" />
@@ -45,7 +53,7 @@ const ReferYourFriends = () => {
                             </Button>
                             <Button onClick={() => {
                                 navigator.share({
-                                    url:"https://portal.avatalk.me/#/login?refer="+application.currentUser.information?.referral_code
+                                    url:"https://portal.avatalk.me/#/login?referral="+application.currentUser.information?.referral_code
                                 })
                             }} theme="Carbon">
                                 <div className="flex w-full justify-center items-center">
