@@ -58,7 +58,7 @@ interface AccountInfo {
 }
 
 interface AddEvent {
-  event_type: 'page_view' | 'add_contact' |'link_click'|'file_click '| 'exchange_contact' | 'more_info' |'share_link'|'ar_usage',
+  event_type: 'page_view'|'save_contact'| 'add_contact' |'link_click'|'file_click'| 'exchange_contact' | 'more_info' |'share_link'|'ar_usage',
   userid: string,
   sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
                       'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'|

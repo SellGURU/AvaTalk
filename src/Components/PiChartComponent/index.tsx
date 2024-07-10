@@ -17,8 +17,10 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
   const resolveColor = (name:string) => {
     if(name == 'QR Code') {
       return 'rgba(133, 92, 248, 0.8)'
-    }else {
+    }else  if(name == 'SMS'){
       return 'rgba(133, 92, 248, 0.4)'
+    }else {
+      return '#e4bbfc'
     }
   }
   // const initialData: DataItem[] = chartData.map(el => {

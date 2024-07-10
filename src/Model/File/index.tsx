@@ -40,7 +40,7 @@ export class File {
             <>
             <Link onClick={() => {
              Auth.addEvent({
-                event_type:"file_click ",
+                event_type:"file_click",
                 userid:userID,
                 sub_event_category:'view_link'
             })                  

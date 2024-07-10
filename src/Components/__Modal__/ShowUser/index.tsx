@@ -59,8 +59,8 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                       newLink.textContent = contact.name;
                       newLink.href = url;
                       Auth.addEvent({
-                        event_type:'add_contact',
-                        sub_event_category:'share_link',
+                        event_type:'save_contact',
+                        sub_event_category:'view_link',
                         userid:user.information?.userId as string
                       })
                       newLink.click();              
