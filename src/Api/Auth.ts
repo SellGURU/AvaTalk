@@ -275,6 +275,11 @@ class Auth extends Api {
     const response = this.post('/referral_shownumber',{})
     return response
   }
+
+  static googleWallet() {
+    const response = this.post('/generic_pass',{})
+    return response
+  }
 }
 
 export default Auth;

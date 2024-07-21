@@ -186,7 +186,10 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         Share Link
                     </div>
                     <div onClick={() => {
-                        window.open('https://wallet.google/')
+                        Auth.googleWallet().then(res => {
+                           window.open(res? res.data:'', '_blank');
+                        })
+                        // window.open('https://wallet.google/')
                     }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <img src="./icons/image 436.png" alt="" />
