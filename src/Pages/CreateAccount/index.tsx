@@ -54,7 +54,7 @@ const validateEmail = (value:string|undefined) =>{
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("Required"),
   LastName: Yup.string().required("Required"),
-  JobTitle: Yup.string(),
+  JobTitle: Yup.string().required("Required"),
   CompanyName: Yup.string(),
   email: Yup.string().required("Required").test('Invalid email address',(value) => {
     return validateEmail(value)
@@ -684,6 +684,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
               theme="Carbon"
               name="JobTitle"
               type="text"
+              required
               errorMessage={formik.errors.JobTitle}
               inValid={formik.errors.JobTitle && formik.touched?.JobTitle}
             ></TextField>
@@ -709,7 +710,7 @@ const LocationStep: React.FC<LocationStepProps> = ({ setStep, formik }) => {
           </div> */}
           <div className="mt-8">
             <Button
-              disabled={formik.values.CompanyName.length > 15 || formik.values.JobTitle.length> 15 }
+              disabled={formik.values.CompanyName.length > 15 || formik.values.JobTitle.length> 15 || formik.values.JobTitle.length == 0 }
               onClick={() => {
                 setStep(3);
               }}
