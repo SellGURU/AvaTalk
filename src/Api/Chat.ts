@@ -5,7 +5,7 @@ class Chat extends Api {
     public static async flow(data:any){
         // const response = this.flowMock(data)
         const response = await fetch(
-        'https://vercel-backend-one-roan.vercel.app/avatalk/flow',
+        'https://vercel-avatalk-six.vercel.app/avatalk/flow',
         {
             method: 'POST',
             mode: 'cors', // no-cors, *cors, same-origin
