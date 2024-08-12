@@ -9,6 +9,7 @@ import { Auth } from "../../Api"
 import { useAuth } from "../../hooks/useAuth"
 import { Box } from "../../Model"
 import { BeatLoader } from "react-spinners"
+import UserType from "../../Model/UserType"
 
 
 const Home2 = () => {
@@ -49,6 +50,7 @@ const Home2 = () => {
                 address:''
             })
             authContext.currentUser.setBox(resolveSocial)
+            authContext.currentUser.setTypeOfAccount(new UserType(data.type_of_account.type.capitalize(),data.type_of_account.register_date))
 
         })        
     }

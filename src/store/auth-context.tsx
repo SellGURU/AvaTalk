@@ -7,6 +7,7 @@ import {removeTokenFromLocalStorage, storeTokenInLocalStorage } from "../Storage
 import {User} from "../Model";
 import { reolveJsonToObject } from "../help";
 import { Auth } from "../Api";
+import UserType from "../Model/UserType";
 
 interface VerificationProps {
   emailOrPhone:string;
@@ -67,6 +68,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
   resolveUser.setBox(reolveJsonToObject(localuser as string))
+  resolveUser.setTypeOfAccount(new UserType('Free',new Date()))
   const [googleInformation,setGoogleInformation] = useState({})
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [nfc_id,setNfc_id] = useState<string|null>('')

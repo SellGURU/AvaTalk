@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui";
-import { BackIcon, Select, TextArea } from "../../../Components";
+import { AccessNotifManager, BackIcon, Select, TextArea } from "../../../Components";
 import { useFormik } from "formik";
 // import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
@@ -70,6 +70,10 @@ const EditAiSetting = () => {
               formik.setFieldValue("Description",event.target.value)
             }} value={formik.values.Description} theme="Carbon" textAreaHeight='100px'></TextArea>
           </div>                   */}
+          <div className="px-6">
+            <AccessNotifManager></AccessNotifManager>
+
+          </div>
           <div className="px-6 mt-4">
             <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>

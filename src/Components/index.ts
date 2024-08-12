@@ -36,7 +36,9 @@ import PiChartComponent from "./PiChartComponent";
 import BarChartComponent from "./BarChartComponent";
 import AnalyticsSummary from "./AnalyticsSummary";
 import DatePicker from "./DatePicker";
+import AccessNotifManager from "./AccessNotifManager";
 export {
+  AccessNotifManager,
   Profile2,
   Spinners,
   ContentCard,

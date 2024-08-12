@@ -5,6 +5,7 @@ import Box from "../Boxs";
 import AdvancedSettings from "./AdvancedSettings";
 import { Auth } from "../../Api";
 import { boxProvider } from "../../help";
+import UserType from "../UserType";
 
 interface Information {
     firstName:string;
@@ -68,6 +69,8 @@ class User {
     public boxs:Array<Box> =this.defaultBoxs.map((item:any) => {
         return boxProvider(item);
     })
+
+    public type_of_account : UserType = new UserType('Trial',new Date())
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
@@ -167,6 +170,9 @@ class User {
     }
     public resolveLink() {
         return '/#/A/'+this.information?.userId
+    }
+    public setTypeOfAccount(acount:UserType){
+        this.type_of_account = acount
     }
 } 
 export default User
