@@ -3,6 +3,7 @@ type UserTypes = 'Trial' | 'Free' | 'Pro'
 class UserType {
     protected type : UserTypes
     protected date : Date
+    protected nowDate: Date = new Date()
     constructor(type: UserTypes,date:Date){
         this.type = type
         this.date = date
@@ -14,12 +15,16 @@ class UserType {
 
     public getDayUsed() {
         const date = new Date(this.date)
-        return new Date(new Date().getTime() -date.getTime()).getDate()
+        return new Date(this.nowDate.getTime() -date.getTime()).getDate()
     }
 
-    getPercentDayUsed() {
+    public getPercentDayUsed() {
         const date = new Date(this.date)
-        return new Date(new Date().getTime() -date.getTime()).getDate() * 100 / 14
+        return new Date(this.nowDate.getTime() -date.getTime()).getDate() * 100 / 14
+    }
+
+    public nextDay() {
+        this.nowDate.setDate(this.nowDate.getDate() + 1);
     }
 }
 

@@ -37,6 +37,8 @@ import BarChartComponent from "./BarChartComponent";
 import AnalyticsSummary from "./AnalyticsSummary";
 import DatePicker from "./DatePicker";
 import AccessNotifManager from "./AccessNotifManager";
+import DeveloperTools from "./DeveloperTools";
+
 export {
   AccessNotifManager,
   Profile2,
@@ -76,5 +78,6 @@ export {
   BarChartComponent,
   AnalyticsSummary,
   DatePicker,
-  Profile
+  Profile,
+  DeveloperTools
 };

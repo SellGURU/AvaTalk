@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react"
 import { MenuType } from "../../Types"
-import {Splash ,Footer} from "../../Components"
+import {Splash ,Footer, DeveloperTools} from "../../Components"
 import { Outlet, useNavigate,useSearchParams } from "react-router-dom"
 import { boxProvider, resolveMenuFromRoute, resolveNavigation, useConstructor } from "../../help"
 import { publish, subscribe } from "../../utils/event"
@@ -19,6 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
+    const [showDeveloperTools,setShowDeveloperTools] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
@@ -84,6 +85,11 @@ const Home2 = () => {
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);
+    useEffect(() => {
+        if(window.innerWidth> 1300) {
+            setShowDeveloperTools(true)
+        }
+    })
     return (
         <>
             {showSplash ?
@@ -97,8 +103,17 @@ const Home2 = () => {
                         resolveNavigation(element,navigate)
                     }} theme="Carbon"/>
                 :
-                <div className="sticky h-0 bottom-0"></div>
+                <>
+                    <div className="sticky h-0 bottom-0"></div>
+                </>
                 }
+                {
+                    showDeveloperTools?
+                        <>
+                            <DeveloperTools></DeveloperTools>
+                        </>
+                    :undefined
+                }                
                 {isLoading ?
                 <>
                 <div className="absolute z-50 w-full h-full left-0 top-0 flex justify-center items-center">
