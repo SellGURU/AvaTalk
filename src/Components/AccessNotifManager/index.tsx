@@ -15,7 +15,12 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
             setTimeout(() => {
                 setShowNotif(true)
             }, 3000);
+        }
 
+        if(authContext.currentUser.type_of_account.getType() == 'Free' && !isSkipped){
+            setTimeout(() => {
+                setShowNotif(true)
+            }, 3000);            
         }
     })
     subscribe("nextPage",() => {
@@ -54,6 +59,38 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 `                
             }                                             
         }
+        if(authContext.currentUser.type_of_account.getType() == 'Free') {
+            if(page == 'AiSetting'){
+                return `
+                   Personalize your AI once for free, with a 2000 character limit on provided info. Want more customizations later? Upgrade to Pro for unlimited edits!      
+                `
+            }
+            if(page == 'GallerySetting'){
+                return `
+                    Showcase up to 5 images in your gallery. Need more? Upgrade to Pro and upload up to 50 images!       
+                `                
+            }
+            if(page == 'LinkSetting'){
+                return `
+                    Add up to 2 links to your profile. Upgrade to Pro for unlimited link sharing and boost your networking!
+                `                
+            }        
+            if(page == 'FileSetting'){
+                return `
+                    Upload your first file for free. Up to 10 MB. Need more space? Upgrade to Pro for 50 uploads up to 50MB!
+                `                
+            }  
+            if(page == 'AnalysePage'){
+                return `
+                    Discover powerful insights with Avatalk Pro! Get detailed analytics and reports to grow your influence.
+                `                
+            }   
+            if(page == 'ChatPage'){
+                return `
+                    Unlock full conversations with your Avatar by upgrading to Avatalk Pro. Enhance your networking experience!
+                `                
+            }                                             
+        }        
         return ''
     }
     return (
