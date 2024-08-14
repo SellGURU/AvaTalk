@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, PiChartComponent } from "..";
+import { AccessNotifManager, AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, PiChartComponent } from "..";
 import { Auth } from "../../Api";
 
 interface Props {
@@ -30,6 +30,10 @@ const Analytics: React.FC<Props> = ({ theme }) => {
   return (
     <div className={`${theme}-Analytics-container`}>
       <p className={`${theme}-Analytics-text`}>Analytics</p>
+      <div className="">
+        <AccessNotifManager page="AnalysePage"></AccessNotifManager>
+
+      </div>         
       <div className={`${theme}-Analytics-divider1`}>
         <DatePicker day={day} setDay={setDay} />
       </div>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
-import { BackIcon } from "../../../Components";
+import { AccessNotifManager, BackIcon } from "../../../Components";
 import ImageUploadr from "../../../Components/UploadImage";
 import { GalleryBox } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth";
@@ -41,7 +41,11 @@ const EditGallery = () => {
           <BackIcon title="Gallery" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
-          <div className="mt-24 px-6">
+          <div className="px-6 mt-24  mb-[24px]">
+            <AccessNotifManager page="GallerySetting"></AccessNotifManager>
+
+          </div>          
+          <div className="px-6">
             <TextField
               {...formik.getFieldProps("title")}
               errorMessage={formik.errors?.title}

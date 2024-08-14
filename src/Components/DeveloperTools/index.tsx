@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button } from "symphony-ui"
-import { useAuth } from "../../hooks/useAuth"
+import { TimeManegar } from "../../Model"
 import { publish } from "../../utils/event"
 
 interface DeveloperToolsInterface {
@@ -8,7 +8,6 @@ interface DeveloperToolsInterface {
 }
 
 const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
-    const context = useAuth()
     const [showMenu,setShowMenu] = useState(false)
     return (
         <>
@@ -25,8 +24,9 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
 
                     <div className="mt-3">
                         <div className="px-10">
+                            <div>time is : {TimeManegar.renderDate()}</div>
                             <Button onClick={() => {
-                                context.currentUser.type_of_account.nextDay()
+                                TimeManegar.nextDay()
                                 publish("nextPage",{})
                             }} theme="Carbon"> next day</Button>
 

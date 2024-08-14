@@ -1,5 +1,5 @@
 import { Button, TextField } from "symphony-ui";
-import { BackIcon} from "../../../Components";
+import { AccessNotifManager, BackIcon} from "../../../Components";
 import { createRef, useEffect, useState } from "react";
 import { LinkBox, Link } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth"
@@ -81,7 +81,11 @@ const EditLinks = () => {
           <BackIcon title="Links" theme="Carbon"></BackIcon>
         </div>        
         <div className="mt-[120px] hiddenScrollBar h-full">
-          <div className="mt-24 px-6">
+          <div className="px-6 mt-24  mb-[24px]">
+            <AccessNotifManager page="LinkSetting"></AccessNotifManager>
+
+          </div>              
+          <div className=" px-6">
             <TextField {...formik.getFieldProps("title")} inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)} theme="Carbon" label="Title" name="title"  type="text"  placeholder="Enter title..."></TextField>
           </div>
           {links.length == 0 ?

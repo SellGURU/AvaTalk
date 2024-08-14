@@ -2,11 +2,16 @@ import { useAuth } from "../../hooks/useAuth"
 import {useEffect, useState} from 'react';
 import { subscribe } from "../../utils/event";
 
-const AccessNotifManager = () => {
+interface AccessNotifManager{
+    page:string
+}
+
+const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
     const authContext = useAuth()
     const [showNotif,setShowNotif] = useState(false)
+    const [isSkipped,setIsSkipped] = useState(false)
     useEffect(() => {
-        if(authContext.currentUser.type_of_account.getType() == 'Trial'){
+        if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
             setTimeout(() => {
                 setShowNotif(true)
             }, 3000);
@@ -18,9 +23,36 @@ const AccessNotifManager = () => {
     })
     const resolveText = () => {      
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
-            return `
-                Enjoy full access to all settings during your trial for a limited time. Upgrade to Pro to keep this control forever!            
-            `
+            if(page == 'AiSetting'){
+                return `
+                    Enjoy full access to all settings during your trial for a limited time. Upgrade to Pro to keep this control forever!            
+                `
+            }
+            if(page == 'GallerySetting'){
+                return `
+                    You're enjoying unlimited image uploads now. Don't lose this—upgrade to Pro!        
+                `                
+            }
+            if(page == 'LinkSetting'){
+                return `
+                    Add all the links you need now., but post-trial, link options reduce. Keep your connectivity—upgrade to Pro!
+                `                
+            }        
+            if(page == 'FileSetting'){
+                return `
+                    Access to upload multiple files is just a trial perk! Go Pro to maintain this advantage.
+                `                
+            }  
+            if(page == 'AnalysePage'){
+                return `
+                    All metrics are visible now. Upgrade to Pro to retain and track your stats forever!
+                `                
+            }   
+            if(page == 'ChatPage'){
+                return `
+                    Unlimited chats are open now! Post-trial, chats will be limited unless you upgrade to Pro.
+                `                
+            }                                             
         }
         return ''
     }
@@ -46,7 +78,10 @@ const AccessNotifManager = () => {
                         }
                         <div className="flex w-full font-medium mt-2 gap-6 justify-end items-center">
                             <div className="text-[#FBBF24] cursor-pointer text-[14px]">Upgrade to Pro</div>
-                            <div className="text-[#94A3B8] cursor-pointer text-[14px]">Skip Now</div>
+                            <div onClick={() => {
+                                setShowNotif(false)
+                                setIsSkipped(true)
+                            }} className="text-[#94A3B8] cursor-pointer text-[14px]">Skip Now</div>
                         </div>
                     </div>
                 :undefined

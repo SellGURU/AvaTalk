@@ -7,6 +7,7 @@ import { Outlet } from "react-router";
 import { useConstructor } from "../../help";
 // import { TagList } from "..";
 import ChatApi from '../../Api/Chat'
+import AccessNotifManager from "../AccessNotifManager";
 
 interface Props {
   theme?: string;
@@ -100,6 +101,10 @@ const Chat: React.FC<Props> = ({ theme }) => {
         <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Visitors Chat History" rightText="Your Test History" theme="Carbon" />
 
       </div>
+      <div className="px-6 py-2">
+        <AccessNotifManager page="ChatPage"></AccessNotifManager>
+
+      </div>         
       {activeView === "Visitors Chat History" ? (
         <>
           {/* <div className="mt-8 px-6">

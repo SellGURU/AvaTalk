@@ -71,7 +71,7 @@ const EditAiSetting = () => {
             }} value={formik.values.Description} theme="Carbon" textAreaHeight='100px'></TextArea>
           </div>                   */}
           <div className="px-6">
-            <AccessNotifManager></AccessNotifManager>
+            <AccessNotifManager page="AiSetting"></AccessNotifManager>
 
           </div>
           <div className="px-6 mt-4">
