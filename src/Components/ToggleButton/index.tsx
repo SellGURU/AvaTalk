@@ -18,12 +18,12 @@ const ToggleButton: React.FC<ToggleProps> = ({ theme, leftText, rightText, onBut
   return (
     <div className={`${theme}-ToggleButton-container `}>
       <div className={`${theme}-ToggleButton-notActiveButton border border-solid border-transparent   ${activeButton === leftText ? activeStyle : ""} `}>
-        <Button onClick={() => handleButtonClick(leftText)} theme="Carbon-Toggle">
+        <Button data-mode={activeButton == leftText ?'active':""} onClick={() => handleButtonClick(leftText)} theme={`${theme}-Toggle`}>
           {leftText}
         </Button>
       </div>
       <div className={`${theme}-ToggleButton-notActiveButton border border-solid border-transparent  ${activeButton === rightText ? activeStyle : ""} `}>
-        <Button onClick={() => handleButtonClick(rightText)} theme="Carbon-Toggle">
+        <Button data-mode={activeButton == rightText ?'active':""} onClick={() => handleButtonClick(rightText)} theme={`${theme}-Toggle`}>
           {rightText}
         </Button>
       </div>

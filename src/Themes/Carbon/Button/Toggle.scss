@@ -5,3 +5,16 @@
 .Carbon-Toggle-Button-container-disabled {
   @apply opacity-[50%] #{!important};
 }
+
+
+.Carbon-secandary-Toggle-Button-container {
+  @apply disabled:cursor-not-allowed px-5 md:w-[220px] flex justify-center items-center  whitespace-nowrap  text-[#374151] leading-[21px]  text-[14px] font-[500]    #{!important};
+}
+
+.Carbon-secandary-Toggle-Button-container[data-mode="active"] {
+  @apply disabled:cursor-not-allowed flex justify-center items-center px-5  md:w-[220px] whitespace-nowrap  text-white leading-[21px]  text-[14px] font-[500]    #{!important};
+}
+
+.Carbon-secandary-Toggle-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}

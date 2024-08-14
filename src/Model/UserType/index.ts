@@ -30,6 +30,10 @@ class UserType {
         return 100
     }
 
+    public getDaysReminded() {
+        return 14 - this.getDayUsed()
+    }
+
 }
 
 export default UserType

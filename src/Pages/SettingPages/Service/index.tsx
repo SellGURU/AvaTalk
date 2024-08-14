@@ -1,25 +1,27 @@
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
-import { useState } from "react";
-
-interface serviceType {
-    title:string,
-    price:number
-}
+// import { useState } from "react";
+import { ToggleButton } from "../../../Components";
+import { useAuth } from "../../../hooks/useAuth";
+// interface serviceType {
+//     title:string,
+//     price:number
+// }
 
 const SettingService =() => {
+    const context = useAuth()
     const navigate = useNavigate();
-    const service:Array<serviceType> = [
-        {
-            title:'Annually',
-            price:345
-        },
-        {
-            title:'Monthly',
-            price:45
-        },
-    ] 
-    const [activeService,setAtiveService] = useState<serviceType>()
+    // const service:Array<serviceType> = [
+    //     {
+    //         title:'Annually',
+    //         price:345
+    //     },
+    //     {
+    //         title:'Monthly',
+    //         price:45
+    //     },
+    // ] 
+    // const [activeService,setAtiveService] = useState<serviceType>()
 
     return (
         <>
@@ -29,37 +31,44 @@ const SettingService =() => {
                 <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
                     <div className={`Carbon-back-Button-vector`}></div>
                 </Button>
-                <p className={`Carbon-ChatDetails-title`}>Your Service</p>
+                <p className={`Carbon-ChatDetails-title`}>Your plan</p>
             </div>            
 
             <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
-                        <img className={`Carbon-Setting-logo`} src="/Carbon/splashImage.svg" alt="" />
-                        <p className="mb-4">You’re using our free plan</p>
-                        <p className="text-gray-500 mb-2">Unlock the full networking experience with upgrade features</p>
+                        <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re Currently our {context.currentUser.type_of_account.getType()+ 'Plan'}</p>
+                        <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">Your {context.currentUser.type_of_account.getType()} will end in {context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.</p>
+                    </div>
+                    <div>
+                        <ToggleButton onButtonClick={() => {}} leftText="Annually $200" rightText="Monthly $20" theme="Carbon-secandary" />                        
                     </div>
                     <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
                         <div className="flex flex-col items-start gap-4">
                             <div className="flex justify-center items-center gap-2">
                                 <div className="Carbon-Setting-TickCircle"></div>
-                                Real-Time Analytics
+                                Unlimited AI Persona Edits
                             </div>
                             <div className="flex justify-center items-center gap-2">
                                 <div className="Carbon-Setting-TickCircle"></div>
-                                Calendar Integration
+                                Upload up to 50 Images
                             </div>
                             <div className="flex justify-center items-center gap-2">
                                 <div className="Carbon-Setting-TickCircle"></div>
-                                Access to Pro Content
+                                Add Unlimited Links
                             </div>
                             <div className="flex justify-center items-center gap-2">
                                 <div className="Carbon-Setting-TickCircle"></div>
-                                Customize settings
+                               Share up to 1GB Files
                             </div>
+                            <div className="flex justify-center items-center gap-2">
+                                <div className="Carbon-Setting-TickCircle"></div>
+                                Access to Insightful Analytics
+                            </div>                            
                         </div>
                     </div>
-                    {service.map((item)=>{
+                    {/* {service.map((item)=>{
                         return(
                             <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
                                 {activeService?.title == item.title ?
@@ -82,9 +91,9 @@ const SettingService =() => {
                                 }
                             </div>
                         )
-                    })}
+                    })} */}
                     <div className="mt-8 mb-4">
-                        <button className="Carbon-Button-container">Continue to Payment</button>
+                        <Button theme="Carbon">Continue to Payment</Button>
                     </div>
                 </div>
             </div>
