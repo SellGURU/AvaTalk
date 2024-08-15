@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Legend, ResponsiveContainer, Tooltip } from "recharts";
+import { useAuth } from "../../hooks/useAuth";
 
 interface DataItem {
   name: string;
@@ -14,6 +15,7 @@ interface Props {
   chartData:Array<any>
 }
 const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
+  const context = useAuth()
   const resolveColor = (name:string) => {
     if(name == 'QR Code') {
       return 'rgba(133, 92, 248, 0.8)'
@@ -96,19 +98,28 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
   );
 
   return (
-    <div className={`${theme}-PiChartComponent-container`}>
-      <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
-          <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
-            {filteredData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-          </Pie>
-          <Tooltip/>
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="relative w-[100%] ">
+    {context.currentUser.type_of_account.getType() == 'Free'?
+      <>
+        <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Type of Share</p>
+        <img className=" scale-[1.027] w-full z-20 " src="./icons/chartBlur4.png" alt="" />
+      </>    
+    :
+      <div className={`${theme}-PiChartComponent-container`}>
+        <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
+            <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
+              {filteredData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip/>
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    }
     </div>
   );
 };

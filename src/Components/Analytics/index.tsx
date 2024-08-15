@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { AccessNotifManager, AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, PiChartComponent } from "..";
 import { Auth } from "../../Api";
+import { useAuth } from "../../hooks/useAuth";
 
 interface Props {
   theme?: string;
@@ -9,23 +10,59 @@ interface Props {
 const Analytics: React.FC<Props> = ({ theme }) => {
   const [data,setData] = useState<Array<any>>([])
   const startDate = new Date()
+  const context = useAuth()
   startDate.setMonth(startDate.getMonth() -1)
   const [day, setDay] = useState({
     startDate: startDate,
     endDate: new Date(),
   });  
-  const [dataBox,setDataBox] = useState([])
+  const [dataBox,setDataBox] = useState<Array<any>>([])
   useEffect(() => {
-    Auth.getAnalytics(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
-      if(data.reports){
-        setData(data.reports)
-      }
-    })
-    Auth.getInfoBox(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
-      if(data.reports){
-        setDataBox(data.reports)
-      }
-    })
+    if(context.currentUser.type_of_account.getType() != 'Free'){
+      Auth.getAnalytics(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
+        if(data.reports){
+          setData(data.reports)
+        }
+      })
+      Auth.getInfoBox(day.startDate.toISOString().split('T')[0],day.endDate.toISOString().split('T')[0],(data) => {
+        if(data.reports){
+          setDataBox(data.reports)
+        }
+      })
+    }else {
+      setDataBox([
+        {
+            "id": 1,
+            "name": "Page View",
+            "value": 10
+        },
+        {
+            "id": 2,
+            "name": "َAR Usage",
+            "value": 4
+        },
+        {
+            "id": 3,
+            "name": "Chat Count",
+            "value": 15
+        },
+        {
+            "id": 4,
+            "name": "Save Contact",
+            "value": 7
+        },
+        {
+            "id": 5,
+            "name": "Link Click",
+            "value": 95
+        },
+        {
+            "id": 6,
+            "name": "File Click",
+            "value": 57
+        }
+    ])
+    }
   },[day])
   return (
     <div className={`${theme}-Analytics-container`}>
