@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import Litepicker from "../../Litepicker";
+import { useAuth } from "../../hooks/useAuth";
 // import { Button } from "symphony-ui";
 
 const DatePicker = (props:any) => {
@@ -9,12 +11,13 @@ const DatePicker = (props:any) => {
   //   startDate: startDate,
   //   endDate: new Date(),
   // });
-
+  const context = useAuth()
+  const [isVisible,] = useState(context.currentUser.type_of_account.getType() == 'Free'?false:true)
   return (
-    <div className="flex mt-4 space-x-3  items-center ">
+    <div className="flex mt-4  relative items-center ">
       <div onClick={() => {
         document.getElementById("dataPicker")?.click()
-       }} className=" h-[44px] flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray ">
+       }} className={` h-[44px] ${isVisible?'':'opacity-20'} flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray `}>
         <div className="h-full flex items-center justify-between w-full px-2">
        <div  className=" flex justify-start items-center">
           <div className={`Carbon-Profile-EditProfileBtnVector6  px-3 Carbon-Footer-Vectors
@@ -54,6 +57,9 @@ const DatePicker = (props:any) => {
         </div>
 
       </div>
+      {!isVisible?
+        <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
+      :undefined}
       {/* <div className=" w-2/6">
         <Button theme="Carbon">
           <div className="space-x-1 flex items-center">
