@@ -1,5 +1,6 @@
 // import dummyData from "../../data/dummy_data";
 // import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import ChatItem from "../ChatItem";
 
 // interface Props {
@@ -16,6 +17,7 @@ interface DataProps {
 }
 const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
   const lastDateRender: Array<string> = [];
+  const context = useAuth()
   const mustBeRenderDate2 = (date1: string) => {
       // let
       // console.log(new Date(date1))
@@ -64,10 +66,10 @@ const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefine
       // return mustBeRenderDate(new Date(date1))
   };  
   return (
-    <div className=" w-full overflow-y-scroll hiddenScrollBar mt-4 h-dvh px-6 pb-[220px]">
+    <div className={`w-full  ${context.currentUser.type_of_account.getType() == 'Free'?'opacity-30':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[220px]`}>
       {data.map((items, index) => (
         <>
-          <ChatItem visibleDate={mustBeRenderDate2(items.date_group)} theme={theme} key={index} data={items} />
+          <ChatItem plan={context.currentUser.type_of_account.getType()} visibleDate={mustBeRenderDate2(items.date_group)} theme={theme} key={index} data={items} />
         </>
       ))}
     </div>

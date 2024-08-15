@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface DataProps {
   id: string;
@@ -10,14 +10,19 @@ interface DataProps {
   date_group:string; 
 }
 
-const ChatItem = ({data, theme,visibleDate}: { data: DataProps; theme: string | undefined,visibleDate:boolean}) => {
-
+const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: string | undefined,visibleDate:boolean,plan:string}) => {
+  const navigate = useNavigate()
   return (
     <>
     {visibleDate ?
       <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
     :undefined}
-    <Link to={`/chats/${data.chat_list_id}`} className={`${theme}-ChatItem-container`}>
+    <div  onClick={() => {
+      if(plan != 'Free'){
+        navigate(`/chats/${data.chat_list_id}`)
+      }
+      // to={`/chats/${data.chat_list_id}`}
+    }}  className={`${theme}-ChatItem-container`}>
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
           <div className={`${theme}-ChatItem-innerCard `}>
@@ -30,7 +35,7 @@ const ChatItem = ({data, theme,visibleDate}: { data: DataProps; theme: string | 
           <p className={`${theme}-ChatItem-content`}>{data.response.substring(0,35)+' ...'}</p>
         </div>
       </div>
-    </Link>
+    </div>
     </>
   );
 };
