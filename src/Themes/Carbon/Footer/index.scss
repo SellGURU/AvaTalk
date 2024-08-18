@@ -34,6 +34,9 @@
 .Carbon-Footer-ChatVector{
   mask-image: url(/Carbon/chatVector.svg);
 }
+.Carbon-Footer-ChatVector-active{
+  mask-image: url(/Carbon/messages.svg);
+}
 .Carbon-Footer-ActiveVectorSection {
   @apply flex justify-center items-center borderBox-Gray;
 }

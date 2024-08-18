@@ -33,8 +33,9 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
               {currentChat.map((el) => {
                 return (
                   <>
-                    <Button theme="Carbon" data-mode="ChatDetails-question-button">{el.messages[0].content}</Button>              
-                    <div>{el.messages[1].content}</div>                  
+                    <div className="bg-primary-color text-[14px] text-white px-4 py-3 rounded-[16px] rounded-tl-none">{el.messages[0].content}</div>
+                    {/* <Button theme="Carbon" data-mode="ChatDetails-question-button">{el.messages[0].content}</Button>               */}
+                    <div className="bg-[#F3F4F6] text-[14px] text-[#374151] px-4 py-3 rounded-[16px] rounded-tr-none">{el.messages[1].content}</div>                  
                   </>
                 )
               })}

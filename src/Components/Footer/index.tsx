@@ -64,7 +64,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
         <div className="flex flex-col justify-center items-center">
           <div
             className={`${theme}-Footer-Vectors ${theme}-Footer-ChatVector ${
-              activeItem === "chats" ? `${theme}-Footer-ActiveVectors` : ""
+              activeItem === "chats" ? `${theme}-Footer-ActiveVectors ${theme}-Footer-ChatVector-active` : ""
             }`}
           ></div>
             {activeItem!= 'chats'?
