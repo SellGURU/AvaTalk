@@ -8,6 +8,9 @@ import { useConstructor } from "../../help";
 // import { TagList } from "..";
 import ChatApi from '../../Api/Chat'
 import AccessNotifManager from "../AccessNotifManager";
+import { EnhanceModal } from "../__Modal__";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 interface Props {
   theme?: string;
@@ -17,7 +20,10 @@ const Chat: React.FC<Props> = ({ theme }) => {
 
   const [searchQuery] = useState<string>("");
   const [chats,setChats] = useState<Array<any>>([]);
+  const navigate = useNavigate()
+  const appcontext = useAuth()
   // const [isLoading, setIsLoading] = useState(false);
+  const [showEchangeModal,setShowEchangeModal] = useState(false)
   const [activeView, setActiveView] = useState("Visitors Chat History");
 
   useConstructor(() => {
@@ -27,6 +33,12 @@ const Chat: React.FC<Props> = ({ theme }) => {
           setChats(res.chats)
         }
     })
+    if(appcontext.currentUser.editStatus == false) {
+      setTimeout(() => {
+        setShowEchangeModal(true)
+      }, 10000);
+
+    }
     // setIsLoading(false);
   });
 
@@ -94,7 +106,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
   };
   return (
     
-    <div className={`${theme}-ContactsView-Container  `}>
+    <div className={`${theme}-ContactsView-Container relative `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText mb-4`}>Chats</p>
       <div className={`${theme}-ContactsView-buttonsContainer w-3/4 `}>
@@ -138,7 +150,14 @@ const Chat: React.FC<Props> = ({ theme }) => {
           )}
         </>
       )}
-
+      {
+        showEchangeModal && 
+        <EnhanceModal onClose={() => {
+          setShowEchangeModal(false)
+        }} submit={() => {
+          navigate('/edit/ai-setting')
+        }}></EnhanceModal>
+      }
     </div>
   );
 };

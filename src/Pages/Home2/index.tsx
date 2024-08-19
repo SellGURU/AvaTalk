@@ -24,7 +24,7 @@ const Home2 = () => {
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
         Auth.showProfile((data) => {
-            console.log(data.boxs)
+            // console.log(data.boxs)
             data.boxs.map((item:any) => {
                 const newBox = boxProvider(item);
                 resolveSocial.push(newBox);
@@ -50,6 +50,7 @@ const Home2 = () => {
                 referral_code:data.information. referral_code,
                 address:''
             })
+            authContext.currentUser.setEditStatus(data.edit_status)
             authContext.currentUser.setBox(resolveSocial)
             authContext.currentUser.setTypeOfAccount(new UserType(data.type_of_account.type.capitalize(),data.type_of_account.register_date))
 

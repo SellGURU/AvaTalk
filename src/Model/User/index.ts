@@ -71,6 +71,7 @@ class User {
     })
 
     public type_of_account : UserType = new UserType('Trial',new Date())
+    public editStatus:boolean = false;
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
@@ -173,6 +174,10 @@ class User {
     }
     public setTypeOfAccount(acount:UserType){
         this.type_of_account = acount
+    }
+
+    public setEditStatus(status:boolean){
+        this.editStatus = status
     }
 } 
 export default User
