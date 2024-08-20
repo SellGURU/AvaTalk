@@ -10,6 +10,7 @@ import { EditAiSetting, EditAvater,EditAvailability, EditContactInfo, EditFile, 
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
 import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
+import OnBoarding from "../Pages/SignUp/onboardingSteps";
 
 const route = createHashRouter([
   {
@@ -169,7 +170,11 @@ const route = createHashRouter([
   {
     path: "/signup",
     element: <SignUp></SignUp>,
-  },  
+  }, 
+  {
+    path: "/createAccount",
+    element: <OnBoarding></OnBoarding>,
+  },     
   {
     path: "/Verification",
     element: <Verification></Verification>,
