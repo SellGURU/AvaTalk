@@ -13,5 +13,6 @@ import { EditAbout } from "./EditPages";
 import Setting from "./Setting";
 import AnalyticsPage from "./AnalyticsPage";
 import Share from "./Share";
+import SignUp from "./SignUp";
 
-export { CreateAccount, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage ,Share};
+export { CreateAccount, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage ,Share,SignUp};

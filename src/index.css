@@ -185,6 +185,9 @@
   .boxShadow-Gray {
     box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
   }
+  .boxShadow-bisinesCard {
+    box-shadow: 2px 2px 4px 0px #728EAB1A;
+  }
   .boxShadow-mini-Gray {
     box-shadow: 2px 2px 4px 0px rgb(114, 142, 171,0.1), 2px 2px 20px 0px rgb(111, 140, 176,0.21);
   }

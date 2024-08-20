@@ -38,10 +38,12 @@ import AnalyticsSummary from "./AnalyticsSummary";
 import DatePicker from "./DatePicker";
 import AccessNotifManager from "./AccessNotifManager";
 import DeveloperTools from "./DeveloperTools";
+import BissinesCard from "./BissinesCard";
 
 export {
   AccessNotifManager,
   Profile2,
+  BissinesCard,
   Spinners,
   ContentCard,
   StepController,

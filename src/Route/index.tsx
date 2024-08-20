@@ -1,5 +1,5 @@
 import {createHashRouter } from "react-router-dom";
-import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2 } from "../Pages";
+import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2, SignUp } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -166,6 +166,10 @@ const route = createHashRouter([
     path: "/login",
     element: <Login></Login>,
   },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>,
+  },  
   {
     path: "/Verification",
     element: <Verification></Verification>,
