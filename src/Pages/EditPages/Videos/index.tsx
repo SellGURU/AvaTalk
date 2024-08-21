@@ -1,7 +1,6 @@
 import { Button, TextField } from "symphony-ui";
 import {AccessNotifManager, BackIcon} from "../../../Components";
 import {useAuth} from "../../../hooks/useAuth.tsx";
-import {Link, LinkBox} from "../../../Model";
 import {createRef, useEffect, useState} from "react";
 import {useFormik} from "formik";
 import {useNavigate} from "react-router-dom";
@@ -9,7 +8,7 @@ import Sortable from "sortablejs/modular/sortable.complete.esm.js";
 import * as Yup from "yup";
 import {confirmAlert} from "react-confirm-alert";
 import {AddLink, Confirm} from "../../../Components/__Modal__";
-import {VideosLink} from "../../../Model/VideosLink";
+import {Video, VideosLink} from "../../../Model/Video";
 
 const regex = /^.*Test.*$/
 
@@ -23,10 +22,12 @@ const EditVideos = () => {
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'VideosBox')[0] as VideosLink
   console.log(currentBox)
   if(currentBox == undefined) {
-    currentBox = new VideosLink('videos',[])
+    currentBox = new VideosLink('videos-main',[])
   }
   const confirmRef = createRef<HTMLDivElement>()
-  const [links,setLinks] = useState<Array<Link>>(currentBox.getLinks().map(((item:Link) => Object.assign(new Link('',''),item))))
+  // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
+  const [video,setVideo] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
+
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)
   const initialValue = {
     title:currentBox.getTitle(),
@@ -44,13 +45,13 @@ const EditVideos = () => {
   const [editeValue,setEditeValue] = useState('')
 
   const addLink = (name:string,url:string) => {
-    const newLink = new Link(url,name)
+    const newVidoe = new Video(url,name)
     if(editName!= ''){
-      setLinks([...links.filter((el) =>el.getName() != editName),newLink])
+      setVideo([...video.filter((el) =>el.getName() != editName),newVidoe])
       setEditName('')
       setEditeValue('')
     }else{
-      setLinks([...links,newLink])
+      setVideo([...video,newVidoe])
     }
   }
   const [openaddlink,setOpenAddLink] = useState(false);
@@ -58,15 +59,15 @@ const EditVideos = () => {
   const submit = () => {
     console.log("tes")
     auth.currentUser.addBox(
-        new LinkBox(formik.values.title,links)
+        new VideosLink(formik.values.title,video)
     )
     navigate('/')
   }
   const deleteSocial = (index:number) => {
-    const newArr = [...links]
+    const newArr = [...video]
     newArr.splice(index,1)
     console.log(newArr)
-    setLinks(newArr)
+    setVideo(newArr)
   }
   useEffect(() => {
     setTimeout(() => {
@@ -93,7 +94,7 @@ const EditVideos = () => {
               <TextField {...formik.getFieldProps("title")} inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)} theme="Carbon" label="Title" name="title"  type="text"  placeholder="Enter title..."></TextField>
             </div>
 
-            {links.length == 0 ?
+            {video.length == 0 ?
                 <div className="mt-3 px-6">
                   <TextField theme="Carbon" disabled label="Links" inValid={false} name="title" onBlur={() => {}} onChange={() => {}} type="text" value="" placeholder="No Link"></TextField>
                 </div>
@@ -101,16 +102,16 @@ const EditVideos = () => {
                 <>
                   <ul style={{width:'100%'}} >
                     <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>videos Links</div>
-                    {links.map((item:Link,index) => {
+                    {video.map((item:any,index) => {
                       return (
                           <li data-mame={item.getName()} draggable onDrag={() => {
                             const element = document.getElementById('sortable2')?.children
-                            const resolve =links.map((_el,index) =>{
+                            const resolve =video.map((_el,index) =>{
                               return element?.item(index)?.attributes[0].value
                             })
                             resolve.forEach((elem,ind) => {
-                              if(links.find(e=>e.getName() == elem)){
-                                links.filter(e=>e.getName() == elem)[0].order = ind
+                              if(video.find(e=>e.getName() == elem)){
+                                video.filter(e=>e.getName() == elem)[0].order = ind
                               }
                             })
                           }}  className="mt-3 px-6">
@@ -130,7 +131,7 @@ const EditVideos = () => {
                                 </div>
                                 <div className="flex justify-end gap-1 items-start">
                                   {
-                                    links.length> 1 ?
+                                    video.length> 1 ?
                                         <div>
                                           <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
                                         </div>
