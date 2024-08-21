@@ -1,6 +1,6 @@
 import { Button } from "symphony-ui"
 import { useState } from "react"
-import {CreatePasswordStep, InformationStep} from "./steps"
+import {ContactStep, CreatePasswordStep, InformationStep} from "./steps"
 
 
 const OnBoarding = () => {
@@ -15,9 +15,16 @@ const OnBoarding = () => {
                 }
                 {step == 1 &&
                     <>
-                        <InformationStep></InformationStep>
+                        <InformationStep onSubmit={() => {
+                            setStep(step+1)
+                        }}></InformationStep>
                     </>
-                }                
+                }      
+                {step == 2 &&
+                    <>
+                        <ContactStep></ContactStep>
+                    </>
+                }                            
             </>
         )
     }

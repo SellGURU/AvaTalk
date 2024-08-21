@@ -2,13 +2,19 @@ import { useFormik } from "formik"
 import { BissinesCard, Select, TextField } from "../../../../Components"
 import * as Yup from "yup";
 import { Button } from "symphony-ui";
+import { useAuth } from "../../../../hooks/useAuth";
 
-const InformationStep = () => {
+interface InformationStepProps {
+    onSubmit:() => void
+}
+
+const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
+    const context = useAuth() 
     const formik = useFormik({
         initialValues:{
-            FirstName:'',
-            LastName:'',
-            gender:'female'
+            FirstName:context.siginUpOptions.firstName,
+            LastName:context.siginUpOptions.lastName,
+            gender:context.siginUpOptions.gender == ''? 'female':context.siginUpOptions.gender
         },
         validationSchema:Yup.object().shape({
             FirstName: Yup.string().required("Required"),
@@ -19,7 +25,8 @@ const InformationStep = () => {
     const GenderOptions = [
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
-    ];    
+    ];   
+    
     return (
         <>
             <div className="mt-8">
@@ -93,7 +100,14 @@ const InformationStep = () => {
                         
                         </Select>
                     </div>      
-                    <Button disabled={!formik.isValid || !formik.touched.FirstName} theme="Carbon">Continue</Button>                              
+                    <Button onClick={() => {
+                        context.siginupHandler({
+                            firstName:formik.values.FirstName,
+                            lastName:formik.values.LastName,
+                            gender:formik.values.gender
+                        })
+                        onSubmit()
+                    }} disabled={!formik.isValid || formik.values.FirstName == ''} theme="Carbon">Continue</Button>                              
                 </div>                   
             </div>
         </>
