@@ -2,11 +2,18 @@
 import { useFormik } from "formik"
 import { BissinesCard, TextField } from "../../../../Components"
 import * as Yup from "yup";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
 
-const ContactStep = () => {
+interface ContactStepProps {
+    onSubmit:() => void
+}
+
+
+const ContactStep:React.FC<ContactStepProps> = ({
+    onSubmit
+}) => {
     const context = useAuth()
     const validateEmail = (email: string | undefined) => {
     return Yup.string().email().isValidSync(email)
@@ -71,7 +78,8 @@ const ContactStep = () => {
                         context.siginupHandler({
                             phone:formik.values.phone,
                             email:formik.values.email
-                        })                        
+                        })             
+                        onSubmit()           
                     }} disabled={!formik.isValid || formik.values.email == ''} theme="Carbon">Continue</Button>
                 </div>                                                         
             </div>
