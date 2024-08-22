@@ -1,15 +1,14 @@
 import { Box } from "../index.ts";
 import { Auth } from "../../Api";
 import { Tooltip } from "react-tooltip";
-import ReactImageGallery from "react-image-gallery";
-import { useEffect, useState } from "react";
+
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 class Video {
   public order: number = -1;
   constructor(protected url: string, protected name: string) {}
-  public resolveRender(theme: string, userID: string) {
+  public resolveRender(_theme: string, userID: string) {
     console.log("this.geturl() mkmk", this.geturl());
     
     return (
