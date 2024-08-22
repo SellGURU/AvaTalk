@@ -45,7 +45,6 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
         const resolve =Array(element?.length).fill(1).map((_el,index) => {
           return element?.item(index)?.attributes[1].value
         } )
-        console.log(resolve)
         resolve.forEach((el,ind) => {
           if(item.getTypeName() == el){
             item.setOrder(ind)

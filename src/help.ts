@@ -13,7 +13,7 @@ import {
 } from "./Model";
 import { Chat } from "./Api";
 import { toast } from "react-toastify";
-import { Video } from "./Model/Video";
+import { Video, VideoBox } from "./Model/Video";
 
 const resolveMenuFromRoute = () => {
   console.log(
@@ -72,8 +72,8 @@ const useConstructor = (callBack = () => {}) => {
 
 const boxProvider = (box: any) => {
   switch (box.type_name) {
-    case "VideosBox": {
-      return Object.assign(new Video("simple", ""), box);
+    case "VideoBox": {
+      return Object.assign(new VideoBox("simple", []), box);
     }
     case "SocialBox": {
       return Object.assign(new SocialBox("simple", []), box);

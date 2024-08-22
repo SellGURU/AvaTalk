@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class Box {
     protected static boxCounter:number = 0
-    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'VideosBox'|'GoogleMapBox' | 'FileBox' = 'Box'
+    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'VideoBox'|'GoogleMapBox' | 'FileBox' = 'Box'
     protected order:number = -1;
 
     constructor(protected title:string){}

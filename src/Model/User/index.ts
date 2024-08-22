@@ -70,8 +70,8 @@ class User {
             "order": 5,
             "title": "Videos",
             "contents": [],
-            "typeName": "VideosBox",
-            "type_name": "VideosBox"
+            "typeName": "VideoBox",
+            "type_name": "VideoBox"
         }
     ]
     public boxs:Array<Box> =this.defaultBoxs.map((item:any) => {
