@@ -9,6 +9,7 @@ import GoogleMapBox from "./GoogleMap";
 import FileBox from "./File";
 import { File } from "./File";
 import TimeManegar from "./TimeManegar";
+import { VideoBox } from "./Video";
 
 export {
     User,
@@ -23,5 +24,6 @@ export {
     GoogleMapBox,
     FileBox,
     File,
-    TimeManegar
+    TimeManegar,
+    VideoBox
 }

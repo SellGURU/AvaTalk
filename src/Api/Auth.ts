@@ -62,7 +62,7 @@ interface AddEvent {
   userid: string,
   sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
                       'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'|
-                      'email'|'sms'|'clipboard'|'qr_code'|'share_link'
+                      'email'|'sms'|'clipboard'|'qr_code'|'share_link'|"more_info_video"
 }
 // interface ContactType {
 //   name: string;

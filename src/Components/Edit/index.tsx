@@ -68,7 +68,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
     {
       name: "Videos",
       icon: "video-play.svg",
-      link: "",
+      link: "Videos",
       description: "Make your page come to life with a video.",
     },
   ]);

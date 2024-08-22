@@ -1,0 +1,6 @@
+[aria-roledescription="carousel"]{
+    width: 100%;
+}
+.react-slideshow-container .default-nav {
+    z-index: 7;
+}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutableRefObject, useState } from "react";
 import { MenuType, chat } from "./Types";
-import { AboutBox, Box, FileBox, GalleryBox, GoogleMapBox,AvailabilityBox, LinkBox, SocialBox } from "./Model";
+import { AboutBox, Box, FileBox, GalleryBox, GoogleMapBox,AvailabilityBox,VideoBox, LinkBox, SocialBox } from "./Model";
 import { Chat } from "./Api";
 import { toast } from "react-toastify";
 
@@ -66,7 +66,10 @@ const boxProvider = (box: any) => {
     }    
     case "FileBox": {
         return Object.assign(new FileBox("simple", []), box);
-    }       
+    } 
+    case "VideoBox": {
+        return Object.assign(new VideoBox("simple", []), box);
+    }            
     default: {
       return Object.assign(new Box("simple"), box);
     }
@@ -232,7 +235,9 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
       case "LinkBox":
         return new LinkBox(item.title, item.links);
       case "FileBox":
-        return new FileBox(item.title, item.contents);        
+        return new FileBox(item.title, item.contents);     
+      case "VideoBox":
+        return new VideoBox(item.title, item.links);             
     }
   }) as Array<Box>;
 };
