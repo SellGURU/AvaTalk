@@ -260,7 +260,7 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
   console.log(jsonBox);
 
   return jsonBox.map((item) => {
-    if (item !== null)
+    // if (item !== null)
       switch (item.type_name) {
         case "GoogleMapBox":
           return new GoogleMapBox(item.title, item.location);

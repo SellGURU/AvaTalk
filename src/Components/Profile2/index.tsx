@@ -551,6 +551,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
                 <ul style={{ width: '100%' }} id="sortable">
                   {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item: Box) => {
+                    console.log("shareUser.boxs", shareUser.boxs);
+                    
                     console.log("item in content card:",item);
                     
                     return (
