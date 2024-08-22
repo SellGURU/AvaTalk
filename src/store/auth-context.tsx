@@ -20,6 +20,8 @@ interface SiginUpOptionProps {
   email:string
   gender:"female"| "male"| ''
   phone:string;
+  job:'',
+  company:''
 }
 
 interface AuthContextProps {
@@ -55,7 +57,9 @@ export const AuthContext = createContext<AuthContextProps>({
     gender:'',
     email:'',
     lastName:'',
-    phone:''
+    phone:'',
+    job:'',
+    company:''
   },
   refrealCode:'',
   setReferalCode:() =>{},
@@ -102,7 +106,9 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     gender:'',
     lastName:'',
     email:'',
-    phone:''
+    phone:'',
+    job:'',
+    company:''
   })
   // const userIsLoggedIn = !!token && !!user.information;
 

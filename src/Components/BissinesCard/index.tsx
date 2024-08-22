@@ -15,6 +15,13 @@ const BissinesCard = () => {
         }
         return context.siginUpOptions.firstName + " " +context.siginUpOptions.lastName
     }
+
+    const resolveCompanyJob = () => {
+        if(context.siginUpOptions.job == '' && context.siginUpOptions.company == ''){
+            return 'Company/ Job Title'
+        }
+        return context.siginUpOptions.company + "/ " +context.siginUpOptions.job        
+    }
     return (
         <>
             <div className="bg-primary-color relative flex justify-between items-center px-4 w-[247px] h-[134px] rounded-[16px]">
@@ -43,7 +50,7 @@ const BissinesCard = () => {
                 </div>
                 <div>
                     <div className="text-[12px] text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
-                    <div className="text-[8px] opacity-80 text-white font-semibold">Company/ Job Title</div>
+                    <div className="text-[8px] opacity-80 text-white font-semibold">{resolveCompanyJob()}</div>
                 </div>
             </div>
         </>
