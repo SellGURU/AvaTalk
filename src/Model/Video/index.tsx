@@ -20,6 +20,7 @@ class Video {
           onClick={() => this.handleMoreInfoClick(userID)}
         >
           <iframe
+          className=" !rounded-xl"
             width="100%"
             height="315"
             src={this.geturl()}

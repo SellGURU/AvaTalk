@@ -9,7 +9,7 @@ class Link {
 
     } 
     public resolveRender(theme:string,userID:string) {
-        console.log("this.geturl() link", this.geturl());
+        // console.log("this.geturl() link", this.geturl());
         
         return (
             <>
