@@ -44,7 +44,6 @@ class User {
       typeName: "AboutBox",
       type_name: "AboutBox",
     },
-
     {
       order: 2,
       title: "Social",

@@ -9,8 +9,6 @@ class Link {
 
     } 
     public resolveRender(theme:string,userID:string) {
-        // console.log("this.geturl() link", this.geturl());
-        
         return (
             <>
             <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() =>{

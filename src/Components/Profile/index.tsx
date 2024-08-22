@@ -11,7 +11,7 @@ import ShareContact from '../__Modal__/ShareContact';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import { boxProvider, useConstructor } from '../../help';
 import Share from '../../Api/Share';
-import { Spinners } from '..';
+import {ContentCard, Spinners} from '..';
 import ToturialsBox from '../ToturialsBox';
 import { publish } from '../../utils/event';
 import { Auth, Contacts } from '../../Api';
@@ -20,7 +20,6 @@ interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
-
   const resolveMode = () => {
     switch(window.location.hash.replace('#/','').split('/')[0]){
       case '' :return 'profile'
@@ -147,7 +146,6 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       })
     }
   })
-    console.log("sherebox",shareUser.boxs)
   return (
     <>
     {isLoading ?
@@ -335,18 +333,18 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           // }}
           >
 
-            {/*{shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item:Box) => {*/}
-            {/*  return (*/}
-            {/*    <>*/}
-            {/*    {item.isShareAble() || mode=='profile' ?*/}
-            {/*        <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >*/}
-            {/*        </ContentCard>              */}
-            {/*      :*/}
-            {/*      undefined*/}
-            {/*    }*/}
-            {/*    </>*/}
-            {/*  )*/}
-            {/*})}*/}
+            {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item:Box) => {
+              return (
+                <>
+                {item.isShareAble() || mode=='profile' ?
+                    <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
+                    </ContentCard>
+                  :
+                  undefined
+                }
+                </>
+              )
+            })}
 
           </ul>
         </div>

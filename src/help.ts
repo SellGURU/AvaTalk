@@ -189,7 +189,6 @@ const sendToApi = (
   userId: string,
   isSilent?: boolean
 ) => {
-  console.log(userId);
   const aiChats = chats.filter((item) => item.from == "Ai");
   const massageKey = makeid(15);
   const newChat: chat = {
@@ -258,10 +257,7 @@ const reolveJsonToObject = (jsonuser: string) => {
 };
 
 const resolveBoxsJson = (jsonBox: Array<any>) => {
-  console.log(jsonBox);
-
   return jsonBox.map((item) => {
-    // if (item !== null)
       switch (item.type_name) {
         case "GoogleMapBox":
           return new GoogleMapBox(item.title, item.location);
