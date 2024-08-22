@@ -66,13 +66,7 @@ class User {
             "typeName": "MeetingBox",
             "type_name": "MeetingBox"
         }   ,
-        {
-            "order": 5,
-            "title": "Videos",
-            "contents": [],
-            "typeName": "VideoBox",
-            "type_name": "VideoBox"
-        }
+    
     ]
     public boxs:Array<Box> =this.defaultBoxs.map((item:any) => {
         return boxProvider(item);

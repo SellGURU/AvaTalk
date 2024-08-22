@@ -24,11 +24,10 @@ const EditVideos = () => {
   )[0] as VideoBox;
 
   if (currentBox == undefined) {
-    currentBox = new VideoBox("videos", []);
+    currentBox = new VideoBox("video", []);
   }
   const confirmRef = createRef<HTMLDivElement>();
   // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
-  console.log("c:", currentBox);
   const [video, setVideo] = useState<Array<Video>>(
     currentBox.links.map((item: any) => Object.assign(new Video("", ""), item))
   );

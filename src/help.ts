@@ -1,5 +1,5 @@
+import { useState } from "react";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MutableRefObject, useState } from "react";
 import { MenuType, chat } from "./Types";
 import {
   AboutBox,
@@ -12,7 +12,6 @@ import {
   SocialBox,
 } from "./Model";
 import { Chat } from "./Api";
-import { toast } from "react-toastify";
 import { Video, VideoBox } from "./Model/Video";
 
 const resolveMenuFromRoute = () => {
@@ -72,7 +71,7 @@ const useConstructor = (callBack = () => {}) => {
 
 const boxProvider = (box: any) => {
   switch (box.type_name) {
-    case "VideoBox": {
+    case "VideosBox": {
       return Object.assign(new VideoBox("simple", []), box);
     }
     case "SocialBox": {
@@ -258,23 +257,26 @@ const reolveJsonToObject = (jsonuser: string) => {
 };
 
 const resolveBoxsJson = (jsonBox: Array<any>) => {
+  console.log(jsonBox);
+
   return jsonBox.map((item) => {
-    switch (item.type_name) {
-      case "GoogleMapBox":
-        return new GoogleMapBox(item.title, item.location);
-      case "AboutBox":
-        return new AboutBox(item.title, item.text);
-      case "MeetingBox":
-        return new AvailabilityBox(item.title, item.url);
-      case "GalleryBox":
-        return new GalleryBox(item.title, item.contents);
-      case "SocialBox":
-        return new SocialBox(item.title, item.socialMedias);
-      case "LinkBox":
-        return new LinkBox(item.title, item.links);
-      case "FileBox":
-        return new FileBox(item.title, item.contents);
-    }
+    if (item !== null)
+      switch (item.type_name) {
+        case "GoogleMapBox":
+          return new GoogleMapBox(item.title, item.location);
+        case "AboutBox":
+          return new AboutBox(item.title, item.text);
+        case "MeetingBox":
+          return new AvailabilityBox(item.title, item.url);
+        case "GalleryBox":
+          return new GalleryBox(item.title, item.contents);
+        case "SocialBox":
+          return new SocialBox(item.title, item.socialMedias);
+        case "LinkBox":
+          return new LinkBox(item.title, item.links);
+        case "FileBox":
+          return new FileBox(item.title, item.contents);
+      }
   }) as Array<Box>;
 };
 
