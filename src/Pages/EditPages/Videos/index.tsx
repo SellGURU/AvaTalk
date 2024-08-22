@@ -20,13 +20,14 @@ const validationSchema = Yup.object().shape({
 const EditVideos = () => {
   const auth = useAuth()
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'VideosBox')[0] as VideosLink
-  console.log(currentBox)
+
   if(currentBox == undefined) {
-    currentBox = new VideosLink('videos-main',[])
+    currentBox = new VideosLink('videos',[])
   }
   const confirmRef = createRef<HTMLDivElement>()
   // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
-  const [video,setVideo] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
+  console.log("c:",currentBox)
+  const [video,setVideo] = useState<Array<Video>>(currentBox.links.map(((item:any) => Object.assign(new Video('',''),item))))
 
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)
   const initialValue = {

@@ -1,14 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutableRefObject, useState } from "react";
 import { MenuType, chat } from "./Types";
-import { AboutBox, Box, FileBox, GalleryBox, GoogleMapBox,AvailabilityBox, LinkBox, SocialBox } from "./Model";
+import {
+  AboutBox,
+  Box,
+  FileBox,
+  GalleryBox,
+  GoogleMapBox,
+  AvailabilityBox,
+  LinkBox,
+  SocialBox,
+} from "./Model";
 import { Chat } from "./Api";
 import { toast } from "react-toastify";
+import { Video } from "./Model/Video";
 
 const resolveMenuFromRoute = () => {
-  console.log(window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0])
+  console.log(
+    window.location.hash
+      .replace("#/", "")
+      .replace("?splash=false", "")
+      .split("/")[0]
+  );
   // console.log(window.location.hash.replace('#/','').split('/')[0])
-  switch (window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0]) {
+  switch (
+    window.location.hash
+      .replace("#/", "")
+      .replace("?splash=false", "")
+      .split("/")[0]
+  ) {
     case "":
       return "profile";
     case "edit":
@@ -16,12 +36,18 @@ const resolveMenuFromRoute = () => {
     case "?review=true":
       return "profile";
     case "?splash=true":
-      return 'profile';
+      return "profile";
     default:
-      return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
+      return window.location.hash
+        .replace("#/", "")
+        .replace("?splash=false", "")
+        .split("/")[0];
   }
 };
-const resolveNavigation = (item: MenuType, navigate: (route: string) => void) => {
+const resolveNavigation = (
+  item: MenuType,
+  navigate: (route: string) => void
+) => {
   switch (item) {
     case "profile":
       return navigate("/");
@@ -46,6 +72,9 @@ const useConstructor = (callBack = () => {}) => {
 
 const boxProvider = (box: any) => {
   switch (box.type_name) {
+    case "VideosBox": {
+      return Object.assign(new Video("simple", ""), box);
+    }
     case "SocialBox": {
       return Object.assign(new SocialBox("simple", []), box);
     }
@@ -62,11 +91,11 @@ const boxProvider = (box: any) => {
       return Object.assign(new GalleryBox("simple", []), box);
     }
     case "GoogleMapBox": {
-      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0}), box);
-    }    
+      return Object.assign(new GoogleMapBox("simple", { lan: 0, lat: 0 }), box);
+    }
     case "FileBox": {
-        return Object.assign(new FileBox("simple", []), box);
-    }       
+      return Object.assign(new FileBox("simple", []), box);
+    }
     default: {
       return Object.assign(new Box("simple"), box);
     }
@@ -74,7 +103,9 @@ const boxProvider = (box: any) => {
 };
 
 const getDragAfterElement = (container: any, y: any) => {
-  const draggableElements = [...container.querySelectorAll("li:not(.dragging)")];
+  const draggableElements = [
+    ...container.querySelectorAll("li:not(.dragging)"),
+  ];
 
   return draggableElements.reduce(
     (closest, child) => {
@@ -95,7 +126,11 @@ const getDragAfterElement = (container: any, y: any) => {
   ).element;
 };
 
-const dragStart = (e: any, allowDrag: boolean, setDraggedItem: (value: any) => void) => {
+const dragStart = (
+  e: any,
+  allowDrag: boolean,
+  setDraggedItem: (value: any) => void
+) => {
   if (allowDrag) {
     setDraggedItem(e.target);
     setTimeout(() => {
@@ -104,7 +139,11 @@ const dragStart = (e: any, allowDrag: boolean, setDraggedItem: (value: any) => v
   }
 };
 
-const dragEnd = (e: any, allowDrag: boolean, setDraggedItem: (value: any) => void) => {
+const dragEnd = (
+  e: any,
+  allowDrag: boolean,
+  setDraggedItem: (value: any) => void
+) => {
   setTimeout(() => {
     if (allowDrag) {
       e.target.style.display = "";
@@ -140,34 +179,35 @@ const generateSlugId = () => {
   return slugId;
 };
 const sendToApi = (
-  chats: Array<chat>, 
+  chats: Array<chat>,
   setChats: (chats: Array<chat>) => void,
   text: string,
   onresolve: (res: any) => void,
   oncatch: () => void,
-  language:string,
-  BLokedIdList:MutableRefObject<string[]>,
-  userId:string,
-  isSilent?:boolean
-  ) => {
-    console.log(userId)
+  language: string,
+  BLokedIdList: MutableRefObject<string[]>,
+  userId: string,
+  isSilent?: boolean
+) => {
+  console.log(userId);
   const aiChats = chats.filter((item) => item.from == "Ai");
-  const massageKey =  makeid(15)
+  const massageKey = makeid(15);
   const newChat: chat = {
     from: "user",
-    message_key:massageKey,
+    message_key: massageKey,
     text: text,
     instanceid: "",
     audio_file: "",
-    chat_user:'',
+    chat_user: "",
     currentconverationid: "",
   };
   setChats([...chats, newChat]);
   chats.push(newChat);
   // console.log(window.location.href.includes('?user='))
-  let chatUser = aiChats.length > 0 ? aiChats[aiChats.length - 1].chat_user : undefined
-  if(!window.location.href.includes("/A/")){
-    chatUser =userId
+  let chatUser =
+    aiChats.length > 0 ? aiChats[aiChats.length - 1].chat_user : undefined;
+  if (!window.location.href.includes("/A/")) {
+    chatUser = userId;
   }
   // console.dir(BLokedIdList.current)
   Chat.flow({
@@ -176,28 +216,29 @@ const sendToApi = (
     message_key: massageKey,
     // apikey: "0e218a19f41b4eb689003fa634889a19",
     user_bot_id: userId,
-    chat_user:chatUser,
-    is_silent: isSilent?isSilent:false,
-    getcurrentconvesationid: aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
+    chat_user: chatUser,
+    is_silent: isSilent ? isSilent : false,
+    getcurrentconvesationid:
+      aiChats.length > 0 ? aiChats[aiChats.length - 1].currentconverationid : 1,
   })
     .then((res) => {
-      console.log(res)
-      console.dir(BLokedIdList.current)
-      console.log(BLokedIdList.current)
-      if(res == "No bot has been created"){
-        toast.warning(res)
+      console.log(res);
+      console.dir(BLokedIdList.current);
+      console.log(BLokedIdList.current);
+      if (res == "No bot has been created") {
+        toast.warning(res);
       }
-      if(!BLokedIdList.current.includes(res.message_key as string)){
+      if (!BLokedIdList.current.includes(res.message_key as string)) {
         setChats([
           ...chats,
           {
             from: "Ai",
             text: res.answer.answer,
-            message_key:res.message_key,
+            message_key: res.message_key,
             audio_file: res.answer.audio_file,
             instanceid: res.instanceid,
             currentconverationid: res.currentconverationid,
-            chat_user:res.chat_user
+            chat_user: res.chat_user,
           },
         ]);
         onresolve(res);
@@ -232,15 +273,15 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
       case "LinkBox":
         return new LinkBox(item.title, item.links);
       case "FileBox":
-        return new FileBox(item.title, item.contents);        
+        return new FileBox(item.title, item.contents);
     }
   }) as Array<Box>;
 };
 
 function makeid(length: number) {
-  let result = '';
+  let result = "";
   const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength = characters.length;
   let counter = 0;
   while (counter < length) {
@@ -249,4 +290,16 @@ function makeid(length: number) {
   }
   return result;
 }
-export { resolveMenuFromRoute, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+export {
+  resolveMenuFromRoute,
+  resolveNavigation,
+  useConstructor,
+  boxProvider,
+  getDragAfterElement,
+  dragStart,
+  dragEnd,
+  dragOver,
+  generateSlugId,
+  sendToApi,
+  reolveJsonToObject,
+};

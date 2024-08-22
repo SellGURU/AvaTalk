@@ -1,10 +1,13 @@
 import {Box} from "../index.ts";
 import {Auth} from "../../Api";
 import {Tooltip} from "react-tooltip";
-class Video {
+import boxs from "../Boxs";
+class Video extends boxs{
     public order:number = -1
     constructor(protected url:string,protected name:string){
-
+        super("video")
+        this.order = 5
+        this.type_name= 'VideosBox'
     }
     public resolveRender(theme:string,userID:string) {
         return (
@@ -36,7 +39,7 @@ class Video {
 }
 
 class VideosLink extends Box{
-    constructor(protected title:string,protected links:Array<Video>){
+    constructor(protected title:string, public links:Array<Video>){
         super(title)
         this.order = 3
         this.type_name= 'VideosBox'

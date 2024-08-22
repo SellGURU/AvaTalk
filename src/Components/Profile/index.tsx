@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button } from "symphony-ui"
-import ContentCard from '../ContentCard';
 import { BookMark, ExchangeContact } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
@@ -21,6 +20,7 @@ interface ProfileProps {
   theme?: string;
 }
 const Profile: React.FC<ProfileProps> = ({theme}) => {
+
   const resolveMode = () => {
     switch(window.location.hash.replace('#/','').split('/')[0]){
       case '' :return 'profile'
@@ -147,6 +147,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
       })
     }
   })
+    console.log("sherebox",shareUser.boxs)
   return (
     <>
     {isLoading ?
@@ -334,18 +335,18 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
           // }}
           >
 
-            {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item:Box) => {
-              return (
-                <>
-                {item.isShareAble() || mode=='profile' ?
-                    <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
-                    </ContentCard>              
-                  :
-                  undefined
-                }
-                </>
-              )
-            })}
+            {/*{shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item:Box) => {*/}
+            {/*  return (*/}
+            {/*    <>*/}
+            {/*    {item.isShareAble() || mode=='profile' ?*/}
+            {/*        <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >*/}
+            {/*        </ContentCard>              */}
+            {/*      :*/}
+            {/*      undefined*/}
+            {/*    }*/}
+            {/*    </>*/}
+            {/*  )*/}
+            {/*})}*/}
 
           </ul>
         </div>
