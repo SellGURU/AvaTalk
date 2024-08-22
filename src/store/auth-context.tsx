@@ -14,11 +14,20 @@ interface VerificationProps {
   googleJson:any;
 }
 
+interface SiginUpOptionProps {
+  firstName:string
+  lastName:string
+  email:string
+  gender:"female"| "male"| ''
+  phone:string;
+}
+
 interface AuthContextProps {
   token: string | null;
   isLoggedIn: boolean;
   varification:VerificationProps;
   currentUser:User;
+  siginUpOptions:SiginUpOptionProps;
   needReload:boolean
   googleInformation:any
   nfc_id:string | null
@@ -30,6 +39,7 @@ interface AuthContextProps {
   setUser:(user:User) => void;
   login: (token: string) => void;
   verificationHandler: (verification:VerificationProps) => void;
+  siginupHandler:(siginup:any) =>void
   logout: () => void;
 }
 
@@ -40,12 +50,20 @@ export const AuthContext = createContext<AuthContextProps>({
     emailOrPhone:'',
     googleJson:{},
   },
+  siginUpOptions:{
+    firstName:'',
+    gender:'',
+    email:'',
+    lastName:'',
+    phone:''
+  },
   refrealCode:'',
   setReferalCode:() =>{},
   nfc_id:'',
   setNfc_id:() =>{},
   googleInformation:{},
   needReload :false,
+  siginupHandler:() => {},
   setNeedReload:() => {},
   setUser:() => {},
   currentUser: new User(),
@@ -78,6 +96,14 @@ function AuthContextProvider({ children }: PropsWithChildren) {
       googleJson: {}
     }
   )
+
+  const [siginOptions,setSiginOptions] = useState<SiginUpOptionProps>({
+    firstName:'',
+    gender:'',
+    lastName:'',
+    email:'',
+    phone:''
+  })
   // const userIsLoggedIn = !!token && !!user.information;
 
   function logoutHandler() {
@@ -89,6 +115,9 @@ function AuthContextProvider({ children }: PropsWithChildren) {
 
   function verificationHandler(verification:VerificationProps) {
     setVerification(verification)
+  }
+  function siginOptionsHandler(siginValues:any) {
+    setSiginOptions({...siginOptions,...siginValues})
   }
 
   function loginHandler(token: string) {
@@ -103,6 +132,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     refrealCode:referalCode,
     setReferalCode:setReferalCode,
     varification:verification,
+    siginUpOptions:siginOptions,
     currentUser: user,
     needReload:needReload,
     setNeedReload:setNeedReload,
@@ -116,6 +146,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
       setUser(user)
     },
     verificationHandler:verificationHandler,
+    siginupHandler:siginOptionsHandler,
     login: loginHandler,
     logout: logoutHandler,
   };
