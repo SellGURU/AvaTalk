@@ -9,7 +9,9 @@ import "react-slideshow-image/dist/styles.css";
 class Video {
   public order: number = -1;
   constructor(protected url: string, protected name: string) {}
-  public resolveRender(theme: string, userID: string, videos: Video[]) {
+  public resolveRender(theme: string, userID: string) {
+    console.log("this.geturl() mkmk", this.geturl());
+    
     return (
       <div className={`w-full`}>
         <div
@@ -70,7 +72,7 @@ class VideoBox extends Box {
     return (
       <>
         {this.links.length > 0 ? (
-          <div className={`${theme}-Profile-Vectors hiram`}>
+          <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide>
               {this.links
                 .sort((a, b) => a.order - b.order)
@@ -84,7 +86,6 @@ class VideoBox extends Box {
                       {newSocal.resolveRender(
                         theme,
                         options.userId,
-                        this.links
                       )}
                     </>
                   );

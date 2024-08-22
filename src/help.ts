@@ -71,7 +71,7 @@ const useConstructor = (callBack = () => {}) => {
 
 const boxProvider = (box: any) => {
   switch (box.type_name) {
-    case "VideosBox": {
+    case "VideoBox": {
       return Object.assign(new VideoBox("simple", []), box);
     }
     case "SocialBox": {
@@ -276,6 +276,8 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
           return new LinkBox(item.title, item.links);
         case "FileBox":
           return new FileBox(item.title, item.contents);
+        case "VideosBox":
+          return new VideoBox(item.title, item.links);
       }
   }) as Array<Box>;
 };
