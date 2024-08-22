@@ -1,6 +1,7 @@
 import { Button } from "symphony-ui"
 import { useState } from "react"
-import {CreatePasswordStep, InformationStep} from "./steps"
+import {ContactStep, CreatePasswordStep, InformationStep} from "./steps"
+import { StepController } from "../../../Components"
 
 
 const OnBoarding = () => {
@@ -15,9 +16,18 @@ const OnBoarding = () => {
                 }
                 {step == 1 &&
                     <>
-                        <InformationStep></InformationStep>
+                        <InformationStep onSubmit={() => {
+                            setStep(step+1)
+                        }}></InformationStep>
                     </>
-                }                
+                }      
+                {step == 2 &&
+                    <>
+                        <ContactStep onSubmit={() => {
+                            setStep(step+1)
+                        }}></ContactStep>
+                    </>
+                }                            
             </>
         )
     }
@@ -30,6 +40,13 @@ const OnBoarding = () => {
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                         <div className="Carbon-back-Button-vector"></div>
                     </Button>
+                    <div className="mt-10">
+                        <StepController
+                            theme="Carbon"
+                            steps={4}
+                            currentStep={step}
+                        ></StepController>                    
+                    </div>
                     <div className="text-text-primary font-semibold">Skip</div>
                 </div>
                 {

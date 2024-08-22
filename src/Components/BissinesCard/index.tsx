@@ -1,4 +1,20 @@
+import { useAuth } from "../../hooks/useAuth"
+
 const BissinesCard = () => {
+    const context = useAuth()
+    console.log(context.siginUpOptions)
+    const resolveProfImage = () => {
+        if(context.siginUpOptions.gender == 'female'){
+            return './icons/FemaleFace.png'
+        }
+        return './icons/MaleFace.png'
+    }
+    const resolveCardName = () => {
+        if(context.siginUpOptions.firstName == '' && context.siginUpOptions.lastName == ''){
+            return 'Your Name'
+        }
+        return context.siginUpOptions.firstName + " " +context.siginUpOptions.lastName
+    }
     return (
         <>
             <div className="bg-primary-color relative flex justify-between items-center px-4 w-[247px] h-[134px] rounded-[16px]">
@@ -16,17 +32,17 @@ const BissinesCard = () => {
                         <img className="w-[16px] opacity-30" src="./icons/cardVisit/global.svg" alt="" />                         
                     </div>
                     <div className="w-[24px] h-[24px] flex justify-center top-[-18px] left-[-12px] boxShadow-bisinesCard bg-white absolute rounded-full">
-                        <img className="w-[16px] opacity-30" src="./icons/cardVisit/sms.svg" alt="" />                          
+                        <img className={`w-[16px] ${context.siginUpOptions.email!= ''?'opacity-100':'opacity-30'}`} src="./icons/cardVisit/sms.svg" alt="" />                          
                     </div>
                     <div className="w-[24px] flex justify-center h-[24px] top-[-28px] left-[16px] boxShadow-bisinesCard bg-white absolute rounded-full">
-                        <img className="w-[16px] opacity-30" src="./icons/cardVisit/call.svg" alt="" />                          
+                        <img className={`w-[16px] ${context.siginUpOptions.phone!= ''?'opacity-100':'opacity-30'}`} src="./icons/cardVisit/call.svg" alt="" />                          
                     </div>
                     <div className="w-[62px] h-[62px] bg-white rounded-full boxShadow-bisinesCard">
-                        <img className="opacity-30" src="./icons/MaleFace.png" alt="" />
+                        <img className={` ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
                     </div>
                 </div>
                 <div>
-                    <div className="text-sm text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>Your Name</div>
+                    <div className="text-[12px] text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
                     <div className="text-[8px] opacity-80 text-white font-semibold">Company/ Job Title</div>
                 </div>
             </div>

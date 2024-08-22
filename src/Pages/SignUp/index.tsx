@@ -54,8 +54,11 @@ const SignUp = () => {
                 emailOrPhone: formik.values.email,
                 googleJson:{}
             })
+            authContext.siginupHandler({
+                email:formik.values.email
+            })
             authContext.setReferalCode(parametr.get("referral") as string)
-            navigate('/Verification')
+            navigate('/createAccount')
         })
     }    
     return (
