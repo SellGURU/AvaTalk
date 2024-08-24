@@ -8,6 +8,7 @@ import { Auth } from "../../../Api"
 import { useAuth } from "../../../hooks/useAuth"
 import { toast } from "react-toastify"
 import { useFormik } from "formik"
+import CompleteStep from "./steps/CompleteStep"
 
 interface Avatars {
   photo: string;
@@ -17,7 +18,7 @@ interface Avatars {
 }
 
 const OnBoarding = () => {
-    const [step ,setStep] = useState(1)
+    const [step ,setStep] = useState(0)
     const authContext = useAuth()
     const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
     const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
@@ -77,7 +78,9 @@ const OnBoarding = () => {
             <>
                 {step == 0 &&
                     <>
-                        <CreatePasswordStep></CreatePasswordStep>
+                        <CreatePasswordStep onSubmit={() => {
+                            setStep(step+1)
+                        }}></CreatePasswordStep>
                     </>
                 }
                 {step == 1 &&
@@ -105,9 +108,18 @@ const OnBoarding = () => {
                     <>
                         <AvatarStep setUploadedAvater={setUploadedAvater} formik={formik} avatarList={avatarList} uploadedAvater={uploadedAvater} onSubmit={() => {
                             setStep(step+1)
+                            authContext.siginupHandler({
+                                silent_video_avatar:formik.values.silent_video_avatar,
+                                avatar_pic_url:formik.values.avatar_pic_url
+                            })
                         }}></AvatarStep>
                     </>
-                }                                                             
+                }   
+                {step == 5 &&
+                    <>
+                        <CompleteStep></CompleteStep>
+                    </>
+                }                                                                            
             </>
         )
     }
@@ -116,18 +128,22 @@ const OnBoarding = () => {
             <div className="w-full min-h-screen py-8 px-4">
                 <div className="flex justify-between items-center w-full">
                     <Button onClick={() =>{
-                        setStep(step -1)
+                        if(step>0){
+                            setStep(step -1)
+                        }
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                         <div className="Carbon-back-Button-vector"></div>
                     </Button>
-                    <div className="mt-10">
-                        <StepController
-                            theme="Carbon"
-                            steps={4}
-                            currentStep={step}
-                        ></StepController>                    
+
+                    <div className={`mt-10 ${step>0 && step < 5?'visible':'invisible'}`}>
+                            <StepController
+                                theme="Carbon"
+                                steps={4}
+                                currentStep={step}
+                            ></StepController>                    
                     </div>
-                    <div className="text-text-primary font-semibold">Skip</div>
+
+                    <div className={`text-text-primary ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                 </div>
                 {
                     resolveStep()

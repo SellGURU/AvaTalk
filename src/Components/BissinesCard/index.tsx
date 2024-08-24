@@ -4,6 +4,9 @@ const BissinesCard = () => {
     const context = useAuth()
     console.log(context.siginUpOptions)
     const resolveProfImage = () => {
+        if(context.siginUpOptions.avatar_pic_url != ''){
+            return context.siginUpOptions.avatar_pic_url
+        }
         if(context.siginUpOptions.gender == 'female'){
             return './icons/FemaleFace.png'
         }
@@ -44,8 +47,8 @@ const BissinesCard = () => {
                     <div className="w-[24px] flex justify-center h-[24px] top-[-28px] left-[16px] boxShadow-bisinesCard bg-white absolute rounded-full">
                         <img className={`w-[16px] ${context.siginUpOptions.phone!= ''?'opacity-100':'opacity-30'}`} src="./icons/cardVisit/call.svg" alt="" />                          
                     </div>
-                    <div className="w-[62px] h-[62px] bg-white rounded-full boxShadow-bisinesCard">
-                        <img className={` ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
+                    <div className="w-[62px] h-[62px] overflow-hidden bg-white rounded-full boxShadow-bisinesCard">
+                        <img className={`h-full  ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
                     </div>
                 </div>
                 <div>

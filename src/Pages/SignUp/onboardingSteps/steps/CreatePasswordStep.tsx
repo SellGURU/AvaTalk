@@ -1,7 +1,13 @@
 import { Button } from "symphony-ui"
 import { TextField } from "../../../../Components"
 
-const CreatePasswordStep = () => {
+interface CreatePasswordStep {
+    onSubmit:() => void
+}
+
+const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
+    onSubmit
+}) => {
     return (
         <>
             <div className="mt-8">
@@ -19,7 +25,9 @@ const CreatePasswordStep = () => {
                 <TextField type="text" required label="Confirm password" placeholder="Confirm password..." inValid={false} name="" onBlur={() => {}} onChange={() => {}} value="" theme="Carbon" ></TextField>
             </div>     
             <div className="mt-8">
-                <Button theme="Carbon">Continue</Button>           
+                <Button onClick={() => {
+                    onSubmit()
+                }} theme="Carbon">Continue</Button>           
             </div>        
         </>
     )
