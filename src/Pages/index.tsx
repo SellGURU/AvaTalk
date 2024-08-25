@@ -14,5 +14,6 @@ import Setting from "./Setting";
 import AnalyticsPage from "./AnalyticsPage";
 import Share from "./Share";
 import SignUp from "./SignUp";
+import RegisterVerification from "./Verification/index2";
 
-export { CreateAccount, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage ,Share,SignUp};
+export { CreateAccount, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage,RegisterVerification ,Share,SignUp};

@@ -58,7 +58,7 @@ const SignUp = () => {
                 email:formik.values.email
             })
             authContext.setReferalCode(parametr.get("referral") as string)
-            navigate('/createAccount')
+            navigate('/RVerification')
         })
     }    
     return (
