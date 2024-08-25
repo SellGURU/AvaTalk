@@ -229,6 +229,7 @@ const EditVideos = () => {
             value={editeValue}
             theme="Carbon"
             isOpen={openaddlink}
+            placeholder="https://www.youtube.com"
             onClose={() => {
               setEditName("");
               setEditeValue("");
