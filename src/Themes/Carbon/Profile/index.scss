@@ -147,6 +147,10 @@
     background-image: url(/Carbon/volume-high.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
 }
+.Carbon-Profile-notificationVector{
+    mask-image: url(/Carbon/notification.svg);
+    @apply w-6 h-6 bg-cover bg-no-repeat bg-[#8290a3];
+}
 .Carbon-Profile-mutedVector{
     background-image: url(/Carbon/volume-slash.svg);
     @apply w-6 h-6 bg-cover bg-no-repeat;
