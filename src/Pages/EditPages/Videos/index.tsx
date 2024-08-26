@@ -215,7 +215,7 @@ const EditVideos = () => {
               onClick={() => setOpenAddLink(!openaddlink)}
               theme="Carbon-AddLink"
             >
-              Add Link
+              Add video Link
             </Button>
             <div className="relative"></div>
           </div>
