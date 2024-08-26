@@ -57,7 +57,11 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 return `
                     Unlimited chats are open now! Post-trial, chats will be limited unless you upgrade to Pro.
                 `                
-            }                                             
+            }  
+             if (page == "VideoSetting") {
+               return `
+               You're enjoying unlimited video uploads. Upgrade to Pro to keep this feature! after your trial.             `;
+             }                                             
         }
         if(authContext.currentUser.type_of_account.getType() == 'Free') {
             if(page == 'AiSetting'){
@@ -89,6 +93,10 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 return `
                     Unlock full conversations with your Avatar by upgrading to Avatalk Pro. Enhance your networking experience!
                 `                
+            }    
+            if (page == "VideoSetting") {
+              return `
+                Engage more with videos. Upgrade to Pro to captivate your audience!                `;
             }                                             
         }        
         return ''

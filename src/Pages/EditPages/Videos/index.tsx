@@ -88,7 +88,7 @@ const EditVideos = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="LinkSetting"></AccessNotifManager>
+            <AccessNotifManager page="VideoSetting"></AccessNotifManager>
           </div>
           <div className=" px-6">
             <TextField
@@ -215,7 +215,7 @@ const EditVideos = () => {
               onClick={() => setOpenAddLink(!openaddlink)}
               theme="Carbon-AddLink"
             >
-              Add Link
+              Add video Link
             </Button>
             <div className="relative"></div>
           </div>
@@ -229,6 +229,7 @@ const EditVideos = () => {
             value={editeValue}
             theme="Carbon"
             isOpen={openaddlink}
+            placeholder="https://www.youtube.com"
             onClose={() => {
               setEditName("");
               setEditeValue("");

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button } from "symphony-ui"
-import ContentCard from '../ContentCard';
 import { BookMark, ExchangeContact } from '../__Modal__';
 import { useAuth } from '../../hooks/useAuth';
 import CropperBox from '../CropperBox/index';
@@ -12,7 +11,7 @@ import ShareContact from '../__Modal__/ShareContact';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import { boxProvider, useConstructor } from '../../help';
 import Share from '../../Api/Share';
-import { Spinners } from '..';
+import {ContentCard, Spinners} from '..';
 import ToturialsBox from '../ToturialsBox';
 import { publish } from '../../utils/event';
 import { Auth, Contacts } from '../../Api';
@@ -339,7 +338,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 <>
                 {item.isShareAble() || mode=='profile' ?
                     <ContentCard userId={shareUser.information?.userId as string} item={item} mod={mode} theme="Carbon" >
-                    </ContentCard>              
+                    </ContentCard>
                   :
                   undefined
                 }
