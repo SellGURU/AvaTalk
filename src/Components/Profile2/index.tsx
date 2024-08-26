@@ -20,6 +20,7 @@ import { ExchangeContact } from "../__Modal__";
 import { toast } from "react-toastify";
 import ShowUser from "../__Modal__/ShowUser";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
+import Notification from "../Notification";
 
 interface ProfileProps {
   theme?: string;
@@ -49,12 +50,19 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const ShowProfileRef =useRef<HTMLDivElement>(null)
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
   const [prisentMode,setPrisentMode] = useState('audio')
+  const notificationRefrence =useRef<HTMLDivElement>(null)
   useModalAutoClose({
     refrence:ShowProfileRef,
     close:() => {
       setShowIsProfileOpen(false)
     }
   })     
+  useModalAutoClose({
+    refrence:notificationRefrence,
+    close:() => {
+      setShowNotification(false)
+    }
+  })    
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [,setShowMuiteController] = useState(false)
@@ -124,6 +132,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //     setLaodPage(true)
   //   }
   // })
+  const [showNotification,setShowNotification] = useState(false)
   useConstructor(() => {
     console.log(id)
     console.log(mode)
@@ -275,7 +284,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     :
       <div className="w-full h-svh relative flex justify-start text-gray-700 text-center flex-col">
         <Outlet></Outlet>
+        {showNotification &&
+          <div ref={notificationRefrence}>
+            <Notification></Notification>   
 
+          </div>
+        }
         <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
           {/* {mode == 'profile' ?
             <div className=" w-48 h-[40px] sticky z-20">
@@ -309,6 +323,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </>}
               </>
           } */}
+          {/* {!scrolled && */}
+            <div className="absolute top-4 left-6 z-20">
+              <Button onClick={() => {
+              setShowNotification(true)
+              }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
+              </Button>  
+                       
+            </div>          
+          {/* } */}
           {
             mode == 'profile' ?
             <>
