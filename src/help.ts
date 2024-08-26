@@ -259,25 +259,24 @@ const reolveJsonToObject = (jsonuser: string) => {
 
 const resolveBoxsJson = (jsonBox: Array<any>) => {
   return jsonBox.map((item) => {
-    if (item != null)
-      switch (item.type_name) {
-        case "GoogleMapBox":
-          return new GoogleMapBox(item.title, item.location);
-        case "AboutBox":
-          return new AboutBox(item.title, item.text);
-        case "MeetingBox":
-          return new AvailabilityBox(item.title, item.url);
-        case "GalleryBox":
-          return new GalleryBox(item.title, item.contents);
-        case "SocialBox":
-          return new SocialBox(item.title, item.socialMedias);
-        case "LinkBox":
-          return new LinkBox(item.title, item.links);
-        case "FileBox":
-          return new FileBox(item.title, item.contents);
-        case "VideoBox":
-          return new VideoBox(item.title, item.links);
-      }
+    switch (item.type_name) {
+      case "GoogleMapBox":
+        return new GoogleMapBox(item.title, item.location);
+      case "AboutBox":
+        return new AboutBox(item.title, item.text);
+      case "MeetingBox":
+        return new AvailabilityBox(item.title, item.url);
+      case "GalleryBox":
+        return new GalleryBox(item.title, item.contents);
+      case "SocialBox":
+        return new SocialBox(item.title, item.socialMedias);
+      case "LinkBox":
+        return new LinkBox(item.title, item.links);
+      case "FileBox":
+        return new FileBox(item.title, item.contents);
+      case "VideoBox":
+        return new VideoBox(item.title, item.links);
+    }
   }) as Array<Box>;
 };
 
