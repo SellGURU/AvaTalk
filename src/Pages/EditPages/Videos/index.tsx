@@ -88,7 +88,7 @@ const EditVideos = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="LinkSetting"></AccessNotifManager>
+            <AccessNotifManager page="VideoSetting"></AccessNotifManager>
           </div>
           <div className=" px-6">
             <TextField
