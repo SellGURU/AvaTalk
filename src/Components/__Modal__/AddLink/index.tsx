@@ -20,7 +20,7 @@ const validationSchema = Yup.object().shape({
     url:Yup.string().required(),
 });
 
-const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplete,onAfterOpen,onClose,placeholder,theme}) => {
+const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplete,onAfterOpen,onClose,placeholder="https://facebook.com/",theme}) => {
     const initialValue= {
         name:name?name:'',
         url:value? value :'',
@@ -70,7 +70,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
                 <TextField  {...formik.getFieldProps("name")}  label={'Name'} placeholder="website" theme="Carbon" name="name" type="text" errorMessage="" inValid={false} />
               </div>  
               <div className="my-4">
-                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder="https://facebook.com/" placeholder={placeholder} theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
+                <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder={placeholder} theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
               </div>                 
               <Button disabled={!formik.isValid || !formik.touched.url || !formik.values.url.includes('http')} onClick={() => {
                 onComplete(formik.values.name,formik.values.url)
