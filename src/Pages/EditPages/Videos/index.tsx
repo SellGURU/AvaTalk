@@ -29,7 +29,7 @@ const EditVideos = () => {
   const confirmRef = createRef<HTMLDivElement>();
   // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
   const [video, setVideo] = useState<Array<Video>>(
-    currentBox.content.map((item: any) =>
+    currentBox.contents.map((item: any) =>
       Object.assign(new Video("", ""), item)
     )
   );
