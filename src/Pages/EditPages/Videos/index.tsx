@@ -29,7 +29,9 @@ const EditVideos = () => {
   const confirmRef = createRef<HTMLDivElement>();
   // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
   const [video, setVideo] = useState<Array<Video>>(
-    currentBox.links.map((item: any) => Object.assign(new Video("", ""), item))
+    currentBox.content.map((item: any) =>
+      Object.assign(new Video("", ""), item)
+    )
   );
 
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)
@@ -110,14 +112,14 @@ const EditVideos = () => {
               <TextField
                 theme="Carbon"
                 disabled
-                label="Links"
+                label="Video Links"
                 inValid={false}
                 name="title"
                 onBlur={() => {}}
                 onChange={() => {}}
                 type="text"
                 value=""
-                placeholder="No Link"
+                placeholder="No Video Link"
               ></TextField>
             </div>
           ) : (
@@ -189,8 +191,8 @@ const EditVideos = () => {
                                       <Confirm
                                         refrence={confirmRef}
                                         onConfirm={() => deleteSocial(index)}
-                                        content="Are you sure you want to delete this link?"
-                                        title="Delete Link"
+                                        content="Are you sure you want to delete this Video link?"
+                                        title="Delete Video Link"
                                         onClose={onClose}
                                       ></Confirm>
                                     );

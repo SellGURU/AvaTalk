@@ -57,14 +57,14 @@ class Video {
 }
 
 class VideoBox extends Box {
-  constructor(protected title: string, public links: Array<Video>) {
+  constructor(protected title: string, public content: Array<Video>) {
     super(title);
     this.order = 3;
     this.type_name = "VideoBox";
   }
 
   public isShareAble(): boolean {
-    if (this.links.length == 0) {
+    if (this.content.length == 0) {
       return false;
     } else {
       return true;
@@ -78,7 +78,7 @@ class VideoBox extends Box {
   ): JSX.Element {
     return (
       <>
-        {this.links.length > 0 ? (
+        {this.content.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide
               prevArrow={
@@ -108,7 +108,7 @@ class VideoBox extends Box {
                 </div>
               }
             >
-              {this.links
+              {this.content
                 .sort((a, b) => a.order - b.order)
                 .map((item) => {
                   const newSocal = Object.assign(
@@ -131,7 +131,7 @@ class VideoBox extends Box {
   }
 
   public getLinks() {
-    return this.links;
+    return this.content;
   }
 }
 
