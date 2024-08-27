@@ -4,13 +4,16 @@ import { Tooltip } from "react-tooltip";
 
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import { Button } from "symphony-ui";
 
 class Video {
   public order: number = -1;
+
   constructor(protected url: string, protected name: string) {}
+
   public resolveRender(_theme: string, userID: string) {
     console.log("this.geturl() mkmk", this.geturl());
-    
+
     return (
       <div className={`w-full`}>
         <div
@@ -19,7 +22,7 @@ class Video {
           onClick={() => this.handleMoreInfoClick(userID)}
         >
           <iframe
-          className=" !rounded-xl"
+            className=" !rounded-xl"
             width="100%"
             height="315"
             src={this.geturl()}
@@ -32,6 +35,7 @@ class Video {
       </div>
     );
   }
+
   private handleMoreInfoClick(userID: string) {
     Auth.addEvent({
       event_type: "more_info",
@@ -39,6 +43,7 @@ class Video {
       sub_event_category: "more_info_links",
     });
   }
+
   public geturl() {
     // Extract the video ID from the original URL
     const videoId = this.url.split("v=")[1];
@@ -57,6 +62,7 @@ class VideoBox extends Box {
     this.order = 3;
     this.type_name = "VideoBox";
   }
+
   public isShareAble(): boolean {
     if (this.links.length == 0) {
       return false;
@@ -64,6 +70,7 @@ class VideoBox extends Box {
       return true;
     }
   }
+
   public resolveRender(
     theme: string,
     mode?: string,
@@ -73,7 +80,34 @@ class VideoBox extends Box {
       <>
         {this.links.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
-            <Slide>
+            <Slide
+              prevArrow={
+                <div
+                  className={`${theme}-back-Button-container-box`}
+                  style={{ transform: "translate(30%, -50%)" }}
+                  data-mode="gallery"
+                >
+                  <Button disabled={false} theme={`${theme}-back`}>
+                    <div className={`${theme}-back-Button-vector`}></div>
+                  </Button>
+                </div>
+              }
+              nextArrow={
+                <div
+                  className={`${theme}-back-Button-container-box`}
+                  style={{ transform: "translate(-30%, -50%)", right: "0%" }}
+                  data-mode="gallery"
+                >
+                  <Button
+                    disabled={false}
+                    theme={`${theme}-back`}
+                    style={{ rotate: "180deg" }}
+                  >
+                    <div className={`${theme}-back-Button-vector`}></div>
+                  </Button>
+                </div>
+              }
+            >
               {this.links
                 .sort((a, b) => a.order - b.order)
                 .map((item) => {
@@ -81,16 +115,9 @@ class VideoBox extends Box {
                     new Video("htps://some.com", ""),
                     item
                   );
-                  return (
-                    <>
-                      {newSocal.resolveRender(
-                        theme,
-                        options.userId,
-                      )}
-                    </>
-                  );
+                  return <>{newSocal.resolveRender(theme, options.userId)}</>;
                 })}
-        </Slide>
+            </Slide>
           </div>
         ) : (
           this.resolveAddRender(theme, mode)
@@ -98,11 +125,14 @@ class VideoBox extends Box {
       </>
     );
   }
+
   public getRouteAddress(): string {
     return "videos";
   }
+
   public getLinks() {
     return this.links;
   }
 }
+
 export { VideoBox, Video };
