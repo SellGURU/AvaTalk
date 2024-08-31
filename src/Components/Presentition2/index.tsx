@@ -6,6 +6,7 @@ import { chat } from "../../Types";
 import { User } from "../../Model";
 import { Suggestions } from "symphony-ui";
 import { BeatLoader } from "react-spinners";
+import AccessNotifManager from "../AccessNotifManager";
 
 interface PresentationProps {
   theme?: string;
@@ -148,6 +149,12 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
                 </>
                 )
             })
+            }
+            {!showSuggestions && 
+                <div className=" absolute bottom-14 bg-white py-4 mt-24  mb-[24px]">
+                    <AccessNotifManager page="chatEndUser"></AccessNotifManager>
+
+                </div>             
             }
             <div ref={messagesEndRef} />
             {
