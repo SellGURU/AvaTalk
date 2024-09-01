@@ -4,15 +4,27 @@ import { Notification as NotificationApi } from "../../Api"
 
 interface NotificationProps {
     notifs:any
+    setNotifs:(notifs:any) => void
 }
 
-const Notification:React.FC<NotificationProps> = ({notifs}) => {
+const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
     const [menu,setMenu] = useState<'All'|'Unread'>('All')
+    
+    const markAsRead = (id:string, day:string) => {
+        setNotifs((prevNotifications:any) => ({
+            ...prevNotifications,
+            [day]: prevNotifications[day].map((notification:any) => 
+                notification.id === id 
+                    ? { ...notification, isRead: true } 
+                    : notification
+            )
+        }));
+        localStorage.setItem("notifs",JSON.stringify(notifs))
+    };
 
     const resolveDateAgo = (date:Date) => {
         const now = new Date();
         // console.log(date)
-        console.log(date.getTimezoneOffset())
         const secondsPast = Math.floor((now.getTime() - date.getTime() ) / 1000);
 
         if (secondsPast < 60) {
@@ -77,6 +89,7 @@ const Notification:React.FC<NotificationProps> = ({notifs}) => {
                                                         {!value.isRead &&
                                                             <div onClick={() => {
                                                                 NotificationApi.readNotification(value.id)
+                                                                markAsRead(value.id,el)
                                                             }} className="text-left">
                                                                 <div className="flex justify-between">
                                                                     <div className="text-text-primary text-sm">{value.title}</div>

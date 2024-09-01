@@ -321,7 +321,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         <Outlet></Outlet>
         {showNotification &&
           <div ref={notificationRefrence}>
-            <Notification notifs={notifs}></Notification>   
+            <Notification setNotifs={setNotify} notifs={notifs}></Notification>   
 
           </div>
         }
