@@ -79,13 +79,18 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     >
       <div>
         <div className='flex w-full justify-between items-start'>
-            <div>
-                <div className='text-gray-700 text-base font-semibold contactNameShadow'>{title}</div>
-                <div className='text-gray-400 text-xs font-medium'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
-            </div>
             <Button onClick={onClose} theme="Carbon-back">
                 <div className={`${theme}-Profile-closeIcon`}></div>
             </Button>
+            <div>
+                <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{title}</div>
+                <div className='text-gray-400 text-xs font-medium'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
+            </div>
+            <div className="invisible">
+              <Button onClick={onClose} theme="Carbon-back">
+                  <div className={`${theme}-Profile-closeIcon`}></div>
+              </Button>
+            </div>
         </div>
 
         <div className="my-4">

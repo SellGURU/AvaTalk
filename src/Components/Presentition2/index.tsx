@@ -127,7 +127,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
     }, [chats]);    
     return (
         <>
-        <div  className={`${theme}-Presentation-MoreInfoSection px-4 pt-2 pb-24 ${theme}-Presentation-fadeIn`}>
+        <div  className={`${theme}-Presentation-MoreInfoSection px-4 pt-2 pb-36 ${theme}-Presentation-fadeIn`}>
         {
             showSuggestions  && chats.length ==0 ?
             <>

@@ -27,9 +27,9 @@ class Notification extends Api {
         })
     }
 
-    static checkNotification(time:Date){
+    static checkNotification(){
         const response = this.post("/check_notification",{
-            time:time.getTime()
+            time:this.lastUsed.getTime()
         },{
             noPending:true
         }    

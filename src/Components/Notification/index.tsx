@@ -13,7 +13,7 @@ const Notification:React.FC<NotificationProps> = ({notifs}) => {
         const now = new Date();
         // console.log(date)
         console.log(date.getTimezoneOffset())
-        const secondsPast = Math.floor((now.getTime() - date.getTime() ) / 1000)+(date.getTimezoneOffset()*60 );
+        const secondsPast = Math.floor((now.getTime() - date.getTime() ) / 1000);
 
         if (secondsPast < 60) {
             return `${secondsPast} second${secondsPast === 1 ? '' : 's'} ago`;

@@ -52,6 +52,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
   const [prisentMode,setPrisentMode] = useState('audio')
   const notificationRefrence =useRef<HTMLDivElement>(null)
+  const [isHaveNewNotif,setIsHaveNewNotif] = useState(false)
   useModalAutoClose({
     refrence:ShowProfileRef,
     close:() => {
@@ -107,8 +108,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //   })
   // })
   const checkNotif = () => {
-    NotificationApi.checkNotification(new Date()).then((res) => {
+    NotificationApi.checkNotification().then((res) => {
         if(res.data["New notification"] == true) {
+          setIsHaveNewNotif(true)
           getNotifs()
         }
     })
@@ -154,6 +156,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const getNotifs = () => {
     NotificationApi.getAll((data) => {
         setNotify(data)
+        // setIsHaveNewNotif(true)
     })    
   }
   useConstructor(() => {
@@ -350,9 +353,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             mode == 'profile' &&
               <div className="absolute top-4 left-6 z-20">
                 <Button onClick={() => {
-                setShowNotification(true)
+                  setShowNotification(true)
+                  // setIsHaveNewNotif(false)
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
+                  {isHaveNewNotif &&
+                    <div className="absolute animate-pulse w-2 h-2 top-2 right-[5px] rounded-full bg-yellow-400"></div>
+                  }
                 </Button>  
                         
               </div>          
