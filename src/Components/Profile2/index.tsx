@@ -158,6 +158,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   // })
   const [showNotification,setShowNotification] = useState(false)
   const [notifs,setNotify]= useState<Array<any>>([])
+  useEffect(() => {
+    localStorage.setItem("notifs",JSON.stringify(notifs))
+  },[notifs])
   const getNotifs = (isNew?:boolean) => {
     NotificationApi.getAll((data) => {
         setNotify(data)

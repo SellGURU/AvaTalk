@@ -19,7 +19,6 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                     : notification
             )
         }));
-        localStorage.setItem("notifs",JSON.stringify(notifs))
     };
     const markAllAsRead = () => {
         setNotifs((prevNotifications:any) => {
@@ -32,7 +31,6 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
             });
             return updatedNotifications;
         });
-        localStorage.setItem("notifs",JSON.stringify(notifs))
         NotificationApi.markAll()
     };
     const resolveDateAgo = (date:Date) => {
