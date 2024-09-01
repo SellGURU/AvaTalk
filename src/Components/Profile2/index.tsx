@@ -65,6 +65,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setShowNotification(false)
     }
   })    
+  const resolveunRead= (data:any) => {
+      let unreadCount = 0;
+      for (const day in data) {
+          unreadCount += data[day].filter((notification:any) => !notification.isRead).length;
+      }
+      return unreadCount;
+  }     
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [,setShowMuiteController] = useState(false)
@@ -371,7 +378,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
                   {isHaveNewNotif &&
-                    <div className="absolute animate-pulse w-2 h-2 top-2 right-[5px] rounded-full bg-yellow-400"></div>
+                    <div className="absolute animate-pulse flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
+                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>                      
+                    </div>
+                  }
+                  {!isHaveNewNotif &&resolveunRead(notifs) > 0 &&
+                    <div className="absolute flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
+                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>
+                    </div>
                   }
                 </Button>  
                         

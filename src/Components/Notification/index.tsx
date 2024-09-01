@@ -70,7 +70,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
             }
         })
         return length
-    }
+    } 
     return (
         <>
             <div className="absolute z-30 px-4 py-6 rounded-[27px] boxShadow-Gray top-[110px] left-4 bg-white h-[320px] w-[320px]">
