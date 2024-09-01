@@ -56,6 +56,11 @@ const Home2 = () => {
 
         })        
     }
+    const playNotifSound = () => {
+        const audio = new Audio('sounds/notif.wav');
+        
+        audio.play();        
+    }
     useConstructor(() => {
         getProfile()
     })
@@ -63,6 +68,9 @@ const Home2 = () => {
         if(parametr.get("force") == 'true'){
             publish("ForceReload",{})
         }        
+    })
+    subscribe("playNotifSound",() => {
+        playNotifSound()
     })
     subscribe('profileIsReview',() => {
         setShowFooter(false)
@@ -98,6 +106,7 @@ const Home2 = () => {
             :
             <>
                 <Outlet></Outlet>
+
                 {showFooter ? 
                     <Footer activeItem={menu} onItemChange={(element) => {
                         setMenu(element)

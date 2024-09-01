@@ -2,7 +2,7 @@
 import Api from "./Api";
 
 class Notification extends Api {
-    static lastUsed:Date = new Date()
+    static lastUsed:Date | null = null
     static isChecking:boolean = false
     static getAll(resolve:(data:Array<any>) =>void) {
         this.isChecking = true
@@ -12,6 +12,7 @@ class Notification extends Api {
             resolve(res.data)
             this.isChecking= false
             this.lastUsed = new Date()
+            localStorage.setItem("lastNotif",JSON.stringify(new Date()))
         },
     ).catch(() => {
             this.isChecking =false
@@ -28,8 +29,14 @@ class Notification extends Api {
     }
 
     static checkNotification(){
+        if(this.lastUsed == null){
+            const last = localStorage.getItem("lastNotif")
+            if(last){
+                this.lastUsed = new Date(JSON.parse(last))
+            }
+        }
         const response = this.post("/check_notification",{
-            time:this.lastUsed.getTime()
+            time:this.lastUsed?.getTime()
         },{
             noPending:true
         }    

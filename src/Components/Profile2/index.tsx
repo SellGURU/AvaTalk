@@ -110,13 +110,18 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const checkNotif = () => {
     NotificationApi.checkNotification().then((res) => {
         if(res.data["New notification"] == true) {
-          setIsHaveNewNotif(true)
-          getNotifs()
+          getNotifs(true)
         }
     })
   }
   useEffect(() => {
-    const interval = setInterval(checkNotif, 30000);     
+    const nots = localStorage.getItem("notifs")
+    if(nots){
+      setNotify(JSON.parse(nots))
+    }else{
+      getNotifs()
+    }
+    const interval = setInterval(checkNotif, 15000);     
     return () => clearInterval(interval);
   },[])
   useEffect(() => {
@@ -153,14 +158,19 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   // })
   const [showNotification,setShowNotification] = useState(false)
   const [notifs,setNotify]= useState<Array<any>>([])
-  const getNotifs = () => {
+  const getNotifs = (isNew?:boolean) => {
     NotificationApi.getAll((data) => {
         setNotify(data)
+        localStorage.setItem("notifs",JSON.stringify(data))
+        if(isNew){
+          setIsHaveNewNotif(true)
+          publish("playNotifSound",{})
+        }
         // setIsHaveNewNotif(true)
     })    
   }
   useConstructor(() => {
-    getNotifs()
+    // getNotifs()
     if(id){
       const resolveSocial: Array<Box> = [];
       Share.getShareData('/presentation_info/user='+id,(data) => {
@@ -354,7 +364,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               <div className="absolute top-4 left-6 z-20">
                 <Button onClick={() => {
                   setShowNotification(true)
-                  // setIsHaveNewNotif(false)
+                  setIsHaveNewNotif(false)
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
                   {isHaveNewNotif &&
