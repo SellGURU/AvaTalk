@@ -21,7 +21,20 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
         }));
         localStorage.setItem("notifs",JSON.stringify(notifs))
     };
-
+    const markAllAsRead = () => {
+        setNotifs((prevNotifications:any) => {
+            const updatedNotifications:any = {};
+            Object.keys(prevNotifications).forEach(day => {
+                updatedNotifications[day] = prevNotifications[day].map((notification:any) => ({
+                    ...notification,
+                    isRead: true
+                }));
+            });
+            return updatedNotifications;
+        });
+        localStorage.setItem("notifs",JSON.stringify(notifs))
+        NotificationApi.markAll()
+    };
     const resolveDateAgo = (date:Date) => {
         const now = new Date();
         // console.log(date)
@@ -70,7 +83,9 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                     <div onClick={() => {
                         setMenu('Unread')
                     }} className={`${menu =='Unread'? 'text-primary-color':'text-[#9CA3AF] '} cursor-pointer font-medium`}>Unread ({resolveNotifLength(notifs,{isUnread:true})})</div>
-                    <div className="text-primary-color cursor-pointer font-medium">Mark all as read</div>
+                    <div onClick={() => {
+                        markAllAsRead()                        
+                    }} className="text-primary-color cursor-pointer font-medium">Mark all as read</div>
                 </div>
                 <div className="w-full border-b border-[#E5E7EB] mt-4"></div>
 

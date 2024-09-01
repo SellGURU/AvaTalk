@@ -44,6 +44,13 @@ class Notification extends Api {
         return response
     }
 
+    static markAll() {
+        this.post('/update_notification',{
+            type:'Mark all as read'
+        },{
+            noPending:true
+        })
+    }
 }
 
 export default Notification
