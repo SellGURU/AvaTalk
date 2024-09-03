@@ -22,46 +22,68 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       link: "account",
     },
 
-    // {
-    //   name: "Sharing",
-    //   icon: "share.svg",
-    //   link: "sharing",
-    // },
     {
-      name: "Your Service",
-      icon: "service.svg",
-      link: "service",
+      name: "Sharing",
+      icon: "share.svg",
+      link: "sharing",
     },
     {
-      name: "Refer Your Friends",
-      icon: "profile-add.svg",
+      name: "Order NFC Card",
+      icon: "OrderNFCCard.svg",
+      link: "OrderNFCCard",
+    },
+    // {
+    //   name: "Your Service",
+    //   icon: "service.svg",
+    //   link: "service",
+    // },
+    {
+      name: "Refer and get rewards",
+      icon: "Referandgetrewards.svg",
       link: "refer",
     },
     {
-      name: "Privacy Policy",
-      icon: "policy.svg",
-      link: "privacypolicy",
+      name: "Your Plan",
+      icon: "YourPlan.svg",
+      link: "YourPlan",
     },
     {
-      name: "Terms of Service",
-      icon: "security.svg",
-      link: "termsservice",
+      name: "payment-subscription",
+      icon: "payment.svg",
+      link: "payment",
     },
     {
-      name: "Support",
-      icon: "support.svg",
-      link: "support",
+      name: "Help",
+      icon: "help.svg",
+      link: "Help",
     },
+    // {
+    //   name: "Privacy Policy",
+    //   icon: "policy.svg",
+    //   link: "privacypolicy",
+    // },
+    // {
+    //   name: "Terms of Service",
+    //   icon: "security.svg",
+    //   link: "termsservice",
+    // },
+    // {
+    //   name: "Support",
+    //   icon: "support.svg",
+    //   link: "support",
+    // },
+    // {
+    //   name: "Support",
+    //   icon: "support.svg",
+    //   link: "support",
+    // },
+
     // {
     //   name: "Connected Accounts",
     //   icon: "connected.svg",
     //   link: "connectedaccount",
     // },
-    // {
-    //   name: "payment-subscription",
-    //   icon: "payment.svg",
-    //   link: "payment",
-    // },
+
   ]);
   return (
     <>
