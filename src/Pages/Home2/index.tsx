@@ -57,9 +57,9 @@ const Home2 = () => {
         })        
     }
     const playNotifSound = () => {
-        const audio = new Audio('sounds/notif.wav');
-        
-        audio.play();        
+        // const audio = new Audio('sounds/notif2.wav');
+        // audio.volume= 10
+        // audio.play();        
     }
     useConstructor(() => {
         getProfile()
