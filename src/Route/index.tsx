@@ -11,6 +11,7 @@ import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
 import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
 import OnBoarding from "../Pages/SignUp/onboardingSteps";
+import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 
 const route = createHashRouter([
   {
@@ -137,7 +138,11 @@ const route = createHashRouter([
           {
             path: "refer",
             element: <ReferYourFriends></ReferYourFriends>,
-          },          
+          },
+          {
+            path: "OrderNFCCard",
+            element: <OrderNfcCard></OrderNfcCard>,
+          },
         ],
         // children:[
         //   {
