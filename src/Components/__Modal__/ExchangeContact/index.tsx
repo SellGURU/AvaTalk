@@ -160,14 +160,17 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
         <div>
           <div className='flex w-full justify-between items-center'>
               <div className="invisible">
-                <Button onClick={onClose} theme="Carbon-back">
+                <Button onClick={() => {
+                  setStep(0)
+                  onClose()
+                  }} theme="Carbon-back">
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
               </div>
               <div>
                   <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>Contact Exchanged!</div>
               </div>
-              <div className="">
+              <div className="z-30">
                 <Button onClick={onClose} theme="Carbon-back">
                     <div className={`${theme}-Profile-closeIcon`}></div>
                 </Button>
@@ -190,10 +193,16 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
                 <img src="./icons/qrcode.png" alt="" />
               </div>
             </div>
-            <ConfettiExplosion />
+            <ConfettiExplosion zIndex={40} />
           </div>
+          <div className='absolute w-full flex justify-center pt-28 top-0 left-0'>
+              <img className='' src="./icons/illo.png" alt="" />
+          </div>          
           <div className="mt-10 mb-4">
-            <Button disabled={formData.fullName == '' || formData.email == ''} onClick={onClose} theme="Carbon">
+            <Button disabled={formData.fullName == '' || formData.email == ''} onClick={() => {
+              onClose()
+              setStep(0)
+              }} theme="Carbon">
               <div >Create Your Avatalk for Free</div>
             </Button>
             {/* <div className="text-[12px] text-[#6B7280] text-center mt-2 mb-5">We don’t sell your contact details</div> */}
