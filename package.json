@@ -36,6 +36,7 @@
     "react-advanced-cropper": "^0.20.0",
     "react-animation": "^1.2.2",
     "react-calendar": "^4.8.0",
+    "react-confetti-explosion": "^2.1.2",
     "react-confirm-alert": "^3.0.6",
     "react-cropper": "^2.3.3",
     "react-dom": "^18.2.0",

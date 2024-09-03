@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import ShowUser from "../__Modal__/ShowUser";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Notification from "../Notification";
+import { Notification as NotificationApi } from "../../Api"
 
 interface ProfileProps {
   theme?: string;
@@ -51,6 +52,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
   const [prisentMode,setPrisentMode] = useState('audio')
   const notificationRefrence =useRef<HTMLDivElement>(null)
+  const [isHaveNewNotif,setIsHaveNewNotif] = useState(false)
   useModalAutoClose({
     refrence:ShowProfileRef,
     close:() => {
@@ -63,6 +65,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setShowNotification(false)
     }
   })    
+  const resolveunRead= (data:any) => {
+      let unreadCount = 0;
+      for (const day in data) {
+          unreadCount += data[day].filter((notification:any) => !notification.isRead).length;
+      }
+      return unreadCount;
+  }     
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [,setShowMuiteController] = useState(false)
@@ -100,6 +109,28 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //     }
   //   }
   // },[isTalking])
+  // useEffect(() => {
+  //   NotificationApi.checkNotifManager(() => {
+  //     getNotifs()
+  //   })
+  // })
+  const checkNotif = () => {
+    NotificationApi.checkNotification().then((res) => {
+        if(res.data["New notification"] == true) {
+          getNotifs(true)
+        }
+    })
+  }
+  useEffect(() => {
+    const nots = localStorage.getItem("notifs")
+    if(nots){
+      setNotify(JSON.parse(nots))
+    }else{
+      getNotifs()
+    }
+    const interval = setInterval(checkNotif, 15000);     
+    return () => clearInterval(interval);
+  },[])
   useEffect(() => {
     if(isTalking ){
       if(videoRef2.current){
@@ -133,9 +164,23 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //   }
   // })
   const [showNotification,setShowNotification] = useState(false)
+  const [notifs,setNotify]= useState<Array<any>>([])
+  useEffect(() => {
+    localStorage.setItem("notifs",JSON.stringify(notifs))
+  },[notifs])
+  const getNotifs = (isNew?:boolean) => {
+    NotificationApi.getAll((data) => {
+        setNotify(data)
+        localStorage.setItem("notifs",JSON.stringify(data))
+        if(isNew){
+          setIsHaveNewNotif(true)
+          publish("playNotifSound",{})
+        }
+        // setIsHaveNewNotif(true)
+    })    
+  }
   useConstructor(() => {
-    console.log(id)
-    console.log(mode)
+    // getNotifs()
     if(id){
       const resolveSocial: Array<Box> = [];
       Share.getShareData('/presentation_info/user='+id,(data) => {
@@ -286,7 +331,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         <Outlet></Outlet>
         {showNotification &&
           <div ref={notificationRefrence}>
-            <Notification></Notification>   
+            <Notification setNotifs={setNotify} notifs={notifs}></Notification>   
 
           </div>
         }
@@ -324,14 +369,29 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </>
           } */}
           {/* {!scrolled && */}
-            <div className="absolute top-4 left-6 z-20">
-              <Button onClick={() => {
-              setShowNotification(true)
-              }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
-              </Button>  
-                       
-            </div>          
+          {
+            mode == 'profile' &&
+              <div className="absolute top-4 left-6 z-20">
+                <Button onClick={() => {
+                  setShowNotification(true)
+                  setIsHaveNewNotif(false)
+                }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                  <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
+                  {isHaveNewNotif &&
+                    <div className="absolute animate-pulse flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
+                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>                      
+                    </div>
+                  }
+                  {!isHaveNewNotif &&resolveunRead(notifs) > 0 &&
+                    <div className="absolute flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
+                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>
+                    </div>
+                  }
+                </Button>  
+                        
+              </div>          
+
+          }
           {/* } */}
           {
             mode == 'profile' ?

@@ -26,7 +26,10 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
     subscribe("nextPage",() => {
         setShowNotif(false)
     })
-    const resolveText = () => {      
+    const resolveText = () => {     
+        if(page == 'chatEndUser'){
+            return 'Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!'
+        }
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
             if(page == 'AiSetting'){
                 return `
@@ -121,8 +124,13 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                                 </>
                             :undefined
                         }
+                        
                         <div className="flex w-full font-medium mt-2 gap-6 justify-end items-center">
-                            <div className="text-[#FBBF24] cursor-pointer text-[14px]">Upgrade to Pro</div>
+                            {page == 'chatEndUser' ?
+                                  <div className="text-[#FBBF24] cursor-pointer text-[14px]">Create Your Avatalk</div>
+                                :
+                                <div className="text-[#FBBF24] cursor-pointer text-[14px]">Upgrade to Pro</div>
+                            }
                             <div onClick={() => {
                                 setShowNotif(false)
                                 setIsSkipped(true)
