@@ -12,6 +12,7 @@ import AnalyticsPage from "../Pages/AnalyticsPage";
 import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
 import OnBoarding from "../Pages/SignUp/onboardingSteps";
 import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
+import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
 
 const route = createHashRouter([
   {
@@ -142,6 +143,10 @@ const route = createHashRouter([
           {
             path: "OrderNFCCard",
             element: <OrderNfcCard></OrderNfcCard>,
+          },
+          {
+            path: "NFCBusinessCard",
+            element: <NFCBusinessCard></NFCBusinessCard>,
           },
         ],
         // children:[
