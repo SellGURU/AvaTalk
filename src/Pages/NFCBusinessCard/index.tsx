@@ -53,7 +53,15 @@ export const NFCBusinessCard = () => {
 
                                     <div className={"bg-[#EEEFF3] flex items-center justify-between px-2 w-[128px] h-[40px] rounded-2xl"}>
                                         <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full"}>+</button>
-                                        {item.count}
+                                        {
+
+
+
+
+
+
+
+                                            item.count}
                                         <button  className={"bg-white text-[#5B21B6] w-8 h-8 rounded-full"}>-</button>
 
                                     </div>
