@@ -29,10 +29,16 @@
   @apply cursor-pointer;
 }
 .Carbon-TextField-icon-eye {
-  @apply bg-[url('/Carbon/eye.svg')] w-[25px] h-[22px];
+  @apply bg-[url('/Carbon/eye.svg')] absolute right-3 bottom-3 w-[25px] h-[22px];
+}
+.Carbon-TextField-icon-eye[data-mode="empty"]{
+  @apply opacity-50;
+}
+.Carbon-TextField-icon-eyeOff[data-mode="empty"] {
+  @apply opacity-50;
 }
 .Carbon-TextField-icon-eyeOff {
-  @apply bg-[url('/Carbon/eyeOff.svg')] w-[25px] h-[22px];
+  @apply bg-[url('/Carbon/eyeOff.svg')] absolute right-3 bottom-3 w-[25px] h-[22px];
 }
 .Carbon-TextField-error {
   @apply text-red-500 text-[11px] font-medium ml-6 mt-[1px];

@@ -151,10 +151,10 @@ const TextField: React.FC<InputProps> = ({
           >
             {showPassword ? (
               // <AiOutlineEyeInvisible size="20px" />
-              <div className={`${theme}-TextField-icon-eyeOff`} />
+              <div className={`${theme}-TextField-icon-eyeOff`} data-mode={value.length == 0?'empty':''} />
             ) : (
               // <AiOutlineEye size="20px" />
-              <div className={`${theme}-TextField-icon-eye`} />
+              <div className={`${theme}-TextField-icon-eye`} data-mode={value.length == 0?'empty':''} />
             )}
           </div>
         )}

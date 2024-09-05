@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Checkbox} from "symphony-ui";
+import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -12,11 +12,10 @@ import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const initialValue = {
-  email: "",
-  password:""
+  emailOrPhone: "",
 };
 
 const validateEmail = (email: string | undefined) => {
@@ -29,12 +28,38 @@ const PosEnd = (id:string) => {
     input.value = ''; //clear the value of the element
     input.value = val; //set that value back.      
 }
+const validatePhone = (phone: number | undefined) => {
+  // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
+  //   (phone) => {
+  //     return 
+  //   }
+  // )
+   return Yup.number().integer().positive().test(
+      (phone) => {
+        return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+      }
+    ).isValidSync(phone);
+};
+const validatePhoneType = (phone: string ) => {
+  console.log(phone?.split(" ").length )
+
+   return Yup.string().test(
+      (phone) => {
+        return (phone && phone.split(" ").length == 2) ? true : false;
+      }
+    ).isValidSync(phone);
+};
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-      .required('Email  is required')
-      .test('email', 'Email  is invalid', (value) => {
-         return validateEmail(value) 
+  emailOrPhone: Yup.string()
+      .required('Email / Phone is required')
+      .test('email_or_phone', 'Email / Phone is invalid', (value) => {
+         return validateEmail(value) || (
+          validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0')));
+      }).test('email_or_phone', 'invalid phone type (+1 123456)',(value) => {
+        console.log(value)
+        return validatePhoneType(value) || validateEmail(value)
       })
 });
 
@@ -50,59 +75,32 @@ const Login = () => {
       console.log(values);
     },
   });
+  const [country, setCountry] = useState<any>({
+    codeName: "us",
+    codePhone: "+1",
+  });  
   function handleSubmit() {
-    // const resolvePhoneOrEnail = {
-    //   email:formik.values.email
+    // let resolvePhoneOrEnail = null
+    // if(formik.values.emailOrPhone.includes('@')){
+    //   resolvePhoneOrEnail = {
+    //     email:formik.values.emailOrPhone
+    //   }
+    // }else {
+    //   resolvePhoneOrEnail = {
+    //     mobile_number:formik.values.emailOrPhone
+    //   }      
     // }
-    Auth.login({
-      password:formik.values.password,
-      email:formik.values.email
-    }).then((res) => {
-      if(res.data.error){
-        toast.error(res.data.error)
-      }
-      if(res.data.access_token){
-          localStorage.setItem("token",res.data.access_token)
-          authContext.login(res.data.access_token)
-          const resolveSocial: Array<Box> = [];
-          Auth.showProfile((data) => {
-              data.boxs.map((item:any) => {
-                  const newBox = boxProvider(item);
-                  resolveSocial.push(newBox);
-              })
-              authContext.currentUser.updateInformation({
-                  firstName:data.information.first_name,
-                  lastName:data.information.last_name,
-                  phone:data.information.mobile_number,
-                  personlEmail:data.information.email,
-                  company:data.information.company_name,
-                  job:data.information.job_title,
-                  banelImage:data.information.back_ground_pic,
-                  imageurl:data.information.profile_pic,
-                  location:{
-                      lat:33,
-                      lng:33
-                  },
-                  workEmail:data.information.work_email,
-                  workPhone:data.information.work_mobile_number,
-                  userId:data.information.created_userid
-              })
-              authContext.currentUser.setBox(resolveSocial)
-              navigate("/?splash=true");
-          })          
-      }
-    })
     // Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
     //   toast.info(res.data)
     //   authContext.verificationHandler({
-    //     emailOrPhone: formik.values.email,
+    //     emailOrPhone: formik.values.emailOrPhone,
     //     googleJson:{}
     //   })
     //   authContext.setReferalCode(parametr.get("referral") as string)
     //   navigate('/Verification')
     // })
   }
-  const [isRememberMe,setIsRememberMe]= useState(false)
+
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
@@ -126,39 +124,39 @@ const Login = () => {
               <div className="w-full px-4">
                 <img src="/Avatalk Logo.svg" alt="logo" className="w-[49px] h-[54px] mx-auto mb-[30px]" />
                 <div className="w-full flex justify-center">
-                  <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Email Address and Password to Login</div>
+                  <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Phone Number or Email Address to Login</div>
                 </div>
 
-                <div className="mb-2">
-                  <TextField  {...formik.getFieldProps("email")} theme="Carbon" name="email" errorMessage={formik.errors?.email} placeholder="Enter your email address" type="email" inValid={formik.errors?.email != undefined && (formik.touched?.email as boolean)}></TextField>
-                </div>
-                <div className="mb-4">
-                  <TextField  {...formik.getFieldProps("password")} theme="Carbon" name="password" errorMessage={formik.errors?.password} placeholder="Enter your password" type="password" inValid={formik.errors?.password != undefined && (formik.touched?.password as boolean)}></TextField>
-                </div>    
+                {
+                  formik.values.emailOrPhone[0] == '+'?
+                  <div className="mb-8">
+                    <TextField 
+                    id="phoneField"
+                    {...formik.getFieldProps("emailOrPhone")} 
 
-                <div className="flex justify-between w-full px-2 mb-4 ">
-                  <div>
-                    <Checkbox label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
+                    // value={country.codePhone + formik.values.emailOrPhone}
+                    phoneCountry={country} 
+                    setValue={(value) => {
+                      formik.setFieldValue('emailOrPhone',value)
+                    }}
+                    setPhoneCountry={setCountry} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="phone" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
+                  </div>                
+                  :
+                  <div className="mb-8">
+                    <TextField  {...formik.getFieldProps("emailOrPhone")} theme="Carbon" name="emailOrPhone" errorMessage={formik.errors?.emailOrPhone} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.emailOrPhone != undefined && (formik.touched?.emailOrPhone as boolean)}></TextField>
                   </div>
-
-                  <div className="text-[14px] text-[#06B6D4] cursor-pointer">
-                    Forgot Password?
-                  </div>
-                </div>            
+                }
                 <Button
                   onClick={handleSubmit}
                   //     () => {
                   //     navigate("/Verification");
                   //   }
                   // }
-                  disabled={!formik.isValid || formik.values.password.length <= 4}
+                  disabled={!formik.isValid || formik.values.emailOrPhone.length <= 4}
                   theme="Carbon"
                 >
                   Continue
                 </Button>
-                <div className="text-[14px] text-[#374151] text-center mt-4">
-                  Don`t have an account? <span className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
-                </div>
                 <div className="flex w-full items-center mt-6">
                   <div style={{ background: "linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
                     <div style={{ background: "linear-gradient(to top,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>

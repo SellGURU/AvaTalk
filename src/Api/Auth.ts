@@ -7,10 +7,9 @@ import { boxProvider } from "../help";
 import Api from "./Api";
 
 interface LoginData {
-  // email: string | null;
-  mobile_number?: string | null;
-  email?:string;
-  entered_code?: string;
+  mobile_number?:string,
+  email?:string,
+  password: string
 }
 interface Location {
   lat: number;
@@ -91,7 +90,7 @@ interface UpdateContactInfo {
 
 class Auth extends Api {
   static login(data: LoginData) {
-    const response = this.post("/check_Login_code", data);
+    const response = this.post("/login", data);
     return response;
   }
 
