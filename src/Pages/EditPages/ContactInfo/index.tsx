@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  Button } from "symphony-ui";
-import { BackIcon, TextArea, TextField } from "../../../Components";
+import { BackIcon, FileUploadr, TextArea, TextField } from "../../../Components";
 // import LocationPicker from "react-leaflet-location-picker";
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -51,6 +51,7 @@ const EditContactInfo = () => {
     codeName: "us",
     codePhone: "+1",
   });
+  const [icons,setIcons] = useState<Array<any>>([])
   const submit = () => {
     auth.currentUser.updateInformation({
       job:formik.values.job as string,
@@ -71,7 +72,8 @@ const EditContactInfo = () => {
       talk_video_avater:auth.currentUser.information?.talk_video_avater,
       userId:auth.currentUser.information?.userId,
       referral_code:auth.currentUser.information?.referral_code,
-      address:auth.currentUser.information?.address
+      address:auth.currentUser.information?.address,
+      // logo:icons[0]
     })
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
@@ -80,6 +82,7 @@ const EditContactInfo = () => {
         lat:pointMode.control.values[0][0],
         lng:pointMode.control.values[0][1]
       },
+      logo:icons[0],
       work_email:formik.values.workEmail as string,
       address:formik.values.address,
       work_phone:formik.values.workPhone as string
@@ -107,6 +110,11 @@ const EditContactInfo = () => {
           <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={false} name="company" type="text" placeholder="Enter your company name..."></TextField>
         </div>
 
+        <div className="mt-3 px-6">
+          <FileUploadr label="Logo" mod="files" value={icons} uploades={(files) => {
+            setIcons(files)
+          }} accept=".svg"></FileUploadr>
+        </div>
         <div className="mt-3 px-6">
           {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}
           <TextArea inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>

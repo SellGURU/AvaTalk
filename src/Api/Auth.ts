@@ -86,6 +86,7 @@ interface UpdateContactInfo {
   phone?:string,
   work_phone:string
   address?:string
+  logo?:string
 }
 
 class Auth extends Api {
