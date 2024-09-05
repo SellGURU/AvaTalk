@@ -2,19 +2,19 @@ import {BackIcon} from "../../Components";
 import {useState} from "react";
 
 export const NFCBusinessCard = () => {
-    const [quantity, setQuantity] = useState(1);
+    // const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1}]);
 
     const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
-    const handleQuantityChange = (action: string) => {
-        if (action === 'increment') {
-            setQuantity(quantity + 1);
-        } else if (action === 'decrement' && quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
+    // const handleQuantityChange = (action: string) => {
+    //     if (action === 'increment') {
+    //         setQuantity(quantity + 1);
+    //     } else if (action === 'decrement' && quantity > 1) {
+    //         setQuantity(quantity - 1);
+    //     }
+    // };
     return (
-        <div className=" w-full bg-[#FDFDFE] hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+        <div className=" w-full bg-[#FDFDFE] hiddenScrollBar h-dvh top-[0px]  z-[15]">
             <div className=" top-4">
                 <BackIcon title="Avatalk NFC Business Card" theme="Carbon"></BackIcon>
 

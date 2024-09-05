@@ -39,17 +39,20 @@ const SignUp = () => {
         setshowSplash(false)
     }, 3000);    
     const handleSubmit = () => {
-        let resolvePhoneOrEnail = null
-        if(formik.values.email.includes('@')){
-            resolvePhoneOrEnail = {
-                email:formik.values.email
-            }
-        }else {
-            resolvePhoneOrEnail = {
-                mobile_number:formik.values.email
-            }      
-        }
-        Auth.get_Login_code(resolvePhoneOrEnail).then(() => {
+        // let resolvePhoneOrEnail = null
+        // if(formik.values.email.includes('@')){
+        //     resolvePhoneOrEnail = {
+        //         email:formik.values.email
+        //     }
+        // }else {
+        //     resolvePhoneOrEnail = {
+        //         mobile_number:formik.values.email,
+                
+        //     }      
+        // }
+        Auth.get_Login_code({
+            password:""
+        }).then(() => {
             authContext.verificationHandler({
                 emailOrPhone: formik.values.email,
                 googleJson:{}
@@ -82,7 +85,9 @@ const SignUp = () => {
                             <Button onClick={handleSubmit} disabled={!formik.isValid || formik.values.email.length <= 4} theme="Carbon">Sign up</Button>
                         </div>
                         <div className="mt-4">
-                            <div className="text-sm text-center text-text-primary">Already have an account?<span className="text-[#06B6D4] cursor-pointer"> Login</span></div>
+                            <div className="text-sm text-center text-text-primary">Already have an account?<span onClick={() => {
+                                navigate('/login')
+                            }} className="text-[#06B6D4] cursor-pointer"> Login</span></div>
                         </div>
 
                         <div className="flex w-full items-center mt-6">

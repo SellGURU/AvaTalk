@@ -32,20 +32,22 @@ const Verification = () => {
             <p className="text-sm mb-6 font-medium">{authContext.varification.emailOrPhone}</p>
             <div>
             <VerificationInput
-                onComplete={(value) => {
-                    let resolvePhoneOrEnail = null
+                onComplete={() => {
+                    // let resolvePhoneOrEnail = null
                     if(authContext.varification.emailOrPhone.includes('@')){
-                    resolvePhoneOrEnail = {
-                        email:authContext.varification.emailOrPhone,
-                        entered_code:value
-                    }
-                    }else {
-                    resolvePhoneOrEnail = {
-                        mobile_number:authContext.varification.emailOrPhone,
-                        entered_code:value
-                    }      
+                    // resolvePhoneOrEnail = {
+                    //     email:authContext.varification.emailOrPhone,
+                    //     // entered_code:value,
+                    // }
+                    // }else {
+                    // resolvePhoneOrEnail = {
+                    //     mobile_number:authContext.varification.emailOrPhone,
+                    //     entered_code:value
+                    // }      
                     }                    
-                    Auth.login(resolvePhoneOrEnail).then((res) => {
+                    Auth.login({
+                        password:""
+                    }).then((res) => {
                         console.log(res)
                         if(res.data == 'The code you have entered is wrong'){
                             toast.error(res.data)
@@ -105,18 +107,18 @@ const Verification = () => {
             />
             </div>
             <p onClick={completeTimer ?() => {
-                    setCompleteTimer(false) 
-                    let resolvePhoneOrEnail = null
-                    if(authContext.varification.emailOrPhone.includes('@')){
-                    resolvePhoneOrEnail = {
-                        email:authContext.varification.emailOrPhone
-                    }
-                    }else {
-                    resolvePhoneOrEnail = {
-                        mobile_number:authContext.varification.emailOrPhone
-                    }      
-                    }                    
-                    Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
+                    // setCompleteTimer(false) 
+                    // let resolvePhoneOrEnail = null
+                    // if(authContext.varification.emailOrPhone.includes('@')){
+                    // resolvePhoneOrEnail = {
+                    //     email:authContext.varification.emailOrPhone
+                    // }
+                    // }else {
+                    // resolvePhoneOrEnail = {
+                    //     mobile_number:authContext.varification.emailOrPhone
+                    // }      
+                    // }                    
+                    Auth.get_Login_code({password:""}).then((res) => {
                         toast.info(res.data)
                     })
             }:undefined} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   

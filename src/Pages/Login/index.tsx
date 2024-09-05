@@ -12,7 +12,6 @@ import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
-import { toast } from "react-toastify";
 
 const initialValue = {
   email: "",
@@ -35,7 +34,14 @@ const validationSchema = Yup.object().shape({
       .required('Email  is required')
       .test('email', 'Email  is invalid', (value) => {
          return validateEmail(value) 
-      })
+      }),
+      password:Yup.string().min(8, 'Password must be at least 8 characters')
+        .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+        .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+        .matches(/\d/, 'Password must contain at least one number')
+        .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+        .required('Password is required'),
+  
 });
 
 const Login = () => {
@@ -59,7 +65,13 @@ const Login = () => {
       email:formik.values.email
     }).then((res) => {
       if(res.data.error){
-        toast.error(res.data.error)
+        // toast.error(res.data.error)
+        if(res.data.error == 'This user is not registered'){
+          formik.setFieldError("email",res.data.error)
+        }
+        if(res.data.error == 'The password you have entered is wrong'){
+          formik.setFieldError("password",res.data.error)
+        }        
       }
       if(res.data.access_token){
           localStorage.setItem("token",res.data.access_token)
@@ -154,10 +166,12 @@ const Login = () => {
                   disabled={!formik.isValid || formik.values.password.length <= 4}
                   theme="Carbon"
                 >
-                  Continue
+                  Login
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
-                  Don`t have an account? <span className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
+                  Don`t have an account? <span onClick={() => {
+                    navigate('/signup')
+                  }} className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
                 </div>
                 <div className="flex w-full items-center mt-6">
                   <div style={{ background: "linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
@@ -175,7 +189,7 @@ const Login = () => {
                     <GoogleLogin
                       size="large"
                       width={'100%'}
-                      text="continue_with"
+                      text="signin_with"
                       onSuccess={credentialResponse => {
                         // setcertificate(credentialResponse);
                         // console.log(credentialResponse);
