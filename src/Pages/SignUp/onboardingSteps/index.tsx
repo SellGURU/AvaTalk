@@ -9,6 +9,7 @@ import { useAuth } from "../../../hooks/useAuth"
 import { toast } from "react-toastify"
 import { useFormik } from "formik"
 import CompleteStep from "./steps/CompleteStep"
+import { useSearchParams } from "react-router-dom"
 
 interface Avatars {
   photo: string;
@@ -20,6 +21,7 @@ interface Avatars {
 const OnBoarding = () => {
     const [step ,setStep] = useState(0)
     const authContext = useAuth()
+    const [parametr] = useSearchParams() 
     const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
     const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
         photo:"",
@@ -71,7 +73,8 @@ const OnBoarding = () => {
             formik.setFieldValue('silent_video_avatar',res.data[0].video)
             formik.setFieldValue('avatar_pic_url',res.data[0].photo)
         }     
-        })            
+        })    
+        authContext.setNfc_id(parametr.get('nfc_id'))                
     })    
     const resolveStep = () => {
         return (

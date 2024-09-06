@@ -1,7 +1,9 @@
 import { Button } from "symphony-ui"
 import { BissinesCard } from "../../../../Components"
+import { useNavigate } from "react-router-dom";
 
 const CompleteStep = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="mt-8">
@@ -16,7 +18,9 @@ const CompleteStep = () => {
                         <BissinesCard></BissinesCard>
                     </div>
                 </div>          
-                <Button theme="Carbon">Get Started</Button>         
+                <Button onClick={() => {
+                    navigate("/?splash=true");
+                }} theme="Carbon">Get Started</Button>         
             </div>        
         </>
     )

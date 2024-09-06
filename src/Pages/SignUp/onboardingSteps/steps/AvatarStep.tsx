@@ -10,6 +10,8 @@ import CropperBox from "../../../../Components/CropperBox";
 import { AddAvatar } from "../../../../Components/__Modal__";
 import Camera from "react-html5-camera-photo";
 import { BackIcon } from "../../../../Components";
+import { boxProvider } from "../../../../help";
+import { Box } from "../../../../Model";
 
 interface AvatarStepProps {
     onSubmit:() => void
@@ -29,6 +31,7 @@ interface Avatars {
 const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvater,formik,setUploadedAvater}) => {
     const [isLoading, setIsLoading] = useState(false);
     const authContext = useAuth()
+    // const navigate = useNavigate();
     const [openCamera,setOpenCamera] = useState(false);
     const [currentAvatar,setCurrentAvatr] = useState<Avatars>({
         photo:"",
@@ -281,12 +284,43 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                             gender:authContext.siginUpOptions.gender,
                             job_title:authContext.siginUpOptions.job,
                             mobile_number:authContext.siginUpOptions.phone,
-                            nfc_id:'',
+                            nfc_id:authContext.nfc_id,
                             profile_pic:authContext.siginUpOptions.avatar_pic_url,
                             silent_video_avatar:authContext.siginUpOptions.silent_video_avatar,
                             referral_code:''
-                        }).then(() => {
-                            onSubmit()
+                        }).then((res) => {
+                            if(res.data.access_token){
+                                localStorage.setItem("token",res.data.access_token)
+                                authContext.login(res.data.access_token)
+                                const resolveSocial: Array<Box> = [];
+                                Auth.showProfile((data) => {
+                                    data.boxs.map((item:any) => {
+                                        const newBox = boxProvider(item);
+                                        resolveSocial.push(newBox);
+                                    })
+                                    authContext.currentUser.updateInformation({
+                                        firstName:data.information.first_name,
+                                        lastName:data.information.last_name,
+                                        phone:data.information.mobile_number,
+                                        personlEmail:data.information.email,
+                                        company:data.information.company_name,
+                                        job:data.information.job_title,
+                                        banelImage:data.information.back_ground_pic,
+                                        imageurl:data.information.profile_pic,
+                                        location:{
+                                            lat:33,
+                                            lng:33
+                                        },
+                                        workEmail:data.information.work_email,
+                                        workPhone:data.information.work_mobile_number,
+                                        userId:data.information.created_userid
+                                    })
+                                    authContext.currentUser.setBox(resolveSocial)
+                                })                                  
+                                onSubmit()
+                            }else{
+                                toast.error(res.data)
+                            }
                         })
                     }}
                     theme="Carbon"
