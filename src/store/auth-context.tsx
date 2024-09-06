@@ -23,7 +23,9 @@ interface SiginUpOptionProps {
   job:string,
   company:string,
   avatar_pic_url:string,
-  silent_video_avatar:string
+  silent_video_avatar:string,
+  password:string,
+  conFirmPassword:string
 }
 
 interface AuthContextProps {
@@ -63,6 +65,8 @@ export const AuthContext = createContext<AuthContextProps>({
     job:'',
     company:'',
     avatar_pic_url:'',
+    conFirmPassword:'',
+    password:'',
     silent_video_avatar:''
   },
   refrealCode:'',
@@ -114,7 +118,9 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     job:'',
     company:'',
     avatar_pic_url:'',
-    silent_video_avatar:''
+    silent_video_avatar:'',
+    conFirmPassword:'',
+    password:''
   })
   // const userIsLoggedIn = !!token && !!user.information;
 

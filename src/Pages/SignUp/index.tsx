@@ -39,6 +39,30 @@ const SignUp = () => {
         setshowSplash(false)
     }, 3000);    
     const handleSubmit = () => {
+        Auth.check_user_existence({
+            email:formik.values.email
+        }).then((res) => {
+            console.log(res)
+            if(res.data.error){
+                formik.setFieldError("email",res.data.error)
+            }
+            if(res.data.check_user ==true){
+                Auth.get_Login_code({
+                    code_type:'verification',
+                    email:formik.values.email
+                }).then(() => {
+                    authContext.verificationHandler({
+                        emailOrPhone: formik.values.email,
+                        googleJson:{}
+                    })
+                    authContext.siginupHandler({
+                        email:formik.values.email
+                    })
+                    authContext.setReferalCode(parametr.get("referral") as string)
+                    navigate('/RVerification')
+                })                
+            }
+        })
         // let resolvePhoneOrEnail = null
         // if(formik.values.email.includes('@')){
         //     resolvePhoneOrEnail = {
@@ -50,19 +74,19 @@ const SignUp = () => {
                 
         //     }      
         // }
-        Auth.get_Login_code({
-            password:""
-        }).then(() => {
-            authContext.verificationHandler({
-                emailOrPhone: formik.values.email,
-                googleJson:{}
-            })
-            authContext.siginupHandler({
-                email:formik.values.email
-            })
-            authContext.setReferalCode(parametr.get("referral") as string)
-            navigate('/RVerification')
-        })
+        // Auth.get_Login_code({
+        //     password:""
+        // }).then(() => {
+        //     authContext.verificationHandler({
+        //         emailOrPhone: formik.values.email,
+        //         googleJson:{}
+        //     })
+        //     authContext.siginupHandler({
+        //         email:formik.values.email
+        //     })
+        //     authContext.setReferalCode(parametr.get("referral") as string)
+        //     navigate('/RVerification')
+        // })
     }    
     return (
         <>
@@ -98,7 +122,11 @@ const SignUp = () => {
                         <div style={{ background: "linear-gradient(to right,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
                             <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                         </div>
-                        </div>                        
+                        </div>    
+                        <div className="text-[#374151] text-center text-[14px]">
+                            By Signing up you agreed with our
+                        </div>                    
+                        <div className="text-center text-[14px] mt-1 cursor-pointer"><span className="text-[#06B6D4]">Terms & Conditions. </span></div>
                     </div>
                 </>
             }  

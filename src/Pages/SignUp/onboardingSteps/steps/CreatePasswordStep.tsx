@@ -1,6 +1,8 @@
 import { Button } from "symphony-ui"
 import { TextField } from "../../../../Components"
-
+import { useFormik } from "formik"
+import * as Yup from "yup";
+import { useAuth } from "../../../../hooks/useAuth";
 interface CreatePasswordStep {
     onSubmit:() => void
 }
@@ -8,6 +10,27 @@ interface CreatePasswordStep {
 const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
     onSubmit
 }) => {
+    const context = useAuth()
+    const formik = useFormik({
+        initialValues:{
+            password:'',
+            confirmPassword:''
+        },
+        validationSchema:Yup.object().shape({
+            password:Yup.string().min(8, 'Password must be at least 8 characters')
+                .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+                .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+                .matches(/\d/, 'Password must contain at least one number')
+                .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+                .required('Password is required'),
+            confirmPassword:Yup.string()
+                .oneOf([Yup.ref('password'), ''], 'Passwords must match')
+                .required('Confirm Password is required')
+                    }),
+        onSubmit:(() => {
+
+        })
+    })
     return (
         <>
             <div className="mt-8">
@@ -19,13 +42,17 @@ const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
                 </div>
             </div>
             <div className="mt-8">
-                <TextField type="text" required label="Password" placeholder="Enter Password..." inValid={false} name="" onBlur={() => {}} onChange={() => {}} value="" theme="Carbon" ></TextField>
+                <TextField {...formik.getFieldProps("password")} type="password" required label="Password" placeholder="Enter Password..." inValid={formik.errors?.password != undefined && (formik.touched?.password as boolean)} errorMessage={formik.errors.password} theme="Carbon" ></TextField>
             </div>
             <div className="mt-4">
-                <TextField type="text" required label="Confirm password" placeholder="Confirm password..." inValid={false} name="" onBlur={() => {}} onChange={() => {}} value="" theme="Carbon" ></TextField>
+              <TextField {...formik.getFieldProps("confirmPassword")} type="password" required label="Confirm password" placeholder="Confirm password..." inValid={formik.errors?.confirmPassword != undefined && (formik.touched?.confirmPassword as boolean)} errorMessage={formik.errors.confirmPassword} theme="Carbon" ></TextField>
             </div>     
             <div className="mt-8">
-                <Button onClick={() => {
+                <Button disabled={!formik.isValid || !formik.touched.password} onClick={() => {
+                    context.siginupHandler({
+                        password:formik.values.password,
+                        conFirmPassword:formik.values.confirmPassword
+                    })
                     onSubmit()
                 }} theme="Carbon">Continue</Button>           
             </div>        

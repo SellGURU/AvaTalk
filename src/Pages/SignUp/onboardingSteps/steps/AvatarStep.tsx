@@ -269,10 +269,29 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                 <div className="mt-8 mb-3 px-4">
                 <Button
                     // disabled={formik.values.silent_video_avatar.length == 0}
-                    onClick={onSubmit}
+                    onClick={() => {
+                        Auth.register({
+                            first_name:authContext.siginUpOptions.firstName,
+                            last_name:authContext.siginUpOptions.lastName,
+                            avatar_pic_url:authContext.siginUpOptions.avatar_pic_url,
+                            company_name:authContext.siginUpOptions.company,
+                            confirm_password:authContext.siginUpOptions.conFirmPassword,
+                            password:authContext.siginUpOptions.password,
+                            email:authContext.siginUpOptions.email,
+                            gender:authContext.siginUpOptions.gender,
+                            job_title:authContext.siginUpOptions.job,
+                            mobile_number:authContext.siginUpOptions.phone,
+                            nfc_id:'',
+                            profile_pic:authContext.siginUpOptions.avatar_pic_url,
+                            silent_video_avatar:authContext.siginUpOptions.silent_video_avatar,
+                            referral_code:''
+                        }).then(() => {
+                            onSubmit()
+                        })
+                    }}
                     theme="Carbon"
                 >
-                    Get Started
+                    Continue
                 </Button>
                 </div>   
 

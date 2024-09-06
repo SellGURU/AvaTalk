@@ -24,12 +24,14 @@ interface RegisterData {
   mobile_number: string | null;
   job_title: string | null;
   company_name: string | null;
-  location: Location | null;
+  location?: Location | null;
   profile_pic: string | null;
   email:string | null
   silent_video_avatar:string | null
   avatar_pic_url:string | null
   referral_code?:string|null
+  password:string
+  confirm_password:string
 }
 
 ///
@@ -39,6 +41,11 @@ interface SupportData {
   message: string
 }
 ///
+
+interface check_user_existenceProps {
+  email?:string
+  mobileNumber?:string
+}
 
 interface AiSetting {
   name:string,
@@ -88,6 +95,12 @@ interface UpdateContactInfo {
   logo?:string
 }
 
+interface GetLoginCodeProps {
+  mobile_number?:string,
+  email?:string,
+  code_type: 'verification' | 'reset'
+}
+
 class Auth extends Api {
   static login(data: LoginData) {
     const response = this.post("/login", data);
@@ -99,10 +112,11 @@ class Auth extends Api {
     return response
   }
 
-  static check_user_existence(mobile_number?:string,email?:string) {
+  static check_user_existence(data:check_user_existenceProps) {
     const response = this.post('/check_user_existence',{
-      email:email,
-      mobile_number:mobile_number
+      email:data.email,
+      mobile_number:data.mobileNumber,
+      code_type:'verification'
     })
     return response
   }
@@ -115,7 +129,7 @@ class Auth extends Api {
     const response = this.post('/create_silent_avatar',{avatar_url:avatar_url},{noPending:true})
     return response
   }
-  static get_Login_code(data: LoginData) {
+  static get_Login_code(data: GetLoginCodeProps) {
     const response = this.post("/get_Login_code", data);
     return response;
   }
