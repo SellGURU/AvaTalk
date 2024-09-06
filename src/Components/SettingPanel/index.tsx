@@ -30,7 +30,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     {
       name: "Order NFC Card",
       icon: "OrderNFCCard.svg",
-      link: "OrderNFCCard",
+      link: "",
     },
     // {
     //   name: "Your Service",
@@ -45,17 +45,17 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     {
       name: "Your Plan",
       icon: "YourPlan.svg",
-      link: "YourPlan",
+      link: "service",
     },
     {
       name: "payment-subscription",
       icon: "payment.svg",
-      link: "payment",
+      link: "",
     },
     {
       name: "Help",
       icon: "help.svg",
-      link: "Help",
+      link: "",
     },
     // {
     //   name: "Privacy Policy",
