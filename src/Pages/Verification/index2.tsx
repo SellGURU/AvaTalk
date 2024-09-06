@@ -79,7 +79,9 @@ const RegisterVerification = () => {
                     // }      
                     // }                    
                     Auth.get_Login_code({
-                        password:''
+                        // password:'',
+                        email:authContext.varification.emailOrPhone,
+                        code_type:'verification'
                     }).then((res) => {
                         toast.info(res.data)
                     })

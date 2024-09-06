@@ -97,6 +97,8 @@ const CreateAccount = () => {
         mobile_number: authContext.varification.emailOrPhone.includes("@")
           ? values.Phone
           : authContext.varification.emailOrPhone,
+          password:'',
+          confirm_password:'',
         job_title: values.JobTitle,
         nfc_id:authContext.nfc_id,
         company_name: values.CompanyName,
@@ -596,13 +598,13 @@ const InfoStep: React.FC<InfoStepProps> = ({
                 }
                 onClick={() => {
                   let localEmail=formik.values.email
-                  let localPhone=formik.values.Phone
+                  // let localPhone=formik.values.Phone
                   if(authContext.varification.emailOrPhone.includes('@')){
                     localEmail = undefined
                   }else{
-                    localPhone = undefined
+                    // localPhone = undefined
                   }
-                  Auth.check_user_existence(localPhone,localEmail).then((res) => {
+                  Auth.check_user_existence(localEmail).then((res) => {
                     if(res.data == false){
                       setStep(2);
                     }else if(res.data){
@@ -626,13 +628,13 @@ const InfoStep: React.FC<InfoStepProps> = ({
               onClick={() => {
                 console.log(authContext.varification.emailOrPhone)
                 let localEmail=formik.values.email
-                let localPhone=formik.values.Phone
+                // let localPhone=formik.values.Phone
                 if(authContext.varification.emailOrPhone.includes('@')){
                   localEmail = undefined
                 }else{
-                  localPhone = undefined
+                  // localPhone = undefined
                 }
-                Auth.check_user_existence(localPhone,localEmail).then((res) => {
+                Auth.check_user_existence(localEmail).then((res) => {
                   if(res.data == false){
                     setStep(2);
                   }else if(res.data){
