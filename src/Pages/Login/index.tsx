@@ -8,10 +8,12 @@ import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
-import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin} from "@react-oauth/google";
+// import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const initialValue = {
   email: "",
@@ -129,6 +131,62 @@ const Login = () => {
       // alert("posEnd")
     }
   })
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`,
+          },
+        });
+        Auth.loginWithGoogle(
+          {
+            google_json:userInfo.data
+          },
+        ).then((res) => {
+          authContext.setReferalCode(parametr.get("referral") as string)
+          if(res.data.access_token){
+            localStorage.setItem("token",res.data.access_token)
+            authContext.login(res.data.access_token)
+            const resolveSocial: Array<Box> = [];
+            Auth.showProfile((data) => {
+                data.boxs.map((item:any) => {
+                    const newBox = boxProvider(item);
+                    resolveSocial.push(newBox);
+                })
+                authContext.currentUser.updateInformation({
+                    firstName:data.information.first_name,
+                    lastName:data.information.last_name,
+                    phone:data.information.mobile_number,
+                    personlEmail:data.information.email,
+                    company:data.information.company_name,
+                    job:data.information.job_title,
+                    banelImage:data.information.back_ground_pic,
+                    imageurl:data.information.profile_pic,
+                    location:{
+                        lat:33,
+                        lng:33
+                    },
+                    workEmail:data.information.work_email,
+                    workPhone:data.information.work_mobile_number,
+                    userId:data.information.created_userid
+                })
+                authContext.currentUser.setBox(resolveSocial)
+                navigate("/?splash=true");
+            })                                                   
+          }else{
+            toast.error(res.data)
+          }
+        });    
+        console.log('User Info:', userInfo.data);
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+      }
+    },
+    onError: (error) => {
+      console.log('Login Failed:', error);
+    },
+  });  
   return (
     <>
       {showSplash ?
@@ -184,9 +242,12 @@ const Login = () => {
                 </div>
                 
                 <div className="flex items-center justify-center mt-4">
-                  <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
-
-                    <GoogleLogin
+                
+                    <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                      <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
+                      <div className="text-text-primary">Login with Google</div>
+                    </Button>
+                    {/* <GoogleLogin
                       size="large"
                       width={'100%'}
                       text="signin_with"
@@ -207,49 +268,45 @@ const Login = () => {
                             googleJson:prof
                           })
                           authContext.setReferalCode(parametr.get("referral") as string)
-                          if(res.data == 'Not Registered'){
-                             navigate("/register")
-                          }else {
-                            if(res.data.access_token){
-                              localStorage.setItem("token",res.data.access_token)
-                              authContext.login(res.data.access_token)
-                              const resolveSocial: Array<Box> = [];
-                              Auth.showProfile((data) => {
-                                  data.boxs.map((item:any) => {
-                                      const newBox = boxProvider(item);
-                                      resolveSocial.push(newBox);
-                                  })
-                                  authContext.currentUser.updateInformation({
-                                      firstName:data.information.first_name,
-                                      lastName:data.information.last_name,
-                                      phone:data.information.mobile_number,
-                                      personlEmail:data.information.email,
-                                      company:data.information.company_name,
-                                      job:data.information.job_title,
-                                      banelImage:data.information.back_ground_pic,
-                                      imageurl:data.information.profile_pic,
-                                      location:{
-                                          lat:33,
-                                          lng:33
-                                      },
-                                      workEmail:data.information.work_email,
-                                      workPhone:data.information.work_mobile_number,
-                                      userId:data.information.created_userid
-                                  })
-                                  authContext.currentUser.setBox(resolveSocial)
-                                  navigate("/?splash=true");
-                              })                                                   
-                            }else {
-                              navigate("/register")
-                            }
+                          if(res.data.access_token){
+                            localStorage.setItem("token",res.data.access_token)
+                            authContext.login(res.data.access_token)
+                            const resolveSocial: Array<Box> = [];
+                            Auth.showProfile((data) => {
+                                data.boxs.map((item:any) => {
+                                    const newBox = boxProvider(item);
+                                    resolveSocial.push(newBox);
+                                })
+                                authContext.currentUser.updateInformation({
+                                    firstName:data.information.first_name,
+                                    lastName:data.information.last_name,
+                                    phone:data.information.mobile_number,
+                                    personlEmail:data.information.email,
+                                    company:data.information.company_name,
+                                    job:data.information.job_title,
+                                    banelImage:data.information.back_ground_pic,
+                                    imageurl:data.information.profile_pic,
+                                    location:{
+                                        lat:33,
+                                        lng:33
+                                    },
+                                    workEmail:data.information.work_email,
+                                    workPhone:data.information.work_mobile_number,
+                                    userId:data.information.created_userid
+                                })
+                                authContext.currentUser.setBox(resolveSocial)
+                                navigate("/?splash=true");
+                            })                                                   
+                          }else{
+                            toast.error(res.data)
                           }
                         });                          
                       }}
                       onError={() => {
                         console.log('Login Failed');
                       }}
-                    />                     
-                  </GoogleOAuthProvider>    
+                    />                      */}
+                  {/* </GoogleOAuthProvider>     */}
                 </div>
                 {/* <div className="mt-4">
                   <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
