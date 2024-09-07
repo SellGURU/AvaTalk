@@ -22,7 +22,7 @@ const RegisterVerification = () => {
             <p className="text-sm mb-6 font-medium">{authContext.varification.emailOrPhone}</p>
             <div>
             <VerificationInput
-                onComplete={() => {
+                onComplete={(value) => {
                     // let resolvePhoneOrEnail = null
                     // if(authContext.varification.emailOrPhone.includes('@')){
                     // resolvePhoneOrEnail = {
@@ -35,19 +35,15 @@ const RegisterVerification = () => {
                     //     entered_code:value
                     // }      
                     // }                    
-                    Auth.login({
-                        password:''
+                    Auth.check_login_code({
+                       code_type:'verification',
+                       email:authContext.varification.emailOrPhone,
+                       entered_code:value
                     }).then((res) => {
-                        if(res.data == 'The code you have entered is wrong'){
-                            toast.error(res.data)
-                        }else
-                        if(res.data == null){
-                            navigate("/register");
-                        }else
-                        if(res.data == 'Not Registered'){
-                            navigate("/createAccount");
+                        if(res.data.check_code ==true){
+                            navigate("/createAccount")
                         }else{
-                            navigate("/createAccount");                       
+                            toast.error(res.data.error)
                         }
                     })
                 }}

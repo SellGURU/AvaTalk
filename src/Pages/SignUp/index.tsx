@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useConstructor } from "../../help";
 
 const initialValue = {
   email: "",
@@ -88,6 +89,21 @@ const SignUp = () => {
         //     navigate('/RVerification')
         // })
     }    
+    useConstructor(() => {
+        authContext.siginupHandler({
+            firstName:'',
+            gender:'',
+            email:'',
+            lastName:'',
+            phone:'',
+            job:'',
+            company:'',
+            avatar_pic_url:'',
+            conFirmPassword:'',
+            password:'',
+            silent_video_avatar:''
+        })          
+    })
     return (
         <>
             {showSplash ?

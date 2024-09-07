@@ -47,6 +47,12 @@ interface check_user_existenceProps {
   mobileNumber?:string
 }
 
+interface checkLoginCode{
+  email: string,
+  entered_code: string,
+  code_type: string 
+}
+
 interface AiSetting {
   name:string,
   ai_knowledge:string,
@@ -132,6 +138,11 @@ class Auth extends Api {
   static get_Login_code(data: GetLoginCodeProps) {
     const response = this.post("/get_Login_code", data);
     return response;
+  }
+
+  static check_login_code(data:checkLoginCode){
+    const response = this.post("/check_Login_code",data)
+    return response
   }
 
   static register(data: RegisterData) {
