@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 interface ReadyForMoreProps {
     onClose:() =>void
-    page:'link'|'AiSetting'| 'Gallery' | 'File'
+    page:'link'|'AiSetting'| 'Gallery' | 'File' | 'Video'
 }
 
 const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
@@ -37,6 +37,11 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                 You've reached the file upload limit. Upgrade to Avatalk Pro for up to 50 file uploads and expand your sharing capabilities!            
             `
         }
+        if(page == 'Video'){
+            return `
+                You've reached the video upload limit. Upgrade to Avatalk Pro for more video uploads and enhance your profile!         
+            `
+        }        
     }
     return (
         <>
