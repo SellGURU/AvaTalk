@@ -170,7 +170,7 @@ const EditAiSetting = () => {
         </div>
         {isReadyTO &&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <ReadyForMore page="link" onClose={() => {
+            <ReadyForMore page="AiSetting" onClose={() => {
               setIsReadyTo(false)
             }} ></ReadyForMore>
           </div>

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 interface ReadyForMoreProps {
     onClose:() =>void
-    page:'link'|'AiSetting'| 'Gallery' | 'File' | 'Video'
+    page:'link'|'AiSetting'| 'Gallery' | 'File' | 'Video' | 'Chat'
 }
 
 const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
@@ -41,7 +41,12 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
             return `
                 You've reached the video upload limit. Upgrade to Avatalk Pro for more video uploads and enhance your profile!         
             `
-        }        
+        }      
+        if(page == 'Chat'){
+            return `
+              You can't read the received messages in the free plan. Upgrade to Avatalk Pro to unlock full conversations with your Avatar and enhance your networking!
+            `
+        }                  
     }
     return (
         <>
