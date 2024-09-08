@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
 import { useAuth } from "../../hooks/useAuth";
 import { Confirm } from "../__Modal__";
+import PlanCard from "../PlanCard";
 
 interface SettingPanelProps {
   theme?: string;
@@ -91,6 +92,10 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       <div className={`Carbon-ContactsView-Container`}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
+        <div className="px-6">
+          <PlanCard></PlanCard>
+
+        </div>
         <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll pb-[300px] ">
           {settingCards.map((item) => {
             return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>
