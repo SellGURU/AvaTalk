@@ -91,7 +91,17 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                     {Object.keys(notifs).map((el:any) => {
                         return (
                             <>
+                                {/* <div>{notifs[el].map((val:any) => val.isRead ).filter((val:any) => val == true).length}</div> */}
+                                {menu == 'Unread' && notifs[el].map((val:any) => val.isRead ).filter((val:any) => val == false).length >0 ?
                                 <div className="text-[12px] text-left my-2 text-[#9CA3AF]">{el}</div>
+                                :
+                                <>
+                                    {menu == 'All' &&
+                                     <div className="text-[12px] text-left my-2 text-[#9CA3AF]">{el}</div>
+                                    }
+                                </>
+                                }
+
                                 {
                                     notifs[el].map((value:any) => {
                                         return (
