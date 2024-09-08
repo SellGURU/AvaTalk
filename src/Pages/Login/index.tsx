@@ -208,7 +208,7 @@ const Login = () => {
 
                 <div className="flex justify-between w-full px-2 mb-4 ">
                   <div>
-                    <Checkbox label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
+                    <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
                   </div>
 
                   <div className="text-[14px] text-[#06B6D4] cursor-pointer">
@@ -247,85 +247,19 @@ const Login = () => {
                       <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
                       <div className="text-text-primary">Login with Google</div>
                     </Button>
-                    {/* <GoogleLogin
-                      size="large"
-                      width={'100%'}
-                      text="signin_with"
-                      onSuccess={credentialResponse => {
-                        // setcertificate(credentialResponse);
-                        // console.log(credentialResponse);
-                        const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
-                        // console.log(prof)
-                        authContext.setGoogleInformation(prof)
-                        // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
-                        Auth.loginWithGoogle(
-                          {
-                            google_json:prof
-                          },
-                        ).then((res) => {
-                          authContext.verificationHandler({
-                            emailOrPhone: prof?.email,
-                            googleJson:prof
-                          })
-                          authContext.setReferalCode(parametr.get("referral") as string)
-                          if(res.data.access_token){
-                            localStorage.setItem("token",res.data.access_token)
-                            authContext.login(res.data.access_token)
-                            const resolveSocial: Array<Box> = [];
-                            Auth.showProfile((data) => {
-                                data.boxs.map((item:any) => {
-                                    const newBox = boxProvider(item);
-                                    resolveSocial.push(newBox);
-                                })
-                                authContext.currentUser.updateInformation({
-                                    firstName:data.information.first_name,
-                                    lastName:data.information.last_name,
-                                    phone:data.information.mobile_number,
-                                    personlEmail:data.information.email,
-                                    company:data.information.company_name,
-                                    job:data.information.job_title,
-                                    banelImage:data.information.back_ground_pic,
-                                    imageurl:data.information.profile_pic,
-                                    location:{
-                                        lat:33,
-                                        lng:33
-                                    },
-                                    workEmail:data.information.work_email,
-                                    workPhone:data.information.work_mobile_number,
-                                    userId:data.information.created_userid
-                                })
-                                authContext.currentUser.setBox(resolveSocial)
-                                navigate("/?splash=true");
-                            })                                                   
-                          }else{
-                            toast.error(res.data)
-                          }
-                        });                          
-                      }}
-                      onError={() => {
-                        console.log('Login Failed');
-                      }}
-                    />                      */}
-                  {/* </GoogleOAuthProvider>     */}
-                </div>
-                {/* <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                    <div>Continue with LinkedIn</div>
-                  </Button>
                 </div>
                 <div className="mt-4">
                   <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/faceBook.svg" alt="" />
-                    <div>Continue with Facebook</div>
+                    <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
+                    <div className="text-text-primary">Login with LinkedIn</div>
                   </Button>
                 </div>
                 <div className="mt-4">
                   <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                     <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
-                    <div>Continue with Apple</div>
+                    <div className="text-text-primary">Login with Apple</div>
                   </Button>
-                </div> */}
+                </div>
               </div>
         </>
       }

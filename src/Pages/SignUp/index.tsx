@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useState } from "react";
 import {BissinesCard, Splash, TextField} from "../../Components";
 import { Button } from "symphony-ui";
@@ -6,7 +7,11 @@ import * as Yup from "yup";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useConstructor } from "../../help";
+import { boxProvider, useConstructor } from "../../help";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { Box } from "../../Model";
+import { toast } from "react-toastify";
 
 const initialValue = {
   email: "",
@@ -36,6 +41,62 @@ const SignUp = () => {
             console.log(values);
         },
     });    
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+        try {
+            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+                Authorization: `Bearer ${tokenResponse.access_token}`,
+            },
+            });
+            Auth.loginWithGoogle(
+            {
+                google_json:userInfo.data
+            },
+            ).then((res) => {
+            authContext.setReferalCode(parametr.get("referral") as string)
+            if(res.data.access_token){
+                localStorage.setItem("token",res.data.access_token)
+                authContext.login(res.data.access_token)
+                const resolveSocial: Array<Box> = [];
+                Auth.showProfile((data) => {
+                    data.boxs.map((item:any) => {
+                        const newBox = boxProvider(item);
+                        resolveSocial.push(newBox);
+                    })
+                    authContext.currentUser.updateInformation({
+                        firstName:data.information.first_name,
+                        lastName:data.information.last_name,
+                        phone:data.information.mobile_number,
+                        personlEmail:data.information.email,
+                        company:data.information.company_name,
+                        job:data.information.job_title,
+                        banelImage:data.information.back_ground_pic,
+                        imageurl:data.information.profile_pic,
+                        location:{
+                            lat:33,
+                            lng:33
+                        },
+                        workEmail:data.information.work_email,
+                        workPhone:data.information.work_mobile_number,
+                        userId:data.information.created_userid
+                    })
+                    authContext.currentUser.setBox(resolveSocial)
+                    navigate("/?splash=true");
+                })                                                   
+            }else{
+                toast.error(res.data)
+            }
+            });    
+            console.log('User Info:', userInfo.data);
+        } catch (error) {
+            console.error('Failed to fetch user info:', error);
+        }
+        },
+        onError: (error) => {
+        console.log('Login Failed:', error);
+        },
+    });     
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);    
@@ -139,7 +200,26 @@ const SignUp = () => {
                             <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                         </div>
                         </div>    
-                        <div className="text-[#374151] text-center text-[14px]">
+                        <div className="flex items-center justify-center mt-4">
+                        
+                            <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
+                            <div className="text-text-primary">Login with Google</div>
+                            </Button>
+                        </div>
+                        <div className="mt-4">
+                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
+                            <div className="text-text-primary">Login with LinkedIn</div>
+                        </Button>
+                        </div>
+                        <div className="mt-4">
+                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
+                            <div className="text-text-primary">Login with Apple</div>
+                        </Button>
+                        </div>                        
+                        <div className="text-[#374151] mt-4 text-center text-[14px]">
                             By Signing up you agreed with our
                         </div>                    
                         <div className="text-center text-[14px] mt-1 cursor-pointer"><span className="text-[#06B6D4]">Terms & Conditions. </span></div>

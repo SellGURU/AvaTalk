@@ -24,7 +24,7 @@ const ContactStep:React.FC<ContactStepProps> = ({
             email:context.siginUpOptions.email
         },
         validationSchema:Yup.object().shape({
-            phone: Yup.string().required("Required"),
+            phone: Yup.string(),
             email: Yup.string().required('Email is required').test('email', 'Email is invalid', (value) => {
                 return validateEmail(value)
             })

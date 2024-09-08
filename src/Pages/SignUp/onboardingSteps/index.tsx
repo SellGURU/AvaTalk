@@ -9,7 +9,7 @@ import { useAuth } from "../../../hooks/useAuth"
 import { toast } from "react-toastify"
 import { useFormik } from "formik"
 import CompleteStep from "./steps/CompleteStep"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 interface Avatars {
   photo: string;
@@ -22,6 +22,7 @@ const OnBoarding = () => {
     const [step ,setStep] = useState(0)
     const authContext = useAuth()
     const [parametr] = useSearchParams() 
+    const navigate = useNavigate()
     const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
     const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
         photo:"",
@@ -133,6 +134,8 @@ const OnBoarding = () => {
                     <Button onClick={() =>{
                         if(step>0){
                             setStep(step -1)
+                        }else{
+                            navigate('/signup')
                         }
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                         <div className="Carbon-back-Button-vector"></div>
@@ -146,7 +149,9 @@ const OnBoarding = () => {
                             ></StepController>                    
                     </div>
 
-                    <div className={`text-text-primary ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
+                    <div onClick={() => {
+                        
+                    }} className={`text-text-primary cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                 </div>
                 {
                     resolveStep()

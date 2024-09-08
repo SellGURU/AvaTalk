@@ -13,8 +13,8 @@ const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
     const context = useAuth()
     const formik = useFormik({
         initialValues:{
-            password:'',
-            confirmPassword:''
+            password:context.siginUpOptions.password,
+            confirmPassword:context.siginUpOptions.conFirmPassword
         },
         validationSchema:Yup.object().shape({
             password:Yup.string().min(8, 'Password must be at least 8 characters')
@@ -48,7 +48,7 @@ const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
               <TextField {...formik.getFieldProps("confirmPassword")} type="password" required label="Confirm password" placeholder="Confirm password..." inValid={formik.errors?.confirmPassword != undefined && (formik.touched?.confirmPassword as boolean)} errorMessage={formik.errors.confirmPassword} theme="Carbon" ></TextField>
             </div>     
             <div className="mt-8">
-                <Button disabled={!formik.isValid || !formik.touched.password} onClick={() => {
+                <Button disabled={!formik.isValid || formik.values.confirmPassword == '' || formik.values.password == ''} onClick={() => {
                     context.siginupHandler({
                         password:formik.values.password,
                         conFirmPassword:formik.values.confirmPassword
