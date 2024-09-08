@@ -145,6 +145,13 @@ class Auth extends Api {
     return response
   }
 
+  static analyseAiSetting(text:string) {
+    const response = this.post('/analyze_ai_setting',{
+      ai_knowledge:text
+    })
+    return response
+  }
+
   static register(data: RegisterData) {
     const response = this.post("/register", data);
     return response;

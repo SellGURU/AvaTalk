@@ -79,7 +79,7 @@ class VideoBox extends Box {
   ): JSX.Element {
     return (
       <>
-        {this.contents.length > 0 ? (
+        {this.contents?.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide
               prevArrow={

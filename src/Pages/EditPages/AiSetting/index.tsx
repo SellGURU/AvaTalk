@@ -42,6 +42,7 @@ const EditAiSetting = () => {
       setGender(res.gender != null ?res.gender :'female')
     })
   })
+  const [analysedText,setAnaysedText] = useState("")
   const [showAiSuggestion,setShowAiSuggestion] = useState(false)
   const [isReadyTO,setIsReadyTo] = useState(false)
   useEffect(() => {
@@ -68,22 +69,7 @@ const EditAiSetting = () => {
           </div>
           <div className="hiddenScrollBar px-6 h-full">
             <div className="text-left my-8" style={{lineHeight:'28px'}}>
-                Your input is quite detailed and gives a comprehensive overview of your professional background, which is great! Here are a few suggestions to enhance it:
-                Consolidate Contact Info: 
-                <br></br>
-                <p className="ml-8">
-                  1. Combine your email, phone, and LinkedIn into a single contact section for clarity. <br/>
-
-                </p>
-                <p className="ml-8">
-                  2. Simplify Experience: Shorten descriptions to highlight key achievements and skills more concisely. <br/>
-
-                </p>
-                <p className="ml-8">
-                  3. Update Skills Section: Consider adding specific tools or technologies you are proficient in, such as those relevant to your current role. <br/>
-
-                </p>
-                These adjustments will help your AI assistant represent you more effectively in professional settings. <br/>
+              {analysedText}
 
             </div>
 
@@ -110,7 +96,7 @@ const EditAiSetting = () => {
             {/* <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>
             </div> */}
-            <TextArea setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse required label="AI Knowledge" errorMessage={formik.errors.Description} placeholder="Write your AI Knowledge ..." inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)} name="Description"  theme="Carbon" textAreaHeight='140px'></TextArea>
+            <TextArea analysedText={analysedText} setAnalysedText={setAnaysedText} setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse required label="AI Knowledge" errorMessage={formik.errors.Description} placeholder="Write your AI Knowledge ..." inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)} name="Description"  theme="Carbon" textAreaHeight='140px'></TextArea>
             {/* <MDEditor
               value={value}
               data-color-mode="light"
