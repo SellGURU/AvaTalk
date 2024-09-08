@@ -9,10 +9,11 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   mod?:'files' | 'profile',
   label?:string
   accept?:string
+  userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
@@ -123,12 +124,23 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                     <div className={`${theme}-ImageUploader-itemList-items`}>
                       {files.map((item,index) => {
                         return (
-                          <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                            <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
-                            {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                            </div> */}
-                            <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Trash.svg" alt="" />
-                          </div>
+                          <>
+                            {userMode == 'Free' && index > 4 ?
+                              <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                </div> */}
+                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
+                              </div>                            
+                            :
+                              <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                </div> */}
+                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Trash.svg" alt="" />
+                              </div>
+                            }
+                          </>
                         )
                       })}
                     </div>

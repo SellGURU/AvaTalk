@@ -31,7 +31,11 @@ const EditGallery = () => {
     },
   });
   const submit = () => {
-    auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
+    if(auth.currentUser.type_of_account.getType() == 'Free'){
+      auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.slice(0, 5)));
+    }else{
+       auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
+    }
     navigate("/");
   };
   return (
@@ -60,6 +64,7 @@ const EditGallery = () => {
           <div className="px-6 mt-3">
             <ImageUploadr
               accept="image/*"
+              userMode={auth.currentUser.type_of_account.getType()}
               value={formik.values.files.map((item, index) => {
                 return {
                   url: item.original,
