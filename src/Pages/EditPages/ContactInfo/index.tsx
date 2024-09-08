@@ -82,7 +82,7 @@ const EditContactInfo = () => {
         lat:pointMode.control.values[0][0],
         lng:pointMode.control.values[0][1]
       },
-      logo:icons[0],
+      logo:icons[0].url,
       work_email:formik.values.workEmail as string,
       address:formik.values.address,
       work_phone:formik.values.workPhone as string
@@ -94,6 +94,7 @@ const EditContactInfo = () => {
       formik.setFieldValue("job",res.data.job_title)
       formik.setFieldValue("company",res.data.company_name)
       formik.setFieldValue("address",res.data.address)
+      setIcons([...icons,{name:"file",type:"image/png",url:res.data.logo}])
       setPointVals([[res.data.location.lat,res.data.location.lng]])
     })
   })
@@ -111,9 +112,10 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
-          <FileUploadr label="Logo" mod="files" value={icons} uploades={(files) => {
+          <FileUploadr label="Logo" mod="profile" value={icons} uploades={(files) => {
             setIcons(files)
-          }} accept=".svg"></FileUploadr>
+            console.log(files)
+          }} accept=".png"></FileUploadr>
         </div>
         <div className="mt-3 px-6">
           {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}

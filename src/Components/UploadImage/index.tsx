@@ -51,6 +51,9 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
           console.log('Error: ', error);
       };
   }   
+  useEffect(() => {
+    setFiles(value?value:[])
+  },[value])
   const deleteFile = (index:number) => {
     const newArr = [...files]
     newArr.splice(index,1)
