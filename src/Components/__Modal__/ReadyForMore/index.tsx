@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 interface ReadyForMoreProps {
     onClose:() =>void
-    page:'link'
+    page:'link'|'AiSetting'| 'Gallery' | 'File'
 }
 
 const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
@@ -21,6 +21,21 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                 return `
                 You've reached the limit for links. Upgrade to Avatalk Pro to add unlimited links and maximize your profile's potential!
                 `
+        }
+        if(page == 'AiSetting'){
+            return `
+                You've customized your AI persona once for free. To make further edits and keep your AI dynamic, upgrade to Avatalk Pro!            
+            `
+        }
+        if(page == 'Gallery'){
+            return `
+                You've uploaded the maximum number of images. Upgrade to Avatalk Pro to upload up to 50 images and enhance your gallery!          
+            `
+        }        
+        if(page == 'File'){
+            return `
+                You've reached the file upload limit. Upgrade to Avatalk Pro for up to 50 file uploads and expand your sharing capabilities!            
+            `
         }
     }
     return (

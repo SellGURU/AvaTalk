@@ -7,6 +7,8 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { ReadyForMore } from "../../../Components/__Modal__";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -19,6 +21,7 @@ const EditGallery = () => {
   if (currentBox == undefined) {
     currentBox = new GalleryBox("Gallery", []);
   }
+  const [isReadyTO,setIsReadyTo] = useState(false)
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -32,11 +35,16 @@ const EditGallery = () => {
   });
   const submit = () => {
     if(auth.currentUser.type_of_account.getType() == 'Free'){
-      auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.slice(0, 5)));
+      if(formik.values.files.length>5){
+        setIsReadyTo(true)
+      }else{
+        auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.slice(0, 5)));
+        navigate("/");
+      }
     }else{
        auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
+       navigate("/");
     }
-    navigate("/");
   };
   return (
     <>
@@ -91,6 +99,13 @@ const EditGallery = () => {
             </Button>
           </div>
         </div>
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="Gallery" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }          
       </div>
     </>
   );

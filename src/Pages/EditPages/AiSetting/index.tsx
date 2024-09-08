@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
+import { ReadyForMore } from "../../../Components/__Modal__";
+import { useAuth } from "../../../hooks/useAuth";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
   // if (currentBox == undefined) {
   //   currentBox = new AboutBox("about", "");
   // }  
+  const auth = useAuth()
   const navigate = useNavigate();
   const [gender,setGender] = useState('female')
   const initialValue = {
@@ -40,6 +43,7 @@ const EditAiSetting = () => {
     })
   })
   const [showAiSuggestion,setShowAiSuggestion] = useState(false)
+  const [isReadyTO,setIsReadyTo] = useState(false)
   useEffect(() => {
     if(showAiSuggestion){
       document.getElementById("aiSettingEdit")?.scrollTo(0, 0);
@@ -139,14 +143,18 @@ const EditAiSetting = () => {
           </div>           */}
           <div className="px-6 mt-10">
             <Button disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
-              Auth.updateAiSetting({
-                name:formik.values.title,
-                ai_knowledge:formik.values.Description,
-                gender:gender
-              })
-              setTimeout(() => {
-                navigate('/')
-              }, 600);
+              if(auth.currentUser.type_of_account.getType() == 'Free' && auth.currentUser.editStatus){
+                setIsReadyTo(true)
+              }else{
+                  Auth.updateAiSetting({
+                    name:formik.values.title,
+                    ai_knowledge:formik.values.Description,
+                    gender:gender
+                  })
+                  setTimeout(() => {
+                    navigate('/')
+                  }, 600);
+              }
             }} theme="Carbon">
               Save Change
             </Button>
@@ -160,7 +168,13 @@ const EditAiSetting = () => {
             <div className="text-sm text-left mt-2 text-text-primary">Watch our <span className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
           </div>
         </div>
-      
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="link" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }      
       </div>    
     </>
   )
