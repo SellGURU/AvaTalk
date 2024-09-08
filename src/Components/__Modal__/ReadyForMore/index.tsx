@@ -43,7 +43,7 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                     </div>
                 </div>
                 <div className="px-5 mt-4 mb-6">
-                    <div className="Carbon-TextArea-input h-[63px]">
+                    <div className="boxsInnerShadows p-6 text-[14px] w-full flex justify-center items-center text-[#374151] rounded-[27px] mt-4 h-[63px]">
                       {resolveText()}
                     </div>
                 </div>
