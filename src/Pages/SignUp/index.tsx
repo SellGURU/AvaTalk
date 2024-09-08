@@ -102,7 +102,8 @@ const SignUp = () => {
     }, 3000);    
     const handleSubmit = () => {
         Auth.check_user_existence({
-            email:formik.values.email
+            email:formik.values.email,
+            code_type:'verification'
         }).then((res) => {
             console.log(res)
             if(res.data.error){

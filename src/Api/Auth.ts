@@ -45,6 +45,7 @@ interface SupportData {
 interface check_user_existenceProps {
   email?:string
   mobileNumber?:string
+  code_type:"verification"|"reset"
 }
 
 interface checkLoginCode{
@@ -122,7 +123,7 @@ class Auth extends Api {
     const response = this.post('/check_user_existence',{
       email:data.email,
       mobile_number:data.mobileNumber,
-      code_type:'verification'
+      code_type:data.code_type
     })
     return response
   }

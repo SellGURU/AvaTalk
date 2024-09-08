@@ -5,9 +5,8 @@ import { Auth } from "../../Api";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from '../../store/auth-context';
 import { useContext, useState } from "react";
-import { boxProvider, useConstructor } from "../../help";
+import {  useConstructor } from "../../help";
 import { Timer } from "../../Components";
-import { Box } from "../../Model";
 import { toast } from "react-toastify";
 
 const Verification = () => {
@@ -32,64 +31,18 @@ const Verification = () => {
             <p className="text-sm mb-6 font-medium">{authContext.varification.emailOrPhone}</p>
             <div>
             <VerificationInput
-                onComplete={() => {
+                onComplete={(value) => {
                     // let resolvePhoneOrEnail = null
-                    if(authContext.varification.emailOrPhone.includes('@')){
-                    // resolvePhoneOrEnail = {
-                    //     email:authContext.varification.emailOrPhone,
-                    //     // entered_code:value,
-                    // }
-                    // }else {
-                    // resolvePhoneOrEnail = {
-                    //     mobile_number:authContext.varification.emailOrPhone,
-                    //     entered_code:value
-                    // }      
-                    }                    
-                    Auth.login({
-                        password:""
+                    Auth.check_login_code({
+                        code_type:'reset',
+                        email:authContext.varification.emailOrPhone,
+                        entered_code:value
                     }).then((res) => {
-                        console.log(res)
-                        if(res.data == 'The code you have entered is wrong'){
-                            toast.error(res.data)
-                        }else
-                        if(res.data == null){
-                            navigate("/register");
-                        }else
-                        if(res.data == 'Not Registered'){
-                            navigate("/register");
-                        }else{
-                            localStorage.setItem("token",res.data.access_token)
-                            authContext.login(res.data.access_token)
-                            const resolveSocial: Array<Box> = [];
-                            Auth.showProfile((data) => {
-                                data.boxs.map((item:any) => {
-                                    const newBox = boxProvider(item);
-                                    resolveSocial.push(newBox);
-                                })
-                                authContext.currentUser.updateInformation({
-                                    firstName:data.information.first_name,
-                                    lastName:data.information.last_name,
-                                    phone:data.information.mobile_number,
-                                    personlEmail:data.information.email,
-                                    company:data.information.company_name,
-                                    job:data.information.job_title,
-                                    banelImage:data.information.back_ground_pic,
-                                    imageurl:data.information.profile_pic,
-                                    location:{
-                                        lat:33,
-                                        lng:33
-                                    },
-                                    workEmail:data.information.work_email,
-                                    workPhone:data.information.work_mobile_number,
-                                    userId:data.information.created_userid
-                                })
-                                authContext.currentUser.setBox(resolveSocial)
-                                setTimeout(() => {
-                                    navigate("/?splash=true");
-                                }, 200);
-                            })                            
+                        if(res.data.check_code == true){
+                            navigate("/resetPassword")
                         }
                     })
+
                 }}
                 classNames={{
                     container: "container",
@@ -107,17 +60,6 @@ const Verification = () => {
             />
             </div>
             <p onClick={completeTimer ?() => {
-                    // setCompleteTimer(false) 
-                    // let resolvePhoneOrEnail = null
-                    // if(authContext.varification.emailOrPhone.includes('@')){
-                    // resolvePhoneOrEnail = {
-                    //     email:authContext.varification.emailOrPhone
-                    // }
-                    // }else {
-                    // resolvePhoneOrEnail = {
-                    //     mobile_number:authContext.varification.emailOrPhone
-                    // }      
-                    // }                    
                     Auth.get_Login_code({
                         email:authContext.varification.emailOrPhone,
                         code_type:'verification'                        
