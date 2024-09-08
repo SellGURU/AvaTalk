@@ -13,6 +13,7 @@ import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayme
 import OnBoarding from "../Pages/SignUp/onboardingSteps";
 import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
+import ResetPassword from "../Pages/ResetPassword";
 
 const route = createHashRouter([
   {
@@ -185,6 +186,10 @@ const route = createHashRouter([
     path: "/forgetPassword",
     element: <ForgetPassword></ForgetPassword>,
   },   
+  {
+    path: "/resetPassword",
+    element: <ResetPassword></ResetPassword>,
+  },    
   {
     path: "/createAccount",
     element: <OnBoarding></OnBoarding>,

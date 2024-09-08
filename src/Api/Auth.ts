@@ -164,6 +164,11 @@ class Auth extends Api {
     });
   }
 
+  static forgetPassword(data:any) {
+    const response = this.post("/forgot_password",data)
+    return response
+  }
+
   static getBoxs(resolve: (data: Array<Box>) => void) {
     const resolveSocial: Array<Box> = [];
     this.post("/profileInfo", {}).then((res) => {

@@ -211,7 +211,9 @@ const Login = () => {
                     <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
                   </div>
 
-                  <div className="text-[14px] text-[#06B6D4] cursor-pointer">
+                  <div onClick={() => {
+                    navigate("/forgetPassword")
+                  }} className="text-[14px] text-[#06B6D4] cursor-pointer">
                     Forgot Password?
                   </div>
                 </div>            
