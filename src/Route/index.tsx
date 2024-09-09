@@ -14,6 +14,7 @@ import OnBoarding from "../Pages/SignUp/onboardingSteps";
 import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
 import ResetPassword from "../Pages/ResetPassword";
+import {Tutorial} from "../Pages/Tutorial";
 
 const route = createHashRouter([
   {
@@ -144,9 +145,14 @@ const route = createHashRouter([
               {
                 path: "support",
                 element: <HelpSupport></HelpSupport>
+              },
+              {
+                path: "tutorial",
+                element: <Tutorial></Tutorial>
               }
             ]
           },
+          //   CartTu
           {
             path: "refer",
             element: <ReferYourFriends></ReferYourFriends>,
