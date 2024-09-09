@@ -74,6 +74,8 @@ const EditFile = () => {
                   type:item.getType()
                 };
               })}
+              limite={0}
+              userMode={auth.currentUser.type_of_account.getType()}
               uploades={(files: Array<any>) => {
                 console.log(files)
                 const converted:Array<File> = files.map((item) => {
