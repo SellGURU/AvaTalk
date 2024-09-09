@@ -10,7 +10,7 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) =
     return (
 
         <div className={"Carbon-Card-Product-container"}>
-            <div><img src={imgSrc}  alt={""}/></div>
+            <div><img src={imgSrc} className={"h-[108px]"}  alt={""}/></div>
                 <h1 className={"text-[10px] text-[#374151] font-bold"}>{title}</h1>
             <div className={"text-[10px] text-[#6B7280] flex gap-2 items-center"}>
                 Colors:
