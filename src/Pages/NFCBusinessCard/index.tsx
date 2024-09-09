@@ -44,7 +44,7 @@ export const NFCBusinessCard = () => {
             <div
                 className="max-w-sm mx-auto p-4 rounded-lg  px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]">
                 <div className="flex flex-col justify-center items-center">
-                    <div className="flex w-full h-screen">
+                    <div className="flex w-full pb-16  ">
                         <ImageGallery
                             showThumbnails={true} // Ensure thumbnails are visible
                             thumbnailPosition="right" // Thumbnail position on the right
