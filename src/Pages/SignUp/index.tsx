@@ -121,6 +121,7 @@ const SignUp = () => {
                     authContext.siginupHandler({
                         email:formik.values.email
                     })
+                    console.log(parametr.get("referral"))
                     authContext.setReferalCode(parametr.get("referral") as string)
                     navigate('/RVerification')
                 })                
