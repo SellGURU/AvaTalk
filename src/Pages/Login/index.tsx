@@ -269,10 +269,10 @@ const Login = () => {
                 </div>
                   <LinkedIn
                       clientId="786lwqvw2unoip"
-                      redirectUri={`http://localhost:5173/`}
+                      redirectUri={`http://localhost:5173/linkedin/callback`}
                       onSuccess={handleSuccessLinkedIn}
                       onError={handleFailureLinkedIn}
-                      scope={"r_basicprofile"}
+                      scope={"profile,email"}
                       children={
                           ({linkedInLogin}) => <div className="mt-4">
                               <Button theme="Carbon-Outline"
