@@ -72,6 +72,7 @@ const EditGallery = () => {
           <div className="px-6 mt-3">
             <ImageUploadr
               accept="image/*"
+              limite={5}
               userMode={auth.currentUser.type_of_account.getType()}
               value={formik.values.files.map((item, index) => {
                 return {

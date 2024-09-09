@@ -74,6 +74,8 @@ const EditFile = () => {
                   type:item.getType()
                 };
               })}
+              limite={0}
+              userMode={auth.currentUser.type_of_account.getType()}
               uploades={(files: Array<any>) => {
                 console.log(files)
                 const converted:Array<File> = files.map((item) => {
@@ -95,7 +97,7 @@ const EditFile = () => {
         </div>
         {isReadyTO &&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <ReadyForMore page="Gallery" onClose={() => {
+            <ReadyForMore page="File" onClose={() => {
               setIsReadyTo(false)
             }} ></ReadyForMore>
           </div>

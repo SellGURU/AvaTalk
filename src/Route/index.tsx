@@ -9,7 +9,7 @@ import { Chat, ContactsView, Profile2 } from "../Components";
 import { EditAiSetting, EditAvater,EditAvailability, EditContactInfo, EditFile, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
-import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
+import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService , SettingHelp, HelpSupport } from "../Pages/SettingPages";
 import OnBoarding from "../Pages/SignUp/onboardingSteps";
 import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
@@ -138,6 +138,16 @@ const route = createHashRouter([
             element: <SettingSupport></SettingSupport>,
           },
           {
+            path: "help",
+            element: <SettingHelp></SettingHelp>,
+            children : [
+              {
+                path: "support",
+                element: <HelpSupport></HelpSupport>
+              }
+            ]
+          },
+          {
             path: "refer",
             element: <ReferYourFriends></ReferYourFriends>,
           },
@@ -149,6 +159,7 @@ const route = createHashRouter([
             path: "NFCBusinessCard",
             element: <NFCBusinessCard></NFCBusinessCard>,
           },
+       
         ],
         // children:[
         //   {

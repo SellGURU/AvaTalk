@@ -87,6 +87,15 @@ class User {
         // toast.success("Done Successfully!")
         this.syncToLocalStorage()
     }
+    public updateCustomInformation(information:any){
+        console.log(this.information)
+        this.information = {
+            ...this.information,
+            ...information
+        }
+        console.log(this.information)
+        this.syncToLocalStorage()
+    }
     public updateAvater(pic:string,silent:string){
         if(this.information?.silent_video_avatar){
             this.information.silent_video_avatar = silent

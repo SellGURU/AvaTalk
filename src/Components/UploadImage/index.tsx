@@ -9,11 +9,12 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   mod?:'files' | 'profile',
   label?:string
   accept?:string
+  limite?:number
   userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,userMode,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
@@ -52,9 +53,13 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,userMode,th
           console.log('Error: ', error);
       };
   }   
+  const [resolveLimite,setResolveLimite] = useState(limite?limite:1)
   useEffect(() => {
     setFiles(value?value:[])
   },[value])
+  useEffect(() => {
+    setResolveLimite(limite?limite:1)
+  },[limite])
   const deleteFile = (index:number) => {
     const newArr = [...files]
     newArr.splice(index,1)
@@ -125,7 +130,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,userMode,th
                       {files.map((item,index) => {
                         return (
                           <>
-                            {userMode == 'Free' && index > 4 ?
+                            {userMode == 'Free' && index >= resolveLimite ?
                               <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
                                 <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
                                 {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>

@@ -113,6 +113,9 @@ const EditAvater: React.FC = () => {
     }else{
       publish('isLoading-stop',{})
     }
+    return () =>{
+      publish('isLoading-stop',{})
+    }
   },[firstLoading])
   // const navigate = useNavigate();  
   const [showGudieLine, setShowGudieLine] = useState(false);
