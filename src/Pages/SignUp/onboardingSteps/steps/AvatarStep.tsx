@@ -390,55 +390,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                 <Button
                     // disabled={formik.values.silent_video_avatar.length == 0}
                     onClick={() => {
-                        Auth.register({
-                            first_name:authContext.siginUpOptions.firstName,
-                            last_name:authContext.siginUpOptions.lastName,
-                            avatar_pic_url:authContext.siginUpOptions.avatar_pic_url,
-                            company_name:authContext.siginUpOptions.company,
-                            confirm_password:authContext.siginUpOptions.conFirmPassword,
-                            password:authContext.siginUpOptions.password,
-                            email:authContext.siginUpOptions.email,
-                            gender:authContext.siginUpOptions.gender,
-                            job_title:authContext.siginUpOptions.job,
-                            mobile_number:authContext.siginUpOptions.phone,
-                            nfc_id:authContext.nfc_id,
-                            profile_pic:authContext.siginUpOptions.avatar_pic_url,
-                            silent_video_avatar:authContext.siginUpOptions.silent_video_avatar,
-                            referral_code:''
-                        }).then((res) => {
-                            if(res.data.access_token){
-                                localStorage.setItem("token",res.data.access_token)
-                                authContext.login(res.data.access_token)
-                                const resolveSocial: Array<Box> = [];
-                                Auth.showProfile((data) => {
-                                    data.boxs.map((item:any) => {
-                                        const newBox = boxProvider(item);
-                                        resolveSocial.push(newBox);
-                                    })
-                                    authContext.currentUser.updateInformation({
-                                        firstName:data.information.first_name,
-                                        lastName:data.information.last_name,
-                                        phone:data.information.mobile_number,
-                                        personlEmail:data.information.email,
-                                        company:data.information.company_name,
-                                        job:data.information.job_title,
-                                        banelImage:data.information.back_ground_pic,
-                                        imageurl:data.information.profile_pic,
-                                        location:{
-                                            lat:33,
-                                            lng:33
-                                        },
-                                        workEmail:data.information.work_email,
-                                        workPhone:data.information.work_mobile_number,
-                                        userId:data.information.created_userid
-                                    })
-                                    authContext.currentUser.setBox(resolveSocial)
-                                })                                  
-                                onSubmit()
-                            }else{
-                                toast.error(res.data)
-                            }
-                        })
+                        onSubmit()
                     }}
                     theme="Carbon"
                 >
