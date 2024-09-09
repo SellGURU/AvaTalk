@@ -20,6 +20,8 @@ export  default  {
 
 				"input-color":  "#F5F7FA",
 
+			"black-custom":"#000000"
+
 			},
       fontFamily: {
         'poppins' :['Poppins']

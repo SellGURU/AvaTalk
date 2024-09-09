@@ -36,3 +36,16 @@
 .Carbon-back-Button-container-disabled {
   @apply opacity-[50%] #{!important}
 }
+
+
+.Carbon-back-Button-container-box-NfcCard {
+  @apply flex px-6 items-center space-x-4 absolute z-10 top-8 #{!important}
+}
+
+.Carbon-back-Button-container-box-NfcCard[data-mode ='modal'] {
+  @apply flex px-0 items-center space-x-4 z-10 relative top-0  #{!important}
+}
+
+.Carbon-back-Button-container-box-NfcCard[data-mode ='gallery'] {
+  @apply flex px-0 items-center space-x-4 z-[2] absolute top-[110%]  #{!important}
+}
