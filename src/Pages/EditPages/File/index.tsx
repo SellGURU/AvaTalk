@@ -97,7 +97,7 @@ const EditFile = () => {
         </div>
         {isReadyTO &&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <ReadyForMore page="Gallery" onClose={() => {
+            <ReadyForMore page="File" onClose={() => {
               setIsReadyTo(false)
             }} ></ReadyForMore>
           </div>
