@@ -2,6 +2,7 @@ import {BackIcon} from "../../Components";
 import {useState} from "react";
 import ImageGallery from "react-image-gallery";
 import {Button} from "symphony-ui";
+import Modal from "react-modal";
 
 export const NFCBusinessCard = () => {
     const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1,id:0}]);
@@ -17,7 +18,7 @@ export const NFCBusinessCard = () => {
             description: '',
         },
     ];
-
+const [isOpen, setIsOpen] = useState(false);
     const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
     const handleQuantityChange = (action:string, id:number) => {
         setSelectedColor(prevColors =>
@@ -112,7 +113,21 @@ export const NFCBusinessCard = () => {
                     </div>
 
                 </div>
-                <button className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={() => {
+                        setIsOpen(false)}
+                }
+                    style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+                    contentLabel=" Modal"
+                >
+                    <div className={"flex flex-col items-center justify-center"}>
+                        <img src={"/Carbon/tick-circle.svg"}/>
+                        <h1 className={"text-lg font-semibold"}>Your purchase</h1>
+                        <p className={"text-lg font-semibold"}>has been successfully completed</p>
+                    </div>
+                </Modal>
+                <button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
                 </button>
                 <div className="mt-4">
