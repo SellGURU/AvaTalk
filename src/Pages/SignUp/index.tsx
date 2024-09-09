@@ -7,11 +7,10 @@ import * as Yup from "yup";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { boxProvider, useConstructor } from "../../help";
+import { useConstructor } from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { Box } from "../../Model";
-import { toast } from "react-toastify";
+
 
 const initialValue = {
   email: "",
@@ -45,50 +44,20 @@ const SignUp = () => {
         onSuccess: async (tokenResponse) => {
         try {
             const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-            headers: {
-                Authorization: `Bearer ${tokenResponse.access_token}`,
-            },
+                headers: {
+                    Authorization: `Bearer ${tokenResponse.access_token}`,
+                },
             });
-            Auth.loginWithGoogle(
-            {
-                google_json:userInfo.data
-            },
-            ).then((res) => {
-            authContext.setReferalCode(parametr.get("referral") as string)
-            if(res.data.access_token){
-                localStorage.setItem("token",res.data.access_token)
-                authContext.login(res.data.access_token)
-                const resolveSocial: Array<Box> = [];
-                Auth.showProfile((data) => {
-                    data.boxs.map((item:any) => {
-                        const newBox = boxProvider(item);
-                        resolveSocial.push(newBox);
-                    })
-                    authContext.currentUser.updateInformation({
-                        firstName:data.information.first_name,
-                        lastName:data.information.last_name,
-                        phone:data.information.mobile_number,
-                        personlEmail:data.information.email,
-                        company:data.information.company_name,
-                        job:data.information.job_title,
-                        banelImage:data.information.back_ground_pic,
-                        imageurl:data.information.profile_pic,
-                        location:{
-                            lat:33,
-                            lng:33
-                        },
-                        workEmail:data.information.work_email,
-                        workPhone:data.information.work_mobile_number,
-                        userId:data.information.created_userid
-                    })
-                    authContext.currentUser.setBox(resolveSocial)
-                    navigate("/?splash=true");
-                })                                                   
-            }else{
-                toast.error(res.data)
-            }
-            });    
-            console.log('User Info:', userInfo.data);
+            // console.log(userInfo)
+            Auth.check_user_existence({
+                email:userInfo.data.email,
+                code_type:'verification'
+            }).then(res => {
+                if(res.data.check_user == true){
+                    authContext.setGoogleInformation(userInfo.data)
+                    navigate('/createAccount')
+                }
+            })
         } catch (error) {
             console.error('Failed to fetch user info:', error);
         }

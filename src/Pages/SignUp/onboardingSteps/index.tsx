@@ -38,20 +38,25 @@ const OnBoarding = () => {
     const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
         toast.loading('Creating your Avatalk')
         Auth.createAvatarVideo(photo).then((response) => {
+            console.log(response)
             if(response.data == 'No face detected'){
             // setIsLoading(false)
             toast.dismiss()
             formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
             formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
-            }else{
-            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-            setUploadedAvater({
-                photo:response.data.avatar_pic_link,
-                video:response.data.silent_video_link,
-                type:'Api'
-            })
-            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
+            }else if(response.data.avatar_pic_link){
+                formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
+                setUploadedAvater({
+                    photo:response.data.avatar_pic_link,
+                    video:response.data.silent_video_link,
+                    type:'Api'
+                })
+                formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
             // setIsLoading(false)
+            }else{
+                toast.dismiss()
+                formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+                formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
             }
         }).catch(() => {
         // setIsLoading(false)
@@ -62,7 +67,7 @@ const OnBoarding = () => {
         })     
     }      
     useConstructor(() => {
-        Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
+        Auth.avatarList(authContext.googleInformation?.email ? {google_json:authContext.googleInformation}:{}).then(res => {
         // setAllAvatar(res.data)
         if(res.data[res.data.length -1].video == ''){
             createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])

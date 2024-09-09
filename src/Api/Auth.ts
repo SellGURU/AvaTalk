@@ -19,6 +19,7 @@ interface RegisterData {
   first_name: string;
   last_name: string;
   // Gender: string;
+  google_json?:any;
   gender:string | null;
   nfc_id:string|null;
   mobile_number: string | null;

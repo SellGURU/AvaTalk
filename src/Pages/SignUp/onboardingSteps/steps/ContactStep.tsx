@@ -18,10 +18,18 @@ const ContactStep:React.FC<ContactStepProps> = ({
     const validateEmail = (email: string | undefined) => {
     return Yup.string().email().isValidSync(email)
     };    
+    const resolveEmail = () => {
+        if(context.siginUpOptions.email != ''){
+            return context.siginUpOptions.email as string
+        }else if(context.googleInformation.email){
+            return context.googleInformation.email as string
+        }
+        return ''
+    }
     const formik = useFormik({
         initialValues:{
             phone:context.siginUpOptions.phone,
-            email:context.siginUpOptions.email
+            email:resolveEmail()
         },
         validationSchema:Yup.object().shape({
             phone: Yup.string(),

@@ -191,8 +191,8 @@ const Login = () => {
 
 
 
-    const [code, setCode] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [, setCode] = useState('');
+    const [, setErrorMessage] = useState('');
 
     const handleSuccessLinkedIn = (data:any) => {
         setCode(data.code);
