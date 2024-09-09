@@ -127,9 +127,9 @@ const [isOpen, setIsOpen] = useState(false);
                         <p className={"text-lg font-semibold"}>has been successfully completed</p>
                     </div>
                 </Modal>
-                <button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
+                <Button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
-                </button>
+                </Button>
                 <div className="mt-4">
                     <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
                         <summary className="font-bold text-gray-800">Description</summary>
