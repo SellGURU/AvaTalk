@@ -17,6 +17,35 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
         setCurrentChat(res)
       })
     })
+    const formatText = (text:string) => {
+  // Split the text on newlines and process each line
+      return text.split('\n').map((line, index) => {
+        // Check for headers
+        if (line.startsWith('### ')) {
+          return <h3 key={index}>{line.slice(4)}</h3>;
+        } else if (line.startsWith('## ')) {
+          return <h2 key={index}>{line.slice(3)}</h2>;
+        } else if (line.startsWith('# ')) {
+          return <h1 key={index}>{line.slice(2)}</h1>;
+        }
+
+        // Process bold text within the lines
+        const parts = line.split(/(\*\*[^*]+\*\*)/g); // Split by bold format (**bold**)
+        
+        return (
+          <p key={index}>
+            {parts.map((part, i) => {
+              if (part.startsWith('**') && part.endsWith('**')) {
+                // Remove the asterisks and render bold text
+                return <strong key={i}>{part.slice(2, -2)}</strong>;
+              } else {
+                return part; // Regular text
+              }
+            })}
+          </p>
+        );
+      });
+    };    
     return (
         <>
           <div className={`${theme}-ChatDetails-container`}>
@@ -33,9 +62,9 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
               {currentChat.map((el) => {
                 return (
                   <>
-                    <div className="bg-primary-color text-[14px] text-white px-4 py-3 rounded-[16px] rounded-tl-none">{el.messages[0].content}</div>
+                    <div className="bg-primary-color text-[14px] text-white px-4 py-3 rounded-[16px] rounded-tl-none">{ formatText(el.messages[0].content)}</div>
                     {/* <Button theme="Carbon" data-mode="ChatDetails-question-button">{el.messages[0].content}</Button>               */}
-                    <div className="bg-[#F3F4F6] text-[14px] text-[#374151] px-4 py-3 rounded-[16px] rounded-tr-none">{el.messages[1].content}</div>                  
+                    <div className="bg-[#F3F4F6] text-[14px] text-[#374151] px-4 py-3 rounded-[16px] rounded-tr-none">{formatText(el.messages[1].content)}</div>                  
                   </>
                 )
               })}
