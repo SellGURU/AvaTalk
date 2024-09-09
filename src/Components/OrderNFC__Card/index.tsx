@@ -10,7 +10,7 @@ interface Props {
 export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) => {
 
     return (
-
+        <Link rel="stylesheet" to="/settings/NFCBusinessCard">
         <div className={"Carbon-Card-Product-container"}>
             <div><img src={imgSrc} className={"h-[108px]"}  alt={""}/></div>
                 <h1 className={"text-[10px] h-10 text-[#374151] font-bold"}>{title}</h1>
@@ -23,13 +23,13 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) =
             </div>
             <div className={"flex items-center justify-between"}>
                 <p className={"text-[#5B21B6] font-semibold text-[14px]"}>£{price}</p>
-                <Link rel="stylesheet" to="/settings/NFCBusinessCard">
+
 
                 <div className={"Carbon-Card-product-Vector-container"}>
                     <div className={"Carbon-Card-product-Vector"}></div>
                 </div>
-                </Link>
             </div>
         </div>
+                </Link>
     );
 };
