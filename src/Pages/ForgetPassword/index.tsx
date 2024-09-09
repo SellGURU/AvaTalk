@@ -34,12 +34,18 @@ const ForgetPassword = () => {
             code_type:'reset'
         }).then(res => {
             if(res.data.check_user == true){
-                authContext.verificationHandler({
-                    emailOrPhone: formik.values.email,
-                    googleJson:{}
-                })                
-                navigate('/Verification')
+                Auth.get_Login_code({
+                  code_type:'reset',
+                  email:formik.values.email
+                }).then(() => {
+                  authContext.verificationHandler({
+                      emailOrPhone: formik.values.email,
+                      googleJson:{}
+                  })                
+                  navigate('/Verification')
+                })              
             }
+
         })
     }     
     return (
