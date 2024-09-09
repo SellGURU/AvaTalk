@@ -3,33 +3,11 @@ import {CartTu} from "./card-tutorial.tsx";
 import {TutorialApi} from "../../Api";
 import {useEffect, useState} from "react";
 
-
-// date
-// :
-// null
-// description
-// :
-// null
-// link
-// :
-// "https://codieblob.blob.core.windows.net/avatalk/Videos/C%3A/Users/ASUS/Videos/528da576-d66b-4c9f-88c9-0471e7855862.mp4"
-// mean_rate
-// :
-// 4
-// title
-// :
-// null
-// total_views
-// :
-// 1
-// video_id
-// :
-// "100object"
 export const Tutorial=()=>{
     const [videos,setVideos]=useState<[]>()
     const [isLoading,setIsLoading]=useState<boolean>(false);
     const getData=async ()=>{
-        setVideos(true)
+        setIsLoading(true)
         const videosRes=await TutorialApi.tutorialVideos()
         setVideos(videosRes.data)
         console.log(videosRes.data)
@@ -48,11 +26,9 @@ export const Tutorial=()=>{
                 {
                     !isLoading?(
                         <>
-                            <CartTu/>
-                            <CartTu/>
-                            <CartTu/>
-                            <CartTu/>
-                            <CartTu/>
+                            {videos?.map((video:any)=>{
+                                return <CartTu link={video.link} total_views={video.total_views} videoId={video.video_id}/>
+                            })}
                         </>
                     ):""
                 }

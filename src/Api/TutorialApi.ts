@@ -5,9 +5,7 @@ class TutorialApi extends Api {
         return this.post("/tutorial_videos")
     }
     static checkRating(videoId:string) {
-        this.post("/check_rating",{  "video_id": videoId}).then(res => {
-            console.log(res.data)
-        })
+        return this.post("/check_rating",{"video_id": videoId})
     }
 }
 export  default  TutorialApi
