@@ -10,9 +10,6 @@ import CropperBox from "../../../../Components/CropperBox";
 import { AddAvatar } from "../../../../Components/__Modal__";
 import Camera from "react-html5-camera-photo";
 import { BackIcon } from "../../../../Components";
-import { boxProvider } from "../../../../help";
-import { Box } from "../../../../Model";
-
 interface AvatarStepProps {
     onSubmit:() => void
     avatarList:Array<Avatars>

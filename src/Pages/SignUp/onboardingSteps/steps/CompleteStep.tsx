@@ -37,10 +37,10 @@ const CompleteStep = () => {
                         gender:authContext.siginUpOptions.gender,
                         job_title:authContext.siginUpOptions.job,
                         mobile_number:authContext.siginUpOptions.phone,
-                        nfc_id:authContext.nfc_id,
+                        nfc_id:authContext.nfc_id != ''?authContext.nfc_id :null,
                         profile_pic:authContext.siginUpOptions.avatar_pic_url,
                         silent_video_avatar:authContext.siginUpOptions.silent_video_avatar,
-                        referral_code:''
+                        referral_code:authContext.refrealCode
                     }).then((res) => {
                         if(res.data.access_token){
                             localStorage.setItem("token",res.data.access_token)
