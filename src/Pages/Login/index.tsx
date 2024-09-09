@@ -14,6 +14,7 @@ import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
 import { toast } from "react-toastify";
 import axios from "axios";
+import {LinkedIn} from "react-linkedin-login-oauth2";
 
 const initialValue = {
   email: "",
@@ -186,7 +187,23 @@ const Login = () => {
     onError: (error) => {
       console.log('Login Failed:', error);
     },
-  });  
+  });
+
+
+
+    const [code, setCode] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSuccessLinkedIn = (data:any) => {
+        setCode(data.code);
+        console.log('Code: ', data.code);
+    };
+
+    const handleFailureLinkedIn = (error:any) => {
+        setErrorMessage(error.errorMessage);
+        console.log('Error: ', error.errorMessage);
+    };
+
   return (
     <>
       {showSplash ?
@@ -250,18 +267,31 @@ const Login = () => {
                       <div className="text-text-primary">Login with Google</div>
                     </Button>
                 </div>
-                <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                    <div className="text-text-primary">Login with LinkedIn</div>
-                  </Button>
-                </div>
-                <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
-                    <div className="text-text-primary">Login with Apple</div>
-                  </Button>
-                </div>
+                  <LinkedIn
+                      clientId="786lwqvw2unoip"
+                      redirectUri={`http://localhost:5173/`}
+                      onSuccess={handleSuccessLinkedIn}
+                      onError={handleFailureLinkedIn}
+                      scope={"r_basicprofile"}
+                      children={
+                          ({linkedInLogin}) => <div className="mt-4">
+                              <Button theme="Carbon-Outline"
+                                      onClick={linkedInLogin}
+                                      className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                                  <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
+
+                                  <div className="text-text-primary">Login with LinkedIn</div>
+                              </Button>
+                          </div>
+                      }/>
+
+                  <div className="mt-4">
+                      <Button theme="Carbon-Outline"
+                              className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                          <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt=""/>
+                          <div className="text-text-primary">Login with Apple</div>
+                      </Button>
+                  </div>
               </div>
         </>
       }
