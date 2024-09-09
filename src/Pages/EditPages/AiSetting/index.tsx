@@ -50,6 +50,35 @@ const EditAiSetting = () => {
       document.getElementById("aiSettingEdit")?.scrollTo(0, 0);
     }
   })
+  const formatText = (text:string) => {
+// Split the text on newlines and process each line
+    return text.split('\n').map((line, index) => {
+      // Check for headers
+      if (line.startsWith('### ')) {
+        return <h3 key={index}>{line.slice(4)}</h3>;
+      } else if (line.startsWith('## ')) {
+        return <h2 key={index}>{line.slice(3)}</h2>;
+      } else if (line.startsWith('# ')) {
+        return <h1 key={index}>{line.slice(2)}</h1>;
+      }
+
+      // Process bold text within the lines
+      const parts = line.split(/(\*\*[^*]+\*\*)/g); // Split by bold format (**bold**)
+      
+      return (
+        <p key={index}>
+          {parts.map((part, i) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              // Remove the asterisks and render bold text
+              return <strong key={i}>{part.slice(2, -2)}</strong>;
+            } else {
+              return part; // Regular text
+            }
+          })}
+        </p>
+      );
+    });
+  };     
   return (
     <>
       <div id="aiSettingEdit" className="absolute w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
@@ -69,7 +98,7 @@ const EditAiSetting = () => {
           </div>
           <div className="hiddenScrollBar px-6 h-full">
             <div className="text-left my-8" style={{lineHeight:'28px'}}>
-              {analysedText}
+              {formatText(analysedText)}
 
             </div>
 
