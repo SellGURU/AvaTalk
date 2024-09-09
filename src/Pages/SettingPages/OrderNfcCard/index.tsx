@@ -10,7 +10,7 @@ export const OrderNfcCard = () => {
                         <BackIcon title="Order NFC Card" theme="Carbon"></BackIcon>
 
                     </div>
-                    <div className={"flex  flex-wrap gap-2 px-4 md:px-8 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]"}>
+                    <div className={"flex  flex-wrap items-center justify-between px-4 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]"}>
 
                     <CardOrderNFCProduct imgSrc={"/Carbon/nfcCard.png"} listColorBadge={["#000000", "#5B21B6","#DBBB6A"]} price={"7"} title={"Avatalk NFC Business Card"}/>
                     <CardOrderNFCProduct imgSrc={"/Carbon/nfcTag.png"} listColorBadge={["#5B21B6","#000000"]} price={"5"} title={"Avatalk NFC Tag"}/>
