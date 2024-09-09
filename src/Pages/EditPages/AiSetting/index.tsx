@@ -83,7 +83,7 @@ const EditAiSetting = () => {
         <div className="relative top-8" style={{visibility:showAiSuggestion?'hidden':'visible'}}>
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-[120px] hiddenScrollBar h-full"  style={{visibility:showAiSuggestion?'hidden':'visible'}}>
+        <div className="mt-[120px] mb-10 hiddenScrollBar h-full"  style={{visibility:showAiSuggestion?'hidden':'visible'}}>
 
           <div className="px-6">
             <AccessNotifManager page="AiSetting"></AccessNotifManager>
