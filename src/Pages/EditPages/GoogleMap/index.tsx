@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
-import LocationPicker, { PointMode } from "react-leaflet-location-picker";
-import { useState } from "react";
+// import LocationPicker, { PointMode } from "react-leaflet-location-picker";
+import LocationPicker, { PointMode} from 'react-leaflet-location-picker';
+import {  useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { GoogleMapBox } from "../../../Model";
 import { useFormik } from "formik";
@@ -9,6 +12,8 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { LatLngTuple } from "leaflet";
 import '../../../index.css'
+
+// import MapComponent from "./MapComponent";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -26,6 +31,7 @@ const EditGoogleMap = () => {
     
     const pointMode: PointMode = {
         banner: false,
+    
         control: {
             values: pointVals as LatLngTuple[],
             onClick: (point: any) => setPointVals([...[point]]),
@@ -80,6 +86,7 @@ const EditGoogleMap = () => {
                     <div className="mt-24 px-6 text-left">
                         <TextField
                             {...formik.getFieldProps("title")}
+
                             errorMessage={formik.errors?.title}
                             inValid={formik.errors?.title !== undefined && (formik.touched?.title as boolean)}
                             theme="Carbon"
@@ -90,20 +97,27 @@ const EditGoogleMap = () => {
                         />
                     </div>
                     <div className="px-6 mt-3 mb-[50px] w-full h-[2rem] flex flex-col items-center justify-start">
-                        <label className="ml-6 w-full text-left text-[13px] font-medium leading-[19.36px] text-[#374151]">Your Location</label>
-                        <div className=" w-full  rounded-[27px] bg-[#F3F4F6] px-4 pb-2 pt-2 text-[14px] font-normal leading-[21px] text-[#374151] flex items-center justify-between">
-                            <input type="text" className=" w-[80%] h-[29px] bg-transparent border-none " value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search for a location..." />
+                       {/* <TextField type="s"></TextField> */}
+                        {/* <label className="ml-6 w-full text-left text-[13px] font-medium leading-[19.36px] text-[#374151]">Your Location</label> */}
+                        {/* <div className=" w-full  rounded-[27px] bg-[#F3F4F6] px-4 pb-2 pt-2 text-[14px] font-normal leading-[21px] text-[#374151] flex items-center justify-between">
+                            <input type="text" className=" w-[80%] h-[29px] bg-transparent border-none " value={searchQuery} onChange={(e) =>{
+                                setSearchQuery(e.target.value)
+                                handleSearch()
+                            } } placeholder="Search for a location..." />
                             <div className="bg-[#ffff] p-2 rounded-full inputBorderBox cursor-pointer">
-                            <svg onClick={handleSearch} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="text-[#6432c9]" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-</svg>
+                                                        <svg onClick={handleSearch} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="text-[#6432c9]" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                            </svg>
                             </div>
 
 
-                        </div>
-                        {/* <TextField
+                        </div> */}
+                       <TextField
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value)
+                                handleSearch()
+                            }}
                             onBlur={() => {}}
                             theme="Carbon"
                             label="Search Location"
@@ -114,7 +128,7 @@ const EditGoogleMap = () => {
                             errorMessage=""
                         />
 
-                        <Button onClick={handleSearch} theme="Carbon">Search</Button> */}
+                        {/* <Button onClick={handleSearch} theme="Carbon">Search</Button>  */}
                     </div>
                     <div className="px-6 mt-3">
                         <LocationPicker
@@ -123,6 +137,9 @@ const EditGoogleMap = () => {
                             pointMode={pointMode}
                         />
                     </div>
+                    {/* <div>
+                        <LocationPickerMap></LocationPickerMap>
+                    </div> */}
                     <div className="px-6 mt-10">
                         <Button onClick={submit} theme="Carbon">Save Change</Button>
                     </div>
