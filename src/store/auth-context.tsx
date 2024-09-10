@@ -54,7 +54,7 @@ export const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
   varification:{
     emailOrPhone:'',
-    googleJson:{},
+    googleJson:null,
   },
   siginUpOptions:{
     firstName:'',
@@ -73,7 +73,7 @@ export const AuthContext = createContext<AuthContextProps>({
   setReferalCode:() =>{},
   nfc_id:'',
   setNfc_id:() =>{},
-  googleInformation:{},
+  googleInformation:null,
   needReload :false,
   siginupHandler:() => {},
   setNeedReload:() => {},
@@ -99,7 +99,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
   resolveUser.setBox(reolveJsonToObject(localuser as string))
   resolveUser.setTypeOfAccount(new UserType('Free',new Date()))
-  const [googleInformation,setGoogleInformation] = useState({})
+  const [googleInformation,setGoogleInformation] = useState(null)
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [nfc_id,setNfc_id] = useState<string|null>('')
   const [verification,setVerification] = useState<VerificationProps>(

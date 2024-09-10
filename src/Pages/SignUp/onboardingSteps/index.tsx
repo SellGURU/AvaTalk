@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {AvatarStep, BusinessStep, ContactStep, CreatePasswordStep, InformationStep} from "./steps"
 import { StepController } from "../../../Components"
 import { useConstructor } from "../../../help"
@@ -65,8 +65,14 @@ const OnBoarding = () => {
         formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
                 
         })     
-    }      
+    }    
+    useEffect(() => {
+        if(authContext.googleInformation == null && authContext.varification.emailOrPhone.length ==0){
+            navigate('/signup')
+        }        
+    })  
     useConstructor(() => {
+
         if(authContext.googleInformation!= null){
             setStep(1)
         }
