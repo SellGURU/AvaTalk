@@ -66,7 +66,8 @@ const CompleteStep = () => {
                                     },
                                     workEmail:data.information.work_email,
                                     workPhone:data.information.work_mobile_number,
-                                    userId:data.information.created_userid
+                                    userId:data.information.created_userid,
+                                    gender:data.information.gender
                                 })
                                 authContext.currentUser.setBox(resolveSocial)
                             })                                  
