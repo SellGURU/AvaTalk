@@ -36,7 +36,6 @@ const CompleteStep = () => {
                         email:authContext.siginUpOptions.email,
                         gender:authContext.siginUpOptions.gender,
                         job_title:authContext.siginUpOptions.job,
-                        google_json:authContext.googleInformation,
                         mobile_number:authContext.siginUpOptions.phone,
                         nfc_id:authContext.nfc_id != ''?authContext.nfc_id :null,
                         profile_pic:authContext.siginUpOptions.avatar_pic_url,
