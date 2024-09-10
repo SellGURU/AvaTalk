@@ -116,7 +116,7 @@ class Auth extends Api {
   }
 
   static loginWithGoogle(data:any) {
-    const response = this.post("/login_with_google",data)
+    const response = this.post("/login_with_accounts",data)
     return response
   }
 
