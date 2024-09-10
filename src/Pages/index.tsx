@@ -16,5 +16,6 @@ import Share from "./Share";
 import SignUp from "./SignUp";
 import RegisterVerification from "./Verification/index2";
 import ForgetPassword from "./ForgetPassword";
+import LinkedInCallback from "./LinkdinCallBack";
 
-export { CreateAccount,ForgetPassword, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage,RegisterVerification ,Share,SignUp};
+export { CreateAccount,ForgetPassword,LinkedInCallback, Chats, Home2, Edit, EditAbout, Login, Verification, Spinner, Splash, Contacts, Dev, Setting, AnalyticsPage,RegisterVerification ,Share,SignUp};

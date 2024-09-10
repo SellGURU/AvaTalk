@@ -12,6 +12,7 @@ import { useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useAuth } from "../../../hooks/useAuth";
+import { learnMore } from "./learnMore";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
@@ -35,6 +36,7 @@ const EditAiSetting = () => {
       console.log(values);
     },
   });  
+  const learnMoreText = learnMore
   useConstructor(() => {
     Auth.showAiSetting((res) => {
       formik.setFieldValue("title",res.ai_setting.Name)
@@ -44,6 +46,7 @@ const EditAiSetting = () => {
   })
   const [analysedText,setAnaysedText] = useState("")
   const [showAiSuggestion,setShowAiSuggestion] = useState(false)
+  const [showLearnMore,setShowLearnMore] = useState(false)
   const [isReadyTO,setIsReadyTo] = useState(false)
   useEffect(() => {
     if(showAiSuggestion){
@@ -109,6 +112,33 @@ const EditAiSetting = () => {
 
         </div>
         }
+        {showLearnMore
+        &&
+        <div className=" top-0 left-0 w-full bg-white min-h-screen absolute z-40">
+          <div className="flex  w-full items-center justify-between px-6 mt-[120px] ">
+            <div className="invisible">
+              <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
+            </Button>
+            </div>
+            <div className="text-[16px] font-semibold text-text-primary">Learn more about your AI settings</div>
+            <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
+            </Button>
+          </div>
+          <div className="hiddenScrollBar px-6 mb-20 h-full">
+            <div className="text-left my-8" style={{lineHeight:'28px'}}>
+              {formatText(learnMoreText)}
+
+            </div>
+
+            <Button onClick={() => {
+              setShowLearnMore(false)
+            }} theme="Carbon">Got it</Button>
+          </div>
+
+        </div>
+        }        
         <div className="relative top-8" style={{visibility:showAiSuggestion?'hidden':'visible'}}>
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
@@ -120,7 +150,9 @@ const EditAiSetting = () => {
           </div>
           <div className="px-6 mt-4">
 
-            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer">Learn more </span></div>
+            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
+              setShowLearnMore(true)
+            }}>Learn more </span></div>
 
             {/* <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>
