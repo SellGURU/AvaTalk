@@ -1,5 +1,5 @@
 import {BackIcon} from "../../Components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ImageGallery from "react-image-gallery";
 import {Button} from "symphony-ui";
 import Modal from "react-modal";
@@ -28,6 +28,11 @@ export const NFCBusinessCard = () => {
             description: '',
         },
     ];
+    useEffect(()=>{
+        if(selectedColor.length==0){
+            setSelectedColor([{color:'purple',count:1,id:0}]);
+        }
+    },[selectedColor])
 const [isOpen, setIsOpen] = useState(false);
     const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
     const handleQuantityChange = (action:string, id:number) => {
