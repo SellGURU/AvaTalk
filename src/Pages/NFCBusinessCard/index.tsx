@@ -2,22 +2,33 @@ import {BackIcon} from "../../Components";
 import {useState} from "react";
 import ImageGallery from "react-image-gallery";
 import {Button} from "symphony-ui";
+import Modal from "react-modal";
 
 export const NFCBusinessCard = () => {
     const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1,id:0}]);
     const images = [
         {
-            original: '/Carbon/trashVector.svg', // Path relative to public folder
-            thumbnail: '/Carbon/trashVector.svg', // Optional thumbnail (can be the same image or different)
+            original: '/Carbon/Purple 1.png', // Path relative to public folder
+            thumbnail: '/Carbon/Purple 1.png', // Optional thumbnail (can be the same image or different)
             description: '', // Optional description
         },
         {
-            original: '/Carbon/trashVector.svg', // Another image
-            thumbnail: '/Carbon/trashVector.svg',
+            original: '/Carbon/whaote.png', // Another image
+            thumbnail: '/Carbon/whaote.png',
+            description: '',
+        },
+        {
+            original: '/Carbon/black1.png', // Another image
+            thumbnail: '/Carbon/black1.png',
+            description: '',
+        },
+        {
+            original: '/Carbon/gold 1.png', // Another image
+            thumbnail: '/Carbon/gold 1.png',
             description: '',
         },
     ];
-
+const [isOpen, setIsOpen] = useState(false);
     const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
     const handleQuantityChange = (action:string, id:number) => {
         setSelectedColor(prevColors =>
@@ -42,7 +53,7 @@ export const NFCBusinessCard = () => {
 
             </div>
             <div
-                className="max-w-sm mx-auto p-4 rounded-lg  px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]">
+                className="md:max-w-full max-w-sm mx-auto p-4 rounded-lg  px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]">
                 <div className="flex flex-col justify-center items-center">
                     <div className="flex w-full pb-16  ">
                         <ImageGallery
@@ -112,9 +123,23 @@ export const NFCBusinessCard = () => {
                     </div>
 
                 </div>
-                <button className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={() => {
+                        setIsOpen(false)}
+                }
+                    style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+                    contentLabel=" Modal"
+                >
+                    <div className={"flex flex-col items-center justify-center"}>
+                        <img src={"/Carbon/tick-circle.svg"}/>
+                        <h1 className={"text-lg font-semibold"}>Your purchase</h1>
+                        <p className={"text-lg font-semibold"}>has been successfully completed</p>
+                    </div>
+                </Modal>
+                <Button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
-                </button>
+                </Button>
                 <div className="mt-4">
                     <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
                         <summary className="font-bold text-gray-800">Description</summary>
