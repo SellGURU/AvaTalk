@@ -269,8 +269,8 @@ const Login = () => {
                 </div>
                   <LinkedIn
                       clientId="786lwqvw2unoip"
-                      // redirectUri="https://linkedin-callback.vercel.app/"
-                      redirectUri={`http://localhost:5173/#/linkedin/callback`}
+                      redirectUri="https://linkedin-callback.vercel.app/"
+                      // redirectUri={`http://localhost:5173/linkedin/callback`}
                       onSuccess={handleSuccessLinkedIn}
                       onError={handleFailureLinkedIn}
                       scope={"profile,email"}
