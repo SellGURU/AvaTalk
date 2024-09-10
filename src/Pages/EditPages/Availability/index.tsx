@@ -9,8 +9,8 @@ import { useNavigate } from "react-router";
 const re = new RegExp("https://calendly.com/");
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
-  url: Yup.string().required().matches(re),
+  title: Yup.string().required('Title is required.'),
+  url: Yup.string().required('URL is required.').matches(re,'URL must match the following https://calendly.com/'),
 });
 
 const EditAvailability = () => {
