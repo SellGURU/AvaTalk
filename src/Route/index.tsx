@@ -147,6 +147,14 @@ const route = createHashRouter([
                 element: <HelpSupport></HelpSupport>
               },
               {
+                path: "privacy",
+                element: <SettingPrivacyPolicy></SettingPrivacyPolicy>,
+              },
+              {
+                path: "terms",
+                element: <SettingTermsService></SettingTermsService>,
+              },
+              {
                 path: "tutorial",
                 element: <Tutorial></Tutorial>
               }
