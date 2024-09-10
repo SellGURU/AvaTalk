@@ -48,11 +48,11 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       icon: "YourPlan.svg",
       link: "service",
     },
-    {
-      name: "payment-subscription",
-      icon: "payment.svg",
-      link: "payment",
-    },
+    // {
+    //   name: "payment-subscription",
+    //   icon: "payment.svg",
+    //   link: "payment",
+    // },
     {
       name: "Help",
       icon: "help.svg",
