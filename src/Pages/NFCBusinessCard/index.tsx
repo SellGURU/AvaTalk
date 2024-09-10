@@ -8,13 +8,23 @@ export const NFCBusinessCard = () => {
     const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1,id:0}]);
     const images = [
         {
-            original: '/Carbon/trashVector.svg', // Path relative to public folder
-            thumbnail: '/Carbon/trashVector.svg', // Optional thumbnail (can be the same image or different)
+            original: '/Carbon/Purple 1.png', // Path relative to public folder
+            thumbnail: '/Carbon/Purple 1.png', // Optional thumbnail (can be the same image or different)
             description: '', // Optional description
         },
         {
-            original: '/Carbon/trashVector.svg', // Another image
-            thumbnail: '/Carbon/trashVector.svg',
+            original: '/Carbon/whaote.png', // Another image
+            thumbnail: '/Carbon/whaote.png',
+            description: '',
+        },
+        {
+            original: '/Carbon/black1.png', // Another image
+            thumbnail: '/Carbon/black1.png',
+            description: '',
+        },
+        {
+            original: '/Carbon/gold 1.png', // Another image
+            thumbnail: '/Carbon/gold 1.png',
             description: '',
         },
     ];
