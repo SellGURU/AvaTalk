@@ -24,6 +24,7 @@ interface Information {
     talk_video_avater?:string
     address?:string
     referral_code?:string
+    gender?:'male'|'female'
 }
 
 // interface Location {

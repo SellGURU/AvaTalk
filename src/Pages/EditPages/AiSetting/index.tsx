@@ -198,6 +198,9 @@ const EditAiSetting = () => {
                     ai_knowledge:formik.values.Description,
                     gender:gender
                   })
+                  auth.currentUser.updateCustomInformation({
+                    gender:gender
+                  })
                   auth.currentUser.setEditStatus(true)
                   setTimeout(() => {
                     navigate('/')
