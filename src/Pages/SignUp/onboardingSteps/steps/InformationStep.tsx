@@ -13,7 +13,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
     const resolveName = () => {
         if(context.siginUpOptions.firstName != ''){
             return context.siginUpOptions.firstName as string
-        }else if(context.googleInformation.given_name){
+        }else if(context.googleInformation){
             return context.googleInformation.given_name as string
         }
         return ''
@@ -22,7 +22,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
     const resolveFamilyName = () => {
         if(context.siginUpOptions.lastName != ''){
             return context.siginUpOptions.lastName as string
-        }else if(context.googleInformation.family_name){
+        }else if(context.googleInformation){
             return context.googleInformation.family_name as string
         }
         return ''

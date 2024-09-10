@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useConstructor } from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 const initialValue = {
@@ -43,20 +44,25 @@ const SignUp = () => {
     const handleGoogleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
         try {
-            const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+            const userInfo =  axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
                 headers: {
                     Authorization: `Bearer ${tokenResponse.access_token}`,
                 },
             });
             // console.log(userInfo)
-            Auth.check_user_existence({
-                email:userInfo.data.email,
-                code_type:'verification'
-            }).then(res => {
-                if(res.data.check_user == true){
-                    authContext.setGoogleInformation(userInfo.data)
-                    navigate('/createAccount')
-                }
+            userInfo.then((value) => {
+                console.log(value)
+                Auth.check_user_existence({
+                    google_json:value.data,
+                    code_type:'verification'
+                }).then(res => {
+                    if(res.data.check_user == true){
+                        authContext.setGoogleInformation(value.data)
+                        navigate('/createAccount')
+                    }else {
+                        toast.error("user exist")
+                    }
+                })
             })
         } catch (error) {
             console.error('Failed to fetch user info:', error);
@@ -85,8 +91,9 @@ const SignUp = () => {
                 }).then(() => {
                     authContext.verificationHandler({
                         emailOrPhone: formik.values.email,
-                        googleJson:{}
+                        googleJson:null
                     })
+                    authContext.setGoogleInformation(null)
                     authContext.siginupHandler({
                         email:formik.values.email
                     })

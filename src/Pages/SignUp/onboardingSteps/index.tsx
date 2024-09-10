@@ -67,6 +67,9 @@ const OnBoarding = () => {
         })     
     }      
     useConstructor(() => {
+        if(authContext.googleInformation!= null){
+            setStep(1)
+        }
         Auth.avatarList(authContext.googleInformation?.email ? {google_json:authContext.googleInformation}:{}).then(res => {
         // setAllAvatar(res.data)
         if(res.data[res.data.length -1].video == ''){
@@ -134,15 +137,30 @@ const OnBoarding = () => {
         <>
             <div className="w-full min-h-screen py-8 px-4">
                 <div className="flex justify-between items-center w-full">
-                    <Button onClick={() =>{
-                        if(step>0){
-                            setStep(step -1)
-                        }else{
-                            navigate('/signup')
-                        }
-                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                        <div className="Carbon-back-Button-vector"></div>
-                    </Button>
+                    {(authContext.googleInformation!= null && step >1 )||  authContext.googleInformation == null ?
+                        <Button onClick={() =>{
+                            if(step>0){
+                                setStep(step -1)
+                            }else{
+                                navigate('/signup')
+                            }
+                        }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                            <div className="Carbon-back-Button-vector"></div>
+                        </Button>
+                        :
+                        <div className="invisible">
+                            <Button onClick={() =>{
+                                if(step>0){
+                                    setStep(step -1)
+                                }else{
+                                    navigate('/signup')
+                                }
+                            }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                                <div className="Carbon-back-Button-vector"></div>
+                            </Button>                        
+
+                        </div>
+                    }
 
                     <div className={`mt-10 ${step>0 && step < 5?'visible':'invisible'}`}>
                             <StepController

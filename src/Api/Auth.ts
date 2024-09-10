@@ -35,6 +35,8 @@ interface RegisterData {
   confirm_password:string
 }
 
+
+
 ///
 interface SupportData {
   name: string,
@@ -46,6 +48,7 @@ interface SupportData {
 interface check_user_existenceProps {
   email?:string
   mobileNumber?:string
+  google_json?:any
   code_type:"verification"|"reset"
 }
 
@@ -119,13 +122,13 @@ class Auth extends Api {
     const response = this.post("/login_with_accounts",data)
     return response
   }
+  static RegisterWithGoogle(data:any) {
+    const response = this.post("/register_with_accounts",data)
+    return response
+  }
 
   static check_user_existence(data:check_user_existenceProps) {
-    const response = this.post('/check_user_existence',{
-      email:data.email,
-      mobile_number:data.mobileNumber,
-      code_type:data.code_type
-    })
+    const response = this.post('/check_user_existence',data)
     return response
   }
 
