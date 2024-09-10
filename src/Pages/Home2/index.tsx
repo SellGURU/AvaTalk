@@ -48,7 +48,8 @@ const Home2 = () => {
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information. referral_code,
-                address:''
+                address:'',
+                gender:data.information.gender
             })
             authContext.currentUser.setEditStatus(data.edit_status)
             authContext.currentUser.setBox(resolveSocial)

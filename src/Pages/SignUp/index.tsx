@@ -175,25 +175,28 @@ const SignUp = () => {
                         
                             <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                             <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
-                            <div className="text-text-primary">Login with Google</div>
+                            <div className="text-text-primary">Sign up with Google</div>
                             </Button>
                         </div>
                         <div className="mt-4">
                         <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                             <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                            <div className="text-text-primary">Login with LinkedIn</div>
+                            <div className="text-text-primary">Sign up with LinkedIn</div>
                         </Button>
                         </div>
                         <div className="mt-4">
                         <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                             <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
-                            <div className="text-text-primary">Login with Apple</div>
+                            <div className="text-text-primary">Sign up with Apple</div>
                         </Button>
                         </div>                        
                         <div className="text-[#374151] mt-4 text-center text-[14px]">
                             By Signing up you agreed with our
                         </div>                    
-                        <div className="text-center text-[14px] mt-1 cursor-pointer"><span className="text-[#06B6D4]">Terms & Conditions. </span></div>
+                        <div  className="text-center text-[14px] mt-1 cursor-pointer"><span onChange={() => {
+                            // navigate('https://avatalk.me/termsofservice/')
+                            window.open('https://avatalk.me/termsofservice/')
+                        }} className="text-[#06B6D4]">Terms & Conditions. </span></div>
                     </div>
                 </>
             }  

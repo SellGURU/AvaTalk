@@ -89,9 +89,9 @@ const EditAvater: React.FC = () => {
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
         setFirstLoading(false)
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender == authContext.currentUser.information?.gender))  
       }else{
-        setAvaterList(res.data)
+        setAvaterList(res.data.filter((el:any) => el.gender == authContext.currentUser.information?.gender))
         // setIsLoading(false)
         setFirstLoading(false)
         formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
