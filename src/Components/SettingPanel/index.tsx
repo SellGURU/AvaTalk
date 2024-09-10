@@ -96,7 +96,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
           <PlanCard></PlanCard>
 
         </div>
-        <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll pb-[300px] ">
+        <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll md:pb-[450px] pb-[300] ">
           {settingCards.map((item) => {
             return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}

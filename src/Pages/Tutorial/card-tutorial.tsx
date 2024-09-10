@@ -20,7 +20,7 @@ export const CartTu = ({link,total_views,videoId}:Props) => {
         getData();
     },[])
     return (
-        <div className={"Carbon-ContentCard-Container text-right  space-y-5"}>
+        <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"}>
             <div className={"space-y-5"}>
                 <h1 className={"text-left text-[14px]  font-medium"}>Title of the Video</h1>
                 <video className={"rounded-xl w-full h-[180px]"}   controls>
