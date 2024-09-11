@@ -6,7 +6,7 @@ import { useAuth } from "../../../hooks/useAuth"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { AddLink, Confirm } from "../../../Components/__Modal__";
+import { AddLink, Confirm, ReadyForMore } from "../../../Components/__Modal__";
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
@@ -24,6 +24,7 @@ const EditLinks = () => {
       currentBox = new LinkBox('links',[])
   }   
   const confirmRef = createRef<HTMLDivElement>()
+  const [isReadyTO,setIsReadyTo] = useState(false)
   const [links,setLinks] = useState<Array<Link>>(currentBox.getLinks().map(((item:Link) => Object.assign(new Link('',''),item))))
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)  
   const initialValue = {
@@ -59,6 +60,7 @@ const EditLinks = () => {
       )
       navigate('/')
   }
+
   const deleteSocial = (index:number) => {
     const newArr = [...links]
     newArr.splice(index,1)
@@ -175,7 +177,13 @@ const EditLinks = () => {
               formik.setFieldValue('url',e.target.value)
               setAutoSave(e.target.value.length)
             }} type="text" placeholder="Click to add your link "></TextField> */}
-            <Button onClick={() => setOpenAddLink(!openaddlink)} theme="Carbon-AddLink">Add Link</Button>
+            <Button onClick={() => {
+                if(auth.currentUser.type_of_account.getType() == 'Free' && links.length == 2){
+                  setIsReadyTo(true)
+                }else {
+                  setOpenAddLink(!openaddlink)
+                }
+              }} theme="Carbon-AddLink">Add Link</Button>
               <div className="relative"></div>
           </div>
           <div className="px-6 mt-10">
@@ -191,6 +199,14 @@ const EditLinks = () => {
             formik.setFieldValue("name",name)
             addLink(name,url)
           }} title="Link" ></AddLink>
+          {isReadyTO &&
+            <div className="fixed w-full left-0 bottom-0 flex justify-center">
+              <ReadyForMore page="link" onClose={() => {
+                setIsReadyTo(false)
+              }} ></ReadyForMore>
+            </div>
+          }
+
         </div>
       </div>
     </>

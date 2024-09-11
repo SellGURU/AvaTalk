@@ -8,5 +8,6 @@ import AddAvatar from "./AddAvatar/index2";
 import Confirm from './Confirm';
 import ExchangeContact from "./ExchangeContact";
 import EnhanceModal from "./EnhanceModal";
+import ReadyForMore from "./ReadyForMore";
 
-export { AddSocials,Confirm,AddLink,AddAvatar,BookMark, AddContact, EditContact, DeleteContact, ExchangeContact,EnhanceModal };
+export { ReadyForMore,AddSocials,Confirm,AddLink,AddAvatar,BookMark, AddContact, EditContact, DeleteContact, ExchangeContact,EnhanceModal };

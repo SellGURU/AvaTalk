@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "../index.ts";
 import { Auth } from "../../Api";
 import { Tooltip } from "react-tooltip";
@@ -64,7 +65,7 @@ class VideoBox extends Box {
   }
 
   public isShareAble(): boolean {
-    if (this.contents.length == 0) {
+    if (this.contents?.length == 0) {
       return false;
     } else {
       return true;
@@ -78,7 +79,7 @@ class VideoBox extends Box {
   ): JSX.Element {
     return (
       <>
-        {this.contents.length > 0 ? (
+        {this.contents?.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide
               prevArrow={

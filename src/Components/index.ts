@@ -39,6 +39,7 @@ import DatePicker from "./DatePicker";
 import AccessNotifManager from "./AccessNotifManager";
 import DeveloperTools from "./DeveloperTools";
 import BissinesCard from "./BissinesCard";
+import PlanCard from "./PlanCard";
 
 export {
   AccessNotifManager,
@@ -56,6 +57,7 @@ export {
   Presentation,
   ContactsView,
   Splash,
+  PlanCard,
   Footer,
   ContactDetails,
   TextArea,

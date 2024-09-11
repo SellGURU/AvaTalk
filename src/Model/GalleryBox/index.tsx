@@ -6,6 +6,8 @@ import { Auth } from "../../Api";
 interface galleryImage {
     original:string
     thumbnail:string
+    name:string,
+    sizes:string
 }
 
 class GalleryBox extends Box{

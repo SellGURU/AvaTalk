@@ -10,9 +10,6 @@ import CropperBox from "../../../../Components/CropperBox";
 import { AddAvatar } from "../../../../Components/__Modal__";
 import Camera from "react-html5-camera-photo";
 import { BackIcon } from "../../../../Components";
-import { boxProvider } from "../../../../help";
-import { Box } from "../../../../Model";
-
 interface AvatarStepProps {
     onSubmit:() => void
     avatarList:Array<Avatars>
@@ -79,8 +76,125 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
         setAddAvatar(false)
         }
     })     
+    const [showGudieLine,setShowGudieLine] = useState(false)
     return (
         <>
+            <div className={`w-full ${showGudieLine?'visible':'hidden'} relative top-[200px] h-dvh z-40 bg-white hiddenScrollBar overflow-y-scroll`}>
+                <div>
+                {/* <div className="absolute right-6 top-6">
+                    <Button
+                    onClick={() => {
+                        setShowGudieLine(false);
+                    }}
+                    theme="Carbon-back"
+                    >
+                    <div className={`Carbon-Profile-closeIcon`}></div>
+                    </Button>
+                </div> */}
+                <div
+                    className={`text-gray-700  ${
+                    window.innerWidth < 332 ? "mt-12" : "mt-2"
+                    } ${
+                    window.innerWidth < 420 ? "text-center" : "text-center"
+                    } font-semibold text-base`}
+                >
+                    Photo Guidelines for AI Profile
+                </div>
+                <div className="mt-6 flex relative justify-center">
+                    <div className="relative">
+                    <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full -right-3 -top-3">
+                        <img src="./icons/Vector2.svg" alt="" />
+                    </div>
+                    <img src="./icons/gudei1.png" alt="" />
+                    </div>
+                </div>
+
+                <div className="mt-8 px-6">
+                    <div className="text-gray-700 text-left font-semibold text-base">
+                    Common Mistakes{" "}
+                    </div>
+                    <div className="mt-4 flex justify-start items-start">
+                    <div className="relative min-w-[60px]">
+                        <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                        <img
+                            className="ml-[1px]"
+                            src="./icons/Add.svg"
+                            alt=""
+                        />
+                        </div>
+                        <img src="./icons/1.png" alt="" />
+                    </div>
+                    <div className="ml-3 max-w-[283px]">
+                        <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                        Not Neutral Expression
+                        </div>
+                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        Your photo must feature a neutral facial expression.
+                        Ensure your mouth is closed and avoid smiling or
+                        frowning.
+                        </div>
+                    </div>
+                    </div>
+
+                    <div className="mt-4 flex justify-start items-start">
+                    <div className="relative min-w-[60px]">
+                        <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                        <img
+                            className="ml-[1px]"
+                            src="./icons/Add.svg"
+                            alt=""
+                        />
+                        </div>
+                        <img src="./icons/2.png" alt="" />
+                    </div>
+                    <div className="ml-3 max-w-[283px]">
+                        <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                        Distracting Background
+                        </div>
+                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        Use a simple, uncluttered background to avoid any
+                        distractions from the primary focus—your face.
+                        </div>
+                    </div>
+                    </div>
+
+                    <div className="mt-4 flex justify-start items-start">
+                    <div className="relative min-w-[60px]">
+                        <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                        <img
+                            className="ml-[1px]"
+                            src="./icons/Add.svg"
+                            alt=""
+                        />
+                        </div>
+                        <img src="./icons/3.png" alt="" />
+                    </div>
+                    <div className="ml-3 max-w-[283px]">
+                        <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                        Indirect Camera Gaze{" "}
+                        </div>
+                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        Look directly into the camera to establish a clear,
+                        forward-facing base for your AI profile.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div
+                    className={`mt-5 ${
+                    window.innerWidth < 400 ? "px-2" : "px-6"
+                    }`}
+                >
+                    <Button
+                    onClick={() => setShowGudieLine(false)}
+                    theme="Carbon"
+                    >
+                    Got it
+                    </Button>
+                </div>
+                </div>
+            </div>        
             <div className="mt-8">
                 <div className="px-5">
                 <div className="text-gray-700 text-center font-semibold text-base">
@@ -155,7 +269,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                     profile.{" "}
                     <span
                         onClick={() => {
-                        // setshowGudie(true);
+                            setShowGudieLine(true)
                         }}
                         className="text-[#06B6D4] cursor-pointer"
                     >
@@ -273,55 +387,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                 <Button
                     // disabled={formik.values.silent_video_avatar.length == 0}
                     onClick={() => {
-                        Auth.register({
-                            first_name:authContext.siginUpOptions.firstName,
-                            last_name:authContext.siginUpOptions.lastName,
-                            avatar_pic_url:authContext.siginUpOptions.avatar_pic_url,
-                            company_name:authContext.siginUpOptions.company,
-                            confirm_password:authContext.siginUpOptions.conFirmPassword,
-                            password:authContext.siginUpOptions.password,
-                            email:authContext.siginUpOptions.email,
-                            gender:authContext.siginUpOptions.gender,
-                            job_title:authContext.siginUpOptions.job,
-                            mobile_number:authContext.siginUpOptions.phone,
-                            nfc_id:authContext.nfc_id,
-                            profile_pic:authContext.siginUpOptions.avatar_pic_url,
-                            silent_video_avatar:authContext.siginUpOptions.silent_video_avatar,
-                            referral_code:''
-                        }).then((res) => {
-                            if(res.data.access_token){
-                                localStorage.setItem("token",res.data.access_token)
-                                authContext.login(res.data.access_token)
-                                const resolveSocial: Array<Box> = [];
-                                Auth.showProfile((data) => {
-                                    data.boxs.map((item:any) => {
-                                        const newBox = boxProvider(item);
-                                        resolveSocial.push(newBox);
-                                    })
-                                    authContext.currentUser.updateInformation({
-                                        firstName:data.information.first_name,
-                                        lastName:data.information.last_name,
-                                        phone:data.information.mobile_number,
-                                        personlEmail:data.information.email,
-                                        company:data.information.company_name,
-                                        job:data.information.job_title,
-                                        banelImage:data.information.back_ground_pic,
-                                        imageurl:data.information.profile_pic,
-                                        location:{
-                                            lat:33,
-                                            lng:33
-                                        },
-                                        workEmail:data.information.work_email,
-                                        workPhone:data.information.work_mobile_number,
-                                        userId:data.information.created_userid
-                                    })
-                                    authContext.currentUser.setBox(resolveSocial)
-                                })                                  
-                                onSubmit()
-                            }else{
-                                toast.error(res.data)
-                            }
-                        })
+                        onSubmit()
                     }}
                     theme="Carbon"
                 >

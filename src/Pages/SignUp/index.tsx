@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useState } from "react";
 import {BissinesCard, Splash, TextField} from "../../Components";
 import { Button } from "symphony-ui";
@@ -6,6 +7,11 @@ import * as Yup from "yup";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useConstructor } from "../../help";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 const initialValue = {
   email: "",
@@ -35,12 +41,44 @@ const SignUp = () => {
             console.log(values);
         },
     });    
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+        try {
+            const userInfo =  axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: {
+                    Authorization: `Bearer ${tokenResponse.access_token}`,
+                },
+            });
+            // console.log(userInfo)
+            userInfo.then((value) => {
+                console.log(value)
+                Auth.check_user_existence({
+                    google_json:value.data,
+                    code_type:'verification'
+                }).then(res => {
+                    if(res.data.check_user == true){
+                        authContext.setGoogleInformation(value.data)
+                        navigate('/createAccount')
+                    }else {
+                        toast.error("user exist")
+                    }
+                })
+            })
+        } catch (error) {
+            console.error('Failed to fetch user info:', error);
+        }
+        },
+        onError: (error) => {
+        console.log('Login Failed:', error);
+        },
+    });     
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);    
     const handleSubmit = () => {
         Auth.check_user_existence({
-            email:formik.values.email
+            email:formik.values.email,
+            code_type:'verification'
         }).then((res) => {
             console.log(res)
             if(res.data.error){
@@ -53,11 +91,13 @@ const SignUp = () => {
                 }).then(() => {
                     authContext.verificationHandler({
                         emailOrPhone: formik.values.email,
-                        googleJson:{}
+                        googleJson:null
                     })
+                    authContext.setGoogleInformation(null)
                     authContext.siginupHandler({
                         email:formik.values.email
                     })
+                    console.log(parametr.get("referral"))
                     authContext.setReferalCode(parametr.get("referral") as string)
                     navigate('/RVerification')
                 })                
@@ -88,6 +128,21 @@ const SignUp = () => {
         //     navigate('/RVerification')
         // })
     }    
+    useConstructor(() => {
+        authContext.siginupHandler({
+            firstName:'',
+            gender:'',
+            email:'',
+            lastName:'',
+            phone:'',
+            job:'',
+            company:'',
+            avatar_pic_url:'',
+            conFirmPassword:'',
+            password:'',
+            silent_video_avatar:''
+        })          
+    })
     return (
         <>
             {showSplash ?
@@ -123,10 +178,32 @@ const SignUp = () => {
                             <div style={{ background: "linear-gradient(to bottom,rgba(255, 255, 255, 1) 0% ,rgba(255, 255, 255, 0) 100%)" }} className="w-full h-[4px]"></div>
                         </div>
                         </div>    
-                        <div className="text-[#374151] text-center text-[14px]">
+                        <div className="flex items-center justify-center mt-4">
+                        
+                            <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
+                            <div className="text-text-primary">Sign up with Google</div>
+                            </Button>
+                        </div>
+                        <div className="mt-4">
+                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
+                            <div className="text-text-primary">Sign up with LinkedIn</div>
+                        </Button>
+                        </div>
+                        <div className="mt-4">
+                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                            <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
+                            <div className="text-text-primary">Sign up with Apple</div>
+                        </Button>
+                        </div>                        
+                        <div className="text-[#374151] mt-4 text-center text-[14px]">
                             By Signing up you agreed with our
                         </div>                    
-                        <div className="text-center text-[14px] mt-1 cursor-pointer"><span className="text-[#06B6D4]">Terms & Conditions. </span></div>
+                        <div  className="text-center text-[14px] mt-1 cursor-pointer"><span onClick={() => {
+                            // navigate('https://avatalk.me/termsofservice/')
+                            window.open('https://avatalk.me/termsofservice/')
+                        }} className="text-[#06B6D4]">Terms & Conditions. </span></div>
                     </div>
                 </>
             }  

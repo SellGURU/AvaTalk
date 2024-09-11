@@ -9,6 +9,7 @@ const SettingPayment =() => {
                     <BackIcon title="Payment" theme="Carbon"></BackIcon>
 
                 </div>
+
                 {/* <div className="mt-[120px] hiddenScrollBar h-full">
                     <div className="mt-24 px-6 text-left">
                         <TextField {...formik.getFieldProps("title")} name="title" errorMessage={formik.errors?.title} theme="Carbon" label="Title" inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)}  type="text" placeholder="Enter title..."></TextField>

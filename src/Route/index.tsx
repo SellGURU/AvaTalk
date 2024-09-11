@@ -1,5 +1,5 @@
-import {createHashRouter } from "react-router-dom";
-import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2, SignUp, RegisterVerification } from "../Pages";
+import { createHashRouter } from "react-router-dom";
+import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2, SignUp, RegisterVerification, ForgetPassword, LinkedInCallback } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
 
@@ -9,10 +9,13 @@ import { Chat, ContactsView, Profile2 } from "../Components";
 import { EditAiSetting, EditAvater,EditAvailability, EditContactInfo, EditFile, EditGallery, EditGoogleMap, EditLinks, EditSocials, EditVideos } from "../Pages/EditPages";
 import ChatPage from "../Pages/ChatPage";
 import AnalyticsPage from "../Pages/AnalyticsPage";
-import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService } from "../Pages/SettingPages";
+import { ReferYourFriends, SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService , SettingHelp, HelpSupport } from "../Pages/SettingPages";
 import OnBoarding from "../Pages/SignUp/onboardingSteps";
 import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
+import ResetPassword from "../Pages/ResetPassword";
+import {Tutorial} from "../Pages/Tutorial";
+import {UserManual} from "../Pages/SettingPages/UserManual";
 
 const route = createHashRouter([
   {
@@ -137,6 +140,33 @@ const route = createHashRouter([
             element: <SettingSupport></SettingSupport>,
           },
           {
+            path: "help",
+            element: <SettingHelp></SettingHelp>,
+            children : [
+              {
+                path: "support",
+                element: <HelpSupport></HelpSupport>
+              },
+              {
+                path: "privacy",
+                element: <SettingPrivacyPolicy></SettingPrivacyPolicy>,
+              },
+              {
+                path: "manual",
+                element: <UserManual></UserManual>,
+              },
+              {
+                path: "terms",
+                element: <SettingTermsService></SettingTermsService>,
+              },
+              {
+                path: "tutorial",
+                element: <Tutorial></Tutorial>
+              }
+            ]
+          },
+          //   CartTu
+          {
             path: "refer",
             element: <ReferYourFriends></ReferYourFriends>,
           },
@@ -148,6 +178,7 @@ const route = createHashRouter([
             path: "NFCBusinessCard",
             element: <NFCBusinessCard></NFCBusinessCard>,
           },
+       
         ],
         // children:[
         //   {
@@ -174,6 +205,10 @@ const route = createHashRouter([
     element: <Dev></Dev>,
   },
   {
+    path:'/linkedin/callback',
+    element:<LinkedInCallback></LinkedInCallback>
+  },
+  {
     path: "/login",
     element: <Login></Login>,
   },
@@ -181,6 +216,14 @@ const route = createHashRouter([
     path: "/signup",
     element: <SignUp></SignUp>,
   }, 
+  {
+    path: "/forgetPassword",
+    element: <ForgetPassword></ForgetPassword>,
+  },   
+  {
+    path: "/resetPassword",
+    element: <ResetPassword></ResetPassword>,
+  },    
   {
     path: "/createAccount",
     element: <OnBoarding></OnBoarding>,

@@ -53,7 +53,7 @@ const ReferYourFriends = () => {
                             </Button>
                             <Button onClick={() => {
                                 navigator.share({
-                                    url:"https://portal.avatalk.me/#/login?referral="+application.currentUser.information?.referral_code
+                                    url:"https://portal.avatalk.me/#/signup?referral="+application.currentUser.information?.referral_code
                                 })
                             }} theme="Carbon">
                                 <div className="flex w-full justify-center items-center">

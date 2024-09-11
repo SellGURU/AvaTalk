@@ -111,7 +111,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                     <div className="w-full py-4 px-6 rounded-[27px] bg-white borderBox-primary3 ">
                         <div className="text-[14px] text-left text-[#374151]">{resolveText()}</div>
                         {
-                            authContext.currentUser.type_of_account.getType() == 'Trial'?
+                            authContext.currentUser.type_of_account.getType() == 'Trial' && page != 'chatEndUser'?
                                 <>
                                     <div className="w-full h-2 relative rounded-[12px] border-[#FFFFFF80] border mt-4" style={{
                                         boxShadow: "inner 4px 4px 14px 2px #E2E8F0,inner -4px -4px 9px 2px #FFFFFF99"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth.tsx";
@@ -7,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Sortable from "sortablejs/modular/sortable.complete.esm.js";
 import * as Yup from "yup";
 import { confirmAlert } from "react-confirm-alert";
-import { AddLink, Confirm } from "../../../Components/__Modal__";
+import { AddLink, Confirm, ReadyForMore } from "../../../Components/__Modal__";
 import { Video, VideoBox } from "../../../Model/Video";
 
 const regex = /^.*Test.*$/;
@@ -49,7 +50,7 @@ const EditVideos = () => {
   });
   const [editName, setEditName] = useState("");
   const [editeValue, setEditeValue] = useState("");
-
+  const [isReadyTO,setIsReadyTo] = useState(false)
   const addLink = (name: string, url: string) => {
     const newVidoe = new Video(url, name);
     if (editName != "") {
@@ -214,7 +215,13 @@ const EditVideos = () => {
           )}
           <div className="px-6 mt-3">
             <Button
-              onClick={() => setOpenAddLink(!openaddlink)}
+              onClick={() => {
+                if(auth.currentUser.type_of_account.getType() == 'Free' && video.length >= 1){
+                  setIsReadyTo(true)
+                }else {
+                  setOpenAddLink(!openaddlink)
+                }
+              }}
               theme="Carbon-AddLink"
             >
               Add video Link
@@ -245,6 +252,13 @@ const EditVideos = () => {
             title="Link"
           ></AddLink>
         </div>
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="Video" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }           
       </div>
     </>
   );

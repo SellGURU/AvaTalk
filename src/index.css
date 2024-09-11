@@ -304,3 +304,6 @@
 .react-slideshow-container .default-nav {
     z-index: 1;
 }
+.image-gallery {
+  width: 100%;
+}

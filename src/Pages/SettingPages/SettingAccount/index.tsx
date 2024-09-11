@@ -7,7 +7,6 @@ import { AuthContext } from "../../../store/auth-context";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Auth } from "../../../Api";
-import { Location } from "../../../Types";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 
@@ -162,22 +161,10 @@ const SettingAccount =() => {
                             language:selectedLanguage.value,
                             state:true
                         })
-                        context.currentUser.updateInformation({
-                            banelImage:context.currentUser.information?.banelImage as string,
-                            company:context.currentUser.information?.company as string,
+                        context.currentUser.updateCustomInformation({
                             firstName: formik.values.firstname as string,
-                            workPhone:context.currentUser.information?.workEmail as string,
-                            imageurl:context.currentUser.information?.imageurl as string,
-                            job:context.currentUser.information?.job as string,
                             lastName:formik.values.lastname as string,
-                            location:context.currentUser.information?.location as Location,
-                            personlEmail:formik.values.personlEmail as string,
                             phone:formik.values.phone as string,
-                            silent_video_avatar:context.currentUser.information?.silent_video_avatar,
-                            talk_video_avater:context.currentUser.information?.talk_video_avater,
-                            workEmail:context.currentUser.information?.workEmail as string,
-                            userId:context.currentUser.information?.userId as string,
-                            referral_code:context.currentUser.information?.referral_code as string
                         })
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>

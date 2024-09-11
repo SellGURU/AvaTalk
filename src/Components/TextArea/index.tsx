@@ -1,5 +1,6 @@
-import React, { TextareaHTMLAttributes, useState } from "react";
+import React, { TextareaHTMLAttributes, useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { Auth } from "../../Api";
 
 // import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
@@ -12,6 +13,8 @@ interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   required?: boolean;
   isAnalyse?:boolean;
   placeholder?: string;
+  analysedText?:string;
+  setAnalysedText?:(value:string) => void;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   //   type: "text" | "password" | "email";
@@ -39,17 +42,32 @@ const TextArea: React.FC<InputProps> = ({
   inValid,
   setShowSuggestion,
   errorMessage,
+  setAnalysedText,
   ...props
 }) => {
   const [isAnalysing,setIsAnalysing] = useState(false)
   const [isCompleteAnalyse,setIsCompleteAnalyse] = useState(false)
+  
   const analyseText = () => {
     setIsAnalysing(true)
-    setTimeout(() => {
+    Auth.analyseAiSetting(value).then((res) => {
+      console.log(res)
+      if(res.data["AI suggestion"]){
+        setIsCompleteAnalyse(true)      
+        if(setAnalysedText){
+          setAnalysedText(res.data["AI suggestion"])
+        }
+      }
       setIsAnalysing(false)
-      setIsCompleteAnalyse(true)
-    },3000);
+    }).catch(() => {
+        setIsAnalysing(false)
+    })
+
   }
+  useEffect(() => {
+    setIsAnalysing(false)
+    setIsCompleteAnalyse(false)
+  },[value])
   return (
     <div className={`${theme}-TextArea-container w-[100%]`}>
       <label className={`${theme}-TextArea-label`} htmlFor={inputId()}>

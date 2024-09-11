@@ -26,3 +26,14 @@
 .Carbon-Card-container[aria-disabled ='true']{
     @apply opacity-50;
 }
+
+// .Carbon-Card-overly {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 255, 0.05); /* Red with 50% opacity */
+//     mix-blend-mode: multiply; /* Blend mode for overlay */
+//     pointer-events: none;    
+// }

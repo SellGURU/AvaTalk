@@ -7,6 +7,8 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { ReadyForMore } from "../../../Components/__Modal__";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -19,6 +21,7 @@ const EditGallery = () => {
   if (currentBox == undefined) {
     currentBox = new GalleryBox("Gallery", []);
   }
+  const [isReadyTO,setIsReadyTo] = useState(false)
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -31,8 +34,17 @@ const EditGallery = () => {
     },
   });
   const submit = () => {
-    auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
-    navigate("/");
+    if(auth.currentUser.type_of_account.getType() == 'Free'){
+      if(formik.values.files.length>5){
+        setIsReadyTo(true)
+      }else{
+        auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.slice(0, 5)));
+        navigate("/");
+      }
+    }else{
+       auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
+       navigate("/");
+    }
   };
   return (
     <>
@@ -60,10 +72,12 @@ const EditGallery = () => {
           <div className="px-6 mt-3">
             <ImageUploadr
               accept="image/*"
-              value={formik.values.files.map((item, index) => {
+              limite={5}
+              userMode={auth.currentUser.type_of_account.getType()}
+              value={formik.values.files.map((item) => {
                 return {
                   url: item.original,
-                  name: "itembox " + index * 2000,
+                  name: item.name?item.name: "item",
                 };
               })}
               uploades={(files: Array<any>) => {
@@ -72,6 +86,8 @@ const EditGallery = () => {
                   return {
                     original: item.url,
                     thumbnail: item.url,
+                    name:item.name,
+                    sizes:`(max-width: 710px) 120px,(max-width: 991px) 193px,278px`
                   };
                 });
                 formik.setFieldValue("files", converted);
@@ -86,6 +102,13 @@ const EditGallery = () => {
             </Button>
           </div>
         </div>
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="Gallery" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }          
       </div>
     </>
   );

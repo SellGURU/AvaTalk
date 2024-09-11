@@ -15,15 +15,48 @@ interface AddSocialsProps {
     onComplete:(url:string) =>void
     onAfterOpen?:() =>void    
 }
-const validationSchema = Yup.object().shape({
-    url:Yup.string().required(),
-});
+const urlPatterns = {
+  youtube: /^(https:\/\/(www\.)?youtube\.com\/|https:\/\/youtu\.be\/).+$/,
+  linkedin: /^https:\/\/(www\.)?linkedin\.com\/.+$/,
+  instagram: /^https:\/\/(www\.)?instagram\.com\/.+$/,
+  twitter: /^https:\/\/(www\.)?twitter\.com\/.+$/,
+  facebook: /^https:\/\/(www\.)?facebook\.com\/.+$/,
+  telegram: /^(https:\/\/t\.me\/([a-zA-Z0-9_]{5,32})|https:\/\/t\.me\/joinchat\/[a-zA-Z0-9_-]+)$/,
+};
+
+
+
 
 const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onAfterOpen,onClose,theme}) => {
     const initialValue= {
         url:value? value :'',
     };
-
+    const validateUrl = (url: string | undefined) => {
+        if(title == 'Linkedin'){
+            return Yup.string().matches(urlPatterns.linkedin, "Invalid linkedin URL").isValidSync(url)
+        }
+        if(title == 'Instagram'){
+            return Yup.string().matches(urlPatterns.instagram, "Invalid instagram URL").isValidSync(url)
+        }
+        if(title == 'Facebook'){
+            return Yup.string().matches(urlPatterns.facebook, "Invalid facebook URL").isValidSync(url)
+        }
+        if(title == 'Twitter/ X'){
+            return Yup.string().matches(urlPatterns.twitter, "Invalid Twitter/ X URL").isValidSync(url)
+        }
+        if(title == 'Youtube'){
+            return Yup.string().matches(urlPatterns.youtube, "Invalid Youtube URL").isValidSync(url)
+        }    
+        if(title == 'Telegram'){
+            return Yup.string().matches(urlPatterns.telegram, "Invalid Telegram URL").isValidSync(url)
+        }                                        
+        return Yup.string().isValidSync(url)
+    };    
+    const validationSchema = Yup.object().shape({
+        url:Yup.string().required().test("url",(value) => {
+            return validateUrl(value)
+        }),
+    });
     const formik = useFormik({
         initialValues: initialValue,
         validationSchema,
@@ -48,9 +81,9 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
             return 'https://instagram.com/username'
         }
         if(title == 'Telegram'){
-            return 'https://telegram.com/username'
+            return 'https://t.me/username'
         }        
-        return 'https://youtube.com.com/username'
+        return 'https://youtu.be/username'
     }   
     return (
         <>
@@ -74,7 +107,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
               <div className="my-4">
                 <TextField  {...formik.getFieldProps("url")}  label={'URL'} placeholder={resolvePlaceholder()} theme="Carbon" name="url" type="text" errorMessage="" inValid={false} />
               </div>    
-              <Button disabled={formik.values.url?.length == 0} onClick={() => {
+              <Button disabled={formik.values.url?.length == 0 || !formik.isValid} onClick={() => {
                 formik.setFieldValue('url','')
                 onClose()
                 onComplete(formik.values.url)
