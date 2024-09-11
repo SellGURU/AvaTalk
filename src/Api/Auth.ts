@@ -128,7 +128,7 @@ class Auth extends Api {
   }
 
   static check_user_existence(data:check_user_existenceProps) {
-    const response = this.post('/check_user_existence',data)
+    const response = this.post('/check_user_existence',data,{noPending:true})
     return response
   }
 
@@ -141,7 +141,7 @@ class Auth extends Api {
     return response
   }
   static get_Login_code(data: GetLoginCodeProps) {
-    const response = this.post("/get_Login_code", data);
+    const response = this.post("/get_Login_code", data,{noPending:true});
     return response;
   }
 

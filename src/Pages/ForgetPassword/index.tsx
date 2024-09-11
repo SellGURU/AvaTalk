@@ -4,8 +4,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../Api";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../store/auth-context";
+import { BeatLoader } from "react-spinners";
 const validateEmail = (email: string | undefined) => {
    return Yup.string().email().isValidSync(email)
 };
@@ -28,7 +29,10 @@ const ForgetPassword = () => {
         console.log(values);
         },
     });   
+    const [isLoading,setisLoading] = useState(false)
     function handleSubmit() {
+      if(!isLoading){
+        setisLoading(true)
         Auth.check_user_existence({
             email:formik.values.email,
             code_type:'reset'
@@ -42,11 +46,14 @@ const ForgetPassword = () => {
                       emailOrPhone: formik.values.email,
                       googleJson:{}
                   })                
+                  setisLoading(false)
                   navigate('/Verification')
                 })              
             }
 
         })
+
+      }
     }     
     return (
         <>
@@ -56,7 +63,7 @@ const ForgetPassword = () => {
                   <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Forgot Password</div>
                 </div>
 
-                <div className="text-[14px] mb-6 text-[#6B7280] text-center">Enter your E-mail and we'll send you verification code.</div>
+                <div className="text-[14px] mb-6 text-[#6B7280] text-center">Enter your E-mail and we'll sent you verification code.</div>
 
                 <div className="mb-4">
                   <TextField  {...formik.getFieldProps("email")} theme="Carbon" name="email" errorMessage={formik.errors?.email} placeholder="Enter your email address" type="email" inValid={formik.errors?.email != undefined && (formik.touched?.email as boolean)}></TextField>
@@ -64,14 +71,16 @@ const ForgetPassword = () => {
         
                 <Button
                   onClick={handleSubmit}
-                  //     () => {
-                  //     navigate("/Verification");
-                  //   }
-                  // }
                   disabled={!formik.isValid || formik.values.email == ''}
                   theme="Carbon"
                 >
-                  Get code
+                  {isLoading?
+                  <>
+                    <BeatLoader color="#FFFFFF" size={10}></BeatLoader>
+                  </>
+                  :
+                  'Get code'
+                  }
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
                   Don`t have an account? <span onClick={() => {

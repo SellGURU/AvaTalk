@@ -63,7 +63,7 @@ const RegisterVerification = () => {
             />
             </div>
             <p onClick={completeTimer ?() => {
-                    // setCompleteTimer(false) 
+                    setCompleteTimer(false) 
                     // let resolvePhoneOrEnail = null
                     // if(authContext.varification.emailOrPhone.includes('@')){
                     // resolvePhoneOrEnail = {
