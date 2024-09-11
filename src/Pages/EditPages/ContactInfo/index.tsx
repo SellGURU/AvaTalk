@@ -116,7 +116,7 @@ const EditContactInfo = () => {
             {...formik.getFieldProps("personlEmail")}
             theme="Carbon"
             disabled
-            label="Personl Email"
+            label="Personal Email"
             inValid={false}
             name="personlEmail"
             type="text"
