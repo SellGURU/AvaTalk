@@ -12,8 +12,8 @@ export const Accordion=({bodyText,title}:Props) => {
     };
     return(
         <>
-            <div className={"bg-[#F3F4F6] rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
-                <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[12px]"}>
+            <div className={"bg-[#F3F4F6] shadow-lg rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
+                <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[14px]"}>
                     <button
                         type="button"
                         className={`flex items-center justify-between w-full px-5 pt-5 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-5'}`}

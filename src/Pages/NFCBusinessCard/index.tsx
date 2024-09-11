@@ -137,10 +137,16 @@ const [isOpen, setIsOpen] = useState(false);
                     style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
                     contentLabel=" Modal"
                 >
+                    <div className={"relative py-5"}>
+                    <Button onClick={()=> setIsOpen(false)} className={"absolute bg-white rounded-full p-1 shadow-md top-0 right-0"} data-mode="profile-review-button-2">
+                        <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
+                    </Button>
                     <div className={"flex flex-col items-center justify-center"}>
+
                         <img src={"/Carbon/tick-circle.svg"}/>
-                        <h1 className={"text-lg font-semibold"}>Your purchase</h1>
-                        <p className={"text-lg font-semibold"}>has been successfully completed</p>
+                        <h1 className={"text-lg font-semibold text-[#374151]"}>Your purchase</h1>
+                        <p className={"text-lg font-semibold text-[#374151]"}>has been successfully completed</p>
+                    </div>
                     </div>
                 </Modal>
                 <Button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
