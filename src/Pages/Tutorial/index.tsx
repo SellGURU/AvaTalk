@@ -22,12 +22,12 @@ export const Tutorial=()=>{
                 <BackIcon title="Tutorial Videos" theme="Carbon"></BackIcon>
 
             </div>
-            <div className={"max-w-sm mx-auto p-4 rounded-lg  px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
+            <div className={" p-4 rounded-lg  px-16 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
                 {
                     !isLoading?(
                         <>
                             {videos?.map((video:any)=>{
-                                return <CartTu link={video.link} total_views={video.total_views} videoId={video.video_id}/>
+                                return <CartTu link={video.link} rate={parseInt(video.mean_rate)} total_views={video.total_views} videoId={video.video_id}/>
                             })}
                         </>
                     ):""

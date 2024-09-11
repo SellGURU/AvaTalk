@@ -18,19 +18,19 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
     <>
       {auth.currentUser.type_of_account.getType() === "Free" ? (
         <div className="w-full h-[230px] pt-7 relative bg-primary-color rounded-[24px] flex flex-col items-center justify-start ">
-          <img className={"w-[50px] h-[50px]"} src={"/Carbon/L-Shield Done.svg"}/>
-          <div className="absolute w-full opacity-100 left-0 top-0">
-            <img className="w-full" src="/public/icons/backPlanBg.svg" alt="" />
+          <img className={"w-[50px] relative z-50 h-[50px]"} src={"/Carbon/L-Shield Done.svg"}/>
+          <div className=" overflow-hidden  rounded-3xl h-full  absolute w-full opacity-100 left-0 top-0">
+            <img className="w-full rounded-xl " src="/public/icons/backPlanBg.svg" alt="" />
             {/* <div className="Carbon-Card-overly"></div> */}
           </div>
           <div className="pt-2 w-full flex items-center justify-center">
             {/* <img className="" src="/public/icons/L-Shield Done.svg" alt="" /> */}
-            <div className="text-white text-center font-semibold mt-2">
+            <div className="text-white text-center relative z-50 font-semibold mt-2">
               Go Premium
             </div>
           </div>
           <div className="flex justify-center  mt-3">
-            <div className="text-white text-[14px] text-center w-[309px]">
+            <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
               Unlock all the power of this app and enjoy networking experience
               like never before!
             </div>
@@ -45,7 +45,7 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
       ) : auth.currentUser.type_of_account.getType() === "Trial" ? (
           <div
               className="w-full pt-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
-            <img className={"w-[50px] h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
+            <img className={"w-[50px]  relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
 
             <div className="absolute w-full opacity-10 left-0 top-0">
               <img className="w-full  " src="./icons/backPlanCard.png" alt=""/>
@@ -59,7 +59,7 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
               {/* <img className="" src="/public/icons/L-Shield Done.svg" alt="" /> */}
             </div>
             <div className="flex justify-center mt-3">
-              <div className="text-white text-[14px] text-center w-[309px]">
+              <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
                 Unlock all the power of this app and enjoy networking experience
                 like never before!
               </div>
