@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React from "react";
 import NumberSeparator from "../../utils/NumberSeparator";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 
 interface Props {
   theme?: string;
@@ -9,8 +9,8 @@ interface Props {
 }
 
 const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
-  const context = useAuth()
-  const [isVisible,] = useState(context.currentUser.type_of_account.getType() == 'Free'?false:true)
+  // const context = useAuth()
+  // const [isVisible,] = useState(context.currentUser.type_of_account.getType() == 'Free'?false:true)
   return (
     <div className={`${theme}-AnalyticsSummary-container`}>
       <div className={`${theme}-AnalyticsSummary-rowContainer`}>
