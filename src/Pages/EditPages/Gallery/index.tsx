@@ -74,10 +74,10 @@ const EditGallery = () => {
               accept="image/*"
               limite={5}
               userMode={auth.currentUser.type_of_account.getType()}
-              value={formik.values.files.map((item, index) => {
+              value={formik.values.files.map((item) => {
                 return {
                   url: item.original,
-                  name: "itembox " + index * 2000,
+                  name: item.name?item.name: "item",
                 };
               })}
               uploades={(files: Array<any>) => {
@@ -86,6 +86,8 @@ const EditGallery = () => {
                   return {
                     original: item.url,
                     thumbnail: item.url,
+                    name:item.name,
+                    sizes:`(max-width: 710px) 120px,(max-width: 991px) 193px,278px`
                   };
                 });
                 formik.setFieldValue("files", converted);
