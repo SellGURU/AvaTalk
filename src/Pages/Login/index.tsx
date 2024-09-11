@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Checkbox} from "symphony-ui";
+import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
-import { TextField } from "../../Components";
+import { CheckBoxCostom, TextField } from "../../Components";
 import { useGoogleLogin} from "@react-oauth/google";
 // import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
@@ -59,6 +59,18 @@ const Login = () => {
       console.log(values);
     },
   });
+  const [isRememberMe,setIsRememberMe]= useState(false)
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('email');
+    const savedPassword = localStorage.getItem('password');
+    const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+
+    if (savedRememberMe) {
+      formik.setFieldValue("email",savedEmail || '');
+      formik.setFieldValue("password",savedPassword || '');
+      setIsRememberMe(true);
+    }
+  }, []);  
   function handleSubmit() {
     // const resolvePhoneOrEnail = {
     //   email:formik.values.email
@@ -77,6 +89,16 @@ const Login = () => {
         }        
       }
       if(res.data.access_token){
+          if (isRememberMe) {
+            localStorage.setItem('email', formik.values.email);
+            localStorage.setItem('password', formik.values.password);
+            localStorage.setItem('rememberMe', 'true');
+          } else {
+            // If not remembering, clear local storage
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            localStorage.removeItem('rememberMe');
+          }        
           localStorage.setItem("token",res.data.access_token)
           authContext.login(res.data.access_token)
           const resolveSocial: Array<Box> = [];
@@ -117,7 +139,7 @@ const Login = () => {
     //   navigate('/Verification')
     // })
   }
-  const [isRememberMe,setIsRememberMe]= useState(false)
+
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
@@ -225,7 +247,10 @@ const Login = () => {
 
                 <div className="flex justify-between w-full px-2 mb-4 ">
                   <div>
-                    <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
+                    <CheckBoxCostom checked={isRememberMe} onChange={() => {
+                      setIsRememberMe(!isRememberMe)
+                    }} label={'Remember me'}></CheckBoxCostom>
+                    {/* <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox> */}
                   </div>
 
                   <div onClick={() => {
