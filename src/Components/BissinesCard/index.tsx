@@ -27,7 +27,7 @@ const BissinesCard = () => {
     }
     return (
         <>
-            <div className="bg-primary-color relative flex justify-between items-center px-4 w-[247px] h-[134px] rounded-[16px]">
+            <div className="bg-primary-color relative flex justify-between items-center px-4 w-[270px] h-[144px] rounded-[16px]">
                 <div className="absolute right-0 top-0">
                     <img src="./icons/cardVisitBack.png" alt="" />
                 </div>
@@ -51,7 +51,7 @@ const BissinesCard = () => {
                         <img className={`h-full  ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
                     </div>
                 </div>
-                <div>
+                <div className="ml-2">
                     <div className="text-[12px] text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
                     <div className="text-[8px] opacity-80 text-white font-semibold">{resolveCompanyJob()}</div>
                 </div>

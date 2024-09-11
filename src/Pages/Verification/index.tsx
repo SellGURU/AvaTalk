@@ -60,6 +60,7 @@ const Verification = () => {
             />
             </div>
             <p onClick={completeTimer ?() => {
+                    setCompleteTimer(false)
                     Auth.get_Login_code({
                         email:authContext.varification.emailOrPhone,
                         code_type:'verification'                        
