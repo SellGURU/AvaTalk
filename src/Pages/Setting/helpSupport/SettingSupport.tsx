@@ -14,7 +14,7 @@ const HelpSupport = () => {
     {
       name: "User Manual",
       icon: "manual.svg",
-      link: "manual",
+      link: "/settings/Help/manual",
     },
     {
       name: "Tutorial Videos",
