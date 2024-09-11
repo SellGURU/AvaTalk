@@ -18,12 +18,23 @@ export const CartTu = ({link,total_views,videoId,rate}:Props) => {
         setIsLoading(true)
         const videosRes=await TutorialApi.checkRating(videoId);
         setVideoRate(videosRes.data.rated)
-        console.log(videosRes.data.rated)
+        console.log(typeof  videosRes.data.rated)
         setIsLoading(false);
     }
     useEffect(()=>{
         getData();
     },[])
+    useEffect(()=>{
+        console.log("test1")
+        const sendRate=async ()=>{
+            console.log(typeof  videoRate.rated)
+            if(rate!==rating){
+                console.log("test")
+                await TutorialApi.sendRate(videoId,`${rate}`);
+            }
+        }
+        sendRate();
+    },[rating])
     return (
         <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"}>
             <div className={"space-y-5"}>
@@ -43,7 +54,7 @@ export const CartTu = ({link,total_views,videoId,rate}:Props) => {
                     className={"!w-24"}
                     value={rating}
                     onChange={setRating}
-                    readOnly={videoRate.rated}
+                    readOnly={videoRate}
                 />}
                 <p className={"text-[12px] font-normal"}>{total_views} reviews</p>
                 <p className={"text-[10px] font-normal"}>08/08/2024</p>
