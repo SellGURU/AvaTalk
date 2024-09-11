@@ -273,7 +273,7 @@ const Login = () => {
                       // redirectUri={`http://localhost:5173/linkedin/callback`}
                       onSuccess={handleSuccessLinkedIn}
                       onError={handleFailureLinkedIn}
-                      scope={"profile,email"}
+                      scope={"profile,email,openid"}
                       children={
                           ({linkedInLogin}) => <div className="mt-4">
                               <Button theme="Carbon-Outline"
