@@ -50,7 +50,7 @@ const EditAvailability = () => {
               errorMessage={formik.errors?.title}
               theme="Carbon"
               label="Title"
-              inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)}
+              inValid={formik.errors?.title != undefined}
               type="text"
               placeholder="Enter title..."
             ></TextField>
@@ -60,7 +60,7 @@ const EditAvailability = () => {
               {...formik.getFieldProps("url")}
               errorMessage={formik.errors?.url}
               placeholder="https://calendly.com/username"
-              inValid={formik.errors?.url != undefined && (formik.touched?.url as boolean)}
+              inValid={formik.errors?.url != undefined}
               theme="Carbon"
               label="URL"
               type="text"
