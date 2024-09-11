@@ -30,14 +30,14 @@ const initialValue2 = {
   phone:""
 };
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required().nonNullable().max(12),
-  lastName:Yup.string().required().max(12),
-  email:Yup.string().required().email()
+  firstName: Yup.string().required('First name is required.').nonNullable().max(12),
+  lastName:Yup.string().required('Last name is required.').max(12),
+  email:Yup.string().required('Email address is required.').email()
 });
 const validationSchema2 = Yup.object().shape({
-  firstName: Yup.string().required().nonNullable().max(12),
-  lastName:Yup.string().required().max(12),
-  phone:Yup.string().required().min(8).max(15)
+  firstName: Yup.string().required('First name is required.').nonNullable().max(12),
+  lastName:Yup.string().required('Last name is required.').max(12),
+  phone:Yup.string().required('Phone is required.').min(8).max(15)
 });
 
 const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,theme}) => {

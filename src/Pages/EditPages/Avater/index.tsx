@@ -239,7 +239,7 @@ const EditAvater: React.FC = () => {
                     Indirect Camera Gaze{" "}
                   </div>
                   <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                    Look directly into the camera lens to establish a clear,
+                    Look directly into the camera to establish a clear,
                     forward-facing base for your AI profile.
                   </div>
                 </div>
