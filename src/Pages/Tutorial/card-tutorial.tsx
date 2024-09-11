@@ -7,17 +7,18 @@ interface  Props{
     link:string,
     total_views:string
     videoId:string
+    rate:number
 }
-export const CartTu = ({link,total_views,videoId}:Props) => {
-    const [rating, setRating] = useState(3);
+export const CartTu = ({link,total_views,videoId,rate}:Props) => {
+    const [rating, setRating] = useState(rate);
 
     const [videoRate,setVideoRate]=useState<any>()
-    const [isLoading,setIsLoading]=useState<boolean>(false);
+    const [isLoading,setIsLoading]=useState<boolean>(true);
     const getData=async ()=>{
         setIsLoading(true)
         const videosRes=await TutorialApi.checkRating(videoId);
-        setVideoRate(videosRes.data)
-        console.log(videosRes.data)
+        setVideoRate(videosRes.data.rated)
+        console.log(videosRes.data.rated)
         setIsLoading(false);
     }
     useEffect(()=>{
@@ -36,14 +37,14 @@ export const CartTu = ({link,total_views,videoId}:Props) => {
             </div>
             <div className={"flex items-center w-full justify-between"}>
 
-
-
+                {!isLoading
+&&
                 <Rating
                     className={"!w-24"}
                     value={rating}
                     onChange={setRating}
                     readOnly={videoRate.rated}
-                />
+                />}
                 <p className={"text-[12px] font-normal"}>{total_views} reviews</p>
                 <p className={"text-[10px] font-normal"}>08/08/2024</p>
 
