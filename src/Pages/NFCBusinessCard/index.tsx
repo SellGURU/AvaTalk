@@ -147,19 +147,19 @@ const [isOpen, setIsOpen] = useState(false);
                 </Button>
                 <div className="mt-4">
                     <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Description</summary>
-                        <p className="text-gray-600 mt-2">
+                        <summary className=" text-[#374151] font-normal text-[12px]">Description</summary>
+                        <p className="text-[#6B7280] font-normal mt-2 text-[12px]">
                             Revolutionize Your Networking with the Avatalk NFC Business Card
                             Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression.
                         </p>
                     </details>
                     <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Key Features</summary>
-                        <p className="text-gray-600 mt-2">Key features of the product.</p>
+                        <summary className=" text-[#374151] font-normal text-[12px]">Key Features</summary>
+                        <p className="text-[#6B7280] font-normal mt-2 text-[12px]">Key features of the product.</p>
                     </details>
                     <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Why Choose this Product?</summary>
-                        <p className="text-gray-600 mt-2">
+                        <summary className=" text-[#374151] font-normal text-[12px]">Why Choose this Product?</summary>
+                        <p className="text-[#6B7280] font-normal mt-2 text-[12px]">
                             Reasons why this product is a great choice.
                         </p>
                     </details>
