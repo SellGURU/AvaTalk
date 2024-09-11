@@ -21,17 +21,19 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
   return (
     <div className="relative w-[100%]  ">
       {context.currentUser.type_of_account.getType() == 'Free'?
-      <>
-        <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Page Views</p>
-        <img className=" scale-[1.027] w-full z-20 " src="./icons/chartBlur1.png" alt="" />
-      </>
-      :
-        <div className={`${theme}-AreaChartComponent-container`}>
-          <p className={`${theme}-AreaChartComponent-text z-30`}>Page Views</p>
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={resolvedData}
-              margin={{
+          <>
+            <div className={`bg-[#F3F4F6] ${theme}-BarChartComponent-container-notShow`}>
+              <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Page Views</p>
+              <img className=" scale-[.5] w-full z-20 " src="/Carbon/Frame1000003689.png" alt=""/>
+            </div>
+          </>
+          :
+          <div className={`${theme}-AreaChartComponent-container`}>
+            <p className={`${theme}-AreaChartComponent-text z-30`}>Page Views</p>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                  data={resolvedData}
+                  margin={{
                 top: 10,
                 right: 10,
                 left: -40,

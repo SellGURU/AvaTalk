@@ -56,10 +56,10 @@ const BarChartComponent: React.FC<Props> = ({ theme ,data}) => {
   return (
     <div className="relative w-[100%] ">
     {context.currentUser.type_of_account.getType() == 'Free'?
-      <>
+      <div className={`bg-[#F3F4F6] ${theme}-BarChartComponent-container-notShow`}>
         <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Clicks per Category</p>
-        <img className=" scale-[1.027] w-full z-20 " src="./icons/chartBlur3.png" alt="" />
-      </>       
+        <img className=" scale-[.5] w-full z-20 " src="/Carbon/Frame1000003689.png" alt="" />
+      </div>
     :
       <div className={`${theme}-BarChartComponent-container`}>
         <p className={`${theme}-BarChartComponent-text`}>Clicks per Category</p>

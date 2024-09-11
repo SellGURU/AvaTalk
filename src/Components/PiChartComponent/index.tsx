@@ -99,17 +99,17 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
 
   return (
     <div className="relative w-[100%] ">
-    {context.currentUser.type_of_account.getType() == 'Free'?
-      <>
-        <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Type of Share</p>
-        <img className=" scale-[1.027] w-full z-20 " src="./icons/chartBlur4.png" alt="" />
-      </>    
-    :
+    {context.currentUser.type_of_account.getType() == 'Free' ?
+        <div className={`bg-[#F3F4F6] ${theme}-BarChartComponent-container-notShow`}>
+          <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Type of Share</p>
+          <img className=" scale-[.5] w-full z-20 " src="/Carbon/Frame1000003689.png" alt=""/>
+        </div>
+      :
       <div className={`${theme}-PiChartComponent-container`}>
-        <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
+      <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
             <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
               {filteredData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
