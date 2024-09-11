@@ -1,0 +1,55 @@
+import {useState} from "react";
+
+interface  Props{
+    bodyText:string;
+    title:string;
+}
+export const Accordion=({bodyText,title}:Props) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleAccordion = () => {
+        setIsOpen(!isOpen);
+    };
+    return(
+        <>
+            <div className={"bg-[#F3F4F6] rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
+                <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[12px]"}>
+                    <button
+                        type="button"
+                        className={`flex items-center justify-between w-full px-5 pt-5 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-5'}`}
+                        onClick={toggleAccordion}
+                        aria-expanded={isOpen}
+                        aria-controls="accordion-collapse-body-1"
+                    >
+                        <span>{title}</span>
+                        <svg
+                            data-accordion-icon
+                            className={`w-3 h-3 transform ${isOpen ? 'rotate-180' : 'rotate-0'} shrink-0`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M9 5 5 1 1 5"
+                            />
+                        </svg>
+                    </button>
+                </h2>
+                <div
+                    id="accordion-collapse-body-1"
+                    className={`${isOpen ? 'block' : 'hidden'}`}
+                    aria-labelledby="accordion-collapse-heading-1"
+                >
+                    <div className="p-5">
+                        <p className="mb-2 text-[#6B7280] font-normal text-[12px]">{bodyText}</p>
+                    </div>
+                </div>
+            </div>
+
+</>
+    )
+}

@@ -47,7 +47,7 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
               className="w-full pt-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
             <img className={"w-[50px]  relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
 
-            <div className="absolute w-full opacity-10 left-0 top-0">
+            <div className="overflow-hidden  rounded-3xl h-full  absolute w-full opacity-100 left-0 top-0">
               <img className="w-full  " src="./icons/backPlanCard.png" alt=""/>
               {/* <div className="Carbon-Card-overly"></div> */}
             </div>

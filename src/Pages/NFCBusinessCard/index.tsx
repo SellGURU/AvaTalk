@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import ImageGallery from "react-image-gallery";
 import {Button} from "symphony-ui";
 import Modal from "react-modal";
+import {Accordion} from "../../Components/accardion";
 
 export const NFCBusinessCard = () => {
     const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1,id:0}]);
@@ -146,23 +147,14 @@ const [isOpen, setIsOpen] = useState(false);
                     Checkout
                 </Button>
                 <div className="mt-4">
-                    <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Description</summary>
-                        <p className="text-gray-600 mt-2">
-                            Revolutionize Your Networking with the Avatalk NFC Business Card
-                            Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression.
-                        </p>
-                    </details>
-                    <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Key Features</summary>
-                        <p className="text-gray-600 mt-2">Key features of the product.</p>
-                    </details>
-                    <details className="mb-2 cursor-pointer bg-[#F3F4F6] rounded-3xl text-[14px] font-bold text-[#374151] px-4 py-2">
-                        <summary className="font-bold text-gray-800">Why Choose this Product?</summary>
-                        <p className="text-gray-600 mt-2">
-                            Reasons why this product is a great choice.
-                        </p>
-                    </details>
+                   <Accordion bodyText={"Revolutionize Your Networking with the Avatalk NFC Business Card\n" +
+                       "                Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed\n" +
+                       "                to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking\n" +
+                       "                assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact\n" +
+                       "                sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression."}
+                              title={"Description"}/>
+                    <Accordion bodyText={"Key features of the product."} title={"Key Features"}/>
+                    <Accordion bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>
                 </div>
             </div>
 

@@ -15,6 +15,7 @@ import {OrderNfcCard} from "../Pages/SettingPages/OrderNfcCard";
 import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
 import ResetPassword from "../Pages/ResetPassword";
 import {Tutorial} from "../Pages/Tutorial";
+import {UserManual} from "../Pages/SettingPages/UserManual";
 
 const route = createHashRouter([
   {
@@ -149,6 +150,10 @@ const route = createHashRouter([
               {
                 path: "privacy",
                 element: <SettingPrivacyPolicy></SettingPrivacyPolicy>,
+              },
+              {
+                path: "manual",
+                element: <UserManual></UserManual>,
               },
               {
                 path: "terms",
