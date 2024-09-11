@@ -1,5 +1,6 @@
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import {useState} from "react";
 
 interface PlanCardProps {
   theme?: string;
@@ -14,6 +15,7 @@ console.log( auth.currentUser.type_of_account.getDaysReminded());
 const daysRemaining = auth.currentUser.type_of_account.getDaysReminded();
 const totalDays = 14; 
 const percentageRemaining = (daysRemaining / totalDays) * 100;
+const [isClose,setIsClose] = useState(false);
   return (
     <>
       {auth.currentUser.type_of_account.getType() === "Free" ? (
@@ -42,7 +44,7 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
             <img src={"./Carbon/arrow-right.svg"} alt="" />
           </div>
         </div>
-      ) : auth.currentUser.type_of_account.getType() === "Trial" ? (
+      ) : (!isClose&&auth.currentUser.type_of_account.getType() === "Free") ? (
           <div
               className="w-full pt-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
             <img className={"w-[50px]  relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
@@ -53,7 +55,7 @@ const percentageRemaining = (daysRemaining / totalDays) * 100;
             </div>
 
             <img width={32} height={32} className="w-8 h-8 cursor-pointer absolute top-4 right-6 "
-                 src="/public/icons/Add.svg" alt=""/>
+                 src="/public/icons/Add.svg" onClick={()=>setIsClose(true)} alt=""/>
 
             <div className="pt-2 w-full flex items-center justify-center">
               {/* <img className="" src="/public/icons/L-Shield Done.svg" alt="" /> */}
