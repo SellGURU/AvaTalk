@@ -9,10 +9,12 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   mod?:'files' | 'profile',
   label?:string
   accept?:string
+  limite?:number
+  userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const getBase64 = (file:any,name:string) => {
@@ -51,6 +53,13 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
           console.log('Error: ', error);
       };
   }   
+  const [resolveLimite,setResolveLimite] = useState(limite?limite:1)
+  useEffect(() => {
+    setFiles(value?value:[])
+  },[value])
+  useEffect(() => {
+    setResolveLimite(limite?limite:1)
+  },[limite])
   const deleteFile = (index:number) => {
     const newArr = [...files]
     newArr.splice(index,1)
@@ -104,7 +113,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                         </div>
                         <input  onChange={(res:any) => {
                             setisLoading(true)
-                            console.log(res.target.files.length)
+                            // console.log(res.target.files.length)
                             // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
                               // })
                                 getBase64(res.target.files[0],res.target.value.split('\\')[2])    
@@ -120,12 +129,23 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label ,theme,mod,u
                     <div className={`${theme}-ImageUploader-itemList-items`}>
                       {files.map((item,index) => {
                         return (
-                          <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                            <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
-                            {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                            </div> */}
-                            <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Trash.svg" alt="" />
-                          </div>
+                          <>
+                            {userMode == 'Free' && index >= resolveLimite ?
+                              <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                </div> */}
+                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
+                              </div>                            
+                            :
+                              <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
+                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                </div> */}
+                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Trash.svg" alt="" />
+                              </div>
+                            }
+                          </>
                         )
                       })}
                     </div>

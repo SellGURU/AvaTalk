@@ -24,6 +24,7 @@ interface Information {
     talk_video_avater?:string
     address?:string
     referral_code?:string
+    gender?:'male'|'female'
 }
 
 // interface Location {
@@ -85,6 +86,15 @@ class User {
     public updateInformation(information:Information){
         this.information = information
         // toast.success("Done Successfully!")
+        this.syncToLocalStorage()
+    }
+    public updateCustomInformation(information:any){
+        console.log(this.information)
+        this.information = {
+            ...this.information,
+            ...information
+        }
+        console.log(this.information)
         this.syncToLocalStorage()
     }
     public updateAvater(pic:string,silent:string){

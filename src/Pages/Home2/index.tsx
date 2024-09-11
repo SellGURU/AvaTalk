@@ -19,7 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
-    const [showDeveloperTools,setShowDeveloperTools] = useState(false)
+    const [showDeveloperTools] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
@@ -48,7 +48,8 @@ const Home2 = () => {
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information. referral_code,
-                address:''
+                address:'',
+                gender:data.information.gender
             })
             authContext.currentUser.setEditStatus(data.edit_status)
             authContext.currentUser.setBox(resolveSocial)
@@ -94,11 +95,11 @@ const Home2 = () => {
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);
-    useEffect(() => {
-        if(window.innerWidth> 1300) {
-            setShowDeveloperTools(true)
-        }
-    })
+    // useEffect(() => {
+    //     if(window.innerWidth> 1300) {
+    //         setShowDeveloperTools(true)
+    //     }
+    // })
     return (
         <>
             {showSplash ?

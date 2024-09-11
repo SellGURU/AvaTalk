@@ -8,7 +8,7 @@ import { useConstructor } from "../../help";
 // import { TagList } from "..";
 import ChatApi from '../../Api/Chat'
 import AccessNotifManager from "../AccessNotifManager";
-import { EnhanceModal } from "../__Modal__";
+import { EnhanceModal, ReadyForMore } from "../__Modal__";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -25,7 +25,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
   // const [isLoading, setIsLoading] = useState(false);
   const [showEchangeModal,setShowEchangeModal] = useState(false)
   const [activeView, setActiveView] = useState("Visitors Chat History");
-
+  const [isReadyTO,setIsReadyTo] = useState(false)
   useConstructor(() => {
     ChatApi.showList((res) => {
       // if(res.cha)
@@ -38,6 +38,12 @@ const Chat: React.FC<Props> = ({ theme }) => {
         setShowEchangeModal(true)
       }, 10000);
 
+    }
+    if(appcontext.currentUser.type_of_account.getType() == 'Free'){
+      setIsReadyTo(true)
+      setTimeout(() => {
+        setIsReadyTo(true)
+      }, 15000);      
     }
     // setIsLoading(false);
   });
@@ -158,6 +164,13 @@ const Chat: React.FC<Props> = ({ theme }) => {
           navigate('/edit/ai-setting')
         }}></EnhanceModal>
       }
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="Chat" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }         
     </div>
   );
 };

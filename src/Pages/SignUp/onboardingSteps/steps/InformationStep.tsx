@@ -10,10 +10,27 @@ interface InformationStepProps {
 
 const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
     const context = useAuth() 
+    const resolveName = () => {
+        if(context.siginUpOptions.firstName != ''){
+            return context.siginUpOptions.firstName as string
+        }else if(context.googleInformation){
+            return context.googleInformation.given_name as string
+        }
+        return ''
+    }
+
+    const resolveFamilyName = () => {
+        if(context.siginUpOptions.lastName != ''){
+            return context.siginUpOptions.lastName as string
+        }else if(context.googleInformation){
+            return context.googleInformation.family_name as string
+        }
+        return ''
+    }    
     const formik = useFormik({
         initialValues:{
-            FirstName:context.siginUpOptions.firstName,
-            LastName:context.siginUpOptions.lastName,
+            FirstName:resolveName(),
+            LastName:resolveFamilyName(),
             gender:context.siginUpOptions.gender == ''? 'female':context.siginUpOptions.gender
         },
         validationSchema:Yup.object().shape({
@@ -26,7 +43,6 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
     ];   
-    
     return (
         <>
             <div className="mt-8">

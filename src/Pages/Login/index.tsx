@@ -8,10 +8,13 @@ import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
 import { TextField } from "../../Components";
-import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin} from "@react-oauth/google";
+// import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
+import { toast } from "react-toastify";
+import axios from "axios";
+import {LinkedIn} from "react-linkedin-login-oauth2";
 
 const initialValue = {
   email: "",
@@ -129,6 +132,78 @@ const Login = () => {
       // alert("posEnd")
     }
   })
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`,
+          },
+        });
+        Auth.loginWithGoogle(
+          {
+            google_json:userInfo.data
+          },
+        ).then((res) => {
+          authContext.setReferalCode(parametr.get("referral") as string)
+          if(res.data.access_token){
+            localStorage.setItem("token",res.data.access_token)
+            authContext.login(res.data.access_token)
+            const resolveSocial: Array<Box> = [];
+            Auth.showProfile((data) => {
+                data.boxs.map((item:any) => {
+                    const newBox = boxProvider(item);
+                    resolveSocial.push(newBox);
+                })
+                authContext.currentUser.updateInformation({
+                    firstName:data.information.first_name,
+                    lastName:data.information.last_name,
+                    phone:data.information.mobile_number,
+                    personlEmail:data.information.email,
+                    company:data.information.company_name,
+                    job:data.information.job_title,
+                    banelImage:data.information.back_ground_pic,
+                    imageurl:data.information.profile_pic,
+                    location:{
+                        lat:33,
+                        lng:33
+                    },
+                    workEmail:data.information.work_email,
+                    workPhone:data.information.work_mobile_number,
+                    userId:data.information.created_userid
+                })
+                authContext.currentUser.setBox(resolveSocial)
+                navigate("/?splash=true");
+            })                                                   
+          }else{
+            toast.error(res.data)
+          }
+        });    
+        console.log('User Info:', userInfo.data);
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+      }
+    },
+    onError: (error) => {
+      console.log('Login Failed:', error);
+    },
+  });
+
+
+
+    const [, setCode] = useState('');
+    const [, setErrorMessage] = useState('');
+
+    const handleSuccessLinkedIn = (data:any) => {
+        setCode(data.code);
+        console.log('Code: ', data.code);
+    };
+
+    const handleFailureLinkedIn = (error:any) => {
+        setErrorMessage(error.errorMessage);
+        console.log('Error: ', error.errorMessage);
+    };
+
   return (
     <>
       {showSplash ?
@@ -150,10 +225,12 @@ const Login = () => {
 
                 <div className="flex justify-between w-full px-2 mb-4 ">
                   <div>
-                    <Checkbox label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
+                    <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
                   </div>
 
-                  <div className="text-[14px] text-[#06B6D4] cursor-pointer">
+                  <div onClick={() => {
+                    navigate("/forgetPassword")
+                  }} className="text-[14px] text-[#06B6D4] cursor-pointer">
                     Forgot Password?
                   </div>
                 </div>            
@@ -169,7 +246,7 @@ const Login = () => {
                   Login
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
-                  Don`t have an account? <span onClick={() => {
+                 Don't have an account? <span onClick={() => {
                     navigate('/signup')
                   }} className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
                 </div>
@@ -184,91 +261,38 @@ const Login = () => {
                 </div>
                 
                 <div className="flex items-center justify-center mt-4">
-                  <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
+                
+                    <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                      <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
+                      <div className="text-text-primary">Login with Google</div>
+                    </Button>
+                </div>
+                  <LinkedIn
+                      clientId="786lwqvw2unoip"
+                      redirectUri="https://linkedin-callback.vercel.app/"
+                      // redirectUri={`http://localhost:5173/linkedin/callback`}
+                      onSuccess={handleSuccessLinkedIn}
+                      onError={handleFailureLinkedIn}
+                      scope={"profile,email,openid"}
+                      children={
+                          ({linkedInLogin}) => <div className="mt-4">
+                              <Button theme="Carbon-Outline"
+                                      onClick={linkedInLogin}
+                                      className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                                  <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
 
-                    <GoogleLogin
-                      size="large"
-                      width={'100%'}
-                      text="signin_with"
-                      onSuccess={credentialResponse => {
-                        // setcertificate(credentialResponse);
-                        // console.log(credentialResponse);
-                        const prof:any = jwtDecode(credentialResponse.credential? credentialResponse?.credential : '')
-                        // console.log(prof)
-                        authContext.setGoogleInformation(prof)
-                        // console.log(jwt_decode(credentialResponse.credential? credentialResponse?.credential : '' ))
-                        Auth.loginWithGoogle(
-                          {
-                            google_json:prof
-                          },
-                        ).then((res) => {
-                          authContext.verificationHandler({
-                            emailOrPhone: prof?.email,
-                            googleJson:prof
-                          })
-                          authContext.setReferalCode(parametr.get("referral") as string)
-                          if(res.data == 'Not Registered'){
-                             navigate("/register")
-                          }else {
-                            if(res.data.access_token){
-                              localStorage.setItem("token",res.data.access_token)
-                              authContext.login(res.data.access_token)
-                              const resolveSocial: Array<Box> = [];
-                              Auth.showProfile((data) => {
-                                  data.boxs.map((item:any) => {
-                                      const newBox = boxProvider(item);
-                                      resolveSocial.push(newBox);
-                                  })
-                                  authContext.currentUser.updateInformation({
-                                      firstName:data.information.first_name,
-                                      lastName:data.information.last_name,
-                                      phone:data.information.mobile_number,
-                                      personlEmail:data.information.email,
-                                      company:data.information.company_name,
-                                      job:data.information.job_title,
-                                      banelImage:data.information.back_ground_pic,
-                                      imageurl:data.information.profile_pic,
-                                      location:{
-                                          lat:33,
-                                          lng:33
-                                      },
-                                      workEmail:data.information.work_email,
-                                      workPhone:data.information.work_mobile_number,
-                                      userId:data.information.created_userid
-                                  })
-                                  authContext.currentUser.setBox(resolveSocial)
-                                  navigate("/?splash=true");
-                              })                                                   
-                            }else {
-                              navigate("/register")
-                            }
-                          }
-                        });                          
-                      }}
-                      onError={() => {
-                        console.log('Login Failed');
-                      }}
-                    />                     
-                  </GoogleOAuthProvider>    
-                </div>
-                {/* <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                    <div>Continue with LinkedIn</div>
-                  </Button>
-                </div>
-                <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/faceBook.svg" alt="" />
-                    <div>Continue with Facebook</div>
-                  </Button>
-                </div>
-                <div className="mt-4">
-                  <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                    <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
-                    <div>Continue with Apple</div>
-                  </Button>
-                </div> */}
+                                  <div className="text-text-primary">Login with LinkedIn</div>
+                              </Button>
+                          </div>
+                      }/>
+
+                  <div className="mt-4">
+                      <Button theme="Carbon-Outline"
+                              className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                          <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt=""/>
+                          <div className="text-text-primary">Login with Apple</div>
+                      </Button>
+                  </div>
               </div>
         </>
       }

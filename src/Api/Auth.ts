@@ -19,6 +19,7 @@ interface RegisterData {
   first_name: string;
   last_name: string;
   // Gender: string;
+  google_json?:any;
   gender:string | null;
   nfc_id:string|null;
   mobile_number: string | null;
@@ -34,6 +35,8 @@ interface RegisterData {
   confirm_password:string
 }
 
+
+
 ///
 interface SupportData {
   name: string,
@@ -45,6 +48,14 @@ interface SupportData {
 interface check_user_existenceProps {
   email?:string
   mobileNumber?:string
+  google_json?:any
+  code_type:"verification"|"reset"
+}
+
+interface checkLoginCode{
+  email: string,
+  entered_code: string,
+  code_type: string 
 }
 
 interface AiSetting {
@@ -108,16 +119,16 @@ class Auth extends Api {
   }
 
   static loginWithGoogle(data:any) {
-    const response = this.post("/login_with_google",data)
+    const response = this.post("/login_with_accounts",data)
+    return response
+  }
+  static RegisterWithGoogle(data:any) {
+    const response = this.post("/register_with_accounts",data)
     return response
   }
 
   static check_user_existence(data:check_user_existenceProps) {
-    const response = this.post('/check_user_existence',{
-      email:data.email,
-      mobile_number:data.mobileNumber,
-      code_type:'verification'
-    })
+    const response = this.post('/check_user_existence',data,{noPending:true})
     return response
   }
 
@@ -130,8 +141,20 @@ class Auth extends Api {
     return response
   }
   static get_Login_code(data: GetLoginCodeProps) {
-    const response = this.post("/get_Login_code", data);
+    const response = this.post("/get_Login_code", data,{noPending:true});
     return response;
+  }
+
+  static check_login_code(data:checkLoginCode){
+    const response = this.post("/check_Login_code",data)
+    return response
+  }
+
+  static analyseAiSetting(text:string) {
+    const response = this.post('/analyze_ai_setting',{
+      ai_knowledge:text
+    })
+    return response
   }
 
   static register(data: RegisterData) {
@@ -143,6 +166,11 @@ class Auth extends Api {
     this.post("/logout").then(() => {
       removeTokenFromLocalStorage();
     });
+  }
+
+  static forgetPassword(data:any) {
+    const response = this.post("/forgot_password",data)
+    return response
   }
 
   static getBoxs(resolve: (data: Array<Box>) => void) {

@@ -10,12 +10,16 @@ import { useEffect, useState } from "react";
 import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
+import { ReadyForMore } from "../../../Components/__Modal__";
+import { useAuth } from "../../../hooks/useAuth";
+import { learnMore } from "./learnMore";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
   // if (currentBox == undefined) {
   //   currentBox = new AboutBox("about", "");
   // }  
+  const auth = useAuth()
   const navigate = useNavigate();
   const [gender,setGender] = useState('female')
   const initialValue = {
@@ -32,6 +36,7 @@ const EditAiSetting = () => {
       console.log(values);
     },
   });  
+  const learnMoreText = learnMore
   useConstructor(() => {
     Auth.showAiSetting((res) => {
       formik.setFieldValue("title",res.ai_setting.Name)
@@ -39,12 +44,44 @@ const EditAiSetting = () => {
       setGender(res.gender != null ?res.gender :'female')
     })
   })
+  const [analysedText,setAnaysedText] = useState("")
   const [showAiSuggestion,setShowAiSuggestion] = useState(false)
+  const [showLearnMore,setShowLearnMore] = useState(false)
+  const [isReadyTO,setIsReadyTo] = useState(false)
   useEffect(() => {
     if(showAiSuggestion){
       document.getElementById("aiSettingEdit")?.scrollTo(0, 0);
     }
   })
+  const formatText = (text:string) => {
+// Split the text on newlines and process each line
+    return text.split('\n').map((line, index) => {
+      // Check for headers
+      if (line.startsWith('### ')) {
+        return <h3 key={index}>{line.slice(4)}</h3>;
+      } else if (line.startsWith('## ')) {
+        return <h2 key={index}>{line.slice(3)}</h2>;
+      } else if (line.startsWith('# ')) {
+        return <h1 key={index}>{line.slice(2)}</h1>;
+      }
+
+      // Process bold text within the lines
+      const parts = line.split(/(\*\*[^*]+\*\*)/g); // Split by bold format (**bold**)
+      
+      return (
+        <p key={index}>
+          {parts.map((part, i) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+              // Remove the asterisks and render bold text
+              return <strong key={i}>{part.slice(2, -2)}</strong>;
+            } else {
+              return part; // Regular text
+            }
+          })}
+        </p>
+      );
+    });
+  };     
   return (
     <>
       <div id="aiSettingEdit" className="absolute w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
@@ -64,22 +101,7 @@ const EditAiSetting = () => {
           </div>
           <div className="hiddenScrollBar px-6 h-full">
             <div className="text-left my-8" style={{lineHeight:'28px'}}>
-                Your input is quite detailed and gives a comprehensive overview of your professional background, which is great! Here are a few suggestions to enhance it:
-                Consolidate Contact Info: 
-                <br></br>
-                <p className="ml-8">
-                  1. Combine your email, phone, and LinkedIn into a single contact section for clarity. <br/>
-
-                </p>
-                <p className="ml-8">
-                  2. Simplify Experience: Shorten descriptions to highlight key achievements and skills more concisely. <br/>
-
-                </p>
-                <p className="ml-8">
-                  3. Update Skills Section: Consider adding specific tools or technologies you are proficient in, such as those relevant to your current role. <br/>
-
-                </p>
-                These adjustments will help your AI assistant represent you more effectively in professional settings. <br/>
+              {formatText(analysedText)}
 
             </div>
 
@@ -90,10 +112,37 @@ const EditAiSetting = () => {
 
         </div>
         }
+        {showLearnMore
+        &&
+        <div className=" top-0 left-0 w-full bg-white min-h-screen absolute z-40">
+          <div className="flex  w-full items-center justify-between px-6 mt-[120px] ">
+            <div className="invisible">
+              <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
+            </Button>
+            </div>
+            <div className="text-[16px] font-semibold text-text-primary">Learn more about your AI settings</div>
+            <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
+            </Button>
+          </div>
+          <div className="hiddenScrollBar px-6 mb-20 h-full">
+            <div className="text-left my-8" style={{lineHeight:'28px'}}>
+              {formatText(learnMoreText)}
+
+            </div>
+
+            <Button onClick={() => {
+              setShowLearnMore(false)
+            }} theme="Carbon">Got it</Button>
+          </div>
+
+        </div>
+        }        
         <div className="relative top-8" style={{visibility:showAiSuggestion?'hidden':'visible'}}>
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-[120px] hiddenScrollBar h-full"  style={{visibility:showAiSuggestion?'hidden':'visible'}}>
+        <div className="mt-[120px] mb-10 hiddenScrollBar h-full"  style={{visibility:showAiSuggestion?'hidden':'visible'}}>
 
           <div className="px-6">
             <AccessNotifManager page="AiSetting"></AccessNotifManager>
@@ -101,12 +150,14 @@ const EditAiSetting = () => {
           </div>
           <div className="px-6 mt-4">
 
-            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer">Learn more </span></div>
+            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
+              setShowLearnMore(true)
+            }}>Learn more </span></div>
 
             {/* <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>
             </div> */}
-            <TextArea setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse required label="AI Knowledge" errorMessage={formik.errors.Description} placeholder="Write your AI Knowledge ..." inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)} name="Description"  theme="Carbon" textAreaHeight='140px'></TextArea>
+            <TextArea analysedText={analysedText} setAnalysedText={setAnaysedText} setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse required label="AI Knowledge" errorMessage={formik.errors.Description} placeholder="Write your AI Knowledge ..." inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)} name="Description"  theme="Carbon" textAreaHeight='140px'></TextArea>
             {/* <MDEditor
               value={value}
               data-color-mode="light"
@@ -139,14 +190,22 @@ const EditAiSetting = () => {
           </div>           */}
           <div className="px-6 mt-10">
             <Button disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
-              Auth.updateAiSetting({
-                name:formik.values.title,
-                ai_knowledge:formik.values.Description,
-                gender:gender
-              })
-              setTimeout(() => {
-                navigate('/')
-              }, 600);
+              if(auth.currentUser.type_of_account.getType() == 'Free' && auth.currentUser.editStatus){
+                setIsReadyTo(true)
+              }else{
+                  Auth.updateAiSetting({
+                    name:formik.values.title,
+                    ai_knowledge:formik.values.Description,
+                    gender:gender
+                  })
+                  auth.currentUser.updateCustomInformation({
+                    gender:gender
+                  })
+                  auth.currentUser.setEditStatus(true)
+                  setTimeout(() => {
+                    navigate('/')
+                  }, 600);
+              }
             }} theme="Carbon">
               Save Change
             </Button>
@@ -160,7 +219,13 @@ const EditAiSetting = () => {
             <div className="text-sm text-left mt-2 text-text-primary">Watch our <span className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
           </div>
         </div>
-      
+        {isReadyTO &&
+          <div className="fixed w-full left-0 bottom-0 flex justify-center">
+            <ReadyForMore page="AiSetting" onClose={() => {
+              setIsReadyTo(false)
+            }} ></ReadyForMore>
+          </div>
+        }      
       </div>    
     </>
   )

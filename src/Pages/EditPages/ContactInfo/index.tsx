@@ -17,6 +17,7 @@ const validationSchema = Yup.object().shape({
 
 const EditContactInfo = () => {
   const auth = useAuth()
+  console.log(auth.currentUser.information)
   const initialValue = {
     job:auth.currentUser.information?.job,
     company:auth.currentUser.information?.company,
@@ -53,26 +54,14 @@ const EditContactInfo = () => {
   });
   const [icons,setIcons] = useState<Array<any>>([])
   const submit = () => {
-    auth.currentUser.updateInformation({
+    auth.currentUser.updateCustomInformation({
       job:formik.values.job as string,
-      banelImage:auth.currentUser.information?.banelImage as string,
       company:formik.values.company as string ,
-      firstName:auth.currentUser.information?.firstName as string,
-      imageurl:auth.currentUser.information?.imageurl as string,
-      lastName:auth.currentUser.information?.lastName as string,
-      location:{
-        lat:pointVals[0][0] as number,
-        lng:pointVals[0][1] as number
-      },
-      phone:auth.currentUser.information?.phone as string,
       personlEmail:formik.values.personlEmail as string,
       workEmail:formik.values.workEmail as string,
       workPhone:formik.values.workPhone as string,
-      silent_video_avatar:auth.currentUser.information?.silent_video_avatar,
-      talk_video_avater:auth.currentUser.information?.talk_video_avater,
-      userId:auth.currentUser.information?.userId,
       referral_code:auth.currentUser.information?.referral_code,
-      address:auth.currentUser.information?.address,
+      address:formik.values.address,
       // logo:icons[0]
     })
     Auth.updateContactInfo({
@@ -82,7 +71,7 @@ const EditContactInfo = () => {
         lat:pointMode.control.values[0][0],
         lng:pointMode.control.values[0][1]
       },
-      logo:icons[0],
+      logo:icons[0].url,
       work_email:formik.values.workEmail as string,
       address:formik.values.address,
       work_phone:formik.values.workPhone as string
@@ -94,7 +83,8 @@ const EditContactInfo = () => {
       formik.setFieldValue("job",res.data.job_title)
       formik.setFieldValue("company",res.data.company_name)
       formik.setFieldValue("address",res.data.address)
-      setPointVals([[res.data.location.lat,res.data.location.lng]])
+      setIcons([...icons,{name:"file",type:"image/png",url:res.data.logo}])
+      // setPointVals([[res.data.location.lat,res.data.location.lng]])
     })
   })
   return (
@@ -111,9 +101,10 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
-          <FileUploadr label="Logo" mod="files" value={icons} uploades={(files) => {
+          <FileUploadr label="Logo" mod="profile" value={icons} uploades={(files) => {
             setIcons(files)
-          }} accept=".svg"></FileUploadr>
+            console.log(files)
+          }} accept=".png"></FileUploadr>
         </div>
         <div className="mt-3 px-6">
           {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}
@@ -125,7 +116,7 @@ const EditContactInfo = () => {
             {...formik.getFieldProps("personlEmail")}
             theme="Carbon"
             disabled
-            label="Personl Email"
+            label="Personal Email"
             inValid={false}
             name="personlEmail"
             type="text"

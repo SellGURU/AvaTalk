@@ -7,8 +7,8 @@ import { AboutBox } from "../../../Model";
 import { useNavigate } from "react-router";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
-  bio: Yup.string().required(),
+  title: Yup.string().required('Title is required.'),
+  bio: Yup.string().required('Bio is required.'),
 });
 
 const EditAbout = () => {

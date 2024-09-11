@@ -89,9 +89,9 @@ const EditAvater: React.FC = () => {
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
         setFirstLoading(false)
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo))  
+        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender == authContext.currentUser.information?.gender))  
       }else{
-        setAvaterList(res.data)
+        setAvaterList(res.data.filter((el:any) => el.gender == authContext.currentUser.information?.gender))
         // setIsLoading(false)
         setFirstLoading(false)
         formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
@@ -111,6 +111,9 @@ const EditAvater: React.FC = () => {
     if(firstLoading) {
       publish('isLoading-start',{})
     }else{
+      publish('isLoading-stop',{})
+    }
+    return () =>{
       publish('isLoading-stop',{})
     }
   },[firstLoading])
@@ -236,7 +239,7 @@ const EditAvater: React.FC = () => {
                     Indirect Camera Gaze{" "}
                   </div>
                   <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                    Look directly into the camera lens to establish a clear,
+                    Look directly into the camera to establish a clear,
                     forward-facing base for your AI profile.
                   </div>
                 </div>

@@ -134,6 +134,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               value={formData.phone}
               onChange={handleInputChange}
               onBlur={() => {}}
+              required
               label="Phone"
               placeholder="Enter your phone number..."
               theme="Carbon"
@@ -150,7 +151,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
             <TextArea inValid="" placeholder="Enter your note..." textAreaHeight="136px" name="note" value={formData.note} onBlur={() => {}} label="Note" theme="Carbon" onChange={handleInputChange} />
           </div>
           <div className="mt-10">
-            <Button disabled={formData.fullName == '' || formData.email == ''} onClick={handleAction} theme="Carbon">
+            <Button disabled={formData.fullName == '' || formData.email == '' || formData.phone == ''} onClick={handleAction} theme="Carbon">
               <div >Exchange Contact</div>
             </Button>
             <div className="text-[12px] text-[#6B7280] text-center mt-2 mb-5">We don’t sell your contact details</div>

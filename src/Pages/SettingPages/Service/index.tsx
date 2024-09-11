@@ -3,25 +3,26 @@ import { Outlet, useNavigate } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
-// interface serviceType {
-//     title:string,
-//     price:number
-// }
+import {useState} from "react";
+interface serviceType {
+    title:string,
+    price:number
+}
 
 const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
-    // const service:Array<serviceType> = [
-    //     {
-    //         title:'Annually',
-    //         price:345
-    //     },
-    //     {
-    //         title:'Monthly',
-    //         price:45
-    //     },
-    // ] 
-    // const [activeService,setAtiveService] = useState<serviceType>()
+    const service:Array<serviceType> = [
+        {
+            title:'Annually',
+            price:345
+        },
+        {
+            title:'Monthly',
+            price:45
+        },
+    ]
+    const [activeService,setAtiveService] = useState<serviceType>()
 
     return (
         <>
@@ -68,30 +69,32 @@ const SettingService =() => {
                             </div>                            
                         </div>
                     </div>
-                    {/* {service.map((item)=>{
+                     {service.map((item)=>{
                         return(
                             <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
                                 {activeService?.title == item.title ?
                                     <>
-                                    <div className="flex items-center">
-                                        <span className="w-6 h-6 mr-3 cursor-pointer relative border border-white bg-primary-color rounded-full p-[5px]">
-                                            <span className="absolute w-3 h-3 rounded-full borderBox-Gray boxShadow-Gray"></span>
-                                        </span>
+                                    <div className="flex items-center text-sm font-medium text-[#374151]">
+                                        <div className="w-6 h-6 flex mr-3 items-center justify-center cursor-pointer relative border border-white bg-primary-color rounded-full p-[5px]">
+                                            <input type={"radio"} className={""}/>
+                                        </div>
                                         {item.title}
                                     </div>
-                                    <div className="text-sm text-gray-700">{item.price} $</div>
+                                    <div className="text-sm text-[#6B7280] font-normal">{item.price} $</div>
                                     </>
                                 :
                                     <>
-                                    <div className="flex items-center">
-                                        <span className="w-6 h-6 mr-3 cursor-pointer relative borderBox-Gray btnInnerShadowsDark rounded-full"></span>
-                                        {item.title}
-                                    </div>
+                                        <div className="flex items-center">
+                                            <div
+                                                className="w-6 h-6 mr-3   cursor-pointer relative borderBox-Gray  rounded-full"></div>
+                                           <h1 className={"text-sm font-medium text-[#374151]"}>{item.title}</h1>
+                                        </div>
+                                        <div className="text-sm text-[#6B7280] font-normal">{item.price} $</div>
                                     </>
                                 }
                             </div>
                         )
-                    })} */}
+                    })}
                     <div className="mt-8 mb-4">
                         <Button theme="Carbon">Continue to Payment</Button>
                     </div>

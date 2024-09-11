@@ -7,5 +7,7 @@ import SettingSharing from "./Sharing";
 import SettingSupport from "./Support";
 import SettingTermsService from "./TermsService";
 import ReferYourFriends from "./ReferYourFriends";
+import  SettingHelp  from "./Help/Help";
+import HelpSupport from "../Setting/helpSupport/SettingSupport";
 
-export { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService,ReferYourFriends };
+export { SettingAccount, SettingConnectedAccount, SettingPayment, SettingPrivacyPolicy, SettingService, SettingSharing, SettingSupport, SettingTermsService,ReferYourFriends , SettingHelp, HelpSupport};
