@@ -19,7 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
-    const [showDeveloperTools,setShowDeveloperTools] = useState(false)
+    const [showDeveloperTools] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
@@ -95,11 +95,11 @@ const Home2 = () => {
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);
-    useEffect(() => {
-        if(window.innerWidth> 1300) {
-            setShowDeveloperTools(true)
-        }
-    })
+    // useEffect(() => {
+    //     if(window.innerWidth> 1300) {
+    //         setShowDeveloperTools(true)
+    //     }
+    // })
     return (
         <>
             {showSplash ?
