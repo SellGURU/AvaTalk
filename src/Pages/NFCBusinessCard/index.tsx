@@ -137,10 +137,14 @@ const [isOpen, setIsOpen] = useState(false);
                     style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
                     contentLabel=" Modal"
                 >
-                    <div className={"relative py-5"}>
-                    <Button onClick={()=> setIsOpen(false)} className={"absolute bg-white rounded-full p-1 shadow-md top-0 right-0"} data-mode="profile-review-button-2">
-                        <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
-                    </Button>
+                    <div className={" relative pb-5 pt-12"}>
+                       <div className={"absolute right-0 top-0"}>
+                           <Button onClick={() => {
+                               setIsOpen(false)
+                           }} data-mode="profile-review-button-2" theme="Carbon-Google">
+                               <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>
+                           </Button>
+                       </div>
                     <div className={"flex flex-col items-center justify-center"}>
 
                         <img src={"/Carbon/tick-circle.svg"}/>
