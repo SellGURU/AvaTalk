@@ -50,7 +50,7 @@ const SettingService =() => {
                         </p>
 
                     </div>
-                    {context.currentUser.type_of_account.getType() ==="Free" &&
+                    {context.currentUser.type_of_account.getType() !="Pro" &&
                         (<>
                         <div>
                         <ToggleButton onButtonClick={() => {}} leftText="Annually $200" rightText="Monthly $20" theme="Carbon-secandary" />                        
