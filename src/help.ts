@@ -254,4 +254,42 @@ function makeid(length: number) {
   }
   return result;
 }
-export { resolveMenuFromRoute, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+
+function hexToRgb(hex:string) {
+    // Remove the hash if present
+    hex = hex.replace(/^#/, '');
+    
+    // Parse r, g, b values
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    
+    return { r, g, b };
+}
+
+// Function to calculate luminance
+function getLuminance(r:number, g:number, b:number) {
+    // Convert RGB values to the range [0, 1]
+    let rs = r / 255;
+    let gs = g / 255;
+    let bs = b / 255;
+
+    // Apply the gamma correction for sRGB
+    rs = rs <= 0.03928 ? rs / 12.92 : Math.pow((rs + 0.055) / 1.055, 2.4);
+    gs = gs <= 0.03928 ? gs / 12.92 : Math.pow((gs + 0.055) / 1.055, 2.4);
+    bs = bs <= 0.03928 ? bs / 12.92 : Math.pow((bs + 0.055) / 1.055, 2.4);
+
+    // Calculate the relative luminance
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+
+
+const getTextColorFromBackground = (hex:string) => {
+    const { r, g, b } = hexToRgb(hex);
+    const luminance = getLuminance(r, g, b);
+
+    // Use black text if the luminance is high, otherwise use white
+    return luminance > 0.5 ? '#374151' : 'white';
+}
+export { resolveMenuFromRoute,getTextColorFromBackground, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
