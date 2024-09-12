@@ -1,42 +1,73 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {BackIcon} from "../../Components";
 import {useEffect, useState} from "react";
 import ImageGallery from "react-image-gallery";
 import {Button} from "symphony-ui";
 import Modal from "react-modal";
 import {Accordion} from "../../Components/accardion";
+import NFC from '../../Api/Data/NFC.json';
+import { useParams } from "react-router-dom";
+import { BusinessCard } from "../../Types";
+import { Rating } from "@smastrom/react-rating";
 
 export const NFCBusinessCard = () => {
-    const [selectedColor, setSelectedColor] = useState([{color:'purple',count:1,id:0}]);
-    const images = [
-        {
-            original: '/Carbon/Purple 1.png', // Path relative to public folder
-            thumbnail: '/Carbon/Purple 1.png', // Optional thumbnail (can be the same image or different)
-            description: '', // Optional description
-        },
-        {
-            original: '/Carbon/whaote.png', // Another image
-            thumbnail: '/Carbon/whaote.png',
-            description: '',
-        },
-        {
-            original: '/Carbon/black1.png', // Another image
-            thumbnail: '/Carbon/black1.png',
-            description: '',
-        },
-        {
-            original: '/Carbon/gold 1.png', // Another image
-            thumbnail: '/Carbon/gold 1.png',
-            description: '',
-        },
-    ];
-    useEffect(()=>{
-        if(selectedColor.length==0){
-            setSelectedColor([{color:'purple',count:1,id:0}]);
-        }
-    },[selectedColor])
+    const { id } = useParams();
+    const [currentCard,setCurrentCard] = useState<BusinessCard>()
+    const [selectedColor, setSelectedColor] = useState([{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:'0'}]);
+    // const images = [
+    //     {
+    //         original: '/Carbon/Purple 1.png', // Path relative to public folder
+    //         thumbnail: '/Carbon/Purple 1.png', // Optional thumbnail (can be the same image or different)
+    //         description: '', // Optional description
+    //     },
+    //     {
+    //         original: '/Carbon/whaote.png', // Another image
+    //         thumbnail: '/Carbon/whaote.png',
+    //         description: '',
+    //     },
+    //     {
+    //         original: '/Carbon/black1.png', // Another image
+    //         thumbnail: '/Carbon/black1.png',
+    //         description: '',
+    //     },
+    //     {
+    //         original: '/Carbon/gold 1.png', // Another image
+    //         thumbnail: '/Carbon/gold 1.png',
+    //         description: '',
+    //     },
+    // ];
+    const changeCardColor = (id:string,newColor:string) => {
+        setSelectedColor((prevCards) =>
+            prevCards.map((card:any) =>
+                card.id === id
+            ? {
+                ...card,
+                color: newColor, 
+                }
+            : card
+        )
+        );
+    };    
+    const [rating, setRating] = useState(4);
+    const [videoRate]=useState<any>()
+    useEffect(() => {
+        setCurrentCard(NFC.filter((el) => el.id == id)[0])
+        // setSelectedColor([{color:'',count:1,id:0}])
+    },[id])
+    const svgImage= (<svg aria-hidden="true" className="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 27 25.81"
+                    preserveAspectRatio="xMidYMid meet" stroke-width="2">
+        <g shape-rendering="geometricPrecision">
+            <polygon
+                points="25 9.02 16.4 7.75 12.46 0 8.59 7.79 0 9.14 6.21 15.23 4.85 23.81 12.55 19.79 20.3 23.74 18.85 15.17 25 9.02"></polygon>
+        </g>
+    </svg>)
+    const customStyles = {
+        itemShapes:svgImage,
+        activeFillColor: '#5B21B6',
+        inactiveFillColor: '#fff',
+    };    
     const [isOpen, setIsOpen] = useState(false);
-    const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
-    const handleQuantityChange = (action:string, id:number) => {
+    const handleQuantityChange = (action:string, id:string) => {
         setSelectedColor(prevColors =>
             prevColors
                 .map(colorItem => {
@@ -52,10 +83,16 @@ export const NFCBusinessCard = () => {
                 .filter(colorItem => colorItem.count > 0) // Remove items where count is 0 or less
         );
     };
+    const resolveBackGround = (color:string) => {
+        if(color == 'sevenColor'){
+            return 'radial-gradient(circle, #9873D2CC, #FFFAEE)'
+        }
+        return color
+    }    
     return (
         <div className=" w-full bg-[#FDFDFE] hiddenScrollBar h-dvh top-[0px]  z-[15]">
             <div className=" top-4">
-                <BackIcon title="Avatalk NFC Business Card" theme="Carbon"></BackIcon>
+                <BackIcon title={currentCard?.title || ''} theme="Carbon"></BackIcon>
 
             </div>
             <div
@@ -67,7 +104,7 @@ export const NFCBusinessCard = () => {
                             thumbnailPosition="right" // Thumbnail position on the right
                             showPlayButton={false} // Disable slideshow button
                             showFullscreenButton={false} // Disable fullscreen button
-                            items={images}
+                            items={currentCard?.images || []}
                             renderLeftNav={(onClick, disabled) => {
                                 return (
                                     <div className={`Carbon-back-Button-container-box-NfcCard !top-[100%] w-fit flex items-end justify-end`} style={{transform: 'translate(30%, -50%)', left: '20%'}} data-mode="gallery">
@@ -91,11 +128,25 @@ export const NFCBusinessCard = () => {
                     </div>
                     <div className={"bg-white shadow-md w-full p-5 rounded-xl"}>
                         <h2 className="text-[14px] font-semibold text-[#374151]">
-                            Avatalk NFC Business Card
+                            {currentCard?.title}
                         </h2>
+                        <div className="flex justify-start mt-2 items-center">
+                            <Rating
+                                className={"!w-24"}
+                                value={rating}
+                                onChange={setRating}
+                                readOnly={videoRate}
+                                itemStyles={customStyles}
+                            />
+                            <div className="w-full flex justify-start ml-2 items-center gap-4">
+                                <p className={"text-[12px] font-normal"}> 4 | 262 reviews</p>
+                                {/* <p className={"text-[10px] font-normal"}>08/08/2024</p>                             */}
+
+                            </div>
+                        </div>
                         <div className="flex items-center mt-2">
                             <div className="flex text-[#9CA3AF] font-normal text-[16px]">price:<p
-                                className={"text-purple-500 text-lg font-semibold"}>£7</p></div>
+                                className={"text-purple-500 text-lg font-semibold"}>£{currentCard?.price}</p></div>
                         </div>
                         <div className="text-[#374151] font-normal text-[12px]">
                             Tax included. Shipping calculated at checkout.
@@ -104,16 +155,24 @@ export const NFCBusinessCard = () => {
                             return (
                                 <div className="mt-4 flex justify-between items-center">
                                     <div className={"flex gap-3"}>
-                                        {listColorBadge.map((color: string) => (
-                                            <div className={`w-[32px] h-[32px] rounded-md bg-[${color}]`}>
+                                        {currentCard?.colors.map((color: string) => (
+                                            <div onClick={() => {
+                                                changeCardColor(item.id,color)
+                                            }} className={`w-[26px] cursor-pointer h-[26px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
+                                                {item.color == color && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
                                             </div>
                                         ))}
                                     </div>
 
 
                                     <div className={"bg-[#EEEFF3] flex items-center justify-between px-2 w-[128px] h-[40px] rounded-2xl"}>
-                                        <button  className={"bg-white text-[#5B21B6] w-8 h-8 rounded-full flex items-center justify-center"}  onClick={()=>handleQuantityChange("decrement",item.id)}>
-                                            {item.count>1?
+                                        <button  className={"bg-white text-[#5B21B6] w-8 h-8 rounded-full flex items-center justify-center"}  onClick={()=>{
+                                            if(item.count >1 || selectedColor.length > 1){
+                                                handleQuantityChange("decrement",item.id)
+
+                                            }
+                                        }}>
+                                            {item.count>1 || selectedColor.length == 1?
                                             "-":<img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}
@@ -125,7 +184,7 @@ export const NFCBusinessCard = () => {
                         })}
 
                         <p className={"text-[14px] cursor-pointer mt-5 font-medium text-[#5B21B6]"}
-                           onClick={() => setSelectedColor((prv) => [ ...prv,{color:"purpule",count:1,id:prv.length+1}])}>+ Add New Color</p>
+                           onClick={() => setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString()}])}>+ Add New Color</p>
                     </div>
 
                 </div>

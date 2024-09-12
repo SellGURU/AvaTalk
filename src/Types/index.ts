@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface PhoneCountry {
   codeName: string;
   codePhone: string;
@@ -45,4 +46,15 @@ type Location = {
     lat:number,
     lng:number
 }
-export type { PhoneCountry, MenuType, Tag, Contact, chat ,SharingModType,Location};
+
+type BusinessCard = {
+    title:string,
+    image:string,
+    colors:Array<string>,
+    price:string,
+    id:string,
+    images:Array<any>
+}
+
+export type { PhoneCountry, MenuType, Tag, BusinessCard ,Contact, chat ,SharingModType,Location};
+

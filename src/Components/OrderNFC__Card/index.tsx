@@ -5,9 +5,10 @@ interface Props {
     title:string,
     price:string,
     imgSrc:string
+    id:string
 }
 
-export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) => {
+export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc,id}:Props) => {
     const resolveBackGround = (color:string) => {
         if(color == 'sevenColor'){
             return 'radial-gradient(circle, #9873D2CC, #FFFAEE)'
@@ -15,7 +16,7 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) =
         return color
     }
     return (
-        <Link rel="stylesheet" to="/settings/NFCBusinessCard">
+        <Link rel="stylesheet" to={"/settings/NFCBusinessCard/"+id}>
             <div className={"Carbon-Card-Product-NfcCard-container overflow-hidden "} style={{padding:'0px'}}>
                 <div className={"w-full flex items-center justify-center"} style={{
                     boxShadow:'inset 4px 4px 14px 2px #E2E8F0,inset -4px -4px 9px 2px #FFFFFF99',

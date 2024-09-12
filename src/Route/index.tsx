@@ -175,7 +175,7 @@ const route = createHashRouter([
             element: <OrderNfcCard></OrderNfcCard>,
           },
           {
-            path: "NFCBusinessCard",
+            path: "NFCBusinessCard/:id",
             element: <NFCBusinessCard></NFCBusinessCard>,
           },
        
