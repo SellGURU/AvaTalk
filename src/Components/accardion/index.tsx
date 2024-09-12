@@ -12,7 +12,7 @@ export const Accordion=({bodyText,title}:Props) => {
     };
     return(
         <>
-            <div className={"bg-[#F3F4F6] shadow-lg rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
+            <div className={"bg-[#F3F4F6] boxShadow-Gray borderBox-Gray rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
                 <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[14px]"}>
                     <button
                         type="button"
