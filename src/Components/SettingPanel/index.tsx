@@ -86,19 +86,21 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     // },
 
   ]);
+  const [isShowPlanCard,setIsShowPalnCard] = useState(true)
   return (
     <>
     
       <div className={`Carbon-ContactsView-Container`}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
-        <div className="px-6">
-          <PlanCard></PlanCard>
-
-        </div>
+        {isShowPlanCard &&
+          <div className="px-6">
+            <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
+          </div>
+        }
         <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll md:pb-[450px] pb-[300] ">
           {settingCards.map((item) => {
-            return <SettingCard linkTo={item.link} content={item} theme="Carbon"></SettingCard>
+            return <SettingCard key={item.link} linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}
           <div className="mt-5 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>

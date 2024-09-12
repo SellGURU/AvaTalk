@@ -30,6 +30,10 @@ class UserType {
         return 100
     }
 
+    public getPercentDayReminded() {
+        return 100 - this.getPercentDayUsed() 
+    }    
+
     public getDaysReminded() {
         return 14 - this.getDayUsed()
     }
