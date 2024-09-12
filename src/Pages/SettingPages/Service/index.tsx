@@ -39,8 +39,9 @@ const SettingService =() => {
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re Currently our {context.currentUser.type_of_account.getType()+ ' Plan'}</p>
-                        <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">Your {context.currentUser.type_of_account.getType()} will end in {context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.</p>
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our{context.currentUser.type_of_account.getType()+ ' Plan'}</p>
+
+                        <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">Your {context.currentUser.type_of_account.getType()} was expired on {context.currentUser.type_of_account.getDaysReminded()} . Upgrade to Pro to unlock premium features and elevate your networking game!</p>
                     </div>
                     <div>
                         <ToggleButton onButtonClick={() => {}} leftText="Annually $200" rightText="Monthly $20" theme="Carbon-secandary" />                        
