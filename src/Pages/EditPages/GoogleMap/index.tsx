@@ -141,7 +141,7 @@ const EditGoogleMap = () => {
                         <LocationPickerMap></LocationPickerMap>
                     </div> */}
                     <div className="px-6 mt-10">
-                        <Button onClick={submit} theme="Carbon">Save Change</Button>
+                        <Button onClick={submit} theme="Carbon">Save Changes</Button>
                     </div>
                 </div>
             </div>
