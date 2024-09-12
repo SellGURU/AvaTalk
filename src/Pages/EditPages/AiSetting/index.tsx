@@ -207,7 +207,7 @@ const formatText = (text: string) => {
                   }, 600);
               }
             }} theme="Carbon">
-              Save Change
+              Save Changes
             </Button>
           </div>
           

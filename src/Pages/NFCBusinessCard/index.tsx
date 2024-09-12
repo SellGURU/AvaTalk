@@ -34,7 +34,7 @@ export const NFCBusinessCard = () => {
             setSelectedColor([{color:'purple',count:1,id:0}]);
         }
     },[selectedColor])
-const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const listColorBadge=["#5B21B6","#000000","#DBBB6A"]
     const handleQuantityChange = (action:string, id:number) => {
         setSelectedColor(prevColors =>

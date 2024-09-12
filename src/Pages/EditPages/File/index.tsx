@@ -91,7 +91,7 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">
-              Save Change
+              Save Changes
             </Button>
           </div>
         </div>
