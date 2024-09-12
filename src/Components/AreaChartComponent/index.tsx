@@ -24,7 +24,10 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
           <>
             <div className={`bg-[#F3F4F6] ${theme}-BarChartComponent-container-notShow`}>
               <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Page Views</p>
-              <img className=" scale-[.3] w-full z-20 " src="/Carbon/Frame1000003689.png" alt=""/>
+              <div>
+                <img className=" scale-[.9] w-full z-20 " src="/Carbon/notDAtaToShow.svg" alt=""/>
+                <p className={"text-[#6B7280] text-[12px] font-medium"}>No data to show</p>
+              </div>
             </div>
           </>
           :
