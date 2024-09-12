@@ -17,11 +17,11 @@ const DatePicker = (props:any) => {
     <div className="flex mt-4  relative items-center ">
       <div onClick={() => {
         document.getElementById("dataPicker")?.click()
-       }} className={` h-[44px] flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray `}>
+       }} className={` h-[44px] ${isVisible?'':'opacity-20'} flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray `}>
         <div className="h-full flex items-center justify-between w-full px-2">
        <div  className=" flex justify-start items-center">
           <div className={`Carbon-Profile-EditProfileBtnVector6  px-3 Carbon-Footer-Vectors
-                          text-[#374151] w-6 h-6 ms-2
+                          text-[#8290a3] w-6 h-6 ms-2
                           `}></div>
             {/* <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" /> */}
             <Litepicker
@@ -58,7 +58,7 @@ const DatePicker = (props:any) => {
 
       </div>
       {!isVisible?
-        <div className="w-full h-full bg-[#F3F4F6] absolute z-30 rounded-[25px] left-0 top-0"></div>
+        <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
       :undefined}
       {/* <div className=" w-2/6">
         <Button theme="Carbon">
