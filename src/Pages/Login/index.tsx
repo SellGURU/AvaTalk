@@ -140,6 +140,54 @@ const Login = () => {
     // })
   }
 
+  useEffect(() => {
+    const handleMessage = (event:any) => {
+      if (event.data.type === 'linkedin-auth-success') {
+        // Handle the received token
+        const { token } = event.data;
+            localStorage.setItem("token",token)
+            authContext.login(token)
+            const resolveSocial: Array<Box> = [];
+            Auth.showProfile((data) => {
+                data.boxs.map((item:any) => {
+                    const newBox = boxProvider(item);
+                    resolveSocial.push(newBox);
+                })
+                authContext.currentUser.updateInformation({
+                    firstName:data.information.first_name,
+                    lastName:data.information.last_name,
+                    phone:data.information.mobile_number,
+                    personlEmail:data.information.email,
+                    company:data.information.company_name,
+                    job:data.information.job_title,
+                    banelImage:data.information.back_ground_pic,
+                    imageurl:data.information.profile_pic,
+                    location:{
+                        lat:33,
+                        lng:33
+                    },
+                    workEmail:data.information.work_email,
+                    workPhone:data.information.work_mobile_number,
+                    userId:data.information.created_userid
+                })
+                authContext.currentUser.setBox(resolveSocial)
+                navigate("/?splash=true");
+            })    
+        // Save token to localStorage or state management
+        // localStorage.setItem('linkedin_access_token', token);
+
+        // Redirect to the main application page or update UI
+        // history.push('/');
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
