@@ -37,7 +37,7 @@ const LinkedInCallback: React.FC = () => {
           google_json:res.data
         }).then(res => {
           if (window.opener) {
-            window.opener.postMessage({ type: 'linkedin-auth-success' }, {token: res.data.access_token});
+            window.opener.postMessage({ type: 'linkedin-auth-success',token: res.data.access_token }, '*');
             window.close();
           } else {
             // Handle case where popup is not available
