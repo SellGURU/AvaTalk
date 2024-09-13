@@ -4,7 +4,7 @@ import { Button } from "symphony-ui";
 import { useState } from "react";
 import { Auth, Contacts } from "../../Api";
 import { AddContact, DeleteContact } from "../__Modal__";
-import { useConstructor } from "../../help";
+import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
 import AddTagContact from "../__Modal__/AddTagContact";
@@ -160,9 +160,9 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             return (
               <>
               {index < 2 ?
-              <div onClick={() =>{removeTag(item)}} className={`${theme}-ContactDetails-exibitionconContainer px-2`} style={{backgroundColor:item.color}}>
-                <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
-                <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
+              <div  className={`${theme}-ContactDetails-exibitionconContainer px-2`} style={{backgroundColor:item.color}}>
+                <p className={`${theme}-ContactDetails-exibition`} style={{color:getTextColorFromBackground(item.color)}} >{item.name}</p>
+                <div onClick={() =>{removeTag(item)}} className={` ${theme}-ContactDetails-crossIcon  `} style={{width:'24px'}}></div>
               </div>
               :undefined}
               {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center cursor-pointer">
@@ -186,7 +186,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 </>
               )
             })}
-          </div>}          
+          </div>}     
+          <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] text-[14px] font-medium cursor-pointer">Add Tag</div>     
           {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
         <div className={`${theme}-ContactDetails-container4 min-w-64`}>
