@@ -3,9 +3,6 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Auth } from '../../Api';
 import { useAuth } from '../../hooks/useAuth';
-import { Box } from '../../Model';
-import { boxProvider } from '../../help';
-import { toast } from 'react-toastify';
 // import axios from "axios";
 
 const LinkedInCallback: React.FC = () => {
@@ -39,39 +36,14 @@ const LinkedInCallback: React.FC = () => {
         Auth.loginWithGoogle({
           google_json:res.data
         }).then(res => {
-          auth.setReferalCode(params.get("referral") as string)
-          if(res.data.access_token){
-            localStorage.setItem("token",res.data.access_token)
-            auth.login(res.data.access_token)
-            const resolveSocial: Array<Box> = [];
-            Auth.showProfile((data) => {
-                data.boxs.map((item:any) => {
-                    const newBox = boxProvider(item);
-                    resolveSocial.push(newBox);
-                })
-                auth.currentUser.updateInformation({
-                    firstName:data.information.first_name,
-                    lastName:data.information.last_name,
-                    phone:data.information.mobile_number,
-                    personlEmail:data.information.email,
-                    company:data.information.company_name,
-                    job:data.information.job_title,
-                    banelImage:data.information.back_ground_pic,
-                    imageurl:data.information.profile_pic,
-                    location:{
-                        lat:33,
-                        lng:33
-                    },
-                    workEmail:data.information.work_email,
-                    workPhone:data.information.work_mobile_number,
-                    userId:data.information.created_userid
-                })
-                auth.currentUser.setBox(resolveSocial)
-                navigate("/?splash=true");
-            })                                                   
-          }else{
-            toast.error(res.data)
-          }
+          if (window.opener) {
+            window.opener.postMessage({ type: 'linkedin-auth-success' }, {token: res.data.access_token});
+            window.close();
+          } else {
+            // Handle case where popup is not available
+            window.location.href = '/'; // Redirect to main application
+          }          
+
         })
       })
       // getToken(code);
