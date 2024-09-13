@@ -31,20 +31,13 @@ const LinkedInCallback: React.FC = () => {
     if (code) {
       console.log('Authorization code:', code);
       Auth.get_UserInfo(code).then(res => {
-        console.log(res)
-        auth.setGoogleInformation(res.data)
-        Auth.loginWithGoogle({
-          google_json:res.data
-        }).then(res => {
-          if (window.opener) {
-            window.opener.postMessage({ type: 'linkedin-auth-success',token: res.data.access_token }, '*');
-            window.close();
-          } else {
-            // Handle case where popup is not available
-            window.location.href = '/'; // Redirect to main application
-          }          
-
-        })
+        if (window.opener) {
+          window.opener.postMessage({ type: 'linkedin-auth-success',info: res.data }, '*');
+          window.close();
+        } else {
+          // Handle case where popup is not available
+          window.location.href = '/'; // Redirect to main application
+        }           
       })
       // getToken(code);
     } else {

@@ -144,9 +144,16 @@ const Login = () => {
     const handleMessage = (event:any) => {
       if (event.data.type === 'linkedin-auth-success') {
         // Handle the received token
-        const { token } = event.data;
-            localStorage.setItem("token",token)
-            authContext.login(token)
+        const { info } = event.data;
+        Auth.loginWithGoogle(
+          {
+            google_json:info
+          },
+        ).then((res) => {
+          authContext.setReferalCode(parametr.get("referral") as string)
+          if(res.data.access_token){
+            localStorage.setItem("token",res.data.access_token)
+            authContext.login(res.data.access_token)
             const resolveSocial: Array<Box> = [];
             Auth.showProfile((data) => {
                 data.boxs.map((item:any) => {
@@ -172,12 +179,11 @@ const Login = () => {
                 })
                 authContext.currentUser.setBox(resolveSocial)
                 navigate("/?splash=true");
-            })    
-        // Save token to localStorage or state management
-        // localStorage.setItem('linkedin_access_token', token);
-
-        // Redirect to the main application page or update UI
-        // history.push('/');
+            })                                                   
+          }else{
+            toast.error(res.data)
+          }
+        });    
       }
     };
 
