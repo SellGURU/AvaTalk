@@ -23,6 +23,8 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
             setExplotaion(true)
         }, 1200);
     })
+    const userInfo=useAuth();
+    console.log("user",user)
     return (
         <> 
             <div ref={refEl} className='bg-white overflow-hidden max-w-xl pb-6 rounded-t-[27px] px-10 w-full'>
