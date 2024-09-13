@@ -145,6 +145,13 @@ class Auth extends Api {
     return response;
   }
 
+  static get_UserInfo(token:string) {
+    const response = this.post("/get_userinfo",{
+      code:token
+    })
+    return response
+  }
+
   static check_login_code(data:checkLoginCode){
     const response = this.post("/check_Login_code",data)
     return response

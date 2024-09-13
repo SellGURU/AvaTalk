@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Auth } from '../../Api';
 // import axios from "axios";
 
 const LinkedInCallback: React.FC = () => {
@@ -26,6 +27,9 @@ const LinkedInCallback: React.FC = () => {
 
     if (code) {
       console.log('Authorization code:', code);
+      Auth.get_UserInfo(code).then(res => {
+        console.log(res)
+      })
       // getToken(code);
     } else {
       console.error('No authorization code found');
