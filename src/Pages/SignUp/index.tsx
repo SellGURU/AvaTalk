@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {BissinesCard, Splash, TextField} from "../../Components";
 import { Button } from "symphony-ui";
 import { useFormik } from "formik";
@@ -11,6 +11,7 @@ import { useConstructor } from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LinkedIn } from "react-linkedin-login-oauth2";
 
 
 const initialValue = {
@@ -143,6 +144,31 @@ const SignUp = () => {
             silent_video_avatar:''
         })          
     })
+    useEffect(() => {
+        const handleMessage = (event:any) => {
+        if (event.data.type === 'linkedin-auth-success') {
+            // Handle the received token
+            const { info } = event.data;
+            Auth.check_user_existence({
+                google_json:info,
+                code_type:'verification'
+            }).then(res => {
+                if(res.data.check_user == true){
+                    authContext.setGoogleInformation(info)
+                    navigate('/createAccount')
+                }else {
+                    toast.error("user exist")
+                }
+            })
+        }
+        };
+
+        window.addEventListener('message', handleMessage);
+
+        return () => {
+        window.removeEventListener('message', handleMessage);
+        };
+    }, []);    
     return (
         <>
             {showSplash ?
@@ -185,12 +211,24 @@ const SignUp = () => {
                             <div className="text-text-primary">Sign up with Google</div>
                             </Button>
                         </div>
-                        <div className="mt-4">
-                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                            <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                            <div className="text-text-primary">Sign up with LinkedIn</div>
-                        </Button>
-                        </div>
+                        <LinkedIn
+                            clientId="786lwqvw2unoip"
+                            redirectUri="https://linkedin-callback.vercel.app/"
+                            // redirectUri={`http://localhost:5173/linkedin/callback`}
+                            onSuccess={() => {}}
+                            onError={() =>{}}
+                            scope={"profile,email,openid"}
+                            children={
+                                ({linkedInLogin}) => <div className="mt-4">
+                                    <Button theme="Carbon-Outline"
+                                            onClick={linkedInLogin}
+                                            className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                                        <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
+
+                                        <div className="text-text-primary">Sign up LinkedIn</div>
+                                    </Button>
+                                </div>
+                            }/>
                         <div className="mt-4">
                         <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                             <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
