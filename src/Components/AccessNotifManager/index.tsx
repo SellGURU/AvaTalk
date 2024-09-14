@@ -22,6 +22,12 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 setShowNotif(true)
             }, 3000);            
         }
+        if(authContext.currentUser.type_of_account.getType() == 'Free' && !isSkipped){
+            if(authContext.currentUser.type_of_account.getDaysReminded()<=5)
+                setTimeout(() => {
+                    setShowNotif(true)
+                }, 3000);
+        }
     })
     subscribe("nextPage",() => {
         setShowNotif(false)
