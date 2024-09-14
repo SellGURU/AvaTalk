@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 // import { Button } from "symphony-ui";
 import PackageJson from '../../../package.json';
 import { Outlet } from "react-router-dom";
@@ -86,7 +86,15 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     // },
 
   ]);
-  const [isShowPlanCard,setIsShowPalnCard] = useState(true)
+  const [isShowPlanCard,setIsShowPalnCard] = useState(false)
+  useEffect(() => {
+    setTimeout(() => {
+        if(auth.currentUser.type_of_account.getType() != 'Pro') {
+          setIsShowPalnCard(true)
+        }
+      
+    }, 2000);
+  },[])
   return (
     <>
     
