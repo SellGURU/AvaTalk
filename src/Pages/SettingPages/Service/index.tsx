@@ -45,7 +45,7 @@ const SettingService =() => {
                             {context.currentUser.type_of_account.getType() ==="Free" &&
                                         `Your ${context.currentUser.type_of_account.getType()} was expired on ${context.currentUser.type_of_account.getDaysReminded()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
                             {context.currentUser.type_of_account.getType()==="Trial"&&`Your trial will end in  ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
-                            {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDaysReminded()}.`}
+                            {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
 
                         </p>
 

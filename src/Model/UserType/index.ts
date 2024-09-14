@@ -38,6 +38,10 @@ class UserType {
         return 14 - this.getDayUsed()
     }
 
+    public getDateExpired() {
+        return TimeManegar.formatDate(this.date)
+    }
+
 }
 
 export default UserType
