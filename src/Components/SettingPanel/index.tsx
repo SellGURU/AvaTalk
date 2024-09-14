@@ -98,7 +98,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
   return (
     <>
     
-      <div className={`Carbon-ContactsView-Container overflow-y-scroll`}>
+      <div className={`Carbon-ContactsView-Container overflow-y-scroll hiddenScrollBar md:overflow-none`}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
         {isShowPlanCard &&
@@ -106,7 +106,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
             <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
           </div>
         }
-        <div className="px-6 mt-0 hiddenScrollBar  overflow-y-scroll md:pb-[450px] pb-[300] ">
+        <div className="px-6 mt-0 hiddenScrollBar md:h-fit  overflow-y-scroll md:pb-[100px] pb-[300] ">
           {settingCards.map((item) => {
             return <SettingCard key={item.link} linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}
