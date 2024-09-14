@@ -25,6 +25,7 @@ interface Information {
     address?:string
     referral_code?:string
     gender?:'male'|'female'
+    logo?:string
 }
 
 // interface Location {
