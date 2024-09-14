@@ -81,7 +81,7 @@ const BarChartComponent: React.FC<Props> = ({ theme ,data}) => {
                 <Bar dataKey="value" fill="#5048E5" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-        ):(<div className={" h-full w-full flex items-center justify-center scale-150"}>
+        ):(<div className={" h-full w-full flex-col flex items-center justify-center scale-150"}>
           <img className={"w-20 h-20"} src={"/Carbon/notDAtaToShow.svg"}/>
           <h1 className={"text-[12px] font-medium"}>No data to show</h1>
 
