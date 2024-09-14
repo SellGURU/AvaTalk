@@ -49,7 +49,7 @@ interface check_user_existenceProps {
   email?:string
   mobileNumber?:string
   google_json?:any
-  code_type:"verification"|"reset"
+  code_type?:"verification"|"reset"
 }
 
 interface checkLoginCode{

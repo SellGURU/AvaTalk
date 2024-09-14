@@ -55,7 +55,6 @@ const SignUp = () => {
                 console.log(value)
                 Auth.check_user_existence({
                     google_json:value.data,
-                    code_type:'verification'
                 }).then(res => {
                     if(res.data.check_user == true){
                         authContext.setGoogleInformation(value.data)
@@ -151,7 +150,6 @@ const SignUp = () => {
             const { info } = event.data;
             Auth.check_user_existence({
                 google_json:info,
-                code_type:'verification'
             }).then(res => {
                 if(res.data.check_user == true){
                     authContext.setGoogleInformation(info)

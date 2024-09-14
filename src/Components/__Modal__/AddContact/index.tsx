@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // /* eslint-disable @typescript-eslint/no-explicit-any */
 // import Modal from "react-modal";
 // import "./index.scss";
@@ -293,7 +294,7 @@ import { useState, useEffect } from "react";
 import { Contact, Tag } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
-import { Select, TextArea, TextField } from "../..";
+import { TextArea, TextField } from "../..";
 import { Contacts } from "../../../Api";
 import * as Yup from "yup";
 
@@ -332,7 +333,6 @@ const validationSchema = Yup.object().shape({
 
 const AddContact: React.FC<AddContactProps> = ({
   isOpen,
-  allTags,
   theme,
   onClose,
   mode,
@@ -469,8 +469,9 @@ const AddContact: React.FC<AddContactProps> = ({
             type="text"
             errorMessage={errors.fullName}
             inValid={!!errors.fullName}
-            required
-          />
+            required onBlur={function (): void {
+              throw new Error("Function not implemented.");
+            } }          />
         </div>
 
         <div className="mb-4">

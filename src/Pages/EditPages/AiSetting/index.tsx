@@ -12,7 +12,7 @@ import { useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useAuth } from "../../../hooks/useAuth";
-import { learnMore } from "./learnMore";
+// import { learnMore } from "./learnMore";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
@@ -36,7 +36,7 @@ const EditAiSetting = () => {
       console.log(values);
     },
   });  
-  const learnMoreText = learnMore
+  // const learnMoreText = learnMore
   useConstructor(() => {
     Auth.showAiSetting((res) => {
       formik.setFieldValue("title",res.ai_setting.Name)

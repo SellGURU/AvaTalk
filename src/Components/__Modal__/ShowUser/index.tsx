@@ -23,7 +23,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
             setExplotaion(true)
         }, 1200);
     })
-    const userInfo=useAuth();
+    // const userInfo=useAuth();
     console.log("user",user)
     return (
         <> 
@@ -36,7 +36,13 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </Button>
                             <div>
                                 <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
-                                <div className='text-text-primary text-center text-xs '>{'CoFounder & CEO/Codie'}</div>
+                                <div className='text-text-primary mt-1 text-center text-xs flex justify-start items-center '>{auth.currentUser.information?.job}
+                                     {" & "}  
+                                    <span className='ml-1'>
+                                        <img className='w-[16px] h-[16px]' src={auth.currentUser.information?.logo} alt="" />
+                                    </span>
+                                     {auth.currentUser.information?.company}
+                                </div>
                             </div>
                             <div className="invisible">
                                 <Button onClick={onClose} theme="Carbon-back">
