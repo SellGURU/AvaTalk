@@ -98,7 +98,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
   resolveUser.setBox(reolveJsonToObject(localuser as string))
-  resolveUser.setTypeOfAccount(new UserType('Free',new Date()))
+  console.log(JSON.parse(localuser as string).type_of_account)
+  resolveUser.setTypeOfAccount(new UserType(JSON.parse(localuser as string).type_of_account.type,JSON.parse(localuser as string).type_of_account.type.date))
   const [googleInformation,setGoogleInformation] = useState(null)
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());
   const [nfc_id,setNfc_id] = useState<string|null>('')
