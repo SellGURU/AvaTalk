@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
 import { AddContact, DeleteContact } from "../__Modal__";
 import { getTextColorFromBackground, useConstructor } from "../../help";
@@ -12,6 +12,7 @@ import { publish } from "../../utils/event";
 // import AddTagContact from "../__Modal__/AddTagContact";
 import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
 import { TagPicker } from 'rsuite';
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   // const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
@@ -125,6 +126,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     setShowMore(false);
   };
   const [showMoreTages,setShowMoreTags] = useState(false)
+  const showMoreRefrence = useRef(null)
+  useModalAutoClose({
+    refrence:showMoreRefrence,
+    close:() => {
+      setShowAddTagModal(false)
+    }
+  })
   if (isLoading) return <p></p>;
   return (
     <div>
@@ -179,7 +187,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                   </>
                 )
               })}
-              {showMoreTages && <div id="tags"  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll hiddenScrollBar max-h-[110px] w-[123px]">
+              {showMoreTages && <div id="tags" ref={showMoreRefrence}  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll hiddenScrollBar max-h-[110px] w-[123px]">
                 {contact?.tags.map((item,index) => {
                   return (
                     <>
