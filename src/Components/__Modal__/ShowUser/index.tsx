@@ -75,10 +75,14 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             const contact = {
                                 name: user.information?.lastName as string,
                                 phone: user.information?.phone as string,
-                                email: user.information?.personlEmail as string };
+                                email: user.information?.personlEmail as string ,
+                                company:user.information?.company as string,
+                                address:user.information?.address as string,
+                                job:user.information?.job as string,
+                            };
 
                             // create a vcard file
-                            const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nEMAIL:" + contact.email + "\nEND:VCARD";
+                            const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nCOMPANY:" + contact.company + "JOB:" + contact.job + "ADDRESS:" + contact.address + "\nEMAIL:" + contact.email + "\nEND:VCARD";
                             const blob = new Blob([vcard], { type: "text/vcard" });
                             const url = URL.createObjectURL(blob);
 
