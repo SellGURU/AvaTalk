@@ -22,7 +22,10 @@ const SettingService =() => {
             price:45
         },
     ]
-    const [activeService,setAtiveService] = useState<serviceType>()
+    const [activeService,setAtiveService] = useState<serviceType>({
+            title:'Annually',
+            price:345
+        },)
     console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
     return (
         <>
@@ -39,11 +42,11 @@ const SettingService =() => {
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our{context.currentUser.type_of_account.getType()+ ' Plan'}</p>
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+context.currentUser.type_of_account.getType()+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
                             {context.currentUser.type_of_account.getType() ==="Free" &&
-                                        `Your ${context.currentUser.type_of_account.getType()} was expired on ${context.currentUser.type_of_account.getDaysReminded()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
+                                        `Your ${context.currentUser.type_of_account.getType()} was expired on ${context.currentUser.type_of_account.getDateExpired()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
                             {context.currentUser.type_of_account.getType()==="Trial"&&`Your trial will end in  ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
                             {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
 
