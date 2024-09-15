@@ -83,7 +83,7 @@ const ForgetPassword = () => {
                   }
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
-                  Don`t have an account? <span onClick={() => {
+                  Don't have an account? <span onClick={() => {
                     navigate('/signup')
                   }} className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
                 </div>
