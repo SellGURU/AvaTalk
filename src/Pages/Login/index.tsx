@@ -80,7 +80,7 @@ const Login = () => {
       email:formik.values.email
     }).then((res) => {
       if(res.data.error){
-        // toast.error(res.data.error)
+        toast.error(res.data.error)
         if(res.data.error == 'This user is not registered'){
           formik.setFieldError("email",res.data.error)
         }
@@ -252,7 +252,7 @@ const Login = () => {
                 navigate("/?splash=true");
             })                                                   
           }else{
-            toast.error(res.data)
+            toast.error(res.data.error)
           }
         });    
         console.log('User Info:', userInfo.data);
