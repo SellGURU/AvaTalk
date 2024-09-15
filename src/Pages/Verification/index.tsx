@@ -67,7 +67,7 @@ const Verification = () => {
                     }).then((res) => {
                         toast.info(res.data)
                     })
-            }:undefined} className={`text-sm mt-8 ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
+            }:undefined} className={`text-sm mt-8 flex justify-center items-center ${completeTimer?'cursor-pointer':'cursor-not-allowed'} flex justify-center text-violet-700 font-medium`}>I didn’t receive a code   
                 {
                     !completeTimer?
                         <span className="ml-2"><Timer oncomplete={() => {
