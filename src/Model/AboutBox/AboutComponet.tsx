@@ -11,7 +11,7 @@ const AboutComponent:React.FC<AboutComponentProps> = ({text,userID}) => {
     const [isShowMore,setIsShowMore] =useState(false)
     return (
         <>
-            <h1 onClick={() => {
+            <h1 style={{lineHeight:'normal'}} onClick={() => {
                 Auth.addEvent({
                     event_type:"more_info",
                     userid:userID,
@@ -20,7 +20,7 @@ const AboutComponent:React.FC<AboutComponentProps> = ({text,userID}) => {
             }}>{text.length> 130?
             <div>
                 {isShowMore?
-                    <div >
+                    <div className="" style={{lineHeight:'normal'}}>
                         {text} 
                         <span onClick={() => {setIsShowMore(false)}} className="text-[#06B6D4] cursor-pointer text-sm font-medium">show less</span>
                     </div>                        
@@ -32,7 +32,7 @@ const AboutComponent:React.FC<AboutComponentProps> = ({text,userID}) => {
                 }
             </div> 
             :
-            <div>{text}</div>
+            <div style={{lineHeight:'normal'}} >{text}</div>
             }</h1>          
 
         </>        
