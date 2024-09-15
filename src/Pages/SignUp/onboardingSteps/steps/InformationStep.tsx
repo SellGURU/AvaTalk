@@ -34,8 +34,8 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
             gender:context.siginUpOptions.gender == ''? 'female':context.siginUpOptions.gender
         },
         validationSchema:Yup.object().shape({
-            FirstName: Yup.string().required("Required"),
-            LastName: Yup.string().required("Required"),
+            FirstName: Yup.string().required("First name is required."),
+            LastName: Yup.string().required("Last name is required."),
         }),
         onSubmit:() =>{}
     })
