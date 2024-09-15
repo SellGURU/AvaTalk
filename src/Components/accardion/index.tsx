@@ -16,7 +16,7 @@ export const Accordion=({bodyText,title}:Props) => {
                 <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[14px]"}>
                     <button
                         type="button"
-                        className={`flex items-center justify-between w-full px-5 pt-5 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-5'}`}
+                        className={`flex items-center justify-between w-full px-5 pt-1 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-1'}`}
                         onClick={toggleAccordion}
                         aria-expanded={isOpen}
                         aria-controls="accordion-collapse-body-1"

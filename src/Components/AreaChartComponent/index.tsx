@@ -28,15 +28,15 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
       :
         <div className={`${theme}-AreaChartComponent-container`}>
           <p className={`${theme}-AreaChartComponent-text z-30`}>Page Views</p>
-          <ResponsiveContainer width="100%" height="100%">
+          {data.length > 0 ? ( <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              data={resolvedData}
-              margin={{
-                top: 10,
-                right: 10,
-                left: -40,
-                bottom: 0,
-              }}
+                data={resolvedData}
+                margin={{
+                  top: 10,
+                  right: 10,
+                  left: -40,
+                  bottom: 0,
+                }}
             >
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
               <XAxis dataKey="name" strokeWidth="0px" fontSize={12} stroke="#9CA3AF" />
@@ -44,7 +44,11 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
               <Tooltip />
               <Area type="monotone" dataKey="view" stroke="#6D28D9" opacity={0.5} fill="#6D28D9" />
             </AreaChart>
-          </ResponsiveContainer>
+          </ResponsiveContainer>):(
+              <div className={" h-full w-full flex-col flex items-center justify-center scale-150"}>
+                <img className={"md:w-20 w-16 h-16 md:h-20 "} src={"/Carbon/notDAtaToShow.svg"}/>
+            <h1 className={"text-[12px]  font-medium"}>No data to show</h1>
+          </div>)}
         </div> 
       }
     
