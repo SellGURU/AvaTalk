@@ -19,7 +19,7 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
     :undefined}
     <div  onClick={() => {
       if(plan != 'Free'){
-        navigate(`/chats/${data.chat_list_id}`)
+        navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
       // to={`/chats/${data.chat_list_id}`}
     }}  className={`${theme}-ChatItem-container`}>
