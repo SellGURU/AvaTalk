@@ -24,7 +24,7 @@ export const Accordion=({bodyText,title}:Props) => {
                         <span>{title}</span>
                         <svg
                             data-accordion-icon
-                            className={`w-3 h-3 transform ${isOpen ? 'rotate-180' : 'rotate-0'} shrink-0`}
+                            className={`w-3 h-3 transform ${isOpen ? 'rotate-0' : 'rotate-180'} shrink-0`}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 10 6"

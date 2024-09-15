@@ -39,7 +39,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     //   link: "service",
     // },
     {
-      name: "Refer and get rewards",
+      name: "Refer and Get Rewards",
       icon: "Referandgetrewards.svg",
       link: "refer",
     },
