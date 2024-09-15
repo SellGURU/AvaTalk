@@ -127,20 +127,18 @@ const formatText = (text: string) => {
             </Button>
           </div>
           <div className="hiddenScrollBar px-6 mb-20 h-full">
-            <div className="text-left my-8" style={{lineHeight: '28px'}}>
+            <div className="text-left my-4" style={{lineHeight: '28px'}}>
               {/*{formatText(learnMoreText)}*/}
-              <div className="text-left my-8" style={{lineHeight: '28px'}}>
-                <p className={" text-lg"}>Avatalk's AI
+              <div className="text-left  text-[14px]" style={{}}>
+                <p className={" text-[16px]"}>Avatalk's AI
                   Knowledge section is the hub for crafting a personalized and effective AI-driven persona. This feature
                   ensures your digital interactions reflect your unique professional expertise, style, and preferences,
                   enhancing your presence and effectiveness across virtual platforms.</p>
-                <br/>
                 <h1
-                    className={"font-bold text-xl"}>Purpose of Customizing Your AI Knowledge</h1>
-                <br/>
+                    className={"font-bold text-[16px]"}>Purpose of Customizing Your AI Knowledge</h1>
 
                 <p
-                    className={" text-lg"}>The core of Avatalk's appeal lies in its ability to let you tailor your AI's
+                    className={" text-[16px]"}>The core of Avatalk's appeal lies in its ability to let you tailor your AI's
                   knowledge base, which in turn shapes how your digital persona interacts in professional settings.
                   Whether it’s for virtual networking, engaging potential clients, or maintaining an active professional
                   online presence, the information you feed into your AI helps it deliver insightful, relevant
@@ -148,62 +146,54 @@ const formatText = (text: string) => {
                   This customization aligns your AI's interactions with your personal and professional ambitions,
                   helping
                   you stand out in a competitive digital marketplace.</p>
-                <br/>
 
-                <h1 className={"font-bold text-xl"}>How to Use
+                <h1 className={"font-bold text-[16px]"}>How to Use
                   This Section </h1>
-                <br/>
 
-                <p className={" text-lg"}>Navigate to the "AI Settings" in Avatalk to start
+                <p className={" text-[16px]"}>Navigate to the "AI Settings" in Avatalk to start
                   customizing:</p>
-                <br/>
 
                 <ul>
-                  <li className={"list-disc ml-10 pl-3"}><span className={"font-bold"}>AI Knowledge Input:</span> Use the rich text editor to enter
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>AI Knowledge Input:</span> Use the rich text editor to enter
                     details about your professional domain,
                     expertise, and other pertinent information you wish your AI to communicate. The more detailed and
                     specific your input, the more accurately and effectively your AI represents you.
                   </li>
-                  <br/>
 
-                  <li className={"list-disc ml-10 pl-3"}><span className={"font-bold"}>Voice Gender Selection:</span> Choose your AI persona's voice
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Voice Gender Selection:</span> Choose your AI persona's voice
                     gender from a dropdown menu to match your
                     professional identity, reinforcing the consistency of your digital persona.
                   </li>
-                  <br/>
 
-                  <li className={"list-disc ml-10 pl-3"}><span className={"font-bold"}>Analyze by AI:</span> This functionality analyzes your inputs
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Analyze by AI:</span> This functionality analyzes your inputs
                     and suggests enhancements to increase
                     clarity and engagement, ensuring your AI persona communicates with sophistication and
                     professionalism.
                   </li>
-                                  <br/>
 
-                  <li className={"list-disc ml-10 pl-3"}><span className={"font-bold"}>Saving Changes:</span> After tweaking your AI's knowledge and
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Saving Changes:</span> After tweaking your AI's knowledge and
                     voice settings, click "Save Changes" to
                     implement them. Your AI will instantly use this updated information, ensuring your digital presence
                     remains polished and precise.
                   </li>
-                                  <br/>
 
                 </ul>
-                <br/>
 
-                <h1 className={"font-bold text-xl"}>Upgrading to the Pro Version</h1>
-                <br/>
+                <h1 className={"font-bold text-[16px]"}>Upgrading to the Pro Version</h1>
 
-                <p className={" text-lg"}>While
+
+                <p className={" text-[16px]"}>While
                   the free version of Avatalk offers substantial benefits, upgrading to the Pro version unlocks
                   unlimited edits and continuous refinements of your AI persona. This allows for ongoing adjustments as
                   your professional needs evolve, giving you the flexibility to keep your digital persona as dynamic and
                   responsive as your career itself.</p>
-                <br/>
 
-                <h1 className={"font-bold text-xl"}>Maximize Your AI Knowledge
+
+                <h1 className={"font-bold  text-[16px]"}>Maximize Your AI Knowledge
                   for Effective Networking</h1>
-                <br/>
 
-                <p className={" text-lg"}>With Avatalk’s intuitive design, you can
+
+                <p className={" text-[16px]"}>With Avatalk’s intuitive design, you can
                   readily update and refine your AI settings, ensuring your persona remains relevant and impactful in
                   all professional interactions. Leverage the full capabilities of Avatalk by upgrading to the Pro
                   version, where the possibilities for customizing and enhancing your AI-driven persona are limitless,
