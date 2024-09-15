@@ -169,15 +169,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     localStorage.setItem("notifs",JSON.stringify(notifs))
   },[notifs])
   const getNotifs = (isNew?:boolean) => {
-    NotificationApi.getAll((data) => {
-        setNotify(data)
-        localStorage.setItem("notifs",JSON.stringify(data))
-        if(isNew){
-          setIsHaveNewNotif(true)
-          publish("playNotifSound",{})
-        }
-        // setIsHaveNewNotif(true)
-    })    
+    if(mode != 'share'){
+      NotificationApi.getAll((data) => {
+          setNotify(data)
+          localStorage.setItem("notifs",JSON.stringify(data))
+          if(isNew){
+            setIsHaveNewNotif(true)
+            publish("playNotifSound",{})
+          }
+          // setIsHaveNewNotif(true)
+      })    
+    }
   }
   useConstructor(() => {
     // getNotifs()
