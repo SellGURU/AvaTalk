@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
+import { Outlet, useNavigate, useSearchParams, useLocation } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
@@ -19,6 +19,7 @@ const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
+    const location = useLocation();    
     const [isOpen, setIsOpen] = useState(false);
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
@@ -27,6 +28,7 @@ const SettingService =() => {
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     publish("refreshPage",{})
+                    navigate(location.pathname, { replace: true });                  
                 })    
             }, 1000);
         }
