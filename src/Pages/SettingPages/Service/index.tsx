@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
 import { Service } from "../../../Api";
+import Modal from "react-modal";
 import { useEffect, useState } from "react";
 // import {useState} from "react";
 interface serviceType {
@@ -16,10 +18,16 @@ const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
-    console.log(searchParametr.get("sassionid"))
+    const [isOpen, setIsOpen] = useState(false);
+    // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
-            Service.subRedirect(searchParametr.get("sassionid")||"")
+            setIsOpen(true)
+            setTimeout(() => {
+                Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
+                    window.location.reload()
+                })    
+            }, 1000);
         }
     })
     const service:Array<serviceType> = [
@@ -149,6 +157,30 @@ const SettingService =() => {
                 </div>
             </div>
         </div>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={() => {
+                setIsOpen(false)}
+        }
+            style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+            contentLabel=" Modal"
+        >
+            <div className={" relative pb-5 pt-12"}>
+                <div className={"absolute right-0 top-0"}>
+                    <Button onClick={() => {
+                        setIsOpen(false)
+                    }} data-mode="profile-review-button-2" theme="Carbon-Google">
+                        <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>
+                    </Button>
+                </div>
+            <div className={"flex flex-col items-center justify-center"}>
+
+                <img src={"/Carbon/tick-circle.svg"}/>
+                <h1 className={"text-lg font-semibold text-[#374151]"}>Your purchase</h1>
+                <p className={"text-lg font-semibold text-[#374151]"}>has been successfully completed</p>
+            </div>
+            </div>
+        </Modal>        
         </>
     )
 }
