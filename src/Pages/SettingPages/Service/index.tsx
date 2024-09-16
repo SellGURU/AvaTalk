@@ -7,6 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Service } from "../../../Api";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
+import { publish } from "../../../utils/event";
 // import {useState} from "react";
 interface serviceType {
     title:string,
@@ -25,7 +26,7 @@ const SettingService =() => {
             setIsOpen(true)
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
-                    navigate("/")
+                    publish("refreshPage",{})
                 })    
             }, 1000);
         }
