@@ -499,6 +499,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2
                       `}
+                      style={{width:'1.25rem'}}
                     ></div>  
                     <span className={`${theme}-text-layer1`}>
                     Share Profile
@@ -587,6 +588,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
+                      style={{width:'1.25rem'}}
                     ></div>     
                     <div className={`${theme}-text-layer1`}>
                       Share Profile
