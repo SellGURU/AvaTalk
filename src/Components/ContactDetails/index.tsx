@@ -1,17 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
 import { AddContact, DeleteContact } from "../__Modal__";
-import { useConstructor } from "../../help";
+import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
-import AddTagContact from "../__Modal__/AddTagContact";
+// import AddTagContact from "../__Modal__/AddTagContact";
 import { publish } from "../../utils/event";
-
+// import AddTagContact from "../__Modal__/AddTagContact";
+import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
+import { TagPicker } from 'rsuite';
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
+  // const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
+  //   item => ({ label: item, value: item })
+  // );
+
   const [showMore, setShowMore] = useState(false);
   const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +126,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     setShowMore(false);
   };
   const [showMoreTages,setShowMoreTags] = useState(false)
+  const showMoreRefrence = useRef(null)
+  useModalAutoClose({
+    refrence:showMoreRefrence,
+    close:() => {
+      setShowAddTagModal(false)
+    }
+  })
   if (isLoading) return <p></p>;
   return (
     <div>
@@ -156,37 +170,75 @@ const ContactDetails = ({ theme }: { theme: string }) => {
               <div onClick={() => setShowExhibition(false)} className={` ${theme}-ContactDetails-crossIcon  `}></div>
             </div>
           )} */}
-          {contact?.tags.map((item,index) => {
-            return (
-              <>
-              {index < 2 ?
-              <div onClick={() =>{removeTag(item)}} className={`${theme}-ContactDetails-exibitionconContainer px-2`} style={{backgroundColor:item.color}}>
-                <p className={`${theme}-ContactDetails-exibition`} >{item.name}</p>
-                <div className={` ${theme}-ContactDetails-crossIcon  `}></div>
-              </div>
-              :undefined}
-              {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center cursor-pointer">
-                <div id="tags" className="text-gray-700 -mt-2">...</div>
-              </div>}
-              </>
-            )
-          })}
-          {showMoreTages && <div id="tags"  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll hiddenScrollBar max-h-[110px] w-[123px]">
-            {contact?.tags.map((item,index) => {
-              return (
-                <>
-                  {index >= 2 ?
-                    <>
-                      <div className="w-full items-center justify-center flex">
-                        <div className={`${theme}-ContactItem-exhibition `} style={{backgroundColor:item.color}}>{item.name}</div>
-                      </div>
-                      {index < contact.tags.length -1 && <div className="w-full my-1 border-white  border-t" />}
-                    </>
+          {!showAddTagModal && 
+            <>
+              {contact?.tags.map((item,index) => {
+                return (
+                  <>
+                  {index < 2 ?
+                  <div  className={`${theme}-ContactDetails-exibitionconContainer px-2`} style={{backgroundColor:item.color}}>
+                    <p className={`${theme}-ContactDetails-exibition`} style={{color:getTextColorFromBackground(item.color)}} >{item.name}</p>
+                    <div onClick={() =>{removeTag(item)}} className={` ${theme}-ContactDetails-crossIcon  `} style={{width:'24px'}}></div>
+                  </div>
                   :undefined}
-                </>
-              )
-            })}
-          </div>}          
+                  {index == 2 && <div onClick={() => setShowMoreTags(!showMoreTages)} className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center cursor-pointer">
+                    <div id="tags" className="text-gray-700 -mt-2">...</div>
+                  </div>}
+                  </>
+                )
+              })}
+              {showMoreTages && <div id="tags" ref={showMoreRefrence}  className="bg-[#F3F4F6] border-2 z-20 right-0 border-white rounded-[15px] absolute py-2 top-10 overflow-y-scroll hiddenScrollBar max-h-[110px] w-[123px]">
+                {contact?.tags.map((item,index) => {
+                  return (
+                    <>
+                      {index >= 2 ?
+                        <>
+                          <div className="w-full items-center justify-center flex">
+                            <div className={`${theme}-ContactItem-exhibition `} style={{backgroundColor:item.color}}>{item.name}</div>
+                          </div>
+                          {index < contact.tags.length -1 && <div className="w-full my-1 border-white  border-t" />}
+                        </>
+                      :undefined}
+                    </>
+                  )
+                })}
+              </div>} 
+            </>
+          }
+          {!showAddTagModal &&
+            <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] text-[14px] font-medium cursor-pointer">Add Tag</div>     
+          }    
+          {
+            showAddTagModal &&  
+            <>
+              <div className="w-full flex justify-center items-center">
+                <TagPicker 
+                defaultValue={contact?.tags.map(el => el.name)}
+                onChange={(e:Array<any>) => {
+                  const selected = tags.filter((el) => {
+                    return e.includes(el.name)
+                  })
+                  const newContact = contact  as Contact
+                  newContact.tags = selected
+                  Contacts.updateContact(newContact)
+                  publish('contactChange',{})                  
+                }} data={tags.map((e) => {
+                  return {
+                    label:e.name,
+                    value:e.name,
+
+                  }
+                })} style={{ width: 300 }} />
+              </div>
+              <div className="w-[80px]">
+                <Button onClick={() => {
+                    setShowAddTagModal(false)
+                  }} theme="Carbon-back">
+                  <div className={`${theme}-Profile-closeIcon`}></div>
+                </Button>
+              </div>
+            </>
+          }
           {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
         <div className={`${theme}-ContactDetails-container4 min-w-64`}>
@@ -292,7 +344,13 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           setTags([...tags,tag])
         }}
       ></AddTag> */}
-      <AddTagContact 
+      {/* {showAddTagModal &&
+        <div>
+          <TagPicker data={data} style={{ width: 300 }} />
+
+        </div>
+      } */}
+      {/* <AddTagContact 
       theme="Carbon"
       selected={contact?.tags as Array<Tag>}
       isOpen={showAddTagModal} 
@@ -303,7 +361,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         Contacts.updateContact(newContact)
         publish('contactChange',{})
       }}
-      ></AddTagContact>
+      ></AddTagContact> */}
     </div>
   );
 };

@@ -169,15 +169,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     localStorage.setItem("notifs",JSON.stringify(notifs))
   },[notifs])
   const getNotifs = (isNew?:boolean) => {
-    NotificationApi.getAll((data) => {
-        setNotify(data)
-        localStorage.setItem("notifs",JSON.stringify(data))
-        if(isNew){
-          setIsHaveNewNotif(true)
-          publish("playNotifSound",{})
-        }
-        // setIsHaveNewNotif(true)
-    })    
+    if(mode != 'share'){
+      NotificationApi.getAll((data) => {
+          setNotify(data)
+          localStorage.setItem("notifs",JSON.stringify(data))
+          if(isNew){
+            setIsHaveNewNotif(true)
+            publish("playNotifSound",{})
+          }
+          // setIsHaveNewNotif(true)
+      })    
+    }
   }
   useConstructor(() => {
     // getNotifs()
@@ -497,6 +499,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2
                       `}
+                      style={{width:'1.25rem'}}
                     ></div>  
                     <span className={`${theme}-text-layer1`}>
                     Share Profile
@@ -585,6 +588,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
+                      style={{width:'1.25rem'}}
                     ></div>     
                     <div className={`${theme}-text-layer1`}>
                       Share Profile
@@ -654,17 +658,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               )}
               {mode != 'profile' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length > 0
               ?
-              <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
+              <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
                   <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Pricing</p>
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >FAQ</p>
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Legals</p>
-                  <div className="flex gap-3">
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
-                  </div>
-
+                  <div className="text-[12px] text-text-primary">
+                    Want your own Avatalk? Create your AI Avatar in less than 3 minutes!
+                  </div>              
               </div>              
               :undefined}
             </div>
@@ -673,17 +671,19 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className=" absolute w-full z-20 bottom-0">
               {mode == 'review' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length == 0
               ?
-              <div className=" flex px-5 py-6 flex-row gap-6 bg-white justify-between items-center text-xs w-full	">
+              <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
                   <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Pricing</p>
+                  {/* <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Pricing</p>
                   <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >FAQ</p>
                   <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Legals</p>
                   <div className="flex gap-3">
                     <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
                     <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
                     <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
-                  </div>
-
+                  </div> */}
+                <div className="text-[12px] text-text-primary">
+                  Want your own Avatalk? Create your AI Avatar in less than 3 minutes!
+                </div>
               </div>              
               :undefined}
               <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">

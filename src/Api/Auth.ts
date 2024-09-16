@@ -49,7 +49,7 @@ interface check_user_existenceProps {
   email?:string
   mobileNumber?:string
   google_json?:any
-  code_type:"verification"|"reset"
+  code_type?:"verification"|"reset"
 }
 
 interface checkLoginCode{
@@ -143,6 +143,18 @@ class Auth extends Api {
   static get_Login_code(data: GetLoginCodeProps) {
     const response = this.post("/get_Login_code", data,{noPending:true});
     return response;
+  }
+
+  static get_UserInfo(token:string) {
+    const response = this.post("/get_userinfo",{
+      code:token
+    })
+    return response
+  }
+
+  static checkSub(){
+    const response = this.post("/check_sub",{})
+    return response
   }
 
   static check_login_code(data:checkLoginCode){

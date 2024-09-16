@@ -8,6 +8,8 @@ import { Button } from "symphony-ui";
 import {  TextArea, TextField } from "../..";
 import ConfettiExplosion from 'react-confetti-explosion';
 import { generateSlugId } from "../../../help";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 interface ExchangeContactProps {
   isOpen: boolean;
@@ -35,7 +37,48 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     id: "",
     address :'',
   });
+  const validatePhone = (phone: number | undefined) => {
+    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
+    //   (phone) => {
+    //     return 
+    //   }
+    // )
+    return Yup.number().integer().positive().test(
+        (phone) => {
+          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+        }
+      ).isValidSync(phone);
+  };
+  const validatePhoneType = (phone: string ) => {
+    console.log(phone?.split(" ").length )
 
+    return Yup.string().test(
+        (phone) => {
+          return (phone && phone.split(" ").length == 2) ? true : false;
+        }
+      ).isValidSync(phone);
+  };  
+  const formik = useFormik({
+    initialValues:{
+      fullName:'',
+      email:'',
+      phone:'',
+    },
+    validationSchema:Yup.object().shape({
+      fullName:Yup.string().required('Full name  is required'),
+      email: Yup.string().email().required('Email  is required'),
+      phone:Yup.string().required('Phone  is required').test("phone","Please enter a valid phone number in the format: +1 (123) 456-7890",(value) => {
+        return validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0'))
+      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
+        console.log(value)
+        return validatePhoneType(value)
+      })
+    }),
+    onSubmit:() => {
+
+    }
+  })
   useEffect(() => {
     if (mode === "edit" && contactData) {
       setFormData(contactData);
@@ -100,7 +143,10 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
           <div className="my-4">
             <TextField
               value={formData.fullName}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                formik.setFieldValue("fullName",e.target.value)
+              }}
               onBlur={() => {}}
               label="Full Name"
               placeholder="Enter your first and last name..."
@@ -108,15 +154,18 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               name="fullName"
               type="text"
               required
-              errorMessage=""
-              inValid={false}
+              errorMessage={formik.errors.fullName || ''}
+              inValid={formik.errors.fullName != undefined}
             />
           </div>
 
           <div className="mb-4">
             <TextField
               value={formData.email}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                formik.setFieldValue("email",e.target.value)
+              }}
               onBlur={() => {}}
               label="Email Address"
               required
@@ -124,15 +173,18 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               theme="Carbon"
               name="email"
               type="text"
-              errorMessage=""
-              inValid={false}
+              errorMessage={formik.errors.email || ''}
+              inValid={formik.errors.email != undefined}
             />
           </div>
 
           <div className="mb-4">
             <TextField
               value={formData.phone}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e)
+                formik.setFieldValue("phone",e.target.value)
+              }}
               onBlur={() => {}}
               required
               label="Phone"
@@ -142,8 +194,8 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               type="phone"
               phoneCountry={country}
               setPhoneCountry={setCountry}
-              errorMessage=""
-              inValid=""
+              errorMessage={formik.errors.phone || ''}
+              inValid={formik.errors.phone != undefined}
             ></TextField>
           </div>
 

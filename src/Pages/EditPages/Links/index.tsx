@@ -187,7 +187,7 @@ const EditLinks = () => {
               <div className="relative"></div>
           </div>
           <div className="px-6 mt-10">
-            <Button onClick={submit} theme="Carbon">Save Change</Button>
+            <Button onClick={submit} theme="Carbon">Save Changes</Button>
           </div>
           <AddLink name={editName} value={editeValue} theme="Carbon" isOpen={openaddlink} onClose={() =>{
             setEditName('')

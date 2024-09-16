@@ -47,15 +47,27 @@ const Home2 = () => {
                 userId:data.information.created_userid,
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
-                referral_code:data.information. referral_code,
+                referral_code:data.information.referral_code,
                 address:'',
+                logo:data.information.logo,
                 gender:data.information.gender
             })
             authContext.currentUser.setEditStatus(data.edit_status)
             authContext.currentUser.setBox(resolveSocial)
-            authContext.currentUser.setTypeOfAccount(new UserType(data.type_of_account.type.capitalize(),data.type_of_account.register_date))
+            authContext.currentUser.setTypeOfAccount(
+                new UserType(
+                    data.type_of_account.type.capitalize(),
+                    data.type_of_account.register_date,
+                    data.type_of_account.end_of_subscription_date,
+                    data.type_of_account.previous_status_detail
+                ))
 
         })        
+    }
+    const checkSub = () => {
+        Auth.checkSub().then(res => {
+            console.log(res)
+        })
     }
     const playNotifSound = () => {
         // const audio = new Audio('sounds/notif2.wav');
@@ -64,6 +76,7 @@ const Home2 = () => {
     }
     useConstructor(() => {
         getProfile()
+        checkSub()
     })
     useEffect(() => {
         if(parametr.get("force") == 'true'){
