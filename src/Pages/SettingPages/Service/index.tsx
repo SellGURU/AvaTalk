@@ -126,7 +126,7 @@ const SettingService =() => {
                             Service.SubLink({
                                 quantity:1,
                                 recurring_interval:activeService.mode,
-                                unit_amount:activeService.price
+                                unit_amount:activeService.price * 100
                             }).then(res => {
                                 window.open(res.data.sublink)
                             })
