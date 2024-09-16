@@ -47,45 +47,51 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
   const auth = useAuth();
   return (
     <>
-      <div className="w-full pt-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
-        <img className={"w-[50px]  relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
+      <div className="w-full pt-6 px-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
+        <div className="w-full relative z-30 flex justify-end">
+          <img width={32} height={32} className="w-8 h-8 cursor-pointer  " src="/icons/Add.svg" onClick={onClose} alt=""/>
+
+        </div>
+        <div className="absolute z-30">
+          <img className={"w-[50px]   relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
+        </div>
 
         <div className="overflow-hidden  rounded-3xl h-full  absolute w-full opacity-100 left-0 top-0">
           <img className="w-full  " src="/icons/backPlanCard.png" alt=""/>
       
         </div>
 
-        <img width={32} height={32} className="w-8 h-8 cursor-pointer absolute top-4 right-6 " src="/icons/Add.svg" onClick={onClose} alt=""/>
+
 
         <div className="pt-2 w-full flex items-center justify-center">
         </div>
         <div className="flex justify-center mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
+          <div className="text-white text-[14px]  relative z-50  text-center w-full">
             Unlock all the power of this app and enjoy networking experience
             like never before!
           </div>
         </div>
-        <div className=" w-full max-w-[309px] flex flex-col items-center justify-center gap-2">
+        <div className=" w-full  flex flex-col items-center justify-center gap-2">
           <div
-              className={` mt-2 h-[20px] relative w-full  rounded-[8px] bg-[#E1E1E1] `}
+              className={` mt-2 h-[20px] relative w-full  rounded-[16px] p-[1px] px-[2px] bg-[#E1E1E1] `}
           >
             <div
-                className={`absolute rounded-[8px]  h-[20px]  `}
+                className={`absolute rounded-[16px]  h-[17px]  `}
                 style={{
                   background: 'linear-gradient(to right, #FECA06 50%, #FECA06 100%)',
-                  width: `${auth.currentUser.type_of_account.getPercentDayReminded()}%`,
+                  width: `${auth.currentUser.type_of_account.getPercentDayUsed()}%`,
                 }}
             ></div>
           </div>
           <div
-              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getDaysReminded()}/14
+              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getDayUsed()}/14
             Day
           </div>
         </div>
         <div onClick={() => {
           navigate("service")
-        }} className="absolute right-7 cursor-pointer bottom-6 flex">
-          <div className="text-[#F3F4F6] mr-2 text-[14px] font-medium">
+        }} className=" relative z-20 cursor-pointer w-full justify-end flex">
+          <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
 
             Upgrade your plan
           </div>
