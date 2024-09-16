@@ -22,7 +22,7 @@ class TimeManegar {
         const day = String(date.getDate()).padStart(2, '0');
 
         // Return formatted date as YYYY-MM-DD
-        return `${year}-${month}-${day}`;
+        return `${year}-${day}-${month}`;
 }
 }
 

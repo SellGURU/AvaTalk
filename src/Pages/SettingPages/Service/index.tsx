@@ -3,29 +3,29 @@ import { Outlet, useNavigate } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
-import {useState} from "react";
-interface serviceType {
-    title:string,
-    price:number
-}
+// import {useState} from "react";
+// interface serviceType {
+//     title:string,
+//     price:number
+// }
 
 const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
-    const service:Array<serviceType> = [
-        {
-            title:'Annually',
-            price:345
-        },
-        {
-            title:'Monthly',
-            price:45
-        },
-    ]
-    const [activeService,setAtiveService] = useState<serviceType>({
-            title:'Annually',
-            price:345
-        },)
+    // const service:Array<serviceType> = [
+    //     {
+    //         title:'Annually',
+    //         price:345
+    //     },
+    //     {
+    //         title:'Monthly',
+    //         price:45
+    //     },
+    // ]
+    // const [activeService,setAtiveService] = useState<serviceType>({
+    //         title:'Annually',
+    //         price:345
+    //     },)
     console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
     return (
         <>
@@ -45,9 +45,9 @@ const SettingService =() => {
                         <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+context.currentUser.type_of_account.getType()+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
-                            {context.currentUser.type_of_account.getType() ==="Free" &&
-                                        `Your ${context.currentUser.type_of_account.getType()} was expired on ${context.currentUser.type_of_account.getDateExpired()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
-                            {context.currentUser.type_of_account.getType()==="Trial"&&`Your trial will end in  ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
+                            {context.currentUser.type_of_account.getType() ==="Trial" &&
+                                        `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
+                            {context.currentUser.type_of_account.getType()==="Free"&&`Your trial was expired ${context.currentUser.type_of_account.getDateExpired()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
                             {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
 
                         </p>
@@ -83,7 +83,7 @@ const SettingService =() => {
                             </div>
                         </div>
 
-                            {service.map((item)=>{
+                            {/* {service.map((item)=>{
                                 return(
                                     <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
                                         {activeService?.title == item.title ?
@@ -109,7 +109,7 @@ const SettingService =() => {
                                         }
                                     </div>
                                 )
-                            })}
+                            })} */}
                     <div className="mt-8 mb-4">
                         <Button theme="Carbon">Continue to Payment</Button>
                     </div>
