@@ -152,6 +152,11 @@ class Auth extends Api {
     return response
   }
 
+  static checkSub(){
+    const response = this.post("/check_sub",{})
+    return response
+  }
+
   static check_login_code(data:checkLoginCode){
     const response = this.post("/check_Login_code",data)
     return response

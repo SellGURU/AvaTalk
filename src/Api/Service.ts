@@ -31,6 +31,10 @@ class Service extends Api {
         }
         )
     }
+
+    static subRedirect(session_id:string) {
+        return this.get('/subredirect/'+session_id)
+    }
 }
 
 export default Service

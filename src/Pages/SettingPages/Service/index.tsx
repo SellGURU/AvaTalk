@@ -1,10 +1,10 @@
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
 import { Service } from "../../../Api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import {useState} from "react";
 interface serviceType {
     title:string,
@@ -15,6 +15,13 @@ interface serviceType {
 const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
+    const [searchParametr] = useSearchParams()
+    console.log(searchParametr.get("sassionid"))
+    useEffect(() => {
+        if(searchParametr.get("status") == "true"){
+            Service.subRedirect(searchParametr.get("sassionid")||"")
+        }
+    })
     const service:Array<serviceType> = [
         {
             title:'Annually $200',

@@ -64,6 +64,11 @@ const Home2 = () => {
 
         })        
     }
+    const checkSub = () => {
+        Auth.checkSub().then(res => {
+            console.log(res)
+        })
+    }
     const playNotifSound = () => {
         // const audio = new Audio('sounds/notif2.wav');
         // audio.volume= 10
@@ -71,6 +76,7 @@ const Home2 = () => {
     }
     useConstructor(() => {
         getProfile()
+        checkSub()
     })
     useEffect(() => {
         if(parametr.get("force") == 'true'){
