@@ -53,7 +53,7 @@ const SettingService =() => {
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
                             {context.currentUser.type_of_account.getType() ==="Trial" &&
                                         `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
-                            {context.currentUser.type_of_account.getType()==="Free"&&`Your trial was expired ${context.currentUser.type_of_account.getDateExpired()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
+                            {context.currentUser.type_of_account.getType()==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired ${context.currentUser.type_of_account.getOldExpiredDate()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
                             {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
 
                         </p>
@@ -64,7 +64,7 @@ const SettingService =() => {
                         <div>
                         <ToggleButton onButtonClick={(value) => {
                             setAtiveService(service.filter(el => {
-                                el.title == value
+                                return el.title.includes(value)
                             })[0])
                         }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />                        
                     </div>
@@ -122,6 +122,7 @@ const SettingService =() => {
                             })} */}
                     <div className="mt-8 mb-4">
                         <Button onClick={() => {
+                            console.log(activeService)
                             Service.SubLink({
                                 quantity:1,
                                 recurring_interval:activeService.mode,

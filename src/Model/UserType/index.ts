@@ -1,4 +1,8 @@
 type UserTypes = 'Trial' | 'Free' | 'Pro'
+type previous_status_detailProps = {
+    previous_type: UserTypes,
+    previous_type_end_date:Date
+}
 import TimeManegar from "../TimeManegar"
 
 class UserType {
@@ -6,10 +10,15 @@ class UserType {
     protected date : Date
     protected endDate : Date
     protected nowDate: Date = TimeManegar.getDate()
-    constructor(type: UserTypes,date:Date,endDate:Date){
+    protected previous_status_detail : previous_status_detailProps | undefined
+    constructor(type: UserTypes,date:Date,endDate:Date,previous_status_detail?:previous_status_detailProps){
         this.type = type
         this.date = date
         this.endDate = endDate
+        this.previous_status_detail ={
+            previous_type:previous_status_detail?.previous_type || 'Free',
+            previous_type_end_date: new Date(previous_status_detail?.previous_type_end_date||'')
+        }
     }
 
     public getType() {
@@ -43,6 +52,14 @@ class UserType {
     public getDateExpired() {
         return TimeManegar.formatDate(this.endDate)
     }
+
+    public getOldExpiredDate() {
+        return TimeManegar.formatDate(this.previous_status_detail?.previous_type_end_date || new Date())
+    }
+
+    public getOldType() {
+        return  this.previous_status_detail?.previous_type
+    }    
 
 }
 
