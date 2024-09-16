@@ -3,29 +3,35 @@ import { Outlet, useNavigate } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
+import { Service } from "../../../Api";
+import { useState } from "react";
 // import {useState} from "react";
-// interface serviceType {
-//     title:string,
-//     price:number
-// }
+interface serviceType {
+    title:string,
+    price:number,
+    mode:'week'|'year'
+}
 
 const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
-    // const service:Array<serviceType> = [
-    //     {
-    //         title:'Annually',
-    //         price:345
-    //     },
-    //     {
-    //         title:'Monthly',
-    //         price:45
-    //     },
-    // ]
-    // const [activeService,setAtiveService] = useState<serviceType>({
-    //         title:'Annually',
-    //         price:345
-    //     },)
+    const service:Array<serviceType> = [
+        {
+            title:'Annually $200',
+            price:200,
+            mode:'year'
+        },
+        {
+            title:'Monthly $20',
+            price:20,
+            mode:'week'
+        },
+    ]
+    const [activeService,setAtiveService] = useState<serviceType>({
+            title:'Annually $200',
+            mode:'year',
+            price:200
+        },)
     console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
     return (
         <>
@@ -56,7 +62,11 @@ const SettingService =() => {
                     {context.currentUser.type_of_account.getType() !="Pro" &&
                         (<>
                         <div>
-                        <ToggleButton onButtonClick={() => {}} leftText="Annually $200" rightText="Monthly $20" theme="Carbon-secandary" />                        
+                        <ToggleButton onButtonClick={(value) => {
+                            setAtiveService(service.filter(el => {
+                                el.title == value
+                            })[0])
+                        }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />                        
                     </div>
                   <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">
@@ -111,7 +121,15 @@ const SettingService =() => {
                                 )
                             })} */}
                     <div className="mt-8 mb-4">
-                        <Button theme="Carbon">Continue to Payment</Button>
+                        <Button onClick={() => {
+                            Service.SubLink({
+                                quantity:1,
+                                recurring_interval:activeService.mode,
+                                unit_amount:activeService.price
+                            }).then(res => {
+                                window.open(res.data.sublink)
+                            })
+                        }} theme="Carbon">Continue to Payment</Button>
                     </div>
                         </>)}
                     {context.currentUser.type_of_account.getType() ==="Pro" &&
