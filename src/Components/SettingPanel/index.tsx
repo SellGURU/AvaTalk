@@ -56,7 +56,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     {
       name: "Help",
       icon: "help.svg",
-      link: "",
+      link: "Help",
     },
     // {
     //   name: "Privacy Policy",
