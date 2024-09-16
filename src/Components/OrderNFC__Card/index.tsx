@@ -23,7 +23,7 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc,id}:Props
                 }}>
                     <img src={imgSrc} className={"h-[115px] w-fit"}  alt={""}/>
                 </div>
-                <div className="p-4 bg-white mt-0 ">
+                <div className="p-4 px-3 bg-white mt-0 ">
                     <h1 className={"text-[10px] h-[40px] text-[#374151] font-bold"}>{title}</h1>
                     <div className={"text-[10px] text-[#6B7280] flex gap-2 items-center"}>
                         Colors:
