@@ -4,11 +4,12 @@ interface Props {
     listColorBadge:string[],
     title:string,
     price:string,
+    oldPrice:string|undefined
     imgSrc:string
     id:string
 }
 
-export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc,id}:Props) => {
+export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,id}:Props) => {
     const resolveBackGround = (color:string) => {
         if(color == 'sevenColor'){
             return 'radial-gradient(circle, #9873D2CC, #FFFAEE)'
@@ -34,7 +35,9 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc,id}:Props
                         ))}
                     </div>
                     <div className={"flex items-center justify-between mt-4"}>
-                        <p className={"text-[#5B21B6] font-semibold text-[14px]"}>£{price}</p>
+                        <p className={"text-[#5B21B6] font-semibold text-[14px]"}>
+                            {oldPrice &&<span className="text-[#94A3B8] mr-1 line-through">£{oldPrice}</span>}
+                            £{price}</p>
 
 
                         <div className={"Carbon-Card-product-Vector-container hover:border hover:border-white"}>

@@ -17,7 +17,7 @@ export const OrderNfcCard = () => {
                     {nfcCards.map((el) => {
                         return (
                             <>
-                                <CardOrderNFCProduct id={el.id} imgSrc={el.image} listColorBadge={el.colors} price={el.price} title={el.title}/>
+                                <CardOrderNFCProduct oldPrice={el.oldPrice} id={el.id} imgSrc={el.image} listColorBadge={el.colors} price={el.price} title={el.title}/>
                             </>
                         )
                     })}

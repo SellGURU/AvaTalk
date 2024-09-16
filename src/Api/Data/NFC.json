@@ -47,7 +47,8 @@
         "title":"Avatalk NFC Tag and Business Card Bundle",
         "image":"/Carbon/nfcCard_Tag.png",
         "colors":["#5B21B6","sevenColor"],
-        "price":"7",
+        "price":"10",
+        "oldPrice":"12",
         "id":"3",
         "images":[
         {
