@@ -25,7 +25,7 @@ const SettingService =() => {
             setIsOpen(true)
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
-                    window.location.reload()
+                    navigate("/")
                 })    
             }, 1000);
         }
