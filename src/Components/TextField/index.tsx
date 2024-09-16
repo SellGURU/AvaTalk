@@ -88,7 +88,7 @@ const TextField: React.FC<InputProps> = ({
       </label>
       <div
         data-testid="input-container"
-        deta-selectBox={ShowDropDown?'true': 'false'}
+        data-selectbox={ShowDropDown?'true': 'false'}
         className={` w-[100%]  ${
           inValid && `${theme}-TextField-inValid`
         } ${theme}-TextField-box `}
@@ -132,7 +132,7 @@ const TextField: React.FC<InputProps> = ({
         }
         <input
           data-testid="input-id"
-          deta-selectBox="true"
+          data-selectbox="true"
           {...props}
           className={`${theme}-TextField-input`}
           type={getInputType()}

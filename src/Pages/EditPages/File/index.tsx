@@ -79,6 +79,7 @@ const EditFile = () => {
               uploades={(files: Array<any>) => {
                 console.log(files)
                 const converted:Array<File> = files.map((item) => {
+                  console.log("item.type",item.type)
                   const newFile:File = new File(item.url,item.name,item.type)
                   return newFile
                 });
@@ -91,7 +92,7 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">
-              Save Change
+              Save Changes
             </Button>
           </div>
         </div>

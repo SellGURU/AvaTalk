@@ -29,9 +29,9 @@ import { Confirm } from "../../../Components/__Modal__";
       ).isValidSync(phone);
   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().test('phone', 'Phone is invalid', (value) => {
+    phone:Yup.string().test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890', (value) => {
          return validatePhone(parseInt(value?.replace('+','').replace(" ",'') ?? '0')) || value == null;
-      }).test('phone', 'phone type (+1 123456)',(value) => {
+      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
         return validatePhoneType(value?value:'') || value == null
       })
 });

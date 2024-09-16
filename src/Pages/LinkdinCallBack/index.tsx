@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Auth } from '../../Api';
+import { useAuth } from '../../hooks/useAuth';
 // import axios from "axios";
 
 const LinkedInCallback: React.FC = () => {
+  const auth = useAuth()
+  const navigate = useNavigate()
   const location = useLocation();
 // const getToken=async (code:string)=>{
 //   try {
@@ -23,14 +28,22 @@ const LinkedInCallback: React.FC = () => {
     // Extract the authorization code from the URL query parameters
     const params = new URLSearchParams(location.search);
     const code = params.get('code');
-
     if (code) {
       console.log('Authorization code:', code);
+      Auth.get_UserInfo(code).then(res => {
+        if (window.opener) {
+          window.opener.postMessage({ type: 'linkedin-auth-success',info: res.data }, '*');
+          window.close();
+        } else {
+          // Handle case where popup is not available
+          window.location.href = '/'; // Redirect to main application
+        }           
+      })
       // getToken(code);
     } else {
       console.error('No authorization code found');
     }
-  }, [location]);
+  }, [auth, location, navigate]);
 
   return (
     <div>

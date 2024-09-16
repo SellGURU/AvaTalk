@@ -12,11 +12,11 @@ export const Accordion=({bodyText,title}:Props) => {
     };
     return(
         <>
-            <div className={"bg-[#F3F4F6] rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
-                <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[12px]"}>
+            <div className={"bg-[#F3F4F6] boxShadow-Gray borderBox-Gray rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
+                <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[14px]"}>
                     <button
                         type="button"
-                        className={`flex items-center justify-between w-full px-5 pt-5 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-5'}`}
+                        className={`flex items-center justify-between w-full px-5 pt-1 font-medium gap-3 ${isOpen ? 'rounded-t-xl ' : 'rounded-xl pb-1'}`}
                         onClick={toggleAccordion}
                         aria-expanded={isOpen}
                         aria-controls="accordion-collapse-body-1"
@@ -24,7 +24,7 @@ export const Accordion=({bodyText,title}:Props) => {
                         <span>{title}</span>
                         <svg
                             data-accordion-icon
-                            className={`w-3 h-3 transform ${isOpen ? 'rotate-180' : 'rotate-0'} shrink-0`}
+                            className={`w-3 h-3 transform ${isOpen ? 'rotate-0' : 'rotate-180'} shrink-0`}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 10 6"

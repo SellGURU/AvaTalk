@@ -1,7 +1,10 @@
+import { useState } from "react";
 import {BackIcon} from "../../../Components";
 import {CardOrderNFCProduct} from "../../../Components/OrderNFC__Card";
+import NFC from '../../../Api/Data/NFC.json'
 
 export const OrderNfcCard = () => {
+    const [nfcCards] = useState(NFC)
     return (
         <>
             <>
@@ -11,10 +14,13 @@ export const OrderNfcCard = () => {
 
                     </div>
                     <div className={"flex  flex-wrap items-center justify-between px-4 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]"}>
-
-                    <CardOrderNFCProduct imgSrc={"/Carbon/nfcCard.png"} listColorBadge={["#000000", "#5B21B6","#DBBB6A"]} price={"7"} title={"Avatalk NFC Business Card"}/>
-                    <CardOrderNFCProduct imgSrc={"/Carbon/nfcTag.png"} listColorBadge={["#5B21B6","#000000"]} price={"5"} title={"Avatalk NFC Tag"}/>
-                    <CardOrderNFCProduct imgSrc={"/Carbon/nfcCard_Tag.png"} listColorBadge={["#5B21B6","#000000"]} price={"10"} title={"Avatalk NFC Tag and Business Card Bundle"}/>
+                    {nfcCards.map((el) => {
+                        return (
+                            <>
+                                <CardOrderNFCProduct id={el.id} imgSrc={el.image} listColorBadge={el.colors} price={el.price} title={el.title}/>
+                            </>
+                        )
+                    })}
                     </div>
                 </div>
             </>

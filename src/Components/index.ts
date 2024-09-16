@@ -40,7 +40,7 @@ import AccessNotifManager from "./AccessNotifManager";
 import DeveloperTools from "./DeveloperTools";
 import BissinesCard from "./BissinesCard";
 import PlanCard from "./PlanCard";
-
+import CheckBoxCostom from "./CheckBoxCustom";
 export {
   AccessNotifManager,
   Profile2,
@@ -83,5 +83,6 @@ export {
   AnalyticsSummary,
   DatePicker,
   Profile,
-  DeveloperTools
+  DeveloperTools,
+  CheckBoxCostom
 };

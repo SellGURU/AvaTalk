@@ -66,7 +66,7 @@ const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefine
       // return mustBeRenderDate(new Date(date1))
   };  
   return (
-    <div className={`w-full  ${context.currentUser.type_of_account.getType() == 'Free'?'opacity-30':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[220px]`}>
+    <div className={`w-full  ${context.currentUser.type_of_account.getType() == 'Free'?'':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[400px]`}>
       {data.map((items, index) => (
         <>
           <ChatItem plan={context.currentUser.type_of_account.getType()} visibleDate={mustBeRenderDate2(items.date_group)} theme={theme} key={index} data={items} />

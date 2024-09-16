@@ -25,7 +25,7 @@ export const UserManual=()=>{
 
                 </div>
                 <div
-                    className={" p-4 rounded-lg  px-16 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
+                    className={" p-4 rounded-lg   mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
                     {AccordionData.map(({title, body})=>{
                         return (
                             <Accordion bodyText={title} title={body}/>

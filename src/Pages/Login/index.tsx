@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Checkbox} from "symphony-ui";
+import { Button} from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect, useState } from "react";
 import Splash from "../../Components/Splash";
-import { TextField } from "../../Components";
+import { CheckBoxCostom, TextField } from "../../Components";
 import { useGoogleLogin} from "@react-oauth/google";
 // import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
@@ -59,6 +59,18 @@ const Login = () => {
       console.log(values);
     },
   });
+  const [isRememberMe,setIsRememberMe]= useState(false)
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('email');
+    const savedPassword = localStorage.getItem('password');
+    const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+
+    if (savedRememberMe) {
+      formik.setFieldValue("email",savedEmail || '');
+      formik.setFieldValue("password",savedPassword || '');
+      setIsRememberMe(true);
+    }
+  }, []);  
   function handleSubmit() {
     // const resolvePhoneOrEnail = {
     //   email:formik.values.email
@@ -68,7 +80,7 @@ const Login = () => {
       email:formik.values.email
     }).then((res) => {
       if(res.data.error){
-        // toast.error(res.data.error)
+        toast.error(res.data.error)
         if(res.data.error == 'This user is not registered'){
           formik.setFieldError("email",res.data.error)
         }
@@ -77,6 +89,16 @@ const Login = () => {
         }        
       }
       if(res.data.access_token){
+          if (isRememberMe) {
+            localStorage.setItem('email', formik.values.email);
+            localStorage.setItem('password', formik.values.password);
+            localStorage.setItem('rememberMe', 'true');
+          } else {
+            // If not remembering, clear local storage
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            localStorage.removeItem('rememberMe');
+          }        
           localStorage.setItem("token",res.data.access_token)
           authContext.login(res.data.access_token)
           const resolveSocial: Array<Box> = [];
@@ -117,7 +139,61 @@ const Login = () => {
     //   navigate('/Verification')
     // })
   }
-  const [isRememberMe,setIsRememberMe]= useState(false)
+
+  useEffect(() => {
+    const handleMessage = (event:any) => {
+      if (event.data.type === 'linkedin-auth-success') {
+        // Handle the received token
+        const { info } = event.data;
+        Auth.loginWithGoogle(
+          {
+            google_json:info
+          },
+        ).then((res) => {
+          authContext.setReferalCode(parametr.get("referral") as string)
+          if(res.data.access_token){
+            localStorage.setItem("token",res.data.access_token)
+            authContext.login(res.data.access_token)
+            const resolveSocial: Array<Box> = [];
+            Auth.showProfile((data) => {
+                data.boxs.map((item:any) => {
+                    const newBox = boxProvider(item);
+                    resolveSocial.push(newBox);
+                })
+                authContext.currentUser.updateInformation({
+                    firstName:data.information.first_name,
+                    lastName:data.information.last_name,
+                    phone:data.information.mobile_number,
+                    personlEmail:data.information.email,
+                    company:data.information.company_name,
+                    job:data.information.job_title,
+                    banelImage:data.information.back_ground_pic,
+                    imageurl:data.information.profile_pic,
+                    location:{
+                        lat:33,
+                        lng:33
+                    },
+                    workEmail:data.information.work_email,
+                    workPhone:data.information.work_mobile_number,
+                    userId:data.information.created_userid
+                })
+                authContext.currentUser.setBox(resolveSocial)
+                navigate("/?splash=true");
+            })                                                   
+          }else{
+            toast.error(res.data)
+          }
+        });    
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   setTimeout(() => {
     setshowSplash(false)
   }, 3000);
@@ -176,7 +252,7 @@ const Login = () => {
                 navigate("/?splash=true");
             })                                                   
           }else{
-            toast.error(res.data)
+            toast.error(res.data.error)
           }
         });    
         console.log('User Info:', userInfo.data);
@@ -225,7 +301,10 @@ const Login = () => {
 
                 <div className="flex justify-between w-full px-2 mb-4 ">
                   <div>
-                    <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox>
+                    <CheckBoxCostom checked={isRememberMe} onChange={() => {
+                      setIsRememberMe(!isRememberMe)
+                    }} label={'Remember me'}></CheckBoxCostom>
+                    {/* <Checkbox theme="Carbon" label={'Remember me'} checked={isRememberMe} onChange={() => {setIsRememberMe(!isRememberMe)}}></Checkbox> */}
                   </div>
 
                   <div onClick={() => {
@@ -286,13 +365,13 @@ const Login = () => {
                           </div>
                       }/>
 
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                       <Button theme="Carbon-Outline"
                               className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                           <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt=""/>
                           <div className="text-text-primary">Login with Apple</div>
                       </Button>
-                  </div>
+                  </div> */}
               </div>
         </>
       }
