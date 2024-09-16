@@ -18,11 +18,11 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
       <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
     :undefined}
     <div  onClick={() => {
-      if(plan != 'Free'){
+      if(plan != 'Free' || data.title == 'samanta'){
         navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
       // to={`/chats/${data.chat_list_id}`}
-    }}  className={`${theme}-ChatItem-container`}>
+    }}  className={`${theme}-ChatItem-container`} style={{opacity:plan != 'Free' || data.title == 'samanta'?'100%':'30%'}}>
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
           <div className={`${theme}-ChatItem-innerCard `}>
