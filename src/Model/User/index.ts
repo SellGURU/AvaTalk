@@ -185,6 +185,7 @@ class User {
     }
     public setTypeOfAccount(acount:UserType){
         this.type_of_account = acount
+        this.syncToLocalStorage()
     }
 
     public setEditStatus(status:boolean){
