@@ -6,9 +6,30 @@ interface SublinkPayload {
     quantity:number
 }
 
+interface Product {
+    "product_name": string,
+    "product_id": string,
+    "amount": string,
+    "quantity": number,
+    "color":string,
+    "product_url": string,
+    "description": string
+}
+
 class Service extends Api {
     static SubLink(paymentData:SublinkPayload) {
         return this.post("/sublink",paymentData)
+    }
+
+    static Pyload(userId:string,product:Product) {
+        return this.post("/paylink",
+        {
+            "userid":userId,
+            "products": [
+                product
+            ] 
+        }
+        )
     }
 }
 

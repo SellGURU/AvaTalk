@@ -9,6 +9,7 @@ import NFC from '../../Api/Data/NFC.json';
 import { useParams } from "react-router-dom";
 import { BusinessCard } from "../../Types";
 import { Rating } from "@smastrom/react-rating";
+import { Service } from "../../Api";
 
 export const NFCBusinessCard = () => {
     const { id } = useParams();
@@ -213,7 +214,19 @@ export const NFCBusinessCard = () => {
                     </div>
                     </div>
                 </Modal>
-                <Button onClick={()=>setIsOpen(true)} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
+                <Button onClick={()=>{
+                    Service.Pyload("c7a680d998",{
+                        amount:'200',
+                        color:'black',
+                        description:'Upgrade your networking with the Avatalk NFC Business Card. Share contact details instantly, customize your AI persona, and track engagements for lasting professional impressions',
+                        product_id:'1',
+                        product_name:'a',
+                        product_url:'a',
+                        quantity:1
+                    }).then((res) => {
+                        window.open(res.data.paylink)
+                    })                    
+                }} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
                 </Button>
                 <div className="mt-4">
