@@ -72,7 +72,7 @@ class User {
         return boxProvider(item);
     })
 
-    public type_of_account : UserType = new UserType('Pro',new Date())
+    public type_of_account : UserType = new UserType('Pro',new Date(),new Date())
     public editStatus:boolean = false;
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()

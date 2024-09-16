@@ -100,7 +100,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   resolveUser.setBox(reolveJsonToObject(localuser as string))
   if(localuser){
     console.log(JSON.parse(localuser as string).type_of_account)
-    resolveUser.setTypeOfAccount(new UserType(JSON.parse(localuser as string).type_of_account.type,JSON.parse(localuser as string).type_of_account.type.date))
+    resolveUser.setTypeOfAccount(new UserType(JSON.parse(localuser as string).type_of_account.type,JSON.parse(localuser as string).type_of_account.type.date,JSON.parse(localuser as string).type_of_account.type.endDate))
   }
   const [googleInformation,setGoogleInformation] = useState(null)
   const [user,setUser] = useState<User>(resolveUser ? resolveUser : new User());

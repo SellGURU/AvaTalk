@@ -4,10 +4,12 @@ import TimeManegar from "../TimeManegar"
 class UserType {
     protected type : UserTypes
     protected date : Date
+    protected endDate : Date
     protected nowDate: Date = TimeManegar.getDate()
-    constructor(type: UserTypes,date:Date){
+    constructor(type: UserTypes,date:Date,endDate:Date){
         this.type = type
         this.date = date
+        this.endDate = endDate
     }
 
     public getType() {
@@ -39,7 +41,7 @@ class UserType {
     }
 
     public getDateExpired() {
-        return TimeManegar.formatDate(this.date)
+        return TimeManegar.formatDate(this.endDate)
     }
 
 }
