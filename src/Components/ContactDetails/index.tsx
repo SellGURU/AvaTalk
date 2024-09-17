@@ -137,7 +137,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   return (
     <div>
       <div className={`${theme}-ContactDetails-infoContainer`}>
-        <BackIcon theme={theme} title="Contact info" ></BackIcon>
+        <BackIcon theme={theme} title="Contact Info" ></BackIcon>
       </div>
       <div className={`${theme}-ContactDetails-container2`}>
         <div className={`${theme}-ContactDetails-container3`}>      
