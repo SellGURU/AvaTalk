@@ -8,7 +8,7 @@ import ContactList from "../ContactList";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 // import dummyData from "../../data/dummy_data";
 import { Outlet } from "react-router";
-import { AddContact } from "../__Modal__";
+import { AddContactNew } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
@@ -222,7 +222,17 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           )}
         </>
       )}
+     {showAddContactModal &&
+     <>
+        <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+            <AddContactNew onAddContact={handleAddContact} onClose={() => setShowAddContactModal(false)} title="Add Contact">
 
+            </AddContactNew>
+        </div>
+        <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
+     </>
+     }
+{/* 
       <AddContact
         allTags={tags}
         title="Add Contact"
@@ -234,7 +244,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         onClose={() => {
           setShowAddContactModal(false);
         }}
-      ></AddContact>
+      ></AddContact> */}
       <AddTag
         theme="Carbon"
         isOpen={showAddTagModal}
