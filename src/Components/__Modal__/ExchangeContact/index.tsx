@@ -67,7 +67,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     },
     validationSchema:Yup.object().shape({
       fullName:Yup.string().required('Full name  is required'),
-      email: Yup.string().email().required('Email  is required'),
+      email: Yup.string().email('Email address must be valid.').required('Email  is required'),
       phone:Yup.string().required('Phone  is required').test("phone","Please enter a valid phone number in the format: +1 (123) 456-7890",(value) => {
         return validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0'))
       }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {

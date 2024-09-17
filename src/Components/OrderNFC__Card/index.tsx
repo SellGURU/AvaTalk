@@ -26,7 +26,7 @@ export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,
                 </div>
                 <div className="p-4 px-3 bg-white mt-0 ">
                     <h1 className={"text-[10px]   text-[#374151] font-bold"} style={{lineHeight:'1rem'}}>{title}</h1>
-                    <div className={"text-[10px] text-[#6B7280]  flex gap-2 items-center"}>
+                    <div className={"text-[10px] mt-2 text-[#6B7280]  flex gap-2 items-center"}>
                         Colors:
                         {listColorBadge.map((color:string,index) => (
                             <div className={`w-[17px] h-[17px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
