@@ -56,19 +56,31 @@
 } */
 
 .form-control {
-  @apply border-none pl-[46px] h-[42px] rounded-[26px] w-full #{!important};
+  @apply border-white overflow-hidden pl-[63px] h-[42px] rounded-[26px] w-full #{!important};
 }
+
+.form-control[data-mode="invalid"] {
+  @apply border-2 border-red-500 #{!important};
+}
+
+/* .form-control-invalid {
+  @apply border-red-500 border overflow-hidden pl-[63px] h-[42px] rounded-[26px] w-full #{!important};
+} */
 
 .selected-flag{
-  @apply w-[45px] px-2 border-none outline-none #{!important};
+  /* border: 1px sol #E3E3EE80 */
+  box-shadow: inset 4px 4px 14px 2px #E2E8F0 ,inset -4px -4px 9px 2px #FFFFFF99;
+  @apply w-[60px] flex justify-center rounded-l-[26px] px-2 border-none outline-none #{!important};
+  
 }
 .flag-dropdown{
-  @apply w-[45px] border-none rounded-l-[26px] bg-white outline-none #{!important};
+  @apply w-[60px] mt-1 h-[35px] ml-1 rounded-lg border-none rounded-l-[26px] bg-white outline-none #{!important};
 }
 .invalid-number{
-  @apply border-red-500 border-2 #{!important};
+  @apply  bg-inherit  #{!important};
 }
 
-.form-control.invalid-number{
-   @apply border-red-500 border-2 #{!important};
+
+.country-list{
+  @apply rounded-[26px] text-[14px] hiddenScrollBar px-2 text-[#374151] #{!important};
 }

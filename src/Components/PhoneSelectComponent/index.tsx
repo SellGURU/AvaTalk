@@ -33,8 +33,12 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ label,invalid,error
             value={phoneNumber}
             onChange={handlePhoneChange}
             isValid={!invalid}
+            inputProps={{
+                "data-mode":invalid?"invalid":""
+            }}
             inputClass="Carbon-TextField-input"
             containerClass="Carbon-TextField-box " 
+            
 
         />
         {invalid && (
