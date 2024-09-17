@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Contact } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
-import {  TextArea, TextField } from "../..";
+import {  PhoneNumberInput, TextArea, TextField } from "../..";
 import ConfettiExplosion from 'react-confetti-explosion';
 import { generateSlugId } from "../../../help";
 import { useFormik } from "formik";
@@ -37,28 +37,28 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     id: "",
     address :'',
   });
-  const validatePhone = (phone: number | undefined) => {
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
-    //   (phone) => {
-    //     return 
-    //   }
-    // )
-    return Yup.number().integer().positive().test(
-        (phone) => {
-          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
-  const validatePhoneType = (phone: string ) => {
-    console.log(phone?.split(" ").length )
+  // const validatePhone = (phone: number | undefined) => {
+  //   // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  //   // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
+  //   //   (phone) => {
+  //   //     return 
+  //   //   }
+  //   // )
+  //   return Yup.number().integer().positive().test(
+  //       (phone) => {
+  //         return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+  //       }
+  //     ).isValidSync(phone);
+  // };
+  // const validatePhoneType = (phone: string ) => {
+  //   console.log(phone?.split(" ").length )
 
-    return Yup.string().test(
-        (phone) => {
-          return (phone && phone.split(" ").length == 2) ? true : false;
-        }
-      ).isValidSync(phone);
-  };  
+  //   return Yup.string().test(
+  //       (phone) => {
+  //         return (phone && phone.split(" ").length == 2) ? true : false;
+  //       }
+  //     ).isValidSync(phone);
+  // };  
   const formik = useFormik({
     initialValues:{
       fullName:'',
@@ -68,12 +68,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     validationSchema:Yup.object().shape({
       fullName:Yup.string().required('Full name  is required'),
       email: Yup.string().email('Email address must be valid.').required('Email  is required'),
-      phone:Yup.string().required('Phone  is required').test("phone","Please enter a valid phone number in the format: +1 (123) 456-7890",(value) => {
-        return validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0'))
-      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
-        console.log(value)
-        return validatePhoneType(value)
-      })
+      phone:Yup.string().required('Phone  is required')
     }),
     onSubmit:() => {
 
@@ -109,10 +104,10 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     // onClose();
   };
 
-  const [country, setCountry] = useState<any>({
-    codeName: "us",
-    codePhone: "+1",
-  });
+  // const [country, setCountry] = useState<any>({
+  //   codeName: "us",
+  //   codePhone: "+1",
+  // });
 
   return (
     <Modal
@@ -179,7 +174,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
           </div>
 
           <div className="mb-4">
-            <TextField
+            {/* <TextField
               value={formData.phone}
               onChange={(e) => {
                 handleInputChange(e)
@@ -196,7 +191,21 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               setPhoneCountry={setCountry}
               errorMessage={formik.errors.phone || ''}
               inValid={formik.errors.phone != undefined}
-            ></TextField>
+            ></TextField> */}
+            <PhoneNumberInput 
+                value={formData.phone}
+                required
+                onChange={(e) => {
+                  setFormData({
+                      ...formData,
+                      ["phone"]: e,
+                    });
+                  formik.setFieldValue("phone",e)
+                }}
+                label="Phone"
+                invalid={formik.errors.phone?true:false} 
+                errorMessage={formik.errors.phone}
+            ></PhoneNumberInput>                    
           </div>
 
           <div className="mt-4">

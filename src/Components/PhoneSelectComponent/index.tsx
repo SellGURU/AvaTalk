@@ -9,9 +9,10 @@ interface PhoneNumberInputProps {
   onChange: (value: string) => void;
   invalid?:boolean
   errorMessage?:string
+  required?:boolean
 }
 
-const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ label,invalid,errorMessage, value, onChange }) => {
+const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ label,required,invalid,errorMessage, value, onChange }) => {
   const [phoneNumber, setPhoneNumber] = useState(value || '');
 
   const handlePhoneChange = (phone: string) => {
@@ -25,7 +26,12 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ label,invalid,error
   },[value])
   return (
     <div className="phone-number-input-container">
-      {label && <label className="Carbon-TextField-label ">{label}</label>}
+      {label && <label className="Carbon-TextField-label ">{label}
+        {required ? 
+            <span className={`Carbon-TextField-label-required`} >*</span>
+        :undefined
+        }
+        </label>}
       <div className='mt-1'>
         <PhoneInput
             placeholder='Enter your phone number ...'
@@ -34,7 +40,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ label,invalid,error
             onChange={handlePhoneChange}
             isValid={!invalid}
             inputProps={{
-                "data-mode":invalid?"invalid":""
+                "data-mode":invalid?"invalid":"",
             }}
             inputClass="Carbon-TextField-input"
             containerClass="Carbon-TextField-box " 
