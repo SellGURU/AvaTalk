@@ -110,7 +110,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
                 }} className="w-[120px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
               <div onClick={() => {
                   navigate('/edit/avatars')
-                }} className="text-gray-700 mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
+                }} className="text-gray-700 cursor-pointer mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
             </div>
           </div>
           {editCards.map((item) => {

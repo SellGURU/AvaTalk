@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useState} from "react";
 
 interface  Props{
     bodyText:string;
+    component?:() => JSX.Element
     title:string;
 }
-export const Accordion=({bodyText,title}:Props) => {
+export const Accordion=({bodyText,title,component}:Props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -45,6 +47,7 @@ export const Accordion=({bodyText,title}:Props) => {
                     aria-labelledby="accordion-collapse-heading-1"
                 >
                     <div className="p-5">
+                        {component? component():undefined}
                         <p className="mb-2 text-[#6B7280] font-normal text-[12px]">{bodyText}</p>
                     </div>
                 </div>
