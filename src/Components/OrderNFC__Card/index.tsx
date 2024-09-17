@@ -29,9 +29,18 @@ export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,
                     <div className={"text-[10px] mt-2 text-[#6B7280]  flex gap-2 items-center"}>
                         Colors:
                         {listColorBadge.map((color:string,index) => (
-                            <div className={`w-[17px] h-[17px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
-                                {index == 0 && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
-                            </div>
+                            <>  
+                            {color!='sevenColor' 
+                            ?
+                                <div className={`w-[17px] h-[17px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
+                                    {index == 0 && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
+                                </div>
+                            :
+                                <div>
+                                    <img className="w-[17px] h-[17px]  rounded-md" src="./icons/bussinesCards/sevenColor.jpg" alt="" />
+                                </div>
+                            }
+                            </>
                         ))}
                     </div>
                     <div className={"flex items-center justify-between mt-4"}>

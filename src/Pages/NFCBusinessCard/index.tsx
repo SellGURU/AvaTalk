@@ -281,11 +281,23 @@ export const NFCBusinessCard = () => {
                                 <div className="mt-4 flex justify-between items-center">
                                     <div className={"flex gap-3"}>
                                         {currentCard?.colors.map((color: string) => (
-                                            <div onClick={() => {
-                                                changeCardColor(item.id,color)
-                                            }} className={`w-[26px] cursor-pointer h-[26px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
-                                                {item.color == color && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
-                                            </div>
+                                            <>
+                                                {color != 'sevenColor'
+                                                ?
+                                                <div onClick={() => {
+                                                    changeCardColor(item.id,color)
+                                                }} className={`w-[26px] cursor-pointer h-[26px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
+                                                    {item.color == color && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
+                                                </div>
+                                                :
+                                                <div onClick={() => {
+                                                    changeCardColor(item.id,color)
+                                                }}  className="relative">
+                                                    <img className="w-[26px] h-[26px]  rounded-md" src="./icons/bussinesCards/sevenColor.jpg" alt="" />
+                                                    {item.color == color && <div className="top-0 z-20 absolute left-0 w-full flex justify-center items-center h-full"> <img className="w-[10px] " src="./Carbon/tick.svg" /></div>}
+                                                </div>
+                                                }
+                                            </>
                                         ))}
                                     </div>
 
