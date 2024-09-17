@@ -23,7 +23,6 @@ const SettingService =() => {
         },
     ]
     const [activeService,setAtiveService] = useState<serviceType>()
-    console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
