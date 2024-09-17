@@ -270,7 +270,7 @@ export const NFCBusinessCard = () => {
                             </div>
                         </div>
                         <div className="flex items-center mt-2">
-                            <div className="flex text-[#9CA3AF] font-normal text-[16px]">price:<p
+                            <div className="flex text-[#9CA3AF] font-normal gap-1 text-[16px]">Price:<p
                                 className={"text-purple-500 text-lg font-semibold"}>£{currentCard?.price}</p></div>
                         </div>
                         <div className="text-[#374151] font-normal text-[12px]">

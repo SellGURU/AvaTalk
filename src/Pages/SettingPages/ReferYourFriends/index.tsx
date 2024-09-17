@@ -18,7 +18,7 @@ const ReferYourFriends = () => {
         <>
            <div className=" w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]">
                 <div className=" top-4 bg-white">
-                    <BackIcon title="Refer Your Friends" theme="Carbon"></BackIcon>
+                    <BackIcon title="Refer and Get Rewards" theme="Carbon"></BackIcon>
                 </div>         
                 <div className="w-full  h-[80px] bg-white absolute top-0"></div>   
                 <div className="mt-[100px] px-8 w-full hiddenScrollBar h-full">
@@ -57,7 +57,7 @@ const ReferYourFriends = () => {
                                 })
                             }} theme="Carbon">
                                 <div className="flex w-full justify-center items-center">
-                                    <div className={`Carbon-Edit-shareIcon`}></div>
+                                    <div className={`Carbon-Edit-shareIcon `} style={{width:'16px'}}></div>
                                    <div className="ml-2">Share Code</div> 
                                 </div>
                             </Button>
