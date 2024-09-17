@@ -29,7 +29,7 @@ import { Confirm } from "../../../Components/__Modal__";
 //       ).isValidSync(phone);
 //   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().required()
+    phone:Yup.string().required('Phone number is required')
 });
 interface SettingAccount {
     value: any;

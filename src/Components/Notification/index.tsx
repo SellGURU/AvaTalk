@@ -113,7 +113,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                                                             <div onClick={() => {
                                                                 NotificationApi.readNotification(value.id)
                                                                 markAsRead(value.id,el)
-                                                            }} className="text-left">
+                                                            }} className="text-left my-2">
                                                                 <div className="flex justify-between">
                                                                     <div className="text-text-primary text-sm">{value.title}</div>
                                                                     <div className="text-text-primary flex items-center gap-1 text-sm">{resolveDateAgo(new Date(value.date))} {!value.isRead && 
@@ -128,7 +128,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
 
                                                     <div onClick={() => {
                                                         NotificationApi.readNotification(value.id)
-                                                    }} className="text-left">
+                                                    }} className="text-left my-2">
                                                         <div className="flex justify-between">
                                                             <div className="text-text-primary text-sm">{value.title}</div>
                                                             <div className="text-text-primary flex items-center gap-1 text-sm">{resolveDateAgo(new Date(value.date))} {!value.isRead && 

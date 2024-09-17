@@ -291,17 +291,19 @@ export const NFCBusinessCard = () => {
 
 
                                     <div className={"bg-[#EEEFF3] flex items-center justify-between px-2 w-[128px] h-[40px] rounded-2xl"}>
-                                        <button  className={"bg-white text-[#5B21B6] w-8 h-8 rounded-full flex items-center justify-center"}  onClick={()=>{
+                                        <button  className={"bg-white text-[#5B21B6] text-[24px]  w-8 h-8 rounded-full flex items-center justify-center"}  onClick={()=>{
                                             if(item.count >1 || selectedColor.length > 1){
                                                 handleQuantityChange("decrement",item.id)
 
                                             }
                                         }}>
                                             {item.count>1 || selectedColor.length == 1?
-                                            "-":<img src={"/Carbon/trashVector.svg"}/>}
+                                            <div className="mt-[-3px]">-</div>:<img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}
-                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full"} onClick={()=>handleQuantityChange("increment",item.id)}>+</button>
+                                        <button  className={"bg-[#5B21B6] text-white text-[24px] flex justify-center items-center w-8 h-8 rounded-full"} onClick={()=>handleQuantityChange("increment",item.id)}>
+                                           <div className="mt-[-3px]">+</div>
+                                            </button>
 
                                     </div>
                                 </div>
