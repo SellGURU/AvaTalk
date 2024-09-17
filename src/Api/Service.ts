@@ -3,7 +3,7 @@ import Api from "./Api";
 
 interface SublinkPayload {
     unit_amount: | number,
-    recurring_interval:'year'|'week',
+    recurring_interval:'year'|'month',
     quantity:number
 }
 

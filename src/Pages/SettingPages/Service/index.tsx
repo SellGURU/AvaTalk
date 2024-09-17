@@ -12,7 +12,7 @@ import { publish } from "../../../utils/event";
 interface serviceType {
     title:string,
     price:number,
-    mode:'week'|'year'
+    mode:'month'|'year'
 }
 
 const SettingService =() => {
@@ -42,7 +42,7 @@ const SettingService =() => {
         {
             title:'Monthly $20',
             price:20,
-            mode:'week'
+            mode:'month'
         },
     ]
     const [activeService,setAtiveService] = useState<serviceType>({
