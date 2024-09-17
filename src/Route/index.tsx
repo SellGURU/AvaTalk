@@ -16,6 +16,7 @@ import {NFCBusinessCard} from "../Pages/NFCBusinessCard";
 import ResetPassword from "../Pages/ResetPassword";
 import {Tutorial} from "../Pages/Tutorial";
 import {UserManual} from "../Pages/SettingPages/UserManual";
+import {FormPage} from "../Pages/SettingPages/form";
 
 const route = createHashRouter([
   {
@@ -146,6 +147,10 @@ const route = createHashRouter([
               {
                 path: "support",
                 element: <HelpSupport></HelpSupport>
+              },
+              {
+                path: "form",
+                element: <FormPage></FormPage>
               },
               {
                 path: "privacy",
