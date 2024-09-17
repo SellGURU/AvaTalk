@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Select, TextField } from "../../../Components"
+import { PhoneNumberInput, Select, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
 import { createRef, useContext , useState } from "react";
@@ -11,29 +11,25 @@ import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 
 // const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
-  const validatePhone = (phone: number | undefined) => {
+//   const validatePhone = (phone: number | undefined) => {
 
-    return Yup.number().integer().positive().test(
-        (phone) => {
-          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
-  const validatePhoneType = (phone: string ) => {
-    console.log(phone?.split(" ").length )
+//     return Yup.number().integer().positive().test(
+//         (phone) => {
+//           return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+//         }
+//       ).isValidSync(phone);
+//   };
+//   const validatePhoneType = (phone: string ) => {
+//     console.log(phone?.split(" ").length )
 
-    return Yup.string().test(
-        (phone) => {
-          return (phone && phone.split(" ").length == 2) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
+//     return Yup.string().test(
+//         (phone) => {
+//           return (phone && phone.split(" ").length == 2) ? true : false;
+//         }
+//       ).isValidSync(phone);
+//   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890', (value) => {
-         return validatePhone(parseInt(value?.replace('+','').replace(" ",'') ?? '0')) || value == null;
-      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
-        return validatePhoneType(value?value:'') || value == null
-      })
+    phone:Yup.string().required()
 });
 interface SettingAccount {
     value: any;
@@ -58,10 +54,10 @@ const SettingAccount =() => {
         console.log(values);
         },        
     })
-    const [country, setCountry] = useState<any>({
-        codeName: "us",
-        codePhone: "+1",
-    });
+    // const [country, setCountry] = useState<any>({
+    //     codeName: "us",
+    //     codePhone: "+1",
+    // });
 
     const languageOptions = [
         { value: 'English', label: 'English' },
@@ -108,12 +104,21 @@ const SettingAccount =() => {
                             type="email" disabled></TextField>
                         </div>
 
-                        <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={formik.errors.phone?true:false} 
+                        <PhoneNumberInput 
+                            onChange={(e) => {
+                                formik.setFieldValue("phone",e)
+                            }}
+                            value={formik.values.phone}
+                            label="Account Phone"
+                            invalid={formik.errors.phone?true:false} 
+                            errorMessage={formik.errors.phone}
+                        ></PhoneNumberInput>
+                        {/* <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={formik.errors.phone?true:false} 
                         theme="Carbon" name="phone"
                         phoneCountry={country}
                         setPhoneCountry={setCountry}
                         errorMessage={formik.errors.phone}
-                        type="phone" ></TextField>
+                        type="phone" ></TextField> */}
 
                         <Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">
                             {languageOptions.map((language,index:number) => (

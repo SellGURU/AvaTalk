@@ -41,6 +41,8 @@ import DeveloperTools from "./DeveloperTools";
 import BissinesCard from "./BissinesCard";
 import PlanCard from "./PlanCard";
 import CheckBoxCostom from "./CheckBoxCustom";
+import PhoneNumberInput from "./PhoneSelectComponent";
+
 export {
   AccessNotifManager,
   Profile2,
@@ -63,6 +65,7 @@ export {
   TextArea,
   FooterPresentation,
   ContactList,
+  PhoneNumberInput,
   ContactItem,
   TagList,
   TagItem,
