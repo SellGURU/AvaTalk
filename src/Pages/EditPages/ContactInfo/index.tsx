@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  Button } from "symphony-ui";
-import { BackIcon, FileUploadr, TextArea, TextField } from "../../../Components";
+import { BackIcon, FileUploadr, PhoneNumberInput, TextArea, TextField } from "../../../Components";
 // import LocationPicker from "react-leaflet-location-picker";
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -48,10 +48,7 @@ const EditContactInfo = () => {
       onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
     },
   };
-  const [country, setCountry] = useState<any>({
-    codeName: "us",
-    codePhone: "+1",
-  });
+
   const [icons,setIcons] = useState<Array<any>>([])
   const submit = () => {
     auth.currentUser.updateCustomInformation({
@@ -143,8 +140,17 @@ const EditContactInfo = () => {
             inValid=""
           ></TextField>
         </div> */}
-        <div className="mt-3 px-6">
-          <TextField
+        <div className="mt-3 text-left px-6">
+            <PhoneNumberInput 
+                onChange={(e) => {
+                    formik.setFieldValue("workPhone",e)
+                }}
+                value={formik.values.workPhone}
+                label="Phone"
+                invalid={formik.errors.workPhone?true:false} 
+                errorMessage={formik.errors.workPhone}
+            ></PhoneNumberInput>            
+          {/* <TextField
             {...formik.getFieldProps("workPhone")}
             label="Work Phone"
             placeholder="Enter your work phone number..."
@@ -158,7 +164,7 @@ const EditContactInfo = () => {
             setPhoneCountry={setCountry}
             errorMessage=""
             inValid=""
-          ></TextField>
+          ></TextField> */}
         </div>
         <div className="px-6 mt-10">
           <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">Save Changes</Button>
