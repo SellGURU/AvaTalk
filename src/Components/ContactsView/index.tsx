@@ -246,9 +246,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
             title:tag.name,
             color:tag.color
           }).then(el => {
-            const newTag = tag
-            tag.id = el.data
-            setTags([...tags,newTag])
+            if(el.data.error){
+              toast.warn(el.data.error)
+            }else {
+              const newTag = tag
+              tag.id = el.data
+              setTags([...tags,newTag])
+            }
           })
         }}
       ></AddTag>
