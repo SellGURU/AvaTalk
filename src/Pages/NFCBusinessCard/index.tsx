@@ -10,11 +10,33 @@ import { useParams } from "react-router-dom";
 import { BusinessCard } from "../../Types";
 import { Rating } from "@smastrom/react-rating";
 import { Service } from "../../Api";
+import { useAuth } from "../../hooks/useAuth";
+
+const resolveColorNameFromColor =(color:string) => {
+    if(color == '#5B21B6'){
+        return 'purple'
+    }
+    if(color == '#000000'){
+        return 'black'
+    }
+    if(color == '#DBBB6A'){
+        return 'gold'
+    }
+    if(color == 'sevenColor'){
+        return 'rainbow'
+    }        
+    return 'black'
+}
 
 export const NFCBusinessCard = () => {
     const { id } = useParams();
+    const auth = useAuth()
     const [currentCard,setCurrentCard] = useState<BusinessCard>()
-    const [selectedColor, setSelectedColor] = useState([{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:'0'}]);
+    const [selectedColor, setSelectedColor] = useState([{
+        color:NFC.filter((el) => el.id == id)[0].colors[0],
+        count:1,id:'0',
+        colorName:'purple'
+    }]);
     // const images = [
     //     {
     //         original: '/Carbon/Purple 1.png', // Path relative to public folder
@@ -44,6 +66,7 @@ export const NFCBusinessCard = () => {
             ? {
                 ...card,
                 color: newColor, 
+                colorName:resolveColorNameFromColor(newColor)
                 }
             : card
         )
@@ -186,7 +209,7 @@ export const NFCBusinessCard = () => {
                         })}
 
                         <p className={"text-[14px] cursor-pointer mt-5 font-medium text-[#5B21B6]"}
-                           onClick={() => setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString()}])}>+ Add New Color</p>
+                           onClick={() => setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString(),colorName:resolveColorNameFromColor(NFC.filter((el) => el.id == id)[0].colors[0] as string)}])}>+ Add New Color</p>
                     </div>
 
                 </div>
@@ -215,26 +238,24 @@ export const NFCBusinessCard = () => {
                     </div>
                 </Modal>
                 <Button onClick={()=>{
-                    Service.Pyload("c7a680d998",{
-                        amount:'200',
-                        color:'black',
-                        description:'Upgrade your networking with the Avatalk NFC Business Card. Share contact details instantly, customize your AI persona, and track engagements for lasting professional impressions',
-                        product_id:'1',
-                        product_name:'a',
-                        product_url:'a',
-                        quantity:1
-                    }).then((res) => {
+                    Service.Pyload(auth.currentUser.information?.userId as string,selectedColor.map(el => {
+                        return {
+                            amount:currentCard?.price +"00" as string,
+                            color:el.colorName,
+                            description:currentCard?.description as string,
+                            product_id:currentCard?.product_id as string, 
+                            product_name:currentCard?.title as string,
+                            product_url:currentCard?.urls.filter((e) => e.color == el.colorName)[0].url,
+                            quantity: el.count
+                        }
+                    })).then((res) => {
                         window.open(res.data.paylink)
                     })                    
                 }} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
                 </Button>
                 <div className="mt-4">
-                   <Accordion bodyText={"Revolutionize Your Networking with the Avatalk NFC Business Card\n" +
-                       "                Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed\n" +
-                       "                to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking\n" +
-                       "                assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact\n" +
-                       "                sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression."}
+                   <Accordion bodyText={currentCard?.description as string}
                               title={"Description"}/>
                     <Accordion bodyText={"Key features of the product."} title={"Key Features"}/>
                     <Accordion bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>

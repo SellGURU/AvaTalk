@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Api from "./Api";
 
 interface SublinkPayload {
@@ -21,12 +22,12 @@ class Service extends Api {
         return this.post("/sublink",paymentData)
     }
 
-    static Pyload(userId:string,product:Product) {
+    static Pyload(userId:string,product:Array<Product>) {
         return this.post("/paylink",
         {
             "userid":userId,
             "products": [
-                product
+               ...product
             ] 
         }
         )

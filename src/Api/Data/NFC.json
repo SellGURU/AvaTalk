@@ -5,6 +5,8 @@
         "colors":["#5B21B6","#000000", "#DBBB6A","sevenColor"],
         "price":"7",
         "id":"1",
+        "product_id":"#00-nfc-c",
+        "description":"Upgrade your networking with the Avatalk NFC Business Card. Share contact details instantly, customize your AI persona, and track engagements for lasting professional impressions.",
         "images":[
         {
             "original": "/icons/bussinesCards/A1.png",
@@ -23,6 +25,24 @@
             "original": "/icons/bussinesCards/A4.png",
             "thumbnail": "/icons/bussinesCards/A4.png"
         }
+        ],
+        "urls":[
+            {
+                "color":"purple",
+                "url":"https://drive.google.com/uc?export=view&id=1f3yMo_NBp_aYGLq69WDhM0LjKT5kL23U"
+            },
+            {
+                "color":"black",
+                "url":"https://drive.google.com/uc?export=view&id=14-4-9hUewHUJ3567ndrpZBnVUjUv00iC"
+            },
+            {
+                "color":"gold",
+                "url":"https://drive.google.com/uc?export=view&id=1mxmErSrkQ44vNKzdT6S2xlVSMJ59E9vT"
+            },
+            {
+                "color":"rainbow",
+                "url":"https://drive.google.com/uc?export=view&id=1LCVHhMMlG7ULk5wovtYYkGe4bkWwQYG"
+            }                                    
         ]
     },
     {
@@ -31,6 +51,8 @@
         "colors":["#5B21B6","sevenColor"],
         "price":"5",
         "id":"2",
+        "product_id":"#01-nfc-t",
+        "description":"The Avatalk NFC Tag offers instant contact sharing with a tap. Its compact, AI-powered design ensures seamless networking anytime, anywhere. Perfect for professionals on the go.",        
         "images":[
         {
             "original": "/icons/bussinesCards/C1.png",
@@ -41,7 +63,17 @@
             "thumbnail": "/icons/bussinesCards/C3.png"
         }        
 
-        ]        
+        ],
+        "urls":[
+            {
+                "color":"purple",
+                "url":"https://drive.google.com/uc?export=view&id=1zsv3EP_AWbB7-WUfkGi2tS3d-Atmnxbn"
+            },
+            {
+                "color":"rainbow",
+                "url":"https://drive.google.com/uc?export=view&id=1wdclyym1lEutfug8E3xUWXxd-CTkl4h_"
+            }                                    
+        ]                
     },
     {
         "title":"Avatalk NFC Tag and Business Card Bundle",
@@ -50,6 +82,8 @@
         "price":"10",
         "oldPrice":"12",
         "id":"3",
+        "product_id":"#02-nfc-tc",
+        "description":"Get the best of both worlds with the Avatalk NFC Tag and Business Card Bundle. Instant contact sharing, AI-driven interactions, and analytics for versatile, 24/7 networking.",  
         "images":[
         {
             "original": "/icons/bussinesCards/B1.png",
@@ -59,6 +93,16 @@
             "original": "/icons/bussinesCards/B2.png",
             "thumbnail": "/icons/bussinesCards/B2.png"
         }        
-        ]        
+        ],
+        "urls":[
+            {
+                "color":"purple",
+                "url":"https://drive.google.com/uc?export=view&id=1AqTySQImwfqya7xB9FvedDf5uYNy0mBM"
+            },
+            {
+                "color":"rainbow",
+                "url":"https://drive.google.com/uc?export=view&id=1OmcnurKNY9Fg_SGLy6s4IuDvVIPy9Gq8"
+            }                                    
+        ]                 
     }   
 ]
