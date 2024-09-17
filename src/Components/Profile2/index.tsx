@@ -115,11 +115,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //   })
   // })
   const checkNotif = () => {
-    NotificationApi.checkNotification().then((res) => {
-        if(res.data["New notification"] == true) {
-          getNotifs(true)
-        }
-    })
+    if(mode != 'share'){
+      NotificationApi.checkNotification().then((res) => {
+          if(res.data["New notification"] == true) {
+            getNotifs(true)
+          }
+      })
+    }
   }
   useEffect(() => {
     const nots = localStorage.getItem("notifs")
