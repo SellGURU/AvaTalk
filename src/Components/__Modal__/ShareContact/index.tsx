@@ -123,14 +123,14 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
 
                         </div>
                     </div>
-                    <div onClick={() => {
+                    {/* <div onClick={() => {
                         setMode('smsSection')
                     }} className={`${theme}-ShareContact-CardItems `} >
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-SmsVector`}></div>
                         </div>
                         Share via SMS 
-                    </div>
+                    </div> */}
                     <div onClick={() => {
                         setMode('emailSection')
                     }} className={`${theme}-ShareContact-CardItems `}>
@@ -185,18 +185,16 @@ const ShareContact:React.FC<ShareContactProps> = ({isOpen,onAfterOpen,onClose,th
                         </div>
                         Share Link
                     </div>
-                    <div onClick={() => {
+                    {/* <div onClick={() => {
                         Auth.googleWallet().then(res => {
                            window.open(res? res.data:'', '_blank');
                         })
-                        // window.open('https://wallet.google/')
                     }} className={`${theme}-ShareContact-CardItems`}>
                         <div className={`${theme}-ShareContact-VectorMainSection btnInnerShadowsDark`}>
                             <img src="./icons/image 436.png" alt="" />
-                            {/* <div className={`${theme}-ShareContact-MainVectors ${theme}-ShareContact-LinkVector`}></div> */}
                         </div>
                        Google Wallet
-                    </div>                    
+                    </div>                     */}
                 </div>
             </div>
             </>

@@ -21,11 +21,11 @@ const HelpSupport = () => {
       icon: "tutorial.svg",
       link: "/settings/Help/tutorial",
     },
-    {
-      name: "Customer Service",
-      icon: "costomer-service.svg",
-      link: "customer-service",
-    },
+    // {
+    //   name: "Customer Service",
+    //   icon: "costomer-service.svg",
+    //   link: "customer-service",
+    // },
   ];
 
   return (
