@@ -115,20 +115,20 @@ const SettingAccount =() => {
                         errorMessage={formik.errors.phone}
                         type="phone" ></TextField>
 
-                        <Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">
-                            {languageOptions.map((language,index:number) => (
-                                <>
-                                <option key={language.value} onClick={() => {
-                                    setSelectedLanguage(language)
-                                }} className="ml-4 cursor-pointer" value={language.value}>
-                                    {language.label}
-                                </option>
-                                {index <= languageOptions.length -2 ?
-                                    <hr />
-                                :undefined}
-                                </>
-                            ))}
-                        </Select>
+                        {/*<Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">*/}
+                        {/*    {languageOptions.map((language,index:number) => (*/}
+                        {/*        <>*/}
+                        {/*        <option key={language.value} onClick={() => {*/}
+                        {/*            setSelectedLanguage(language)*/}
+                        {/*        }} className="ml-4 cursor-pointer" value={language.value}>*/}
+                        {/*            {language.label}*/}
+                        {/*        </option>*/}
+                        {/*        {index <= languageOptions.length -2 ?*/}
+                        {/*            <hr />*/}
+                        {/*        :undefined}*/}
+                        {/*        </>*/}
+                        {/*    ))}*/}
+                        {/*</Select>*/}
 {/* 
 
                         <Select

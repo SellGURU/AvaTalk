@@ -27,8 +27,7 @@ const  FreeCard = () => {
         </div>
         <div className="flex justify-center  mt-3">
           <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
-            Unlock all the power of this app and enjoy networking experience
-            like never before!
+            Unlock the full potential of this app and elevate your networking experience like never before!
           </div>
         </div>
         <div onClick={()=>{navigate("service")}} className="absolute right-7 cursor-pointer bottom-6 flex">
@@ -67,8 +66,7 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className="flex justify-center mt-3">
           <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock all the power of this app and enjoy networking experience
-            like never before!
+            Unlock the full potential of this app and elevate your networking experience like never before!
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
