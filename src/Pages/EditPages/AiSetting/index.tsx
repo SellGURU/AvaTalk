@@ -100,7 +100,7 @@ const formatText = (text: string) => {
             </Button>
           </div>
           <div className="hiddenScrollBar px-6 h-full">
-            <div className="text-left my-8" style={{lineHeight:'28px'}}>
+            <div className="text-justify my-8" style={{lineHeight:'28px'}}>
               {formatText(analysedText)}
 
             </div>

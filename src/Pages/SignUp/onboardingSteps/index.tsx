@@ -28,6 +28,20 @@ const OnBoarding = () => {
         type:'Local',
         video:''
     });      
+
+    const [canSkips,setCanSkips] = useState([
+        {
+            name:"password",
+            value:false
+        }
+    ])
+    const skipMannager = () => {
+        if(step == 0){
+            if(canSkips.filter((el) => el.name == "password")[0].value == true){
+                setStep(step+1)
+            }
+        }
+    }
     const formik = useFormik({
         initialValues:{
             silent_video_avatar:'',
@@ -94,7 +108,19 @@ const OnBoarding = () => {
             <>
                 {step == 0 &&
                     <>
-                        <CreatePasswordStep onSubmit={() => {
+                        <CreatePasswordStep canskip={(action) => {
+                            setCanSkips((pre) => {
+                                return pre.map((el) => {
+                                    if (el.name == "password") {
+                                        return {
+                                            ...el,
+                                            value: action
+                                        }
+                                    }
+                                    return el
+                                })
+                            })
+                        }} onSubmit={() => {
                             setStep(step+1)
                         }}></CreatePasswordStep>
                     </>
@@ -177,7 +203,7 @@ const OnBoarding = () => {
                     </div>
 
                     <div onClick={() => {
-                        
+                        skipMannager()
                     }} className={`text-text-primary cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                 </div>
                 {
