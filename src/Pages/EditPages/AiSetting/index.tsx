@@ -221,8 +221,8 @@ const formatText = (text: string) => {
           </div>
           <div className="px-6 mt-4">
 
-            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact
-              with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI
+            <div className="text-base  mb-4 text-justify text-text-primary">Here,you can train the AI to interact
+              with your contacts by providing detailed and useful content in the AI
               knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
                 setShowLearnMore(true)
               }}>Learn more </span></div>
