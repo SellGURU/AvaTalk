@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {BissinesCard, Splash, TextField} from "../../Components";
 import { Button } from "symphony-ui";
 import { useFormik } from "formik";
@@ -11,6 +11,8 @@ import { useConstructor } from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { LinkedIn } from "react-linkedin-login-oauth2";
+import { BeatLoader } from "react-spinners";
 
 
 const initialValue = {
@@ -41,6 +43,7 @@ const SignUp = () => {
             console.log(values);
         },
     });    
+    const [isLoading,setIsLoading] = useState(false)
     const handleGoogleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
         try {
@@ -54,7 +57,6 @@ const SignUp = () => {
                 console.log(value)
                 Auth.check_user_existence({
                     google_json:value.data,
-                    code_type:'verification'
                 }).then(res => {
                     if(res.data.check_user == true){
                         authContext.setGoogleInformation(value.data)
@@ -76,6 +78,7 @@ const SignUp = () => {
         setshowSplash(false)
     }, 3000);    
     const handleSubmit = () => {
+        setIsLoading(true)
         Auth.check_user_existence({
             email:formik.values.email,
             code_type:'verification'
@@ -83,6 +86,7 @@ const SignUp = () => {
             console.log(res)
             if(res.data.error){
                 formik.setFieldError("email",res.data.error)
+                setIsLoading(false)
             }
             if(res.data.check_user ==true){
                 Auth.get_Login_code({
@@ -97,11 +101,16 @@ const SignUp = () => {
                     authContext.siginupHandler({
                         email:formik.values.email
                     })
+                    setIsLoading(false)
                     console.log(parametr.get("referral"))
                     authContext.setReferalCode(parametr.get("referral") as string)
                     navigate('/RVerification')
+                }).catch(() => {
+                    setIsLoading(false)
                 })                
             }
+        }).catch(() => {
+            setIsLoading(false)
         })
         // let resolvePhoneOrEnail = null
         // if(formik.values.email.includes('@')){
@@ -143,6 +152,30 @@ const SignUp = () => {
             silent_video_avatar:''
         })          
     })
+    useEffect(() => {
+        const handleMessage = (event:any) => {
+        if (event.data.type === 'linkedin-auth-success') {
+            // Handle the received token
+            const { info } = event.data;
+            Auth.check_user_existence({
+                google_json:info,
+            }).then(res => {
+                if(res.data.check_user == true){
+                    authContext.setGoogleInformation(info)
+                    navigate('/createAccount')
+                }else {
+                    toast.error("user exist")
+                }
+            })
+        }
+        };
+
+        window.addEventListener('message', handleMessage);
+
+        return () => {
+        window.removeEventListener('message', handleMessage);
+        };
+    }, []);    
     return (
         <>
             {showSplash ?
@@ -161,7 +194,19 @@ const SignUp = () => {
                             <TextField  {...formik.getFieldProps("email")} errorMessage={formik.errors?.email}  placeholder="Enter your email address..." inValid={formik.errors?.email != undefined && (formik.touched?.email as boolean)} name="email"  type="email"  theme="Carbon"></TextField>
                         </div>
                         <div className="mt-4">
-                            <Button onClick={handleSubmit} disabled={!formik.isValid || formik.values.email.length <= 4} theme="Carbon">Sign up</Button>
+                            <Button  onClick={() => {
+                                if(!isLoading){
+                                    handleSubmit()
+                                }
+                                }} disabled={!formik.isValid || formik.values.email.length <= 4} theme="Carbon">
+                                {isLoading?
+                                <>
+                                    <BeatLoader color="#FFFFFF" size={10}></BeatLoader>
+                                </>   
+                                :        
+                                'Sign up'
+                                }
+                            </Button>
                         </div>
                         <div className="mt-4">
                             <div className="text-sm text-center text-text-primary">Already have an account?<span onClick={() => {
@@ -185,17 +230,29 @@ const SignUp = () => {
                             <div className="text-text-primary">Sign up with Google</div>
                             </Button>
                         </div>
+                        <LinkedIn
+                            clientId="786lwqvw2unoip"
+                            redirectUri="https://linkedin-callback.vercel.app/"
+                            // redirectUri={`http://localhost:5173/linkedin/callback`}
+                            onSuccess={() => {}}
+                            onError={() =>{}}
+                            scope={"profile,email,openid"}
+                            children={
+                                ({linkedInLogin}) => <div className="mt-4">
+                                    <Button theme="Carbon-Outline"
+                                            onClick={linkedInLogin}
+                                            className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                                        <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
+
+                                        <div className="text-text-primary">Sign up LinkedIn</div>
+                                    </Button>
+                                </div>
+                            }/>
                         <div className="mt-4">
-                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                            <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt="" />
-                            <div className="text-text-primary">Sign up with LinkedIn</div>
-                        </Button>
-                        </div>
-                        <div className="mt-4">
-                        <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                        {/* <Button theme="Carbon-Outline" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                             <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt="" />
                             <div className="text-text-primary">Sign up with Apple</div>
-                        </Button>
+                        </Button> */}
                         </div>                        
                         <div className="text-[#374151] mt-4 text-center text-[14px]">
                             By Signing up you agreed with our

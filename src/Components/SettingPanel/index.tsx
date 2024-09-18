@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 // import { Button } from "symphony-ui";
 import PackageJson from '../../../package.json';
 import { Outlet } from "react-router-dom";
@@ -23,11 +23,11 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       link: "account",
     },
 
-    {
-      name: "Sharing",
-      icon: "share.svg",
-      link: "sharing",
-    },
+    // {
+    //   name: "Sharing",
+    //   icon: "share.svg",
+    //   link: "sharing",
+    // },
     {
       name: "Order NFC Card",
       icon: "OrderNFCCard.svg",
@@ -39,7 +39,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     //   link: "service",
     // },
     {
-      name: "Refer and get rewards",
+      name: "Refer and Get Rewards",
       icon: "Referandgetrewards.svg",
       link: "refer",
     },
@@ -86,19 +86,27 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     // },
 
   ]);
-  const [isShowPlanCard,setIsShowPalnCard] = useState(true)
+  const [isShowPlanCard,setIsShowPalnCard] = useState(false)
+  useEffect(() => {
+    setTimeout(() => {
+        if(auth.currentUser.type_of_account.getType() != 'Pro') {
+          setIsShowPalnCard(true)
+        }
+      
+    }, 2000);
+  },[])
   return (
     <>
     
-      <div className={`Carbon-ContactsView-Container`}>
+      <div className={`Carbon-ContactsView-Container `}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
-        {isShowPlanCard &&
-          <div className="px-6">
-            <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
-          </div>
-        }
-        <div className="px-6 mt-0 hiddenScrollBar  h-dvh overflow-y-scroll md:pb-[450px] pb-[300] ">
+        <div className="px-6 mt-0 hiddenScrollBar h-dvh  overflow-y-scroll pb-[300px]  ">
+          {isShowPlanCard &&
+            <div className="">
+              <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
+            </div>
+          }
           {settingCards.map((item) => {
             return <SettingCard key={item.link} linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}
@@ -113,7 +121,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
         {showConfirm ?
         <>
             <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm confirmTitle="logout" refrence={confirmRef} title={"LogOut"} content={"Are you sure want to logout your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+                <Confirm confirmTitle="Logout" refrence={confirmRef} title={"Logout"} content={"Are you sure want to logout your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                   auth.logout()
                 }}></Confirm>
             </div>
@@ -121,7 +129,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
         </>
         :
         undefined
-        }      
+        }
     </>
   );
 };

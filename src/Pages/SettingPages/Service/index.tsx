@@ -1,28 +1,45 @@
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
-import {useState} from "react";
+import { Service } from "../../../Api";
+import { useEffect, useState } from "react";
+// import {useState} from "react";
 interface serviceType {
     title:string,
-    price:number
+    price:number,
+    mode:'week'|'year'
 }
 
 const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
+    const [searchParametr] = useSearchParams()
+    console.log(searchParametr.get("sassionid"))
+    useEffect(() => {
+        if(searchParametr.get("status") == "true"){
+            Service.subRedirect(searchParametr.get("sassionid")||"")
+        }
+    })
     const service:Array<serviceType> = [
         {
-            title:'Annually',
-            price:345
+            title:'Annually $200',
+            price:200,
+            mode:'year'
         },
         {
-            title:'Monthly',
-            price:45
+            title:'Monthly $20',
+            price:20,
+            mode:'week'
         },
     ]
-    const [activeService,setAtiveService] = useState<serviceType>()
+    const [activeService,setAtiveService] = useState<serviceType>({
+            title:'Annually $200',
+            mode:'year',
+            price:200
+        },)
+    console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -38,13 +55,13 @@ const SettingService =() => {
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our{context.currentUser.type_of_account.getType()+ ' Plan'}</p>
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+context.currentUser.type_of_account.getType()+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
-                            {context.currentUser.type_of_account.getType() ==="Free" &&
-                                        `Your ${context.currentUser.type_of_account.getType()} was expired on ${context.currentUser.type_of_account.getDaysReminded()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
-                            {context.currentUser.type_of_account.getType()==="Trial"&&`Your trial will end in  ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
-                            {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDaysReminded()}.`}
+                            {context.currentUser.type_of_account.getType() ==="Trial" &&
+                                        `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
+                            {context.currentUser.type_of_account.getType()==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired ${context.currentUser.type_of_account.getOldExpiredDate()} . Upgrade to Pro to unlock premium features and elevate your networking game!`}
+                            {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
 
                         </p>
 
@@ -52,7 +69,11 @@ const SettingService =() => {
                     {context.currentUser.type_of_account.getType() !="Pro" &&
                         (<>
                         <div>
-                        <ToggleButton onButtonClick={() => {}} leftText="Annually $200" rightText="Monthly $20" theme="Carbon-secandary" />                        
+                        <ToggleButton onButtonClick={(value) => {
+                            setAtiveService(service.filter(el => {
+                                return el.title.includes(value)
+                            })[0])
+                        }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />
                     </div>
                   <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">
@@ -79,7 +100,7 @@ const SettingService =() => {
                             </div>
                         </div>
 
-                            {service.map((item)=>{
+                            {/* {service.map((item)=>{
                                 return(
                                     <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
                                         {activeService?.title == item.title ?
@@ -105,9 +126,18 @@ const SettingService =() => {
                                         }
                                     </div>
                                 )
-                            })}
+                            })} */}
                     <div className="mt-8 mb-4">
-                        <Button theme="Carbon">Continue to Payment</Button>
+                        <Button onClick={() => {
+                            console.log(activeService)
+                            Service.SubLink({
+                                quantity:1,
+                                recurring_interval:activeService.mode,
+                                unit_amount:activeService.price * 100
+                            }).then(res => {
+                                window.open(res.data.sublink)
+                            })
+                        }} theme="Carbon">Continue to Payment</Button>
                     </div>
                         </>)}
                     {context.currentUser.type_of_account.getType() ==="Pro" &&

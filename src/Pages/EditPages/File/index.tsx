@@ -79,6 +79,7 @@ const EditFile = () => {
               uploades={(files: Array<any>) => {
                 console.log(files)
                 const converted:Array<File> = files.map((item) => {
+                  console.log("item.type",item.type)
                   const newFile:File = new File(item.url,item.name,item.type)
                   return newFile
                 });

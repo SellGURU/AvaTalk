@@ -23,6 +23,8 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
             setExplotaion(true)
         }, 1200);
     })
+    // const userInfo=useAuth();
+    console.log("user",user)
     return (
         <> 
             <div ref={refEl} className='bg-white overflow-hidden max-w-xl pb-6 rounded-t-[27px] px-10 w-full'>
@@ -34,7 +36,13 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </Button>
                             <div>
                                 <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
-                                <div className='text-text-primary text-center text-xs '>{'CoFounder & CEO/Codie'}</div>
+                                <div className='text-text-primary mt-1 text-center text-xs flex justify-start items-center '>{auth.currentUser.information?.job}
+                                     {" & "}  
+                                    <span className='ml-1'>
+                                        <img className='w-[16px] h-[16px]' src={auth.currentUser.information?.logo} alt="" />
+                                    </span>
+                                     {auth.currentUser.information?.company}
+                                </div>
                             </div>
                             <div className="invisible">
                                 <Button onClick={onClose} theme="Carbon-back">
@@ -67,10 +75,14 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             const contact = {
                                 name: user.information?.lastName as string,
                                 phone: user.information?.phone as string,
-                                email: user.information?.personlEmail as string };
+                                email: user.information?.personlEmail as string ,
+                                company:user.information?.company as string,
+                                address:user.information?.address as string,
+                                job:user.information?.job as string,
+                            };
 
                             // create a vcard file
-                            const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nEMAIL:" + contact.email + "\nEND:VCARD";
+                            const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nCOMPANY:" + contact.company + "JOB:" + contact.job + "ADDRESS:" + contact.address + "\nEMAIL:" + contact.email + "\nEND:VCARD";
                             const blob = new Blob([vcard], { type: "text/vcard" });
                             const url = URL.createObjectURL(blob);
 

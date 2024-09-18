@@ -1,0 +1,63 @@
+[
+    {
+        "title":"Avatalk NFC Business Card",
+        "image":"/Carbon/nfcCard.png",
+        "colors":["#5B21B6","#000000", "#DBBB6A","sevenColor"],
+        "price":"7",
+        "id":"1",
+        "images":[
+        {
+            "original": "/icons/bussinesCards/A1.png",
+            "thumbnail": "/icons/bussinesCards/A1.png"
+        },
+        {
+            "original": "/icons/bussinesCards/A2.png",
+            "thumbnail": "/icons/bussinesCards/A2.png"
+        },
+        {
+            "original": "/icons/bussinesCards/A3.png",
+            "thumbnail": "/icons/bussinesCards/A3.png"
+
+        },
+        {
+            "original": "/icons/bussinesCards/A4.png",
+            "thumbnail": "/icons/bussinesCards/A4.png"
+        }
+        ]
+    },
+    {
+        "title":"Avatalk NFC Tag",
+        "image":"/Carbon/nfcTag.png",
+        "colors":["#5B21B6","sevenColor"],
+        "price":"5",
+        "id":"2",
+        "images":[
+        {
+            "original": "/icons/bussinesCards/C1.png",
+            "thumbnail": "/icons/bussinesCards/C1.png"
+        },
+        {
+            "original": "/icons/bussinesCards/C3.png",
+            "thumbnail": "/icons/bussinesCards/C3.png"
+        }        
+
+        ]        
+    },
+    {
+        "title":"Avatalk NFC Tag and Business Card Bundle",
+        "image":"/Carbon/nfcCard_Tag.png",
+        "colors":["#5B21B6","sevenColor"],
+        "price":"7",
+        "id":"3",
+        "images":[
+        {
+            "original": "/icons/bussinesCards/B1.png",
+            "thumbnail": "/icons/bussinesCards/B1.png"
+        },
+        {
+            "original": "/icons/bussinesCards/B2.png",
+            "thumbnail": "/icons/bussinesCards/B2.png"
+        }        
+        ]        
+    }   
+]

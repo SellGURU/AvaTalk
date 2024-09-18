@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Tag } from "../../Types";
 import AddTag from "../__Modal__/AddTag";
+import { getTextColorFromBackground } from "../../help";
 
 const TagItem = ({ data, theme ,removeTag,editTag}: { data: Tag; theme: string | undefined,removeTag:(tag:Tag) => void,editTag:(tag:Tag) => void}) => {
   const [showEditTag,setShowEditTag] = useState(false);
@@ -10,7 +11,7 @@ const TagItem = ({ data, theme ,removeTag,editTag}: { data: Tag; theme: string |
         <div className="flex w-full justify-between items-center">
           <div className="borderBox-Gray boxShadow-Gray rounded-[47px]">
             <div style={{ backgroundColor: data.color }} className="flex overflow-x-hidden items-center justify-center w-[108px] space-x-[2px] h-8 rounded-[47px]">
-              <p className={`${data.color === "#6366F1" ? "text-white" : "text-gray-700"}  leading-[20px] text-[14px] font-[500] tracking-tight`}>{data.name}</p>
+              <p className={` leading-[20px] text-[14px] font-[500] tracking-tight`} style={{color:getTextColorFromBackground(data.color)}}>{data.name}</p>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate} from "react-router-dom"
+import { Outlet, useNavigate, useSearchParams} from "react-router-dom"
 import { useConstructor } from "../../help";
 import { Chat } from "../../Api";
 import { useState } from "react";
@@ -11,6 +11,8 @@ interface ChatDetailsProps {
 
 const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
     const navigate = useNavigate();
+    const [queryParameters] = useSearchParams()
+    // console.log(queryParameters.get("name"))
     const [currentChat,setCurrentChat] = useState<Array<any>>([])
     useConstructor(() => {
       Chat.showSelectedChat(window.location.hash.split('/')[2],(res) => {
@@ -54,7 +56,7 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
                 <Button onClick={() => {navigate(-1)}} theme={`${theme}-back`}>
                     <div className={`${theme}-back-Button-vector`}></div>
                 </Button>
-                <p className={`${theme}-ChatDetails-title max-w-[280px] `}>{window.location.hash.split('/')[2]}</p>
+                <p className={`${theme}-ChatDetails-title max-w-[280px] `}>{queryParameters.get("name")}</p>
             </div>            
 
             <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">

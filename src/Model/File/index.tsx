@@ -13,23 +13,27 @@ export class File {
     public order:number = -1
     constructor(protected url:string,protected name:string,protected type:string){
 
-    } 
+    }
     private resolveSvg() {
         console.log(this.type)
         switch(this.type) {
-            case 'application/pdf':
+            case 'application/pdf': //pdf
                 return 'PdfVector';
-            case 'application/psd':
+            case 'application/psd': //psd
                 return 'PhotoShopVector';
-            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //docx
                 return 'wordVector';
-            case 'application/postscript':
+            case 'application/postscript': //ai
                 return 'idVector';
-            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': //pptp
                 return 'powerpointVector';
-            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': //xslx
                 return 'ExelVector'
-            case 'application/x-zip-compressed':
+            case 'application/vnd.ms-excel': //xls
+                return 'ExelVector'
+            case 'application/x-zip-compressed': //word
+                return 'wordVector';
+            case 'application/msword'://doc
                 return 'wordVector';
             default :
                 return 'PhotoShopVector'

@@ -12,7 +12,7 @@ import { useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useAuth } from "../../../hooks/useAuth";
-import { learnMore } from "./learnMore";
+// import { learnMore } from "./learnMore";
 
 const EditAiSetting = () => {
   // let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "")[0] as AboutBox;
@@ -36,7 +36,7 @@ const EditAiSetting = () => {
       console.log(values);
     },
   });  
-  const learnMoreText = learnMore
+  // const learnMoreText = learnMore
   useConstructor(() => {
     Auth.showAiSetting((res) => {
       formik.setFieldValue("title",res.ai_setting.Name)
@@ -127,9 +127,79 @@ const formatText = (text: string) => {
             </Button>
           </div>
           <div className="hiddenScrollBar px-6 mb-20 h-full">
-            <div className="text-left my-8" style={{lineHeight:'28px'}}>
-              {formatText(learnMoreText)}
+            <div className="text-left my-4" style={{lineHeight: '28px'}}>
+              {/*{formatText(learnMoreText)}*/}
+              <div className="text-left  text-[14px]" style={{}}>
+                <p className={" text-[16px]"}>Avatalk's AI
+                  Knowledge section is the hub for crafting a personalized and effective AI-driven persona. This feature
+                  ensures your digital interactions reflect your unique professional expertise, style, and preferences,
+                  enhancing your presence and effectiveness across virtual platforms.</p>
+                <h1
+                    className={"font-bold text-[16px]"}>Purpose of Customizing Your AI Knowledge</h1>
 
+                <p
+                    className={" text-[16px]"}>The core of Avatalk's appeal lies in its ability to let you tailor your AI's
+                  knowledge base, which in turn shapes how your digital persona interacts in professional settings.
+                  Whether it’s for virtual networking, engaging potential clients, or maintaining an active professional
+                  online presence, the information you feed into your AI helps it deliver insightful, relevant
+                  responses.
+                  This customization aligns your AI's interactions with your personal and professional ambitions,
+                  helping
+                  you stand out in a competitive digital marketplace.</p>
+
+                <h1 className={"font-bold text-[16px]"}>How to Use
+                  This Section </h1>
+
+                <p className={" text-[16px]"}>Navigate to the "AI Settings" in Avatalk to start
+                  customizing:</p>
+
+                <ul>
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>AI Knowledge Input:</span> Use the rich text editor to enter
+                    details about your professional domain,
+                    expertise, and other pertinent information you wish your AI to communicate. The more detailed and
+                    specific your input, the more accurately and effectively your AI represents you.
+                  </li>
+
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Voice Gender Selection:</span> Choose your AI persona's voice
+                    gender from a dropdown menu to match your
+                    professional identity, reinforcing the consistency of your digital persona.
+                  </li>
+
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Analyze by AI:</span> This functionality analyzes your inputs
+                    and suggests enhancements to increase
+                    clarity and engagement, ensuring your AI persona communicates with sophistication and
+                    professionalism.
+                  </li>
+
+                  <li className={"list-disc text-[16px] ml-10 pl-3"}><span className={"font-bold"}>Saving Changes:</span> After tweaking your AI's knowledge and
+                    voice settings, click "Save Changes" to
+                    implement them. Your AI will instantly use this updated information, ensuring your digital presence
+                    remains polished and precise.
+                  </li>
+
+                </ul>
+
+                <h1 className={"font-bold text-[16px]"}>Upgrading to the Pro Version</h1>
+
+
+                <p className={" text-[16px]"}>While
+                  the free version of Avatalk offers substantial benefits, upgrading to the Pro version unlocks
+                  unlimited edits and continuous refinements of your AI persona. This allows for ongoing adjustments as
+                  your professional needs evolve, giving you the flexibility to keep your digital persona as dynamic and
+                  responsive as your career itself.</p>
+
+
+                <h1 className={"font-bold  text-[16px]"}>Maximize Your AI Knowledge
+                  for Effective Networking</h1>
+
+
+                <p className={" text-[16px]"}>With Avatalk’s intuitive design, you can
+                  readily update and refine your AI settings, ensuring your persona remains relevant and impactful in
+                  all professional interactions. Leverage the full capabilities of Avatalk by upgrading to the Pro
+                  version, where the possibilities for customizing and enhancing your AI-driven persona are limitless,
+                  ensuring you're always ready to make meaningful professional connections.
+                </p>
+              </div>
             </div>
 
             <Button onClick={() => {
@@ -138,11 +208,12 @@ const formatText = (text: string) => {
           </div>
 
         </div>
-        }        
-        <div className="relative top-8" style={{visibility:showAiSuggestion?'hidden':'visible'}}>
+        }
+        <div className="relative top-8" style={{visibility: showAiSuggestion ? 'hidden' : 'visible'}}>
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-[120px] mb-10 hiddenScrollBar h-full"  style={{visibility:showAiSuggestion?'hidden':'visible'}}>
+        <div className="mt-[120px] mb-10 hiddenScrollBar h-full"
+             style={{visibility: showAiSuggestion ? 'hidden' : 'visible'}}>
 
           <div className="px-6">
             <AccessNotifManager page="AiSetting"></AccessNotifManager>
@@ -150,14 +221,21 @@ const formatText = (text: string) => {
           </div>
           <div className="px-6 mt-4">
 
-            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
-              setShowLearnMore(true)
-            }}>Learn more </span></div>
+            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact
+              with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI
+              knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
+                setShowLearnMore(true)
+              }}>Learn more </span></div>
 
             {/* <div className="w-full mb-1 text-left">
               <label className={`Carbon-TextField-label `}>AI Knowledge</label>
             </div> */}
-            <TextArea analysedText={analysedText} setAnalysedText={setAnaysedText} setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse required label="AI Knowledge" errorMessage={formik.errors.Description} placeholder="Write your AI Knowledge ..." inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)} name="Description"  theme="Carbon" textAreaHeight='140px'></TextArea>
+            <TextArea analysedText={analysedText} setAnalysedText={setAnaysedText}
+                      setShowSuggestion={setShowAiSuggestion} {...formik.getFieldProps("Description")} isAnalyse
+                      required label="AI Knowledge" errorMessage={formik.errors.Description}
+                      placeholder="Write your AI Knowledge ..."
+                      inValid={formik.errors?.Description != undefined && (formik.touched?.Description as boolean)}
+                      name="Description" theme="Carbon" textAreaHeight='140px'></TextArea>
             {/* <MDEditor
               value={value}
               data-color-mode="light"
@@ -165,15 +243,18 @@ const formatText = (text: string) => {
             /> */}
           </div>
           <div className="px-6 mt-6">
-            <Select label="Voice Gender" required valueElement={<div>{gender}</div>} placeholder="Select tag..." theme="Carbon">
-              <div  className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
+            <Select label="Voice Gender" required valueElement={<div>{gender}</div>} placeholder="Select tag..."
+                    theme="Carbon">
+              <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('male')
-              }}>male</div>
-              <hr />
-              <div   className="cursor-pointer h-10 flex items-center justify-start px-4"  onClick={() => {
+              }}>male
+              </div>
+              <hr/>
+              <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('female')
-              }}>female</div>
-            </Select>          
+              }}>female
+              </div>
+            </Select>
           </div>
           {/* <div className="flex justify-between items-center mt-10 px-6 ">
                 <div className="flex gap-2 items-center">

@@ -25,6 +25,7 @@ interface Information {
     address?:string
     referral_code?:string
     gender?:'male'|'female'
+    logo?:string
 }
 
 // interface Location {
@@ -71,7 +72,7 @@ class User {
         return boxProvider(item);
     })
 
-    public type_of_account : UserType = new UserType('Trial',new Date())
+    public type_of_account : UserType = new UserType('Pro',new Date(),new Date())
     public editStatus:boolean = false;
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
@@ -184,6 +185,7 @@ class User {
     }
     public setTypeOfAccount(acount:UserType){
         this.type_of_account = acount
+        this.syncToLocalStorage()
     }
 
     public setEditStatus(status:boolean){

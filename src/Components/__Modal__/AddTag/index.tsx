@@ -34,6 +34,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
     // });
   });
 
+
   return (
     <>
       <Modal
@@ -62,7 +63,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
           {/* <div className="h-[65vh] hiddenScrollBar overflow-y-scroll"> */}
           <div>
             <div className="my-4">
-              <TextField value={title} onChange={(e) => {setTitle(e.target.value)}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="" inValid={false} />
+              <TextField value={title} onChange={(e) => {setTitle(e.target.value)}} onBlur={() => {}} label="Title" placeholder="Enter title..." theme="Carbon" name="FullName" type="text" errorMessage="Title must be 10 characters" inValid={title.length > 10} />
             </div>
             <div>
               <ColorBox color={tag?.color} resolveColor={(color:string) => {
@@ -103,7 +104,7 @@ const AddTag: React.FC<AddContactProps> = ({ isOpen, editTag,onAfterOpen,addTag,
             </div> */}
 
             <div className="mt-10">
-              <Button onClick={() => {
+              <Button disabled={title.length == 0 || title.length> 10} onClick={() => {
                 const newTag:Tag = {
                   color:colorCode,
                   contacts:0,

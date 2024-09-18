@@ -98,33 +98,38 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
   );
 
   return (
-    <div className="relative w-[100%] ">
-    {context.currentUser.type_of_account.getType() == 'Free' ?
-        <div className={`bg-[#F3F4F6] ${theme}-BarChartComponent-container-notShow`}>
-          <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Type of Share</p>
-          <div>
-            <img className=" scale-[.9] w-full z-20 " src="/Carbon/notDAtaToShow.svg" alt="" />
-            <p className={"text-[#6B7280] text-[12px] font-medium"}>No data to show</p>
-          </div>
-        </div>
-      :
-      <div className={`${theme}-PiChartComponent-container`}>
-      <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
-            <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
-              {filteredData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip/>
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    }
-    </div>
-  );
+            <div className="relative w-[100%] ">
+              {context.currentUser.type_of_account.getType() == 'Free'?
+                  <>
+                    <p className={`${theme}-AreaChartComponent-text absolute top-4 left-4 z-10`}>Type of Share</p>
+                    <img className=" scale-[1.027] w-full z-20 " src="./icons/chartBlur4.png" alt="" />
+                  </>
+                  :
+                  <div className={`${theme}-PiChartComponent-container`}>
+                    <p className={`${theme}-PiChartComponent-text`}>Type of Views</p>
+                    {chartData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Legend layout="vertical" verticalAlign="top" align="right" content={renderLegend} />
+                        <Pie startAngle={-270} data={filteredData} cx="50%" cy="50%" labelLine={false} dataKey="value">
+                          {filteredData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip/>
+                      </PieChart>
+                    </ResponsiveContainer>
+                    ):(
+                        <div className={" h-full w-full flex-col flex items-center justify-center scale-150"}>
+                          <img className={"md:w-20 w-16 h-16 md:h-20 "} src={"/Carbon/notDAtaToShow.svg"}/>
+                          <h1 className={"text-[12px] font-medium"}>No data to show</h1>
+
+                        </div>
+                    )}
+                  </div>
+              }
+            </div>
+  )
 };
 
 export default PiChartComponent;

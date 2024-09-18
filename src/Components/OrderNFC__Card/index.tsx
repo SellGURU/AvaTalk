@@ -5,9 +5,10 @@ interface Props {
     title:string,
     price:string,
     imgSrc:string
+    id:string
 }
 
-export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) => {
+export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc,id}:Props) => {
     const resolveBackGround = (color:string) => {
         if(color == 'sevenColor'){
             return 'radial-gradient(circle, #9873D2CC, #FFFAEE)'
@@ -15,16 +16,16 @@ export const CardOrderNFCProduct = ({listColorBadge,title,price,imgSrc}:Props) =
         return color
     }
     return (
-        <Link rel="stylesheet" to="/settings/NFCBusinessCard">
+        <Link rel="stylesheet" to={"/settings/NFCBusinessCard/"+id}>
             <div className={"Carbon-Card-Product-NfcCard-container overflow-hidden "} style={{padding:'0px'}}>
                 <div className={"w-full flex items-center justify-center"} style={{
                     boxShadow:'inset 4px 4px 14px 2px #E2E8F0,inset -4px -4px 9px 2px #FFFFFF99',
                 }}>
                     <img src={imgSrc} className={"h-[115px] w-fit"}  alt={""}/>
                 </div>
-                <div className="p-4 bg-white mt-0 ">
-                    <h1 className={"text-[10px] h-10 text-[#374151] font-bold"}>{title}</h1>
-                    <div className={"text-[10px] text-[#6B7280] flex gap-2 items-center"}>
+                <div className="p-4 px-3 bg-white mt-0 ">
+                    <h1 className={"text-[10px]   text-[#374151] font-bold"} style={{lineHeight:'1rem'}}>{title}</h1>
+                    <div className={"text-[10px] text-[#6B7280]  flex gap-2 items-center"}>
                         Colors:
                         {listColorBadge.map((color:string,index) => (
                             <div className={`w-[17px] h-[17px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
