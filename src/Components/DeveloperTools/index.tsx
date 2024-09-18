@@ -39,7 +39,7 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                                 publish("nextPage",{})
                             }} theme="Carbon"> next day</Button>
                             <Button onClick={() => {
-                                TimeManegar.nextDay()
+                                TimeManegar.nextMonth()
                                 publish("nextPage",{})
                             }} theme="Carbon"> next month</Button>
                         </div>
