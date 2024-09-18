@@ -9,7 +9,7 @@ const HelpSupport = () => {
     {
       name: "Support Form",
       icon: "form.svg",
-      link: "form",
+      link: "/settings/Help/form",
     },
     {
       name: "User Manual",
