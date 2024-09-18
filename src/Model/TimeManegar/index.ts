@@ -6,14 +6,14 @@ class TimeManegar {
     }
 
     static renderDate() {
-        return this.nowDate.getUTCFullYear() +'-'+Number(this.nowDate.getUTCMonth()+1)+"-"+this.nowDate.getUTCDate()
+        return this.formatDate(this.nowDate)
     }
     static nextDay() {
         this.nowDate.setDate(this.nowDate.getDate() + 1);
     } 
     
     static nextMonth() {
-        this.nowDate.setDate(this.nowDate.getMonth() + 1);
+        this.nowDate.setDate(this.nowDate.getDate() + 30);
     } 
 
     static formatDate(dateString:string | Date) {
