@@ -5,6 +5,7 @@ import route from './Route';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { DeveloperTools } from './Components';
 
 function App() {
   // useMoch()
@@ -15,7 +16,7 @@ function App() {
             <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
               <RouterProvider router={route} />
               <ToastContainer />
-
+              <DeveloperTools></DeveloperTools>
             </GoogleOAuthProvider>
         </div>          
       </div>

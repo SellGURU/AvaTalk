@@ -12,6 +12,10 @@ class TimeManegar {
         this.nowDate.setDate(this.nowDate.getDate() + 1);
     } 
     
+    static nextMonth() {
+        this.nowDate.setDate(this.nowDate.getMonth() + 1);
+    } 
+
     static formatDate(dateString:string | Date) {
         // Create a Date object from the input string
         const date = new Date(dateString);

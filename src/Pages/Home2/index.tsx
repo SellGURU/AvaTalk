@@ -57,6 +57,7 @@ const Home2 = () => {
             authContext.currentUser.setTypeOfAccount(
                 new UserType(
                     data.type_of_account.type.capitalize(),
+                    // 'Free',
                     data.type_of_account.register_date,
                     data.type_of_account.end_of_subscription_date,
                     data.type_of_account.previous_status_detail

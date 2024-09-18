@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "symphony-ui"
 import { TimeManegar } from "../../Model"
 import { publish } from "../../utils/event"
@@ -9,6 +9,15 @@ interface DeveloperToolsInterface {
 
 const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
     const [showMenu,setShowMenu] = useState(false)
+    const [time ,setTime] = useState(TimeManegar.renderDate())
+    
+    const updateTime = () => {
+        setTime(TimeManegar.renderDate())
+    }
+    useEffect(() => {
+        const interval = setInterval(updateTime, 15000);     
+        return () => clearInterval(interval);
+    },[])
     return (
         <>
             {showMenu ?
@@ -23,13 +32,16 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                     <hr />
 
                     <div className="mt-3">
-                        <div className="px-10">
-                            <div>time is : {TimeManegar.renderDate()}</div>
+                        <div className="px-10 gap-2 flex flex-col">
+                            <div>time is : {time}</div>
                             <Button onClick={() => {
                                 TimeManegar.nextDay()
                                 publish("nextPage",{})
                             }} theme="Carbon"> next day</Button>
-
+                            <Button onClick={() => {
+                                TimeManegar.nextDay()
+                                publish("nextPage",{})
+                            }} theme="Carbon"> next month</Button>
                         </div>
                     </div>
                 </div>
