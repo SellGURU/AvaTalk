@@ -25,6 +25,14 @@ class UserType {
         return this.type
     }
 
+    getpenaltyDayUsed(){
+        const date = new Date(this.date)
+
+        if(new Date(this.nowDate.getTime() -date.getTime() +365).getDate() <= 14){
+            return new Date(this.nowDate.getTime() -date.getTime()).getDate()
+        }
+        return 1
+    }
     public getDayUsed() {
         const date = new Date(this.date)
         if(new Date(this.nowDate.getTime() -date.getTime()).getDate() <= 14){

@@ -129,9 +129,8 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         <div className="pt-2 w-full flex items-center justify-center">
         </div>
         <div className="flex justify-center mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock all the power of this app and enjoy networking experience
-            like never before!
+          <div className="text-white text-[14px]  relative z-50  text-justify w-full">
+            7 days left! Renew now to keep enjoying premium networking tools without interruption.
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
@@ -147,7 +146,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
             ></div>
           </div>
           <div
-              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getDayUsed() % 7}/7
+              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getpenaltyDayUsed()}/7
             Day
           </div>
         </div>
