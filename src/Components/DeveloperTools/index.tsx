@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Button } from "symphony-ui"
 import { TimeManegar } from "../../Model"
 import { publish } from "../../utils/event"
+import { useAuth } from "../../hooks/useAuth"
 
 interface DeveloperToolsInterface {
 
@@ -10,7 +11,7 @@ interface DeveloperToolsInterface {
 const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
     const [showMenu,setShowMenu] = useState(false)
     const [time ,setTime] = useState(TimeManegar.renderDate())
-    
+    const auth = useAuth()
     const updateTime = () => {
         setTime(TimeManegar.renderDate())
     }
@@ -34,6 +35,8 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                     <div className="mt-3">
                         <div className="px-10 gap-2 flex flex-col">
                             <div>time is : {time}</div>
+                            <div>expired is : {auth.currentUser.type_of_account.getDateExpired()}</div>
+                            <div>user is : {auth.currentUser.type_of_account.getType()}</div>
                             <Button onClick={() => {
                                 TimeManegar.nextDay()
                                 setTime(TimeManegar.renderDate())
