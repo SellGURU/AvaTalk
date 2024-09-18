@@ -174,11 +174,14 @@ export const NFCBusinessCard = () => {
 
                                             }
                                         }}>
-                                            {item.count>1 || selectedColor.length == 1?
-                                            "-":<img src={"/Carbon/trashVector.svg"}/>}
+                                            {item.count > 1 || selectedColor.length == 1 ?
+                                                <img src={"/Carbon/mines.svg"}/>
+                                                : <img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}
-                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full flex items-center justify-center"} onClick={()=>handleQuantityChange("increment",item.id)}>+</button>
+                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full flex items-center justify-center"} onClick={()=>handleQuantityChange("increment",item.id)}>
+                                            <img src={"/Carbon/normalAdd.svg"}/>
+                                        </button>
 
                                     </div>
                                 </div>
@@ -237,7 +240,7 @@ export const NFCBusinessCard = () => {
                        "                sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression."}
                               title={"Description"}/>
                     <Accordion bodyText={"Key features of the product."} title={"Key Features"}/>
-                    <Accordion bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>
+                    {/*<Accordion bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>*/}
                 </div>
             </div>
 
