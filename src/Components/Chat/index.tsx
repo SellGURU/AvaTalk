@@ -157,14 +157,14 @@ const Chat: React.FC<Props> = ({ theme }) => {
         </>
       )}
       {
-        showEchangeModal && 
+        showEchangeModal&&!isReadyTO && 
         <EnhanceModal onClose={() => {
           setShowEchangeModal(false)
         }} submit={() => {
           navigate('/edit/ai-setting')
         }}></EnhanceModal>
       }
-        {isReadyTO &&
+        {isReadyTO &&!showEchangeModal&&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
             <ReadyForMore page="Chat" onClose={() => {
               setIsReadyTo(false)

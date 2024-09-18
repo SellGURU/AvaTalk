@@ -255,11 +255,11 @@ const SignUp = () => {
                         </Button> */}
                         </div>                        
                         <div className="text-[#374151] mt-4 text-center text-[14px]">
-                            By Signing up you agreed with our
+                            By signing up, you agree with
                         </div>                    
                         <div  className="text-center text-[14px] mt-1 cursor-pointer"><span onClick={() => {
                             // navigate('https://avatalk.me/termsofservice/')
-                            window.open('https://avatalk.me/termsofservice/')
+                            window.open('https://avatalk.me/terms-of-service/')
                         }} className="text-[#06B6D4]">Terms & Conditions. </span></div>
                     </div>
                 </>
