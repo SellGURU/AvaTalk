@@ -36,10 +36,12 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                             <div>time is : {time}</div>
                             <Button onClick={() => {
                                 TimeManegar.nextDay()
+                                setTime(TimeManegar.renderDate())
                                 publish("nextPage",{})
                             }} theme="Carbon"> next day</Button>
                             <Button onClick={() => {
                                 TimeManegar.nextMonth()
+                                setTime(TimeManegar.renderDate())
                                 publish("nextPage",{})
                             }} theme="Carbon"> next month</Button>
                         </div>
