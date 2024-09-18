@@ -15,7 +15,7 @@ const  FreeCard = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full h-[230px] pt-7 relative bg-primary-color rounded-[24px] flex flex-col items-center justify-start ">
+      <div className="w-full h-[230px] pt-7 px-6 relative bg-primary-color rounded-[24px] flex flex-col items-center justify-start ">
         <img className={"w-[50px] relative z-50 h-[50px]"} src={"/Carbon/L-Shield Done.svg"}/>
         <div className=" overflow-hidden  rounded-3xl h-full  absolute  w-full opacity-100 left-0 bottom-0 right-0 top-0">
           <img className="w-full scale-150 h-full rounded-xl " src="/icons/backPlanBg.svg" alt="" />
@@ -26,16 +26,19 @@ const  FreeCard = () => {
           </div>
         </div>
         <div className="flex justify-center  mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
+          <div className="text-white text-[14px]  relative z-50  text-center w-full">
             Unlock all the power of this app and enjoy networking experience
             like never before!
           </div>
         </div>
-        <div onClick={()=>{navigate("service")}} className="absolute right-7 cursor-pointer bottom-6 flex">
-          <div  className="text-[#F3F4F6] mr-2 text-[14px] font-medium">
+        <div onClick={() => {
+          navigate("service")
+        }} className=" relative z-20 mt-2 cursor-pointer w-full justify-end flex">
+          <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
+
             Upgrade your plan
           </div>
-          <img src={"/Carbon/arrow-right.svg"} alt="" />
+          <img src={"/Carbon/arrow-right.svg"} alt=""/>
         </div>
       </div>     
     </> 
