@@ -178,7 +178,7 @@ export const NFCBusinessCard = () => {
                                             "-":<img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}
-                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full"} onClick={()=>handleQuantityChange("increment",item.id)}>+</button>
+                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full flex items-center justify-center"} onClick={()=>handleQuantityChange("increment",item.id)}>+</button>
 
                                     </div>
                                 </div>

@@ -23,7 +23,7 @@ const ReferYourFriends = () => {
                 <div className="w-full  h-[80px] bg-white absolute top-0"></div>   
                 <div className="mt-[100px] px-8 w-full hiddenScrollBar h-full">
                     <div className="w-full flex justify-center">
-                        <img src="./icons/gift.png" alt="" />
+                        <img src="./icons/gift2.svg" alt="" />
                     </div>
                     <div className="w-full relative h-[96px] overflow-hidden bg-[#0000001A] mt-4 rounded-[24px]">
                         <div className="w-full absolute top-0 left-0 z-10">
