@@ -21,6 +21,8 @@ const SettingService =() => {
     const [searchParametr] = useSearchParams()
     const location = useLocation();    
     const [isOpen, setIsOpen] = useState(false);
+    const [plan] = useState(context.currentUser.type_of_account.getType())
+    const [beExpired,setIsExpired] = useState(false)
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
@@ -31,6 +33,11 @@ const SettingService =() => {
                     navigate(location.pathname, { replace: true });                  
                 })    
             }, 1000);
+        }
+    })
+    useEffect(() => {
+        if(context.currentUser.type_of_account.getDayremindToExpired() <= 7 && context.currentUser.type_of_account.getType() == 'Pro'){
+            setIsExpired(true)
         }
     })
     const service:Array<serviceType> = [
@@ -50,7 +57,7 @@ const SettingService =() => {
             mode:'year',
             price:200
         },)
-    console.log("context.currentUser.type_of_account.getType():",context.currentUser.type_of_account.getType())
+        
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>
@@ -66,18 +73,18 @@ const SettingService =() => {
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+context.currentUser.type_of_account.getType()+ ' Plan'}</p>
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+plan+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
-                            {context.currentUser.type_of_account.getType() ==="Trial" &&
-                                        `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
-                            {context.currentUser.type_of_account.getType()==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired ${context.currentUser.type_of_account.getOldExpiredDate()}.Upgrade to Pro to unlock premium features and elevate your networking game!`}
-                            {context.currentUser.type_of_account.getType()==="Pro"&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
-
+                            {plan==="Trial" &&
+                                        `Your trial will end in ${plan} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
+                            {plan==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired ${context.currentUser.type_of_account.getOldExpiredDate()}.Upgrade to Pro to unlock premium features and elevate your networking game!`}
+                            {plan==="Pro"&& !beExpired&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
+                            {plan==="Pro"&& beExpired&&`Your plan is about to expire! Renew now to avoid losing your Avatalk services.`}
                         </p>
 
                     </div>
-                    {context.currentUser.type_of_account.getType() !="Pro" &&
+                    {(plan !="Pro" || beExpired) &&
                         (<>
                         <div>
                         <ToggleButton onButtonClick={(value) => {
@@ -111,33 +118,6 @@ const SettingService =() => {
                             </div>
                         </div>
 
-                            {/* {service.map((item)=>{
-                                return(
-                                    <div className="px-6 mb-4 flex items-center justify-between Carbon-Setting-CardContainer ps-5" onClick={()=>setAtiveService(item)}>
-                                        {activeService?.title == item.title ?
-                                            <>
-                                                <div className="flex items-center text-sm font-medium text-[#374151]">
-                                                    <div
-                                                        className="w-6 h-6 flex mr-3 items-center justify-center cursor-pointer relative border border-white bg-primary-color rounded-full p-[5px]">
-                                                        <input type={"radio"} className={""}/>
-                                                    </div>
-                                                    {item.title}
-                                                </div>
-                                                <div className="text-sm text-[#6B7280] font-normal">{item.price} $</div>
-                                            </>
-                                            :
-                                            <>
-                                                <div className="flex items-center">
-                                                    <div
-                                                        className="w-6 h-6 mr-3   cursor-pointer relative borderBox-Gray  rounded-full"></div>
-                                                    <h1 className={"text-sm font-medium text-[#374151]"}>{item.title}</h1>
-                                                </div>
-                                                <div className="text-sm text-[#6B7280] font-normal">{item.price} $</div>
-                                            </>
-                                        }
-                                    </div>
-                                )
-                            })} */}
                     <div className="mt-8 mb-4">
                         <Button onClick={() => {
                             console.log(activeService)
@@ -151,7 +131,7 @@ const SettingService =() => {
                         }} theme="Carbon">Continue to Payment</Button>
                     </div>
                         </>)}
-                    {context.currentUser.type_of_account.getType() ==="Pro" &&
+                    {plan ==="Pro" && !beExpired &&
                     <div className={"w-full flex justify-center items-center mt-6 gap-2"}>
 
                     <img src={"/Carbon/safety money.svg"}/>

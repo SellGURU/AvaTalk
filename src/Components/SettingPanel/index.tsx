@@ -89,7 +89,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
   const [isShowPlanCard,setIsShowPalnCard] = useState(false)
   useEffect(() => {
     setTimeout(() => {
-        if(auth.currentUser.type_of_account.getType() != 'Pro' || auth.currentUser.type_of_account.getDaysReminded() <=7) {
+        if(auth.currentUser.type_of_account.getType() != 'Pro' || auth.currentUser.type_of_account.getDayremindToExpired() <= 7) {
           setIsShowPalnCard(true)
         }
       

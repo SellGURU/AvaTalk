@@ -61,6 +61,22 @@ class UserType {
         return TimeManegar.formatDate(this.endDate)
     }
 
+    public getDayremindToExpired(){
+        const date = new Date(this.endDate)
+        return Math.ceil((date.getTime() -this.nowDate.getTime()) / 86400000) ;
+    }
+
+    public getDayremindToExpiredFrom7Day(){
+        return 7 - this.getDayremindToExpired()
+    }
+
+    public getDayremindToExpiredFrom7DayPercent(){
+        if(this.getDayremindToExpiredFrom7Day() * 100 / 7 <= 100){
+            return this.getDayremindToExpiredFrom7Day() * 100 / 7
+        }
+        return 100
+    }    
+
     public getOldExpiredDate() {
         return TimeManegar.formatDate(this.previous_status_detail?.previous_type_end_date || new Date())
     }

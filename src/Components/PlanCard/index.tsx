@@ -133,18 +133,18 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
           <div
-              className={` mt-2 h-[20px] relative w-full  rounded-[16px] p-[1px] px-[2px] bg-[#E1E1E1] `}
+              className={` mt-2 h-[20px] relative w-full overflow-hidden  rounded-[16px] p-[1px] px-[2px] bg-[#E1E1E1] `}
           >
             <div
                 className={`absolute rounded-[16px]  h-[17px]  `}
                 style={{
                   background: 'linear-gradient(to right, #FECA06 50%, #FECA06 100%)',
-                  width: `${auth.currentUser.type_of_account.getPercentDayUsed()}%`,
+                  width: `${auth.currentUser.type_of_account.getDayremindToExpiredFrom7DayPercent()}%`,
                 }}
             ></div>
           </div>
           <div
-              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getpenaltyDayUsed()}/7
+              className="text-[#F9FAFB] text-sm font-medium self-start "> {auth.currentUser.type_of_account.getDayremindToExpiredFrom7Day()}/7
             Day
           </div>
         </div>
