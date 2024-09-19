@@ -137,28 +137,7 @@ export const NFCBusinessCard = () => {
         count:1,id:'0',
         colorName:'purple'
     }]);
-    // const images = [
-    //     {
-    //         original: '/Carbon/Purple 1.png', // Path relative to public folder
-    //         thumbnail: '/Carbon/Purple 1.png', // Optional thumbnail (can be the same image or different)
-    //         description: '', // Optional description
-    //     },
-    //     {
-    //         original: '/Carbon/whaote.png', // Another image
-    //         thumbnail: '/Carbon/whaote.png',
-    //         description: '',
-    //     },
-    //     {
-    //         original: '/Carbon/black1.png', // Another image
-    //         thumbnail: '/Carbon/black1.png',
-    //         description: '',
-    //     },
-    //     {
-    //         original: '/Carbon/gold 1.png', // Another image
-    //         thumbnail: '/Carbon/gold 1.png',
-    //         description: '',
-    //     },
-    // ];
+
     const changeCardColor = (id:string,newColor:string) => {
         setSelectedColor((prevCards) =>
             prevCards.map((card:any) =>
@@ -212,7 +191,12 @@ export const NFCBusinessCard = () => {
             return 'radial-gradient(circle, #9873D2CC, #FFFAEE)'
         }
         return color
-    }    
+    }  
+    const handelNewCard = () => {
+        if(selectedColor.length <= (currentCard?.colors.length as number)){
+            setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString(),colorName:resolveColorNameFromColor(NFC.filter((el) => el.id == id)[0].colors[0] as string)}])        
+        }
+    }  
     return (
         <div className=" w-full bg-[#FDFDFE] hiddenScrollBar h-dvh top-[0px]  z-[15]">
             <div className=" top-4">
@@ -224,7 +208,7 @@ export const NFCBusinessCard = () => {
                 <div className="flex flex-col justify-center items-center">
                     <div className="flex w-full px-6 xl:px-16 pb-16  ">
                         <ImageGallery
-                        
+                            
                             showThumbnails={true} // Ensure thumbnails are visible
                             thumbnailPosition="right" // Thumbnail position on the right
                             showPlayButton={false} // Disable slideshow button
@@ -323,8 +307,8 @@ export const NFCBusinessCard = () => {
                             )
                         })}
 
-                        <p className={"text-[14px] cursor-pointer mt-5 font-medium text-[#5B21B6]"}
-                           onClick={() => setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString(),colorName:resolveColorNameFromColor(NFC.filter((el) => el.id == id)[0].colors[0] as string)}])}>+ Add New Color</p>
+                        <p  className={`text-[14px]  mt-5 font-medium text-[#5B21B6] ${selectedColor.length > (currentCard?.colors.length as number)?'opacity-60 cursor-not-allowed':'cursor-pointer'}`}
+                           onClick={() => handelNewCard()}>+ Add New Color</p>
                     </div>
 
                 </div>
