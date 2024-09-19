@@ -33,7 +33,7 @@ export const FormPage = () => {
     const [isLoading,setIsLoading]=useState<boolean>(true);
     const getData = async () => {
         setIsLoading(true)
-        const res = await SupportForm.SupportFormApi("","","");
+        const res = await SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message);
         console.log(res)
         setIsLoading(false);
     }
