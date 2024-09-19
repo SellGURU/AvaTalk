@@ -373,7 +373,7 @@ export const NFCBusinessCard = () => {
                    <Accordion bodyText={currentCard?.description as string}
                               title={"Description"}/>
                     <Accordion component={ResolvekeyFeature(currentCard?.id as string)} bodyText={"Key features of the product."} title={"Key Features"}/>
-                    {/*<Accordion component={ResolveWhyChoice(currentCard?.id as string)} bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>*/}
+                    <Accordion component={ResolveWhyChoice(currentCard?.id as string)} bodyText={""} title={"Why Choose this Product? "}/>
                 </div>
             </div>
 
