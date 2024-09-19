@@ -53,7 +53,7 @@ const TextArea: React.FC<InputProps> = ({
     Auth.analyseAiSetting(value).then((res) => {
       console.log(res)
       if(res.data["AI suggestion"]){
-        setIsCompleteAnalyse(true)      
+        setIsCompleteAnalyse(true)
         if(setAnalysedText){
           setAnalysedText(res.data["AI suggestion"])
         }
@@ -101,7 +101,7 @@ const TextArea: React.FC<InputProps> = ({
             </>
           }
           {
-            !isAnalysing && !isCompleteAnalyse &&
+            !isAnalysing &&!isCompleteAnalyse&&
               <div onClick={() => {
                 analyseText()
               }} className="absolute bg-gray-100 flex py-2 px-1 justify-end items-center bottom-0 right-5">
@@ -112,18 +112,18 @@ const TextArea: React.FC<InputProps> = ({
               </div>
           }
           {
-            isCompleteAnalyse && 
+              isCompleteAnalyse &&
               <div onClick={() => {
                 // analyseText()
-                if(setShowSuggestion){
+                if (setShowSuggestion) {
                   setShowSuggestion(true)
                 }
               }} className="absolute bg-gray-100 flex py-2 px-1 justify-end items-center bottom-0 right-5">
-                <img src="./Carbon/tick.svg" alt="" />
+                <img src="./Carbon/tick.svg" alt=""/>
                 <div className="text-primary-color cursor-pointer ml-1 text-sm font-medium">
                   Analyzed
                 </div>
-              </div>            
+              </div>
           }
         
         </>

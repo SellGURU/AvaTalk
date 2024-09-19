@@ -26,9 +26,8 @@ const  FreeCard = () => {
           </div>
         </div>
         <div className="flex justify-center  mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock all the power of this app and enjoy networking experience
-            like never before!
+          <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
+            Unlock the full potential of this app and elevate your networking experience like never before!
           </div>
         </div>
         <div onClick={() => {
@@ -70,8 +69,7 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className="flex justify-center mt-3">
           <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock all the power of this app and enjoy networking experience
-            like never before!
+            Unlock the full potential of this app and elevate your networking experience like never before!
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
@@ -121,7 +119,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
 
         <div className="overflow-hidden  rounded-3xl h-full  absolute w-full opacity-100 left-0 top-0">
           <img className="w-full  " src="/icons/backPlanCard.png" alt=""/>
-      
+
         </div>
 
 
@@ -159,7 +157,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
           </div>
           <img src={"/Carbon/arrow-right.svg"} alt=""/>
         </div>
-      </div>     
+      </div>
     </>
   )
 }

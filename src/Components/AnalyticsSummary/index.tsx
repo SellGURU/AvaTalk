@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, {useState} from "react";
 import NumberSeparator from "../../utils/NumberSeparator";
-import { useAuth } from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth.tsx";
+// import { useAuth } from "../../hooks/useAuth";
 
 interface Props {
   theme?: string;
@@ -26,7 +27,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           {
             !isVisible &&
             <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
-          }          
+          }
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer relative`}>
           <p className={`${theme}-AnalyticsSummary-text`}>AR Usage</p>
@@ -42,7 +43,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           {
             !isVisible &&
             <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
-          }        
+          }
         </div>        
       </div>
       <div className={`${theme}-AnalyticsSummary-rowContainer`}>
@@ -53,7 +54,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           {
             !isVisible &&
             <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
-          }       
+          }
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer relative`}>
           <p className={`${theme}-AnalyticsSummary-text`}>Link Click</p>
@@ -61,7 +62,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           {
             !isVisible &&
             <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
-          }       
+          }
         </div>
         <div className={`${theme}-AnalyticsSummary-cardContainer relative`}>
           <p className={`${theme}-AnalyticsSummary-text`}>File Click</p>
@@ -69,7 +70,7 @@ const AnalyticsSummary: React.FC<Props> = ({ theme ,data}) => {
           {
             !isVisible &&
             <div className="w-full h-full bg-[#5B21B626] absolute z-30 rounded-[25px] left-0 top-0"></div>
-          }        
+          }
         </div>        
       </div>
     </div>

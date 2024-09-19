@@ -15,19 +15,35 @@ export class File {
 
     }
     private resolveSvg() {
-        console.log(this.type)
+        console.log("type:",this.type)
         switch(this.type) {
             case 'application/pdf': //pdf
                 return 'PdfVector';
+            case 'PDF': //pdf
+                return 'PdfVector';
             case 'application/psd': //psd
+                return 'PhotoShopVector';
+            case 'PSD': //psd
                 return 'PhotoShopVector';
             case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //docx
                 return 'wordVector';
             case 'application/postscript': //ai
                 return 'idVector';
+            case 'AI': //ai
+                return 'idVector';
             case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': //pptp
                 return 'powerpointVector';
+            case 'PPTP': //pptp
+                return 'powerpointVector';
+            case 'PPT': //pptp
+                return 'powerpointVector';
             case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': //xslx
+                return 'ExelVector'
+            case 'XLSX': //xslx
+                return 'ExelVector'
+            case 'XLS': //xslx
+                return 'ExelVector'
+            case 'XLX': //xslx
                 return 'ExelVector'
             case 'application/vnd.ms-excel': //xls
                 return 'ExelVector'
@@ -35,8 +51,10 @@ export class File {
                 return 'wordVector';
             case 'application/msword'://doc
                 return 'wordVector';
-            default :
-                return 'PhotoShopVector'
+            case 'DOC'://doc
+                return 'wordVector';
+            case 'DOCX'://doc
+                return 'wordVector';
         }
     }
     public resolveRender(theme:string,userID:string) {

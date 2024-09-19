@@ -2,7 +2,7 @@
   @apply my-5 h-[88px] borderBox-Gray boxShadow-Gray  flex items-center w-full relative  rounded-[24px]  px-4;
 }
 .Carbon-ContactItem-section {
-  @apply flex w-full   items-center pt-4;
+  @apply flex w-full cursor-pointer   items-center pt-4;
 }
 .Carbon-ContactItem-exchange {
   @apply absolute top-0 left-4 bg-primary-color text-[white] leading-[20px] text-[10px] font-[400]  py-[1px] px-[8px] rounded-[4px];

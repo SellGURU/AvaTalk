@@ -24,7 +24,7 @@ const resolveColorNameFromColor =(color:string) => {
     }
     if(color == 'sevenColor'){
         return 'rainbow'
-    }        
+    }
     return 'black'
 }
 
@@ -38,7 +38,7 @@ const ResolvekeyFeature =(id:string) => {
                             Seamless Contact Exchange: Utilizing NFC technology, this card allows for instant and effortless exchange of contact details. With just a simple tap, your professional profile is shared, making it easy for others to connect with you.
                             Customizable AI Persona: Personalize your networking experience by customizing your AI avatar. This avatar reflects your professional image with precision, making sure that every interaction is consistent and aligned with your personal brand.
                             24/7 Availability: Your Avatalk persona is always ready to engage, even when you’re not. Whether you’re in a meeting, traveling, or simply offline, your digital presence remains active, ensuring continuous engagement with your network.
-                            Advanced Analytics: Gain insights into how your networking efforts are paying off. The Avatalk NFC Business Card provides data on your interactions, helping you refine your approach and maximize your impact.                        
+                            Advanced Analytics: Gain insights into how your networking efforts are paying off. The Avatalk NFC Business Card provides data on your interactions, helping you refine your approach and maximize your impact.
                     </p>
                 </>
             )
@@ -52,12 +52,12 @@ const ResolvekeyFeature =(id:string) => {
                         AI-Powered Persona: Just like the Avatalk NFC Business Card, the NFC Tag also integrates an AI-driven persona. This digital assistant is capable of understanding and responding in various contexts, ensuring that your networking interactions are always relevant and engaging.
                         Portable and Durable: The Avatalk NFC Tag is designed for those on the go. Its compact size and robust build make it the perfect companion for any professional, whether you’re at an event, a meeting, or traveling.
                         Customizable Design: Personalize the NFC Tag to align with your professional image. You can customize the AI persona and even the appearance of the tag itself, ensuring it matches your style and branding.
-                        Global Reach: The Avatalk NFC Tag breaks geographical barriers, allowing you to connect with professionals worldwide. Its multilingual support ensures that you can engage with anyone, anywhere, without language being a barrier.             
+                        Global Reach: The Avatalk NFC Tag breaks geographical barriers, allowing you to connect with professionals worldwide. Its multilingual support ensures that you can engage with anyone, anywhere, without language being a barrier.
                     </p>
                 </>
             )
 
-        }       
+        }
         if(id == '3'){
             return (
                 <>
@@ -68,12 +68,12 @@ const ResolvekeyFeature =(id:string) => {
                         Customizable and Personalized: Personalize your AI persona and the appearance of both the business card and the tag. This ensures that your digital presence is consistent across all platforms and interactions, reflecting your professional image accurately.
                         24/7 Networking: With both the NFC Business Card and the NFC Tag, your digital presence is always active. Whether you’re at a business event or simply on the go, your networking assistant is working around the clock, making connections and building relationships.
                         Advanced Analytics: The bundle also provides comprehensive analytics for both the business card and the tag. Track your interactions, analyze engagement trends, and refine your networking strategy based on data-driven insights.
-           
+
                     </p>
                 </>
             )
 
-        }            
+        }
         return (
                 <>
                     <div>{id}</div>
@@ -90,7 +90,7 @@ const ResolveWhyChoice =(id:string) => {
                     <p className="mb-2 text-[#6B7280] font-normal text-[12px]">
 Choosing the Avatalk NFC Business Card means embracing a new era of networking. It’s not just about exchanging contact details; it’s about creating memorable interactions that foster meaningful relationships. This business card is ideal for professionals who want to stand out, offering a blend of advanced technology and personalized engagement that traditional cards simply cannot match.
 Whether you’re at a conference, a meeting, or a casual networking event, the Avatalk NFC Business Card ensures that every interaction is impactful. It’s your 24/7 networking assistant, always ready to connect and impress, leaving a lasting impression long after the first encounter.
-                     
+
                     </p>
                 </>
             )
@@ -102,12 +102,12 @@ Whether you’re at a conference, a meeting, or a casual networking event, the A
                     <p className="mb-2 text-[#6B7280] font-normal text-[12px]">
 The Avatalk NFC Tag is perfect for professionals who need a versatile and portable networking tool. It’s small enough to carry with you everywhere, yet powerful enough to handle all your networking needs. Whether you’re a freelancer, a business owner, or part of a larger organization, this tag helps you maintain a proactive and professional presence.
 Priced at just £5, the Avatalk NFC Tag is an affordable yet powerful tool that ensures you never miss a networking opportunity. It’s your pocket-sized networking assistant, ready to make connections and leave lasting impressions at a moment’s notice.
-        
+
                     </p>
                 </>
             )
 
-        }       
+        }
         if(id == '3'){
             return (
                 <>
@@ -119,7 +119,7 @@ This bundle is perfect for those who want to cover all bases, offering the conve
                 </>
             )
 
-        }            
+        }
         return (
                 <>
                     <div>{id}</div>
@@ -309,13 +309,14 @@ export const NFCBusinessCard = () => {
 
                                             }
                                         }}>
-                                            {item.count>1 || selectedColor.length == 1?
-                                            <div className="mt-[-3px]">-</div>:<img src={"/Carbon/trashVector.svg"}/>}
+                                            {item.count > 1 || selectedColor.length == 1 ?
+                                                <img src={"/Carbon/mines.svg"}/>
+                                                : <img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}
-                                        <button  className={"bg-[#5B21B6] text-white text-[24px] flex justify-center items-center w-8 h-8 rounded-full"} onClick={()=>handleQuantityChange("increment",item.id)}>
-                                           <div className="mt-[-3px]">+</div>
-                                            </button>
+                                        <button  className={"bg-[#5B21B6] text-white w-8 h-8 rounded-full flex items-center justify-center"} onClick={()=>handleQuantityChange("increment",item.id)}>
+                                            <img src={"/Carbon/normalAdd.svg"}/>
+                                        </button>
 
                                     </div>
                                 </div>
@@ -357,7 +358,7 @@ export const NFCBusinessCard = () => {
                             amount:currentCard?.price +"00" as string,
                             color:el.colorName,
                             description:currentCard?.description as string,
-                            product_id:currentCard?.product_id as string, 
+                            product_id:currentCard?.product_id as string,
                             product_name:currentCard?.title as string,
                             product_url:currentCard?.urls.filter((e) => e.color == el.colorName)[0].url,
                             quantity: el.count
@@ -372,7 +373,7 @@ export const NFCBusinessCard = () => {
                    <Accordion bodyText={currentCard?.description as string}
                               title={"Description"}/>
                     <Accordion component={ResolvekeyFeature(currentCard?.id as string)} bodyText={"Key features of the product."} title={"Key Features"}/>
-                    <Accordion component={ResolveWhyChoice(currentCard?.id as string)} bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>
+                    {/*<Accordion component={ResolveWhyChoice(currentCard?.id as string)} bodyText={"Reasons why this product is a great choice."} title={"Why Choose this Product? "}/>*/}
                 </div>
             </div>
 
