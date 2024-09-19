@@ -119,7 +119,11 @@ const EditLinks = () => {
                     <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
                       <div className="w-full flex items-center justify-between">
                         <div className="flex justify-start ml-1 gap-1 items-center">
-                           <img className="h-4" src={`https://${new URL(item.geturl()).hostname}/favicon.ico`} alt="" />
+                          {item.isValidURL() ?
+                            <img className="h-4" src={`https://logo.clearbit.com/${new URL(item.geturl()).hostname}`} alt="" />
+                          :
+                          undefined
+                          }
                           <div className="">
                             <div className="text-[13px] mb-[-4px]">
                               {item.getName()}
