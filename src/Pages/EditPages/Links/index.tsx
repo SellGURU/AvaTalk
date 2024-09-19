@@ -58,9 +58,8 @@ const EditLinks = () => {
       auth.currentUser.addBox(
           new LinkBox(formik.values.title,links)
       )
-      navigate('/')
+           navigate('/')
   }
-
   const deleteSocial = (index:number) => {
     const newArr = [...links]
     newArr.splice(index,1)
