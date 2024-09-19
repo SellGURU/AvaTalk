@@ -1,6 +1,7 @@
 import { useAuth } from "../../hooks/useAuth"
 import {useEffect, useState} from 'react';
 import { subscribe } from "../../utils/event";
+import {Link} from "react-router-dom";
 
 interface AccessNotifManager{
     page:string
@@ -135,7 +136,10 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                             {page == 'chatEndUser' ?
                                   <div className="text-[#FBBF24] cursor-pointer text-[14px]">Create Your Avatalk</div>
                                 :
+                                <Link to={"/settings/service"}>
+
                                 <div className="text-[#FBBF24] cursor-pointer text-[14px]">Upgrade to Pro</div>
+                                </Link>
                             }
                             <div onClick={() => {
                                 setShowNotif(false)

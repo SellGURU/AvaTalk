@@ -115,7 +115,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
             <p onClick={() =>setShowConfirm(true)} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
           </div>
 
-          <div className="flex items-center text-[#8290a3] text-sm mt-5 justify-center">Version:{PackageJson.description}{PackageJson.version}</div>
+          <div className="flex items-center text-[#8290a3] text-sm mt-5 justify-center">Version:{"    "}{PackageJson.description}{PackageJson.version}</div>
         </div>
       </div>
         {showConfirm ?

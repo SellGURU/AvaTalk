@@ -119,8 +119,8 @@ const EditLinks = () => {
                       } */}
                     <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
                       <div className="w-full flex items-center justify-between">
-                        <div className="flex justify-start ml-4 items-center">
-                          {/* <img className="h-4" src={"./icons/media/"+item.miniIconUrl()} alt="" /> */}
+                        <div className="flex justify-start ml-1 gap-1 items-center">
+                           <img className="h-4" src={item.geturl()+"/favicon.ico"} alt="" />
                           <div className="">
                             <div className="text-[13px] mb-[-4px]">
                               {item.getName()}

@@ -217,7 +217,6 @@ const formatText = (text: string) => {
 
           <div className="px-6">
             <AccessNotifManager page="AiSetting"></AccessNotifManager>
-
           </div>
           <div className="px-6 mt-4">
 

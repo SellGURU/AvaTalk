@@ -84,7 +84,7 @@ const SettingService =() => {
                             setAtiveService(service.filter(el => {
                                 return el.title.includes(value)
                             })[0])
-                        }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />                        
+                        }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />
                     </div>
                   <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">
