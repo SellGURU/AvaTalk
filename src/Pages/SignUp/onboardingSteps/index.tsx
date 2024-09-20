@@ -98,8 +98,8 @@ const OnBoarding = () => {
         }else{
             setAvaterList(res.data)
             // setIsLoading(false)
-            formik.setFieldValue('silent_video_avatar',res.data[0].video)
-            formik.setFieldValue('avatar_pic_url',res.data[0].photo)
+            formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) =>el.gender =='female')[0].video)
+            formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) =>el.gender =='female')[0].photo)
         }     
         })    
     })    
@@ -128,6 +128,8 @@ const OnBoarding = () => {
                 {step == 1 &&
                     <>
                         <InformationStep onSubmit={() => {
+                            formik.setFieldValue('silent_video_avatar',avatarList.filter((el:any) =>el.gender =='female')[0].video)
+                            formik.setFieldValue('avatar_pic_url',avatarList.filter((el:any) =>el.gender =='female')[0].photo)                            
                             setStep(step+1)
                         }}></InformationStep>
                     </>
