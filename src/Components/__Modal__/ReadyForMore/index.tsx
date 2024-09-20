@@ -75,7 +75,7 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                 </div>
                 <div className="px-5">
                     <Button onClick={() => {
-                        navigate('/')
+                        navigate('/settings/service')
                     }} theme="Carbon">Upgrade to Pro</Button>
 
                 </div>
