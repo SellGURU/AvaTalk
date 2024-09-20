@@ -67,10 +67,10 @@ const EditFile = () => {
           <div className="px-6 mt-3">
             <ImageUploadr
               accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id"
-              value={files.map((item, index) => {
+              value={files.map((item) => {
                 return {
                   url: item.geturl(),
-                  name: "itembox " + index * 2000,
+                  name: item.getName(),
                   type:item.getType()
                 };
               })}
