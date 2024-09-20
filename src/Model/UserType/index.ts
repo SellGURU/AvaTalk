@@ -85,6 +85,10 @@ class UserType {
         return  this.previous_status_detail?.previous_type
     }    
 
+    public setType(taypeName:UserTypes){
+        this.type = taypeName
+    }
+
 }
 
 export default UserType

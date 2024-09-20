@@ -26,7 +26,7 @@ const  FreeCard = () => {
           </div>
         </div>
         <div className="flex justify-center  mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-[309px]">
+          <div className="text-white text-[14px]  relative z-50  text-center w-full">
             Unlock the full potential of this app and elevate your networking experience like never before!
           </div>
         </div>
