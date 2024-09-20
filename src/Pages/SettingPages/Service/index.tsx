@@ -78,7 +78,7 @@ const SettingService =() => {
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
                             {plan==="Trial" &&
                                         `Your trial will end in ${plan} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
-                            {plan==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired ${context.currentUser.type_of_account.getOldExpiredDate()}.Upgrade to Pro to unlock premium features and elevate your networking game!`}
+                            {plan==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired at ${context.currentUser.type_of_account.getOldExpiredDate()} .Upgrade to Pro to unlock premium features and elevate your networking game!`}
                             {plan==="Pro"&& !beExpired&&`Your subscription will expire at ${context.currentUser.type_of_account.getDateExpired()}.`}
                             {plan==="Pro"&& beExpired&&`Your plan is about to expire! Renew now to avoid losing your Avatalk services.`}
                         </p>

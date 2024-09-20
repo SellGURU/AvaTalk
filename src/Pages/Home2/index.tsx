@@ -114,6 +114,9 @@ const Home2 = () => {
     //         setShowDeveloperTools(true)
     //     }
     // })
+    useEffect(() => {
+        setMenu(resolveMenuFromRoute() as MenuType)
+    })
     return (
         <>
             {showSplash ?

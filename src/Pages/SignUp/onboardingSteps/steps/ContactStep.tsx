@@ -70,7 +70,7 @@ const ContactStep:React.FC<ContactStepProps> = ({
     return (
         <>
             <div className="mt-8">
-                <div className="text-text-primary font-semibold text-center">Contact information</div>
+                <div className="text-text-primary font-semibold text-center">Contact Information</div>
                 <div className="flex justify-center">
                     <div className="text-[#6B7280] text-[14px] mt-2 text-center w-[256px]">
                         Store and manage your phone number and E-mail  address.                                      

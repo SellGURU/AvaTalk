@@ -204,7 +204,7 @@ const OnBoarding = () => {
 
                     <div onClick={() => {
                         skipMannager()
-                    }} className={`text-text-primary cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
+                    }} className={`text-text-primary invisible cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                 </div>
                 {
                     resolveStep()

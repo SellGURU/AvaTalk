@@ -1,6 +1,7 @@
 import { Button } from "symphony-ui"
 import { publish } from "../../../utils/event"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 interface ReadyForMoreProps {
     onClose:() =>void
@@ -8,7 +9,7 @@ interface ReadyForMoreProps {
 }
 
 const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
-
+    const navigate = useNavigate()
     useEffect(() => {
         publish("profileIsReview",{})
         return () => {
@@ -73,7 +74,9 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                     </div>
                 </div>
                 <div className="px-5">
-                    <Button theme="Carbon">Upgrade to Pro</Button>
+                    <Button onClick={() => {
+                        navigate('/')
+                    }} theme="Carbon">Upgrade to Pro</Button>
 
                 </div>
             </div>

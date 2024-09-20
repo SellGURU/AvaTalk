@@ -162,6 +162,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
           setShowEchangeModal(false)
         }} submit={() => {
           navigate('/edit/ai-setting')
+          
         }}></EnhanceModal>
       }
         {isReadyTO &&!showEchangeModal&&
