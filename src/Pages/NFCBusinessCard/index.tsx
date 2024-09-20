@@ -193,7 +193,7 @@ export const NFCBusinessCard = () => {
         return color
     }  
     const handelNewCard = () => {
-        if(selectedColor.length <= (currentCard?.colors.length as number)){
+        if(selectedColor.length < (currentCard?.colors.length as number)){
             setSelectedColor((prv) => [ ...prv,{color:NFC.filter((el) => el.id == id)[0].colors[0],count:1,id:(prv.length+1).toString(),colorName:resolveColorNameFromColor(NFC.filter((el) => el.id == id)[0].colors[0] as string)}])        
         }
     }  
@@ -307,7 +307,7 @@ export const NFCBusinessCard = () => {
                             )
                         })}
 
-                        <p  className={`text-[14px]  mt-5 font-medium text-[#5B21B6] ${selectedColor.length > (currentCard?.colors.length as number)?'opacity-60 cursor-not-allowed':'cursor-pointer'}`}
+                        <p  className={`text-[14px]  mt-5 font-medium text-[#5B21B6] ${selectedColor.length >= (currentCard?.colors.length as number)?'opacity-60 cursor-not-allowed':'cursor-pointer'}`}
                            onClick={() => handelNewCard()}>+ Add New Color</p>
                     </div>
 
@@ -356,7 +356,7 @@ export const NFCBusinessCard = () => {
                 <div className="mt-4">
                    <Accordion bodyText={currentCard?.description as string}
                               title={"Description"}/>
-                    <Accordion component={ResolvekeyFeature(currentCard?.id as string)} bodyText={"Key features of the product."} title={"Key Features"}/>
+                    <Accordion component={ResolvekeyFeature(currentCard?.id as string)} bodyText={""} title={"Key Features"}/>
                     <Accordion component={ResolveWhyChoice(currentCard?.id as string)} bodyText={""} title={"Why Choose this Product? "}/>
                 </div>
             </div>
