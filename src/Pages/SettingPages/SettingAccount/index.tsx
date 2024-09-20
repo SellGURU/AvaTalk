@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PhoneNumberInput, Select, TextField } from "../../../Components"
+import { PhoneNumberInput, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
 import { createRef, useContext , useState } from "react";
@@ -66,7 +66,7 @@ const SettingAccount =() => {
         { value: 'Arabic', label: 'Arabic' },
         { value: 'Persian', label: 'Persian'},
     ];
-    const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]);
+    const [selectedLanguage, ] = useState(languageOptions[0]);
     // const handleLanguageChange = (event: any) => {
     //     setSelectedLanguage(event.target.value);
     // };
