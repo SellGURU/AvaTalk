@@ -129,7 +129,7 @@ const formatText = (text: string) => {
           <div className="hiddenScrollBar px-6 mb-20 h-full">
             <div className="text-left my-4" style={{lineHeight: '28px'}}>
               {/*{formatText(learnMoreText)}*/}
-              <div className="text-left  text-[14px]" style={{}}>
+              <div className="text-justify text-[14px]" style={{}}>
                 <p className={" text-[16px]"}>Avatalk's AI
                   Knowledge section is the hub for crafting a personalized and effective AI-driven persona. This feature
                   ensures your digital interactions reflect your unique professional expertise, style, and preferences,

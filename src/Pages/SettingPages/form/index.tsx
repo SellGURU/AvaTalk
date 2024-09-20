@@ -7,6 +7,7 @@ import {Button} from "symphony-ui";
 import SupportForm from "../../../Api/suportForm.ts";
 import {useState} from "react";
 import TextArea from "../../../Components/TextArea";
+import { toast } from "react-toastify";
 
 export const FormPage = () => {
     const validationSchema = Yup.object().shape({
@@ -33,8 +34,10 @@ export const FormPage = () => {
     const [,setIsLoading]=useState<boolean>(true);
     const getData = async () => {
         setIsLoading(true)
-        const res = await SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message);
-        console.log(res)
+        SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message).then(res => {
+            toast.success(res.data)
+        });
+
         setIsLoading(false);
     }
     return (
@@ -52,7 +55,7 @@ export const FormPage = () => {
                     <div className="mb-4">
                         <div className="flex flex-col relative gap-y-4 w-[100%]">
 
-                            <h1 className={" font-bold text-[14px]"}>Get in touch with us! Have any questions? Let us know, we're here to help!</h1>
+                            <div className={" font-bold mb-4 text-[14px]"}>Get in touch with us! Have any questions? Let us know, we're here to help!</div>
                         </div>
                         <div className={"flex flex-col items-center justify-center gap-4"}>
                             <TextField errorMessage={formik.errors.fullname}  inValid={formik.errors.fullname as string}  {...formik.getFieldProps("fullname")} theme="Carbon" label={"Full Name"} placeholder={"Enter your first and last name..."}
