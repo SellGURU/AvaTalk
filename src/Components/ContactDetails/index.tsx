@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
-import { AddContact, DeleteContact } from "../__Modal__";
+import { DeleteContact } from "../__Modal__";
+import EditContact from "../__Modal__/AddContact/editContact";
 import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
@@ -305,7 +306,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </Button>
         </div>
       </div>
-      <AddContact
+      {/* <AddContact
         allTags={tags}
         mode="edit"
         onEditContact={handleEditContact}
@@ -318,7 +319,22 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         onClose={() => {
           setShowEditContactModal(false);
         }}
-      ></AddContact>
+      ></AddContact> */}
+      {showEditContactModal && 
+      <>
+      <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+        <EditContact
+          contact={contact}
+          title="Edit contact"  
+          onAddContact={handleEditContact}
+          onClose={() => {
+            setShowEditContactModal(false)
+          }}
+        ></EditContact>
+      </div>
+       <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
+      </>
+      }
       <DeleteContact
         theme="Carbon"
         onDelete={() => {
