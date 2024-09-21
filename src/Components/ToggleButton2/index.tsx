@@ -15,17 +15,17 @@ const ToggleButton2: React.FC<ToggleProps> = ({ theme,value, leftText, rightText
     setActiveButton(buttonText);
     onButtonClick(buttonText);
   };
-  const activeStyle = `${theme}-ToggleButton-ActiveButton `;
+  const activeStyle = `${theme}-ToggleButton2-ActiveButton `;
   return (
     <div className={`${theme}-ToggleButton-container px-2 `}>
       <div className={`${theme}-ToggleButton-notActiveButton w-full justify-center flex border border-solid border-transparent px-2   ${activeButton === leftText ? activeStyle : ""} `}>
-        <Button onClick={() => handleButtonClick(leftText)} theme="Carbon-Toggle">
+        <Button data-mode={activeButton == leftText ?'active2':""} onClick={() => handleButtonClick(leftText)} theme="Carbon-Toggle">
           <img src="./Carbon/userVector.svg" className=" w-5 h-5 me-[6px]"/>
           {leftText}
         </Button>
       </div>
       <div className={`${theme}-ToggleButton-notActiveButton w-full justify-center flex border border-solid border-transparent px-2  ${activeButton === rightText ? activeStyle : ""} `}>
-        <Button onClick={() => handleButtonClick(rightText)} theme="Carbon-Toggle">
+        <Button data-mode={activeButton == rightText ?'active2':""} onClick={() => handleButtonClick(rightText)} theme="Carbon-Toggle">
           <img src="./Carbon/chatVector.svg" className=" w-5 h-5 me-[6px]"/>
           {rightText}
         </Button>

@@ -10,6 +10,10 @@
   @apply text-white #{!important};
 }
 
+.Carbon-Toggle-Button-container[data-mode="active2"] {
+  @apply text-[#8290a3] #{!important};
+}
+
 .Carbon-secandary-Toggle-Button-container {
   @apply disabled:cursor-not-allowed px-5 md:w-[220px] flex justify-center items-center  whitespace-nowrap  text-[#374151] leading-[21px]  text-[14px] font-[500]    #{!important};
 }
