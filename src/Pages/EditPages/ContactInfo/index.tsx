@@ -59,11 +59,13 @@ const EditContactInfo = () => {
       workPhone:formik.values.workPhone as string,
       referral_code:auth.currentUser.information?.referral_code,
       address:formik.values.address,
+      phone:formik.values.phone,
       logo:icons[0].url
     })
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
       job_title:formik.values.job as string,
+      phone:formik.values.phone as string,
       location:{
         lat:pointMode.control.values[0][0],
         lng:pointMode.control.values[0][1]
@@ -146,10 +148,12 @@ const EditContactInfo = () => {
                     formik.setFieldValue("workPhone",e)
                 }}
                 value={formik.values.workPhone}
-                label="Phone"
+                label="Work Phone"
                 invalid={formik.errors.workPhone?true:false} 
                 errorMessage={formik.errors.workPhone}
-            ></PhoneNumberInput>            
+            ></PhoneNumberInput>   
+
+                      
           {/* <TextField
             {...formik.getFieldProps("workPhone")}
             label="Work Phone"
@@ -165,6 +169,17 @@ const EditContactInfo = () => {
             errorMessage=""
             inValid=""
           ></TextField> */}
+        </div>
+        <div className="mt-3 text-left px-6">
+            <PhoneNumberInput 
+                onChange={(e) => {
+                    formik.setFieldValue("phone",e)
+                }}
+                value={formik.values.phone}
+                label="Phone"
+                invalid={formik.errors.phone?true:false} 
+                errorMessage={formik.errors.phone}
+            ></PhoneNumberInput>             
         </div>
         <div className="px-6 mt-10">
           <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">Save Changes</Button>
