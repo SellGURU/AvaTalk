@@ -23,8 +23,8 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 setShowNotif(true)
             }, 3000);            
         }
-        if(authContext.currentUser.type_of_account.getType() == 'Free' && !isSkipped){
-            if(authContext.currentUser.type_of_account.getDaysReminded()<=5)
+        if(authContext.currentUser.type_of_account.getType() == 'Pro' && !isSkipped){
+            if(authContext.currentUser.type_of_account.getDayremindToExpired() <= 7)
                 setTimeout(() => {
                     setShowNotif(true)
                 }, 3000);
@@ -109,6 +109,42 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 Engage more with videos. Upgrade to Pro to captivate your audience!                `;
             }                                             
         }        
+        if(authContext.currentUser.type_of_account.getType() == 'Pro') {
+            if(page == 'AiSetting'){
+                return `
+                   Your custom AI settings will revert to default in 7 days unless you renew your plan. Keep your Pro membership!    
+                `
+            }
+            if(page == 'GallerySetting'){
+                return `
+                    Gallery capacity will be limited soon. Renew to maintain your extensive gallery. Tap to renew your Pro membership!
+                `                
+            }
+            if(page == 'LinkSetting'){
+                return `
+                    Your profile will be restricted to 2 links soon. Tap to renew your Pro membership!
+                `                
+            }        
+            if(page == 'FileSetting'){
+                return `
+                    File upload size and access will be limited soon. Renew to continue sharing all your files!
+                `                
+            }  
+            if(page == 'AnalysePage'){
+                return `
+                    Your access to analytics is about to expire! Renew to keep tracking your progress.
+                `                
+            }   
+            if(page == 'ChatPage'){
+                return `
+                    Access to review chats will be limited soon. Renew your subscription to keep seeing the content of your messages.
+                `                
+            }    
+            if (page == "VideoSetting") {
+              return `
+                Video access will end soon. Renew to keep your profile dynamic.              `;
+            }   
+        }
         return ''
     }
     return (

@@ -53,7 +53,8 @@ const DatePicker = (props:any) => {
             />
 
        </div>
-          <img src="../../../Carbon/leftVector.svg" className="w-4 h-4 me-2 -rotate-90 " alt="" />
+        <div className="Carbon-Card-Vector rotate-90 me-2"></div>
+          {/* <img src="../../../Carbon/leftVector.svg" className="w-4 h-4 me-2 -rotate-90 " alt="" /> */}
         </div>
 
       </div>
