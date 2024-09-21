@@ -143,7 +143,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       <div className={`${theme}-ContactDetails-container2`}>
         <div className={`${theme}-ContactDetails-container3`}>      
           <div className={`${theme}-Profile-ProfilePictureSection`}>
-            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture`} />
+            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div onClick={() => {
@@ -162,7 +162,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
+        <p className={`${theme}-ContactDetails-nameItem mt-2`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className={`${theme}-ContactDetails-showExibitionconContainer `}>
           {/* {showExhibition && (
