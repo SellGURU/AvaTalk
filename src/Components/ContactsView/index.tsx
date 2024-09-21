@@ -139,7 +139,8 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <div className="flex w-full items-center relative justify-between mb-[22px] pr-6">
         <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
         <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
-          <img src="./Carbon/more.svg" alt="" />
+          {/* <img src="./Carbon/more.svg" alt="" /> */}
+          <div className={`${theme}-ContactList-Vector-more`}></div>
         </Button>
         {
           showMoreModal ?
@@ -213,8 +214,11 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               const newTags = [...tags]
               const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
               newTags[indexTag] = tag
-              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id)))
+              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id))).then(() => {
+                getContacts()
+              })
               setTags([...newTags])
+              
             }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])             
               Contacts.deleteTag(tag)
