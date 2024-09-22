@@ -52,6 +52,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
   const [prisentMode,setPrisentMode] = useState('audio')
   const notificationRefrence =useRef<HTMLDivElement>(null)
+  const ButtonnotificationRefrence =useRef<HTMLDivElement>(null)
   const [isHaveNewNotif,setIsHaveNewNotif] = useState(false)
   useModalAutoClose({
     refrence:ShowProfileRef,
@@ -61,6 +62,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   })     
   useModalAutoClose({
     refrence:notificationRefrence,
+    buttonRefrence:ButtonnotificationRefrence,
     close:() => {
       setShowNotification(false)
     }
@@ -375,9 +377,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {/* {!scrolled && */}
           {
             mode == 'profile' &&
-              <div className="absolute top-4 left-6 z-20">
+              <div ref={ButtonnotificationRefrence} className="absolute top-4 left-6 z-20">
                 <Button onClick={() => {
-                  setShowNotification(true)
+                  setShowNotification(!showNotification)
                   setIsHaveNewNotif(false)
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
@@ -478,7 +480,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className={`w-full mt-[-320px] invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className="w-full bg-[#E2E8F0] h-[148px] -mt-[16px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
                 <div className="ml-2 min-w-[129px]">
-                  <img className="w-[129px] border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
+                  <img className="w-[129px] border-solid border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                 </div>
                 <div className="ml-3 max-w-[320px] overflow-hidden">
                   <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>

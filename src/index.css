@@ -206,7 +206,9 @@
     background: linear-gradient(0deg, #f3f4f6, #f3f4f6) padding-box, linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box,
       linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%) border-box;
   }
-
+  .boxShadow-button-gray {
+    box-shadow: 4px 4px 20px 0px #886FB01F,2px 2px 4px 0px #728EAB1A;
+  }
   .borderBox-primary {
     border: 3px solid transparent;
     background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255)) padding-box, linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box,
