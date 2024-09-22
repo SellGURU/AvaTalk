@@ -24,21 +24,11 @@ export const Accordion=({bodyText,title,component}:Props) => {
                         aria-controls="accordion-collapse-body-1"
                     >
                         <span>{title}</span>
-                        <svg
-                            data-accordion-icon
-                            className={`w-3 h-3 transform ${isOpen ? 'rotate-0' : 'rotate-180'} shrink-0`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 10 6"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 5 5 1 1 5"
-                            />
-                        </svg>
+                        {isOpen ? 
+                         <div className="Carbon-Card-Vector -rotate-90 w-[14px]"></div>
+                        :
+                        <div className="Carbon-Card-Vector rotate-90 w-[14px]"></div>
+                        }
                     </button>
                 </h2>
                 <div
