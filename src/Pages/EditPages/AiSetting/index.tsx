@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
-import { useConstructor } from "../../../help";
+import { getOS, useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useAuth } from "../../../hooks/useAuth";
@@ -269,7 +269,7 @@ const formatText = (text: string) => {
                 </div>
           </div>           */}
           <div className="px-6 mt-10">
-            <Button disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
+            <Button data-os={getOS} disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
               if(auth.currentUser.type_of_account.getType() == 'Free' && auth.currentUser.editStatus){
                 setIsReadyTo(true)
               }else{

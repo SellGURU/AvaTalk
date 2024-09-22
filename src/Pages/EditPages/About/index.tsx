@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { useAuth } from "../../../hooks/useAuth";
 import { AboutBox } from "../../../Model";
 import { useNavigate } from "react-router";
+import { getOS } from "../../../help";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Title is required.'),
@@ -65,7 +66,7 @@ const EditAbout = () => {
             ></TextArea>
           </div>
           <div className="px-6 mt-10">
-            <Button onClick={submit} theme="Carbon">
+            <Button data-os={getOS} onClick={submit} theme="Carbon">
               Save Changes
             </Button>
           </div>

@@ -6,9 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { DeveloperTools } from './Components';
+import { handleDivices } from './help';
+
 
 function App() {
-  // useMoch()
+  handleDivices()
   return (
     <>
       <div className='w-full h-dvh flex overflow-hidden justify-center items-center '>

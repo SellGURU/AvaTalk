@@ -316,4 +316,19 @@ const getOS = () => {
   return 'other';
 }
 
-export { resolveMenuFromRoute,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+const handleDivices = () =>  {
+  // const platform = getOS();
+  // const element = document.querySelector('.Carbon-Button-container') as HTMLElement;
+  // console.log(element)
+  // if (element) {
+  //     if (platform === 'ios') {
+  //         element.style.fontWeight = '700';
+  //     } else if (platform === 'android') {
+  //         element.style.fontWeight = '600';
+  //     } else {
+  //         element.style.fontWeight = '800'; // For Windows or other
+  //     }
+  // }
+}
+
+export { resolveMenuFromRoute,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
