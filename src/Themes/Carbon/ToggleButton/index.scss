@@ -35,3 +35,12 @@ linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) border-box;
 
   @apply rounded-[27px] h-[32px] flex items-center justify-center overflow-hidden  #{!important};
 }
+
+.Carbon-icon-chatVector{
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url(/Carbon/chatVector.svg);
+    @apply w-[20px] me-[6px] h-[20px] 
+}
