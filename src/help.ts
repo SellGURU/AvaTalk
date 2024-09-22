@@ -294,4 +294,26 @@ const getTextColorFromBackground = (hex:string) => {
     // Use black text if the luminance is high, otherwise use white
     return luminance > 0.5 ? '#374151' : 'white';
 }
-export { resolveMenuFromRoute,getTextColorFromBackground, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+const getOS = () => {
+  const userAgent = window.navigator.userAgent || window.navigator.vendor
+
+  // Windows
+  if (userAgent.indexOf('Win') !== -1) {
+    return 'windows';
+  }
+  
+  // iOS
+  if (/iPad|iPhone|iPod/.test(userAgent) ) {
+    return 'ios';
+  }
+  
+  // Android
+  if (/android/i.test(userAgent)) {
+    return 'android';
+  }
+  
+  // Default (for cases not detected)
+  return 'other';
+}
+
+export { resolveMenuFromRoute,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };

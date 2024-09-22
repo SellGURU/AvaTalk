@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
-import { boxProvider, useConstructor } from "../../help";
+import { boxProvider, getOS, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
 import { Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -497,7 +497,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
                     ></div>
-                    <div  className={`${theme}-text-layer1`}>Edit Profile</div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
@@ -505,7 +505,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       `}
                       style={{width:'1.25rem'}}
                     ></div>  
-                    <span className={`${theme}-text-layer1`}>
+                    <span data-os={getOS()} className={`${theme}-text-layer1`}>
                     Share Profile
                       </span>   
                   </Button>
@@ -587,14 +587,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
                     ></div>
-                    <div className={`${theme}-text-layer1`}>Edit Profile</div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
                       style={{width:'1.25rem'}}
                     ></div>     
-                    <div className={`${theme}-text-layer1`}>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>
                       Share Profile
                     </div>               
                   </Button>
