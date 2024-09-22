@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
@@ -138,7 +139,7 @@ const EditSocials = () => {
                                 <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
                                 <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
                               </div>
-                              <div className="flex justify-end gap-1 items-start">     
+                              <div className="flex justify-end gap-3 items-start">     
                                 {/* {
                                   socials.length> 1 ?
                                     <div>
@@ -228,7 +229,7 @@ const EditSocials = () => {
                               setOpenNewSocial(true);
                               setOpenAddNewSocial(false)
                             }}
-                            className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index == medias.length - 1 ? " border-none" : ""}`}
+                            className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index  == medias.filter(e => !socials.map(v =>v.getType()).includes(e.name)).length -1 ? " border-b-0" : ""}`}
                           >
                             <img className="h-4" src={"./icons/media/" + item.icon} alt="" />
                             <div className="ml-1 text-gray-700 text-sm">{item.name}</div>
