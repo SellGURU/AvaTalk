@@ -128,21 +128,21 @@ const EditLinks = () => {
                             <div className="text-[13px] mb-[-4px]">
                               {item.getName()}
                             </div>
-                            <a href="">
+                            <div>
                               <div className=" text-[10px] text-cyan-500">{item.geturl().substring(0,30)}</div>
-                            </a>
+                            </div>
 
                           </div>
                         </div>
                         <div className="flex justify-end gap-1 items-start">
-                              {
+                              {/* {
                                 links.length> 1 ?
                                   <div>
                                     <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
                                   </div>
                                 :
                                 undefined
-                              }                            
+                              }                             */}
                             <div onClick={() => {
                               setEditName(item.getName())
                               setEditeValue(item.geturl())
