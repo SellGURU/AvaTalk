@@ -20,8 +20,15 @@
     @apply bg-white #{!important} ; 
 }
 .Carbon-ContentCard-Title {
+    @apply text-sm font-medium;
+}
+.Carbon-ContentCard-Title[data-os="windows"] {
     @apply text-sm font-semibold;
 }
+.Carbon-ContentCard-Title[data-os="ios"] {
+    @apply text-sm font-semibold;
+}
+
 .Carbon-ContentCard-Section {
     @apply flex flex-row justify-between w-full mb-4;
 }
