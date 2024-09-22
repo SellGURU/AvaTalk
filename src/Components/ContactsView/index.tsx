@@ -127,8 +127,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     setActiveView(buttonText);
   };
   const moreModalRef= useRef<HTMLDivElement>(null)
+  const ButtonmoreModalRef= useRef<HTMLDivElement>(null)
   useModalAutoClose({
     refrence:moreModalRef,
+    buttonRefrence:ButtonmoreModalRef,
     close:() => {
       setShowMoreModal(false)
     }
@@ -138,10 +140,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <Outlet></Outlet>
       <div className="flex w-full items-center relative justify-between mb-[22px] pr-6">
         <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
-        <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
-          {/* <img src="./Carbon/more.svg" alt="" /> */}
-          <div className={`${theme}-ContactList-Vector-more`}></div>
-        </Button>
+        <div ref={ButtonmoreModalRef}>
+          <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
+            {/* <img src="./Carbon/more.svg" alt="" /> */}
+            <div className={`${theme}-ContactList-Vector-more`}></div>
+          </Button>
+
+        </div>
         {
           showMoreModal ?
             <>
