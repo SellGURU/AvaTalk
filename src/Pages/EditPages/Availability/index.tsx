@@ -68,7 +68,7 @@ const EditAvailability = () => {
             ></TextField>
           </div>
           <div className="px-6 mt-10">
-            <Button disabled={!formik.isValid || !formik.touched.url} onClick={submit} theme="Carbon">
+            <Button disabled={formik.values.url== '' || formik.values.title ==''} onClick={submit} theme="Carbon">
               Save Changes
             </Button>
           </div>

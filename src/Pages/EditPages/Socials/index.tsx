@@ -23,7 +23,7 @@ const EditSocials = () => {
   const confirmRef = createRef<HTMLDivElement>()
   const medias: Array<{ name: initialSocials; icon: string }> = [
     {
-      name: "Linkedin",
+      name: "LinkedIn",
       icon: "devicon_linkdin.svg",
     },
     {

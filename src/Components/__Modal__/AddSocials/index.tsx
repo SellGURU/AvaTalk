@@ -17,7 +17,7 @@ interface AddSocialsProps {
 }
 const urlPatterns = {
   youtube: /^(https:\/\/(www\.)?youtube\.com\/|https:\/\/youtu\.be\/).+$/,
-  linkedin: /^https:\/\/(www\.)?linkedin\.com\/.+$/,
+  linkedIn: /^https:\/\/(www\.)?linkedin\.com\/.+$/,
   instagram: /^https:\/\/(www\.)?instagram\.com\/.+$/,
   twitter: /^https:\/\/(www\.)?twitter\.com\/.+$/,
   facebook: /^https:\/\/(www\.)?facebook\.com\/.+$/,
@@ -32,8 +32,8 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
         url:value? value :'',
     };
     const validateUrl = (url: string | undefined) => {
-        if(title == 'Linkedin'){
-            return Yup.string().matches(urlPatterns.linkedin, "Invalid linkedin URL").isValidSync(url)
+        if(title == 'LinkedIn'){
+            return Yup.string().matches(urlPatterns.linkedIn, "Invalid linkedin URL").isValidSync(url)
         }
         if(title == 'Instagram'){
             return Yup.string().matches(urlPatterns.instagram, "Invalid instagram URL").isValidSync(url)
