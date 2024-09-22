@@ -7,6 +7,24 @@
   overflow: hidden;
   height: 100%;
 }
+::-webkit-scrollbar {
+  width: 4px; /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: white; /* color of the scrollbar track */
+  border-radius: 10px; /* roundness of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E1E7EF; /* color of the scrollbar handle */
+  border-radius: 10px; /* roundness of the handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color on hover */
+}
+
 
 @font-face {
   font-family: Poppins;

@@ -87,7 +87,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                 </div>
                 <div className="w-full border-b border-[#E5E7EB] mt-4"></div>
 
-                <div className="w-full h-[250px] py-3 hiddenScrollBar overflow-y-scroll">
+                <div className="w-full h-[250px] py-3 overflow-y-scroll">
                     {Object.keys(notifs).map((el:any) => {
                         return (
                             <>
