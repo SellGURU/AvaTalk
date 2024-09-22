@@ -692,7 +692,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <div className="flex justify-evenly gap-4 ">
                   <Button onClick={() => {
                     setShowExchangeContact(true)
-                  }}  theme="Carbon-Google">Exchange Contact</Button>
+                  }}  theme="Carbon-Google"> <div className="text-primary-color">Exchange Contact</div></Button>
                   <Button onClick={() => {
                     setShowIsProfileOpen(true)
                 }} theme="Carbon">Show Contact</Button>
