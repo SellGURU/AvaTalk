@@ -96,10 +96,10 @@
     background-position: center;
 }
 .Carbon-Profile-Vectors{
-    @apply flex flex-row flex-wrap gap-4;
+    @apply flex flex-row  flex-wrap gap-4;
 }
 .Carbon-Profile-BackgroundVectors{
-    @apply bg-white borderBox-Gray boxShadow-Gray text-[#8290a3] w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
+    @apply bg-white  boxShadow-Gray text-[#8290a3] w-16 h-16 flex justify-center items-center rounded-full p-2 cursor-pointer; 
 }
 
 .Carbon-Profile-closeIcon{

@@ -68,7 +68,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,value,title,onComplete,onA
         formik.setFieldValue("url",value)
     },[value])          
     const resolvePlaceholder =() => {
-        if(title == 'Linkedin') {
+        if(title == 'LinkedIn') {
             return 'https://linkedin.com/username'
         }
         if(title == 'Twitter/ X'){
