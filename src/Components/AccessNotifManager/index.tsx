@@ -153,7 +153,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
             {
                 showNotif ?
                     <div className="w-full py-4 px-6 rounded-[27px] bg-white borderBox-primary3 ">
-                        <div className="text-[14px] text-left text-[#374151]">{resolveText()}</div>
+                        <div className="text-[14px] text-justify text-[#374151]">{resolveText()}</div>
                         {
                             authContext.currentUser.type_of_account.getType() == 'Trial' && page != 'chatEndUser'?
                                 <>

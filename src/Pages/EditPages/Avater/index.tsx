@@ -347,8 +347,7 @@ const EditAvater: React.FC = () => {
 
             <div>
               <div className="text-[#374151] text-[14px] opacity-80 mt-8 text-justify">
-                Upload image, or choose avatar, we will convert it to talking
-                profile.{" "}
+                Upload image, or choose avatar, we will convert it to a talking profile.{" "}
                 <span
                   onClick={() => {
                     setShowGudieLine(true);
