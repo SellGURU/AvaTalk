@@ -45,7 +45,10 @@ class Social {
                 })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div>
+                <div className={`${theme}-ContentCard-CardVector bg-white`}>
+                    <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[24px] h-[24px]`}></div>
+                </div>
+                {/* <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div> */}
             </div>            
         )
     }
