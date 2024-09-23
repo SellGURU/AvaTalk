@@ -242,16 +242,16 @@ const formatText = (text: string) => {
             /> */}
           </div>
           <div className="px-6 mt-6">
-            <Select label="Voice Gender" required valueElement={<div>{gender}</div>} placeholder="Select tag..."
+            <Select label="Voice Gender" required valueElement={<div>{gender.charAt(0).toUpperCase()+gender.substring(1)}</div>} placeholder="Select tag..."
                     theme="Carbon">
               <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('male')
-              }}>male
+              }}>Male
               </div>
               <hr/>
               <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('female')
-              }}>female
+              }}>Female
               </div>
             </Select>
           </div>
