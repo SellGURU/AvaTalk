@@ -115,12 +115,12 @@ const formatText = (text: string) => {
         {showLearnMore
         &&
         <div className=" top-0 left-0 w-full bg-white min-h-screen absolute z-40">
-          <div className="flex  w-full items-center justify-between px-6 mt-[120px] ">
-            <div className="invisible">
+          <div className="flex  w-full items-center justify-between px-6 mt-[80px] ">
+            {/* <div className="invisible">
               <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
             </Button>
-            </div>
+            </div> */}
             <div className="text-[16px] font-semibold text-text-primary">Learn more about your AI settings</div>
             <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>

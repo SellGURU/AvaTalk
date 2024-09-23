@@ -96,7 +96,7 @@ const EditSocials = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="My Social Network" theme="Carbon"></BackIcon>
+          <BackIcon title="Social" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="mt-24 px-6">
