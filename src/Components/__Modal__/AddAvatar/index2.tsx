@@ -28,7 +28,7 @@ const AddSocials: React.FC<AddSocialsProps> = ({ refEl,onTakePhoto,isCanRemove ,
 
     return (
         <> 
-            <div ref={refEl} className='bg-white max-w-xl pb-6 rounded-t-[27px] px-10 w-full'>
+            <div ref={refEl} className='bg-white max-w-[32rem] pb-6 rounded-t-[27px] px-10 w-full'>
                 <div className="my-4 flex flex-col gap-5 font-medium text-sm">
                     <button className='flex items-center gap-2 cursor-pointer' onClick={handleChooseFromLibrary}>
                         <img className='w-8 h-8' src='./Carbon/gallery-import.svg' />

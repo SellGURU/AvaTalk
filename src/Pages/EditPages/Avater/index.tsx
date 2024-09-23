@@ -50,6 +50,17 @@ const EditAvater: React.FC = () => {
         console.log(values)
     },
   });
+  const [openCamera,setOpenCamera] = useState(false);
+  useEffect(() => {
+    if(addAvatar || openCamera || Cropper.length > 1) {
+      publish('profileIsReview',{})
+    }else{
+      publish('profileIsProfile',{})
+    }
+    return () =>{
+      publish('profileIsProfile',{})
+    }
+  },[addAvatar,openCamera,Cropper])
   const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
       Auth.createAvatarVideo(photo).then((response) => {
           if(response.data == 'No face detected'){
@@ -76,7 +87,7 @@ const EditAvater: React.FC = () => {
       })     
   }
   const [asktakePhoto,setAskTakePhoto] = useState(false)
-  const [openCamera,setOpenCamera] = useState(false);
+  
   const context = useAuth()
   const [firstLoading,setFirstLoading] = useState(false)
   const navigate = useNavigate();
@@ -522,7 +533,7 @@ const EditAvater: React.FC = () => {
             }}
           ></CropperBox>
           {addAvatar?
-            <div className="fixed z-40 left-0  bottom-[50px] w-full flex justify-center items-center">
+            <div className="fixed z-40 left-0  bottom-[0px] w-full flex justify-center items-center">
               <AddAvatar
                 refEl={addAvatarRef}
                 onTakePhoto={() => {
