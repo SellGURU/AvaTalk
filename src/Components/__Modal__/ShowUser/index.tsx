@@ -37,7 +37,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             <div>
                                 <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
                                 <div className='text-text-primary mt-1 text-center text-xs flex justify-start items-center '>{auth.currentUser.information?.job}
-                                     {" & "}  
+                                     {" @ "}  
                                     <span className='ml-1'>
                                         <img className='w-[16px] h-[16px]' src={auth.currentUser.information?.logo} alt="" />
                                     </span>

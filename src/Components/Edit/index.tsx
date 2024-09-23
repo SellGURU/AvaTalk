@@ -30,7 +30,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share something about yourself.",
     },
     {
-      name: "Appointments",
+      name: "Appointment",
       icon: "calendar-2.svg",
       link: "availability",
       description: "Share something about your availability.",
@@ -48,7 +48,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share your social media profiles.",
     },
     {
-      name: "Links",
+      name: "Link",
       icon: "link.svg",
       link: "links",
       description: "Add websites to your profile.",
@@ -66,7 +66,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share a store or office location.",
     },
     {
-      name: "Videos",
+      name: "Video",
       icon: "video-play.svg",
       link: "Videos",
       description: "Make your page come to life with a video.",

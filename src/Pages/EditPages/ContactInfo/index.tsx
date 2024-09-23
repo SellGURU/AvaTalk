@@ -11,8 +11,8 @@ import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 
 const validationSchema = Yup.object().shape({
-  job:Yup.string().max(15),
-  company:Yup.string().max(15),
+job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
+company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
 });
 
 const EditContactInfo = () => {
@@ -92,11 +92,11 @@ const EditContactInfo = () => {
         <div className="relative top-[3px]">
           <BackIcon title="Contact Info" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-24 px-6">
-          <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title" inValid={false} name="job"  type="text"  placeholder="Enter your job title..."></TextField>
+        <div className="mt-24 text-left px-6">
+          <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title"  inValid={formik.errors.job!=undefined } errorMessage={formik.errors.job}  name="job"  type="text"  placeholder="Enter your job title..."></TextField>
         </div>
-        <div className="mt-3 px-6">
-          <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={false} name="company" type="text" placeholder="Enter your company name..."></TextField>
+        <div className="mt-3 text-left px-6">
+          <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={formik.errors.company!=undefined } errorMessage={formik.errors.company} name="company" type="text" placeholder="Enter your company name..."></TextField>
         </div>
 
         <div className="mt-3 px-6">

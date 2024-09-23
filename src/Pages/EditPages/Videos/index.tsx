@@ -87,7 +87,7 @@ const EditVideos = () => {
       <h1>hi</h1>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Videos" theme="Carbon"></BackIcon>
+          <BackIcon title="Video" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
