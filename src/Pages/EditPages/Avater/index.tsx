@@ -51,11 +51,14 @@ const EditAvater: React.FC = () => {
     },
   });
   const [openCamera,setOpenCamera] = useState(false);
+  const [canScroll,setCanScrol] = useState(true)
   useEffect(() => {
     if(addAvatar || openCamera || Cropper.length > 1) {
       publish('profileIsReview',{})
+      setCanScrol(false)
     }else{
       publish('profileIsProfile',{})
+      setCanScrol(true)
     }
     return () =>{
       publish('profileIsProfile',{})
@@ -154,7 +157,7 @@ const EditAvater: React.FC = () => {
   return (
     <>
     {showGudieLine?
-    <div className="absolute w-full pt-8 px-4 hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
+    <div className={`absolute w-full pt-8 px-4 hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'} top-[0px] bg-white z-[15]`}>
         <div className={`w-full ${showGudieLine?'visible':'hidden'} text-left relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}>
           <div>
             {/* <div className="absolute right-6 top-6">
@@ -186,7 +189,7 @@ const EditAvater: React.FC = () => {
             </div>
 
             <div className="mt-8 px-6">
-              <div className="text-gray-700 text-left font-semibold text-base">
+              <div className="text-gray-700 text-left font-semibold text-[14px]">
                 Common Mistakes{" "}
               </div>
               <div className="mt-4 flex justify-start items-start">
@@ -204,7 +207,7 @@ const EditAvater: React.FC = () => {
                   <div className=" text-[#374151] text-[13px] font-medium font-poppins">
                     Not Neutral Expression
                   </div>
-                  <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                  <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
                     Your photo must feature a neutral facial expression.
                     Ensure your mouth is closed and avoid smiling or
                     frowning.
@@ -214,7 +217,7 @@ const EditAvater: React.FC = () => {
 
               <div className="mt-4 flex justify-start items-start">
                 <div className="relative min-w-[60px]">
-                  <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                  <div className="absolute w-6 h-6 flex  text-justifyitems-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
                     <img
                       className="ml-[1px]"
                       src="./icons/Add.svg"
@@ -223,7 +226,7 @@ const EditAvater: React.FC = () => {
                   </div>
                   <img src="./icons/2.png" alt="" />
                 </div>
-                <div className="ml-3 max-w-[283px]">
+                <div className="ml-3 text-justify max-w-[283px]">
                   <div className=" text-[#374151] text-[13px] font-medium font-poppins">
                     Distracting Background
                   </div>
@@ -246,10 +249,10 @@ const EditAvater: React.FC = () => {
                   <img src="./icons/3.png" alt="" />
                 </div>
                 <div className="ml-3 max-w-[283px]">
-                  <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                  <div className=" text-justify text-[#374151] text-[13px] font-medium font-poppins">
                     Indirect Camera Gaze{" "}
                   </div>
-                  <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                  <div className=" text-[#374151] text-[12px] text-justify font-normal font-poppins">
                     Look directly into the camera to establish a clear,
                     forward-facing base for your AI profile.
                   </div>
@@ -266,7 +269,7 @@ const EditAvater: React.FC = () => {
                 onClick={() => setShowGudieLine(false)}
                 theme="Carbon"
               >
-                Got it
+                Got It
               </Button>
             </div>
           </div>
@@ -274,7 +277,7 @@ const EditAvater: React.FC = () => {
     </div>
     :
     <>
-        <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
+        <div className={`absolute w-full hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'}  bottom-0 bg-white z-[15]`}>
           <div className="relative top-8">
             <BackIcon title="" theme="Carbon"></BackIcon>
           </div>        
@@ -355,7 +358,7 @@ const EditAvater: React.FC = () => {
                   className="text-[#06B6D4] cursor-pointer"
                 >
                   {" "}
-                  picture guidline{" "}
+                  Photo Guideline{" "}
                 </span>
               </div>
             </div>

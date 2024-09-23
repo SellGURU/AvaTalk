@@ -19,7 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
-    const [showDeveloperTools] = useState(false)
+    const [showDeveloperTools] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
@@ -132,7 +132,7 @@ const Home2 = () => {
                     }} theme="Carbon"/>
                 :
                 <>
-                    <div className="sticky h-0 bottom-0"></div>
+                    <div className="sticky  bottom-0"></div>
                 </>
                 }
                 {
