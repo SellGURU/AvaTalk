@@ -110,7 +110,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                 </div>
 
                 <div className="mt-8 px-6">
-                    <div className="text-gray-700 text-left font-semibold text-base">
+                    <div className="text-gray-700 text-left font-semibold text-[14px]">
                     Common Mistakes{" "}
                     </div>
                     <div className="mt-4 flex justify-start items-start">
@@ -128,7 +128,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         <div className=" text-[#374151] text-[13px] font-medium font-poppins">
                         Not Neutral Expression
                         </div>
-                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
                         Your photo must feature a neutral facial expression.
                         Ensure your mouth is closed and avoid smiling or
                         frowning.
@@ -151,7 +151,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         <div className=" text-[#374151] text-[13px] font-medium font-poppins">
                         Distracting Background
                         </div>
-                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
                         Use a simple, uncluttered background to avoid any
                         distractions from the primary focus—your face.
                         </div>
@@ -173,7 +173,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         <div className=" text-[#374151] text-[13px] font-medium font-poppins">
                         Indirect Camera Gaze{" "}
                         </div>
-                        <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                        <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
                         Look directly into the camera to establish a clear,
                         forward-facing base for your AI profile.
                         </div>
@@ -274,7 +274,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         className="text-[#06B6D4] cursor-pointer"
                     >
                         {" "}
-                        picture guidline{" "}
+                        Photo Guideline{" "}
                     </span>
                     </div>
                 </div>
