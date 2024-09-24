@@ -216,7 +216,7 @@ const EditSocials = () => {
             </Select>
           </div> */}
           <div className="mt-6  px-6">     
-            <Button disabled={socials.length >= 5} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+            <Button disabled={socials.length >= 6} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
               <div className="relative">
                 {openaddNewSocial ?
                   <div ref={addSocialRef} className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
