@@ -596,7 +596,7 @@ const EditAvater: React.FC = () => {
               />      
           </div>
           <div className="relative z-50 top-4">
-            <BackIcon title="" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
+            <BackIcon title="" icon="close" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
           </div>
           <div className="absolute w-full z-20 h-full bg-black opacity-60 top-0 left-0"></div>
         </>

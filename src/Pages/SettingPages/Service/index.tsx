@@ -43,19 +43,19 @@ const SettingService =() => {
     const service:Array<serviceType> = [
         {
             title:'Annually $200',
-            price:200,
+            price:80,
             mode:'year'
         },
         {
             title:'Monthly $20',
-            price:20,
+            price:8,
             mode:'month'
         },
     ]
     const [activeService,setAtiveService] = useState<serviceType>({
             title:'Annually $200',
             mode:'year',
-            price:200
+            price:80
         },)
         
     return (

@@ -129,7 +129,7 @@ const EditVideos = () => {
                 <div
                   className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}
                 >
-                  videos Links
+                  Videos Links
                 </div>
                 {video.map((item: any, index) => {
                   return (
