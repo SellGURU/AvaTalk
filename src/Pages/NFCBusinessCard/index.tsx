@@ -209,6 +209,7 @@ export const NFCBusinessCard = () => {
                     <div className="flex w-full px-6 xl:px-16 pb-16  ">
                         <ImageGallery
                             
+                            disableThumbnailScroll={currentCard &&currentCard?.images.length<3 ?true:false}
                             showThumbnails={true} // Ensure thumbnails are visible
                             thumbnailPosition="right" // Thumbnail position on the right
                             showPlayButton={false} // Disable slideshow button
