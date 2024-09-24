@@ -10,7 +10,7 @@ const re = new RegExp("https://calendly.com/");
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Title is required.'),
-  url: Yup.string().required('URL is required.').matches(re,'URL must match the following https://calendly.com/'),
+  url: Yup.string().matches(re,'URL must match the following https://calendly.com/'),
 });
 
 const EditAvailability = () => {
@@ -68,7 +68,7 @@ const EditAvailability = () => {
             ></TextField>
           </div>
           <div className="px-6 mt-10">
-            <Button disabled={formik.values.url== '' || formik.values.title ==''} onClick={submit} theme="Carbon">
+            <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">
               Save Changes
             </Button>
           </div>
