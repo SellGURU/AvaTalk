@@ -171,7 +171,10 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                         
                         <div className="flex w-full font-medium mt-2 gap-6 justify-end items-center">
                             {page == 'chatEndUser' ?
-                                  <div className="text-[#FBBF24] cursor-pointer text-[14px]">Create Your Avatalk</div>
+                                  <div onClick={() => {
+                                    window.open('https://portal.avatalk.me/#/signup')
+                                    // navigate('https://portal.avatalk.me/#/login')
+                                  }} className="text-[#FBBF24] cursor-pointer text-[14px]">Create Your Avatalk</div>
                                 :
                                 // <Link to={"/settings/service"}>
 
