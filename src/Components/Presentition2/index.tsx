@@ -41,6 +41,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
     const [isLoading,setIsLoading] = useState(false);
     const [isRecording,setIsRecording] = useState(false)  
     const [showSuggestions,setShowSuggestions] = useState(false);     
+    const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
     const [suggestionList] = useState([
         'Can you introduce yourself?',
@@ -54,6 +55,11 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
         }, 5000);
         }
     },[chats])    
+    useEffect(() => {
+        setTimeout(() => {
+            setShowAccessNotifManager(true)
+        }, 3000);
+    })
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
         // const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
@@ -150,7 +156,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
                 )
             })
             }
-            {!showSuggestions && 
+            {showAccessNotifManager && 
                 <div className=" absolute bottom-14 bg-white py-4 mt-24  mb-[24px]">
                     <AccessNotifManager page="chatEndUser"></AccessNotifManager>
 

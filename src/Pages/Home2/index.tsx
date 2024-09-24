@@ -59,7 +59,7 @@ const Home2 = () => {
                     data.type_of_account.type.capitalize(),
                     // 'Free',
                     data.type_of_account.register_date,
-                    data.type_of_account.end_of_trial_date,
+                    data.type_of_account.end_of_date,
                     data.type_of_account.previous_status_detail
                 ))
 
