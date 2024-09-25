@@ -120,22 +120,23 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                                                                         <div className="w-[8px] h-[8px] rounded-full bg-primary-color"></div>
                                                                     }</div>
                                                                 </div>
-                                                                <div className="text-[#6B7280] text-[12px] mt-1 " >{value.content}</div>
+                                                                <div className="text-[#6B7280] text-justify text-[12px] mt-1 " >{value.content}</div>
                                                             </div>                                                      
                                                         }
                                                      </>
                                                      :
 
                                                     <div onClick={() => {
-                                                        NotificationApi.readNotification(value.id)
-                                                    }} className="text-left my-2">
+                                                                NotificationApi.readNotification(value.id)
+                                                                markAsRead(value.id,el)
+                                                            }} className="text-left my-2">
                                                         <div className="flex justify-between">
                                                             <div className="text-text-primary text-sm">{value.title}</div>
                                                             <div className="text-text-primary flex items-center gap-1 text-sm">{resolveDateAgo(new Date(value.date))} {!value.isRead && 
                                                                 <div className="w-[8px] h-[8px] rounded-full bg-primary-color"></div>
                                                             }</div>
                                                         </div>
-                                                        <div className="text-[#6B7280] text-[12px] mt-1 " >{value.content}</div>
+                                                        <div className="text-[#6B7280] text-justify text-[12px] mt-1 " >{value.content}</div>
                                                     </div>                                            
                                                 }
                                             </>
