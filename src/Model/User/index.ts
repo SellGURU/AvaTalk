@@ -182,7 +182,7 @@ class User {
         }
     }
     public resolveLink() {
-        return '/#/A/'+this.information?.userId
+        return '/#/A/'+this.information?.unique_id
     }
     public setTypeOfAccount(acount:UserType){
         this.type_of_account = acount
