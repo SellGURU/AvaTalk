@@ -224,7 +224,7 @@ const EditVideos = () => {
               }}
               theme="Carbon-AddLink"
             >
-              Add video Link
+              Add Video Link
             </Button>
             <div className="relative"></div>
           </div>
@@ -249,7 +249,7 @@ const EditVideos = () => {
               formik.setFieldValue("name", name);
               addLink(name, url);
             }}
-            title="Link"
+            title="Video Link"
           ></AddLink>
         </div>
         {isReadyTO &&
