@@ -88,7 +88,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
           </Button>
           <p className={`${theme}-Edit-title`}>Edit Profile</p>
         </div>
-        <div className="px-6 mt-[120px]  h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+        <div className="px-6 mt-[120px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
           <div className="w-full flex justify-center mb-5">
             <div className="text-center relative">
                 <div onClick={() => {

@@ -190,7 +190,7 @@ const SettingAccount =() => {
         {showConfirm ?
         <>
             <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm refrence={confirmRef} title={"Delete Your Account"} content={"Are you sure want to delete your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+                <Confirm refrence={confirmRef} title={"Delete Your Account"} content={"Are you sure you want to delete your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                     Auth.updateYourAccount({
                         user_id:context.currentUser.information?.userId as string,
                         state:false

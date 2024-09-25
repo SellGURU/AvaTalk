@@ -166,7 +166,7 @@ const EditVideos = () => {
                               </a>
                             </div>
                           </div>
-                          <div className="flex justify-end gap-1 items-start">
+                          <div className="flex justify-end gap-3 items-start">
                             {video.length > 1 ? (
                               <div>
                                 <div

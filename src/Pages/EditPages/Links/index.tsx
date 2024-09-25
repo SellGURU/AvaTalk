@@ -134,7 +134,7 @@ const EditLinks = () => {
 
                           </div>
                         </div>
-                        <div className="flex justify-end gap-1 items-start">
+                        <div className="flex justify-end gap-3 items-start">
                               {/* {
                                 links.length> 1 ?
                                   <div>

@@ -196,7 +196,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           {!(contacts.length > 0) && !isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-                No contact yet
+                No Contact Yet
               </div>
             </div>
           ) : (
@@ -211,7 +211,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           {!(tags.length > 0) && !isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-                No tag yet
+                No Tag Yet
               </div>
             </div>
           ) : (

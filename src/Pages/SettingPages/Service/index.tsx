@@ -66,7 +66,7 @@ const SettingService =() => {
                 <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
                     <div className={`Carbon-back-Button-vector`}></div>
                 </Button>
-                <p className={`Carbon-ChatDetails-title`}>Your plan</p>
+                <p className={`Carbon-ChatDetails-title`}>Your Plan</p>
             </div>            
 
             <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
