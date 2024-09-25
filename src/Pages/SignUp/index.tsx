@@ -211,7 +211,7 @@ const SignUp = () => {
                         <div className="mt-4">
                             <div className="text-sm text-center text-text-primary">Already have an account?<span onClick={() => {
                                 navigate('/login')
-                            }} className="text-[#06B6D4] cursor-pointer"> Login</span></div>
+                            }} className="text-[#06B6D4] cursor-pointer"> Log in</span></div>
                         </div>
 
                         <div className="flex w-full items-center mt-6">
