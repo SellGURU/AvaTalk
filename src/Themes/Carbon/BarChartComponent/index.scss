@@ -5,5 +5,5 @@
   @apply h-[300px] w-[100%] borderBox-Gray boxShadow-Gray p-[20px] pb-10 rounded-[24px] flex flex-col items-center justify-center;
 }
 .Carbon-BarChartComponent-text {
-  @apply text-gray-700 leading-[21px] text-[14px] font-[600]  pb-2;
+  @apply text-gray-700 leading-[21px] text-[14px] font-poppins font-medium pb-2;
 }
