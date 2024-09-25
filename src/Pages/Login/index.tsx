@@ -289,7 +289,7 @@ const Login = () => {
               <div className="w-full px-4">
                 <img src="/Avatalk Logo.svg" alt="logo" className="w-[49px] h-[54px] mx-auto mb-[30px]" />
                 <div className="w-full flex justify-center">
-                  <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Email Address and Password to Login</div>
+                  <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Email Address and Password to Log in</div>
                 </div>
 
                 <div className="mb-2">
@@ -322,12 +322,12 @@ const Login = () => {
                   disabled={!formik.isValid || formik.values.password.length <= 4}
                   theme="Carbon"
                 >
-                  Login
+                  Log in
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
                  Don't have an account? <span onClick={() => {
                     navigate('/signup')
-                  }} className="text-[#06B6D4] cursor-pointer">Sign Up</span> 
+                  }} className="text-[#06B6D4] cursor-pointer">Sign up</span> 
                 </div>
                 <div className="flex w-full items-center mt-6">
                   <div style={{ background: "linear-gradient(to left,rgba(227, 227, 238, 0.5) 0% ,rgba(255, 255, 255, 0.5) 95%,rgba(255, 255, 255, 0.5) 100%)" }} className="w-full h-[4px]">
@@ -343,7 +343,7 @@ const Login = () => {
                 
                     <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                       <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
-                      <div className="text-text-primary">Login with Google</div>
+                      <div className="text-text-primary">Log in with Google</div>
                     </Button>
                 </div>
                   <LinkedIn
@@ -360,7 +360,7 @@ const Login = () => {
                                       className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                                   <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
 
-                                  <div className="text-text-primary">Login with LinkedIn</div>
+                                  <div className="text-text-primary">Log in with LinkedIn</div>
                               </Button>
                           </div>
                       }/>
