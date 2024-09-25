@@ -64,6 +64,7 @@ const CompleteStep = () => {
                                             lat:33,
                                             lng:33
                                         },
+                                        unique_id:data.information.unique_id,
                                         workEmail:data.information.work_email,
                                         workPhone:data.information.work_mobile_number,
                                         userId:data.information.created_userid,
@@ -109,6 +110,7 @@ const CompleteStep = () => {
                                         personlEmail:data.information.email,
                                         company:data.information.company_name,
                                         job:data.information.job_title,
+                                        unique_id:data.information.unique_id,
                                         banelImage:data.information.back_ground_pic,
                                         imageurl:data.information.profile_pic,
                                         location:{

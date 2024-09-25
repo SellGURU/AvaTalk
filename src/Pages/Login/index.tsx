@@ -122,6 +122,7 @@ const Login = () => {
                   },
                   workEmail:data.information.work_email,
                   workPhone:data.information.work_mobile_number,
+                  unique_id:data.information.unique_id,
                   userId:data.information.created_userid
               })
               authContext.currentUser.setBox(resolveSocial)
@@ -167,6 +168,7 @@ const Login = () => {
                     personlEmail:data.information.email,
                     company:data.information.company_name,
                     job:data.information.job_title,
+                    unique_id:data.information.unique_id,
                     banelImage:data.information.back_ground_pic,
                     imageurl:data.information.profile_pic,
                     location:{
@@ -237,6 +239,7 @@ const Login = () => {
                     phone:data.information.mobile_number,
                     personlEmail:data.information.email,
                     company:data.information.company_name,
+                    unique_id:data.information.unique_id,
                     job:data.information.job_title,
                     banelImage:data.information.back_ground_pic,
                     imageurl:data.information.profile_pic,

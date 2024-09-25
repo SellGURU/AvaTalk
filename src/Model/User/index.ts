@@ -20,6 +20,7 @@ interface Information {
     workEmail:string;
     workPhone:string
     userId?:string
+    unique_id:string
     silent_video_avatar?:string
     talk_video_avater?:string
     address?:string

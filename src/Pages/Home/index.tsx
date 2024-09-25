@@ -42,6 +42,7 @@ const Home = () => {
                 workEmail:data.information.work_email,
                 workPhone:data.information.work_mobile_number,
                 userId:data.information.created_userid,
+                unique_id:data.information.unique_id,
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information. referral_code

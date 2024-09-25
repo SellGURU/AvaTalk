@@ -325,7 +325,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
         <EditContact
           contact={contact}
-          title="Edit contact"  
+          title="Edit Contact"  
           onAddContact={handleEditContact}
           onClose={() => {
             setShowEditContactModal(false)

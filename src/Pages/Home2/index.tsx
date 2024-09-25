@@ -49,6 +49,7 @@ const Home2 = () => {
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information.referral_code,
                 address:'',
+                unique_id:data.information.unique_id,
                 logo:data.information.logo,
                 gender:data.information.gender
             })
