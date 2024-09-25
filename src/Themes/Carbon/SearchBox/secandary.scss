@@ -1,0 +1,67 @@
+.Carbon-secandary-SearchBox-container {
+  @apply flex flex-col   relative w-[100%]  gap-y-1;
+}
+.Carbon-secandary-SearchBox-label {
+  @apply leading-[19.36px] text-[13px] ml-6 font-medium text-gray-700;
+}
+.Carbon-secandary-SearchBox-input {
+  @apply text-gray-700 bg-gray-100 leading-[21px]  text-[14px] font-[400]  focus:outline-none w-full h-[44px]   rounded-[27px]  placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400
+}
+
+.Carbon-secandary-SearchBox-inValid {
+  @apply border-red-500 border-2 #{!important};
+}
+.Carbon-secandary-SearchBox-box {
+  border: 1px solid transparent;
+ 
+  @apply rounded-[27px]  relative flex items-center bg-gray-100  justify-between ;
+}
+.Carbon-secandary-SearchBox-togglePassword {
+  @apply cursor-pointer;
+}
+.Carbon-secandary-SearchBox-icon-eye {
+  @apply bg-[url('/Carbon/eye.svg')] w-[25px] h-[22px];
+}
+.Carbon-secandary-SearchBox-icon-eyeOff {
+  @apply bg-[url('/Carbon/eyeOff.svg')] w-[25px] h-[22px];
+}
+.Carbon-secandary-SearchBox-error {
+  @apply text-red-500 text-[11px] font-medium ml-6 mt-[1px];
+}
+
+.Carbon-secandary-SearchBox-label-required {
+  @apply text-red-500 ml-1;
+}
+
+.Carbon-secandary-SearchBox-selectPhone-container {
+  @apply mr-3 ml-7 cursor-pointer flex justify-center items-center;
+}
+.Carbon-secandary-SearchBox-selectPhone-container-icon {
+  @apply ml-2 w-[10px];
+}
+.Carbon-secandary-SearchBox-dropDown-container {
+  @apply absolute z-40 overflow-y-scroll hiddenScrollBar w-[68px]  bg-gray-100 h-24 top-16;
+}
+.Carbon-secandary-SearchBox-dropDown-item {
+  @apply flex justify-between cursor-pointer px-2 border-b pb-2 border-gray-200 my-2 w-full;
+}
+.Carbon-secandary-SearchBox-dropDown-item-text {
+  @apply text-[10px] ml-2;
+}
+.Carbon-secandary-SearchBox-input[type="phone"] {
+  @apply border-l-0 rounded-l-none pl-1  #{!important};
+}
+.Carbon-secandary-SearchBox-box[deta-selectBox="true"] {
+  @apply rounded-bl-none #{!important};
+}
+.Carbon-secandary-SearchBox-searchIcon {
+  // mask-size: 100%;
+  // -webkit-mask-repeat: no-repeat;
+  // mask-repeat: no-repeat;
+  // mask-position: center;
+  // mask-image: url(/Carbon/search-normal.svg);  
+  @apply w-10 h-10 p-2 absolute  right-3 rounded-full cursor-pointer;
+}
+.Carbon-secandary-SearchBox-ActiveIcon {
+  @apply borderBox-Gray btnInnerShadowsDark ;
+}
