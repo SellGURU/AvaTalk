@@ -237,7 +237,7 @@ export const NFCBusinessCard = () => {
 
                     </div>
                     <div className={"bg-white shadow-md w-full p-5 rounded-xl"}>
-                        <h2 className="text-[14px] font-semibold text-[#374151]">
+                        <h2 className="text-[16px] font-medium text-[#374151]">
                             {currentCard?.title}
                         </h2>
                         <div className="flex justify-start mt-2 items-center">
@@ -255,8 +255,8 @@ export const NFCBusinessCard = () => {
                             </div>
                         </div>
                         <div className="flex items-center mt-2">
-                            <div className="flex text-[#9CA3AF] font-normal gap-1 text-[16px]">Price:<p
-                                className={"text-purple-500 text-lg font-semibold"}>£{currentCard?.price}</p></div>
+                            <div className="flex text-[#9CA3AF] items-center font-normal gap-1 text-[16px]">Price:<p
+                                className={"text-primary-color text-lg font-semibold"}>£{currentCard?.price}</p></div>
                         </div>
                         <div className="text-[#374151] font-normal text-[12px]">
                             Tax included. Shipping calculated at checkout.

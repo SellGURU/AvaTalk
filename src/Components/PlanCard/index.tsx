@@ -49,7 +49,7 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
   const auth = useAuth();
   return (
     <>
-      <div className="w-full pt-6 px-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
+      <div className="w-full pt-6 px-6 overflow-hidden h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
         <div className="w-full relative z-30 flex justify-end">
           <img width={32} height={32} className="w-8 h-8 cursor-pointer  " src="/icons/Add.svg" onClick={onClose} alt=""/>
 
@@ -58,7 +58,7 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
           <img className={"w-[50px]   relative z-50  h-[50px]"} src={"/Carbon/F-Rocket.svg"}/>
         </div>
 
-        <div className="overflow-hidden  rounded-3xl h-full  absolute w-full opacity-100 left-0 top-0">
+        <div className=" rounded-3xl h-full scale-110 absolute w-full opacity-100 left-[-8px] top-[-8px]">
           <img className="w-full  " src="/icons/backPlanCard.png" alt=""/>
       
         </div>

@@ -25,27 +25,27 @@ export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,
                     <img src={imgSrc} className={"h-[115px] w-fit"}  alt={""}/>
                 </div>
                 <div className="p-4 px-3 bg-white mt-0 ">
-                    <h1 className={"text-[10px]   text-[#374151] font-bold"} style={{lineHeight:'1rem'}}>{title}</h1>
-                    <div className={"text-[10px] mt-2 text-[#6B7280]  flex gap-2 items-center"}>
+                    <h1 className={"text-[12px]   text-[#374151] font-medium"} style={{lineHeight:'1rem'}}>{title}</h1>
+                    <div className={"text-[12px] mt-2 text-[#6B7280]  flex gap-2 items-center"}>
                         Colors:
-                        {listColorBadge.map((color:string,index) => (
+                        {listColorBadge.map((color:string) => (
                             <>  
                             {color!='sevenColor' 
                             ?
-                                <div className={`w-[17px] h-[17px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
-                                    {index == 0 && <img className="w-[10px]" src="./Carbon/tick-white.svg" />}
+                                <div className={`w-[20px] h-[20px] rounded-md flex justify-center items-center `} style={{background:resolveBackGround(color)}}>
+                                    {/* {index == 0 && <img className="w-[10px]" src="./Carbon/tick-white.svg" />} */}
                                 </div>
                             :
                                 <div>
-                                    <img className="w-[17px] h-[17px]  rounded-md" src="./icons/bussinesCards/sevenColor.jpg" alt="" />
+                                    <img className="w-[20px] h-[20px]  rounded-md" src="./icons/bussinesCards/sevenColor.jpg" alt="" />
                                 </div>
                             }
                             </>
                         ))}
                     </div>
                     <div className={"flex items-center justify-between mt-4"}>
-                        <p className={"text-[#5B21B6] font-semibold text-[14px]"}>
-                            {oldPrice &&<span className="text-[#94A3B8] mr-1 line-through">£{oldPrice}</span>}
+                        <p className={"text-[#5B21B6] font-semibold text-[16px]"}>
+                            {oldPrice &&<span className="text-[#94A3B8] text-[16px] mr-1 line-through">£{oldPrice}</span>}
                             £{price}</p>
 
 

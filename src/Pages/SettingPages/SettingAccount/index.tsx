@@ -29,7 +29,9 @@ import { Confirm } from "../../../Components/__Modal__";
 //       ).isValidSync(phone);
 //   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().required('Phone number is required')
+    phone:Yup.string().required('Phone number is required'),
+    firstname:Yup.string().required('First Name is required'),
+    lastname:Yup.string().required('Last Name is required'),
 });
 interface SettingAccount {
     value: any;
@@ -88,13 +90,13 @@ const SettingAccount =() => {
                 <div className="mb-4">
                     <div className="flex flex-col relative gap-y-4 w-[100%]">
 
-                        <TextField {...formik.getFieldProps("firstname")} inValid={false} 
-                        theme="Carbon" name="firstname" label="First Name"
+                        <TextField {...formik.getFieldProps("firstname")} inValid={formik.errors.firstname!= undefined} 
+                        theme="Carbon" required errorMessage={formik.errors.firstname} name="firstname" label="First Name"
                         type="text" 
                         ></TextField>
                         
-                        <TextField {...formik.getFieldProps("lastname")} inValid={false} 
-                        theme="Carbon" name="lastname" label="Last Name"
+                        <TextField {...formik.getFieldProps("lastname")} inValid={formik.errors.lastname!= undefined} 
+                        theme="Carbon" required errorMessage={formik.errors.lastname} name="lastname" label="Last Name"
                         type="text" 
                         ></TextField>
 
@@ -173,7 +175,7 @@ const SettingAccount =() => {
                         })
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>
-                <div  className="mt-6 flex items-center ">
+                <div  className="mt-10 flex items-center ">
                     <p onClick={() => {
                         setShowConfirm(true)
                     // Auth.updateYourAccount({
