@@ -27,7 +27,15 @@ class TimeManegar {
 
         // Return formatted date as YYYY-MM-DD
         return `${year}-${day}-${month}`;
-}
+    }
+
+    static formatDateMonthName(dateString:string | Date){
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+        // Format the date as DD-Month-YYYY
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString('en-GB', options);
+        return formattedDate
+    }
 }
 
 export default TimeManegar
