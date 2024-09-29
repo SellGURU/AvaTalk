@@ -42,18 +42,18 @@ const SettingService =() => {
     })
     const service:Array<serviceType> = [
         {
-            title:'Annually $200',
+            title:'Annually £80',
             price:80,
             mode:'year'
         },
         {
-            title:'Monthly $20',
+            title:'Monthly £8',
             price:8,
             mode:'month'
         },
     ]
     const [activeService,setAtiveService] = useState<serviceType>({
-            title:'Annually $200',
+            title:'Annually £80',
             mode:'year',
             price:80
         },)
@@ -91,7 +91,7 @@ const SettingService =() => {
                             setAtiveService(service.filter(el => {
                                 return el.title.includes(value)
                             })[0])
-                        }} leftText={"Annually $200"} rightText="Monthly $20" theme="Carbon-secandary" />
+                        }} leftText={"Annually £80"} rightText="Monthly £8" theme="Carbon-secandary" />
                     </div>
                   <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">

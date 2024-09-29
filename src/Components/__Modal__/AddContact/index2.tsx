@@ -35,7 +35,7 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
         },
         validationSchema:Yup.object().shape({
             fullName:Yup.string().required('Full Name is required'),
-            email:Yup.string().required('Email is required').email('Email is invalid'),
+            email:Yup.string().required('Email address is required').email('Email is invalid'),
             phone:Yup.string().required('Phone is required'),
         }),
         onSubmit:() =>{}

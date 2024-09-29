@@ -14,7 +14,7 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
   const navigate = useNavigate()
   return (
     <>
-    {visibleDate ?
+    {visibleDate  ?
       <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
     :undefined}
     <div  onClick={() => {
@@ -22,7 +22,7 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
         navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
       // to={`/chats/${data.chat_list_id}`}
-    }}  className={`${theme}-ChatItem-container`} style={{opacity:plan != 'Free' || data.title == 'samanta'?'100%':'30%'}}>
+    }}  className={`${theme}-ChatItem-container`} style={{opacity:plan != 'Free' || data.title == 'Samantha'?'100%':'30%'}}>
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
           <div className={`${theme}-ChatItem-innerCard `}>

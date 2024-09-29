@@ -14,6 +14,7 @@ import { publish } from "../../utils/event";
 import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
 import { TagPicker } from 'rsuite';
 import useModalAutoClose from "../../hooks/useModalAutoClose";
+import { TimeManegar } from "../../Model";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   // const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
@@ -295,7 +296,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-calendarIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.addDate}</p>
+                <p className={`${theme}-ContactDetails-textItem`}> Added on {TimeManegar.formatDate(contact?.addDate)}</p>
               </div>
             :undefined}
             </>
