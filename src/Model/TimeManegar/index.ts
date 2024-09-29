@@ -11,6 +11,9 @@ class TimeManegar {
     static nextDay() {
         this.nowDate.setDate(this.nowDate.getDate() + 1);
     } 
+    static previousDay() {
+        this.nowDate.setDate(this.nowDate.getDate() - 1);
+    } 
     
     static nextMonth() {
         this.nowDate.setDate(this.nowDate.getDate() + 30);

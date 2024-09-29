@@ -16,19 +16,19 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
         if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
             setTimeout(() => {
                 setShowNotif(true)
-            }, 3000);
+            }, 1000);
         }
 
         if(authContext.currentUser.type_of_account.getType() == 'Free' && !isSkipped){
             setTimeout(() => {
                 setShowNotif(true)
-            }, 3000);            
+            }, 1000);            
         }
         if(authContext.currentUser.type_of_account.getType() == 'Pro' && !isSkipped){
             if(authContext.currentUser.type_of_account.getDayremindToExpired() <= 7)
                 setTimeout(() => {
                     setShowNotif(true)
-                }, 3000);
+                }, 1000);
         }
     })
     subscribe("nextPage",() => {
@@ -113,7 +113,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
         if(authContext.currentUser.type_of_account.getType() == 'Pro') {
             if(page == 'AiSetting'){
                 return `
-                   Your custom AI settings will revert to default in 7 days unless you renew your plan. Keep your Pro membership!    
+                   Your custom AI settings will revert to default in ${authContext.currentUser.type_of_account.getDayremindToExpired()} days unless you renew your plan. Keep your Pro membership!    
                 `
             }
             if(page == 'GallerySetting'){

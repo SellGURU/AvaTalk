@@ -49,6 +49,12 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                                 setTime(TimeManegar.renderDate())
                                 publish("nextPage",{})
                             }} theme="Carbon"> next month</Button>
+
+                            <Button onClick={() => {
+                                TimeManegar.previousDay()
+                                setTime(TimeManegar.renderDate())
+                                publish("nextPage",{})
+                            }} theme="Carbon"> previous  day</Button>
                             <div>
                                 <Select theme="Carbon" valueElement={plan}>
                                     <div onClick={() => {
