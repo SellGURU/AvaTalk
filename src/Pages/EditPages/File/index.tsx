@@ -50,7 +50,7 @@ const EditFile = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="FileSetting"></AccessNotifManager>
+            <AccessNotifManager isLimited={isReadyTO} page="FileSetting"></AccessNotifManager>
           </div>             
           <div className=" px-6">
             <TextField

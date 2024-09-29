@@ -5,9 +5,10 @@ import {useNavigate} from "react-router-dom";
 
 interface AccessNotifManager{
     page:string
+    isLimited?:boolean
 }
 
-const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
+const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited}) => {
     const authContext = useAuth()
     const [showNotif,setShowNotif] = useState(false)
     const [isSkipped,setIsSkipped] = useState(false)
@@ -76,21 +77,35 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
         }
         if(authContext.currentUser.type_of_account.getType() == 'Free') {
             if(page == 'AiSetting'){
+                if(isLimited){
+                    return `
+                       Unlock unlimited AI persona edits with Avatalk Pro. Make your AI work best for you, anytime you want. Upgrade now!      
+                    `                    
+                }
                 return `
                    Personalize your AI once for free, with a 2000 character limit on provided info. Want more customizations later? Upgrade to Pro for unlimited edits!      
                 `
             }
             if(page == 'GallerySetting'){
+                if(isLimited){
+                    return `Want to display more visuals? Upgrade to Avatalk Pro and get up to 50 image uploads!`
+                }
                 return `
                     Showcase up to 5 images in your gallery. Need more? Upgrade to Pro and upload up to 50 images!       
                 `                
             }
             if(page == 'LinkSetting'){
+                if(isLimited){
+                    return `More links mean more connections. Upgrade to Pro for unlimited links and expand your reach!`
+                }                
                 return `
                     Add up to 2 links to your profile. Upgrade to Pro for unlimited link sharing and boost your networking!
                 `                
             }        
             if(page == 'FileSetting'){
+                if(isLimited){
+                    return `Share more with your connections. Upgrade to Avatalk Pro for up to 50 file uploads!`
+                }                     
                 return `
                     Upload your first file for free. Up to 10 MB. Need more space? Upgrade to Pro for 50 uploads up to 50MB!
                 `                
@@ -106,8 +121,11 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page}) => {
                 `                
             }    
             if (page == "VideoSetting") {
+                if(isLimited){
+                    return `Engage more with videos. Upgrade to Pro to captivate your audience!`
+                }                     
               return `
-                Engage more with videos. Upgrade to Pro to captivate your audience!                `;
+                Add your first video for free. Want to showcase more? Upgrade to Avatalk Pro!                `;
             }                                             
         }        
         if(authContext.currentUser.type_of_account.getType() == 'Pro') {

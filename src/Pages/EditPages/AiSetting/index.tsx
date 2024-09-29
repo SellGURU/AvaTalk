@@ -216,7 +216,7 @@ const formatText = (text: string) => {
              style={{visibility: showAiSuggestion ? 'hidden' : 'visible'}}>
 
           <div className="px-6">
-            <AccessNotifManager page="AiSetting"></AccessNotifManager>
+            <AccessNotifManager isLimited={auth.currentUser.editStatus} page="AiSetting"></AccessNotifManager>
           </div>
           <div className="px-6 mt-4">
 
