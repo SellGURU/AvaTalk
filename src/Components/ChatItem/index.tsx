@@ -18,7 +18,7 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
       <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
     :undefined}
     <div  onClick={() => {
-      if(plan != 'Free' || data.title == 'samanta'){
+      if(plan != 'Free' || data.title == 'Samantha'){
         navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
       // to={`/chats/${data.chat_list_id}`}
