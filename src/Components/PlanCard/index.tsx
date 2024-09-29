@@ -153,7 +153,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         }} className=" relative z-20 cursor-pointer w-full justify-end flex">
           <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
 
-            Upgrade your plan
+            Renew Your Plan
           </div>
           <img src={"/Carbon/arrow-right.svg"} alt=""/>
         </div>
