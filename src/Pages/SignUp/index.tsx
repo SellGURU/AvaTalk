@@ -255,7 +255,7 @@ const SignUp = () => {
                         </Button> */}
                         </div>                        
                         <div className="text-[#374151] mt-4 text-center text-[14px]">
-                            By signing up, you agree with
+                            By signing up, you agree with our 
                         </div>                    
                         <div  className="text-center text-[14px] mt-1 cursor-pointer"><span onClick={() => {
                             // navigate('https://avatalk.me/termsofservice/')

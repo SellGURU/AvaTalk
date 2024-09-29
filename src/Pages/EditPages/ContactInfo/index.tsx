@@ -110,7 +110,7 @@ const EditContactInfo = () => {
           <TextArea inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>
           {/* <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} /> */}
         </div>
-        <div className="mt-3 px-6">
+        <div className="mt-3 px-6 opacity-50">
           <TextField
             {...formik.getFieldProps("personlEmail")}
             theme="Carbon"

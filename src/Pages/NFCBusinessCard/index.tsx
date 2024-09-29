@@ -261,7 +261,7 @@ export const NFCBusinessCard = () => {
                         <div className="text-[#374151] font-normal text-[12px]">
                             Tax included. Shipping calculated at checkout.
                         </div>
-                        {selectedColor.map(item=>{
+                        {selectedColor.map((item,index)=>{
                             return (
                                 <div className="mt-4 flex justify-between items-center">
                                     <div className={"flex gap-3"}>
@@ -289,12 +289,12 @@ export const NFCBusinessCard = () => {
 
                                     <div className={"bg-[#EEEFF3] flex items-center justify-between px-2 w-[128px] h-[40px] rounded-2xl"}>
                                         <button  className={"bg-white text-[#5B21B6] text-[24px]  w-8 h-8 rounded-full flex items-center justify-center"}  onClick={()=>{
-                                            if(item.count >1 || selectedColor.length > 1){
+                                            if(item.count >1 || index > 0){
                                                 handleQuantityChange("decrement",item.id)
 
                                             }
                                         }}>
-                                            {item.count > 1 || selectedColor.length == 1 ?
+                                            {index == 0  || item.count>1?
                                                 <img src={"/Carbon/mines.svg"}/>
                                                 : <img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
