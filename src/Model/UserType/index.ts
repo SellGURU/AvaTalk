@@ -63,7 +63,7 @@ class UserType {
 
     public getDayremindToExpired(){
         const date = new Date(this.endDate)
-        return Math.ceil((date.getTime() -this.nowDate.getTime()) / 86400000) ;
+        return Math.ceil((date.getTime() -this.nowDate.getTime()) / 86400000) - 1;
     }
 
     public getDayremindToExpiredFrom7Day(){

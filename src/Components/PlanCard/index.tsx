@@ -128,7 +128,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className="flex justify-center mt-3">
           <div className="text-white text-[14px]  relative z-50  text-justify w-full">
-            7 days left! Renew now to keep enjoying premium networking tools without interruption.
+            {auth.currentUser.type_of_account.getDayremindToExpired()} days left! Renew now to keep enjoying premium networking tools without interruption.
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
