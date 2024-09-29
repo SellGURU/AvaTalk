@@ -157,7 +157,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
         </>
       )}
       {
-        showEchangeModal&&!isReadyTO && 
+        showEchangeModal&&!isReadyTO &&activeView=='Visitors Chat History' &&
         <EnhanceModal onClose={() => {
           setShowEchangeModal(false)
         }} submit={() => {
@@ -165,7 +165,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
           
         }}></EnhanceModal>
       }
-        {isReadyTO &&!showEchangeModal&&
+        {isReadyTO &&!showEchangeModal&&activeView=='Visitors Chat History'  &&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
             <ReadyForMore page="Chat" onClose={() => {
               setIsReadyTo(false)
