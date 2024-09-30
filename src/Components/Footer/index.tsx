@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MenuType } from "../../Types";
+import { subscribe } from "../../utils/event";
+import { Chat } from "../../Api";
 
 interface FooterProps {
   theme?: string;
@@ -10,10 +12,26 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
   const handleItemClick = (item: MenuType) => {
     if (onItemChange) {
+      setIsHaveNewChat(false)
       onItemChange(item);
     }
   };
-
+  const [isHaveNewAnalyse,setIsHaveNewAnalyse] = useState(false)
+  const [isHaveNewChat,setIsHaveNewChat] = useState(false)
+  subscribe("isHaveNewAnalyse",() => {
+    setIsHaveNewAnalyse(true)
+  })
+  const checkNotifChat = () => {
+    Chat.checkHaveChats().then((res) => {
+      if(res.data["New chat"] == true) {
+        setIsHaveNewChat(true)
+      }
+    })
+  }
+  useEffect(() => {
+    const interval = setInterval(checkNotifChat, 15000);     
+    return () => clearInterval(interval);    
+  },[])
   return (
     <div className={`${theme}-Footer-Container`}>
       <div
@@ -61,12 +79,15 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "chats" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center relative items-center">
           <div
             className={`${theme}-Footer-Vectors ${theme}-Footer-ChatVector ${
               activeItem === "chats" ? `${theme}-Footer-ActiveVectors ${theme}-Footer-ChatVector-active` : ""
             }`}
           ></div>
+              {isHaveNewChat &&
+                <div className="w-2 h-2 bg-primary-color rounded-full absolute top-[-6px] right-[-4px]"></div>
+              }          
             {activeItem!= 'chats'?
               <div className={`${theme}-Footer-Text`}>Chats</div>
             :
@@ -79,12 +100,16 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
           activeItem === "status" ? `${theme}-Footer-ActiveVectorSection boxShadow-Gray` : ""
         }`}
       >
-         <div className="flex flex-col justify-center items-center">
+         <div className="flex flex-col justify-center relative items-center">
           <div
             className={`${theme}-Footer-Vectors ${theme}-Footer-StatusVector ${
               activeItem === "status" ? `${theme}-Footer-ActiveVectors` : ""
             }`}
-          ></div>
+          >
+          </div>
+              {isHaveNewAnalyse &&
+                <div className="w-2 h-2 bg-primary-color rounded-full absolute top-[-6px] right-[-4px]"></div>
+              }
               {activeItem!= 'status'?
                 <div className={`${theme}-Footer-Text`}>Analysis</div>
               :

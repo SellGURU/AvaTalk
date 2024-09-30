@@ -5,6 +5,7 @@ import { removeTokenFromLocalStorage } from "../Storage/Token";
 import { Contact, Tag } from "../Types";
 import { boxProvider } from "../help";
 import Api from "./Api";
+import { publish } from "../utils/event";
 
 interface LoginData {
   mobile_number?:string,
@@ -294,6 +295,9 @@ class Auth extends Api {
 
   static addEvent(event:AddEvent) {
     this.post('/add_event',event,{noPending:true})
+    if(event.event_type == 'page_view' || event.event_type == 'ar_usage' || event.event_type == 'save_contact' || event.event_type == 'file_click' ){
+      publish("isHaveNewAnalyse",{})
+    }
   }
 
   static getAnalytics(from:string,to:string,resolve:(data:any) => void){
