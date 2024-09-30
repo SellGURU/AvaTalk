@@ -321,7 +321,7 @@ export const NFCBusinessCard = () => {
                     style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "360px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
                     contentLabel=" Modal"
                 >
-                    <div className={" relative pb-5 pt-12"}>
+                    <div className={" relative pb-5 pt-6"}>
                        <div className={"absolute right-0 top-0"}>
                            <Button onClick={() => {
                                setIsOpen(false)

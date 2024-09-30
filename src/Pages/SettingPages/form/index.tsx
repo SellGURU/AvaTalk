@@ -1,13 +1,12 @@
 import {BackIcon} from "../../../Components";
 import TextField from "../../../Components/TextField";
-
+import Modal from "react-modal";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import {Button} from "symphony-ui";
 import SupportForm from "../../../Api/suportForm.ts";
 import {useState} from "react";
 import TextArea from "../../../Components/TextArea";
-import { toast } from "react-toastify";
 
 export const FormPage = () => {
     const validationSchema = Yup.object().shape({
@@ -16,6 +15,7 @@ export const FormPage = () => {
             .required('Email is required'),
         fullname: Yup.string().required('Full name is required'),
     });
+    const [isOpen, setIsOpen] = useState(false);
     const initialValue = {
         message:"" ,
         email:"" ,
@@ -34,9 +34,11 @@ export const FormPage = () => {
     const [,setIsLoading]=useState<boolean>(true);
     const getData = async () => {
         setIsLoading(true)
-        SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message).then(res => {
-            toast.success(res.data)
+        SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message).then(() => {
+            // toast.success(res.data)
+            
         });
+        setIsOpen(true)
 
         setIsLoading(false);
     }
@@ -76,6 +78,31 @@ export const FormPage = () => {
 
 
             </div>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={() => {
+                setIsOpen(false)}
+        }
+            style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "380px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+            contentLabel=" Modal"
+        >
+            <div className={" relative pb-5 pt-6"}>
+                <div className={"absolute right-0 top-0"}>
+                    <Button onClick={() => {
+                        setIsOpen(false)
+                    }} data-mode="profile-review-button-2" theme="Carbon-Google">
+                        <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>
+                    </Button>
+                </div>
+            <div className={"flex flex-col items-center justify-center"}>
+
+                <img src={"/Carbon/tick-circle.svg"}/>
+                <h1 className={"text-lg font-medium text-[#374151]"}>Thank you!</h1>
+                <p className={"text-lg text-center font-medium text-[#374151]"}>
+Your request has been successfully submitted. Our team will review it and get back to you shortly.</p>
+            </div>
+            </div>
+        </Modal>                   
         </>
     )
 }

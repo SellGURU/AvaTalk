@@ -6,6 +6,8 @@ class SupportForm extends Api {
             "name": name,
             "email": email,
             "message": message
+        },{
+            noPending:true      
         })
     }
 }
