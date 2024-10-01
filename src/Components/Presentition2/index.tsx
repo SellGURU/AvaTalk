@@ -146,11 +146,15 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
                 return (
                 <>
                     {item.from == 'user' ?
-                    <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
+                    <div className="flex w-full justify-end">
+                        <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
+                    </div>
                     :
-                    <div className={`${theme}-Presentation-chatItem`}>
-                        {item.text}
-                    </div> 
+                    <div className="flex w-full justify-start">
+                        <div className={`${theme}-Presentation-chatItem`}>
+                            {item.text}
+                        </div> 
+                    </div>
                     }
                 </>
                 )

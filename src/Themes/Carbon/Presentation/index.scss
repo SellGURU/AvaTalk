@@ -73,7 +73,7 @@
     @apply flex flex-col gap-3 items-center h-[40vh] overflow-y-scroll hiddenScrollBar w-full;
 }
 .Carbon-Presentation-chatItem{
-    @apply flex justify-start boxShadow-purple  items-center tracking-tighter text-white w-full disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-[27px] px-6 py-[14px] h-auto text-left #{!important};
+    @apply flex justify-start max-w-[363px] items-center tracking-tighter text-[#374151] text-justify disabled:cursor-not-allowed bg-[#F3F4F6] leading-[19.36px] text-[14px] font-[500]  rounded-[16px] rounded-tr-none px-6 py-[14px] h-auto  #{!important};
 }
 .Carbon-Presentation-MoreInfoTitle{
     @apply font-semibold mb-1 mt-6;
@@ -91,7 +91,7 @@
     }
 }
 .Carbon-Presentation-AnswerTitle{
-    @apply mt-6 self-start ms-6;
+    @apply flex justify-start max-w-[363px] text-justify items-center tracking-tighter text-[#374151] disabled:cursor-not-allowed bg-[#5B21B64D] leading-[19.36px] text-[14px] font-[500]  rounded-[16px] rounded-tr-none px-6 py-[14px] h-auto  #{!important};;
 }
 
 .Carbon-Presentation-setting-icon{
