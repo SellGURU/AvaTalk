@@ -120,7 +120,9 @@ const Chat: React.FC<Props> = ({ theme }) => {
 
       </div>
       <div className="px-6 py-2">
-        <AccessNotifManager page="ChatPage"></AccessNotifManager>
+        {activeView=='Visitors Chat History' &&
+          <AccessNotifManager page="ChatPage"></AccessNotifManager>
+        }
 
       </div>         
       {activeView === "Visitors Chat History" ? (
