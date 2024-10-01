@@ -36,15 +36,15 @@ const Chat: React.FC<Props> = ({ theme }) => {
     if(appcontext.currentUser.editStatus == false) {
       setTimeout(() => {
         setShowEchangeModal(true)
-      }, 10000);
+      }, 1000);
 
     }
-    if(appcontext.currentUser.type_of_account.getType() == 'Free'){
-      setIsReadyTo(true)
-      setTimeout(() => {
-        setIsReadyTo(true)
-      }, 15000);      
-    }
+    // if(appcontext.currentUser.type_of_account.getType() == 'Free'){
+    //   setIsReadyTo(true)
+    //   setTimeout(() => {
+    //     setIsReadyTo(true)
+    //   }, 15000);      
+    // }
     // setIsLoading(false);
   });
 
@@ -112,7 +112,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
   };
   return (
     
-    <div className={`${theme}-ContactsView-Container relative `}>
+    <div  className={`${theme}-ContactsView-Container relative `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText mb-4`}>Chats</p>
       <div className={`${theme}-ContactsView-buttonsContainer w-3/4 `}>
@@ -135,7 +135,17 @@ const Chat: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <ChatList data={filteredData} theme={theme} />
+            <div onClick={() => {
+                  if(appcontext.currentUser.type_of_account.getType() == 'Free'){
+                    setTimeout(() => {
+                      setIsReadyTo(true)
+                      
+                    }, 1000);
+                  }
+                }}>
+              <ChatList data={filteredData} theme={theme} />
+
+            </div>
           )}
         </>
       ) : (
