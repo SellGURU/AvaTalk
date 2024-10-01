@@ -34,7 +34,7 @@ const EditVideos = () => {
       Object.assign(new Video("", ""), item)
     )
   );
-
+  const [limiteMdoe,setLimiteMode] = useState("defualt")
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)
   const initialValue = {
     title: currentBox.getTitle(),
@@ -64,8 +64,13 @@ const EditVideos = () => {
   const [openaddlink, setOpenAddLink] = useState(false);
   const navigate = useNavigate();
   const submit = () => {
-    auth.currentUser.addBox(new VideoBox(formik.values.title, video));
-    navigate("/");
+    if(video.length>1) {
+      setIsReadyTo(true)
+    }else {
+      auth.currentUser.addBox(new VideoBox(formik.values.title, video));
+      navigate("/");
+
+    }
   };
   const deleteSocial = (index: number) => {
     const newArr = [...video];
@@ -82,6 +87,13 @@ const EditVideos = () => {
       });
     }, 500);
   });
+  useEffect(() => {
+    if(video.length <= 1){
+      setLimiteMode("defult")
+    }else {
+      setLimiteMode("length")
+    }
+  })
   return (
     <>
       <h1>hi</h1>
@@ -91,7 +103,7 @@ const EditVideos = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager isLimited={isReadyTO} page="VideoSetting"></AccessNotifManager>
+            <AccessNotifManager modeLimited={limiteMdoe} page="VideoSetting"></AccessNotifManager>
           </div>
           <div className=" px-6">
             <TextField
@@ -217,7 +229,8 @@ const EditVideos = () => {
             <Button
               onClick={() => {
                 if(auth.currentUser.type_of_account.getType() == 'Free' && video.length >= 1){
-                  setIsReadyTo(true)
+                  setLimiteMode("length")
+                  setOpenAddLink(!openaddlink)
                 }else {
                   setOpenAddLink(!openaddlink)
                 }

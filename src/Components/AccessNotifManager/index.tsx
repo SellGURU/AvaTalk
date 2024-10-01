@@ -6,9 +6,10 @@ import {useNavigate} from "react-router-dom";
 interface AccessNotifManager{
     page:string
     isLimited?:boolean
+    modeLimited?:string
 }
 
-const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited}) => {
+const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLimited}) => {
     const authContext = useAuth()
     const [showNotif,setShowNotif] = useState(false)
     const [isSkipped,setIsSkipped] = useState(false)
@@ -103,9 +104,12 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited}) => {
                 `                
             }        
             if(page == 'FileSetting'){
-                if(isLimited){
+                if(modeLimited =='length'){
                     return `Share more with your connections. Upgrade to Avatalk Pro for up to 50 file uploads!`
-                }                     
+                }     
+                if(modeLimited =='fileSize'){
+                    return `Want to upload files bigger than 10MB? Upgrade to Avatalk Pro for uploads up to 50MB and share more content!`
+                }                                    
                 return `
                     Upload your first file for free. Up to 10 MB. Need more space? Upgrade to Pro for 50 uploads up to 50MB!
                 `                
@@ -121,7 +125,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited}) => {
                 `                
             }    
             if (page == "VideoSetting") {
-                if(isLimited){
+                if(modeLimited=="length"){
                     return `Engage more with videos. Upgrade to Pro to captivate your audience!`
                 }                     
               return `

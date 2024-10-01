@@ -16,6 +16,7 @@ const validationSchema = Yup.object().shape({
 
 const EditFile = () => {
   const auth = useAuth();
+  const [limiteMdoe,setLimiteMode] = useState("defualt")
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "FileBox")[0] as FileBox;
   if (currentBox == undefined) {
@@ -50,7 +51,7 @@ const EditFile = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager isLimited={isReadyTO} page="FileSetting"></AccessNotifManager>
+            <AccessNotifManager modeLimited={limiteMdoe} isLimited={isReadyTO} page="FileSetting"></AccessNotifManager>
           </div>             
           <div className=" px-6">
             <TextField
@@ -83,8 +84,9 @@ const EditFile = () => {
                 const maxFileSize = 10 * 1024 * 1024; // 10 MB in bytes
                 // Filter files based on size (<= 10 MB)
                 const validFiles = selectedFiles.filter(file =>{
-                  if(file.size > maxFileSize && auth.currentUser.type_of_account.getType()=='Free'){
-                    setIsReadyTo(true)
+                  if(file.size > maxFileSize ){
+                    // setIsReadyTo(true)
+                    setLimiteMode("fileSize")
                   }
                   if(auth.currentUser.type_of_account.getType()=='Free'){
                     return file.size <= maxFileSize
@@ -92,6 +94,9 @@ const EditFile = () => {
                   return true
                 } );                
                 console.log(validFiles)
+                if(validFiles.length > 1){
+                  setLimiteMode("length")
+                }
                 const converted:Array<File> = validFiles.map((item) => {
                   console.log("item.type",item.type)
                   const newFile:File = new File(item.url,item.name,item.type)
