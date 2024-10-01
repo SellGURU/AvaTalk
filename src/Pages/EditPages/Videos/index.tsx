@@ -181,10 +181,10 @@ const EditVideos = () => {
                           <div className="flex justify-end gap-3 items-start">
                             {video.length > 1 ? (
                               <div>
-                                <div
+                                {/* <div
                                   className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector `}
                                   style={{ height: "20px", width: "20px" }}
-                                ></div>
+                                ></div> */}
                               </div>
                             ) : undefined}
                             <div
