@@ -7,6 +7,7 @@ import { User } from "../../Model";
 import { Suggestions } from "symphony-ui";
 import { BeatLoader } from "react-spinners";
 import AccessNotifManager from "../AccessNotifManager";
+import { useAuth } from "../../hooks/useAuth";
 
 interface PresentationProps {
   theme?: string;
@@ -21,9 +22,43 @@ interface PresentationProps {
   mode?:string
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
+  setIsSilent?:(action:boolean) => void
 }
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
-    // const user = useAuth()
+
+const convertToLinks = (text:string) => {
+    // Regular expression to match links inside brackets
+    // eslint-disable-next-line no-useless-escape
+    const regex = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
+
+    // Split the text by the regex and create React elements
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+    // Add text before the link
+    if (lastIndex < match.index) {
+        parts.push(text.substring(lastIndex, match.index));
+    }
+    // Add the link as an anchor tag
+    parts.push(
+        <a key={match[2]} href={match[2]} target="_blank" rel="noopener noreferrer">
+        {match[1]}
+        </a>
+    );
+    // Update lastIndex to the end of the match
+    lastIndex = regex.lastIndex;
+    }
+
+    // Add remaining text after the last link
+    if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+    }
+
+    return parts;
+};   
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
+    const context = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
         { lan: "German", code: "de" },
@@ -97,6 +132,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setVideoUr
         //     }, 300);
         // })    
     })
+
     const handleSendVector = (value: string) => {
         setShowSuggestions(false)
         setIsLoading(true)
@@ -112,6 +148,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setVideoUr
             if(!isSilent){
                 setIsTalking(true)
             }
+            if((chats.length ==3||chats.length==4) && context.currentUser.type_of_account.getType() == 'Free'){
+                setIsSilent?setIsSilent(true):undefined
+            }
+
             setShowMuiteController(true)
             setIsLoading(false)
         },() => {
@@ -153,7 +193,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setVideoUr
                     :
                     <div className="flex w-full justify-start">
                         <div className={`${theme}-Presentation-chatItem`}>
-                            {item.text}
+                            {convertToLinks(item.text)}
                         </div> 
                     </div>
                     }

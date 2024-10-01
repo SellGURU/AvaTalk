@@ -33,16 +33,14 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                 }, 1000);
         }
     })
+    subscribe("useMoreVoiceRecorder",() => {
+        setShowNotif(true)
+    })
     subscribe("nextPage",() => {
         setShowNotif(false)
     })
     const resolveText = () => {     
-        if(page == 'chatEndUser'){
-            if(modeLimited =='review'){
-                return "Unlock voice chat with your Avatar! Upgrade to Pro and make your AI persona even more interactive and engaging."
-            }
-            return 'Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!'
-        }
+
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
             if(page == 'AiSetting'){
                 return `
@@ -80,6 +78,12 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
              }                                             
         }
         if(authContext.currentUser.type_of_account.getType() == 'Free') {
+            if(page == 'chatEndUser'){
+                if(modeLimited =='review'){
+                    return "Unlock voice chat with your Avatar! Upgrade to Pro and make your AI persona even more interactive and engaging."
+                }
+                return 'Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!'
+            }            
             if(page == 'AiSetting'){
                 if(isLimited){
                     return `

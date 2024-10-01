@@ -2,6 +2,7 @@
 import React , {useEffect, useState} from "react";
 import { VoiceRecorder } from "symphony-ui";
 import annyang from 'annyang';
+import { publish } from "../../utils/event";
 
 interface FooterPresentationProps {
   theme?: string;
@@ -15,6 +16,7 @@ interface FooterPresentationProps {
 const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme,setShowSuggestions ,langCode, onSendVector,isLoading,isRecording,setIsRecording}) => {
   const [mode,setMode] = useState<'profile'|'review'>('profile')
   const [resolvedText,setResolvedText] = useState('');
+  const [numberOfUsed,setNumberOfUsed] = useState(0)
   useEffect(() => {
     annyang.setLanguage(langCode)
   },[langCode])
@@ -24,8 +26,14 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme,setShowSu
     video?.load()    
     annyang.start({ autoRestart: true, continuous: false });
     setIsRecording(true)
+    
     // console.log(annyang.isListening())
   }   
+  useEffect(() => {
+    if(numberOfUsed > 5){
+      publish("useMoreVoiceRecorder",{})
+    }
+  })
   const stopSpeetchToText = () => {
     annyang.abort()
     setIsRecording(false)
@@ -74,6 +82,7 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme,setShowSu
     if(resolvedText.length > 0){
       setTimeout(() => {
         onSendVector(resolvedText)
+        setNumberOfUsed(numberOfUsed+1)
         setResolvedText('')
         setIsRecording(false)
         stopSpeetchToText()          
