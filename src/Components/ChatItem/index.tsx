@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { publish } from "../../utils/event";
 
 interface DataProps {
   id: string;
@@ -21,6 +22,12 @@ const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: stri
       if(plan != 'Free' || data.title == 'Samantha'){
         navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
+      if(plan == 'Free'){
+        setTimeout(() => {
+          publish("chatReadyForMore",{})
+          
+        }, 1000);
+      }      
       // to={`/chats/${data.chat_list_id}`}
     }}  className={`${theme}-ChatItem-container`} style={{opacity:plan != 'Free' || data.title == 'Samantha'?'100%':'30%'}}>
       <div className={`${theme}-ChatItem-section`}>

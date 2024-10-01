@@ -11,6 +11,7 @@ import AccessNotifManager from "../AccessNotifManager";
 import { EnhanceModal, ReadyForMore } from "../__Modal__";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { subscribe } from "../../utils/event";
 
 interface Props {
   theme?: string;
@@ -26,6 +27,9 @@ const Chat: React.FC<Props> = ({ theme }) => {
   const [showEchangeModal,setShowEchangeModal] = useState(false)
   const [activeView, setActiveView] = useState("Visitors Chat History");
   const [isReadyTO,setIsReadyTo] = useState(false)
+  subscribe("chatReadyForMore",() => {
+    setIsReadyTo(true)
+  })
   useConstructor(() => {
     ChatApi.showList((res) => {
       // if(res.cha)
@@ -137,14 +141,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <div onClick={() => {
-                  if(appcontext.currentUser.type_of_account.getType() == 'Free'){
-                    setTimeout(() => {
-                      setIsReadyTo(true)
-                      
-                    }, 1000);
-                  }
-                }}>
+            <div >
               <ChatList data={filteredData} theme={theme} />
 
             </div>

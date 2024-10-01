@@ -42,6 +42,11 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     const resolveText = () => {     
 
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
+            if(page == 'chatEndUser'){
+                if(modeLimited =='review'){
+                    return  "Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!"
+                }
+            }              
             if(page == 'AiSetting'){
                 return `
                     Enjoy full access to all settings during your trial for a limited time. Upgrade to Pro to keep this control forever!            
