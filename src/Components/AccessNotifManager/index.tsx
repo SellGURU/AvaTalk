@@ -38,6 +38,9 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     })
     const resolveText = () => {     
         if(page == 'chatEndUser'){
+            if(modeLimited =='review'){
+                return "Unlock voice chat with your Avatar! Upgrade to Pro and make your AI persona even more interactive and engaging."
+            }
             return 'Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!'
         }
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {

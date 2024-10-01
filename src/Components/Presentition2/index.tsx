@@ -18,10 +18,11 @@ interface PresentationProps {
   setPrisentMode:(mode:string) =>void
   shareUser:User
   chats:Array<chat>
+  mode?:string
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
 }
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     // const user = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -162,7 +163,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,setVideoUrl,set
             }
             {showAccessNotifManager && 
                 <div className=" absolute bottom-14 bg-white py-4 mt-24  mb-[24px]">
-                    <AccessNotifManager page="chatEndUser"></AccessNotifManager>
+                    <AccessNotifManager modeLimited={mode as string} page="chatEndUser"></AccessNotifManager>
 
                 </div>             
             }
