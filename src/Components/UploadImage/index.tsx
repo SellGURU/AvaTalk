@@ -87,7 +87,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
 
       reader.onload = () => {
         const base64 = reader.result as string;
-        resolve({ name: file.name, url:base64,type:file.type });
+        resolve({ name: file.name, url:base64,type:file.type ,size:file.size});
       };
 
       reader.onerror = (error) => {

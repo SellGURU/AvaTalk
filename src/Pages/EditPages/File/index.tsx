@@ -71,14 +71,28 @@ const EditFile = () => {
                 return {
                   url: item.geturl(),
                   name: item.getName(),
-                  type:item.getType()
+                  type:item.getType(),
+                  size:100
                 };
               })}
               limite={0}
               userMode={auth.currentUser.type_of_account.getType()}
               uploades={(files: Array<any>) => {
                 console.log(files)
-                const converted:Array<File> = files.map((item) => {
+                const selectedFiles = Array.from(files);
+                const maxFileSize = 10 * 1024 * 1024; // 10 MB in bytes
+                // Filter files based on size (<= 10 MB)
+                const validFiles = selectedFiles.filter(file =>{
+                  if(file.size > maxFileSize && auth.currentUser.type_of_account.getType()=='Free'){
+                    setIsReadyTo(true)
+                  }
+                  if(auth.currentUser.type_of_account.getType()=='Free'){
+                    return file.size <= maxFileSize
+                  }
+                  return true
+                } );                
+                console.log(validFiles)
+                const converted:Array<File> = validFiles.map((item) => {
                   console.log("item.type",item.type)
                   const newFile:File = new File(item.url,item.name,item.type)
                   return newFile

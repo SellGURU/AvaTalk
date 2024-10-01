@@ -93,7 +93,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
           setIsShowPalnCard(true)
         }
       
-    }, 1000);
+    }, 100);
   },[])
   return (
     <>
