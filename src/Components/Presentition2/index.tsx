@@ -8,6 +8,7 @@ import { Suggestions } from "symphony-ui";
 import { BeatLoader } from "react-spinners";
 import AccessNotifManager from "../AccessNotifManager";
 import { useAuth } from "../../hooks/useAuth";
+import { subscribe } from "../../utils/event";
 
 interface PresentationProps {
   theme?: string;
@@ -84,17 +85,31 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         'Tell me more about your business',
         'What services do you provide in Codie?'
     ])    
+    const [usedMoreVoice,setUsedMoreVoice] = useState(false)
+    const resolveModeNotif =() => {
+        if(usedMoreVoice){
+            return "moreVoice"
+        }
+        return mode
+    }
+    subscribe("useMoreVoiceRecorder",() => {
+        setUsedMoreVoice(true)
+    })    
+    const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
     useEffect(() => {
         if(chats.length == 0) {
         setTimeout(() => {
             setShowSuggestions(true)
+            setFirstComeSuggestion(true)
         }, 5000);
         }
     },[chats])    
     useEffect(() => {
-        setTimeout(() => {
-            setShowAccessNotifManager(true)
-        }, 3000);
+        if(firstComeSuggestion){
+            setTimeout(() => {
+                setShowAccessNotifManager(true)
+            }, 3000);
+        }
     })
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
@@ -203,7 +218,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             }
             {showAccessNotifManager && 
                 <div className=" absolute bottom-14 bg-white py-4 mt-24  mb-[24px]">
-                    <AccessNotifManager modeLimited={mode as string} page="chatEndUser"></AccessNotifManager>
+                    <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
 
                 </div>             
             }

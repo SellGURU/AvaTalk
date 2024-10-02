@@ -87,6 +87,9 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                 if(modeLimited =='review'){
                     return "Unlock voice chat with your Avatar! Upgrade to Pro and make your AI persona even more interactive and engaging."
                 }
+                if(modeLimited =='moreVoice'){
+                    return "You've reached the limit for voice chat. Upgrade to Avatalk Pro to unlock full voice chat capabilities and make your Al more interactive!"
+                }                
                 return 'Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!'
             }            
             if(page == 'AiSetting'){
