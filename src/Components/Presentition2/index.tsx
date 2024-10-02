@@ -128,7 +128,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     })
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
-        if(mode =='review'){
+        if(context.currentUser.type_of_account.getType() == 'Pro'){
+            setFirstComeSuggestion(true)
+        }
+        if(mode =='review' && context.prerecorded_voice!=''){
             setAudioUrl(context.prerecorded_voice)
             setPrisentMode('audio')
             setIsTalking(true)
