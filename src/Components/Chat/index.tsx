@@ -142,7 +142,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
             </div>
           ) : (
             <div >
-              <ChatList data={filteredData} theme={theme} />
+              <ChatList isLimitedChat={appcontext.currentUser.type_of_account.getType() == 'Free'?true:false} data={filteredData} theme={theme} />
 
             </div>
           )}
@@ -159,7 +159,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <ChatList data={filteredData} theme={theme} />
+            <ChatList isLimitedChat={false} data={filteredData} theme={theme} />
 
             // <TagList data={filteredTags} theme={theme} />
           )}
