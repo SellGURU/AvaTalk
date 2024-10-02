@@ -46,6 +46,8 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                 if(modeLimited =='review'){
                     return  "Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!"
                 }
+                return "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
+
             }              
             if(page == 'AiSetting'){
                 return `
@@ -148,6 +150,11 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
             }                                             
         }        
         if(authContext.currentUser.type_of_account.getType() == 'Pro') {
+            if(page == 'chatEndUser'){
+                if(modeLimited !='review'){
+                    return  "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
+                }
+            }               
             if(page == 'AiSetting'){
                 return `
                    Your custom AI settings will revert to default in ${authContext.currentUser.type_of_account.getDayremindToExpired()} days unless you renew your plan. Keep your Pro membership!    
@@ -185,6 +192,13 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
         }
         return ''
     }
+    useEffect(() => {
+        if(resolveText() == '' ){
+            setShowNotif(false)
+        }else {
+            setShowNotif(true)
+        }
+    },[])
     return (
         <>
             {
@@ -207,7 +221,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                         }
                         
                         <div className="flex w-full font-medium mt-2 gap-6 justify-end items-center">
-                            {page == 'chatEndUser' ?
+                            {(modeLimited=="defualt" )&& page=="chatEndUser"?
                                   <div onClick={() => {
                                     window.open('https://portal.avatalk.me/#/signup')
                                     // navigate('https://portal.avatalk.me/#/login')

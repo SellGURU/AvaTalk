@@ -93,7 +93,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         return mode
     }
     subscribe("useMoreVoiceRecorder",() => {
-        setUsedMoreVoice(true)
+        if(mode == 'review'){
+            setUsedMoreVoice(true)
+        }
     })    
     const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
     useEffect(() => {
@@ -105,7 +107,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         }
     },[chats])    
     useEffect(() => {
-        if(firstComeSuggestion){
+        if(firstComeSuggestion || chats.length> 0){
             setTimeout(() => {
                 setShowAccessNotifManager(true)
             }, 3000);

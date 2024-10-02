@@ -61,7 +61,7 @@ const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefine
         return true;
       }         
      if (date1 == "Older" && !lastDateRender.includes("Older")) {
-        lastDateRender.push("Olden");
+        lastDateRender.push("Older");
         return true;
       }                    
       // Last Month
