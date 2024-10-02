@@ -175,7 +175,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
                       {files.map((item,index) => {
                         return (
                           <>
-                            {userMode == 'Free' && index >= resolveLimite ?
+                            {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
                               <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
                                 <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
                                 {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>

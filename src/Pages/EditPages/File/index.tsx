@@ -7,7 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReadyForMore } from "../../../Components/__Modal__";
 
 const validationSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ const EditFile = () => {
   if (currentBox == undefined) {
     currentBox = new FileBox("File", []);
   }
-  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','',''),item))))
+  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','','','0'),item))))
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -36,13 +36,27 @@ const EditFile = () => {
     },
   });
   const submit = () => {
-    if(auth.currentUser.type_of_account.getType() == 'Free' && formik.values.files.length > 1){
+    if((auth.currentUser.type_of_account.getType() == 'Free' && formik.values.files.length > 1) ||(auth.currentUser.type_of_account.getType() == 'Free' && limiteMdoe=='fileSize') ){
       setIsReadyTo(true)
     }else {
       auth.currentUser.addBox(new FileBox(formik.values.title, formik.values.files));
       navigate("/");
     }
   };
+  useEffect(() => {
+    let numberofBiges = 0
+    files.map((el) => {
+      if(Number(el.getSize()) > 10 * 1024 * 1024) {
+        numberofBiges = numberofBiges +1
+      }
+    })
+    if(numberofBiges > 0){
+      setLimiteMode("fileSize")
+    }else {
+      setLimiteMode("defualt")
+    }
+    
+  })
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -73,7 +87,7 @@ const EditFile = () => {
                   url: item.geturl(),
                   name: item.getName(),
                   type:item.getType(),
-                  size:100
+                  size:item.getSize()
                 };
               })}
               limite={0}
@@ -88,9 +102,9 @@ const EditFile = () => {
                     // setIsReadyTo(true)
                     setLimiteMode("fileSize")
                   }
-                  if(auth.currentUser.type_of_account.getType()=='Free'){
-                    return file.size <= maxFileSize
-                  }
+                  // if(auth.currentUser.type_of_account.getType()=='Free'){
+                  //   return file.size <= maxFileSize
+                  // }
                   return true
                 } );                
                 console.log(validFiles)
@@ -99,7 +113,7 @@ const EditFile = () => {
                 }
                 const converted:Array<File> = validFiles.map((item) => {
                   console.log("item.type",item.type)
-                  const newFile:File = new File(item.url,item.name,item.type)
+                  const newFile:File = new File(item.url,item.name,item.type,item.size)
                   return newFile
                 });
                 setFiles(converted)
