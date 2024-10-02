@@ -97,24 +97,44 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             setUsedMoreVoice(true)
         }
     })    
+    subscribe("voiceIsEnded",() => {
+        setFirstComeSuggestion(true)
+    })
     const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
+    // const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
+    // useEffect(() => {
+    //     if(chats.length == 0 && firstComeSuggestion ) {
+    //     setTimeout(() => {
+    //         setShowSuggestions(true)
+    //     }, 5000);
+    //     }
+    // },[chats])    
+    const showSuggestionsAction =() => {
+        setShowSuggestions(true)
+    }
     useEffect(() => {
-        if(chats.length == 0) {
-        setTimeout(() => {
-            setShowSuggestions(true)
-            setFirstComeSuggestion(true)
-        }, 5000);
-        }
-    },[chats])    
-    useEffect(() => {
-        if(firstComeSuggestion || chats.length> 0){
+        if(chats.length == 0 && firstComeSuggestion){
             setTimeout(() => {
-                setShowAccessNotifManager(true)
-            }, 3000);
+                showSuggestionsAction()
+            
+            }, 4000);
         }
+    })
+    useEffect(() => {
+
+        setTimeout(() => {
+            setShowAccessNotifManager(true)
+        }, 500);
     })
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
+        if(mode =='review'){
+            setAudioUrl(context.prerecorded_voice)
+            setPrisentMode('audio')
+            setIsTalking(true)
+        }else{
+            setFirstComeSuggestion(true)
+        }
         // const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
         // Share.getShareData('/presentation_info/user='+userid,(data) => {
         //     // const socials = data.boxs.filter((el:any) => el.type_name == 'SocialBox')[0]?.socialMedias

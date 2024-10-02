@@ -727,6 +727,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setShowMuiteController(false)
       setIsTalking(false)
       setStartVideoTalk(false)
+      publish("voiceIsEnded",{})
     }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
 
     <ExchangeContact mode='add' onAddContact={(data) => {

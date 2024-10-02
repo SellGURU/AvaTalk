@@ -35,11 +35,13 @@ interface AuthContextProps {
   currentUser:User;
   siginUpOptions:SiginUpOptionProps;
   needReload:boolean
+  prerecorded_voice:string
   googleInformation:any
   nfc_id:string | null
   refrealCode:string| null
   setReferalCode:(referal:string) => void
   setNfc_id:(id:string| null) => void
+  setPrerecorded_voice:(data:string) => void
   setGoogleInformation:(info:any) => void
   setNeedReload:(action:boolean) => void;
   setUser:(user:User) => void;
@@ -82,6 +84,8 @@ export const AuthContext = createContext<AuthContextProps>({
   verificationHandler: () => {},
  setGoogleInformation:() => {}, 
   login: () => {},
+  prerecorded_voice:"",
+  setPrerecorded_voice:() => {},
   logout: () => {
     // Auth.logout()
     
@@ -92,6 +96,7 @@ export const AuthContext = createContext<AuthContextProps>({
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
   const localuser = localStorage.getItem('authUser')
+  const [prerecorded_voice,setPrerecordedVoice] = useState(localStorage.getItem("prerecorded_voice") || "")
   const [referalCode,setReferalCode] = useState('')
   const [needReload,setNeedReload] = useState(false)
   reolveJsonToObject(localuser as string)
@@ -172,6 +177,11 @@ function AuthContextProvider({ children }: PropsWithChildren) {
       // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
       setUser(user)
     },
+    setPrerecorded_voice:(data) => {
+      setPrerecordedVoice(data)
+      localStorage.setItem("prerecorded_voice",JSON.parse(data))
+    },
+    prerecorded_voice:prerecorded_voice,
     verificationHandler:verificationHandler,
     siginupHandler:siginOptionsHandler,
     login: loginHandler,

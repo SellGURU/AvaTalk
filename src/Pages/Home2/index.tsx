@@ -63,6 +63,7 @@ const Home2 = () => {
                     data.type_of_account.end_of_date,
                     data.type_of_account.previous_status_detail
                 ))
+            authContext.setPrerecorded_voice(data.prerecorded_voice)
 
         })        
     }
