@@ -30,7 +30,7 @@ const FooterPresentation: React.FC<FooterPresentationProps> = ({ theme,setShowSu
     // console.log(annyang.isListening())
   }   
   useEffect(() => {
-    if(numberOfUsed > 3){
+    if(numberOfUsed > 2){
       publish("useMoreVoiceRecorder",{})
     }
   })
