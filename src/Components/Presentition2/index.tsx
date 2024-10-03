@@ -124,22 +124,38 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         }
     })
     useEffect(() => {
-
+        if(mode =='review' && context.prerecorded_voice!=null){
+            setTimeout(() => {
+                setShowAccessNotifManager(true)
+            }, 500);
+        }
         setTimeout(() => {
-            setShowAccessNotifManager(true)
-        }, 500);
+            if(!showSuggestions){
+                setShowAccessNotifManager(true)
+            }
+        },5000);
     })
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
-        if(context.currentUser.type_of_account.getType() == 'Pro'){
+        if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() > 7){
             setFirstComeSuggestion(true)
         }
-        if(mode =='review' && context.prerecorded_voice!=''){
+        if(mode =='review' && context.prerecorded_voice!=null){
+            // alert("this hear")
+            // console.log(context.prerecorded_voice)
             setAudioUrl(context.prerecorded_voice)
             setPrisentMode('audio')
             setIsTalking(true)
         }else{
-            setFirstComeSuggestion(true)
+            if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() <= 7){
+                // setTimeout(() => {
+                //      setFirstComeSuggestion(true)
+                // }, 100);
+                setShowAccessNotifManager(false)
+                setFirstComeSuggestion(true)
+            }else {
+                setFirstComeSuggestion(true)
+            }
         }
         // const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
         // Share.getShareData('/presentation_info/user='+userid,(data) => {

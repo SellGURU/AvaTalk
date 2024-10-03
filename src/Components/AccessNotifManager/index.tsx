@@ -152,10 +152,8 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
             }                                             
         }        
         if(authContext.currentUser.type_of_account.getType() == 'Pro') {
-            if(page == 'chatEndUser'){
-                if(modeLimited !='review'){
-                    return  "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
-                }
+            if(page == 'chatEndUser' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
+                return "Voice chat will be limited soon. Renew to allow your followers to speak with you."
             }               
             if(page == 'AiSetting'){
                 return `
