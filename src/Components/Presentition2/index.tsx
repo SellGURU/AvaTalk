@@ -90,6 +90,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         if(usedMoreVoice){
             return "moreVoice"
         }
+        if(mode != 'review') {
+            return "endUser"
+        }
         return mode
     }
     subscribe("useMoreVoiceRecorder",() => {

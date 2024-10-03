@@ -489,7 +489,7 @@ const EditAvater: React.FC = () => {
                   }}
                   theme="Carbon"
               >
-                  Save
+                  Save Changes
               </Button>
               </div>
           </div>

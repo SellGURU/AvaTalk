@@ -40,7 +40,9 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
         setShowNotif(false)
     })
     const resolveText = () => {     
-
+        if(modeLimited == 'endUser') {
+            return  "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
+        }
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
             if(page == 'chatEndUser'){
                 if(modeLimited =='review'){
@@ -221,7 +223,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                         }
                         
                         <div className="flex w-full font-medium mt-2 gap-6 justify-end items-center">
-                            {(modeLimited=="defualt" )&& page=="chatEndUser"?
+                            {(modeLimited=="endUser" )&& page=="chatEndUser"?
                                   <div onClick={() => {
                                     window.open('https://portal.avatalk.me/#/signup')
                                     // navigate('https://portal.avatalk.me/#/login')
