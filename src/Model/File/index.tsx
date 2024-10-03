@@ -60,17 +60,20 @@ export class File {
     public resolveRender(theme:string,userID:string) {
         return (
             <>
-            <Link onClick={() => {
-             Auth.addEvent({
-                event_type:"file_click",
-                userid:userID,
-                sub_event_category:'view_link'
-            })                  
-            }} to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
-                </div>
-            </Link>  
+            <div  onClick={() => {
+                Auth.addEvent({
+                    event_type:"more_info",
+                    userid:userID,
+                    sub_event_category:'more_info_files'
+                })                  
+                }}>
+                <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
+                    <div className={`${theme}-ContentCard-CardVector`}>
+                        <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
+                    </div>
+                </Link>  
+
+            </div>
             <Tooltip id={"link"+this.name} />     
             </>
         )
