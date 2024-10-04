@@ -178,7 +178,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         }        
       </div>
       <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
-        <div className="w-[45%] min-w-[205px]">
+        <div className="w-[45%] min-w-[205px] invisible">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
         </div>
         <div className="w-[30%] min-w-[100px]">
