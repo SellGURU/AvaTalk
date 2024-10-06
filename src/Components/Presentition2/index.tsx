@@ -102,6 +102,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     })    
     subscribe("voiceIsEnded",() => {
         setFirstComeSuggestion(true)
+        // setShowAccessNotifManager(false)
     })
     const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
     // const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
@@ -115,12 +116,15 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     const showSuggestionsAction =() => {
         setShowSuggestions(true)
     }
+    subscribe("useMoreVoiceRecorder",() => {
+        setShowAccessNotifManager(true)
+    })    
     useEffect(() => {
         if(chats.length == 0 && firstComeSuggestion){
             setTimeout(() => {
                 showSuggestionsAction()
-            
-            }, 4000);
+                setShowAccessNotifManager(false)
+            }, 10000);
         }
     })
     useEffect(() => {
@@ -134,13 +138,13 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                 setShowAccessNotifManager(true)
             }
         },5000);
-    })
+    },[])
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
         if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() > 7){
             setFirstComeSuggestion(true)
         }
-        if(mode =='review' && context.prerecorded_voice!=null){
+        if(mode =='review' && context.prerecorded_voice!=null && chats.length ==0){
             // alert("this hear")
             // console.log(context.prerecorded_voice)
             setAudioUrl(context.prerecorded_voice)
@@ -196,19 +200,19 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         setShowSuggestions(false)
         setIsLoading(true)
         sendToApi(chats,setChats,value,(res) => {
+            if(res.answer.audio_file == null && res.answer.video_file == null){
+                setIsSilent?setIsSilent(true):undefined
+            }
             if(res.answer.audio_file != null){
                 setAudioUrl(res.answer.audio_file)
                 setPrisentMode('audio')
-            }else{
+            }else if(res.answer.video_file != null){
                 // alert('Video')
                 setVideoUrl(res.answer.video_file)
                 setPrisentMode('video')
             }
-            if(!isSilent){
+            if(!isSilent && !(res.answer.audio_file == null && res.answer.video_file == null)){
                 setIsTalking(true)
-            }
-            if((chats.length ==3||chats.length==4) && context.currentUser.type_of_account.getType() == 'Free'){
-                setIsSilent?setIsSilent(true):undefined
             }
 
             setShowMuiteController(true)
@@ -261,7 +265,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             })
             }
             {showAccessNotifManager && 
-                <div className=" absolute bottom-14 bg-white py-4 mt-24  mb-[24px]">
+                <div className=" absolute bottom-10 bg-white py-4 mt-24  mb-[24px]">
                     <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
 
                 </div>             

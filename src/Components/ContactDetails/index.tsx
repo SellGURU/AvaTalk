@@ -208,12 +208,12 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             </>
           }
           {!showAddTagModal &&
-            <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] text-[14px] font-medium cursor-pointer">Add Tag</div>     
+            <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] hidden text-[14px] font-medium cursor-pointer">Add Tag</div>     
           }    
           {
             showAddTagModal &&  
             <>
-              <div className="w-full flex justify-center items-center">
+              <div className="w-full flex  invisible justify-center items-center">
                 <TagPicker 
                 defaultValue={contact?.tags.map(el => el.name)}
                 onChange={(e:Array<any>) => {
