@@ -121,7 +121,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
         {showConfirm ?
         <>
             <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm confirmTitle="Log out" refrence={confirmRef} title={"Log out"} content={"Are you sure want to Log out your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+                <Confirm confirmTitle="Log out" refrence={confirmRef} title={"Log out"} content={"Are you sure want to log out your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                   auth.logout()
                 }}></Confirm>
             </div>
