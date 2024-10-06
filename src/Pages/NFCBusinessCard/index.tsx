@@ -295,7 +295,7 @@ export const NFCBusinessCard = () => {
                                             }
                                         }}>
                                             {index == 0  || item.count>1?
-                                                <img src={"/Carbon/mines.svg"}/>
+                                                <img className="w-4" src={"/Carbon/mines.svg"}/>
                                                 : <img src={"/Carbon/trashVector.svg"}/>}
                                         </button>
                                         {item.count}

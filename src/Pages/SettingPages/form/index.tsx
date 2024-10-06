@@ -62,7 +62,7 @@ export const FormPage = () => {
                         <div className={"flex flex-col items-center justify-center gap-4"}>
                             <TextField errorMessage={formik.errors.fullname}  inValid={formik.errors.fullname as string}  {...formik.getFieldProps("fullname")} theme="Carbon" label={"Full Name"} placeholder={"Enter your first and last name..."}
                                         type={"text"} required={true}/>
-                            <TextField errorMessage={formik.errors.email}  {...formik.getFieldProps("email")} theme="Carbon" label={"Email Address"} placeholder={"Enter your Email address..."}
+                            <TextField errorMessage={formik.errors.email}  {...formik.getFieldProps("email")} theme="Carbon" label={"Email Address"} placeholder={"Enter your email address..."}
                                         type={"text"} inValid={formik.errors.email as string} required={true}/>
                             <TextArea textAreaHeight="136px" {...formik.getFieldProps("message")} theme="Carbon" label={"Message"} placeholder={"Write your message..."}
                                          inValid={""} />
