@@ -3,7 +3,6 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
 import { Link } from "react-router-dom";
-import { Auth } from "../../Api";
 // interface File {
 //     name:string
 //     url:string
@@ -57,16 +56,10 @@ export class File {
                 return 'wordVector';
         }
     }
-    public resolveRender(theme:string,userID:string) {
+    public resolveRender(theme:string,_userID:string) {
         return (
             <>
-            <div  onClick={() => {
-                Auth.addEvent({
-                    event_type:"more_info",
-                    userid:userID,
-                    sub_event_category:'more_info_files'
-                })                  
-                }}>
+            <div >
                 <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                     <div className={`${theme}-ContentCard-CardVector`}>
                         <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
