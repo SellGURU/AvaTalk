@@ -36,6 +36,9 @@ class Service extends Api {
     static subRedirect(session_id:string) {
         return this.get('/subredirect/'+session_id)
     }
+    static payRedirect(session_id:string) {
+        return this.get('/payredirect/'+session_id)
+    }    
 }
 
 export default Service
