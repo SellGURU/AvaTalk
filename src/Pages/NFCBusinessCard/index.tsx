@@ -219,7 +219,7 @@ export const NFCBusinessCard = () => {
                             items={currentCard?.images || []}
                             renderLeftNav={(onClick, disabled) => {
                                 return (
-                                    <div className={`Carbon-back-Button-container-box-NfcCard !top-[100% w-fit flex items-end justify-end`} style={{transform: 'translate(30%, -50%)', left: '20%'}} data-mode="gallery">
+                                    <div className={`Carbon-back-Button-container-box-NfcCard !top-[100%] w-fit flex items-end justify-end`} style={{transform: 'translate(30%, -50%)', left: '20%'}} data-mode="gallery">
                                         <Button onClick={onClick} disabled={disabled} theme={`Carbon-back`}>
                                             <div className={`Carbon-back-Button-vector`}></div>
                                         </Button>

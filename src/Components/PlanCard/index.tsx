@@ -25,9 +25,9 @@ const  FreeCard = () => {
             Go Premium
           </div>
         </div>
-        <div className="flex justify-center  mt-3">
-          <div className="text-white text-[14px] text-center relative z-50   w-full">
-            Unlock the full potential of this app and elevate <br /> your networking experience like never before!
+        <div className=" w-full flex   mt-3">
+          <div className="text-white text-[14px]  text-justify relative z-50   w-full">
+            Unlock the full potential of this app and elevate  your  networking experience like never before!
           </div>
         </div>
         <div onClick={() => {
@@ -69,8 +69,8 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
 
         <div className="pt-2 w-full flex items-center justify-center">
         </div>
-        <div className="flex justify-center mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-full">
+        <div className="flex justify-center mt-3 ">
+          <div className="text-white text-[14px]  relative z-50  text-justify w-full">
             Unlock the full potential of this app and elevate
           
             your networking experience like never before!
