@@ -19,8 +19,8 @@ export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,
     return (
         <Link rel="stylesheet" to={"/settings/NFCBusinessCard/"+id}>
             <div className={"Carbon-Card-Product-NfcCard-container overflow-hidden "} style={{padding:'0px'}}>
-                <div className={"w-full flex items-center justify-center"} style={{
-                    boxShadow:'inset 4px 4px 14px 2px #E2E8F0,inset -4px -4px 9px 2px #FFFFFF99',
+                <div className={"w-full flex items-center justify-center  "} style={{
+                    boxShadow:'inset 4px 1px 14px 2px #E2E8F0,inset -4px -1px 9px 2px #FFFFFF99',
                 }}>
                     <img src={imgSrc} className={"h-[115px] w-fit"}  alt={""}/>
                 </div>

@@ -26,13 +26,13 @@ const  FreeCard = () => {
           </div>
         </div>
         <div className="flex justify-center  mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock the full potential of this app and elevate your networking experience like never before!
+          <div className="text-white text-[14px] text-center relative z-50   w-full">
+            Unlock the full potential of this app and elevate <br /> your networking experience like never before!
           </div>
         </div>
         <div onClick={() => {
           navigate("service")
-        }} className=" relative z-20 mt-2 cursor-pointer w-full justify-end flex">
+        }} className=" relative z-20 mt-2 cursor-pointer w-full items-center justify-end flex">
           <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
 
             Upgrade your plan
@@ -47,6 +47,8 @@ const  FreeCard = () => {
 const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
   const navigate = useNavigate();
   const auth = useAuth();
+
+  
   return (
     <>
       <div className="w-full pt-6 px-6 overflow-hidden h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
@@ -69,7 +71,9 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className="flex justify-center mt-3">
           <div className="text-white text-[14px]  relative z-50  text-center w-full">
-            Unlock the full potential of this app and elevate your networking experience like never before!
+            Unlock the full potential of this app and elevate
+          
+            your networking experience like never before!
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
@@ -91,7 +95,7 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div onClick={() => {
           navigate("service")
-        }} className=" relative z-20 cursor-pointer w-full justify-end flex">
+        }} className=" relative z-20 cursor-pointer w-full items-center justify-end flex">
           <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
 
             Upgrade your plan
@@ -106,6 +110,8 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
 const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
   const navigate = useNavigate();
   const auth = useAuth();
+  console.log(auth.currentUser);
+  
   return (
     <>
       <div className="w-full pt-6 px-6 h-[232px] relative bg-primary-color rounded-[24px] flex flex-col justify-start items-center">
@@ -127,8 +133,8 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         <div className="pt-2 w-full flex items-center justify-center">
         </div>
         <div className="flex justify-center mt-3">
-          <div className="text-white text-[14px]  relative z-50  text-justify w-full">
-            {auth.currentUser.type_of_account.getDayremindToExpired()} days left! Renew now to keep enjoying premium networking tools without interruption.
+          <div className="text-white text-[14px] text-center relative z-50   w-full">
+            {auth.currentUser.type_of_account.getDayremindToExpired()} days left! Renew now to keep enjoying <br /> premium networking tools without interruption.
           </div>
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
@@ -150,7 +156,7 @@ const ProCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div onClick={() => {
           navigate("service")
-        }} className=" relative z-20 cursor-pointer w-full justify-end flex">
+        }} className=" relative mt-2 z-20 cursor-pointer items-center w-full justify-end flex">
           <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
 
             Renew Your Plan
@@ -169,7 +175,7 @@ const PlanCard: React.FC<PlanCardProps> = ({onClose}) => {
       return <FreeCard></FreeCard>
     }else if(auth.currentUser.type_of_account.getType() == 'Trial')  {
       return <TrailCard onClose={onClose}></TrailCard>
-    }else {
+    }else{
       return <ProCard onClose={onClose}></ProCard>
     }
   }

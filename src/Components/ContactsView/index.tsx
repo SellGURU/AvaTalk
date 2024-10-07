@@ -150,7 +150,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         {
           showMoreModal ?
             <>
-              <div ref={moreModalRef} className="w-[210px] top-12 text-sm right-6  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
+              <div ref={moreModalRef} className="w-[210px] -top-2 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
                 {/* <div className="flex opacity-50 items-center justify-start px-4 py-2 border-b border-b-white">
                   <img className={`${theme}-ContactsView-scan`} alt="" />
                   <div className="text-gray-700 ml-2">Scan Business Card</div>
