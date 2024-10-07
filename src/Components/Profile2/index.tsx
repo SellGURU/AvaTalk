@@ -343,7 +343,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
           </div>
         }
-        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
+        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-20'} sticky`}>
           {/* {mode == 'profile' ?
             <div className=" w-48 h-[40px] sticky z-20">
               <Button onClick={() => {

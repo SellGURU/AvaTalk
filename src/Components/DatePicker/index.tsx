@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useState, useEffect , useRef } from "react";
 import Litepicker from "../../Litepicker";
 import { useAuth } from "../../hooks/useAuth";
 // import { Button } from "symphony-ui";
@@ -12,11 +12,30 @@ const DatePicker = (props:any) => {
   //   endDate: new Date(),
   // });
   const context = useAuth()
+  const [isOpen, setisOpen] = useState(false)
   const [isVisible,] = useState(context.currentUser.type_of_account.getType() == 'Free'?false:true)
+  const datepickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        datepickerRef.current &&
+        !datepickerRef.current.contains(event.target as Node)
+      ) {
+        setisOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="flex mt-4  relative items-center ">
+    <div  ref={datepickerRef} className="flex mt-4  relative items-center ">
       <div onClick={() => {
         document.getElementById("dataPicker")?.click()
+        setisOpen(!isOpen)
        }} className={` h-[44px] ${isVisible?'':'opacity-20'} flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray `}>
         <div className="h-full flex items-center justify-between w-full px-2">
        <div  className=" flex justify-start items-center">
@@ -53,7 +72,7 @@ const DatePicker = (props:any) => {
             />
 
        </div>
-        <div className="Carbon-Card-Vector rotate-90 me-2"></div>
+        <div className={`Carbon-Card-Vector  me-2 ${isOpen ? '-rotate-90' : 'rotate-90'}`}></div>
           {/* <img src="../../../Carbon/leftVector.svg" className="w-4 h-4 me-2 -rotate-90 " alt="" /> */}
         </div>
 

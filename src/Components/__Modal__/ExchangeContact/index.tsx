@@ -125,7 +125,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
                   <div className={`${theme}-back-Button-vector`}></div>
               </Button>
               <div>
-                  <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{title}</div>
+                  <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{title}</div>
                   <div className='text-text-primary text-center text-xs '>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
               </div>
               <div className="invisible">
@@ -239,7 +239,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               </div>
 
           </div>
-          <div className="text-[14px] mt-6 text-center text-text-primary">
+          <div className="text-[14px] font-medium mt-6 text-center text-text-primary">
             Keep the momentum going—create your Avatalk in minutes with our free trial."
           </div>
           <div className="w-full flex justify-center mt-5">
@@ -249,7 +249,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               </div>
               <div>
                 <div className="text-white text-[18px] font-semibold  text-center">{formData.fullName}</div>
-                <div className="text-white text-[10px] font-medium  text-center">Job Title/ Company</div>
+                <div className="text-white text-[12px] font-medium opacity-85  text-center">Job Title/ Company</div>
               </div>
               <div className="w-full flex justify-center mt-4">
                 <img src="./icons/qrcode.png" alt="" />
