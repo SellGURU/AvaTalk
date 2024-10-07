@@ -6,12 +6,15 @@ interface PlanCardProps {
   theme?: string;
   onClose:() => void
 }
-
+interface FreeCardProps {
+  onClose:() => void
+}
 interface TrailCardProps {
   onClose:() => void
 }
 
-const  FreeCard:React.FC<TrailCardProps> = ({onClose}) => {
+
+const  FreeCard:React.FC<FreeCardProps> = ({onClose}) => {
   const navigate = useNavigate();
   return (
     <>

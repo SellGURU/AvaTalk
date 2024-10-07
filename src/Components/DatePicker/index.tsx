@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect , useRef } from "react";
+import { useState,  useRef } from "react";
 import Litepicker from "../../Litepicker";
 import { useAuth } from "../../hooks/useAuth";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 // import { Button } from "symphony-ui";
 
 const DatePicker = (props:any) => {
@@ -16,26 +17,16 @@ const DatePicker = (props:any) => {
   const [isVisible,] = useState(context.currentUser.type_of_account.getType() == 'Free'?false:true)
   const datepickerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        datepickerRef.current &&
-        !datepickerRef.current.contains(event.target as Node)
-      ) {
-        setisOpen(false);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useModalAutoClose({
+    refrence: datepickerRef,
+    close: () => setisOpen(false),
+  });
   return (
     <div  ref={datepickerRef} className="flex mt-4  relative items-center ">
       <div onClick={() => {
         document.getElementById("dataPicker")?.click()
-        setisOpen(!isOpen)
+        setisOpen(true)
        }} className={` h-[44px] ${isVisible?'':'opacity-20'} flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray `}>
         <div className="h-full flex items-center justify-between w-full px-2">
        <div  className=" flex justify-start items-center">
@@ -45,7 +36,7 @@ const DatePicker = (props:any) => {
             {/* <img src="../../../Carbon/Calendar-new.svg" className="w-6 h-6 ms-2 " alt="" /> */}
             <Litepicker
               id="dataPicker"
-              className="text-gray-700 text-sm lg:min-w-[230px] w-full pl-1 bg-inherit cursor-pointer"
+              className="text-gray-700 text-sm lg:min-w-[230px] h w-full pl-1 bg-inherit cursor-pointer"
               value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}
               onChange={(value) => {
                 console.log(value)
