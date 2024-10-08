@@ -76,6 +76,7 @@ class GoogleMapBox extends Box {
         // };         
         return (
             <div className={`${theme}-Profile-Vectors justify-center relative`}>
+              
                 <div className="px-0 mt-3 w-full">
                     {/* <LocationPicker  showInputs={false} pointMode={pointMode} mapStyle={{ height: "211px", borderRadius: "27px",zIndex:0 }}  /> */}
                     <LeafletMapLoader

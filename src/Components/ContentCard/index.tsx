@@ -30,6 +30,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   const navigate = useNavigate();
   console.log(item)
   const [showConfirm,setShowConfirm] = useState(false)
+  console.log(item.resolveRender(theme,mod,{userId:userId}))
   return (
     <>
     <li  onClick={() => {
@@ -81,7 +82,11 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
             </div>
         </div>
 
-        <div className={`${theme}-ContentCard-Children`}>{item.resolveRender(theme,mod,{userId:userId})}</div>
+        <div className={`${theme}-ContentCard-Children relative`}>
+          {item.getTitle() === "Google Map" && (
+            <div className='absolute top-0 right-0 bottom-0 left-0  z-10'></div>
+          )}
+          {item.resolveRender(theme,mod,{userId:userId})}</div>
         
     </li>
     {showConfirm ?

@@ -642,6 +642,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             }        
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
+              
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
                 <ul style={{ width: '100%' }} >
                   {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item: Box) => {
