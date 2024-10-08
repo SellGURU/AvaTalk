@@ -164,6 +164,7 @@ const Presentation: React.FC<PresentationProps> = ({ theme }) => {
             workPhone:data.information.work_mobile_number,
             userId:data.information.created_userid,
             silent_video_avatar:data.information.silent_video_url,
+            unique_id:data.information.unique_id,
             talk_video_avater:data.information.talking_video_avatar           
         }
         const shareUser = new User(information)

@@ -18,8 +18,10 @@ const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeh
     setShowSelect(false);
   }, [valueElement]);
   const selectRef = useRef<HTMLDivElement>(null)
+  const selectButtonRef = useRef<HTMLDivElement>(null)
   useModalAutoClose({
     refrence:selectRef,
+    buttonRefrence:selectButtonRef,
     close:() => {
       setShowSelect(false)
     }
@@ -40,6 +42,7 @@ const Select: React.FC<SelectProps> = ({ children, required,theme, label, placeh
           onClick={() => {
             setShowSelect(!showSelect);
           }}
+          ref={selectButtonRef}
           className={` w-[100%] ${theme}-Select-box `}
         >
           <div data-testid="input-id" data-showSelect={showSelect ? "true" : "false"} deta-selectBox="true" {...props} className={`${theme}-Select-input`} id={inputId()}>

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Contact } from "../../../Types";
 import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "symphony-ui";
-import {  TextArea, TextField } from "../..";
+import {  PhoneNumberInput, TextArea, TextField } from "../..";
 import ConfettiExplosion from 'react-confetti-explosion';
 import { generateSlugId } from "../../../help";
 import { useFormik } from "formik";
@@ -37,28 +37,28 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     id: "",
     address :'',
   });
-  const validatePhone = (phone: number | undefined) => {
-    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
-    //   (phone) => {
-    //     return 
-    //   }
-    // )
-    return Yup.number().integer().positive().test(
-        (phone) => {
-          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
-  const validatePhoneType = (phone: string ) => {
-    console.log(phone?.split(" ").length )
+  // const validatePhone = (phone: number | undefined) => {
+  //   // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  //   // return Yup.string().matches(phoneRegExp, 'Phone number is not valid').test(
+  //   //   (phone) => {
+  //   //     return 
+  //   //   }
+  //   // )
+  //   return Yup.number().integer().positive().test(
+  //       (phone) => {
+  //         return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+  //       }
+  //     ).isValidSync(phone);
+  // };
+  // const validatePhoneType = (phone: string ) => {
+  //   console.log(phone?.split(" ").length )
 
-    return Yup.string().test(
-        (phone) => {
-          return (phone && phone.split(" ").length == 2) ? true : false;
-        }
-      ).isValidSync(phone);
-  };  
+  //   return Yup.string().test(
+  //       (phone) => {
+  //         return (phone && phone.split(" ").length == 2) ? true : false;
+  //       }
+  //     ).isValidSync(phone);
+  // };  
   const formik = useFormik({
     initialValues:{
       fullName:'',
@@ -67,13 +67,8 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     },
     validationSchema:Yup.object().shape({
       fullName:Yup.string().required('Full name  is required'),
-      email: Yup.string().email().required('Email  is required'),
-      phone:Yup.string().required('Phone  is required').test("phone","Please enter a valid phone number in the format: +1 (123) 456-7890",(value) => {
-        return validatePhone(parseInt(value.replace('+','').replace(" ",'') ?? '0'))
-      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
-        console.log(value)
-        return validatePhoneType(value)
-      })
+      email: Yup.string().email('Email address must be valid.').required('Email  is required'),
+      phone:Yup.string().required('Phone  is required')
     }),
     onSubmit:() => {
 
@@ -109,10 +104,10 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
     // onClose();
   };
 
-  const [country, setCountry] = useState<any>({
-    codeName: "us",
-    codePhone: "+1",
-  });
+  // const [country, setCountry] = useState<any>({
+  //   codeName: "us",
+  //   codePhone: "+1",
+  // });
 
   return (
     <Modal
@@ -130,7 +125,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
                   <div className={`${theme}-back-Button-vector`}></div>
               </Button>
               <div>
-                  <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{title}</div>
+                  <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{title}</div>
                   <div className='text-text-primary text-center text-xs '>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
               </div>
               <div className="invisible">
@@ -179,7 +174,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
           </div>
 
           <div className="mb-4">
-            <TextField
+            {/* <TextField
               value={formData.phone}
               onChange={(e) => {
                 handleInputChange(e)
@@ -196,7 +191,21 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               setPhoneCountry={setCountry}
               errorMessage={formik.errors.phone || ''}
               inValid={formik.errors.phone != undefined}
-            ></TextField>
+            ></TextField> */}
+            <PhoneNumberInput 
+                value={formData.phone}
+                required
+                onChange={(e) => {
+                  setFormData({
+                      ...formData,
+                      ["phone"]: e,
+                    });
+                  formik.setFieldValue("phone",e)
+                }}
+                label="Phone"
+                invalid={formik.errors.phone?true:false} 
+                errorMessage={formik.errors.phone}
+            ></PhoneNumberInput>                    
           </div>
 
           <div className="mt-4">
@@ -230,7 +239,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               </div>
 
           </div>
-          <div className="text-[14px] mt-6 text-center text-text-primary">
+          <div className="text-[14px] font-medium mt-6 text-center text-text-primary">
             Keep the momentum going—create your Avatalk in minutes with our free trial."
           </div>
           <div className="w-full flex justify-center mt-5">
@@ -240,7 +249,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
               </div>
               <div>
                 <div className="text-white text-[18px] font-semibold  text-center">{formData.fullName}</div>
-                <div className="text-white text-[10px] font-medium  text-center">Job Title/ Company</div>
+                <div className="text-white text-[12px] font-medium opacity-85  text-center">Job Title/ Company</div>
               </div>
               <div className="w-full flex justify-center mt-4">
                 <img src="./icons/qrcode.png" alt="" />

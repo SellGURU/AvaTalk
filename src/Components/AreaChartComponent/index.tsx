@@ -46,8 +46,8 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
             </AreaChart>
           </ResponsiveContainer>):(
               <div className={" h-full w-full flex-col flex items-center justify-center scale-150"}>
-                <img className={"md:w-20 w-16 h-16 md:h-20 "} src={"/Carbon/notDAtaToShow.svg"}/>
-            <h1 className={"text-[12px]  font-medium"}>No data to show</h1>
+                <img className={"md:w-18 w-16 h-16 md:h-20 "} src={"/Carbon/notDAtaToShow.svg"}/>
+            <div className={"text-[8px]  font-medium"}>No data to show</div>
           </div>)}
         </div> 
       }

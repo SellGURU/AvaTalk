@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
-import { AddContact, DeleteContact } from "../__Modal__";
+import { DeleteContact } from "../__Modal__";
+import EditContact from "../__Modal__/AddContact/editContact";
 import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
@@ -13,6 +14,7 @@ import { publish } from "../../utils/event";
 import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
 import { TagPicker } from 'rsuite';
 import useModalAutoClose from "../../hooks/useModalAutoClose";
+import { TimeManegar } from "../../Model";
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   // const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
@@ -137,12 +139,12 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   return (
     <div>
       <div className={`${theme}-ContactDetails-infoContainer`}>
-        <BackIcon theme={theme} title="Contact info" ></BackIcon>
+        <BackIcon theme={theme} title="Contact Info" ></BackIcon>
       </div>
       <div className={`${theme}-ContactDetails-container2`}>
         <div className={`${theme}-ContactDetails-container3`}>      
           <div className={`${theme}-Profile-ProfilePictureSection`}>
-            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture`} />
+            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div onClick={() => {
@@ -161,7 +163,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem`}>{contact?.fullName}</p>
+        <p className={`${theme}-ContactDetails-nameItem mt-2`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className={`${theme}-ContactDetails-showExibitionconContainer `}>
           {/* {showExhibition && (
@@ -206,12 +208,12 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             </>
           }
           {!showAddTagModal &&
-            <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] text-[14px] font-medium cursor-pointer">Add Tag</div>     
+            <div onClick={ () => setShowAddTagModal(true)} className="text-[#06B6D4] hidden text-[14px] font-medium cursor-pointer">Add Tag</div>     
           }    
           {
             showAddTagModal &&  
             <>
-              <div className="w-full flex justify-center items-center">
+              <div className="w-full flex  invisible justify-center items-center">
                 <TagPicker 
                 defaultValue={contact?.tags.map(el => el.name)}
                 onChange={(e:Array<any>) => {
@@ -294,7 +296,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-calendarIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.addDate}</p>
+                <p className={`${theme}-ContactDetails-textItem`}> Added on {TimeManegar.formatDate(contact?.addDate)}</p>
               </div>
             :undefined}
             </>
@@ -305,7 +307,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </Button>
         </div>
       </div>
-      <AddContact
+      {/* <AddContact
         allTags={tags}
         mode="edit"
         onEditContact={handleEditContact}
@@ -318,7 +320,22 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         onClose={() => {
           setShowEditContactModal(false);
         }}
-      ></AddContact>
+      ></AddContact> */}
+      {showEditContactModal && 
+      <>
+      <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+        <EditContact
+          contact={contact}
+          title="Edit Contact"  
+          onAddContact={handleEditContact}
+          onClose={() => {
+            setShowEditContactModal(false)
+          }}
+        ></EditContact>
+      </div>
+       <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
+      </>
+      }
       <DeleteContact
         theme="Carbon"
         onDelete={() => {

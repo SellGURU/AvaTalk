@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "symphony-ui"
 import { TimeManegar } from "../../Model"
 import { publish } from "../../utils/event"
+import { useAuth } from "../../hooks/useAuth"
+import Select from "../Select"
 
 interface DeveloperToolsInterface {
 
@@ -9,6 +11,16 @@ interface DeveloperToolsInterface {
 
 const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
     const [showMenu,setShowMenu] = useState(false)
+    const [time ,setTime] = useState(TimeManegar.renderDate())
+    const auth = useAuth()
+    const [plan,setPlan] = useState(auth.currentUser.type_of_account.getType())
+    const updateTime = () => {
+        setTime(TimeManegar.renderDate())
+    }
+    useEffect(() => {
+        const interval = setInterval(updateTime, 15000);     
+        return () => clearInterval(interval);
+    },[])
     return (
         <>
             {showMenu ?
@@ -23,13 +35,42 @@ const DeveloperTools:React.FC<DeveloperToolsInterface> = () => {
                     <hr />
 
                     <div className="mt-3">
-                        <div className="px-10">
-                            <div>time is : {TimeManegar.renderDate()}</div>
+                        <div className="px-10 gap-2 flex flex-col">
+                            <div>time is : {time}</div>
+                            <div>expired is : {auth.currentUser.type_of_account.getDateExpired()}</div>
+                            <div>user is : {auth.currentUser.type_of_account.getType()}</div>
                             <Button onClick={() => {
                                 TimeManegar.nextDay()
+                                setTime(TimeManegar.renderDate())
                                 publish("nextPage",{})
                             }} theme="Carbon"> next day</Button>
+                            <Button onClick={() => {
+                                TimeManegar.nextMonth()
+                                setTime(TimeManegar.renderDate())
+                                publish("nextPage",{})
+                            }} theme="Carbon"> next month</Button>
 
+                            <Button onClick={() => {
+                                TimeManegar.previousDay()
+                                setTime(TimeManegar.renderDate())
+                                publish("nextPage",{})
+                            }} theme="Carbon"> previous  day</Button>
+                            <div>
+                                <Select theme="Carbon" valueElement={plan}>
+                                    <div onClick={() => {
+                                        auth.currentUser.type_of_account.setType("Free")
+                                        setPlan("Free")
+                                    }} className="ml-4 my-2 cursor-pointer font-normal text-[14px]">Free</div>
+                                    <div onClick={() => {
+                                        auth.currentUser.type_of_account.setType("Trial")
+                                        setPlan("Trial")
+                                    }} className="ml-4 my-2 cursor-pointer font-normal text-[14px]">Trial</div>
+                                    <div onClick={() => {
+                                        auth.currentUser.type_of_account.setType("Pro")
+                                        setPlan("Pro")
+                                    }} className="ml-4 my-2 cursor-pointer font-normal text-[14px]">Pro</div>
+                                </Select>
+                            </div>
                         </div>
                     </div>
                 </div>

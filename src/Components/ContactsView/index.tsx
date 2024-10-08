@@ -8,7 +8,7 @@ import ContactList from "../ContactList";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 // import dummyData from "../../data/dummy_data";
 import { Outlet } from "react-router";
-import { AddContact } from "../__Modal__";
+import { AddContactNew } from "../__Modal__";
 import { useConstructor } from "../../help";
 import { TagList } from "..";
 import AddTag from "../__Modal__/AddTag";
@@ -127,8 +127,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     setActiveView(buttonText);
   };
   const moreModalRef= useRef<HTMLDivElement>(null)
+  const ButtonmoreModalRef= useRef<HTMLDivElement>(null)
   useModalAutoClose({
     refrence:moreModalRef,
+    buttonRefrence:ButtonmoreModalRef,
     close:() => {
       setShowMoreModal(false)
     }
@@ -138,13 +140,17 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       <Outlet></Outlet>
       <div className="flex w-full items-center relative justify-between mb-[22px] pr-6">
         <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
-        <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
-          <img src="./Carbon/more.svg" alt="" />
-        </Button>
+        <div ref={ButtonmoreModalRef}>
+          <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
+            {/* <img src="./Carbon/more.svg" alt="" /> */}
+            <div className={`${theme}-ContactList-Vector-more`}></div>
+          </Button>
+
+        </div>
         {
           showMoreModal ?
             <>
-              <div ref={moreModalRef} className="w-[210px] top-8 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
+              <div ref={moreModalRef} className="w-[210px] -top-2 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
                 {/* <div className="flex opacity-50 items-center justify-start px-4 py-2 border-b border-b-white">
                   <img className={`${theme}-ContactsView-scan`} alt="" />
                   <div className="text-gray-700 ml-2">Scan Business Card</div>
@@ -163,7 +169,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
                   setShowMoreModal(false)
                 }} className="flex items-center cursor-pointer justify-start px-4 py-2">
                   <img className={`${theme}-ContactsView-exportIcon`} alt="" />
-                  <div className="text-gray-700 ml-2">Export As CSV</div>
+                  <div className="text-gray-700 ml-2">Export as CSV</div>
                 </div>                
               </div>
             </>
@@ -172,7 +178,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         }        
       </div>
       <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
-        <div className="w-[45%] min-w-[205px]">
+        <div className="w-[45%] min-w-[205px] invisible">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
         </div>
         <div className="w-[30%] min-w-[100px]">
@@ -185,12 +191,12 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       {activeView === "Contact List" ? (
         <>
           <div className="mt-8 px-6">
-            <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search name or email..." />
+            <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search for Name or Email..." />
           </div>
           {!(contacts.length > 0) && !isLoading ? (
-            <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
+            <div className={`${theme}-ContactsView-box w-[100%] mt-[10px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-                No contact yet
+                No Contact Yet
               </div>
             </div>
           ) : (
@@ -205,7 +211,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           {!(tags.length > 0) && !isLoading ? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-                No tag yet
+                No Tag Yet
               </div>
             </div>
           ) : (
@@ -213,8 +219,11 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               const newTags = [...tags]
               const indexTag =newTags.findIndex((item) =>item.id == tag.id) 
               newTags[indexTag] = tag
-              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id)))
+              Contacts.updateTag(tag,contacts.filter((el) =>el.tags.map((val) =>val.id).includes(tag.id))).then(() => {
+                getContacts()
+              })
               setTags([...newTags])
+              
             }} removeTag={(tag) => {
               setTags([...tags.filter((item) =>item != tag)])             
               Contacts.deleteTag(tag)
@@ -222,7 +231,17 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           )}
         </>
       )}
+     {showAddContactModal &&
+     <>
+        <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+            <AddContactNew onAddContact={handleAddContact} onClose={() => setShowAddContactModal(false)} title="Add Contact">
 
+            </AddContactNew>
+        </div>
+        <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
+     </>
+     }
+{/* 
       <AddContact
         allTags={tags}
         title="Add Contact"
@@ -234,7 +253,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         onClose={() => {
           setShowAddContactModal(false);
         }}
-      ></AddContact>
+      ></AddContact> */}
       <AddTag
         theme="Carbon"
         isOpen={showAddTagModal}
@@ -246,9 +265,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
             title:tag.name,
             color:tag.color
           }).then(el => {
-            const newTag = tag
-            tag.id = el.data
-            setTags([...tags,newTag])
+            if(el.data.error){
+              toast.warn(el.data.error)
+            }else {
+              const newTag = tag
+              tag.id = el.data
+              setTags([...tags,newTag])
+            }
           })
         }}
       ></AddTag>

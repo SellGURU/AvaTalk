@@ -1,0 +1,86 @@
+/* PhoneNumberInput.css */
+/* .phone-number-input-container {
+
+  width: 100%; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+ 
+
+  @apply  flex-col   w-[100%]  gap-y-1 rounded-[27px]  relative flex items-center bg-gray-100  justify-between;
+}
+
+.phone-number-label {
+  @apply leading-[19.36px] text-left text-[13px] ml-6 font-medium text-gray-700;
+}
+
+.react-tel-input .form-control {
+  border-radius: 27px !important;
+}
+
+.react-tel-input .flag-dropdown {
+  border-radius: 27px 0 0 27px !important;
+}
+
+.selected-flag {
+  @apply w-[40px] #{!important}
+}
+
+.react-tel-input .form-control:focus {
+  border-color: #5a67d8; 
+  box-shadow: 0 0 0 1px #5a67d8;
+}
+
+.react-tel-input .selected-flag {
+  border-top-left-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
+  border-right: none !important;
+}
+
+.react-tel-input .flag-dropdown .country-list {
+  border-radius: 15px !important;
+  overflow: hidden;
+}
+
+.react-tel-input .country-list .country {
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.react-tel-input .country-list .country:hover {
+  background-color: #f0f0f0;
+}
+
+.react-tel-input .form-control::placeholder {
+} */
+
+.form-control {
+  @apply border-white bg-gray-100 overflow-hidden pl-[65px] h-[45px] rounded-[26px] w-full #{!important};
+}
+
+.form-control[data-mode="invalid"] {
+  @apply border-2 border-red-500 #{!important};
+}
+
+/* .form-control-invalid {
+  @apply border-red-500 border overflow-hidden pl-[63px] h-[42px] rounded-[26px] w-full #{!important};
+} */
+
+.selected-flag{
+  /* border: 1px sol #E3E3EE80 */
+  box-shadow: inset 4px 4px 14px 2px #E2E8F0 ,inset -4px -4px 9px 2px #FFFFFF99;
+  @apply w-[60px] flex justify-center bg-gray-100 rounded-l-[26px] px-2 border-none outline-none #{!important};
+  
+}
+.flag-dropdown{
+  @apply w-[60px] mt-1 h-[40px] ml-1 rounded-lg border-none rounded-l-[26px] bg-white outline-none #{!important};
+}
+.invalid-number{
+  @apply  bg-inherit  #{!important};
+}
+
+
+.country-list{
+  @apply rounded-[26px] text-[14px] hiddenScrollBar px-2 text-[#374151] #{!important};
+}

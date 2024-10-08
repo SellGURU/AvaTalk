@@ -11,7 +11,7 @@ const EnhanceModal:React.FC<EnhanceModalProps> = ({
 }) => {
     return (
         <>
-            <div  className="absolute p-6 borderBox-Gray boxShadow-purple w-full  bottom-0 z-50 rounded-[27px] bg-[#F3F4F6]">
+            <div  className="absolute slideupModal p-6 borderBox-Gray boxShadow-purple w-full  bottom-0 z-50 rounded-[27px] bg-[#F3F4F6]">
                 <div className="flex w-full justify-between items-center">
                     <div className="invisible">
                         <Button theme="Carbon-Google" data-mode="profile-review-button-2">

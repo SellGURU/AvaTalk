@@ -117,6 +117,7 @@ const Profile: React.FC<ProfileProps> = ({theme}) => {
                 },
                 workEmail:data.information.work_email,
                 workPhone:data.information.work_mobile_number,
+                unique_id:data.information.unique_id,
                 userId:data.information.created_userid
             }
             const shareUser = new User(information)

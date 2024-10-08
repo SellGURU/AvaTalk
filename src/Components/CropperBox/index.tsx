@@ -48,8 +48,8 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
         {
             url.length > 0 ?
             <>
-                    <div className="absolute w-full top-0 left-0 h-screen z-[22] bg-black opacity-[0.9]"></div>     
-                    <div className='absolute w-full top-0 left-0 h-full flex z-30 justify-center items-center'>
+                    <div className="absolute w-full top-0 left-0 h-screen z-[42] bg-black opacity-[0.6]"></div>     
+                    <div className='absolute w-full top-0 left-0 h-full flex z-[45] justify-center items-center'>
                         <div>
                             {/* <Cropper
                             // autoCropArea={80}
@@ -74,7 +74,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 }}
                                 style={{ height: 400, width: 400 }}
                             />                            
-                            <div className="mt-2 flex gap-8 px-4">
+                            <div className="mt-4 flex justify-center gap-2 px-4">
                                 <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>Cancel</Button> 
                                 <Button onClick={getData2} theme="Carbon-Crop">Crop</Button> 
                             </div>

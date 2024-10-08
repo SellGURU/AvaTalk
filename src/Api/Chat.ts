@@ -2,6 +2,7 @@
 import Api from "./Api";
 
 class Chat extends Api {
+    static lastUsed:Date | null = null
     public static async flow(data:any){
         // const response = this.flowMock(data)
         const response = await fetch(
@@ -23,6 +24,8 @@ class Chat extends Api {
     public static showList(submit:(res:any) => void) {
         this.post('/show_user_chat_list',{}).then((res) => {
             submit(res.data)
+            this.lastUsed = new Date()
+            localStorage.setItem("lastcheckChat",JSON.stringify(new Date()))
         })
     }    
     public static showTestList(submit:(res:any) => void) {
@@ -39,6 +42,22 @@ class Chat extends Api {
     public static async flowMock(data:any){
        return this.post('/flow_uni',data)
     }
+
+    public static checkHaveChats(){
+        if(this.lastUsed == null){
+            const last = localStorage.getItem("lastcheckChat")
+            if(last){
+                this.lastUsed = new Date(JSON.parse(last))
+            }
+        }
+        const response = this.post("/check_user_chat_list",{
+            time:this.lastUsed?.getTime()
+        },{
+            noPending:true
+        }    
+        )
+        return response        
+    }    
 }
 
 export default Chat

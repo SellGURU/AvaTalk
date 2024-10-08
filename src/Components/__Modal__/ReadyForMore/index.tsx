@@ -1,6 +1,7 @@
 import { Button } from "symphony-ui"
 import { publish } from "../../../utils/event"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 interface ReadyForMoreProps {
     onClose:() =>void
@@ -8,7 +9,7 @@ interface ReadyForMoreProps {
 }
 
 const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
-
+    const navigate = useNavigate()
     useEffect(() => {
         publish("profileIsReview",{})
         return () => {
@@ -50,7 +51,7 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
     }
     return (
         <>
-            <div className=" boxsInnerShadows rounded-[27px] max-w-xl h-auto pb-10  borderBox-Gray w-full">
+            <div className=" boxsInnerShadows slideupModal rounded-[27px] max-w-[32rem] h-auto pb-10  borderBox-Gray w-full">
                 <div className="flex mt-5 items-center px-5 justify-between">
                     <div className="invisible">
                         <Button data-mode="profile-review-button-2" theme="Carbon-Google">
@@ -68,12 +69,14 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                     </div>
                 </div>
                 <div className="px-5 mt-4 mb-6">
-                    <div className="boxsInnerShadows p-6 text-[14px] w-full flex justify-center items-center text-[#374151] rounded-[27px] mt-4 h-[63px]">
+                    <div className="boxsInnerShadows p-6 text-[14px] w-full flex justify-center items-center text-[#374151] rounded-[27px] mt-4 py-3">
                       {resolveText()}
                     </div>
                 </div>
                 <div className="px-5">
-                    <Button theme="Carbon">Upgrade to Pro</Button>
+                    <Button onClick={() => {
+                        navigate('/settings/service')
+                    }} theme="Carbon">Upgrade to Pro</Button>
 
                 </div>
             </div>
