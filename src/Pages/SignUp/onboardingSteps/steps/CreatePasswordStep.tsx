@@ -3,12 +3,15 @@ import { TextField } from "../../../../Components"
 import { useFormik } from "formik"
 import * as Yup from "yup";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useEffect } from "react";
 interface CreatePasswordStep {
     onSubmit:() => void
+    canskip:(isCan:boolean) => void
 }
 
 const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
-    onSubmit
+    onSubmit,
+    canskip,
 }) => {
     const context = useAuth()
     const formik = useFormik({
@@ -30,6 +33,11 @@ const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
         onSubmit:(() => {
 
         })
+    })
+    useEffect(() => {
+      if(formik.isValid && formik.touched.password){
+        canskip(true)
+      }
     })
     return (
         <>

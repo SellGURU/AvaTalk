@@ -3,7 +3,7 @@ import { JSX } from "react/jsx-runtime"
 import Box from "../Boxs"
 import { Auth } from "../../Api"
 
-type initialSocials = 'Linkedin' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube' | 'Telegram'
+type initialSocials = 'LinkedIn' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube' | 'Telegram'
 
 class Social {
     public order:number = -1
@@ -24,7 +24,7 @@ class Social {
         switch(this.type) {
             case 'Facebook': return 'devicon_facebook.svg'
             case 'Instagram': return 'devicon_instagram.svg'
-            case 'Linkedin' : return 'devicon_linkdin.svg'
+            case 'LinkedIn' : return 'devicon_linkdin.svg'
             case 'Twitter/ X': return 'devicon_twitter.svg'
             case 'Youtube': return 'devicon_youtube.svg'
             case 'Telegram': return 'devicon_telegram.svg'
@@ -45,7 +45,10 @@ class Social {
                 })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div>
+                <div className={`${theme}-ContentCard-CardVector bg-white`}>
+                    <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[24px] h-[24px]`}></div>
+                </div>
+                {/* <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div> */}
             </div>            
         )
     }
@@ -58,7 +61,7 @@ class Social {
         switch (this.type){
             case 'Facebook' : return 'faceBookVector'
             case 'Instagram' : return 'InstagramVector'
-            case 'Linkedin' : return 'LinkedinVector'
+            case 'LinkedIn' : return 'LinkedinVector'
             case 'Twitter/ X' : return 'tweeterVector'
             case 'Youtube' : return 'youtubeVector'
             case 'Telegram' : return 'telegramVector'

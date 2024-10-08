@@ -32,7 +32,10 @@ const SearchBox: React.FC<InputProps> = ({ theme, name, placeholder, onChange, i
           onChange={onChange}
           value={value}
         />
-        <img className={`${theme}-SearchBox-searchIcon ${theme}-SearchBox-ActiveIcon`} src="../../../Acord/search-normal.png" alt="" />
+  <div className={`${theme}-SearchBox-searchIcon ${theme}-SearchBox-ActiveIcon `}>
+  <img  src="../../../Carbon/search-normal.svg" alt="" />
+  </div>
+       
       </div>
     </div>
   );

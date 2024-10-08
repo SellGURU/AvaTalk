@@ -15,9 +15,9 @@ const SettingPrivacyPolicy =() => {
                 <p className={`Carbon-ChatDetails-title`}>Privacy Policy</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div>
-                    <div className="px-6 mt-24  Carbon-Setting-CardContainer text-left">
+                    <div className="px-6 mt-24  Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify ">
 Privacy Policy
 <br />
 AVATALK built the AVATALK app as free app. This SERVICE is provided by AVATALK at no cost and is intended for use as is.

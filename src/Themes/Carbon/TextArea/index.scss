@@ -5,7 +5,7 @@
   @apply leading-[19.36px] flex text-left text-[13px] ml-6 font-medium text-gray-700;
 }
 .Carbon-TextArea-input {
-  @apply text-gray-700  leading-[21px] text-[14px] boxsInnerShadows font-[400] inputBorderBox focus:outline-none w-full resize-none   rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
+  @apply text-gray-700 text-justify hiddenScrollBar  leading-[21px] text-[14px] boxsInnerShadows font-[400] inputBorderBox focus:outline-none w-full resize-none   rounded-[27px] bg-gray-100 placeholder:leading-[27.25px] px-[16px] placeholder:text-[13px]  placeholder:font-[300]   pb-[12px] pt-[10px]  placeholder:text-gray-400;
 }
 
 .Carbon-TextArea-inValid {

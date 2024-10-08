@@ -20,6 +20,7 @@ interface Information {
     workEmail:string;
     workPhone:string
     userId?:string
+    unique_id:string
     silent_video_avatar?:string
     talk_video_avater?:string
     address?:string
@@ -181,7 +182,7 @@ class User {
         }
     }
     public resolveLink() {
-        return '/#/A/'+this.information?.userId
+        return '/#/A/'+this.information?.unique_id
     }
     public setTypeOfAccount(acount:UserType){
         this.type_of_account = acount

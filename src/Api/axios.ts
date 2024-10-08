@@ -17,7 +17,11 @@ axios.interceptors.response.use((response) => {
     // }
     
     if(response.data.detail){
-       toast.error(response.data.detail) 
+        if(response.data.detail.includes("Successfully")){
+            toast.success(response.data.detail)
+        }else {
+            toast.error(response.data.detail) 
+        }
     }
     return response;
 }, (error) => {

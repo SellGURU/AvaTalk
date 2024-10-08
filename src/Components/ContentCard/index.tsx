@@ -5,6 +5,7 @@ import { Box } from '../../Model';
 import { useAuth } from '../../hooks/useAuth';
 import { Auth } from '../../Api';
 import { Confirm } from '../__Modal__';
+import { getOS } from '../../help';
 
 interface ContentCardProps {
   theme?: string;
@@ -53,7 +54,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
         context.currentUser.updateBoxs(resolve as Array<string>)
         }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
-            <div className={`${theme}-ContentCard-Title`}>
+            <div data-os={getOS()} className={`${theme}-ContentCard-Title`}>
                 {item.getTitle()}
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>

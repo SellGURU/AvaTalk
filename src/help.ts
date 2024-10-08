@@ -17,6 +17,8 @@ const resolveMenuFromRoute = () => {
       return "profile";
     case "?splash=true":
       return 'profile';
+    case "anaylitics":
+      return 'status';      
     default:
       return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
   }
@@ -292,4 +294,41 @@ const getTextColorFromBackground = (hex:string) => {
     // Use black text if the luminance is high, otherwise use white
     return luminance > 0.5 ? '#374151' : 'white';
 }
-export { resolveMenuFromRoute,getTextColorFromBackground, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+const getOS = () => {
+  const userAgent = window.navigator.userAgent || window.navigator.vendor
+
+  // Windows
+  if (userAgent.indexOf('Win') !== -1) {
+    return 'windows';
+  }
+  
+  // iOS
+  if (/iPad|iPhone|iPod/.test(userAgent) ) {
+    return 'ios';
+  }
+  
+  // Android
+  if (/android/i.test(userAgent)) {
+    return 'android';
+  }
+  
+  // Default (for cases not detected)
+  return 'other';
+}
+
+const handleDivices = () =>  {
+  // const platform = getOS();
+  // const element = document.querySelector('.Carbon-Button-container') as HTMLElement;
+  // console.log(element)
+  // if (element) {
+  //     if (platform === 'ios') {
+  //         element.style.fontWeight = '700';
+  //     } else if (platform === 'android') {
+  //         element.style.fontWeight = '600';
+  //     } else {
+  //         element.style.fontWeight = '800'; // For Windows or other
+  //     }
+  // }
+}
+
+export { resolveMenuFromRoute,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };

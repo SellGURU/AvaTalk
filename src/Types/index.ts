@@ -53,6 +53,9 @@ type BusinessCard = {
     colors:Array<string>,
     price:string,
     id:string,
+    urls:Array<any>,
+    description:string,
+    product_id:string,
     images:Array<any>
 }
 

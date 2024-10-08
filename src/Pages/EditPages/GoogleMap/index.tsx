@@ -1,8 +1,8 @@
 import  { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Button, TextField } from "symphony-ui";
-import { BackIcon } from "../../../Components";
+import { Button } from "symphony-ui";
+import { BackIcon, TextField } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
 import { GoogleMapBox } from "../../../Model";
 import { useFormik } from "formik";
@@ -100,7 +100,7 @@ const EditGoogleMap = () => {
             theme="Carbon"
             label="Search Location"
             name="search"
-            type="text"
+            type="searchBox"
             placeholder="Search for a location..."
             inValid={false}
             errorMessage=""

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Api from "./Api";
 
 interface SublinkPayload {
     unit_amount: | number,
-    recurring_interval:'year'|'week',
+    recurring_interval:'year'|'month',
     quantity:number
 }
 
@@ -21,12 +22,12 @@ class Service extends Api {
         return this.post("/sublink",paymentData)
     }
 
-    static Pyload(userId:string,product:Product) {
+    static Pyload(userId:string,product:Array<Product>) {
         return this.post("/paylink",
         {
             "userid":userId,
             "products": [
-                product
+               ...product
             ] 
         }
         )
@@ -35,6 +36,9 @@ class Service extends Api {
     static subRedirect(session_id:string) {
         return this.get('/subredirect/'+session_id)
     }
+    static payRedirect(session_id:string) {
+        return this.get('/payredirect/'+session_id)
+    }    
 }
 
 export default Service

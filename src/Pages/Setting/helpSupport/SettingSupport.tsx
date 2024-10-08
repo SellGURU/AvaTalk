@@ -9,23 +9,25 @@ const HelpSupport = () => {
     {
       name: "Support Form",
       icon: "form.svg",
-      link: "form",
+      link: "/settings/Help/form",
     },
-    {
-      name: "User Manual",
-      icon: "manual.svg",
-      link: "/settings/Help/manual",
-    },
-    {
-      name: "Tutorial Videos",
-      icon: "tutorial.svg",
-      link: "/settings/Help/tutorial",
-    },
-    {
-      name: "Customer Service",
-      icon: "costomer-service.svg",
-      link: "customer-service",
-    },
+    // {
+    //   name: "User Manual",
+    //   icon: "manual.svg",
+    //   link:""
+    //   // link: "/settings/Help/manual",
+    // },
+    // {
+    //   name: "Tutorial Videos",
+    //   icon: "tutorial.svg",
+    //   link:""
+    //   // link: "/settings/Help/tutorial",
+    // },
+    // {
+    //   name: "Customer Service",
+    //   icon: "costomer-service.svg",
+    //   link: "customer-service",
+    // },
   ];
 
   return (

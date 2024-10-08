@@ -7,9 +7,10 @@ interface BackIconProps {
     theme?:string
     url?:string
     dataMode?:string
+    icon?:'back'|'close'
     action?:() => void
 }
-const BackIcon:React.FC<BackIconProps> =({theme,title,url,dataMode,action}) => {
+const BackIcon:React.FC<BackIconProps> =({theme,title,icon,url,dataMode,action}) => {
     const navigate = useNavigate();
     return (
         <>
@@ -24,7 +25,11 @@ const BackIcon:React.FC<BackIconProps> =({theme,title,url,dataMode,action}) => {
                         navigate(-1)
                     }
                     }} theme={`${theme}-back`}>
+                    {icon == 'back' || !icon ? 
                     <div className={`${theme}-back-Button-vector`}></div>
+                    :
+                     <div className={`${theme}-Profile-closeIcon`}></div>
+                    }
                 </Button>
                 <p className={`${theme}-Edit-title`}>{title}</p>
             </div>            

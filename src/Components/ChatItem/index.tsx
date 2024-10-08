@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { publish } from "../../utils/event";
 
 interface DataProps {
   id: string;
@@ -10,19 +11,25 @@ interface DataProps {
   date_group:string; 
 }
 
-const ChatItem = ({data, theme,visibleDate,plan}: { data: DataProps; theme: string | undefined,visibleDate:boolean,plan:string}) => {
+const ChatItem = ({data, theme,visibleDate,isLimitedChat}: { data: DataProps; theme: string | undefined,visibleDate:boolean,plan:string,isLimitedChat:boolean}) => {
   const navigate = useNavigate()
   return (
     <>
-    {visibleDate ?
+    {visibleDate  ?
       <div className={`${theme}-ChatItem-date`}>{data.date_group}</div>
     :undefined}
     <div  onClick={() => {
-      if(plan != 'Free' || data.title == 'samanta'){
+      if(!isLimitedChat|| data.title == 'Samantha'){
         navigate(`/chats/${data.chat_list_id}/?name=${data.title}`)
       }
+      if(isLimitedChat&&data.title != 'Samantha'){
+        setTimeout(() => {
+          publish("chatReadyForMore",{})
+          
+        }, 500);
+      }      
       // to={`/chats/${data.chat_list_id}`}
-    }}  className={`${theme}-ChatItem-container`} style={{opacity:plan != 'Free' || data.title == 'samanta'?'100%':'30%'}}>
+    }}  className={`${theme}-ChatItem-container`} style={{opacity:!isLimitedChat || data.title == 'Samantha'?'100%':'30%'}}>
       <div className={`${theme}-ChatItem-section`}>
         <div className={`${theme}-ChatItem-card`}>
           <div className={`${theme}-ChatItem-innerCard `}>

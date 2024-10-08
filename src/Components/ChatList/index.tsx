@@ -15,11 +15,14 @@ interface DataProps {
   date_group:string; 
   title:string;
 }
-const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefined }) => {
+const ChatList = ({ data, theme ,isLimitedChat}: { data: DataProps[]; theme: string | undefined;isLimitedChat:boolean}) => {
   const lastDateRender: Array<string> = [];
   const context = useAuth()
-  const mustBeRenderDate2 = (date1: string) => {
+  const mustBeRenderDate2 = (date1: string,title?:string) => {
       // let
+      if(title == 'Samantha'){
+        return false
+      }
       // console.log(new Date(date1))
       if (date1 == "Today" && !lastDateRender.includes("Today")) {
         lastDateRender.push("Today");
@@ -57,8 +60,8 @@ const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefine
         lastDateRender.push("Last Month");
         return true;
       }         
-     if (date1 == "Olden" && !lastDateRender.includes("Olden")) {
-        lastDateRender.push("Olden");
+     if (date1 == "Older" && !lastDateRender.includes("Older")) {
+        lastDateRender.push("Older");
         return true;
       }                    
       // Last Month
@@ -66,10 +69,10 @@ const ChatList = ({ data, theme }: { data: DataProps[]; theme: string | undefine
       // return mustBeRenderDate(new Date(date1))
   };  
   return (
-    <div className={`w-full  ${context.currentUser.type_of_account.getType() == 'Free'?'':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[400px]`}>
+    <div className={`w-full  ${isLimitedChat?'':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[400px]`}>
       {data.map((items, index) => (
         <>
-          <ChatItem plan={context.currentUser.type_of_account.getType()} visibleDate={mustBeRenderDate2(items.date_group)} theme={theme} key={index} data={items} />
+          <ChatItem isLimitedChat={isLimitedChat} plan={context.currentUser.type_of_account.getType()} visibleDate={mustBeRenderDate2(items.date_group,items.title)} theme={theme} key={index} data={items} />
         </>
       ))}
     </div>

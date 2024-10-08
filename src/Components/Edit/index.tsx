@@ -30,7 +30,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share something about yourself.",
     },
     {
-      name: "Appointments",
+      name: "Appointment",
       icon: "calendar-2.svg",
       link: "availability",
       description: "Share something about your availability.",
@@ -42,13 +42,13 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Add images to your profile.",
     },
     {
-      name: "My Social Network",
+      name: "Social",
       icon: "social.svg",
       link: "socials",
       description: "Share your social media profiles.",
     },
     {
-      name: "Links",
+      name: "Link",
       icon: "link.svg",
       link: "links",
       description: "Add websites to your profile.",
@@ -66,7 +66,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
       description: "Share a store or office location.",
     },
     {
-      name: "Videos",
+      name: "Video",
       icon: "video-play.svg",
       link: "Videos",
       description: "Make your page come to life with a video.",
@@ -110,7 +110,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
                 }} className="w-[120px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
               <div onClick={() => {
                   navigate('/edit/avatars')
-                }} className="text-gray-700 mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
+                }} className="text-gray-700 cursor-pointer mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>
             </div>
           </div>
           {editCards.map((item) => {

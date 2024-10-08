@@ -1,3 +1,12 @@
 .Carbon-ContactList-container {
-  @apply w-full overflow-y-scroll px-6 hiddenScrollBar mt-4 h-dvh pb-[320px];
+  @apply w-full overflow-y-scroll px-6 hiddenScrollBar mt-1 h-dvh pb-[320px];
+}
+
+.Carbon-ContactList-Vector-more {
+    mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: url(/Carbon/more.svg);
+    @apply w-[18px] h-[18px] bg-primary-color;    
 }

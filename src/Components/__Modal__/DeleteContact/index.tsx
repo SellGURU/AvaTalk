@@ -28,7 +28,7 @@ const DeleteContact: React.FC<AddContactProps> = ({ isOpen,onDelete, onAfterOpen
           <div className={`${theme}-DeleteContact-container`}>
             <div className={`${theme}-DeleteContact-content`}>
               <p className={`${theme}-DeleteContact-deleteContact`}>Delete Contact</p>
-              <p className={`${theme}-DeleteContact-question`}>Are you sure you want to delete this Contact?</p>
+              <p className={`${theme}-DeleteContact-question`}>Are you sure you want to delete this contact?</p>
             </div>
             <div className={`${theme}-DeleteContact-buttonContainer`}>
               <Button onClick={onClose} theme="Carbon-Outline">

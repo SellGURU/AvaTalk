@@ -73,7 +73,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
     } 
     return (
         <>
-            <div className="absolute z-30 px-4 py-6 rounded-[27px] boxShadow-Gray top-[110px] left-4 bg-white h-[320px] w-[320px]">
+            <div className="absolute z-30 px-4 py-6 rounded-[27px] boxShadow-button-gray top-[110px] left-4 bg-white h-[320px] w-[320px]">
                 <div className="w-full text-sm  flex justify-between">
                     <div onClick={() => {
                         setMenu('All')
@@ -87,7 +87,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                 </div>
                 <div className="w-full border-b border-[#E5E7EB] mt-4"></div>
 
-                <div className="w-full h-[250px] py-3 hiddenScrollBar overflow-y-scroll">
+                <div className="w-full h-[250px] py-3 overflow-y-scroll">
                     {Object.keys(notifs).map((el:any) => {
                         return (
                             <>
@@ -113,29 +113,30 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
                                                             <div onClick={() => {
                                                                 NotificationApi.readNotification(value.id)
                                                                 markAsRead(value.id,el)
-                                                            }} className="text-left">
+                                                            }} className="text-left my-2">
                                                                 <div className="flex justify-between">
                                                                     <div className="text-text-primary text-sm">{value.title}</div>
                                                                     <div className="text-text-primary flex items-center gap-1 text-sm">{resolveDateAgo(new Date(value.date))} {!value.isRead && 
                                                                         <div className="w-[8px] h-[8px] rounded-full bg-primary-color"></div>
                                                                     }</div>
                                                                 </div>
-                                                                <div className="text-[#6B7280] text-[12px] mt-1 " >{value.content}</div>
+                                                                <div className="text-[#6B7280] text-justify text-[12px] mt-1 " >{value.content}</div>
                                                             </div>                                                      
                                                         }
                                                      </>
                                                      :
 
                                                     <div onClick={() => {
-                                                        NotificationApi.readNotification(value.id)
-                                                    }} className="text-left">
+                                                                NotificationApi.readNotification(value.id)
+                                                                markAsRead(value.id,el)
+                                                            }} className="text-left my-2">
                                                         <div className="flex justify-between">
                                                             <div className="text-text-primary text-sm">{value.title}</div>
                                                             <div className="text-text-primary flex items-center gap-1 text-sm">{resolveDateAgo(new Date(value.date))} {!value.isRead && 
                                                                 <div className="w-[8px] h-[8px] rounded-full bg-primary-color"></div>
                                                             }</div>
                                                         </div>
-                                                        <div className="text-[#6B7280] text-[12px] mt-1 " >{value.content}</div>
+                                                        <div className="text-[#6B7280] text-justify text-[12px] mt-1 " >{value.content}</div>
                                                     </div>                                            
                                                 }
                                             </>

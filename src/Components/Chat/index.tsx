@@ -11,6 +11,7 @@ import AccessNotifManager from "../AccessNotifManager";
 import { EnhanceModal, ReadyForMore } from "../__Modal__";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { subscribe } from "../../utils/event";
 
 interface Props {
   theme?: string;
@@ -26,6 +27,9 @@ const Chat: React.FC<Props> = ({ theme }) => {
   const [showEchangeModal,setShowEchangeModal] = useState(false)
   const [activeView, setActiveView] = useState("Visitors Chat History");
   const [isReadyTO,setIsReadyTo] = useState(false)
+  subscribe("chatReadyForMore",() => {
+    setIsReadyTo(true)
+  })
   useConstructor(() => {
     ChatApi.showList((res) => {
       // if(res.cha)
@@ -36,15 +40,15 @@ const Chat: React.FC<Props> = ({ theme }) => {
     if(appcontext.currentUser.editStatus == false) {
       setTimeout(() => {
         setShowEchangeModal(true)
-      }, 10000);
+      }, 1000);
 
     }
-    if(appcontext.currentUser.type_of_account.getType() == 'Free'){
-      setIsReadyTo(true)
-      setTimeout(() => {
-        setIsReadyTo(true)
-      }, 15000);      
-    }
+    // if(appcontext.currentUser.type_of_account.getType() == 'Free'){
+    //   setIsReadyTo(true)
+    //   setTimeout(() => {
+    //     setIsReadyTo(true)
+    //   }, 15000);      
+    // }
     // setIsLoading(false);
   });
 
@@ -112,7 +116,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
   };
   return (
     
-    <div className={`${theme}-ContactsView-Container relative `}>
+    <div  className={`${theme}-ContactsView-Container relative `}>
       <Outlet></Outlet>
       <p className={`${theme}-ContactsView-contactText mb-4`}>Chats</p>
       <div className={`${theme}-ContactsView-buttonsContainer w-3/4 `}>
@@ -120,7 +124,9 @@ const Chat: React.FC<Props> = ({ theme }) => {
 
       </div>
       <div className="px-6 py-2">
-        <AccessNotifManager page="ChatPage"></AccessNotifManager>
+        {activeView=='Visitors Chat History' &&
+          <AccessNotifManager page="ChatPage"></AccessNotifManager>
+        }
 
       </div>         
       {activeView === "Visitors Chat History" ? (
@@ -131,11 +137,14 @@ const Chat: React.FC<Props> = ({ theme }) => {
           {chats?.length == 0? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-                No chats yet
+                No Chat Yet
               </div>
             </div>
           ) : (
-            <ChatList data={filteredData} theme={theme} />
+            <div >
+              <ChatList isLimitedChat={appcontext.currentUser.type_of_account.getType() == 'Free'?true:false} data={filteredData} theme={theme} />
+
+            </div>
           )}
         </>
       ) : (
@@ -146,25 +155,26 @@ const Chat: React.FC<Props> = ({ theme }) => {
           {chats.length == 0? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-               No chats yet
+               No Chat Yet
               </div>
             </div>
           ) : (
-            <ChatList data={filteredData} theme={theme} />
+            <ChatList isLimitedChat={false} data={filteredData} theme={theme} />
 
             // <TagList data={filteredTags} theme={theme} />
           )}
         </>
       )}
       {
-        showEchangeModal && 
+        showEchangeModal&&!isReadyTO &&activeView=='Visitors Chat History' &&
         <EnhanceModal onClose={() => {
           setShowEchangeModal(false)
         }} submit={() => {
           navigate('/edit/ai-setting')
+          
         }}></EnhanceModal>
       }
-        {isReadyTO &&
+        {isReadyTO &&!showEchangeModal&&activeView=='Visitors Chat History'  &&
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
             <ReadyForMore page="Chat" onClose={() => {
               setIsReadyTo(false)

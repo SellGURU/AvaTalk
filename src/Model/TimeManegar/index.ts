@@ -6,12 +6,19 @@ class TimeManegar {
     }
 
     static renderDate() {
-        return this.nowDate.getUTCFullYear() +'-'+Number(this.nowDate.getUTCMonth()+1)+"-"+this.nowDate.getUTCDate()
+        return this.formatDate(this.nowDate)
     }
     static nextDay() {
         this.nowDate.setDate(this.nowDate.getDate() + 1);
     } 
+    static previousDay() {
+        this.nowDate.setDate(this.nowDate.getDate() - 1);
+    } 
     
+    static nextMonth() {
+        this.nowDate.setDate(this.nowDate.getDate() + 30);
+    } 
+
     static formatDate(dateString:string | Date) {
         // Create a Date object from the input string
         const date = new Date(dateString);
@@ -23,7 +30,15 @@ class TimeManegar {
 
         // Return formatted date as YYYY-MM-DD
         return `${year}-${day}-${month}`;
-}
+    }
+
+    static formatDateMonthName(dateString:string | Date){
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+        // Format the date as DD-Month-YYYY
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString('en-GB', options);
+        return formattedDate
+    }
 }
 
 export default TimeManegar

@@ -30,11 +30,11 @@ const EditVideos = () => {
   const confirmRef = createRef<HTMLDivElement>();
   // const [links,setLinks] = useState<Array<Video>>(currentBox.getLinks().map(((item:any) => Object.assign(new Video('',''),item))))
   const [video, setVideo] = useState<Array<Video>>(
-    currentBox.contents.map((item: any) =>
+    currentBox?.contents?.map((item: any) =>
       Object.assign(new Video("", ""), item)
     )
   );
-
+  const [limiteMdoe,setLimiteMode] = useState("defualt")
   // const [selectItem,setSelectedItem] = useState<null|Social>(null)
   const initialValue = {
     title: currentBox.getTitle(),
@@ -64,8 +64,13 @@ const EditVideos = () => {
   const [openaddlink, setOpenAddLink] = useState(false);
   const navigate = useNavigate();
   const submit = () => {
-    auth.currentUser.addBox(new VideoBox(formik.values.title, video));
-    navigate("/");
+    if(video.length>1) {
+      setIsReadyTo(true)
+    }else {
+      auth.currentUser.addBox(new VideoBox(formik.values.title, video));
+      navigate("/");
+
+    }
   };
   const deleteSocial = (index: number) => {
     const newArr = [...video];
@@ -82,16 +87,23 @@ const EditVideos = () => {
       });
     }, 500);
   });
+  useEffect(() => {
+    if(video.length <= 1){
+      setLimiteMode("defult")
+    }else {
+      setLimiteMode("length")
+    }
+  })
   return (
     <>
       <h1>hi</h1>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Videos" theme="Carbon"></BackIcon>
+          <BackIcon title="Video" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="VideoSetting"></AccessNotifManager>
+            <AccessNotifManager modeLimited={limiteMdoe} page="VideoSetting"></AccessNotifManager>
           </div>
           <div className=" px-6">
             <TextField
@@ -129,7 +141,7 @@ const EditVideos = () => {
                 <div
                   className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}
                 >
-                  videos Links
+                  Videos Links
                 </div>
                 {video.map((item: any, index) => {
                   return (
@@ -166,13 +178,13 @@ const EditVideos = () => {
                               </a>
                             </div>
                           </div>
-                          <div className="flex justify-end gap-1 items-start">
+                          <div className="flex justify-end gap-3 items-start">
                             {video.length > 1 ? (
                               <div>
-                                <div
+                                {/* <div
                                   className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector `}
                                   style={{ height: "20px", width: "20px" }}
-                                ></div>
+                                ></div> */}
                               </div>
                             ) : undefined}
                             <div
@@ -192,7 +204,7 @@ const EditVideos = () => {
                                       <Confirm
                                         refrence={confirmRef}
                                         onConfirm={() => deleteSocial(index)}
-                                        content="Are you sure you want to delete this Video link?"
+                                        content="Are you sure you want to delete this video link?"
                                         title="Delete Video Link"
                                         onClose={onClose}
                                       ></Confirm>
@@ -217,14 +229,15 @@ const EditVideos = () => {
             <Button
               onClick={() => {
                 if(auth.currentUser.type_of_account.getType() == 'Free' && video.length >= 1){
-                  setIsReadyTo(true)
+                  setLimiteMode("length")
+                  setOpenAddLink(!openaddlink)
                 }else {
                   setOpenAddLink(!openaddlink)
                 }
               }}
               theme="Carbon-AddLink"
             >
-              Add video Link
+              Add Video Link
             </Button>
             <div className="relative"></div>
           </div>
@@ -249,7 +262,7 @@ const EditVideos = () => {
               formik.setFieldValue("name", name);
               addLink(name, url);
             }}
-            title="Link"
+            title="Video Link"
           ></AddLink>
         </div>
         {isReadyTO &&

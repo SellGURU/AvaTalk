@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
-import { boxProvider, useConstructor } from "../../help";
+import { boxProvider, getOS, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
 import { Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -52,6 +52,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isShowProfileOpen,setShowIsProfileOpen] = useState(false)
   const [prisentMode,setPrisentMode] = useState('audio')
   const notificationRefrence =useRef<HTMLDivElement>(null)
+  const ButtonnotificationRefrence =useRef<HTMLDivElement>(null)
   const [isHaveNewNotif,setIsHaveNewNotif] = useState(false)
   useModalAutoClose({
     refrence:ShowProfileRef,
@@ -61,6 +62,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   })     
   useModalAutoClose({
     refrence:notificationRefrence,
+    buttonRefrence:ButtonnotificationRefrence,
     close:() => {
       setShowNotification(false)
     }
@@ -115,11 +117,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   //   })
   // })
   const checkNotif = () => {
-    NotificationApi.checkNotification().then((res) => {
-        if(res.data["New notification"] == true) {
-          getNotifs(true)
-        }
-    })
+    if(mode != 'share'){
+      NotificationApi.checkNotification().then((res) => {
+          if(res.data["New notification"] == true) {
+            getNotifs(true)
+          }
+      })
+    }
   }
   useEffect(() => {
     const nots = localStorage.getItem("notifs")
@@ -211,6 +215,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 workPhone:data.information.work_mobile_number,
                 userId:data.information.created_userid,
                 silent_video_avatar:data.information.silent_video_url,
+                unique_id:data.information.unique_id,
                 talk_video_avater:data.information.talking_video_avatar
             }
             const shareUser = new User(information)
@@ -267,7 +272,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 workPhone:data.information.work_mobile_number,
                 userId:data.information.created_userid,
                 silent_video_avatar:data.information.silent_video_url,
-                talk_video_avater:data.information.talking_video_avatar
+                talk_video_avater:data.information.talking_video_avatar,
+                unique_id:data.information.unique_id
             }
             const shareUser = new User(information)
             setShareUser(shareUser) 
@@ -337,7 +343,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
           </div>
         }
-        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
+        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-20'} sticky`}>
           {/* {mode == 'profile' ?
             <div className=" w-48 h-[40px] sticky z-20">
               <Button onClick={() => {
@@ -373,9 +379,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           {/* {!scrolled && */}
           {
             mode == 'profile' &&
-              <div className="absolute top-4 left-6 z-20">
+              <div ref={ButtonnotificationRefrence} className="absolute top-4 left-6 z-20">
                 <Button onClick={() => {
-                  setShowNotification(true)
+                  setShowNotification(!showNotification)
                   setIsHaveNewNotif(false)
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
@@ -476,7 +482,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className={`w-full mt-[-320px] invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className="w-full bg-[#E2E8F0] h-[148px] -mt-[16px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
                 <div className="ml-2 min-w-[129px]">
-                  <img className="w-[129px] border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
+                  <img className="w-[129px] border-solid border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                 </div>
                 <div className="ml-3 max-w-[320px] overflow-hidden">
                   <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
@@ -493,7 +499,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
                     ></div>
-                    <div  className={`${theme}-text-layer1`}>Edit Profile</div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
@@ -501,7 +507,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       `}
                       style={{width:'1.25rem'}}
                     ></div>  
-                    <span className={`${theme}-text-layer1`}>
+                    <span data-os={getOS()} className={`${theme}-text-layer1`}>
                     Share Profile
                       </span>   
                   </Button>
@@ -516,7 +522,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </div>
                     <div className={`${theme}-Profile-Box`}>
                       <Button onClick={() => {
-                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.userId+'&view='+mode)
+                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                       }} theme='Carbon-back'>
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button> 
@@ -583,14 +589,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
                     ></div>
-                    <div className={`${theme}-text-layer1`}>Edit Profile</div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
                   </Button>
                   <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
                     <div
                       className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
                       style={{width:'1.25rem'}}
                     ></div>     
-                    <div className={`${theme}-text-layer1`}>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>
                       Share Profile
                     </div>               
                   </Button>
@@ -610,7 +616,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                             userid:shareUser.information?.userId as string,
                             sub_event_category:'view_link'
                           })
-                          window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.userId+'&view='+mode)
+                          window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                         }} theme='Carbon-back'>
                           <div className={`${theme}-Profile-BoxVector`}></div>
                         </Button> 
@@ -637,7 +643,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           }} className={`${theme}-Profile-ProfileSection`}>
             <div className={`${theme}-Profile-Content mt-4`}>
               {shareUser.boxs && shareUser.boxs.length > 0 ? (
-                <ul style={{ width: '100%' }} id="sortable">
+                <ul style={{ width: '100%' }} >
                   {shareUser.boxs.sort((a,b) => a.getOrder() - b.getOrder())?.map((item: Box) => {
                     return (
                       <>
@@ -658,39 +664,34 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               )}
               {mode != 'profile' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length > 0
               ?
-              <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
-                  <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
-                  <div className="text-[12px] text-text-primary">
-                    Want your own Avatalk? Create your AI Avatar in less than 3 minutes!
-                  </div>              
-              </div>              
-              :undefined}
+              <div className="w-full bg-white pb-4  flex justify-start items-center">
+                <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
+                <div className="text-[10px] ml-1 text-gray-700">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="text-primary-color font-semibold cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
+              </div>
+              // <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
+              //     <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
+              //     <div className="text-[12px] text-text-primary">
+              //       Want your own Avatalk? Create your AI Avatar in less than 3 minutes!
+              //     </div>              
+              // </div>              
+              :undefined
+              }
             </div>
             {mode != 'profile' && !isEditPage()?
             <>
             <div className=" absolute w-full z-20 bottom-0">
               {mode == 'review' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length == 0
               ?
-              <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
-                  <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
-                  {/* <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Pricing</p>
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >FAQ</p>
-                  <p onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="cursor-pointer" >Legals</p>
-                  <div className="flex gap-3">
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/Linkedinicon.svg" alt="Linkedin" />
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-[18px] h-[18px] cursor-pointer" src="/Carbon/instagramicon.svg" alt="instagram" />
-                    <img onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="w-4 h-4 cursor-pointer" src="/Carbon/facebookicon.svg" alt="facebook" />
-                  </div> */}
-                <div className="text-[12px] text-text-primary">
-                  Want your own Avatalk? Create your AI Avatar in less than 3 minutes!
-                </div>
-              </div>              
+              <div className="w-full bg-white pb-4  flex justify-start items-center">
+                <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
+                <div className="text-[10px] ml-1 text-gray-700">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="text-primary-color font-semibold cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
+              </div>            
               :undefined}
               <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">
                 <div className="flex justify-evenly gap-4 ">
                   <Button onClick={() => {
                     setShowExchangeContact(true)
-                  }}  theme="Carbon-Google">Exchange Contact</Button>
+                  }}  theme="Carbon-Google"> <div className="text-primary-color">Exchange Contact</div></Button>
                   <Button onClick={() => {
                     setShowIsProfileOpen(true)
                 }} theme="Carbon">Show Contact</Button>
@@ -702,7 +703,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 setPrisentMode={setPrisentMode} setVideoUrl={setVideoUrl} setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+          <Presentition2 setIsSilent={(action) => {
+            setISMuted(action)
+          }} mode={mode} setPrisentMode={setPrisentMode} setVideoUrl={setVideoUrl} setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
         }
         {showShareContact?
           <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
@@ -724,6 +727,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setShowMuiteController(false)
       setIsTalking(false)
       setStartVideoTalk(false)
+      publish("voiceIsEnded",{})
     }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
 
     <ExchangeContact mode='add' onAddContact={(data) => {

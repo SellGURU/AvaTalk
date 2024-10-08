@@ -17,42 +17,84 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
 const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
-  const getBase64 = (file:any,name:string) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      // console.log(file)
-      reader.onload = function () {
-          setFiles([...files,{
-            url:reader.result,
-            name:name,
-            type:file.type
-          }])
+  // const getBase64 = (file:any,name:string) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     // console.log(file)
+  //     reader.onload = function () {
+  //         setFiles([...files,{
+  //           url:reader.result,
+  //           name:name,
+  //           type:file.type
+  //         }])
+  //         if(uploades){
+  //           if(mod == 'files'){
+  //             uploades([...files,{
+  //               url:reader.result,
+  //               name:name,
+  //               type:file.type
+  //             }])
+  //           }else{
+  //           setFiles([{
+  //             url:reader.result,
+  //             name:name,
+  //             type:file.type
+  //           }])              
+  //             uploades([{
+  //               url:reader.result,
+  //               name:name,
+  //               type:file.type
+  //             }])              
+  //           }
+  //         }
+  //         setisLoading(false)       
+  //     };
+  //     reader.onerror = function (error) {
+  //         console.log('Error: ', error);
+  //     };
+  // }   
+  const getUploadFiles = (newfiles:any) => {
+    if (newfiles) {
+      const fileArray = Array.from(newfiles);
+      const base64Promises = fileArray.map((file:any) => convertToBase64(file));
+
+      // Wait for all files to be converted to Base64
+      Promise.all(base64Promises)
+        .then((base64Files:any) => {
+          console.log(base64Files)
+          setFiles([...files,...base64Files])
           if(uploades){
             if(mod == 'files'){
-              uploades([...files,{
-                url:reader.result,
-                name:name,
-                type:file.type
-              }])
+              uploades([...files,...base64Files])
             }else{
-            setFiles([{
-              url:reader.result,
-              name:name,
-              type:file.type
-            }])              
-              uploades([{
-                url:reader.result,
-                name:name,
-                type:file.type
-              }])              
+              setFiles([...base64Files])              
+              uploades([...base64Files])              
             }
           }
-          setisLoading(false)       
+          setisLoading(false)             
+          // setFilesBase64(base64Files);  // Store the Base64 strings in state
+        })
+        .catch(error => {
+          console.error("Error converting files to base64", error);
+        });
+    }
+  }
+  const convertToBase64 = (file: File): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        resolve({ name: file.name, url:base64,type:file.type ,size:file.size});
       };
-      reader.onerror = function (error) {
-          console.log('Error: ', error);
+
+      reader.onerror = (error) => {
+        reject(error);
       };
-  }   
+    });
+  };  
   const [resolveLimite,setResolveLimite] = useState(limite?limite:1)
   useEffect(() => {
     setFiles(value?value:[])
@@ -113,10 +155,13 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
                         </div>
                         <input  onChange={(res:any) => {
                             setisLoading(true)
-                            // console.log(res.target.files.length)
+                            console.log(res.target.files)
                             // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
-                              // })
-                                getBase64(res.target.files[0],res.target.value.split('\\')[2])    
+                            //   // console.log(res.target.files[index])
+                            //   getBase64(res.target.files[index],res.target.value.split('\\')[2])  
+                            // })
+                            getUploadFiles(res.target.files)
+                            // getBase64(res.target.files[0],res.target.value.split('\\')[2])    
                             // res.target.files.map(element => {
                             // });
                         }}  className={`${theme}-ImageUploader-uploader-input`} multiple type="file" id="upload-button"  accept={accept} />                        
@@ -130,7 +175,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
                       {files.map((item,index) => {
                         return (
                           <>
-                            {userMode == 'Free' && index >= resolveLimite ?
+                            {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
                               <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
                                 <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
                                 {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>

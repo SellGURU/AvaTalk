@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Select, TextField } from "../../../Components"
+import { PhoneNumberInput, TextField } from "../../../Components"
 import { Button } from "symphony-ui"
 import { Outlet, useNavigate } from "react-router-dom"
 import { createRef, useContext , useState } from "react";
@@ -11,29 +11,27 @@ import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 
 // const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
-  const validatePhone = (phone: number | undefined) => {
+//   const validatePhone = (phone: number | undefined) => {
 
-    return Yup.number().integer().positive().test(
-        (phone) => {
-          return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
-  const validatePhoneType = (phone: string ) => {
-    console.log(phone?.split(" ").length )
+//     return Yup.number().integer().positive().test(
+//         (phone) => {
+//           return (phone && phone.toString().length >= 7 && phone.toString().length <= 15) ? true : false;
+//         }
+//       ).isValidSync(phone);
+//   };
+//   const validatePhoneType = (phone: string ) => {
+//     console.log(phone?.split(" ").length )
 
-    return Yup.string().test(
-        (phone) => {
-          return (phone && phone.split(" ").length == 2) ? true : false;
-        }
-      ).isValidSync(phone);
-  };
+//     return Yup.string().test(
+//         (phone) => {
+//           return (phone && phone.split(" ").length == 2) ? true : false;
+//         }
+//       ).isValidSync(phone);
+//   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890', (value) => {
-         return validatePhone(parseInt(value?.replace('+','').replace(" ",'') ?? '0')) || value == null;
-      }).test('phone', 'Please enter a valid phone number in the format: +1 (123) 456-7890',(value) => {
-        return validatePhoneType(value?value:'') || value == null
-      })
+    phone:Yup.string().required('Phone number is required'),
+    firstname:Yup.string().required('First Name is required'),
+    lastname:Yup.string().required('Last Name is required'),
 });
 interface SettingAccount {
     value: any;
@@ -58,10 +56,10 @@ const SettingAccount =() => {
         console.log(values);
         },        
     })
-    const [country, setCountry] = useState<any>({
-        codeName: "us",
-        codePhone: "+1",
-    });
+    // const [country, setCountry] = useState<any>({
+    //     codeName: "us",
+    //     codePhone: "+1",
+    // });
 
     const languageOptions = [
         { value: 'English', label: 'English' },
@@ -70,7 +68,7 @@ const SettingAccount =() => {
         { value: 'Arabic', label: 'Arabic' },
         { value: 'Persian', label: 'Persian'},
     ];
-    const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]);
+    const [selectedLanguage, ] = useState(languageOptions[0]);
     // const handleLanguageChange = (event: any) => {
     //     setSelectedLanguage(event.target.value);
     // };
@@ -92,13 +90,13 @@ const SettingAccount =() => {
                 <div className="mb-4">
                     <div className="flex flex-col relative gap-y-4 w-[100%]">
 
-                        <TextField {...formik.getFieldProps("firstname")} inValid={false} 
-                        theme="Carbon" name="firstname" label="First Name"
+                        <TextField {...formik.getFieldProps("firstname")} inValid={formik.errors.firstname!= undefined} 
+                        theme="Carbon" required errorMessage={formik.errors.firstname} name="firstname" label="First Name"
                         type="text" 
                         ></TextField>
                         
-                        <TextField {...formik.getFieldProps("lastname")} inValid={false} 
-                        theme="Carbon" name="lastname" label="Last Name"
+                        <TextField {...formik.getFieldProps("lastname")} inValid={formik.errors.lastname!= undefined} 
+                        theme="Carbon" required errorMessage={formik.errors.lastname} name="lastname" label="Last Name"
                         type="text" 
                         ></TextField>
 
@@ -108,27 +106,36 @@ const SettingAccount =() => {
                             type="email" disabled></TextField>
                         </div>
 
-                        <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={formik.errors.phone?true:false} 
+                        <PhoneNumberInput 
+                            onChange={(e) => {
+                                formik.setFieldValue("phone",e)
+                            }}
+                            value={formik.values.phone}
+                            label="Account Phone"
+                            invalid={formik.errors.phone?true:false} 
+                            errorMessage={formik.errors.phone}
+                        ></PhoneNumberInput>
+                        {/* <TextField label="Account Phone" {...formik.getFieldProps("phone")} inValid={formik.errors.phone?true:false} 
                         theme="Carbon" name="phone"
                         phoneCountry={country}
                         setPhoneCountry={setCountry}
                         errorMessage={formik.errors.phone}
-                        type="phone" ></TextField>
+                        type="phone" ></TextField> */}
 
-                        <Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">
-                            {languageOptions.map((language,index:number) => (
-                                <>
-                                <option key={language.value} onClick={() => {
-                                    setSelectedLanguage(language)
-                                }} className="ml-4 cursor-pointer" value={language.value}>
-                                    {language.label}
-                                </option>
-                                {index <= languageOptions.length -2 ?
-                                    <hr />
-                                :undefined}
-                                </>
-                            ))}
-                        </Select>
+                        {/*<Select label="Language" valueElement={<div>{selectedLanguage.label}</div>} placeholder="Select tag..." theme="Carbon">*/}
+                        {/*    {languageOptions.map((language,index:number) => (*/}
+                        {/*        <>*/}
+                        {/*        <option key={language.value} onClick={() => {*/}
+                        {/*            setSelectedLanguage(language)*/}
+                        {/*        }} className="ml-4 cursor-pointer" value={language.value}>*/}
+                        {/*            {language.label}*/}
+                        {/*        </option>*/}
+                        {/*        {index <= languageOptions.length -2 ?*/}
+                        {/*            <hr />*/}
+                        {/*        :undefined}*/}
+                        {/*        </>*/}
+                        {/*    ))}*/}
+                        {/*</Select>*/}
 {/* 
 
                         <Select
@@ -168,7 +175,7 @@ const SettingAccount =() => {
                         })
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>
-                <div  className="mt-6 flex items-center ">
+                <div  className="mt-10 flex items-center ">
                     <p onClick={() => {
                         setShowConfirm(true)
                     // Auth.updateYourAccount({
@@ -185,7 +192,7 @@ const SettingAccount =() => {
         {showConfirm ?
         <>
             <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm refrence={confirmRef} title={"Delete Your Account"} content={"Are you sure want to delete your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+                <Confirm refrence={confirmRef} title={"Delete Your Account"} content={"Are you sure you want to delete your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                     Auth.updateYourAccount({
                         user_id:context.currentUser.information?.userId as string,
                         state:false
