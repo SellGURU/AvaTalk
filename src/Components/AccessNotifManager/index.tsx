@@ -225,13 +225,13 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                                   <div onClick={() => {
                                     window.open('https://portal.avatalk.me/#/signup')
                                     // navigate('https://portal.avatalk.me/#/login')
-                                  }} className="text-[#FBBF24] cursor-pointer text-[14px]">Create Your Avatalk</div>
+                                  }} className="text-[#FBBF24] cursor-pointer font-semibold text-[14px]">Create Your Avatalk</div>
                                 :
                                 // <Link to={"/settings/service"}>
 
                                 <div onClick={() => {
                                     navigate('/settings/service')
-                                }} className="text-[#FBBF24] font-medium cursor-pointer text-[14px]">{authContext.currentUser.type_of_account.getType() == 'Pro'? 'Renew Your Plan':'Upgrade to Pro'}</div>
+                                }} className="text-[#FBBF24] font-semibold cursor-pointer text-[14px]">{authContext.currentUser.type_of_account.getType() == 'Pro'? 'Renew Your Plan':'Upgrade to Pro'}</div>
                                 // </Link>
                             }
                             <div onClick={() => {

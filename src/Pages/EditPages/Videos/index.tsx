@@ -204,7 +204,7 @@ const EditVideos = () => {
                                       <Confirm
                                         refrence={confirmRef}
                                         onConfirm={() => deleteSocial(index)}
-                                        content="Are you sure you want to delete this Video link?"
+                                        content="Are you sure you want to delete this video link?"
                                         title="Delete Video Link"
                                         onClose={onClose}
                                       ></Confirm>
