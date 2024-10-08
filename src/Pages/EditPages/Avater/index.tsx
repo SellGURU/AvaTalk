@@ -181,10 +181,10 @@ const EditAvater: React.FC = () => {
             </div>
             <div className="mt-6 flex relative justify-center">
               <div className="relative">
-                <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full -right-3 -top-3">
+                <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full right-2 top-2">
                   <img src="./icons/Vector2.svg" alt="" />
                 </div>
-                <img src="./icons/gudei1.png" alt="" />
+                <img src="./icons/gudei1.svg" alt="" />
               </div>
             </div>
 
