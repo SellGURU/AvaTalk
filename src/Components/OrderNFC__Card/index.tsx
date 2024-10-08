@@ -44,8 +44,8 @@ export const CardOrderNFCProduct = ({listColorBadge,oldPrice,title,price,imgSrc,
                         ))}
                     </div>
                     <div className={"flex items-center justify-between mt-4"}>
-                        <p className={"text-[#5B21B6] font-semibold text-[16px]"}>
-                            {oldPrice &&<span className="text-[#94A3B8] text-[16px] mr-1 line-through">£{oldPrice}</span>}
+                        <p className={"text-[#5B21B6] font-semibold text-[18px]"}>
+                            {oldPrice &&<span className="text-[#94A3B8] text-[18px] mr-1 line-through">£{oldPrice}</span>}
                             £{price}</p>
 
 

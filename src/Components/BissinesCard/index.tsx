@@ -48,7 +48,7 @@ const BissinesCard = () => {
                         <img className={`w-[16px] ${context.siginUpOptions.phone!= ''?'opacity-100':'opacity-30'}`} src="./icons/cardVisit/call.svg" alt="" />                          
                     </div>
                     <div className="w-[62px] h-[62px] overflow-hidden bg-white rounded-full boxShadow-bisinesCard">
-                        <img className={`h-full  ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
+                        <img className={`h-full object-cover  ${context.siginUpOptions.gender == ''?'opacity-30':'opacity-100'}`} src={resolveProfImage()} alt="" />
                     </div>
                 </div>
                 <div className="ml-2">

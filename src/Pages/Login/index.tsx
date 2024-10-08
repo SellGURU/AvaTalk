@@ -276,6 +276,7 @@ const Login = () => {
     const handleSuccessLinkedIn = (data:any) => {
         setCode(data.code);
         console.log('Code: ', data.code);
+
     };
 
     const handleFailureLinkedIn = (error:any) => {

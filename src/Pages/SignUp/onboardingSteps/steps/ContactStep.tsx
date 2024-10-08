@@ -48,6 +48,8 @@ const ContactStep:React.FC<ContactStepProps> = ({
         }
         return ''
     }
+    console.log(resolveEmail());
+    
     const formik = useFormik({
         initialValues:{
             phone:context.siginUpOptions.phone,
@@ -103,6 +105,7 @@ const ContactStep:React.FC<ContactStepProps> = ({
                 </div> 
                 <div className="mt-4">
                     <TextField 
+                    readOnly= {formik.values.email != ''}
                         id="email"
                         {...formik.getFieldProps("email")} 
                         label="E-mail Address"
