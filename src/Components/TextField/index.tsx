@@ -18,7 +18,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   setPhoneCountry?: (phone:PhoneCountry) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  type: "text" | "password" | "email" | "phone";
+  type: "text" | "password" | "email" | "phone" | 'searchBox';
   inValid: boolean | string;
   errorMessage?: string;
   setValue?: (value:string) => void
@@ -143,6 +143,9 @@ const TextField: React.FC<InputProps> = ({
           onBlur={onBlur}
           value={value}
         />
+        {type == 'searchBox' &&
+          <img className={`absolute right-3 w-6 h-6 `} src="../../../Carbon/search-normal.png" alt="" />
+        }
         {type === "password" && (
           <div
             data-testid="toggle-password"

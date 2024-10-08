@@ -123,6 +123,7 @@ const CreateAccount = () => {
           personlEmail: "",
           workEmail: "",
           workPhone: "",
+          unique_id:'',
           silent_video_avatar: values.silent_video_avatar,
         });
         if (!res.data.access_token) {

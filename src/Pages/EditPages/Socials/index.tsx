@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { BackIcon } from "../../../Components";
@@ -22,7 +23,7 @@ const EditSocials = () => {
   const confirmRef = createRef<HTMLDivElement>()
   const medias: Array<{ name: initialSocials; icon: string }> = [
     {
-      name: "Linkedin",
+      name: "LinkedIn",
       icon: "devicon_linkdin.svg",
     },
     {
@@ -95,7 +96,7 @@ const EditSocials = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="My Social Network" theme="Carbon"></BackIcon>
+          <BackIcon title="Social" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="mt-24 px-6">
@@ -138,7 +139,7 @@ const EditSocials = () => {
                                 <img className="h-4" src={"./icons/media/" + item.miniIconUrl()} alt="" />
                                 <div className="ml-2 text-sm text-gray-700">{item.getType()}</div>
                               </div>
-                              <div className="flex justify-end gap-1 items-start">     
+                              <div className="flex justify-end gap-3 items-start">     
                                 {/* {
                                   socials.length> 1 ?
                                     <div>
@@ -215,7 +216,7 @@ const EditSocials = () => {
             </Select>
           </div> */}
           <div className="mt-6  px-6">     
-            <Button disabled={socials.length >= 5} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+            <Button disabled={socials.length >= 6} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
               <div className="relative">
                 {openaddNewSocial ?
                   <div ref={addSocialRef} className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">
@@ -228,7 +229,7 @@ const EditSocials = () => {
                               setOpenNewSocial(true);
                               setOpenAddNewSocial(false)
                             }}
-                            className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index == medias.length - 1 ? " border-none" : ""}`}
+                            className={`h-[50px] px-5 border-b border-[white] cursor-pointer flex justify-start items-center ${index  == medias.filter(e => !socials.map(v =>v.getType()).includes(e.name)).length -1 ? " border-b-0" : ""}`}
                           >
                             <img className="h-4" src={"./icons/media/" + item.icon} alt="" />
                             <div className="ml-1 text-gray-700 text-sm">{item.name}</div>

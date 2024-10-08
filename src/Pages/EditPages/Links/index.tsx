@@ -58,9 +58,8 @@ const EditLinks = () => {
       auth.currentUser.addBox(
           new LinkBox(formik.values.title,links)
       )
-      navigate('/')
+           navigate('/')
   }
-
   const deleteSocial = (index:number) => {
     const newArr = [...links]
     newArr.splice(index,1)
@@ -80,11 +79,11 @@ const EditLinks = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Links" theme="Carbon"></BackIcon>
+          <BackIcon title="Link" theme="Carbon"></BackIcon>
         </div>        
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="LinkSetting"></AccessNotifManager>
+            <AccessNotifManager isLimited={isReadyTO} page="LinkSetting"></AccessNotifManager>
 
           </div>              
           <div className=" px-6">
@@ -119,27 +118,31 @@ const EditLinks = () => {
                       } */}
                     <div className="Carbon-TextField-input flex items-center text-left  h-[50px]">
                       <div className="w-full flex items-center justify-between">
-                        <div className="flex justify-start ml-4 items-center">
-                          {/* <img className="h-4" src={"./icons/media/"+item.miniIconUrl()} alt="" /> */}
+                        <div className="flex justify-start ml-1 gap-1 items-center">
+                          {item.isValidURL() ?
+                            <img className="h-4" src={`https://logo.clearbit.com/${new URL(item.geturl()).hostname}`} alt="" />
+                          :
+                          undefined
+                          }
                           <div className="">
                             <div className="text-[13px] mb-[-4px]">
                               {item.getName()}
                             </div>
-                            <a href="">
+                            <div>
                               <div className=" text-[10px] text-cyan-500">{item.geturl().substring(0,30)}</div>
-                            </a>
+                            </div>
 
                           </div>
                         </div>
-                        <div className="flex justify-end gap-1 items-start">
-                              {
+                        <div className="flex justify-end gap-3 items-start">
+                              {/* {
                                 links.length> 1 ?
                                   <div>
                                     <div className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector ` } style={{height:'20px' ,width:'20px'}}></div>
                                   </div>
                                 :
                                 undefined
-                              }                            
+                              }                             */}
                             <div onClick={() => {
                               setEditName(item.getName())
                               setEditeValue(item.geturl())

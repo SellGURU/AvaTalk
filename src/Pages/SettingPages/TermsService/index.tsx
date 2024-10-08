@@ -15,9 +15,9 @@ const SettingTermsService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Terms of Service</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div>
-                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-left whitespace-pre-wrap ">
+                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap ">
 Welcome to Avatalk
 <br />
 These Terms of Use apply when you use our products and services or our affiliates, including our application programming interface, software, tools, developer services, data, documentation, and website (“Services”). The Terms include our Service Terms and other documentation, guidelines, or policies we may provide in writing. By using our Services, you agree to these Terms. Our Privacy Policy explains how we collect and use personal information.

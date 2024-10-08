@@ -20,7 +20,11 @@ class Link {
             window.open(this.url)
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
+                    {this.isValidURL() ?
+                        <img className="rounded-full" src={`https://logo.clearbit.com/${new URL(this.geturl()).hostname}`} alt="" />
+                    :
                     <div className={`${theme}-ContentCard-GlobalVector`}></div>
+                    }
                 </div>
             </div>  
             <Tooltip id={"link"+this.url} />     
@@ -30,6 +34,11 @@ class Link {
 
     public geturl(){
         return this.url
+    }
+
+    public isValidURL() {
+        const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/\S*)?$/;
+        return regex.test(this.url);
     }
 
     public getName(){

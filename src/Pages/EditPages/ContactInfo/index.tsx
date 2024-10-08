@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  Button } from "symphony-ui";
-import { BackIcon, FileUploadr, TextArea, TextField } from "../../../Components";
+import { BackIcon, FileUploadr, PhoneNumberInput, TextArea, TextField } from "../../../Components";
 // import LocationPicker from "react-leaflet-location-picker";
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -11,8 +11,8 @@ import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 
 const validationSchema = Yup.object().shape({
-  job:Yup.string().max(15),
-  company:Yup.string().max(15),
+job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
+company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
 });
 
 const EditContactInfo = () => {
@@ -48,10 +48,7 @@ const EditContactInfo = () => {
       onRemove: (point: any) => console.log("I've just been clicked for removal :(", point),
     },
   };
-  const [country, setCountry] = useState<any>({
-    codeName: "us",
-    codePhone: "+1",
-  });
+
   const [icons,setIcons] = useState<Array<any>>([])
   const submit = () => {
     auth.currentUser.updateCustomInformation({
@@ -62,11 +59,13 @@ const EditContactInfo = () => {
       workPhone:formik.values.workPhone as string,
       referral_code:auth.currentUser.information?.referral_code,
       address:formik.values.address,
+      phone:formik.values.phone,
       logo:icons[0].url
     })
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
       job_title:formik.values.job as string,
+      phone:formik.values.phone as string,
       location:{
         lat:pointMode.control.values[0][0],
         lng:pointMode.control.values[0][1]
@@ -93,11 +92,11 @@ const EditContactInfo = () => {
         <div className="relative top-[3px]">
           <BackIcon title="Contact Info" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-24 px-6">
-          <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title" inValid={false} name="job"  type="text"  placeholder="Enter your job title..."></TextField>
+        <div className="mt-24 text-left px-6">
+          <TextField {...formik.getFieldProps("job")} theme="Carbon" label="Job Title"  inValid={formik.errors.job!=undefined } errorMessage={formik.errors.job}  name="job"  type="text"  placeholder="Enter your job title..."></TextField>
         </div>
-        <div className="mt-3 px-6">
-          <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={false} name="company" type="text" placeholder="Enter your company name..."></TextField>
+        <div className="mt-3 text-left px-6">
+          <TextField  {...formik.getFieldProps("company")} theme="Carbon" label="Company" inValid={formik.errors.company!=undefined } errorMessage={formik.errors.company} name="company" type="text" placeholder="Enter your company name..."></TextField>
         </div>
 
         <div className="mt-3 px-6">
@@ -111,7 +110,7 @@ const EditContactInfo = () => {
           <TextArea inValid={false} textAreaHeight={'120px'} {...formik.getFieldProps("address")} placeholder="Enter your Address" label="Your Address" theme="Carbon" ></TextArea>
           {/* <LocationPicker showInputs={false} geoURL="yazd" mapStyle={{ height: "211px", borderRadius: "27px" }} pointMode={pointMode as any} /> */}
         </div>
-        <div className="mt-3 px-6">
+        <div className="mt-3 px-6 opacity-50">
           <TextField
             {...formik.getFieldProps("personlEmail")}
             theme="Carbon"
@@ -143,8 +142,19 @@ const EditContactInfo = () => {
             inValid=""
           ></TextField>
         </div> */}
-        <div className="mt-3 px-6">
-          <TextField
+        <div className="mt-3 text-left px-6">
+            <PhoneNumberInput 
+                onChange={(e) => {
+                    formik.setFieldValue("workPhone",e)
+                }}
+                value={formik.values.workPhone}
+                label="Work Phone"
+                invalid={formik.errors.workPhone?true:false} 
+                errorMessage={formik.errors.workPhone}
+            ></PhoneNumberInput>   
+
+                      
+          {/* <TextField
             {...formik.getFieldProps("workPhone")}
             label="Work Phone"
             placeholder="Enter your work phone number..."
@@ -158,7 +168,18 @@ const EditContactInfo = () => {
             setPhoneCountry={setCountry}
             errorMessage=""
             inValid=""
-          ></TextField>
+          ></TextField> */}
+        </div>
+        <div className="mt-3 text-left px-6">
+            <PhoneNumberInput 
+                onChange={(e) => {
+                    formik.setFieldValue("phone",e)
+                }}
+                value={formik.values.phone}
+                label="Phone"
+                invalid={formik.errors.phone?true:false} 
+                errorMessage={formik.errors.phone}
+            ></PhoneNumberInput>             
         </div>
         <div className="px-6 mt-10">
           <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">Save Changes</Button>

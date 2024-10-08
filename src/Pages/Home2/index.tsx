@@ -19,7 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
-    const [showDeveloperTools] = useState(false)
+    const [showDeveloperTools] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
@@ -49,6 +49,7 @@ const Home2 = () => {
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information.referral_code,
                 address:'',
+                unique_id:data.information.unique_id,
                 logo:data.information.logo,
                 gender:data.information.gender
             })
@@ -57,10 +58,12 @@ const Home2 = () => {
             authContext.currentUser.setTypeOfAccount(
                 new UserType(
                     data.type_of_account.type.capitalize(),
+                    // 'Free',
                     data.type_of_account.register_date,
-                    data.type_of_account.end_of_subscription_date,
+                    data.type_of_account.end_of_date,
                     data.type_of_account.previous_status_detail
                 ))
+            authContext.setPrerecorded_voice(data.prerecorded_voice)
 
         })        
     }
@@ -113,6 +116,9 @@ const Home2 = () => {
     //         setShowDeveloperTools(true)
     //     }
     // })
+    useEffect(() => {
+        setMenu(resolveMenuFromRoute() as MenuType)
+    })
     return (
         <>
             {showSplash ?
@@ -128,7 +134,7 @@ const Home2 = () => {
                     }} theme="Carbon"/>
                 :
                 <>
-                    <div className="sticky h-0 bottom-0"></div>
+                    <div className="sticky  bottom-0"></div>
                 </>
                 }
                 {

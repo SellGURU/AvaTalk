@@ -20,10 +20,17 @@
     @apply bg-white #{!important} ; 
 }
 .Carbon-ContentCard-Title {
-    @apply text-sm font-semibold;
+    @apply text-sm font-medium;
 }
+.Carbon-ContentCard-Title[data-os="windows"] {
+    @apply text-sm font-medium;
+}
+.Carbon-ContentCard-Title[data-os="ios"] {
+    @apply text-sm font-medium;
+}
+
 .Carbon-ContentCard-Section {
-    @apply flex flex-row justify-between w-full mb-4;
+    @apply flex flex-row justify-between w-full mb-2;
 }
 .Carbon-ContentCard-Children {
     @apply text-left w-full text-sm;

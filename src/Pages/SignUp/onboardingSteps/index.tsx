@@ -28,6 +28,20 @@ const OnBoarding = () => {
         type:'Local',
         video:''
     });      
+
+    const [canSkips,setCanSkips] = useState([
+        {
+            name:"password",
+            value:false
+        }
+    ])
+    const skipMannager = () => {
+        if(step == 0){
+            if(canSkips.filter((el) => el.name == "password")[0].value == true){
+                setStep(step+1)
+            }
+        }
+    }
     const formik = useFormik({
         initialValues:{
             silent_video_avatar:'',
@@ -37,6 +51,20 @@ const OnBoarding = () => {
     })
     const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
         toast.loading('Creating your Avatalk')
+        // mock 
+        console.log(photo,replaceAvatar)
+        // const mockData = {
+        //     "silent_video_link": "https://storage.googleapis.com/yepic-generated-videos/a680aef3-0db3-4682-8293-a6ffc68821b9/downloads/avatar/468190d9-bbf8-b7a0-e6fb-00a6a26aaf5b/a680aef3-0db3-4682-8293-a6ffc68821b9.mp4",
+        //     "avatar_pic_link": "https://codieblob.blob.core.windows.net/avatalk/Pictures/5708967d40.jpg"
+        // }
+        // formik.setFieldValue('avatar_pic_url',mockData.avatar_pic_link)
+        // setUploadedAvater({
+        //     photo:mockData.avatar_pic_link,
+        //     video:mockData.silent_video_link,
+        //     type:'Api'
+        // })
+        // formik.setFieldValue('silent_video_avatar',mockData.silent_video_link)
+        // end mock
         Auth.createAvatarVideo(photo).then((response) => {
             console.log(response)
             if(response.data == 'No face detected'){
@@ -59,11 +87,9 @@ const OnBoarding = () => {
                 formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
             }
         }).catch(() => {
-        // setIsLoading(false)
         toast.dismiss()
         formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
-                
+        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)       
         })     
     }    
     useEffect(() => {
@@ -84,8 +110,8 @@ const OnBoarding = () => {
         }else{
             setAvaterList(res.data)
             // setIsLoading(false)
-            formik.setFieldValue('silent_video_avatar',res.data[0].video)
-            formik.setFieldValue('avatar_pic_url',res.data[0].photo)
+            formik.setFieldValue('silent_video_avatar',res.data.filter((el:any) =>el.gender =='female')[0].video)
+            formik.setFieldValue('avatar_pic_url',res.data.filter((el:any) =>el.gender =='female')[0].photo)
         }     
         })    
     })    
@@ -94,7 +120,19 @@ const OnBoarding = () => {
             <>
                 {step == 0 &&
                     <>
-                        <CreatePasswordStep onSubmit={() => {
+                        <CreatePasswordStep canskip={(action) => {
+                            setCanSkips((pre) => {
+                                return pre.map((el) => {
+                                    if (el.name == "password") {
+                                        return {
+                                            ...el,
+                                            value: action
+                                        }
+                                    }
+                                    return el
+                                })
+                            })
+                        }} onSubmit={() => {
                             setStep(step+1)
                         }}></CreatePasswordStep>
                     </>
@@ -102,6 +140,10 @@ const OnBoarding = () => {
                 {step == 1 &&
                     <>
                         <InformationStep onSubmit={() => {
+                            if(uploadedAvater.photo == '' ){
+                                formik.setFieldValue('silent_video_avatar',avatarList.filter((el:any) =>el.gender =='female')[0].video)
+                                formik.setFieldValue('avatar_pic_url',avatarList.filter((el:any) =>el.gender =='female')[0].photo)                            
+                            }
                             setStep(step+1)
                         }}></InformationStep>
                     </>
@@ -177,8 +219,8 @@ const OnBoarding = () => {
                     </div>
 
                     <div onClick={() => {
-                        
-                    }} className={`text-text-primary cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
+                        skipMannager()
+                    }} className={`text-text-primary invisible cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                 </div>
                 {
                     resolveStep()

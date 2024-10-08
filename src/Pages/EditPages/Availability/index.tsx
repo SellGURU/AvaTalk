@@ -10,7 +10,7 @@ const re = new RegExp("https://calendly.com/");
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Title is required.'),
-  url: Yup.string().required('URL is required.').matches(re,'URL must match the following https://calendly.com/'),
+  url: Yup.string().matches(re,'URL must match the following https://calendly.com/'),
 });
 
 const EditAvailability = () => {
@@ -39,7 +39,7 @@ const EditAvailability = () => {
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
         <div className="relative top-8">
-          <BackIcon title="Appointments" theme="Carbon"></BackIcon>
+          <BackIcon title="Appointment" theme="Carbon"></BackIcon>
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <p className="mt-24 px-6 text-sm font-medium">To create appointment scheduling access, please enter your Calendly Account URL</p>
@@ -68,7 +68,7 @@ const EditAvailability = () => {
             ></TextField>
           </div>
           <div className="px-6 mt-10">
-            <Button disabled={!formik.isValid || !formik.touched.url} onClick={submit} theme="Carbon">
+            <Button disabled={!formik.isValid} onClick={submit} theme="Carbon">
               Save Changes
             </Button>
           </div>

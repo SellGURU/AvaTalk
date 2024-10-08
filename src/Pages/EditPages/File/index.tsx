@@ -7,7 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReadyForMore } from "../../../Components/__Modal__";
 
 const validationSchema = Yup.object().shape({
@@ -16,12 +16,13 @@ const validationSchema = Yup.object().shape({
 
 const EditFile = () => {
   const auth = useAuth();
+  const [limiteMdoe,setLimiteMode] = useState("defualt")
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "FileBox")[0] as FileBox;
   if (currentBox == undefined) {
     currentBox = new FileBox("File", []);
   }
-  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','',''),item))))
+  const [files,setFiles] = useState<Array<File>>(currentBox.getContents().map(((item:File) => Object.assign(new File('','','','0'),item))))
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -35,13 +36,27 @@ const EditFile = () => {
     },
   });
   const submit = () => {
-    if(auth.currentUser.type_of_account.getType() == 'Free' && formik.values.files.length > 1){
+    if((auth.currentUser.type_of_account.getType() == 'Free' && formik.values.files.length > 1) ||(auth.currentUser.type_of_account.getType() == 'Free' && limiteMdoe=='fileSize') ){
       setIsReadyTo(true)
     }else {
       auth.currentUser.addBox(new FileBox(formik.values.title, formik.values.files));
       navigate("/");
     }
   };
+  useEffect(() => {
+    let numberofBiges = 0
+    files.map((el) => {
+      if(Number(el.getSize()) > 10 * 1024 * 1024) {
+        numberofBiges = numberofBiges +1
+      }
+    })
+    if(numberofBiges > 0){
+      setLimiteMode("fileSize")
+    }else {
+      setLimiteMode("defualt")
+    }
+    
+  })
   return (
     <>
       <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
@@ -50,7 +65,7 @@ const EditFile = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager page="FileSetting"></AccessNotifManager>
+            <AccessNotifManager modeLimited={limiteMdoe} isLimited={isReadyTO} page="FileSetting"></AccessNotifManager>
           </div>             
           <div className=" px-6">
             <TextField
@@ -67,20 +82,38 @@ const EditFile = () => {
           <div className="px-6 mt-3">
             <ImageUploadr
               accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id"
-              value={files.map((item, index) => {
+              value={files.map((item) => {
                 return {
                   url: item.geturl(),
-                  name: "itembox " + index * 2000,
-                  type:item.getType()
+                  name: item.getName(),
+                  type:item.getType(),
+                  size:item.getSize()
                 };
               })}
               limite={0}
               userMode={auth.currentUser.type_of_account.getType()}
               uploades={(files: Array<any>) => {
                 console.log(files)
-                const converted:Array<File> = files.map((item) => {
+                const selectedFiles = Array.from(files);
+                const maxFileSize = 10 * 1024 * 1024; // 10 MB in bytes
+                // Filter files based on size (<= 10 MB)
+                const validFiles = selectedFiles.filter(file =>{
+                  if(file.size > maxFileSize ){
+                    // setIsReadyTo(true)
+                    setLimiteMode("fileSize")
+                  }
+                  // if(auth.currentUser.type_of_account.getType()=='Free'){
+                  //   return file.size <= maxFileSize
+                  // }
+                  return true
+                } );                
+                console.log(validFiles)
+                if(validFiles.length > 1){
+                  setLimiteMode("length")
+                }
+                const converted:Array<File> = validFiles.map((item) => {
                   console.log("item.type",item.type)
-                  const newFile:File = new File(item.url,item.name,item.type)
+                  const newFile:File = new File(item.url,item.name,item.type,item.size)
                   return newFile
                 });
                 setFiles(converted)

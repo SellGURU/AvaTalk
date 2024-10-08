@@ -3,7 +3,6 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
 import { Link } from "react-router-dom";
-import { Auth } from "../../Api";
 // interface File {
 //     name:string
 //     url:string
@@ -11,23 +10,39 @@ import { Auth } from "../../Api";
 // }
 export class File {
     public order:number = -1
-    constructor(protected url:string,protected name:string,protected type:string){
+    constructor(protected url:string,protected name:string,protected type:string,protected size:string){
 
     }
     private resolveSvg() {
-        console.log(this.type)
+        console.log("type:",this.type)
         switch(this.type) {
             case 'application/pdf': //pdf
                 return 'PdfVector';
+            case 'PDF': //pdf
+                return 'PdfVector';
             case 'application/psd': //psd
+                return 'PhotoShopVector';
+            case 'PSD': //psd
                 return 'PhotoShopVector';
             case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //docx
                 return 'wordVector';
             case 'application/postscript': //ai
                 return 'idVector';
+            case 'AI': //ai
+                return 'idVector';
             case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': //pptp
                 return 'powerpointVector';
+            case 'PPTP': //pptp
+                return 'powerpointVector';
+            case 'PPT': //pptp
+                return 'powerpointVector';
             case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': //xslx
+                return 'ExelVector'
+            case 'XLSX': //xslx
+                return 'ExelVector'
+            case 'XLS': //xslx
+                return 'ExelVector'
+            case 'XLX': //xslx
                 return 'ExelVector'
             case 'application/vnd.ms-excel': //xls
                 return 'ExelVector'
@@ -35,24 +50,23 @@ export class File {
                 return 'wordVector';
             case 'application/msword'://doc
                 return 'wordVector';
-            default :
-                return 'PhotoShopVector'
+            case 'DOC'://doc
+                return 'wordVector';
+            case 'DOCX'://doc
+                return 'wordVector';
         }
     }
-    public resolveRender(theme:string,userID:string) {
+    public resolveRender(theme:string,_userID:string) {
         return (
             <>
-            <Link onClick={() => {
-             Auth.addEvent({
-                event_type:"file_click",
-                userid:userID,
-                sub_event_category:'view_link'
-            })                  
-            }} to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
-                <div className={`${theme}-ContentCard-CardVector`}>
-                    <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
-                </div>
-            </Link>  
+            <div >
+                <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
+                    <div className={`${theme}-ContentCard-CardVector`}>
+                        <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
+                    </div>
+                </Link>  
+
+            </div>
             <Tooltip id={"link"+this.name} />     
             </>
         )
@@ -64,6 +78,9 @@ export class File {
 
     public getType(){
         return this.type
+    }
+    public getSize(){
+        return this.size
     }
 
     public getName(){
@@ -94,7 +111,7 @@ class FileBox extends Box{
                     <>
                         <div className={`${theme}-Profile-Vectors`}>
                             {this.contents.sort((a,b) => a.order -b.order).map((item) => {
-                                const newSocal = Object.assign(new File('file','',''),item)
+                                const newSocal = Object.assign(new File('file','','',''),item)
                                 return (
                                     <>
                                         {newSocal.resolveRender(theme,options.userId)}

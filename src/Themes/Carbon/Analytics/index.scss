@@ -1,9 +1,9 @@
 .Carbon-Analytics-container {
-  @apply mt-[100px] overflow-y-scroll hiddenScrollBar h-screen px-6 py-6;
+  @apply mt-[100px] overflow-y-scroll overflow-x-hidden hiddenScrollBar h-screen px-6 py-6;
 }
 
 .Carbon-Analytics-text {
-  @apply text-gray-700 leading-[24px] text-[16px] font-[600] mb-[20px];
+  @apply text-gray-700 leading-[24px] font-poppins text-[16px] font-[500] mb-[20px];
 }
 .Carbon-Analytics-divider1 {
   @apply mb-6;

@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
-import { useConstructor } from "../../../help";
+import { getOS, useConstructor } from "../../../help";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useAuth } from "../../../hooks/useAuth";
@@ -100,7 +100,7 @@ const formatText = (text: string) => {
             </Button>
           </div>
           <div className="hiddenScrollBar px-6 h-full">
-            <div className="text-left my-8" style={{lineHeight:'28px'}}>
+            <div className="text-justify my-8" style={{lineHeight:'28px'}}>
               {formatText(analysedText)}
 
             </div>
@@ -115,12 +115,12 @@ const formatText = (text: string) => {
         {showLearnMore
         &&
         <div className=" top-0 left-0 w-full bg-white min-h-screen absolute z-40">
-          <div className="flex  w-full items-center justify-between px-6 mt-[120px] ">
-            <div className="invisible">
+          <div className="flex  w-full items-center justify-between px-6 mt-[80px] ">
+            {/* <div className="invisible">
               <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
             </Button>
-            </div>
+            </div> */}
             <div className="text-[16px] font-semibold text-text-primary">Learn more about your AI settings</div>
             <Button onClick={() => {setShowLearnMore(false)}} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors"></div>
@@ -129,7 +129,7 @@ const formatText = (text: string) => {
           <div className="hiddenScrollBar px-6 mb-20 h-full">
             <div className="text-left my-4" style={{lineHeight: '28px'}}>
               {/*{formatText(learnMoreText)}*/}
-              <div className="text-left  text-[14px]" style={{}}>
+              <div className="text-justify text-[14px]" style={{}}>
                 <p className={" text-[16px]"}>Avatalk's AI
                   Knowledge section is the hub for crafting a personalized and effective AI-driven persona. This feature
                   ensures your digital interactions reflect your unique professional expertise, style, and preferences,
@@ -204,7 +204,7 @@ const formatText = (text: string) => {
 
             <Button onClick={() => {
               setShowLearnMore(false)
-            }} theme="Carbon">Got it</Button>
+            }} theme="Carbon">Got It</Button>
           </div>
 
         </div>
@@ -216,13 +216,12 @@ const formatText = (text: string) => {
              style={{visibility: showAiSuggestion ? 'hidden' : 'visible'}}>
 
           <div className="px-6">
-            <AccessNotifManager page="AiSetting"></AccessNotifManager>
-
+            <AccessNotifManager isLimited={auth.currentUser.editStatus} page="AiSetting"></AccessNotifManager>
           </div>
           <div className="px-6 mt-4">
 
-            <div className="text-base text-left mb-4 text-text-primary">Here,&nbsp; you can train the AI to interact
-              with your contacts by &nbsp; providing &nbsp; detailed &nbsp; and &nbsp; useful content in the AI
+            <div className="text-base  mb-4 text-justify text-text-primary">Here, you can train the AI to interact
+              with your contacts by providing detailed and useful content in the AI
               knowledge field.<span className="text-[#06B6D4] ml-1 cursor-pointer" onClick={() => {
                 setShowLearnMore(true)
               }}>Learn more </span></div>
@@ -243,16 +242,16 @@ const formatText = (text: string) => {
             /> */}
           </div>
           <div className="px-6 mt-6">
-            <Select label="Voice Gender" required valueElement={<div>{gender}</div>} placeholder="Select tag..."
+            <Select label="Voice Gender" required valueElement={<div>{gender.charAt(0).toUpperCase()+gender.substring(1)}</div>} placeholder="Select tag..."
                     theme="Carbon">
               <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('male')
-              }}>male
+              }}>Male
               </div>
               <hr/>
               <div className="cursor-pointer h-10 flex items-center justify-start px-4" onClick={() => {
                 setGender('female')
-              }}>female
+              }}>Female
               </div>
             </Select>
           </div>
@@ -270,7 +269,7 @@ const formatText = (text: string) => {
                 </div>
           </div>           */}
           <div className="px-6 mt-10">
-            <Button disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
+            <Button data-os={getOS} disabled={!formik.isValid || formik.values.Description.length == 0} onClick={() => {
               if(auth.currentUser.type_of_account.getType() == 'Free' && auth.currentUser.editStatus){
                 setIsReadyTo(true)
               }else{
@@ -293,13 +292,13 @@ const formatText = (text: string) => {
           </div>
           
           <div className="px-6 mt-8">
-            <div className="w-full flex ">
+            {/* <div className="w-full flex ">
               <img src="./Carbon/message-question.svg" alt="" />
               <div className="text-sm font-medium ml-1 text-text-primary">Need Help?</div>
-            </div>
-            <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
+            </div> */}
+            {/* <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
               navigate('/settings/Help/tutorial')
-            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
+            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div> */}
           </div>
         </div>
         {isReadyTO &&

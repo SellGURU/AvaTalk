@@ -3,7 +3,7 @@
 }
 
 .Carbon-ContactsView-contactText {
-  @apply leading-[24px] text-[16px] text-gray-700 px-6  font-[600];
+  @apply leading-[24px] text-[16px] font-poppins text-gray-700 px-6  font-[500];
 }
 .Carbon-ContactsView-buttonsContainer {
   @apply flex justify-between items-center px-6 space-x-[25px]  min-w-[380px];
@@ -32,7 +32,7 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
-    @apply w-6 h-6 bg-gray-700;  
+    @apply w-6 h-6 bg-primary-color;  
 }
 .Carbon-ContactsView-scan {
     mask-image: url(/Carbon/scan.svg);

@@ -25,7 +25,7 @@ class AvailabilityBox extends Box {
               data-mode="profile-edit-button"
             >
               <div className={`${theme}-Profile-EditProfileBtnVector4`}></div>
-              <div className="   text-white">Book an appointment</div>
+              <div className="   text-white">Book an Appointment</div>
             </Button>
 
             {/* <Button
@@ -53,6 +53,9 @@ class AvailabilityBox extends Box {
   public getRouteAddress(): string {
     return "availability";
   }
+  public getCardName() {
+      return 'Appointments Card'
+  }  
 }
 
 export default AvailabilityBox;

@@ -1,3 +1,7 @@
 .Carbon-text-layer1 {
     @apply text-primary-color
 }
+
+.Carbon-text-layer1[data-os="windows"] {
+    @apply text-primary-color font-medium
+}

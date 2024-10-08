@@ -1,5 +1,13 @@
 .Carbon-Button-container {
-  @apply flex justify-center boxShadow-purple boxShadow-Gray  items-center tracking-tighter text-white w-full disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+  @apply flex justify-center  boxShadow-Gray  items-center tracking-tighter text-white w-full disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+}
+@media (max-width: 600px) {
+  .Carbon-Button-container {
+    @apply flex justify-center  boxShadow-Gray  items-center tracking-tighter text-white w-full disabled:cursor-not-allowed bg-primary-color leading-[19.36px] text-[14px] font-[400]  rounded-[27px] h-[44px] #{!important};
+  }
+}
+.Carbon-Button-container[data-os="windows"] {
+  @apply font-semibold #{!important};
 }
 
 .Carbon-Button-container-disabled {
