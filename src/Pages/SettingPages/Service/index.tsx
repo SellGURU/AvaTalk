@@ -21,20 +21,22 @@ const SettingService =() => {
     const [searchParametr] = useSearchParams()
     const location = useLocation();    
     const [isOpen, setIsOpen] = useState(false);
-    const [plan] = useState(context.currentUser.type_of_account.getType())
+    const [plan,setplan] = useState(context.currentUser.type_of_account.getType())
     const [beExpired,setIsExpired] = useState(false)
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
             setIsOpen(true)
+            setplan('Pro')
+            context.currentUser.type_of_account.setType("Pro")
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     publish("refreshPage",{})
                     navigate(location.pathname, { replace: true });                  
                 })    
-            }, 1000);
+            }, 3000);
         }
-    })
+    },[])
     useEffect(() => {
         if(context.currentUser.type_of_account.getDayremindToExpired() <= 7 && context.currentUser.type_of_account.getType() == 'Pro'){
             setIsExpired(true)
