@@ -150,7 +150,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         {
           showMoreModal ?
             <>
-              <div ref={moreModalRef} className="w-[210px] top-8 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
+              <div ref={moreModalRef} className="w-[210px] -top-2 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
                 {/* <div className="flex opacity-50 items-center justify-start px-4 py-2 border-b border-b-white">
                   <img className={`${theme}-ContactsView-scan`} alt="" />
                   <div className="text-gray-700 ml-2">Scan Business Card</div>
@@ -169,7 +169,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
                   setShowMoreModal(false)
                 }} className="flex items-center cursor-pointer justify-start px-4 py-2">
                   <img className={`${theme}-ContactsView-exportIcon`} alt="" />
-                  <div className="text-gray-700 ml-2">Export As CSV</div>
+                  <div className="text-gray-700 ml-2">Export as CSV</div>
                 </div>                
               </div>
             </>
@@ -191,10 +191,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
       {activeView === "Contact List" ? (
         <>
           <div className="mt-8 px-6">
-            <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search name or email..." />
+            <SearchBox inputHeight="56px" onChange={handleSearchChange} value={searchQuery} theme="Carbon" placeholder="Search for Name or Email..." />
           </div>
           {!(contacts.length > 0) && !isLoading ? (
-            <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
+            <div className={`${theme}-ContactsView-box w-[100%] mt-[10px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
                 No Contact Yet
               </div>

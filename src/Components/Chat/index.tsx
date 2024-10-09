@@ -155,7 +155,7 @@ const Chat: React.FC<Props> = ({ theme }) => {
           {chats.length == 0? (
             <div className={`${theme}-ContactsView-box w-[100%] mt-[20px]`}>
               <div data-testid="input-container" className={` w-[100%]  ${theme}-ContactsView-innerBox`}>
-               No chats yet
+               No Chat Yet
               </div>
             </div>
           ) : (

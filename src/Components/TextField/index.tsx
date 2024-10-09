@@ -144,7 +144,7 @@ const TextField: React.FC<InputProps> = ({
           value={value}
         />
         {type == 'searchBox' &&
-          <img className={`Carbon-SearchBox-searchIcon `} src="../../../Carbon/search-normal.png" alt="" />
+          <img className={`absolute right-3 w-6 h-6 `} src="../../../Carbon/search-normal.png" alt="" />
         }
         {type === "password" && (
           <div

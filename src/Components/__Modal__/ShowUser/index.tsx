@@ -35,7 +35,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                                 <div className={`${theme}-back-Button-vector`}></div>
                             </Button>
                             <div>
-                                <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
+                                <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
                                 <div className='text-text-primary mt-1 text-center text-xs flex justify-start items-center '>{auth.currentUser.information?.job}
                                      {" @ "}  
                                     <span className='ml-1'>
@@ -133,7 +133,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </div>
 
                         </div>
-                        <div className="text-[14px] mt-6 text-center text-text-primary">
+                        <div className="text-[14px] font-medium mt-6 text-center text-text-primary">
                           Want to manage your network this easily? Activate your free Avatalk trial and take control
                         </div>
                         <div className="w-full flex justify-center mt-5">
@@ -143,7 +143,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </div>
                             <div>
                                 <div className="text-white text-[18px] font-semibold  text-center">Your Name</div>
-                                <div className="text-white text-[10px] font-medium  text-center">Job Title/ Company</div>
+                                <div className="text-white text-[12px] font-medium opacity-85  text-center">Job Title/ Company</div>
                             </div>
                             <div className="w-full flex justify-center mt-4">
                                 <img src="./icons/qrcode.png" alt="" />

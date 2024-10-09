@@ -35,7 +35,7 @@
     @apply w-full mt-[6px] mb-[6px] flex justify-between px-[12px] items-center h-[36px] rounded-[27px] border border-green-600
 }
 .Carbon-ImageUploader-uploadBox-file[data-mode ='outSize']{
-    box-shadow: inset -4px -4px 9px 0px rgba(255 ,255 ,255,0.6) ,inset 1px 1px 8px 0px rgba(14 ,160 ,11, 0.2);
+    box-shadow: inset -4px -4px 9px 0px rgba(255 ,255 ,255,0.6) ,inset 1px 1px 8px 0px rgba(255, 0, 0, 0.2);
     @apply w-full mt-[6px] mb-[6px] flex justify-between px-[12px] items-center h-[36px] rounded-[27px] border border-red-600
 }
 

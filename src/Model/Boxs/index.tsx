@@ -36,6 +36,7 @@ class Box {
             case 'AboutBox' :return 'more_info_about'
             case 'MeetingBox' :return 'more_info_availability'
             case 'GalleryBox': return 'more_info_gallery'
+            case 'FileBox': return 'more_info_files'
             case 'SocialBox': return 'more_info_socials'
             case 'LinkBox': return 'more_info_links'
         }

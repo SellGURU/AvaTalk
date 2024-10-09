@@ -58,7 +58,7 @@
   // mask-repeat: no-repeat;
   // mask-position: center;
   // mask-image: url(/Carbon/search-normal.svg);  
-  @apply w-10 h-10 p-2 absolute  right-3 rounded-full cursor-pointer;
+  @apply w-10 h-10 p-[6px] absolute  right-3 rounded-full cursor-pointer;
 }
 .Carbon-SearchBox-ActiveIcon {
   @apply borderBox-Gray btnInnerShadowsDark ;

@@ -158,7 +158,7 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
                                 }}
                                 theme="Carbon"
                             >
-                                <div>Edit Contact</div>
+                                <div>Save Changes</div>
                             </Button>
                             </div>                                                                      
                     </div>

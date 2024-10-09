@@ -1,5 +1,5 @@
 .Carbon-Google-Button-container {
-    @apply text-[#8290a3]  tracking-tighter borderBox-Gray boxShadow-button-gray w-full disabled:cursor-not-allowed flex justify-center items-center bg-white leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
+    @apply text-[#8290a3]  tracking-tighter borderBox-Gray w-full disabled:cursor-not-allowed flex justify-center items-center bg-white leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px] #{!important};
 };
 
 .Carbon-Google-Button-container-disabled {

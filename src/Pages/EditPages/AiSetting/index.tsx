@@ -204,7 +204,7 @@ const formatText = (text: string) => {
 
             <Button onClick={() => {
               setShowLearnMore(false)
-            }} theme="Carbon">Got it</Button>
+            }} theme="Carbon">Got It</Button>
           </div>
 
         </div>

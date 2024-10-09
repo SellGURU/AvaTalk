@@ -110,7 +110,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
           {settingCards.map((item) => {
             return <SettingCard key={item.link} linkTo={item.link} content={item} theme="Carbon"></SettingCard>
           })}
-          <div className="mt-5 flex items-center justify-center cursor-pointer">
+          <div className="mt-10 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>
             <p onClick={() =>setShowConfirm(true)} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
           </div>
@@ -120,8 +120,8 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       </div>
         {showConfirm ?
         <>
-            <div className='fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm confirmTitle="Log out" refrence={confirmRef} title={"Log out"} content={"Are you sure want to Log out your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
+            <div className=' fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
+                <Confirm confirmTitle="Log out" refrence={confirmRef} title={"Log out"} content={"Are you sure want to log out your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
                   auth.logout()
                 }}></Confirm>
             </div>

@@ -201,7 +201,7 @@
     display: none !important;
   }
   .boxShadow-Gray {
-    box-shadow: 4px 4px 20px 0px rgba(111, 140, 176, 0.41), -6px -6px 20px 0px rgba(255, 255, 255, 1), 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    box-shadow: 4px 2px 20px 0px rgba(111, 140, 176, 0.41), -6px -2px 20px 0px rgba(255, 255, 255, 1), 2px 1px 4px 0px rgba(114, 142, 171, 0.1);
   }
   .boxShadow-bisinesCard {
     box-shadow: 2px 2px 4px 0px #728EAB1A;
@@ -260,7 +260,7 @@
       linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
   }
   .litepicker {
-    @apply top-[116px] rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
+    @apply top-[116px] h-[530px] overflow-y-auto rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
   }
   .litepicker .container__months {
     -webkit-box-shadow:none;

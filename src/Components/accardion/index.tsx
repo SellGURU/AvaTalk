@@ -14,7 +14,7 @@ export const Accordion=({bodyText,title,component}:Props) => {
     };
     return(
         <>
-            <div className={"bg-[#F3F4F6] boxShadow-Gray borderBox-Gray rounded-3xl mb-5"} id="accordion-collapse" data-accordion="collapse">
+            <div className={"bg-[#F3F4F6] boxShadow-Gray borderBox-Gray rounded-3xl mb-3"} id="accordion-collapse" data-accordion="collapse">
                 <h2 id="accordion-collapse-heading-1" className={"text-[#374151] font-medium text-[14px]"}>
                     <button
                         type="button"
@@ -36,7 +36,7 @@ export const Accordion=({bodyText,title,component}:Props) => {
                     className={`${isOpen ? 'block' : 'hidden'}`}
                     aria-labelledby="accordion-collapse-heading-1"
                 >
-                    <div className="p-5">
+                    <div className="p-5 pt-0 text-justify">
                         {component? component():undefined}
                         <p className="mb-2 text-[#6B7280] font-normal text-[12px]">{bodyText}</p>
                     </div>

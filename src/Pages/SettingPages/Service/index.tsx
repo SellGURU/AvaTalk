@@ -21,20 +21,22 @@ const SettingService =() => {
     const [searchParametr] = useSearchParams()
     const location = useLocation();    
     const [isOpen, setIsOpen] = useState(false);
-    const [plan] = useState(context.currentUser.type_of_account.getType())
+    const [plan,setplan] = useState(context.currentUser.type_of_account.getType())
     const [beExpired,setIsExpired] = useState(false)
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
             setIsOpen(true)
+            setplan('Pro')
+            context.currentUser.type_of_account.setType("Pro")
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     publish("refreshPage",{})
                     navigate(location.pathname, { replace: true });                  
                 })    
-            }, 1000);
+            }, 3000);
         }
-    })
+    },[])
     useEffect(() => {
         if(context.currentUser.type_of_account.getDayremindToExpired() <= 7 && context.currentUser.type_of_account.getType() == 'Pro'){
             setIsExpired(true)
@@ -69,11 +71,11 @@ const SettingService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Plan</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
                         <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re using our {" "+plan+ ' Plan'}</p>
+                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
                             {plan==="Trial" &&
