@@ -91,7 +91,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
         <PiChartComponent chartData={[]} theme={theme} />
         }
       </div>
-      <div className="mb-24 pb-4">
+      <div className="mb-2 pb-4">
         {data.length > 0 ?
         <BarChartComponent data={data.filter((el) => el.name == 'Clicks per Category')[0].value.data} theme={theme} />
         :

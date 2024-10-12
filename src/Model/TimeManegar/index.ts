@@ -32,12 +32,20 @@ class TimeManegar {
         return `${year}-${day}-${month}`;
     }
 
-    static formatDateMonthName(dateString:string | Date){
-    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+    static formatDateMonthName(dateString: string | Date) {
+        const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
         // Format the date as DD-Month-YYYY
         const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString('en-GB', options);
-        return formattedDate
+        const formattedDate = date.toLocaleDateString('en-US', options);
+    
+        // Remove any commas from the formatted date
+        const cleanedDate = formattedDate.replace(/,/g, '');
+    
+        // Split and rearrange the date components
+        const [month, day, year] = cleanedDate.split(' ');
+    
+        // Create the desired format: "Jan 12 204"
+        return `${month} ${day} ${year}`;
     }
 }
 

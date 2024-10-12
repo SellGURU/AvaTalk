@@ -39,7 +39,7 @@ const ChatItem = ({data, theme,visibleDate,isLimitedChat}: { data: DataProps; th
               <div className={`${theme}-ChatItem-Vector`}></div>
             </div>
           </div>
-          <p className={`${theme}-ChatItem-content`}>{data.response.substring(0,35)+' ...'}</p>
+          <p className={`${theme}-ChatItem-content`}>{data.response}</p>
         </div>
       </div>
     </div>

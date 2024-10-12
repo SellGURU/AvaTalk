@@ -9,8 +9,8 @@
   @apply  rounded-[24px] w-full h-[97px] borderBox-Gray boxShadow-Gray;
 }
 .Carbon-AnalyticsSummary-text {
-  @apply leading-[21px] text-center font-poppins text-[14px] font-medium text-gray-700 pt-[13px]  whitespace-nowrap  pb-2;
+  @apply leading-[21px] text-center font-poppins text-[12px] font-normal text-gray-700 pt-[13px]  whitespace-nowrap  pb-2;
 }
 .Carbon-AnalyticsSummary-number {
-  @apply leading-[36px] text-[22px] md:text-[24px] font-poppins font-medium  flex justify-center text-primary-color/80;
+  @apply leading-[36px] text-[22px] md:text-[24px] font-poppins font-normal flex justify-center text-primary-color/80;
 }

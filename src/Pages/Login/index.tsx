@@ -15,7 +15,7 @@ import { boxProvider, useConstructor } from "../../help";
 import { toast } from "react-toastify";
 import axios from "axios";
 import {LinkedIn} from "react-linkedin-login-oauth2";
-
+import { BeatLoader } from "react-spinners";
 const initialValue = {
   email: "",
   password:""
@@ -51,6 +51,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [parametr] = useSearchParams() 
   const [showSplash,setshowSplash] = useState(true);
+  const [loading, setLoading] = useState(false); 
+
   const authContext = useContext(AuthContext)
   const formik = useFormik({
     initialValues: initialValue,
@@ -75,10 +77,12 @@ const Login = () => {
     // const resolvePhoneOrEnail = {
     //   email:formik.values.email
     // }
+    setLoading(true);
     Auth.login({
       password:formik.values.password,
       email:formik.values.email
     }).then((res) => {
+      setLoading(false); 
       if(res.data.error){
         toast.error(res.data.error)
         if(res.data.error == 'This user is not registered'){
@@ -326,7 +330,7 @@ const Login = () => {
                   disabled={!formik.isValid || formik.values.password.length <= 4}
                   theme="Carbon"
                 >
-                  Log in
+              {loading ? <BeatLoader size={8} color={"#fff"} /> : "Log in"}
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
                  Don't have an account? <span onClick={() => {

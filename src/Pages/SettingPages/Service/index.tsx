@@ -71,11 +71,11 @@ const SettingService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Plan</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-3 px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[17px]">
                 <div className="">
                     <div className="flex flex-col justify-center items-center">
-                        <img className={`w-[147px] mb-6`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-4 text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
+                        <img className={`w-[147px] mb-4`} src="/icons/logo2.svg" alt="" />
+                        <p className="mb-1 text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
 
                         <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
                             {plan==="Trial" &&

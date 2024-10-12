@@ -244,7 +244,7 @@ const SignUp = () => {
                                             className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
                                         <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
 
-                                        <div className="text-text-primary">Sign up LinkedIn</div>
+                                        <div className="text-text-primary">Sign up with LinkedIn</div>
                                     </Button>
                                 </div>
                             }/>

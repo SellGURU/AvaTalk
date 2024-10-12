@@ -94,14 +94,14 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
                 <p className={`${theme}-ChatDetails-title max-w-[280px] `}>{queryParameters.get("name")}</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[56px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
               <div className="text-center mb-1">{TimeManegar.formatDateMonthName(new Date(currentChat[0]?.messages[0]?.date * 1000))}</div>
               {currentChat.map((el) => {
                 return (
                   <>
-                    <div className="bg-primary-color text-[14px] text-white px-4 py-3 rounded-[16px] rounded-tl-none">{ formatText(el.messages[0].content)}</div>
+                    <div className="bg-primary-color/30 text-[14px] max-w-[80%] text-text-primary p-3 rounded-[16px] self-end rounded-tr-none">{ formatText(el.messages[0].content)}</div>
                     {/* <Button theme="Carbon" data-mode="ChatDetails-question-button">{el.messages[0].content}</Button>               */}
-                    <div className="bg-[#F3F4F6] text-[14px] text-[#374151] px-4 py-3 rounded-[16px] rounded-tr-none">{formatText(el.messages[1].content)}</div>                  
+                    <div className="bg-[#F3F4F6] self-start text-[14px] text-text-primary  max-w-[80%] p-3 rounded-[16px] rounded-tl-none">{formatText(el.messages[1].content)}</div>                  
                   </>
                 )
               })}

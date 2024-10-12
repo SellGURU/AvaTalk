@@ -68,8 +68,8 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
                         </Button>
                     </div>
                 </div>
-                <div className="px-5 mt-4 mb-6">
-                    <div className="boxsInnerShadows p-6 text-[14px] w-full flex justify-center items-center text-[#374151] rounded-[27px] mt-4 py-3">
+                <div className="px-5 mt-6 mb-8">
+                    <div className="boxsInnerShadows p-6 text-[14px] w-full flex justify-center items-center text-[#374151] rounded-[27px] mt-4 py-4">
                       {resolveText()}
                     </div>
                 </div>

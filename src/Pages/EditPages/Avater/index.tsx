@@ -363,7 +363,7 @@ const EditAvater: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full gap-8 mt-5 grid grid-cols-4 grid-flow-row">
+            <div className="w-full gap-4 mt-5 grid grid-cols-4 grid-flow-row">
               <div
                 className="w-full  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
                 onClick={() => {
@@ -459,7 +459,7 @@ const EditAvater: React.FC = () => {
                       } boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] `}
                     >
                       {/* <img src="" alt="" /> */}
-                      <img src={el.photo} className="w-full  h-full" alt="" />
+                      <img src={el.photo} className="w-full object-cover h-[80px]" alt="" />
                     </div>
                   </>
                 );

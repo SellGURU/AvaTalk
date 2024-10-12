@@ -208,7 +208,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
                         {
                             authContext.currentUser.type_of_account.getType() == 'Trial' && page != 'chatEndUser'?
                                 <>
-                                    <div className="w-full h-2 relative rounded-[12px] border-[#FFFFFF80] border mt-4" style={{
+                                    <div className="w-full h-2 relative rounded-[12px] bg-gray-200 border-[#FFFFFF80] border mt-4" style={{
                                         boxShadow: "inner 4px 4px 14px 2px #E2E8F0,inner -4px -4px 9px 2px #FFFFFF99"
                                     }}>
                                         <div className={`absolute left-0 h-[7px] top-0 rounded-[12px] bg-[#FBBF24] `} style={{width:authContext.currentUser.type_of_account.getPercentDayUsed()+"%"}}></div>
