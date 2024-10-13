@@ -52,24 +52,22 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                         </div>
                         <div className="my-4 flex flex-col gap-5 font-medium text-sm">
                         {user?.information?.phone ?
-                            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                                window.open(user?.information?.phone); 
-                                }}>
+                            <a      href={`tel:${user?.information?.phone}`}
+                            className={`${theme}-ContactDetails-container5`}>
                             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                                 <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                             </div>
                             <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.phone}</p>
-                            </div>
+                            </a>
                         :undefined}
                         {user?.information?.personlEmail ?
-                            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                                window.open(user?.information?.personlEmail); 
-                                }}>
+                            <a       href={`mailto:${user?.information?.personlEmail}`}
+                            className={`${theme}-ContactDetails-container5`}>
                             <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                                 <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                             </div>
                             <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.personlEmail}</p>
-                            </div>
+                            </a>
                         :undefined}    
                         <Button onClick={() => {
                             const contact = {
