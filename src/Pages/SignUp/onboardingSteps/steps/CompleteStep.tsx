@@ -72,7 +72,7 @@ const CompleteStep = () => {
                                     })
                                     authContext.currentUser.setBox(resolveSocial)
                                 })                                  
-                                 navigate("/?splash=true");
+                                 navigate("/?splash=false");
                             }else{
                                 toast.error(res.data)
                             }                            
@@ -124,7 +124,7 @@ const CompleteStep = () => {
                                     })
                                     authContext.currentUser.setBox(resolveSocial)
                                 })                                  
-                                 navigate("/?splash=true");
+                                 navigate("/?splash=false");
                             }else{
                                 toast.error(res.data)
                             }

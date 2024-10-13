@@ -39,7 +39,7 @@ const ReferYourFriends = () => {
                     <div className="w-full bg-white boxShadow-Gray  mt-8 py-4 px-6 rounded-[27px] ">
                         <div className="text-[#374151] text-[16px] text-center font-medium">Invite Your Friends</div>
                         
-                        <div className="text-[#6B7280] text-[14px] text-justify px-5 mt-4">
+                        <div className="text-[#6B7280] text-[14px] text-center px-5 mt-4">
                             You can invite your friends to use our application by either copying and sharing your referral code or 
                             by clicking the invite button.
                         </div>

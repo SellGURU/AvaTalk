@@ -331,6 +331,10 @@
   border:   2px solid #5B21B6 !important;
   border-radius: 8px;
 }
+.image-gallery-thumbnail:hover{
+  border:   2px solid #5B21B6 !important;
+  border-radius: 8px;
+}
 
 @keyframes slide-up {
   0% {
