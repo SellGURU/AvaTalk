@@ -25,39 +25,85 @@ interface PresentationProps {
   isSilent:boolean
   setIsSilent?:(action:boolean) => void
 }
-
-const convertToLinks = (text:string) => {
+type TextWithNewlinesAndLinksProps = {
+    text: string;
+  };
+const TextWithNewlinesAndLinks: React.FC<TextWithNewlinesAndLinksProps> = ({ text }) => {
     // Regular expression to match links inside brackets
     // eslint-disable-next-line no-useless-escape
     const regex = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
-
-    // Split the text by the regex and create React elements
-    const parts = [];
-    let lastIndex = 0;
-    let match;
-
-    while ((match = regex.exec(text)) !== null) {
-    // Add text before the link
-    if (lastIndex < match.index) {
-        parts.push(text.substring(lastIndex, match.index));
-    }
-    // Add the link as an anchor tag
-    parts.push(
-        <a key={match[2]} href={match[2]} target="_blank" rel="noopener noreferrer">
-        {match[1]}
-        </a>
+  
+    // Split the text into lines first
+    return (
+      <div>
+        {text.split('\n').map((line, index) => {
+          // Process each line to convert links
+          const parts = [];
+          let lastIndex = 0;
+          let match;
+  
+          while ((match = regex.exec(line)) !== null) {
+            // Add text before the link
+            if (lastIndex < match.index) {
+              parts.push(line.substring(lastIndex, match.index));
+            }
+            // Add the link as an anchor tag
+            parts.push(
+              <a key={match[2]} href={match[2]} target="_blank" rel="noopener noreferrer">
+                {match[1]}
+              </a>
+            );
+            // Update lastIndex to the end of the match
+            lastIndex = regex.lastIndex;
+          }
+  
+          // Add remaining text after the last link
+          if (lastIndex < line.length) {
+            parts.push(line.substring(lastIndex));
+          }
+  
+          return (
+            <span key={index}>
+              {parts}
+              <br />
+            </span>
+          );
+        })}
+      </div>
     );
-    // Update lastIndex to the end of the match
-    lastIndex = regex.lastIndex;
-    }
+  };
+// const convertToLinks = (text:string) => {
+//     // Regular expression to match links inside brackets
+//     // eslint-disable-next-line no-useless-escape
+//     const regex = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
 
-    // Add remaining text after the last link
-    if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
-    }
+//     // Split the text by the regex and create React elements
+//     const parts = [];
+//     let lastIndex = 0;
+//     let match;
 
-    return parts;
-};   
+//     while ((match = regex.exec(text)) !== null) {
+//     // Add text before the link
+//     if (lastIndex < match.index) {
+//         parts.push(text.substring(lastIndex, match.index));
+//     }
+//     // Add the link as an anchor tag
+//     parts.push(
+//         <a key={match[2]} href={match[2]} target="_blank" rel="noopener noreferrer">
+//         {match[1]}
+//         </a>
+//     );
+//     // Update lastIndex to the end of the match
+//     lastIndex = regex.lastIndex;
+//     }
+
+//     // Add remaining text after the last link
+//     if (lastIndex < text.length) {
+//     parts.push(text.substring(lastIndex));
+//     }
+
+//     return parts;
+// };   
 const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     const context = useAuth()
     const languagesList = [
@@ -247,6 +293,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             <>
             {
             chats.map((item) => {
+                
                 return (
                 <>
                     {item.from == 'user' ?
@@ -256,7 +303,8 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                     :
                     <div className="flex w-full justify-start">
                         <div className={`${theme}-Presentation-chatItem`}>
-                            {convertToLinks(item.text)}
+                            {/* {convertToLinks(item.text)} */}
+                            <TextWithNewlinesAndLinks text={item.text} />
                         </div> 
                     </div>
                     }
