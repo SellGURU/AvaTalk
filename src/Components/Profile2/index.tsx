@@ -91,6 +91,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [startVideoTalk,setStartVideoTalk] = useState(false);
   const [chats,setChats] = useState<Array<chat>>([
   ])      
+  useEffect(() => {
+    const mode = resolveMode();
+    if (mode === 'share') {
+      setPanel('Chat');
+    }
+  }, []);
   // useEffect(() => {
   //   if(isTalking){
   //     if(videoRef2.current){

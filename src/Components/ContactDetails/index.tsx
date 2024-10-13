@@ -244,26 +244,40 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           {/* <Button theme="Carbon-Show"  onClick={ () => setShowAddTagModal(true)}>Add Tag</Button> */}
         </div>
         <div className={`${theme}-ContactDetails-container4 min-w-64`}>
-          {contact?.phone ?
-            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                  window.open(contact?.phone); 
-                }}>
-              <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
-                <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
-              </div>
-              <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.phone}</p>
-            </div>
-          :undefined}
-          {contact?.email?
-            <div className={`${theme}-ContactDetails-container5`} onClick={() => {
-                  window.open(contact?.email); 
-                }}>
-              <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
-                <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}></div>
-              </div>
-              <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{contact?.email}</p>
-            </div>
-          :undefined}
+        {contact?.phone ? (
+    <a
+      href={`tel:${contact.phone}`}
+      className={`${theme}-ContactDetails-container5`}
+    >
+      <div
+        className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}
+      >
+        <div
+          className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}
+        ></div>
+      </div>
+      <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>
+        {contact.phone}
+      </p>
+    </a>
+  ) : undefined}
+         {contact?.email ? (
+    <a
+      href={`mailto:${contact.email}`}
+      className={`${theme}-ContactDetails-container5`}
+    >
+      <div
+        className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}
+      >
+        <div
+          className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-emailIcon ${theme}-ContactDetails-ActiveVectors`}
+        ></div>
+      </div>
+      <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>
+        {contact.email}
+      </p>
+    </a>
+  ) : undefined}
             {contact?.address ?
               <div className={`${theme}-ContactDetails-container5`}>
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
