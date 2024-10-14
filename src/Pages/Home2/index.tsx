@@ -19,7 +19,7 @@ const Home2 = () => {
     const [showSplash,setshowSplash] = useState(parametr.get('splash') == 'false'?false:true);
     const [showFooter,setShowFooter] = useState(parametr.get('review') == 'true'?false:true);
     const authContext = useAuth()
-    const [showDeveloperTools] = useState(true)
+    const [showDeveloperTools] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const resolveSocial: Array<Box> = [];
     const getProfile = () => {
