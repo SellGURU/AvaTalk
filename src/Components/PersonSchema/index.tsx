@@ -11,7 +11,7 @@ const PersonSchema = () => {
     "name": context.currentUser.information?.firstName+""+context.currentUser.information?.lastName,
     "url": "https://portal.avatalk.me/#/A/"+context.currentUser.information?.unique_id,
     "image": context.currentUser.information?.imageurl,
-    "sameAs":socialBOx.getSocialMedias().map((el:any) => el.value),
+    "sameAs":socialBOx?.getSocialMedias().map((el:any) => el.value),
     "jobTitle":context.currentUser.information?.job,
     "worksFor": {
       "@type": "Organization",
