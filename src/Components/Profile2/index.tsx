@@ -438,8 +438,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </>
           }
           {
-            mode != 'profile' ?
+            mode == 'review' ?
             <>
+
               {
                 isMuted?
                   <div className="absolute top-16 right-6 z-20">
@@ -468,6 +469,38 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :
             undefined
           }
+          {
+            mode == 'share' ?
+            <>
+
+              {
+                isMuted?
+                  <div className="absolute top-4 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()         
+                      setIsTalking(false)            
+                      setISMuted(false)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-mutedVector`} ></div>
+                    </Button>                
+                  </div>       
+                :
+                  <div className="absolute top-4 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()    
+                      setIsTalking(false)                    
+                      setISMuted(true)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-VolumeHighVector`} ></div>
+                    </Button>                
+                  </div>  
+              }
+            </>
+            :
+            undefined
+          }          
                 {/* {
                 showMuiteController?
                   <div>
