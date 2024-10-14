@@ -292,7 +292,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             :
             <>
             {
-            chats.map((item) => {
+            chats.map((item,index:number) => {
                 
                 return (
                 <>
@@ -301,12 +301,17 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                         <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
                     </div>
                     :
+                    <>
+                    {index == chats.length-1 &&
+                     <div ref={messagesEndRef} />
+                    }
                     <div className="flex w-full justify-start">
                         <div className={`${theme}-Presentation-chatItem`}>
                             {/* {convertToLinks(item.text)} */}
                             <TextWithNewlinesAndLinks text={item.text} />
                         </div> 
                     </div>
+                    </>
                     }
                 </>
                 )
@@ -318,7 +323,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
 
                 </div>             
             }
-            <div ref={messagesEndRef} />
+           
             {
             isLoading ?
                 <>
