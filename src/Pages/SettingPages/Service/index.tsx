@@ -23,6 +23,7 @@ const SettingService =() => {
     const [isOpen, setIsOpen] = useState(false);
     const [plan,setplan] = useState(context.currentUser.type_of_account.getType())
     const [beExpired,setIsExpired] = useState(false)
+    
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
@@ -33,7 +34,8 @@ const SettingService =() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     publish("refreshPage",{})
                     navigate(location.pathname, { replace: true });                  
-                })    
+                })   
+                rewardful('convert', { email: context.currentUser.information?.personlEmail });                 
             }, 3000);
         }
     },[])
