@@ -17,7 +17,7 @@ import ResetPassword from "../Pages/ResetPassword";
 import {Tutorial} from "../Pages/Tutorial";
 import {UserManual} from "../Pages/SettingPages/UserManual";
 import {FormPage} from "../Pages/SettingPages/form";
-
+import ChangePassowrd from "../Pages/ChangePassword/ChangePassword";
 const route = createHashRouter([
   {
     path: "/",
@@ -141,6 +141,10 @@ const route = createHashRouter([
             element: <SettingSupport></SettingSupport>,
           },
           {
+            path: "changepassword",
+            element: <ChangePassowrd></ChangePassowrd>,
+          },
+          {
             path: "help",
             element: <SettingHelp></SettingHelp>,
             children : [
@@ -167,7 +171,8 @@ const route = createHashRouter([
               {
                 path: "tutorial",
                 element: <Tutorial></Tutorial>
-              }
+              },
+             
             ]
           },
           //   CartTu
@@ -183,6 +188,7 @@ const route = createHashRouter([
             path: "NFCBusinessCard/:id",
             element: <NFCBusinessCard></NFCBusinessCard>,
           },
+        
        
         ],
         // children:[
