@@ -35,6 +35,7 @@ const SettingService =() => {
                     publish("refreshPage",{})
                     navigate(location.pathname, { replace: true });                  
                 })   
+                console.log(context.currentUser.information?.personlEmail )
                 rewardful('convert', { email: context.currentUser.information?.personlEmail });                 
             }, 3000);
         }
