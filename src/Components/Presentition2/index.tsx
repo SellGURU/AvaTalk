@@ -126,11 +126,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     const [showSuggestions,setShowSuggestions] = useState(false);     
     const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
-    const [suggestionList] = useState([
-        'Can you introduce yourself?',
-        'Tell me more about your business',
-        'What services do you provide in Codie?'
-    ])    
+    const [suggestionList] = useState(context.currentUser.sugesstions)    
     const [usedMoreVoice,setUsedMoreVoice] = useState(false)
     const resolveModeNotif =() => {
         if(usedMoreVoice){
@@ -297,9 +293,14 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                 return (
                 <>
                     {item.from == 'user' ?
-                    <div className="flex w-full justify-end">
-                        <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
-                    </div>
+                    <>
+                        {index == chats.length-1 &&
+                            <div ref={messagesEndRef} />
+                        }
+                        <div className="flex w-full justify-end">
+                            <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
+                        </div>
+                    </>
                     :
                     <>
                     {index == chats.length-1 &&

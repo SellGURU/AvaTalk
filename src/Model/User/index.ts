@@ -78,12 +78,15 @@ class User {
     protected sharingMod:SharingModType = 'Default Mode'
     public advancedSettings:AdvancedSettings = new AdvancedSettings()
     constructor(public information?:Information){}
-
+    public sugesstions:Array<string> =[]
     public resolveImageUrl() {
         if(this.information?.imageurl!= '' && this.information?.imageurl!= null){
             return this.information?.imageurl
         }
         return `https://ui-avatars.com/api/?name=${this.information?.firstName}+${this.information?.lastName}`
+    }
+    public setSuggestions(sug:Array<string>) {
+        this.sugesstions =sug
     }
     public updateInformation(information:Information){
         this.information = information
