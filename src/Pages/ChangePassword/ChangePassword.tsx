@@ -2,18 +2,22 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { TextField } from "../../Components";
 import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../store/auth-context";
+import { useState , useEffect } from "react";
+// import { AuthContext } from "../../store/auth-context";
 import * as Yup from "yup";
-import { Auth } from "../../Api";
+import { SuccessModal } from "./SucessModal";
+// import { Auth } from "../../Api";
 const ChangePassowrd = () => {
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
-  const context = useContext(AuthContext);
-  
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  useEffect(()=> console.log(step),[step]
+)
+  //   const context = useContext(AuthContext);
+
   const validationSchema = Yup.object().shape({
-    // currentPassword: Yup.string().required("Current password is required"),
+    currentPassword: Yup.string().required("Current password is required"),
     newPassword: Yup.string()
       .required("New password is required")
       .min(8, "Password should be at least 8 characters"),
@@ -22,19 +26,48 @@ const ChangePassowrd = () => {
       .required("Confirm password is required"),
   });
   const initialValues = {
-   currentPassword :"",
+    currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   };
 
-
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       console.log(values);
+      setShowSuccessModal(true);
     },
   });
+  const handleCurrentPasswordVerification = () => {
+    formik.setFieldTouched("currentPassword", true);
+    formik.validateField("currentPassword").then(() => {
+      if (!formik.errors.currentPassword && formik.values.currentPassword) {
+        setStep(2);
+      }
+    });
+  };
+  //   const verifyCurrentPassword = async (password:string) => {
+  //     return password === 'yourActualPassword';
+  //   };
+  const handleChangePassword = () => {
+    formik.setFieldTouched("newPassword", true);
+    formik.setFieldTouched("confirmPassword", true);
+    formik.validateForm().then((errors) => {
+      if (Object.keys(errors).length === 0) {
+        formik.handleSubmit();
+      } else {
+        console.log("Validation errors:", errors);
+      }
+    });
+  };
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    navigate(-1);
+  };
+
   return (
     <>
       {" "}
@@ -70,48 +103,68 @@ const ChangePassowrd = () => {
             {step == 1 ? (
               <>
                 <TextField
-                  {...formik.getFieldProps("firstname")}
-                  inValid={formik.errors.currentPassword != undefined}
+                  {...formik.getFieldProps("currentPassword")}
+                  inValid={!!formik.errors.currentPassword}
                   theme="Carbon"
                   required
-                  errorMessage={formik.errors.currentPassword}
-                  name="current password"
+                  errorMessage={
+                    formik.touched.currentPassword
+                      ? formik.errors.currentPassword
+                      : ""
+                  }
+                  name="currentPassword"
                   label="Current Password"
-                  type="text"
-                ></TextField>
-                <Button onClick={() => setStep(2)} theme={"Carbon"}>
+                  type="password"
+                  onBlur={() => formik.setFieldTouched("currentPassword", true)}
+
+                />
+                <Button
+                  onClick={handleCurrentPasswordVerification}
+                  theme={"Carbon"}
+                >
                   Continue
                 </Button>
               </>
-            ) : (
+            ) : step == 2 && (
               <>
                 <TextField
-                  {...formik.getFieldProps("firstname")}
-                  inValid={formik.errors.currentPassword != undefined}
+                  {...formik.getFieldProps("newPassword")}
+                  inValid={!!formik.errors.newPassword}
                   theme="Carbon"
                   required
-                  errorMessage={formik.errors.currentPassword}
-                  name="new password"
+                  errorMessage={
+                    formik.touched.newPassword ? formik.errors.newPassword : ""
+                  }
+                  name="newPassword"
                   label="New Password"
-                  type="text"
-                ></TextField>
+                  type="password"
+                  onBlur={() => formik.setFieldTouched("newPassword", true)}
+                />
                 <TextField
-                  {...formik.getFieldProps("firstname")}
-                  inValid={formik.errors.currentPassword != undefined}
+                  {...formik.getFieldProps("confirmPassword")}
+                  inValid={!!formik.errors.confirmPassword}
                   theme="Carbon"
                   required
-                  errorMessage={formik.errors.currentPassword}
-                  name="Confirm New Password"
-                  label="confirm new password"
-                  type="text"
-                ></TextField>
-                <Button onClick={() => setStep(2)} theme={"Carbon"}>
+                  errorMessage={
+                    formik.touched.confirmPassword
+                      ? formik.errors.confirmPassword
+                      : ""
+                  }
+                  name="confirmPassword"
+                  label="Confirm New Password"
+                  type="password"
+                  onBlur={() => formik.setFieldTouched("confirmPassword", true)}
+                />
+                <Button onClick={handleChangePassword} theme={"Carbon"}>
                   Change Password
                 </Button>
               </>
             )}
           </div>
         </div>
+        {showSuccessModal && (
+          <SuccessModal onClose={handleCloseModal}></SuccessModal>
+        )}
       </div>
     </>
   );
