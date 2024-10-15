@@ -84,10 +84,10 @@ const TrailCard:React.FC<TrailCardProps> = ({onClose}) => {
         </div>
         <div className=" w-full  flex flex-col items-center justify-center gap-2">
           <div
-              className={` mt-2 h-[20px] relative w-full  rounded-[16px] p-[1px] px-[2px] bg-[#E1E1E1] `}
+              className={` mt-2  h-[20px] relative w-full  rounded-[16px] bg-[#E1E1E1] `}
           >
             <div
-                className={`absolute rounded-[16px]  h-[17px]  `}
+                className={`absolute rounded-[16px]  h-full w-full  `}
                 style={{
                   background: 'linear-gradient(to right, #FECA06 50%, #FECA06 100%)',
                   width: `${auth.currentUser.type_of_account.getPercentDayUsed()}%`,

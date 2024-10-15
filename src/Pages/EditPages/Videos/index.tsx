@@ -64,12 +64,11 @@ const EditVideos = () => {
   const [openaddlink, setOpenAddLink] = useState(false);
   const navigate = useNavigate();
   const submit = () => {
-    if(video.length>1) {
-      setIsReadyTo(true)
-    }else {
+    if (auth.currentUser.type_of_account.getType() === 'Free' && video.length > 1) {
+      setIsReadyTo(true);
+    } else {
       auth.currentUser.addBox(new VideoBox(formik.values.title, video));
       navigate("/");
-
     }
   };
   const deleteSocial = (index: number) => {
@@ -88,12 +87,13 @@ const EditVideos = () => {
     }, 500);
   });
   useEffect(() => {
-    if(video.length <= 1){
-      setLimiteMode("defult")
-    }else {
-      setLimiteMode("length")
+    if (auth.currentUser.type_of_account.getType() == 'Free' && video.length > 1) {
+      setLimiteMode("length");
+    } else {
+      setLimiteMode("defult");
     }
-  })
+  }, [video.length]);
+
   return (
     <>
       <h1>hi</h1>
