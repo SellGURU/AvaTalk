@@ -85,16 +85,16 @@ const ChangePassowrd = () => {
           <p className={`Carbon-ChatDetails-title`}>Change Password</p>
         </div>
         <div className="mt-[96px] flex flex-col hiddenScrollBar h-dvh overscroll-y-scroll px-6  pb-[300px]">
-          <p className="text-sm text-text-primary">
+          <p className="  text-justify text-sm text-text-primary">
             Regularly changing your password is important for keeping your
             account secure.{" "}
           </p>
-          <ul className=" mt-4 list-disc space-y-1 text-sm text-text-primary px-6">
-            <li>
+          <ul className="  list-disc  text-sm text-text-primary px-6">
+            <li className="text-justify">
               Choose a strong, unique password with a mix of letters, numbers,
               and symbols.
             </li>
-            <li>
+            <li className="text-justify">
               Keep your information secure by avoiding predictable words or
               patterns.
             </li>
@@ -112,6 +112,7 @@ const ChangePassowrd = () => {
                       ? formik.errors.currentPassword
                       : ""
                   }
+                  placeholder="Enter your current password..."
                   name="currentPassword"
                   label="Current Password"
                   type="password"
@@ -132,6 +133,7 @@ const ChangePassowrd = () => {
                   inValid={!!formik.errors.newPassword}
                   theme="Carbon"
                   required
+                  placeholder="Enter your new password..."
                   errorMessage={
                     formik.touched.newPassword ? formik.errors.newPassword : ""
                   }
@@ -145,6 +147,8 @@ const ChangePassowrd = () => {
                   inValid={!!formik.errors.confirmPassword}
                   theme="Carbon"
                   required
+                  placeholder="Enter your new password..."
+
                   errorMessage={
                     formik.touched.confirmPassword
                       ? formik.errors.confirmPassword

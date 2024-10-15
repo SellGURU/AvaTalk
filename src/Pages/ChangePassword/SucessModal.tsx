@@ -28,7 +28,7 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onClose }) => {
         <div
           ref={buttonRef}
           onClick={onClose}
-          className="absolute right-3 top-1 p-2 rounded-full shadow-lg flex items-center justify-center"
+          className="absolute right-3 top-3 p-2 rounded-full shadow-lg flex items-center justify-center"
         >
           <img src="./Carbon/Add.svg" alt="" />
         </div>
