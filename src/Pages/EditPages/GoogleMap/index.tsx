@@ -1,6 +1,7 @@
 import  { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/images/marker-icon-2x.png";
 import { Button } from "symphony-ui";
 import { BackIcon, TextField } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";

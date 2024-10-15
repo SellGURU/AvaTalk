@@ -6,7 +6,7 @@
         "price":"7",
         "id":"1",
         "product_id":"#00-nfc-c",
-        "description":"Upgrade your networking with the Avatalk NFC Business Card. Share contact details instantly, customize your AI persona, and track engagements for lasting professional impressions.",
+        "description":"Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression.",
         "images":[
         {
             "original": "/icons/bussinesCards/A1.png",
@@ -52,7 +52,7 @@
         "price":"5",
         "id":"2",
         "product_id":"#01-nfc-t",
-        "description":"The Avatalk NFC Tag offers instant contact sharing with a tap. Its compact, AI-powered design ensures seamless networking anytime, anywhere. Perfect for professionals on the go.",        
+        "description":"For those who value convenience and versatility, the Avatalk NFC Tag is the ultimate tool for modern networking. This compact yet powerful device is designed to carry your professional identity wherever you go, making it easier than ever to connect with others. The Avatalk NFC Tag is more than just a digital business card—it’s a gateway to seamless, intelligent interactions.",        
         "images":[
         {
             "original": "/icons/bussinesCards/C1.png",
@@ -83,7 +83,7 @@
         "oldPrice":"12",
         "id":"3",
         "product_id":"#02-nfc-tc",
-        "description":"Get the best of both worlds with the Avatalk NFC Tag and Business Card Bundle. Instant contact sharing, AI-driven interactions, and analytics for versatile, 24/7 networking.",  
+        "description":"For professionals who want to take their networking game to the next level, the Avatalk NFC Tag and Business Card Bundle offers the best of both worlds. This bundle combines the advanced features of the Avatalk NFC Business Card with the portability of the NFC Tag, providing a comprehensive solution for all your networking needs.",  
         "images":[
         {
             "original": "/icons/bussinesCards/B1.png",

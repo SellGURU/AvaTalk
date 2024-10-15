@@ -349,7 +349,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
           </div>
         }
-        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-20'} sticky`}>
+        <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
           {/* {mode == 'profile' ?
             <div className=" w-48 h-[40px] sticky z-20">
               <Button onClick={() => {
@@ -438,8 +438,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             </>
           }
           {
-            mode != 'profile' ?
+            mode == 'review' ?
             <>
+
               {
                 isMuted?
                   <div className="absolute top-16 right-6 z-20">
@@ -468,6 +469,38 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :
             undefined
           }
+          {
+            mode == 'share' ?
+            <>
+
+              {
+                isMuted?
+                  <div className="absolute top-4 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()         
+                      setIsTalking(false)            
+                      setISMuted(false)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-mutedVector`} ></div>
+                    </Button>                
+                  </div>       
+                :
+                  <div className="absolute top-4 right-6 z-20">
+                    <Button onClick={() => {
+                      const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
+                      video?.pause()    
+                      setIsTalking(false)                    
+                      setISMuted(true)
+                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                      <div className={`${theme}-Profile-VolumeHighVector`} ></div>
+                    </Button>                
+                  </div>  
+              }
+            </>
+            :
+            undefined
+          }          
                 {/* {
                 showMuiteController?
                   <div>

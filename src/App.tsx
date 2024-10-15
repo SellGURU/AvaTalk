@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { handleDivices } from './help';
 import { useEffect } from 'react';
+import { PersonSchema } from './Components';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <RouterProvider router={route} />
               <ToastContainer   limit={1} />
             </GoogleOAuthProvider>
+            <PersonSchema></PersonSchema>
         </div>          
       </div>
     </>

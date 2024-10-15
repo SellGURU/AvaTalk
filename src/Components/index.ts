@@ -42,7 +42,7 @@ import BissinesCard from "./BissinesCard";
 import PlanCard from "./PlanCard";
 import CheckBoxCostom from "./CheckBoxCustom";
 import PhoneNumberInput from "./PhoneSelectComponent";
-
+import PersonSchema from './PersonSchema';
 export {
   AccessNotifManager,
   Profile2,
@@ -53,6 +53,7 @@ export {
   TextField,
   FileUploadr,
   ToggleButton,
+  PersonSchema,
   ToggleButton2,
   Select,
   SearchBox,
