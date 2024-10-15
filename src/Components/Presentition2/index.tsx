@@ -318,7 +318,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             })
             }
             {showAccessNotifManager && 
-                <div className=" absolute bottom-10 bg-white py-4 mt-24  mb-[24px]">
+                <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
                     <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
 
                 </div>             
@@ -328,7 +328,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             isLoading ?
                 <>
                 <div className="  w-full px-4 flex justify-between items-center rounded-full h-10 borderBox-Gray2 bg-slate-100 ">
-                    <BeatLoader size={10} color="#702CDA" />
+                    <BeatLoader  size={10} color="#702CDA" />
                     <div className="cursor-pointer" onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
                 </div>
                 </>
