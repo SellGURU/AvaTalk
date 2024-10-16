@@ -91,7 +91,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
                         <Select
                         label="Gender"
                         required
-                        valueElement={<div>{formik.values.gender}</div>}
+                        valueElement={<div className="capitalize">{formik.values.gender}</div>}
                         placeholder="Select your gender ..."
                         theme="Carbon"
                         >
@@ -105,7 +105,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
                                 onTouchEnd={() => {
                                 formik.setFieldValue("gender",Gender.value)
                                 }}
-                                className="ml-4 my-2 cursor-pointer font-normal text-[14px]"
+                                className="  capitalize ml-4 my-2 cursor-pointer font-normal text-[14px]"
                                 // value={Gender.value}
                             >
                                 {Gender.value}
