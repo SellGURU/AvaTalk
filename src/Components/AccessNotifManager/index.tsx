@@ -299,7 +299,9 @@ const AccessNotifManager: React.FC<AccessNotifManager> = ({
                   </div>
                 </>
               ) : (authContext.currentUser.type_of_account.getType() == "Trial") && page == "chatEndUser" ? (
-                <div className="flex gap-2 text-sm text-[#5B21B6]">Upgrade to pro
+                <div   onClick={() => {
+                    navigate("/settings/service");
+                  }} className="flex gap-2 text-sm text-[#5B21B6]">Upgrade to pro
                 <img src="./icons/arrow-right.svg" alt="" />
                 </div>
               ) : (
