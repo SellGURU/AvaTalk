@@ -14,6 +14,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     const [showNotif,setShowNotif] = useState(false)
     const [isSkipped,setIsSkipped] = useState(false)
     const navigate = useNavigate()
+    console.log()
     useEffect(() => {
         if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
             setTimeout(() => {
@@ -155,37 +156,37 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
             if(page == 'chatEndUser' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return "Voice chat will be limited soon. Renew to allow your followers to speak with you."
             }               
-            if(page == 'AiSetting'){
+            if(page == 'AiSetting' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                    Your custom AI settings will revert to default in ${authContext.currentUser.type_of_account.getDayremindToExpired()} days unless you renew your plan. Keep your Pro membership!    
                 `
             }
-            if(page == 'GallerySetting'){
+            if(page == 'GallerySetting'&& authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                     Gallery capacity will be limited soon. Renew to maintain your extensive gallery. Tap to renew your Pro membership!
                 `                
             }
-            if(page == 'LinkSetting'){
+            if(page == 'LinkSetting' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                     Your profile will be restricted to 2 links soon. Tap to renew your Pro membership!
                 `                
             }        
-            if(page == 'FileSetting'){
+            if(page == 'FileSetting' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                     File upload size and access will be limited soon. Renew to continue sharing all your files!
                 `                
             }  
-            if(page == 'AnalysePage'){
+            if(page == 'AnalysePage' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                     Your access to analytics is about to expire! Renew to keep tracking your progress.
                 `                
             }   
-            if(page == 'ChatPage'){
+            if(page == 'ChatPage' && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 return `
                     Access to review chats will be limited soon. Renew your subscription to keep seeing the content of your messages.
                 `                
             }    
-            if (page == "VideoSetting") {
+            if (page == "VideoSetting" && authContext.currentUser.type_of_account.getDayremindToExpired() <= 7) {
               return `
                 Video access will end soon. Renew to keep your profile dynamic.              `;
             }   
