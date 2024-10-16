@@ -35,7 +35,9 @@ const SettingService =() => {
                     publish("refreshPage",{})
                     navigate(location.pathname, { replace: true });                  
                 })   
-                rewardful('convert', { email: context.currentUser.information?.personlEmail });                 
+                console.log(context.currentUser.information?.personlEmail )
+                rewardful('convert', { email: context.currentUser.information?.personlEmail });  
+                 rewardful('convert', { email: "amir@gmail.com" });                 
             }, 3000);
         }
     },[])
