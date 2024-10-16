@@ -126,11 +126,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     const [showSuggestions,setShowSuggestions] = useState(false);     
     const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
-    const [suggestionList] = useState([
-        'Can you introduce yourself?',
-        'Tell me more about your business',
-        'What services do you provide in Codie?'
-    ])    
+    const [suggestionList] = useState(context.currentUser.sugesstions)    
     const [usedMoreVoice,setUsedMoreVoice] = useState(false)
     const resolveModeNotif =() => {
         if(usedMoreVoice){
@@ -297,9 +293,14 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                 return (
                 <>
                     {item.from == 'user' ?
-                    <div className="flex w-full justify-end">
-                        <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
-                    </div>
+                    <>
+                        {index == chats.length-1 &&
+                            <div ref={messagesEndRef} />
+                        }
+                        <div className="flex w-full justify-end">
+                            <div className={`${theme}-Presentation-AnswerTitle`}>{item.text}</div>
+                        </div>
+                    </>
                     :
                     <>
                     {index == chats.length-1 &&
@@ -318,7 +319,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             })
             }
             {showAccessNotifManager && 
-                <div className=" absolute bottom-10 bg-white py-4 mt-24  mb-[24px]">
+                <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
                     <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
 
                 </div>             
@@ -328,7 +329,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             isLoading ?
                 <>
                 <div className="  w-full px-4 flex justify-between items-center rounded-full h-10 borderBox-Gray2 bg-slate-100 ">
-                    <BeatLoader size={10} color="#702CDA" />
+                    <BeatLoader  size={10} color="#702CDA" />
                     <div className="cursor-pointer" onClick={() => handleStop(chats[chats.length -1].message_key)}>stop</div>
                 </div>
                 </>

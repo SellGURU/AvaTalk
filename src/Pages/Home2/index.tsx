@@ -53,6 +53,7 @@ const Home2 = () => {
                 logo:data.information.logo,
                 gender:data.information.gender
             })
+            authContext.currentUser.setSuggestions(data.information.suggestion_list)
             authContext.currentUser.setEditStatus(data.edit_status)
             authContext.currentUser.setBox(resolveSocial)
             authContext.currentUser.setTypeOfAccount(
