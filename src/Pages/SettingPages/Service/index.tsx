@@ -66,20 +66,20 @@ const SettingService =() => {
         <>
         <div className={`Carbon-ChatDetails-container`}>
             <Outlet></Outlet>
-            <div className="flex px-6 items-center space-x-4 absolute  top-8">
+            <div className="flex px-6 items-center space-x-4 absolute  top-5">
                 <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
                     <div className={`Carbon-back-Button-vector`}></div>
                 </Button>
                 <p className={`Carbon-ChatDetails-title`}>Your Plan</p>
             </div>            
 
-            <div className="flex flex-col gap-y-3 px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[17px]">
+            <div className="flex flex-col gap-y-3 px-6 mt-[40px] hiddenScrollBar h-dvh overflow-y-hidden  pt-[10px]">
                 <div className="">
-                    <div className="flex flex-col justify-center items-center">
-                        <img className={`w-[147px] mb-4`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-1 text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
+                    <div className="  flex flex-col justify-center items-center">
+                        <img className={`w-[147px] mb-[10px]`} src="/icons/logo2.svg" alt="" />
+                        <p className=" text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
 
-                        <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
+                        <p className="text-[14px] mb-4 text-[#6B7280] px-8 text-center">
                             {plan==="Trial" &&
                                         `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
                             {plan==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired at ${context.currentUser.type_of_account.getOldExpiredDate()}. Upgrade to Pro to unlock premium features and elevate your networking game!`}
@@ -97,7 +97,7 @@ const SettingService =() => {
                             })[0])
                         }} leftText={"Annually £80"} rightText="Monthly £8" theme="Carbon-secandary" />
                     </div>
-                  <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
+                  <div className="px-6 mb-4 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">
                                 <div className="flex justify-center items-center gap-2">
                                     <div className="Carbon-Setting-TickCircle"></div>
@@ -122,7 +122,7 @@ const SettingService =() => {
                             </div>
                         </div>
 
-                    <div className="mt-8 mb-4">
+                    <div className="mt-3 mb-4">
                         <Button onClick={() => {
                             console.log(activeService)
                             Service.SubLink({
