@@ -50,7 +50,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   const [parametr] = useSearchParams() 
-  const [showSplash,setshowSplash] = useState(true);
+  const [showSplash,setshowSplash] = useState(false);
   const [loading, setLoading] = useState(false); 
 
   const authContext = useContext(AuthContext)
@@ -82,7 +82,7 @@ const Login = () => {
       password:formik.values.password,
       email:formik.values.email
     }).then((res) => {
-      setLoading(false); 
+     
       if(res.data.error){
         toast.error(res.data.error)
         if(res.data.error == 'This user is not registered'){
@@ -133,6 +133,7 @@ const Login = () => {
               navigate("/?splash=false");
           })          
       }
+      setLoading(false)
     })
     // Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {
     //   toast.info(res.data)

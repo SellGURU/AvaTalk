@@ -12,10 +12,20 @@ const Analytics: React.FC<Props> = ({ theme }) => {
   const startDate = new Date()
   const context = useAuth()
   startDate.setMonth(startDate.getMonth() -1)
-  const [day, setDay] = useState({
-    startDate: startDate,
-    endDate: new Date(),
-  });  
+  const [day, setDay] = useState(() => {
+    const savedDates = localStorage.getItem("selectedDates");
+    if (savedDates) {
+      const { startDate, endDate } = JSON.parse(savedDates);
+      return {
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+      };
+    }
+    return {
+      startDate: startDate,
+      endDate: new Date(),
+    };
+  });
   const [dataBox,setDataBox] = useState<Array<any>>([])
   useEffect(() => {
     if(context.currentUser.type_of_account.getType() != 'Free'){
@@ -91,7 +101,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
         <PiChartComponent chartData={[]} theme={theme} />
         }
       </div>
-      <div className="mb-4 pb-4">
+      <div className="mb-2 pb-4">
         {data.length > 0 ?
         <BarChartComponent data={data.filter((el) => el.name == 'Clicks per Category')[0].value.data} theme={theme} />
         :

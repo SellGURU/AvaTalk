@@ -20,7 +20,7 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
       if(e.target.id != 'tags') {
         navigate(`/contacts/${data.id}`)
       }
-    } } className={`${theme}-ContactItem-container relative  overflow-visible`}>
+    } } className={`${theme}-ContactItem-container relative  overflow-visible ${data.isExchange ?'items-center' : 'items-start'}`}>
       <div className={`${theme}-ContactItem-section `}>
         {data.isExchange && <p className={`${theme}-ContactItem-exchange `}>Exchange</p>}
         <img src={'https://ui-avatars.com/api/?name='+data.fullName} alt={data.fullName} className="w-[50px] h-[50px] rounded-full" />

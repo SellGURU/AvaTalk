@@ -103,13 +103,13 @@ const ContactStep:React.FC<ContactStepProps> = ({
                     errorMessage={formik.errors.phone}
                 ></PhoneNumberInput>                
                 </div> 
-                <div className="mt-4">
+                <div className={`mt-4 ${formik.values.email != '' && 'opacity-50'}`}>
                     <TextField 
-                    readOnly= {formik.values.email != ''}
+                    disabled= {formik.values.email != ''}
                         id="email"
                         {...formik.getFieldProps("email")} 
                         label="E-mail Address"
-                        required
+                        required={formik.values.email == ''}
                         setValue={(value) => {
                             formik.setFieldValue('email',value)
                         }} theme="Carbon" name="email" errorMessage={formik.errors?.email} placeholder="Enter your phone number or email..." type="email" inValid={formik.errors?.email != undefined && (formik.touched?.email as boolean)}></TextField>

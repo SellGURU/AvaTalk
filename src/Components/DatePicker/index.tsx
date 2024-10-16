@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 // import { Button } from "symphony-ui";
 
-const DatePicker = (props:any) => {
+const DatePicker = ({ day, setDay }: any) => {
   // const startDate = new Date()
   // startDate.setMonth(startDate.getMonth() -1)
   // const [day, setDay] = useState({
@@ -22,6 +22,19 @@ const DatePicker = (props:any) => {
     refrence: datepickerRef,
     close: () => setisOpen(false),
   });
+ 
+
+
+  // Save dates to localStorage whenever they change
+  const handleDateChange = (value: string) => {
+    const [startDateString, endDateString] = value.split(" - ");
+    const newDates = {
+      startDate: new Date(startDateString),
+      endDate: new Date(endDateString),
+    };
+    setDay(newDates);
+    localStorage.setItem("selectedDates", JSON.stringify(newDates));
+  };
   return (
     <div  ref={datepickerRef} className="flex mt-4  relative items-center ">
       <div onClick={() => {
@@ -37,21 +50,15 @@ const DatePicker = (props:any) => {
             <Litepicker
               id="dataPicker"
               className="text-gray-700 lett text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
-              value={`${props.day.startDate.toLocaleDateString()} - ${props.day.endDate.toLocaleDateString()}`}
-              onChange={(value) => {
-                console.log(value)
-                const [startDateString, endDateString] = value.split(" - ");
-                props.setDay({
-                  startDate: new Date(startDateString),
-                  endDate: new Date(endDateString),
-                });
-              }}
+              value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
+              onChange={handleDateChange}
+
               options={{
                 autoApply: false,
                 format: "YYYY-MM-DD",
                 singleMode: false,
                 numberOfColumns: 1,
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 showWeekNumbers: true,
                 dropdowns: {
                   minYear: 1990,
