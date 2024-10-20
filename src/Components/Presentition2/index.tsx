@@ -124,7 +124,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         if(chats.length == 0 && mode=='review'){
             setTimeout(() => {
                 setShowSuggestions(true)
-            }, 15000);
+            }, 10000);
         }else {
             setTimeout(() => {
                 setShowSuggestions(true)
@@ -250,18 +250,29 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             :
             <>
             {
-                chats.length==0 && context.currentUser.type_of_account.getType() == 'Trial'  && mode== 'review' ?
+               ( chats.length==0  && mode== 'review') && (context.currentUser.type_of_account.getType() == 'Free' || context.currentUser.type_of_account.getType() == 'Trial' ) ?
                     <div className="flex w-full justify-start">
                         <div className={`${theme}-Presentation-chatItem`}>
                             {/* {convertToLinks(item.text)} */}
-                            <div>
-                                <TextWithNewlinesAndLinks text={`Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!`} />
-                                <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
-                                    <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
-                                    <img src="./Carbon/arrow-right.svg" alt="" />
-                                </div>
+                            {context.currentUser.type_of_account.getType() == 'Trial' ?
+                                <div>
+                                    <TextWithNewlinesAndLinks text={`Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!`} />
+                                    <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
+                                        <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
+                                        <img src="./Carbon/arrow-right.svg" alt="" />
+                                    </div>
 
-                            </div>
+                                </div>
+                            :
+                                <div>
+                                    <TextWithNewlinesAndLinks text={`Hi, I am your Avatar. Unlock voice chat for your Avatalk with a Pro Subscription! Every new user can have a conversation up to 2 messages. Get Pro to let users interact with Avatalk as much as they want! Don't worry, Text chat is always unlimited!`} />
+                                    {/* <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
+                                        <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
+                                        <img src="./Carbon/arrow-right.svg" alt="" />
+                                    </div> */}
+
+                                </div>                            
+                            }
                         </div> 
                     </div>                
                 :
