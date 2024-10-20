@@ -117,14 +117,19 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
     })
+    subscribe("profileIsProfile",() => {
+        setIsTalking(false)
+        // setFirstComeSuggestion(true)
+        // setShowAccessNotifManager(false)
+    })    
     subscribe("useMoreVoiceRecorder",() => {
         // setShowAccessNotifManager(true)
     })    
     useEffect(() => {
-        if(chats.length == 0 && mode=='review'){
+        if(chats.length == 0 && mode=='review' && context.currentUser.type_of_account.getType() != 'Pro'){
             setTimeout(() => {
                 setShowSuggestions(true)
-            }, 10000);
+            }, 15000);
         }else {
             setTimeout(() => {
                 setShowSuggestions(true)
@@ -256,7 +261,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                             {/* {convertToLinks(item.text)} */}
                             {context.currentUser.type_of_account.getType() == 'Trial' ?
                                 <div>
-                                    <TextWithNewlinesAndLinks text={`Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!`} />
+                                    <TextWithNewlinesAndLinks text={`"Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar"`} />
                                     <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
                                         <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
                                         <img src="./Carbon/arrow-right.svg" alt="" />
