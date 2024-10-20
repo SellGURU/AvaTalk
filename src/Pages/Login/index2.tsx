@@ -222,7 +222,7 @@ const Login = () => {
                                       userId:data.information.created_userid
                                   })
                                   authContext.currentUser.setBox(resolveSocial)
-                                  navigate("/?splash=true");
+                                  navigate("/?splash=true&signin_success=true");
                               })                                                   
                             }else {
                               navigate("/register")
