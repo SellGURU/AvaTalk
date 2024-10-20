@@ -32,9 +32,9 @@ const BissinesCard = () => {
                     <img src="./icons/cardVisitBack.png" alt="" />
                 </div>
                 <div className="relative  ml-10">
-                    <div className="w-[24px] h-[24px] flex justify-center top-[60px] left-[-4px] boxShadow-bisinesCard bg-white absolute rounded-full">
+                    {/* <div className="w-[24px] h-[24px] flex justify-center top-[60px] left-[-4px] boxShadow-bisinesCard bg-white absolute rounded-full">
                         <img className="w-[16px] opacity-30" src="./icons/cardVisit/Apple.svg" alt="" />
-                    </div>
+                    </div> */}
                     <div className="w-[24px] h-[24px] flex justify-center top-[38px] left-[-25px] boxShadow-bisinesCard bg-white absolute rounded-full">
                         <img className="w-[16px] opacity-30" src="./icons/cardVisit/linkdin.svg" alt="" />                        
                     </div>

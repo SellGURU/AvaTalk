@@ -185,6 +185,14 @@ class Auth extends Api {
     const response = this.post("/forgot_password",data)
     return response
   }
+  static checkPassword(data:any) {
+    const response = this.post("/check_password",data)
+    return response
+  }
+  static changePassword(data:any) {
+    const response = this.post("/change_password",data)
+    return response
+  }
 
   static getBoxs(resolve: (data: Array<Box>) => void) {
     const resolveSocial: Array<Box> = [];
