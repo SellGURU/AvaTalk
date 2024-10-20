@@ -458,6 +458,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                        console.log(authContext.currentUser.type_of_account.getType())    
                       if(authContext.currentUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
+                        Auth.sendEmail({
+                          "userid":authContext.currentUser.information?.userId,
+                          "guest_id":"1",
+                          "alert_type":"unmute_chat"
+                        })
                         setAudioUrl(authContext.prerecorded_voice)
                         setPrisentMode('audio')
                         setIsTalking(true)
@@ -497,6 +502,11 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
                       if(authContext.currentUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
+                        Auth.sendEmail({
+                          "userid":authContext.currentUser.information?.userId,
+                          "guest_id":"1",
+                          "alert_type":"unmute_chat"
+                        })                        
                         setAudioUrl(preRecorded)
                         setPrisentMode('audio')
                         setIsTalking(true)
