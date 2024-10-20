@@ -16,11 +16,11 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     const navigate = useNavigate()
     console.log()
     useEffect(() => {
-        if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
-            setTimeout(() => {
-                setShowNotif(true)
-            }, 1000);
-        }
+        // if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
+        //     setTimeout(() => {
+        //         setShowNotif(true)
+        //     }, 1000);
+        // }
 
         if(authContext.currentUser.type_of_account.getType() == 'Free' && !isSkipped){
             setTimeout(() => {
@@ -47,7 +47,8 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {
             if(page == 'chatEndUser'){
                 if(modeLimited =='review'){
-                    return  "Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!"
+                    return ""
+                    // return  "Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar active—upgrade to Pro!"
                 }
                 return "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
 
