@@ -37,9 +37,8 @@ const DatePicker = ({ day, setDay }: any) => {
         } flex justify-between rounded-[21px] w-full borderBox-GrayBox boxShadow-Gray`}
       >
         <div
-          onClick={(e) => {
+          onClick={() => {
             document.getElementById("dataPicker")?.click();
-            e.stopPropagation();
             setisOpen(true);
           }}
           className="h-full flex items-center justify-between w-full px-2"
@@ -52,7 +51,7 @@ const DatePicker = ({ day, setDay }: any) => {
             {isOpen && (
               <Litepicker
                 id="dataPicker"
-                className="text-gray-700 lett text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
+                className="text-gray-700 z-50 text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
                 value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
                 onChange={handleDateChange}
                 options={{
