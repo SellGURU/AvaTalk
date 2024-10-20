@@ -446,9 +446,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-16 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-                      video?.pause()         
-                      setIsTalking(false)            
-                      setISMuted(false)
+                           
+                      if(authContext.currentUser.type_of_account.getType() == 'Free'){
+                        setISMuted(true)
+                        setAudioUrl(authContext.prerecorded_voice)
+                        setPrisentMode('audio')
+                        setIsTalking(true)
+                      }else {
+                         video?.pause()   
+                        setIsTalking(false)       
+                        setISMuted(false)
+                      }    
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                       <div className={`${theme}-Profile-mutedVector`} ></div>
                     </Button>                

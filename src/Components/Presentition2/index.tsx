@@ -159,6 +159,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             setAudioUrl(context.prerecorded_voice)
             setPrisentMode('audio')
             setIsTalking(true)
+            if(context.currentUser.type_of_account.getType() == 'Free' && mode=='review'){
+                setIsSilent?setIsSilent(true):undefined
+            }
         }else{
             if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 // setTimeout(() => {
