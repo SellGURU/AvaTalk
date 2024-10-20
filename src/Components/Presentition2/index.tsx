@@ -212,6 +212,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             if(res.answer.audio_file == null && res.answer.video_file == null){
                 setIsSilent?setIsSilent(true):undefined
             }
+            if(res.mute ==true){
+                setIsSilent?setIsSilent(true):undefined
+            } 
             if(res.answer.audio_file != null){
                 setAudioUrl(res.answer.audio_file)
                 setPrisentMode('audio')
