@@ -23,6 +23,7 @@ interface PresentationProps {
   shareUser:User
   chats:Array<chat>
   mode?:string
+  suggestions:Array<string>
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
   setIsSilent?:(action:boolean) => void
@@ -75,7 +76,7 @@ const TextWithNewlinesAndLinks: React.FC<TextWithNewlinesAndLinksProps> = ({ tex
     );
   };
 
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestions,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     const context = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -97,7 +98,8 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     const [showSuggestions,setShowSuggestions] = useState(false);     
     // const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
-    const [suggestionList] = useState(context.currentUser.sugesstions)    
+    // const [suggestionList,setSuggestionList] = useState(context.currentUser.sugesstions)   
+
     const [usedMoreVoice,setUsedMoreVoice] = useState(false)
     const resolveModeNotif =() => {
         if(usedMoreVoice){
@@ -254,9 +256,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         <>
         <div  className={`${theme}-Presentation-MoreInfoSection px-4 pt-2 pb-36 ${theme}-Presentation-fadeIn`}>
         {
-            showSuggestions  && chats.length ==0 ?
+            showSuggestions && suggestions.length>0  && chats.length ==0 ?
             <>
-                <Suggestions title="Ask me more information" theme="Carbon"  onVSelectItem={(text:string|null) =>{handleSendVector(text as string)}} suggestions={suggestionList}></Suggestions>
+                <Suggestions title="Ask me more information" theme="Carbon"  onVSelectItem={(text:string|null) =>{handleSendVector(text as string)}} suggestions={suggestions}></Suggestions>
             </>
             :
             <>
