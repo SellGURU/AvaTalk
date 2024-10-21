@@ -141,6 +141,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     const interval = setInterval(checkNotif, 15000);     
     return () => clearInterval(interval);
   },[])
+  const [suggestionList,setSuggestionList] = useState(authContext.currentUser.sugesstions)
   useEffect(() => {
     if(isTalking ){
       if(videoRef2.current){
@@ -191,6 +192,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       })    
     }
   }
+  const [preRecorded,setPrerecorded] = useState("")
   useConstructor(() => {
     // getNotifs()
     if(id){
@@ -204,6 +206,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 const newBox = boxProvider(item);
                 resolveSocial.push(newBox);
             })
+            setPrerecorded(data.pre_voice_free_enduser)
             const information = {
                 firstName:data.information.first_name,
                 lastName:data.information.last_name,
@@ -233,6 +236,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               localStorage.setItem("showTotorial"+id,'true')
             }                       
             shareUser.setBox(resolveSocial,{isShare:true})
+            // console.log(data.information.suggestion_list)
+            shareUser.setSuggestions(data.information.suggestion_list)
+            setSuggestionList(data.information.suggestion_list)
             console.log(searchParams.get('viewBy'))
             if(searchParams.get('viewBy')){
               Auth.addEvent({
@@ -261,6 +267,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 const newBox = boxProvider(item);
                 resolveSocial.push(newBox);
             })
+            setPrerecorded(data.pre_voice_free_enduser)
             const information = {
                 firstName:data.information.first_name,
                 lastName:data.information.last_name,
@@ -291,6 +298,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             }                       
             shareUser.setBox(resolveSocial,{isShare:true})
             console.log(searchParams.get('viewBy'))
+            shareUser.setSuggestions(data.information.suggestion_list)
+            setSuggestionList(data.information.suggestion_list)
             if(searchParams.get('viewBy')){
               Auth.addEvent({
                 userid:shareUser.information?.userId as string,
@@ -446,9 +455,22 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-16 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-                      video?.pause()         
-                      setIsTalking(false)            
-                      setISMuted(false)
+                       console.log(authContext.currentUser.type_of_account.getType())    
+                      if(authContext.currentUser.type_of_account.getType() == 'Free'){
+                        setISMuted(true)
+                        Auth.sendEmail({
+                          "userid":authContext.currentUser.information?.userId,
+                          "guest_id":"1",
+                          "alert_type":"unmute_chat"
+                        })
+                        setAudioUrl(authContext.prerecorded_voice)
+                        setPrisentMode('audio')
+                        setIsTalking(true)
+                      }else {
+                         video?.pause()   
+                        setIsTalking(false)       
+                        setISMuted(false)
+                      }    
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                       <div className={`${theme}-Profile-mutedVector`} ></div>
                     </Button>                
@@ -478,9 +500,21 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-4 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-                      video?.pause()         
-                      setIsTalking(false)            
-                      setISMuted(false)
+                      if(authContext.currentUser.type_of_account.getType() == 'Free'){
+                        setISMuted(true)
+                        Auth.sendEmail({
+                          "userid":authContext.currentUser.information?.userId,
+                          "guest_id":"1",
+                          "alert_type":"unmute_chat"
+                        })                        
+                        setAudioUrl(preRecorded)
+                        setPrisentMode('audio')
+                        setIsTalking(true)
+                      }else {
+                         video?.pause()   
+                        setIsTalking(false)       
+                        setISMuted(false)
+                      } 
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                       <div className={`${theme}-Profile-mutedVector`} ></div>
                     </Button>                
@@ -646,6 +680,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       <div className="w-[75%] max-w-[85%] flex items-center justify-between">
                         <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
                           setPanel(el as any)
+                          setIsTalking(false)
                         }} theme="Carbon"></ToggleButton2>
                       </div>
                       <div className={`${theme}-Profile-Box`}>
@@ -743,9 +778,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             :undefined}
           </div>
         :
-          <Presentition2 setIsSilent={(action) => {
-            setISMuted(action)
-          }} mode={mode} setPrisentMode={setPrisentMode} setVideoUrl={setVideoUrl} setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+        <>
+        {!isLoading &&
+            <Presentition2 suggestions={suggestionList} setIsSilent={(action) => {
+              setISMuted(action)
+            }} mode={mode} setPrisentMode={setPrisentMode} setVideoUrl={setVideoUrl} setShowMuiteController={setShowMuiteController} isSilent={isMuted} chats={chats} setChats={setChats} shareUser={shareUser} setAudioUrl={setAudioUrl} isTalking={isTalking} setIsTalking={setIsTalking} theme="Carbon"></Presentition2>
+        }
+        </>
         }
         {showShareContact?
           <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
