@@ -116,6 +116,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         }
     })    
     subscribe("voiceIsEnded",() => {
+        if(context.currentUser.type_of_account.getType() == 'Free' && mode == 'review'){
+            setIsSilent?setIsSilent(true):undefined
+        }
         // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
     })
@@ -131,11 +134,11 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         if(chats.length == 0 && mode=='review' && context.currentUser.type_of_account.getType() != 'Pro'){
             setTimeout(() => {
                 setShowSuggestions(true)
-            }, 15000);
+            }, 18000);
         }else {
             setTimeout(() => {
                 setShowSuggestions(true)
-            }, 3000);
+            }, 10000);
         }
     })
     useEffect(() => {
@@ -161,9 +164,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             setAudioUrl(context.prerecorded_voice)
             setPrisentMode('audio')
             setIsTalking(true)
-            if(context.currentUser.type_of_account.getType() == 'Free' && mode=='review'){
-                setIsSilent?setIsSilent(true):undefined
-            }
+            setIsSilent?setIsSilent(false):undefined
+            // if(context.currentUser.type_of_account.getType() == 'Free' && mode=='review'){
+            //     setIsSilent?setIsSilent(true):undefined
+            // }
         }else{
             if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 // setTimeout(() => {
