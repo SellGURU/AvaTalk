@@ -75,7 +75,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
     }
   },[day])
   return (
-    <div className={`${theme}-Analytics-container`}>
+    <div className={`${theme}-Analytics-container `}>
       <p className={`${theme}-Analytics-text`}>Analytics</p>
       <div className="">
         <AccessNotifManager page="AnalysePage"></AccessNotifManager>
