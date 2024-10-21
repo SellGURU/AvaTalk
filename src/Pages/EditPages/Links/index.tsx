@@ -83,7 +83,7 @@ const EditLinks = () => {
         </div>        
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager isLimited={isReadyTO} page="LinkSetting"></AccessNotifManager>
+            <AccessNotifManager isLimited={links.length >=2} page="LinkSetting"></AccessNotifManager>
 
           </div>              
           <div className=" px-6">
