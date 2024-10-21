@@ -364,7 +364,7 @@ export const NFCBusinessCard = () => {
                 }} className="mt-4 w-full bg-[#5B21B6] text-white py-2 px-4 rounded-full">
                     Checkout
                 </Button>
-                <div className="mt-4">
+                <div className="mt-8">
                    <Accordion bodyText={currentCard?.description as string}
                               title={"Description"}/>
                     <Accordion component={ResolvekeyFeature(currentCard?.id as string)} bodyText={""} title={"Key Features"}/>
