@@ -37,7 +37,7 @@ const EditGallery = () => {
   });
   const submit = () => {
     if (auth.currentUser.type_of_account.getType() == "Free") {
-      if (formik.values.files.length > 5) {
+      if (formik.values.files.length >= 5) {
         setIsReadyTo(true);
       } else {
         auth.currentUser.addBox(
@@ -61,7 +61,7 @@ const EditGallery = () => {
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
             <AccessNotifManager
-              isLimited={isReadyTO}
+              isLimited={auth.currentUser.type_of_account.getType()== "Free" && formik.values.files.length >= 5}
               page="GallerySetting"
             ></AccessNotifManager>
           </div>
