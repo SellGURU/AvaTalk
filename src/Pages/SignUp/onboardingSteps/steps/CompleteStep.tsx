@@ -124,7 +124,7 @@ const CompleteStep = () => {
                                     })
                                     authContext.currentUser.setBox(resolveSocial)
                                 })                                  
-                                 navigate("/?splash=false");
+                                 navigate("/?splash=false&signup_success=true");
                             }else{
                                 toast.error(res.data)
                             }

@@ -2,11 +2,11 @@
   @apply flex flex-col  items-center;
 }
 .Carbon-Suggestions-title {
-  @apply leading-[19.36px] text-[16px] font-[500] text-[#253343]/80 mb-4;
+  @apply leading-[19.36px] text-[16px] font-[600] text-[#374151] mb-2;
 }
 .Carbon-Suggestions-list {
-  @apply space-y-2;
+  @apply space-y-1;
 }
 .Carbon-Suggestions-listItem {
-  @apply boxShadow-purple boxShadow-Gray cursor-pointer px-6 py-4 rounded-[27px] text-white  leading-[17px] text-[14px] font-[400];
+  @apply bg-primary-color cursor-pointer px-6 py-2 rounded-[27px] text-white  leading-[17px] text-[14px] font-[400];
 }

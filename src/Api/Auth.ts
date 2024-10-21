@@ -346,6 +346,11 @@ class Auth extends Api {
     const response = this.post('/generic_pass',{})
     return response
   }
+
+  static sendEmail(data:any) {
+    const response = this.post('/alert_email',data)
+    return response    
+  }
 }
 
 export default Auth;

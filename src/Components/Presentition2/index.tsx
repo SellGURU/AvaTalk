@@ -4,11 +4,13 @@ import FooterPresentation from "../FooterPresentation"
 import { sendToApi, useConstructor } from "../../help";
 import { chat } from "../../Types";
 import { User } from "../../Model";
-import { Suggestions } from "symphony-ui";
+import Suggestions from "../Suggestions";
+// import { Suggestions } from "symphony-ui";
 import { BeatLoader } from "react-spinners";
 import AccessNotifManager from "../AccessNotifManager";
 import { useAuth } from "../../hooks/useAuth";
 import { subscribe } from "../../utils/event";
+// import ChatNotifManager from "./ChatNotifManager";
 
 interface PresentationProps {
   theme?: string;
@@ -21,6 +23,7 @@ interface PresentationProps {
   shareUser:User
   chats:Array<chat>
   mode?:string
+  suggestions:Array<string>
   setChats:(cat:Array<chat>) => void
   isSilent:boolean
   setIsSilent?:(action:boolean) => void
@@ -72,39 +75,8 @@ const TextWithNewlinesAndLinks: React.FC<TextWithNewlinesAndLinksProps> = ({ tex
       </div>
     );
   };
-// const convertToLinks = (text:string) => {
-//     // Regular expression to match links inside brackets
-//     // eslint-disable-next-line no-useless-escape
-//     const regex = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
 
-//     // Split the text by the regex and create React elements
-//     const parts = [];
-//     let lastIndex = 0;
-//     let match;
-
-//     while ((match = regex.exec(text)) !== null) {
-//     // Add text before the link
-//     if (lastIndex < match.index) {
-//         parts.push(text.substring(lastIndex, match.index));
-//     }
-//     // Add the link as an anchor tag
-//     parts.push(
-//         <a key={match[2]} href={match[2]} target="_blank" rel="noopener noreferrer">
-//         {match[1]}
-//         </a>
-//     );
-//     // Update lastIndex to the end of the match
-//     lastIndex = regex.lastIndex;
-//     }
-
-//     // Add remaining text after the last link
-//     if (lastIndex < text.length) {
-//     parts.push(text.substring(lastIndex));
-//     }
-
-//     return parts;
-// };   
-const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
+const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestions,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     const context = useAuth()
     const languagesList = [
         { lan: "English", code: "en-US" },
@@ -124,9 +96,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
     const [isLoading,setIsLoading] = useState(false);
     const [isRecording,setIsRecording] = useState(false)  
     const [showSuggestions,setShowSuggestions] = useState(false);     
-    const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
+    // const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
-    const [suggestionList] = useState(context.currentUser.sugesstions)    
+    // const [suggestionList,setSuggestionList] = useState(context.currentUser.sugesstions)   
+
     const [usedMoreVoice,setUsedMoreVoice] = useState(false)
     const resolveModeNotif =() => {
         if(usedMoreVoice){
@@ -143,64 +116,63 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         }
     })    
     subscribe("voiceIsEnded",() => {
-        setFirstComeSuggestion(true)
+        // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
     })
-    const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
-    // const [firstComeSuggestion,setFirstComeSuggestion] = useState(false)
-    // useEffect(() => {
-    //     if(chats.length == 0 && firstComeSuggestion ) {
-    //     setTimeout(() => {
-    //         setShowSuggestions(true)
-    //     }, 5000);
-    //     }
-    // },[chats])    
-    const showSuggestionsAction =() => {
-        setShowSuggestions(true)
-    }
+    subscribe("profileIsProfile",() => {
+        setIsTalking(false)
+        // setFirstComeSuggestion(true)
+        // setShowAccessNotifManager(false)
+    })    
     subscribe("useMoreVoiceRecorder",() => {
-        setShowAccessNotifManager(true)
+        // setShowAccessNotifManager(true)
     })    
     useEffect(() => {
-        if(chats.length == 0 && firstComeSuggestion){
+        if(chats.length == 0 && mode=='review' && context.currentUser.type_of_account.getType() != 'Pro'){
             setTimeout(() => {
-                showSuggestionsAction()
-                setShowAccessNotifManager(false)
-            }, 10000);
+                setShowSuggestions(true)
+            }, 15000);
+        }else {
+            setTimeout(() => {
+                setShowSuggestions(true)
+            }, 3000);
         }
     })
     useEffect(() => {
         if(mode =='review' && context.prerecorded_voice!=null){
             setTimeout(() => {
-                setShowAccessNotifManager(true)
+                // setShowAccessNotifManager(true)
             }, 500);
         }
         setTimeout(() => {
             if(!showSuggestions){
-                setShowAccessNotifManager(true)
+                // setShowAccessNotifManager(true)
             }
         },5000);
     },[])
     // const [,forceUpdate] = useReducer(x => x + 1, 0);
     useConstructor(() => {
-        if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() > 7){
-            setFirstComeSuggestion(true)
-        }
+        // if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() > 7){
+        //     setFirstComeSuggestion(true)
+        // }
         if(mode =='review' && context.prerecorded_voice!=null && chats.length ==0){
             // alert("this hear")
             // console.log(context.prerecorded_voice)
             setAudioUrl(context.prerecorded_voice)
             setPrisentMode('audio')
             setIsTalking(true)
+            if(context.currentUser.type_of_account.getType() == 'Free' && mode=='review'){
+                setIsSilent?setIsSilent(true):undefined
+            }
         }else{
             if(context.currentUser.type_of_account.getType() == 'Pro' &&  context.currentUser.type_of_account.getDayremindToExpired() <= 7){
                 // setTimeout(() => {
                 //      setFirstComeSuggestion(true)
                 // }, 100);
-                setShowAccessNotifManager(false)
-                setFirstComeSuggestion(true)
+                // setShowAccessNotifManager(false)
+                // setFirstComeSuggestion(true)
             }else {
-                setFirstComeSuggestion(true)
+                // setFirstComeSuggestion(true)
             }
         }
         // const userid = searchParams.get('user')? searchParams.get('user') : user.currentUser.information?.userId
@@ -245,6 +217,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             if(res.answer.audio_file == null && res.answer.video_file == null){
                 setIsSilent?setIsSilent(true):undefined
             }
+            if(res.mute ==true){
+                setIsSilent?setIsSilent(true):undefined
+            } 
             if(res.answer.audio_file != null){
                 setAudioUrl(res.answer.audio_file)
                 setPrisentMode('audio')
@@ -281,12 +256,41 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
         <>
         <div  className={`${theme}-Presentation-MoreInfoSection px-4 pt-2 pb-36 ${theme}-Presentation-fadeIn`}>
         {
-            showSuggestions  && chats.length ==0 ?
+            showSuggestions && suggestions.length>0  && chats.length ==0 ?
             <>
-                <Suggestions  theme="Carbon"  onVSelectItem={(text:string|null) =>{handleSendVector(text as string)}} suggestions={suggestionList}></Suggestions>
+                <Suggestions title="Ask me more information" theme="Carbon"  onVSelectItem={(text:string|null) =>{handleSendVector(text as string)}} suggestions={suggestions}></Suggestions>
             </>
             :
             <>
+            {
+               ( chats.length==0  && mode== 'review') && (context.currentUser.type_of_account.getType() == 'Free' || context.currentUser.type_of_account.getType() == 'Trial' ) ?
+                    <div className="flex w-full justify-start">
+                        <div className={`${theme}-Presentation-chatItem`}>
+                            {/* {convertToLinks(item.text)} */}
+                            {context.currentUser.type_of_account.getType() == 'Trial' ?
+                                <div>
+                                    <TextWithNewlinesAndLinks text={`"Hi, I am your Avatar. Your trial gives you full access to Avatalk's networking power, for a limited time. Keep your avatar"`} />
+                                    <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
+                                        <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
+                                        <img src="./Carbon/arrow-right2.svg" alt="" />
+                                    </div>
+
+                                </div>
+                            :
+                                <div>
+                                    <TextWithNewlinesAndLinks text={`Hi, I am your Avatar. Unlock voice chat for your Avatalk with a Pro Subscription! Every new user can have a conversation up to 2 messages. Get Pro to let users interact with Avatalk as much as they want! Don't worry, Text chat is always unlimited!`} />
+                                    {/* <div onClick={() => {}} className="flex cursor-pointer  mt-[16px] gap-2 items-center justify-end">
+                                        <div className=" text-primary-color text-[14px]">Upgrade to Pro</div>
+                                        <img src="./Carbon/arrow-right.svg" alt="" />
+                                    </div> */}
+
+                                </div>                            
+                            }
+                        </div> 
+                    </div>                
+                :
+                undefined
+            }
             {
             chats.map((item,index:number) => {
                 
@@ -317,13 +321,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
                 </>
                 )
             })
-            }
-            {showAccessNotifManager && 
-                <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
-                    <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
-
-                </div>             
-            }
+            }         
            
             {
             isLoading ?
@@ -338,6 +336,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,setIsSilen
             }
             </>
         }
+        <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
+            <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
+            {/* <ChatNotifManager></ChatNotifManager> */}
+        </div>            
         </div> 
         <FooterPresentation setShowSuggestions={setShowSuggestions} langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
         </>
