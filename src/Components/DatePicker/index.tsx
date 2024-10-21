@@ -78,7 +78,7 @@ const DatePicker = ({ day, setDay }: any) => {
               e.stopPropagation();
               setisOpen(!isOpen);
             }}
-            className={`Carbon-Card-Vector me-2 cursor-pointer rotate-90`}
+            className={`Carbon-Card-Vector me-2 cursor-pointer transition-transform ${isOpen ? 'rotate-90' : '-rotate-90'} `}
           ></div>
         </div>
       </div>
