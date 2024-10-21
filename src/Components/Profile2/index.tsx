@@ -77,7 +77,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [showExchangeContact,setShowExchangeContact] = useState(false)
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [,setShowMuiteController] = useState(false)
-  const [panel,setPanel] = useState<'Profile'|'Chat'>('Profile')
+  const [panel,setPanel] = useState<'Profile'|'Chat'>('Chat')
   const [searchParams] = useSearchParams();
   const {id} = useParams();  
   const authContext = useAuth()
