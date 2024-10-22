@@ -9,8 +9,10 @@ interface  Props{
     total_views:string
     videoId:string
     rate:number
+    description:string
+    title:string
 }
-export const CartTu = ({link,total_views,videoId,rate}:Props) => {
+export const CartTu = ({link,total_views,videoId,rate,title,description}:Props) => {
     const [rating, setRating] = useState(rate);
 
     const [videoRate,setVideoRate]=useState<any>()
@@ -50,14 +52,12 @@ export const CartTu = ({link,total_views,videoId,rate}:Props) => {
     },[rating])
     return (
         <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"}>
-            <div className={"space-y-5"}>
-                <h1 className={"text-left text-[14px]  font-medium"}>Title of the Video</h1>
+            <div className={"space-y-5 w-full"}>
+                <h1 className={"text-left text-[14px]  font-medium"}>{title}</h1>
                 <video className={"rounded-xl w-full h-[180px]"}   controls>
                     <source src={link} type="video/mp4"/>
                 </video>
-                <p className={"text-xs font-normal text-left"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do
-                    eiusmod tempor incididunt ut labore et dolore .</p>
+                <p className={"text-xs font-normal text-left"}>{description}</p>
             </div>
             <div className={"flex items-center w-full justify-between"}>
 
