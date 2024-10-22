@@ -41,7 +41,7 @@ const SettingHelp = () => {
             </Button>
             <p className={`Carbon-ChatDetails-title`}>Help</p>
           </div>
-          <div className="flex flex-col px-6 mt-[40px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+          <div className="flex flex-col px-6 mt-[66px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
             {helpMenus.map((item) => (
               <SettingCard
                 key={item.name}
