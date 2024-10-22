@@ -19,31 +19,31 @@ const PersonSchema = () => {
     "@context": "https://schema.org/",
     "@type": "Person",
     "name": myData?.information.first_name+""+myData?.information.last_name,
-    "url": "https://portal.avatalk.me/#/A/"+'',
-    "image":'',
-    // "sameAs":socialBOx?.getSocialMedias().map((el:any) => el.value),
-    "jobTitle":'',
+    "url": "https://portal.avatalk.me/#/A/"+window.location.hash.split("/")[2],
+    "image":myData?.information.profile_pic,
+    "sameAs":'',
+    "jobTitle":myData?.information.job_title,
     "worksFor": {
       "@type": "Organization",
-      "name": ''
+      "name": myData?.information.company_name
     }
   });
   useEffect(() => {
-    console.log(myData)
     if(myData!= undefined &&  myData!= null){
+      const socialBOx:any = myData?.boxs.filter((el:any) => el.typeName == 'SocialBox')[0]
       setScemaData({
       "@context": "https://schema.org/",
       "@type": "Person",
       "name": myData?.information.first_name+""+myData?.information.last_name,
-      "url": "https://portal.avatalk.me/#/A/"+'',
-      "image":'',
-      // "sameAs":socialBOx?.getSocialMedias().map((el:any) => el.value),
-      "jobTitle":'',
+      "url": "https://portal.avatalk.me/#/A/"+window.location.hash.split("/")[2],
+      "image":myData?.information.profile_pic,
+      "sameAs":socialBOx?.getSocialMedias().map((el:any) => el.value),
+      "jobTitle":myData?.information.job_title,
       "worksFor": {
         "@type": "Organization",
-        "name": ''
+        "name": myData?.information.company_name
       }
-    })
+  })
 
     }
   },[myData])
