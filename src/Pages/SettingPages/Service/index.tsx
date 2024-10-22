@@ -134,7 +134,7 @@ const SettingService =() => {
                                 recurring_interval:activeService.mode,
                                 unit_amount:activeService.price * 100
                             }).then(res => {
-                                window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
+                                // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
                                 window.open(res.data.sublink)
                             })
                         }} theme="Carbon">Continue to Payment</Button>
