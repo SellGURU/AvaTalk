@@ -292,13 +292,13 @@ const formatText = (text: string) => {
           </div>
           
           <div className="px-6 mt-8">
-            {/* <div className="w-full flex ">
+            <div className="w-full flex ">
               <img src="./Carbon/message-question.svg" alt="" />
               <div className="text-sm font-medium ml-1 text-text-primary">Need Help?</div>
-            </div> */}
-            {/* <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
+            </div>
+            <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
               navigate('/settings/Help/tutorial')
-            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div> */}
+            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
           </div>
         </div>
         {isReadyTO &&
