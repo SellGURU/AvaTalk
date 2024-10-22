@@ -68,7 +68,7 @@ const SettingService =() => {
         <>
         <div className={`Carbon-ChatDetails-container`}>
             <Outlet></Outlet>
-            <div className="flex px-6 items-center space-x-4 absolute  top-5">
+            <div className="flex px-6 items-center space-x-4 absolute  top-8">
                 <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
                     <div className={`Carbon-back-Button-vector`}></div>
                 </Button>

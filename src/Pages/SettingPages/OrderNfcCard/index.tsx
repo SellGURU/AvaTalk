@@ -28,7 +28,7 @@ export const OrderNfcCard = () => {
     return (
         <>
             <>
-                <div className=" w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+                <div className=" w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15] ">
                     <div className=" top-4">
                         <BackIcon title="Order NFC Card" theme="Carbon"></BackIcon>
 
