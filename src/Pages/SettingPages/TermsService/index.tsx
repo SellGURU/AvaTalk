@@ -17,28 +17,106 @@ const SettingTermsService =() => {
 
             <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
                 <div>
-                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap ">
-Welcome to Avatalk
-<br />
-These Terms of Use apply when you use our products and services or our affiliates, including our application programming interface, software, tools, developer services, data, documentation, and website (“Services”). The Terms include our Service Terms and other documentation, guidelines, or policies we may provide in writing. By using our Services, you agree to these Terms. Our Privacy Policy explains how we collect and use personal information.
-<br />
-1. Registration and Access
-You must be 18 years or older and able to form a binding contract with AVATALK to use the Services. If you use the Services on behalf of another person or entity, you must have the authority to accept the Terms on their behalf. You must provide accurate and complete information to register for an account. You may not make your access credentials or account available to others outside your organization, and you are responsible for all activities that occur using your credentials.
-<br />
-2. Usage Requirements
-Use of Services. You may access, and we grant you a non-exclusive right to use, the Services in accordance with these Terms. You will comply with these Terms and all applicable laws when using the Services. We and our affiliates own all rights, title, and interest in and to the Services.
-<br />
-3. Content
-Your Content. You may provide input to the Services (“Input”), and receive output generated and returned by the Services based on the Input (“Output”). Input and Output are collectively “Content.” As between the parties and to the extent permitted by applicable law, you own all Input, and subject to your compliance with these Terms, AVATALK hereby assigns to you all its rights, title, and interests in and to Output. AVATALK may use Content as necessary to provide and maintain the Services, comply with applicable law, and enforce our policies. You are responsible for Content, including for ensuring that it does not violate any applicable law or these Terms.
-<br />
-4. Fees and Payments
-Fees and Billing. You will pay all fees charged to your account (“Fees”) as otherwise agreed between us in writing. We have the right to correct pricing errors or mistakes even if we have already issued an invoice or received payment. You will provide complete and accurate billing information including a valid and authorized payment method. We will charge your payment method on an agreed-upon periodic basis but may reasonably change the date on which the charge is posted. You authorize AVATALK and its affiliates, and our third-party payment processor(s), to charge your payment method for the Fees. If your payment cannot be completed, we will provide you with written notice and may suspend access to the Services until payment is received. Fees are payable in UK pounds and are due upon invoice issuance. Payments are nonrefundable except as provided in this Agreement.
-<br />
-5. Term and Termination
-Termination. These Terms take effect when you first use the Services and remain in effect until terminated. You may terminate these Terms at any time for any reason by discontinuing the use of the Services and Content. We may terminate these Terms for any reason by providing you with at least 30 days’ advance notice. We may terminate these Terms immediately upon notice to you if you materially breach Sections, if there are changes in relationships with third-party technology providers outside of our control, or if to comply with law or government requests.
-<br />
-6. General Terms
-Relationship of the Parties. These Terms do not create a partnership, joint venture, or agency relationship between you and AVATALK or any of AVATALK’s affiliates. AVATALK and you are independent contractors and neither party will have the power to bind the other or to incur obligations on the other’s behalf without the other party’s prior written consent.
+                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap space-y-3">
+                    <h3 className="font-semibold">Terms of Service</h3>
+                    <p>Last Updated: 9/18/2024
+
+</p>
+<p>Welcome to Avatalk, a revolutionary AI-driven electronic business card service (“Avatalk”, “we”, “us”, “our”). These Terms of Service (“Terms”) govern your access and use of our website, mobile applications, and related services (collectively, the “Services”). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree to these Terms, do not use the Services.</p>
+<p>Please read these Terms carefully, as they contain important information regarding your legal rights, remedies, and obligations. This includes various limitations and exclusions, a dispute resolution clause, and a binding arbitration agreement.
+
+</p>
+<h1 className="font-semibold text-base">Access and Use of the Services
+</h1>
+<h3 className="font-semibold">Description of Services
+</h3>
+<p>Avatalk offers an advanced AI-driven electronic business card that not only stores your contact information but also acts as a networking assistant. It engages with others on your behalf, ensuring that your professional representation is consistently sharp, engaging, and effective.
+
+</p>
+<h3 className="font-semibold">Your Registration Obligations
+</h3>
+<p>To access and use the Services, you must register and maintain a valid account. You agree to provide and maintain accurate, current, and complete information as prompted by our registration process. If you are under 13 years of age, you are not authorized to use the Services. If you are under 18, you may use the Services only with the approval of your parent or guardian.
+
+</p>
+<h3 className="font-semibold">Security of Your Account
+</h3>
+<p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify Avatalk immediately of any unauthorized use of your account or any other breach of security. Avatalk will not be liable for any loss or damage arising from your failure to comply with these requirements.
+
+</p>
+<h3 className="font-semibold">Access to the Service
+</h3>
+<p>You are responsible for obtaining and maintaining any equipment and ancillary services needed to connect to, access, or otherwise use the Services, including, without limitation, modems, hardware, software, and long-distance or local telephone service. You are responsible for ensuring that such equipment and services are compatible with the Services and comply with all configurations and specifications set forth by Avatalk.
+
+</p>
+<h3 className="font-semibold">Modifications to the Service
+</h3>
+<h4>Changes for Free Users
+</h4>
+<p>Avatalk reserves the right to modify, change, or discontinue any features or aspects of the Services for free users at its sole discretion and without prior notice. You acknowledge and agree that Avatalk will not be liable for any modification, suspension, or discontinuance of any features or aspects of the Services for free users.
+
+</p>
+<h4>Changes for Paid Users
+</h4>
+<p>For paid users, Avatalk will provide reasonable notice of any material modifications, changes, or discontinuations of features or aspects of the Services. You acknowledge and agree that while Avatalk will strive to inform paid users in advance, there may be instances where changes need to be made immediately, in which case notice will be provided as soon as practicable.
+
+</p>
+<h3 className="font-semibold">General Practices Regarding Use and Storage
+</h3>
+<p>You acknowledge that Avatalk may establish general practices and limits concerning the use of the Services, including without limitation the maximum period that data or other content will be retained by the Services and the maximum storage space that will be allotted on Avatalk’s servers on your behalf. You agree that Avatalk has no responsibility or liability for the deletion or failure to store any data or other content maintained or transmitted by the Services. You acknowledge that Avatalk reserves the right to terminate accounts that are inactive for an extended period. You further acknowledge that Avatalk reserves the right to change these general practices and limits at any time in its sole discretion with or without notice.
+
+</p>
+<h4>Fair Use and Excessive Usage
+</h4>
+<p>Avatalk reserves the right to limit or restrict access to the Services if it determines, at its sole discretion, that a user’s usage exceeds reasonable and normal usage patterns compared to the average norms. This includes, but is not limited to, cases where there is excessive usage of AI tools beyond what is considered fair use. Avatalk will notify users if their usage is deemed excessive and may provide guidance on acceptable usage levels. Continued excessive usage may result in suspension or termination of the account.
+
+</p>
+<h3 className="font-semibold">Mobile Services
+</h3>
+<p>The Services may include certain features that are available via a mobile device, including (i) the ability to upload content to the Services via a mobile device, (ii) the ability to browse the Services and the Site from a mobile device, and (iii) the ability to access certain features through an application downloaded and installed on a mobile device (collectively, the “Mobile Services”). To the extent you access the Services through a mobile device, your wireless service carrier’s standard charges, data rates, and other fees may apply. In addition, downloading, installing, or using certain Mobile Services may be prohibited or restricted by your carrier, and not all Mobile Services may work with all carriers or devices.
+
+</p>
+<h1 className="text-lg font-semibold">Conditions of Use
+</h1>
+<h3 className="font-semibold">User Conduct
+</h3>
+<p>You are solely responsible for all information, data, text, images, video, or other materials (“Content”) that you upload, post, publish, display, transmit, or send (collectively, “Transmit”) or otherwise use via the Services. You agree to use the Services in compliance with all applicable local, state, national, and international laws and regulations.
+
+</p>
+<h3 className="font-semibold">Prohibited Activities
+</h3>
+You agree not to:
+
+<ul className="list-disc pl-4">
+    <li>Use the Services for any illegal purpose or in violation of any local, state, national, or international law.
+</li>
+    <li>Transmit any Content that is unlawful, defamatory, obscene, pornographic, hateful, or otherwise objectionable.
+</li>
+    <li>Transmit any Content that infringes any intellectual property or other proprietary rights of any party.
+</li>
+    <li>Transmit any unsolicited or unauthorized advertising, promotional materials, junk mail, spam, chain letters, pyramid schemes, or any other form of solicitation.
+</li>
+    <li>Engage in any conduct that restricts or inhibits any other user from using or enjoying the Services.
+</li>
+</ul>
+<h3 className="font-semibold">Fees</h3>
+<p>To the extent the Services or any portion thereof is made available for any fee, you will be required to select a payment plan and provide Avatalk with accurate billing information. You agree to pay Avatalk the amount specified in the payment plan in accordance with the terms of such plan and these Terms. You authorize Avatalk to bill your payment instrument in advance on a periodic basis in accordance with the terms of the applicable payment plan until you terminate your account. You acknowledge and agree that any such cancellation will be effective at the end of your current billing period and will not result in any refund of prepaid fees.
+
+</p>
+<h3 className="font-semibold">Business Accounts
+</h3>
+<p>If you have been provided access to the Services as part of your employer’s business account with Avatalk, then you acknowledge that your right to access and use the Services is subject to the terms of a separate agreement between Avatalk and your employer. Your access to the Services may be revoked by your employer at any time.
+
+</p>
+<h3 className="font-semibold">Special Notice for International Use; Export Controls
+</h3>
+<p>Software available in connection with the Services and the transmission of applicable data, if any, is subject to United States export controls. No Software may be downloaded from the Services or otherwise exported or re-exported in violation of U.S. export laws. Downloading or using the Software is at your sole risk. Recognizing the global nature of the Internet, you agree to comply with all local rules and laws regarding your use of the Services, including as it concerns online conduct and acceptable content.
+
+</p>
+<h3 className="font-semibold">Commercial Use
+</h3>
+<p>Unless otherwise expressly authorized herein or in the Services, you agree not to display, distribute, license, perform, publish, reproduce, duplicate, copy, create derivative works from, modify, sell, resell, exploit, transfer, or transmit for any commercial purposes, any portion of the Services, use of the Services, or access to the Services.
+
+</p>
                     </div>
                 </div>
             </div>
