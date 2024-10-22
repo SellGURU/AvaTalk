@@ -36,8 +36,8 @@ const SettingService =() => {
                     navigate(location.pathname, { replace: true });                  
                 })   
                 console.log(context.currentUser.information?.personlEmail )
-                rewardful('convert', { email: context.currentUser.information?.personlEmail });  
-                 rewardful('convert', { email: "amir@gmail.com" });                 
+                // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
+                //  rewardful('convert', { email: "amir@gmail.com" });                 
             }, 3000);
         }
     },[])
@@ -123,7 +123,9 @@ const SettingService =() => {
                                 </div>
                             </div>
                         </div>
-
+                    {/* <a href="https://checkout.stripe.com/c/pay/cs_test_a1KYRFiwrRpgRPYyQHJ21abyB6rl8PXZkPXmbymghnrziV9lM91y1z4hye#fidkdWxOYHwnPyd1blpxYHZxWjA0SWlNSEtDUTVxfF1nZ0tWTU5tcGRgS0FQNUdKc31kcVVEVm1saElpU0hkcF1kbkc2S1dSMnE2d1Ruc2w9RDdrc1FOUDNgYjdgbE1XbV9gY0JcdTdKVTF2NTVSNDVuTTZzUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" data-rewardful>
+                        Buy
+                    </a> */}
                     <div className="mt-8 mb-4">
                         <Button onClick={() => {
                             console.log(activeService)
@@ -132,6 +134,7 @@ const SettingService =() => {
                                 recurring_interval:activeService.mode,
                                 unit_amount:activeService.price * 100
                             }).then(res => {
+                                window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
                                 window.open(res.data.sublink)
                             })
                         }} theme="Carbon">Continue to Payment</Button>
