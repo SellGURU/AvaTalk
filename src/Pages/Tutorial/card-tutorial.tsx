@@ -17,6 +17,14 @@ export const CartTu = ({link,total_views,videoId,rate,title,description}:Props) 
     const videoRef = useRef(null);
     const [videoRate,setVideoRate]=useState<any>()
     const [isLoading,setIsLoading]=useState<boolean>(true);
+    const handleFullscreenChange = () => {
+        const videoElement:any = videoRef.current;
+        if (document.fullscreenElement === null && videoElement) {
+            // Exit fullscreen: stop the video and hide it
+            videoElement.pause();
+            videoElement.currentTime = 0; // Reset the video to the start
+        }
+    };      
     const svgImage= (<svg aria-hidden="true" className="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 27 25.81"
                     preserveAspectRatio="xMidYMid meet" stroke-width="2">
         <g shape-rendering="geometricPrecision">
@@ -83,8 +91,17 @@ export const CartTu = ({link,total_views,videoId,rate,title,description}:Props) 
         }
         };
     }, []);    
+    useEffect(() => {
+        // Add event listener for fullscreen change
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        };
+    }, []);     
     return (
-        <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"}>
+        <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"} style={{width:'100%'}}>
             <div className={"space-y-5 w-full"}>
                 <h1 className={"text-left text-[14px]  font-medium"}>{title}</h1>
                 <video ref={videoRef} className={"rounded-xl w-full h-[180px]"}   controls>
