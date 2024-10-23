@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {useEffect, useState} from "react";
+import {useEffect, useState,useRef} from "react";
 import {TutorialApi} from "../../Api";
 import {Rating} from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css';
@@ -9,12 +9,22 @@ interface  Props{
     total_views:string
     videoId:string
     rate:number
+    description:string
+    title:string
 }
-export const CartTu = ({link,total_views,videoId,rate}:Props) => {
+export const CartTu = ({link,total_views,videoId,rate,title,description}:Props) => {
     const [rating, setRating] = useState(rate);
-
+    const videoRef = useRef(null);
     const [videoRate,setVideoRate]=useState<any>()
     const [isLoading,setIsLoading]=useState<boolean>(true);
+    const handleFullscreenChange = () => {
+        const videoElement:any = videoRef.current;
+        if (document.fullscreenElement === null && videoElement) {
+            // Exit fullscreen: stop the video and hide it
+            videoElement.pause();
+            videoElement.currentTime = 0; // Reset the video to the start
+        }
+    };      
     const svgImage= (<svg aria-hidden="true" className="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 27 25.81"
                     preserveAspectRatio="xMidYMid meet" stroke-width="2">
         <g shape-rendering="geometricPrecision">
@@ -38,26 +48,66 @@ export const CartTu = ({link,total_views,videoId,rate}:Props) => {
         getData();
     },[])
     useEffect(()=>{
-        console.log("test1")
         const sendRate=async ()=>{
             console.log(typeof  videoRate.rated)
             if(rate!==rating){
-                console.log("test")
-                await TutorialApi.sendRate(videoId,`${rate}`);
+                await TutorialApi.sendRate(videoId,`${rating}`);
             }
         }
         sendRate();
     },[rating])
+    useEffect(() => {
+        const handleFullscreen = () => {
+        const videoElement:any = videoRef.current;
+        if (videoElement) {
+            TutorialApi.view(videoId);
+            // Trigger fullscreen mode
+            if (videoElement.requestFullscreen) {
+            videoElement.requestFullscreen();
+            } else if (videoElement.mozRequestFullScreen) { // For Firefox
+            videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+            videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) { // For IE/Edge
+            videoElement.msRequestFullscreen();
+            }
+
+            // Optionally auto-play the video when fullscreen is entered
+            videoElement.play();
+        }
+        };
+
+        const videoElement:any = videoRef.current;
+
+        // Automatically trigger fullscreen when the video starts playing
+        if (videoElement) {
+        videoElement.addEventListener('play', handleFullscreen);
+        }
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+        if (videoElement) {
+            videoElement.removeEventListener('play', handleFullscreen);
+        }
+        };
+    }, []);    
+    useEffect(() => {
+        // Add event listener for fullscreen change
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        };
+    }, []);     
     return (
-        <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"}>
-            <div className={"space-y-5"}>
-                <h1 className={"text-left text-[14px]  font-medium"}>Title of the Video</h1>
-                <video className={"rounded-xl w-full h-[180px]"}   controls>
+        <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"} style={{width:'100%'}}>
+            <div className={"space-y-5 w-full"}>
+                <h1 className={"text-left text-[14px]  font-medium"}>{title}</h1>
+                <video ref={videoRef} className={"rounded-xl w-full h-[180px]"}   controls>
                     <source src={link} type="video/mp4"/>
                 </video>
-                <p className={"text-xs font-normal text-left"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do
-                    eiusmod tempor incididunt ut labore et dolore .</p>
+                <p className={"text-xs font-normal text-left"}>{description}</p>
             </div>
             <div className={"flex items-center w-full justify-between"}>
 

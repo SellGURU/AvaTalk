@@ -17,12 +17,12 @@ const HelpSupport = () => {
     //   link:""
     //   // link: "/settings/Help/manual",
     // },
-    // {
-    //   name: "Tutorial Videos",
-    //   icon: "tutorial.svg",
-    //   link:""
-    //   // link: "/settings/Help/tutorial",
-    // },
+    {
+      name: "Tutorial Videos",
+      icon: "tutorial.svg",
+      // link:""
+      link: "/settings/Help/tutorial",
+    },
     // {
     //   name: "Customer Service",
     //   icon: "costomer-service.svg",
