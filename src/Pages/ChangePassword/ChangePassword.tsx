@@ -122,7 +122,7 @@ const ChangePassowrd = () => {
           </Button>
           <p className={`Carbon-ChatDetails-title`}>Change Password</p>
         </div>
-        <div className="mt-[96px] flex flex-col hiddenScrollBar h-dvh overscroll-y-scroll px-6  pb-[300px]">
+        <div className="mt-[66px] flex flex-col hiddenScrollBar h-dvh overscroll-y-scroll px-6  pb-[300px]">
           <p className="  text-justify text-sm text-text-primary">
             Regularly changing your password is important for keeping your
             account secure.{" "}

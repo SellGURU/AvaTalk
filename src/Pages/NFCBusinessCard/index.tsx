@@ -498,7 +498,7 @@ export const NFCBusinessCard = () => {
                                 changeCardColor(item.id, color);
                               }
                             }}
-                            className={`w-[32px] cursor-pointer h-[32px] rounded-md flex justify-center items-center `}
+                            className={`  w-[32px] cursor-pointer h-[32px] rounded-md flex justify-center items-center  `}
                             style={{ background: resolveBackGround(color) }}
                           >
                             {item.color == color && (
