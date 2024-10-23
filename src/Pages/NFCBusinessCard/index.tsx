@@ -257,6 +257,51 @@ const ResolveWhyChoice = (id: string) => {
     );
   };
 };
+const ResolveDescription = (id: string) => {
+  return () => {
+    if (id == "1") {
+      return (
+        <>
+        <h2 className="font-semibold">Revolutionize Your Networking with the Avatalk NFC Business Card
+</h2>
+          <p className="mt-2 text-[#6B7280] font-normal text-[12px]">
+          Step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression.
+
+          </p>
+        </>
+      );
+    }
+    if (id == "2") {
+      return (
+        <>
+        <h2 className="font-semibold">Compact Powerhouse of Connectivity: The Avatalk NFC Tag
+
+</h2>
+          <p className="mt-2 text-[#6B7280] font-normal text-[12px]">
+          For those who value convenience and versatility, the Avatalk NFC Tag is the ultimate tool for modern networking. This compact yet powerful device is designed to carry your professional identity wherever you go, making it easier than ever to connect with others. The Avatalk NFC Tag is more than just a digital business card—it’s a gateway to seamless, intelligent interactions.
+
+          </p>
+        </>
+      );
+    }
+    if (id == "3") {
+      return (
+        <><h2 className="font-semibold">The Ultimate Networking Duo: Avatalk NFC Tag and Business Card Bundle
+        </h2>
+          <p className="mt-2 text-[#6B7280] font-normal text-[12px]">
+          For professionals who want to take their networking game to the next level, the Avatalk NFC Tag and Business Card Bundle offers the best of both worlds. This bundle combines the advanced features of the Avatalk NFC Business Card with the portability of the NFC Tag, providing a comprehensive solution for all your networking needs.
+
+          </p>
+        </>
+      );
+    }
+    return (
+      <>
+        <div>{id}</div>
+      </>
+    );
+  };
+};
 
 export const NFCBusinessCard = () => {
   const { id } = useParams();
@@ -605,7 +650,9 @@ export const NFCBusinessCard = () => {
         </Button>
         <div className="mt-8">
           <Accordion
-            bodyText={currentCard?.description as string}
+                      component={ResolveDescription(currentCard?.id as string)}
+
+            bodyText={""}
             title={"Description"}
           />
           <Accordion
