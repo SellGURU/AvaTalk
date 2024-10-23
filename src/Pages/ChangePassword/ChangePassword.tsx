@@ -6,7 +6,7 @@ import { useState , useEffect } from "react";
 // import { AuthContext } from "../../store/auth-context";
 import * as Yup from "yup";
 import { SuccessModal } from "./SucessModal";
-// import { Auth } from "../../Api";
+import { Auth } from "../../Api";
 const ChangePassowrd = () => {
   const navigate = useNavigate();
 
@@ -36,22 +36,60 @@ const ChangePassowrd = () => {
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (values) => {
-      console.log(values);
-      setShowSuccessModal(true);
+    onSubmit: async (values) => {
+      try {
+        const isChanged = await changePassword(values.newPassword, values.confirmPassword);
+        if (isChanged) {
+          setShowSuccessModal(true);
+        } else {
+          console.log("Password change failed");
+        }
+      } catch (error) {
+        console.error("Error changing password:", error);
+      }
     },
   });
-  const handleCurrentPasswordVerification = () => {
+  const handleCurrentPasswordVerification = async () => {
     formik.setFieldTouched("currentPassword", true);
-    formik.validateField("currentPassword").then(() => {
-      if (!formik.errors.currentPassword && formik.values.currentPassword) {
+    await formik.validateField("currentPassword");
+    if (!formik.errors.currentPassword && formik.values.currentPassword) {
+      const isValid = await verifyCurrentPassword(formik.values.currentPassword);
+      if (isValid) {
         setStep(2);
+      } else {
+        formik.setFieldError("currentPassword", "Incorrect password");
       }
-    });
+    }
   };
-  //   const verifyCurrentPassword = async (password:string) => {
-  //     return password === 'yourActualPassword';
-  //   };
+  const verifyCurrentPassword = async (password: string) => {
+    try {
+      const response = await Auth.checkPassword({password: password});
+      console.log(response);
+      
+      return response.data.check_password
+      
+    } catch (error) {
+      console.error("Error verifying password:", error);
+      return false;
+    }
+  };
+  const changePassword = async (newPassword: string, confirmPassword: string) => {
+    try {
+      const response = await Auth.changePassword({
+        new_password: newPassword,
+        confirm_new_password: confirmPassword,
+      });
+      console.log(response);
+      if (response.data.error) {
+        formik.setFieldError("newPassword", response.data.error);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error("Error changing password:", error);
+      return false;
+    }
+  };
   const handleChangePassword = () => {
     formik.setFieldTouched("newPassword", true);
     formik.setFieldTouched("confirmPassword", true);
@@ -84,7 +122,7 @@ const ChangePassowrd = () => {
           </Button>
           <p className={`Carbon-ChatDetails-title`}>Change Password</p>
         </div>
-        <div className="mt-[96px] flex flex-col hiddenScrollBar h-dvh overscroll-y-scroll px-6  pb-[300px]">
+        <div className="mt-[66px] flex flex-col hiddenScrollBar h-dvh overscroll-y-scroll px-6  pb-[300px]">
           <p className="  text-justify text-sm text-text-primary">
             Regularly changing your password is important for keeping your
             account secure.{" "}

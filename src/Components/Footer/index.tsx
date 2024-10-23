@@ -111,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
                 <div className="w-2 h-2 bg-primary-color rounded-full absolute top-[-6px] right-[-4px]"></div>
               }
               {activeItem!= 'status'?
-                <div className={`${theme}-Footer-Text`}>Analysis</div>
+                <div className={`${theme}-Footer-Text`}>Analytics</div>
               :
               undefined}           
          </div>

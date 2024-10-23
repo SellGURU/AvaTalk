@@ -3,13 +3,15 @@ import { BissinesCard, Select, TextField } from "../../../../Components"
 import * as Yup from "yup";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
-
+import { AuthContext } from "../../../../store/auth-context";
+import { useContext } from "react";
 interface InformationStepProps {
     onSubmit:() => void
 }
 
 const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
     const context = useAuth() 
+    const authContext = useContext(AuthContext)
     const resolveName = () => {
         if(context.siginUpOptions.firstName != ''){
             return context.siginUpOptions.firstName as string
@@ -43,13 +45,15 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
     ];   
+    
+    
     return (
         <>
             <div className="mt-8">
-                <div className="text-text-primary font-semibold text-center">Create Your Account</div>
+                <div className="text-text-primary font-semibold text-center">{authContext.linkedInSignup ? 'Sign up with LinkedIn ' : 'Create Your Account'}</div>
                 <div className="flex justify-center">
                     <div className="text-[#6B7280] text-[14px] mt-2 text-center w-[256px]">
-                        Tell us more about yourself                  
+                    {authContext.linkedInSignup ? 'Please confirm your information' : 'Tell us more about yourself' }                  
                     </div>
                 </div>      
                 <div className="flex justify-center mt-6">
@@ -91,7 +95,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
                         <Select
                         label="Gender"
                         required
-                        valueElement={<div>{formik.values.gender}</div>}
+                        valueElement={<div className="capitalize">{formik.values.gender}</div>}
                         placeholder="Select your gender ..."
                         theme="Carbon"
                         >
@@ -105,7 +109,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
                                 onTouchEnd={() => {
                                 formik.setFieldValue("gender",Gender.value)
                                 }}
-                                className="ml-4 my-2 cursor-pointer font-normal text-[14px]"
+                                className="  capitalize ml-4 my-2 cursor-pointer font-normal text-[14px]"
                                 // value={Gender.value}
                             >
                                 {Gender.value}

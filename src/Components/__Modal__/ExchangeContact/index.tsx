@@ -245,7 +245,7 @@ const ExchangeContact: React.FC<ExchangeContactProps> = ({ isOpen, theme, onClos
           <div className="w-full flex justify-center mt-5">
             <div className="w-[240px] h-[368px] bg-primary-color rounded-[30px]">
               <div className="w-full flex justify-center mt-4">
-                <img className="ml-[-30px]" src="./icons/CardProf.png" alt="" />
+                <img className="ml-[-30px]" src="./icons/CardProf2.png" alt="" />
               </div>
               <div>
                 <div className="text-white text-[18px] font-semibold  text-center">{formData.fullName}</div>

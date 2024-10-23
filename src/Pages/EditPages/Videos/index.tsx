@@ -230,7 +230,9 @@ const EditVideos = () => {
               onClick={() => {
                 if(auth.currentUser.type_of_account.getType() == 'Free' && video.length >= 1){
                   setLimiteMode("length")
-                  setOpenAddLink(!openaddlink)
+                  setIsReadyTo(true)
+                  // setOpenAddLink(!openaddlink)
+             
                 }else {
                   setOpenAddLink(!openaddlink)
                 }

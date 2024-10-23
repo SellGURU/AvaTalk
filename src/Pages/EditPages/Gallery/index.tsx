@@ -17,11 +17,13 @@ const validationSchema = Yup.object().shape({
 const EditGallery = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == "GalleryBox")[0] as GalleryBox;
+  let currentBox = auth.currentUser.boxs.filter(
+    (item) => item.getTypeName() == "GalleryBox"
+  )[0] as GalleryBox;
   if (currentBox == undefined) {
     currentBox = new GalleryBox("Gallery", []);
   }
-  const [isReadyTO,setIsReadyTo] = useState(false)
+  const [isReadyTO, setIsReadyTo] = useState(false);
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -34,16 +36,20 @@ const EditGallery = () => {
     },
   });
   const submit = () => {
-    if(auth.currentUser.type_of_account.getType() == 'Free'){
-      if(formik.values.files.length>5){
-        setIsReadyTo(true)
-      }else{
-        auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.slice(0, 5)));
+    if (auth.currentUser.type_of_account.getType() == "Free") {
+      if (formik.values.files.length >= 5) {
+        setIsReadyTo(true);
+      } else {
+        auth.currentUser.addBox(
+          new GalleryBox(formik.values.title, formik.values.files.slice(0, 5))
+        );
         navigate("/");
       }
-    }else{
-       auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files));
-       navigate("/");
+    } else {
+      auth.currentUser.addBox(
+        new GalleryBox(formik.values.title, formik.values.files)
+      );
+      navigate("/");
     }
   };
   return (
@@ -54,14 +60,19 @@ const EditGallery = () => {
         </div>
         <div className="mt-[120px] hiddenScrollBar h-full">
           <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager isLimited={formik.values.files.length>5} page="GallerySetting"></AccessNotifManager>
-
-          </div>          
+            <AccessNotifManager
+              isLimited={auth.currentUser.type_of_account.getType()== "Free" && formik.values.files.length >= 5}
+              page="GallerySetting"
+            ></AccessNotifManager>
+          </div>
           <div className="px-6">
             <TextField
               {...formik.getFieldProps("title")}
               errorMessage={formik.errors?.title}
-              inValid={formik.errors?.title != undefined && (formik.touched?.title as boolean)}
+              inValid={
+                formik.errors?.title != undefined &&
+                (formik.touched?.title as boolean)
+              }
               theme="Carbon"
               label="Title"
               name="title"
@@ -73,21 +84,30 @@ const EditGallery = () => {
             <ImageUploadr
               accept="image/*"
               limite={5}
+              onClick={(e) => {
+                if (auth.currentUser.type_of_account.getType() == "Free") {
+                  if (formik.values.files.length >=5 ) {
+                    setIsReadyTo(true);
+                    e.preventDefault()
+                    e.stopPropagation()
+                  }
+                }
+              }}
               userMode={auth.currentUser.type_of_account.getType()}
               value={formik.values.files.map((item) => {
                 return {
                   url: item.original,
-                  name: item.name?item.name: "item",
+                  name: item.name ? item.name : "item",
                 };
               })}
               uploades={(files: Array<any>) => {
-                console.log(files)
+                console.log(files);
                 const converted = files.map((item) => {
                   return {
                     original: item.url,
                     thumbnail: item.url,
-                    name:item.name,
-                    sizes:`(max-width: 710px) 120px,(max-width: 991px) 193px,278px`
+                    name: item.name,
+                    sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
                   };
                 });
                 formik.setFieldValue("files", converted);
@@ -102,13 +122,16 @@ const EditGallery = () => {
             </Button>
           </div>
         </div>
-        {isReadyTO &&
+        {isReadyTO && (
           <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <ReadyForMore page="Gallery" onClose={() => {
-              setIsReadyTo(false)
-            }} ></ReadyForMore>
+            <ReadyForMore
+              page="Gallery"
+              onClose={() => {
+                setIsReadyTo(false);
+              }}
+            ></ReadyForMore>
           </div>
-        }          
+        )}
       </div>
     </>
   );

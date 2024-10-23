@@ -30,12 +30,12 @@ export const OrderNfcCard = () => {
     return (
         <>
             <>
-                <div className=" w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+                <div className=" w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15] ">
                     <div className=" top-4">
                         <BackIcon title="Order NFC Card" theme="Carbon"></BackIcon>
 
                     </div>
-                    <div className={"flex  flex-wrap items-center justify-between px-4 mt-[76px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]"}>
+                    <div className={"flex  flex-wrap items-center justify-between px-4 mt-[66px]  hiddenScrollBar h-dvh overflow-y-scroll pb-[130px]"}>
                     {nfcCards.map((el) => {
                         return (
                             <>

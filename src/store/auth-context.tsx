@@ -39,6 +39,8 @@ interface AuthContextProps {
   googleInformation:any
   nfc_id:string | null
   refrealCode:string| null
+  linkedInSignup: boolean;
+  setLinkedInSignup: (value: boolean) => void;
   setReferalCode:(referal:string) => void
   setNfc_id:(id:string| null) => void
   setPrerecorded_voice:(data:string) => void
@@ -81,8 +83,10 @@ export const AuthContext = createContext<AuthContextProps>({
   setNeedReload:() => {},
   setUser:() => {},
   currentUser: new User(),
+  linkedInSignup: false,
   verificationHandler: () => {},
  setGoogleInformation:() => {}, 
+ setLinkedInSignup: ()=>{},
   login: () => {},
   prerecorded_voice:"",
   setPrerecorded_voice:() => {},
@@ -99,6 +103,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const [prerecorded_voice,setPrerecordedVoice] = useState(localStorage.getItem("prerecorded_voice") || "")
   const [referalCode,setReferalCode] = useState('')
   const [needReload,setNeedReload] = useState(false)
+  const [linkedInSignup, setLinkedInSignup] = useState(false);
+
   reolveJsonToObject(localuser as string)
   // Object.assign(new User(),JSON.parse(localStorage.getItem('authUser')))
   const resolveUser:User = Object.assign(new User(),JSON.parse(localuser as string))
@@ -186,6 +192,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     siginupHandler:siginOptionsHandler,
     login: loginHandler,
     logout: logoutHandler,
+    linkedInSignup: linkedInSignup,
+    setLinkedInSignup: setLinkedInSignup
   };
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;

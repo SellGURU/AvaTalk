@@ -17,7 +17,7 @@ axios.interceptors.response.use((response) => {
     // }
     
     if(response.data.detail){
-        if(response.data.detail.includes("Successfully")){
+        if (response.data.detail && response.data.detail.toLowerCase().includes("successfully")) {
             toast.success(response.data.detail)
         }else {
             toast.error(response.data.detail) 

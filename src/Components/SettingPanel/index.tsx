@@ -53,11 +53,11 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     //   icon: "payment.svg",
     //   link: "payment",
     // },
-    // {
-    //   name: "Change Password",
-    //   icon: "lock.svg",
-    //   link: "changepassword",
-    // },
+    {
+      name: "Change Password",
+      icon: "lock.svg",
+      link: "changepassword",
+    },
     {
       name: "Help",
       icon: "help.svg",
@@ -105,8 +105,8 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     
       <div className={`Carbon-ContactsView-Container `}>
         <Outlet></Outlet>
-        <p className={`${theme}-Edit-title px-6 pb-[6px]`}>Setting</p>
-        <div className="px-6 mt-0 hiddenScrollBar h-dvh  overflow-y-scroll pb-[300px]  ">
+        <p className={`${theme}-Edit-title px-6 pb-[20px]`}>Setting</p>
+        <div className="px-6 mt-0  pb-[300px]  ">
           {isShowPlanCard &&
             <div className="">
               <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>

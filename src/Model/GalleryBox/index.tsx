@@ -35,14 +35,14 @@ class GalleryBox extends Box{
                     userid:options.userId,
                     sub_event_category:'more_info_gallery'
                 })                 
-            }} className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'} relative`}>
+            }} className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'}  h-full`}>
                 {this.contents.length > 0 ?
                     <ImageGallery 
                     items={this.contents} 
                     renderLeftNav={(onClick, disabled) => {
                         return (
                             <>
-                                <div  className={`${theme}-back-Button-container-box`} style={{transform: 'translate(30%, -50%)'}} data-mode="gallery">
+                                <div  className={`${theme}-back-Button-container-box `} style={{transform: 'translate(30%, -50%)'}} data-mode="gallery">
                                     <Button onClick={onClick} disabled={disabled} theme={`${theme}-back`}>
                                         <div className={`${theme}-back-Button-vector`}></div>
                                     </Button>

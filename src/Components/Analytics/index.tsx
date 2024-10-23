@@ -12,10 +12,20 @@ const Analytics: React.FC<Props> = ({ theme }) => {
   const startDate = new Date()
   const context = useAuth()
   startDate.setMonth(startDate.getMonth() -1)
-  const [day, setDay] = useState({
-    startDate: startDate,
-    endDate: new Date(),
-  });  
+  const [day, setDay] = useState(() => {
+    const savedDates = localStorage.getItem("selectedDates");
+    if (savedDates) {
+      const { startDate, endDate } = JSON.parse(savedDates);
+      return {
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+      };
+    }
+    return {
+      startDate: startDate,
+      endDate: new Date(),
+    };
+  });
   const [dataBox,setDataBox] = useState<Array<any>>([])
   useEffect(() => {
     if(context.currentUser.type_of_account.getType() != 'Free'){
@@ -65,7 +75,7 @@ const Analytics: React.FC<Props> = ({ theme }) => {
     }
   },[day])
   return (
-    <div className={`${theme}-Analytics-container`}>
+    <div className={`${theme}-Analytics-container `}>
       <p className={`${theme}-Analytics-text`}>Analytics</p>
       <div className="">
         <AccessNotifManager page="AnalysePage"></AccessNotifManager>

@@ -75,13 +75,13 @@ const SettingService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Plan</p>
             </div>            
 
-            <div className="flex flex-col gap-y-3 px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[17px]">
+            <div className="flex flex-col gap-y-3 px-6 mt-[66px] hiddenScrollBar h-dvh overflow-y-hidden">
                 <div className="">
-                    <div className="flex flex-col justify-center items-center">
-                        <img className={`w-[147px] mb-4`} src="/icons/logo2.svg" alt="" />
-                        <p className="mb-1 text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
+                    <div className="  flex flex-col justify-center items-center">
+                        <img className={`w-[147px] mb-[10px]`} src="/icons/logo2.svg" alt="" />
+                        <p className=" text-[14px] text-[#374151] font-medium">You’re Using Our {" "+plan+ ' Plan'}</p>
 
-                        <p className="text-[14px] mb-6 text-[#6B7280] px-8 text-center">
+                        <p className="text-[14px] mb-4 text-[#6B7280] px-8 text-center">
                             {plan==="Trial" &&
                                         `Your trial will end in ${context.currentUser.type_of_account.getDaysReminded()} days. Don't lose your momentum—go Pro to continue enjoying the benefits.`}
                             {plan==="Free"&&`Your ${context.currentUser.type_of_account.getOldType()} was expired at ${context.currentUser.type_of_account.getOldExpiredDate()}. Upgrade to Pro to unlock premium features and elevate your networking game!`}
@@ -99,7 +99,7 @@ const SettingService =() => {
                             })[0])
                         }} leftText={"Annually £80"} rightText="Monthly £8" theme="Carbon-secandary" />
                     </div>
-                  <div className="px-6 mb-6 flex flex-col Carbon-Setting-CardContainer items-center ">
+                  <div className="px-6 mb-4 flex flex-col Carbon-Setting-CardContainer items-center ">
                             <div className="flex flex-col items-start gap-4">
                                 <div className="flex justify-center items-center gap-2">
                                     <div className="Carbon-Setting-TickCircle"></div>
@@ -123,10 +123,8 @@ const SettingService =() => {
                                 </div>
                             </div>
                         </div>
-                    {/* <a href="https://checkout.stripe.com/c/pay/cs_test_a1KYRFiwrRpgRPYyQHJ21abyB6rl8PXZkPXmbymghnrziV9lM91y1z4hye#fidkdWxOYHwnPyd1blpxYHZxWjA0SWlNSEtDUTVxfF1nZ0tWTU5tcGRgS0FQNUdKc31kcVVEVm1saElpU0hkcF1kbkc2S1dSMnE2d1Ruc2w9RDdrc1FOUDNgYjdgbE1XbV9gY0JcdTdKVTF2NTVSNDVuTTZzUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" data-rewardful>
-                        Buy
-                    </a> */}
-                    <div className="mt-8 mb-4">
+
+                    <div className="mt-3 mb-4">
                         <Button onClick={() => {
                             console.log(activeService)
                             Service.SubLink({

@@ -138,7 +138,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   return (
     <div className={`${theme}-ContactsView-Container  `}>
       <Outlet></Outlet>
-      <div className="flex w-full items-center relative justify-between mb-[22px] pr-6">
+      <div className="flex w-full items-center relative justify-between mb-[22px] -mt-2 pr-6">
         <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
         <div ref={ButtonmoreModalRef}>
           <Button onClick={() => {setShowMoreModal(!showMoreModal)}} theme="Carbon-back">
@@ -150,7 +150,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         {
           showMoreModal ?
             <>
-              <div ref={moreModalRef} className="w-[210px] -top-2 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
+              <div ref={moreModalRef} className="w-[210px] -top-1 text-sm right-16  absolute border border-gray-200 py-2 bg-gray-100 rounded-[27px]">
                 {/* <div className="flex opacity-50 items-center justify-start px-4 py-2 border-b border-b-white">
                   <img className={`${theme}-ContactsView-scan`} alt="" />
                   <div className="text-gray-700 ml-2">Scan Business Card</div>

@@ -60,6 +60,7 @@ const SignUp = () => {
                 }).then(res => {
                     if(res.data.check_user == true){
                         authContext.setGoogleInformation(value.data)
+                        authContext.setLinkedInSignup(false)
                         navigate('/createAccount')
                     }else {
                         toast.error("user exist")
@@ -98,6 +99,7 @@ const SignUp = () => {
                         googleJson:null
                     })
                     authContext.setGoogleInformation(null)
+                    authContext.setLinkedInSignup(false)
                     authContext.siginupHandler({
                         email:formik.values.email
                     })
@@ -162,6 +164,7 @@ const SignUp = () => {
             }).then(res => {
                 if(res.data.check_user == true){
                     authContext.setGoogleInformation(info)
+                    authContext.setLinkedInSignup(true);
                     navigate('/createAccount')
                 }else {
                     toast.error("user exist")
