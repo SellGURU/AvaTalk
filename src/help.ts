@@ -17,6 +17,10 @@ const resolveMenuFromRoute = () => {
       return "profile";
     case "?splash=true":
       return 'profile';
+    case "?splash=true&signin_success=true":
+      return 'profile';    
+    case "?splash=true&signup_success=true":
+      return 'profile';            
     case "analytics":
       return 'status';      
     default:
