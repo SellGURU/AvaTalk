@@ -7,7 +7,6 @@ import { useState , useEffect } from "react";
 import * as Yup from "yup";
 import { SuccessModal } from "./SucessModal";
 import { Auth } from "../../Api";
-import { toast } from "react-toastify";
 const ChangePassowrd = () => {
   const navigate = useNavigate();
 
