@@ -162,6 +162,7 @@ const SignUp = () => {
             }).then(res => {
                 if(res.data.check_user == true){
                     authContext.setGoogleInformation(info)
+                    authContext.setLinkedInSignup(true);
                     navigate('/createAccount')
                 }else {
                     toast.error("user exist")
