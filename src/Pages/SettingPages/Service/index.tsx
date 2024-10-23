@@ -36,8 +36,8 @@ const SettingService =() => {
                     navigate(location.pathname, { replace: true });                  
                 })   
                 console.log(context.currentUser.information?.personlEmail )
-                rewardful('convert', { email: context.currentUser.information?.personlEmail });  
-                 rewardful('convert', { email: "amir@gmail.com" });                 
+                // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
+                //  rewardful('convert', { email: "amir@gmail.com" });                 
             }, 3000);
         }
     },[])
@@ -132,6 +132,7 @@ const SettingService =() => {
                                 recurring_interval:activeService.mode,
                                 unit_amount:activeService.price * 100
                             }).then(res => {
+                                // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
                                 window.open(res.data.sublink)
                             })
                         }} theme="Carbon">Continue to Payment</Button>

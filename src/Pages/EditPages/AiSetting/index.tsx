@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 // import MDEditor from "@uiw/react-md-editor";
 import * as Yup from "yup";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
 import { getOS, useConstructor } from "../../../help";
@@ -52,15 +52,54 @@ const EditAiSetting = () => {
   // const learnMoreText = learnMore
   useConstructor(() => {
     Auth.showAiSetting((res) => {
-      formik.setFieldValue("title", res.ai_setting.Name);
-      formik.setFieldValue("Description", res.ai_setting["AI Knowledge"]);
-      setGender(res.gender != null ? res.gender : "female");
-    });
-  });
-  const [analysedText, setAnaysedText] = useState("");
-  const [showAiSuggestion, setShowAiSuggestion] = useState(false);
-  const [showLearnMore, setShowLearnMore] = useState(false);
-  const [isReadyTO, setIsReadyTo] = useState(false);
+      formik.setFieldValue("title",res.ai_setting.Name)
+      formik.setFieldValue("Description",res.ai_setting["AI Knowledge"])
+      setGender(res.gender != null ?res.gender :'female')
+    })
+  })
+  const videoRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false); // Track video visibility
+  const handleFullscreen = () => {
+    setIsVisible(true)
+    const videoElement:any = videoRef.current;
+    if (videoElement) {
+      // Request fullscreen for the video element
+      if (videoElement.requestFullscreen) {
+        videoElement.requestFullscreen();
+      } else if (videoElement.mozRequestFullScreen) { // For Firefox
+        videoElement.mozRequestFullScreen();
+      } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+        videoElement.webkitRequestFullscreen();
+      } else if (videoElement.msRequestFullscreen) { // For IE/Edge
+        videoElement.msRequestFullscreen();
+      }
+
+      // Play the video when fullscreen is entered
+      videoElement.play();
+    }
+  };  
+ const handleFullscreenChange = () => {
+    const videoElement:any = videoRef.current;
+    if (document.fullscreenElement === null && videoElement) {
+      // Exit fullscreen: stop the video and hide it
+      videoElement.pause();
+      videoElement.currentTime = 0; // Reset the video to the start
+      setIsVisible(false);
+    }
+  };  
+  useEffect(() => {
+    // Add event listener for fullscreen change
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);  
+  const [analysedText,setAnaysedText] = useState("")
+  const [showAiSuggestion,setShowAiSuggestion] = useState(false)
+  const [showLearnMore,setShowLearnMore] = useState(false)
+  const [isReadyTO,setIsReadyTo] = useState(false)
   useEffect(() => {
     if (showAiSuggestion) {
       document.getElementById("aiSettingEdit")?.scrollTo(0, 0);
@@ -418,14 +457,18 @@ const EditAiSetting = () => {
           </div>
 
           <div className="px-6 mt-8">
-            {/* <div className="w-full flex ">
+            <div className="w-full flex ">
               <img src="./Carbon/message-question.svg" alt="" />
               <div className="text-sm font-medium ml-1 text-text-primary">Need Help?</div>
-            </div> */}
-            {/* <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
-              navigate('/settings/Help/tutorial')
-            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div> */}
+            </div>
+            <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
+              // navigate('/settings/Help/tutorial')
+              handleFullscreen()
+            }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
           </div>
+
+          <video onEnded={() => {setIsVisible(false)}}  ref={videoRef} src={'https://codieblob.blob.core.windows.net/avatalk/Videos/tut_1.mp4'} style={{display:isVisible?'block':'none'}} />
+
         </div>
         {isReadyTO && (
           <div className="fixed w-full left-0 bottom-0 flex justify-center">

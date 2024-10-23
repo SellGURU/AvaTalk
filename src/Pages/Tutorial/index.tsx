@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {BackIcon} from "../../Components";
 import {CartTu} from "./card-tutorial.tsx";
 import {TutorialApi} from "../../Api";
@@ -22,12 +23,12 @@ export const Tutorial=()=>{
                 <BackIcon title="Tutorial Videos" theme="Carbon"></BackIcon>
 
             </div>
-            <div className={" p-4 rounded-lg  px-16 mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
+            <div className={" rounded-lg px-6  mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
                 {
                     !isLoading?(
                         <>
                             {videos?.map((video:any)=>{
-                                return <CartTu link={video.link} rate={parseInt(video.mean_rate)} total_views={video.total_views} videoId={video.video_id}/>
+                                return <CartTu description={video.description == null?'':video.description} title={video.title} link={video.link} rate={parseInt(video.mean_rate)} total_views={video.total_views} videoId={video.video_id}/>
                             })}
                         </>
                     ):""
