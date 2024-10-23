@@ -33,7 +33,7 @@ const SettingService =() => {
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     publish("refreshPage",{})
-                    navigate(location.pathname, { replace: true });                  
+                    navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
                 })   
                 console.log(context.currentUser.information?.personlEmail )
                 // rewardful('convert', { email: context.currentUser.information?.personlEmail });  

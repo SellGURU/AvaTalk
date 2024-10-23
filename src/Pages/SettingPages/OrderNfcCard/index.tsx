@@ -7,6 +7,7 @@ import { Service } from "../../../Api";
 // import { publish } from "../../../utils/event";
 import Modal from "react-modal";
 import { Button } from "symphony-ui";
+// import { publish } from "../../../utils/event";
 
 export const OrderNfcCard = () => {
     const [nfcCards] = useState(NFC)
@@ -20,7 +21,8 @@ export const OrderNfcCard = () => {
             setTimeout(() => {
                 Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
                     // publish("refreshPage",{})
-                    navigate(location.pathname, { replace: true });                  
+                    console.log(location.pathname)
+                    navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
                 })    
             }, 1000);
         }

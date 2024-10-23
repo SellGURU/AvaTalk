@@ -17,7 +17,7 @@ const resolveMenuFromRoute = () => {
       return "profile";
     case "?splash=true":
       return 'profile';
-    case "anaylitics":
+    case "analytics":
       return 'status';      
     default:
       return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
@@ -34,7 +34,7 @@ const resolveNavigation = (item: MenuType, navigate: (route: string) => void) =>
     case "settings":
       return navigate("/settings");
     case "status":
-      return navigate("/anaylitics");
+      return navigate("/analytics");
   }
 };
 const useConstructor = (callBack = () => {}) => {

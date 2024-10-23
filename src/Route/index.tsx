@@ -95,7 +95,7 @@ const route = createHashRouter([
         ],
       },
       {
-        path: "/anaylitics",
+        path: "/analytics",
         element: <AnalyticsPage></AnalyticsPage>,
         // children: [
         //   {
