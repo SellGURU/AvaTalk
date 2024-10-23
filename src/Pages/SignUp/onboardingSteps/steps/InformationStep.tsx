@@ -46,7 +46,6 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
         { value: 'female', label: 'Female' },
     ];   
     
-    console.log(authContext.linkedInSignup);
     
     return (
         <>
