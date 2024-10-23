@@ -52,6 +52,7 @@ export const CartTu = ({link,total_views,videoId,rate,title,description}:Props) 
         const handleFullscreen = () => {
         const videoElement:any = videoRef.current;
         if (videoElement) {
+            TutorialApi.view(videoId);
             // Trigger fullscreen mode
             if (videoElement.requestFullscreen) {
             videoElement.requestFullscreen();
