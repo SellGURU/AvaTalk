@@ -53,7 +53,7 @@ const FreeCard: React.FC<FreeCardProps> = ({ onClose }) => {
           onClick={() => {
             navigate("service");
           }}
-          className=" relative z-20 mt-5 cursor-pointer w-full items-center justify-end flex"
+          className=" relative z-20 mt-2 cursor-pointer w-full items-center justify-end flex"
         >
           <div className="text-[#F3F4F6] cursor-pointer mr-2 text-[14px] font-medium">
             Upgrade your plan
