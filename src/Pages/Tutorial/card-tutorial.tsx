@@ -24,6 +24,7 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
             // Exit fullscreen: stop the video and hide it
             videoElement.pause();
             videoElement.currentTime = 0; // Reset the video to the start
+            videoElement.load(); // Reload the video to show the cover image
         }
     };      
     const svgImage= (<svg aria-hidden="true" className="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 27 25.81"
@@ -101,11 +102,17 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
         document.removeEventListener('fullscreenchange', handleFullscreenChange);
         };
     }, []);     
+    const handleVideoEnded = () => {
+        const videoElement:any = videoRef.current;
+        if (videoElement) {
+            videoElement.currentTime = 0; // Reset to beginning
+        }
+    };    
     return (
         <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"} style={{width:'100%'}}>
             <div className={"space-y-5 w-full"}>
                 <h1 className={"text-left text-[14px]  font-medium"}>{title}</h1>
-                <video ref={videoRef}   poster={cover} className={"rounded-xl w-full h-[180px]"}   controls>
+                <video id={title} onEnded={() => handleVideoEnded()} ref={videoRef}   poster={cover} className={"rounded-xl w-full h-[180px]"}   controls>
                     <source src={link} type="video/mp4"/>
                 </video>
                 <p className={"text-xs font-normal text-left"}>{description}</p>
