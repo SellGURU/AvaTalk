@@ -28,7 +28,7 @@ export const Tutorial=()=>{
                     !isLoading?(
                         <>
                             {videos?.map((video:any)=>{
-                                return <CartTu description={video.description == null?'':video.description} title={video.title} link={video.link} rate={parseInt(video.mean_rate)} total_views={video.total_views} videoId={video.video_id}/>
+                                return <CartTu cover={video.cover} description={video.description == null?'':video.description} title={video.title} link={video.link} rate={parseInt(video.mean_rate)} total_views={video.total_views} videoId={video.video_id}/>
                             })}
                         </>
                     ):""
