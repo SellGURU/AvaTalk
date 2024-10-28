@@ -329,7 +329,7 @@ const EditAiSetting = () => {
           <BackIcon title="AI Setting" theme="Carbon"></BackIcon>
         </div>
         <div
-          className="mt-[120px] mb-10 hiddenScrollBar h-full"
+          className="mt-[120px] mb-14 pb-[60px] hiddenScrollBar "
           style={{ visibility: showAiSuggestion ? "hidden" : "visible" }}
         >
           <div className="px-6">
