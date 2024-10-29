@@ -7,8 +7,9 @@ import {Button} from "symphony-ui";
 import SupportForm from "../../../Api/suportForm.ts";
 import {useState} from "react";
 import TextArea from "../../../Components/TextArea";
-
+import {useNavigate} from 'react-router-dom'
 export const FormPage = () => {
+    const navigate = useNavigate()
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email format')  // Ensures a valid email format
@@ -81,15 +82,17 @@ export const FormPage = () => {
         <Modal
             isOpen={isOpen}
             onRequestClose={() => {
-                setIsOpen(false)}
+                setIsOpen(false)
+            navigate(-1)}
         }
             style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "380px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
             contentLabel=" Modal"
         >
             <div className={" relative pb-5 pt-6"}>
-                <div className={"absolute right-0 top-0"}>
+                <div className={"absolute right-2 top-0 borderBox-Gray  "}>
                     <Button onClick={() => {
                         setIsOpen(false)
+                        navigate(-1)
                     }} data-mode="profile-review-button-2" theme="Carbon-Google">
                         <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>
                     </Button>

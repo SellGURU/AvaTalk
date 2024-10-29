@@ -230,7 +230,7 @@ html, body {
     box-shadow: 4px 4px 20px 0px #886FB01F,2px 2px 4px 0px #728EAB1A;
   }
   .borderBox-primary {
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box,
                 linear-gradient(300deg, rgba(100, 50, 201, 0.7), rgba(100, 50, 201, 0.7)) border-box;
   }
@@ -263,7 +263,7 @@ html, body {
   }
 
   .litepicker {
-    @apply top-[266px]  w-fit h-[430px] mx-auto overflow-y-auto rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
+    @apply top-[266px]  w-fit h-[390px] mx-auto overflow-y-auto rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
   }
   .litepicker .container__months {
     -webkit-box-shadow:none;
