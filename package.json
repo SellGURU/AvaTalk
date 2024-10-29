@@ -1,8 +1,8 @@
 {
   "name": "card-visit",
   "private": true,
-  "version": "1.9.5",
-  "description": "Alpha",
+  "version": "1.0.0",
+  "description": "",
   "type": "module",
   "scripts": {
     "dev": "vite",
