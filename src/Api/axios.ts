@@ -21,9 +21,9 @@ axios.interceptors.response.use((response) => {
     }
     return response;
 }, (error) => {
-    // if(error.status) {
-    //      toast.dismiss()
-    // }
+    if(error.response.status) {
+         toast.dismiss()
+    }
     if(error.response.status ==401 || error.response.status ==498 ){
         localStorage.clear()
         window.location.reload(); 

@@ -82,16 +82,7 @@ const Login = () => {
       password:formik.values.password,
       email:formik.values.email
     }).then((res) => {
-     
-      if(res.data.error){
-        toast.error(res.data.error)
-        if(res.data.error == 'This user is not registered'){
-          formik.setFieldError("email",res.data.error)
-        }
-        if(res.data.error == 'The password you have entered is wrong'){
-          formik.setFieldError("password",res.data.error)
-        }        
-      }
+    
       if(res.data.access_token){
           if (isRememberMe) {
             localStorage.setItem('email', formik.values.email);
@@ -133,6 +124,18 @@ const Login = () => {
               navigate("/?splash=false&signin_success=true");
           })          
       }
+      setLoading(false)
+    }).catch((res) => {
+      // console.log(res)
+      if(res.detail){
+        toast.error(res.detail)
+        if(res.detail == 'This user is not registered'){
+          formik.setFieldError("email",res.detail)
+        }
+        if(res.detail == 'The password you have entered is wrong'){
+          formik.setFieldError("password",res.detail)
+        }        
+      }      
       setLoading(false)
     })
     // Auth.get_Login_code(resolvePhoneOrEnail).then((res) => {

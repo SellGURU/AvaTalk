@@ -459,8 +459,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       if(authContext.currentUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
                         Auth.sendEmail({
-                          "userid":authContext.currentUser.information?.userId,
-                          "guest_id":"1",
+                          "userid":chats[0].chat_user,
+                          "guest_id":authContext.currentUser.information?.userId,
                           "alert_type":"unmute_chat"
                         })
                         setAudioUrl(authContext.prerecorded_voice)
@@ -503,10 +503,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       if(authContext.currentUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
                         Auth.sendEmail({
-                          "userid":authContext.currentUser.information?.userId,
-                          "guest_id":"1",
+                          "userid":chats[0].chat_user,
+                          "guest_id":authContext.currentUser.information?.userId,
                           "alert_type":"unmute_chat"
-                        })                        
+                        })                   
                         setAudioUrl(preRecorded)
                         setPrisentMode('audio')
                         setIsTalking(true)
