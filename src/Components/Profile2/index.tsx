@@ -22,6 +22,7 @@ import ShowUser from "../__Modal__/ShowUser";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Notification from "../Notification";
 import { Notification as NotificationApi } from "../../Api"
+import UserType from "../../Model/UserType";
 
 interface ProfileProps {
   theme?: string;
@@ -228,7 +229,14 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 talk_video_avater:data.information.talking_video_avatar
             }
             const shareUser = new User(information)
-            setShareUser(shareUser) 
+          shareUser.setTypeOfAccount(
+              new UserType(
+                  data.type_of_account.type.capitalize(),
+                  // 'Free',
+                  data.type_of_account.register_date,
+                  data.type_of_account.end_of_date,
+                  data.type_of_account.previous_status_detail
+              ))              
             if(localStorage.getItem("showTotorial"+id)){
               // setShowToturial(false)
             }else{
@@ -240,6 +248,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             shareUser.setSuggestions(data.information.suggestion_list)
             setSuggestionList(data.information.suggestion_list)
             console.log(searchParams.get('viewBy'))
+            setShareUser(shareUser) 
             if(searchParams.get('viewBy')){
               Auth.addEvent({
                 userid:shareUser.information?.userId as string,
@@ -289,17 +298,26 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 unique_id:id as string
             }
             const shareUser = new User(information)
-            setShareUser(shareUser) 
+            
             if(localStorage.getItem("showTotorial"+searchParams.get('user'))){
               // setShowToturial(false)
             }else{
               // setShowToturial(true)
               localStorage.setItem("showTotorial"+searchParams.get('user'),'true')
-            }                       
+            }               
+            shareUser.setTypeOfAccount(
+                new UserType(
+                    data.type_of_account.type.capitalize(),
+                    // 'Free',
+                    data.type_of_account.register_date,
+                    data.type_of_account.end_of_date,
+                    data.type_of_account.previous_status_detail
+                ))                    
             shareUser.setBox(resolveSocial,{isShare:true})
             console.log(searchParams.get('viewBy'))
             shareUser.setSuggestions(data.information.suggestion_list)
             setSuggestionList(data.information.suggestion_list)
+            setShareUser(shareUser) 
             if(searchParams.get('viewBy')){
               Auth.addEvent({
                 userid:shareUser.information?.userId as string,
@@ -455,12 +473,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-16 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-                       console.log(authContext.currentUser.type_of_account.getType())    
-                      if(authContext.currentUser.type_of_account.getType() == 'Free'){
+                      //  console.log(authContext.currentUser.type_of_account.getType())    
+                      if(shareUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
                         Auth.sendEmail({
                           "userid":chats[0].chat_user,
-                          "guest_id":authContext.currentUser.information?.userId,
+                          "guest_id":shareUser.information?.userId,
                           "alert_type":"unmute_chat"
                         })
                         setAudioUrl(authContext.prerecorded_voice)
@@ -500,12 +518,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-4 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
-                      if(authContext.currentUser.type_of_account.getType() == 'Free'){
+  
+                      if(shareUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
-                        console.log(chats)
+                        // console.log(chats)
                         Auth.sendEmail({
                           "userid":chats[1].chat_user,
-                          "guest_id":authContext.currentUser.information?.userId,
+                          "guest_id":shareUser.information?.userId,
                           "alert_type":"unmute_chat"
                         })                   
                         setAudioUrl(preRecorded)
