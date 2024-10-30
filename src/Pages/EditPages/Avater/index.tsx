@@ -279,12 +279,13 @@ const EditAvater: React.FC = () => {
     <>
         <div className={`absolute w-full hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'}  bottom-0 bg-white z-[15]`}>
           <div className="relative top-8">
-            <BackIcon title="" theme="Carbon"></BackIcon>
+            <BackIcon title="Edit Your Avatar" theme="Carbon"></BackIcon>
+           
           </div>        
           <div className="px-5 mt-[120px] hiddenScrollBar h-full">
-            <div className="text-gray-700 text-center font-semibold text-base">
+            {/* <div className="text-gray-700 text-center font-semibold text-base">
               Edit Your Avatar
-            </div>
+            </div> */}
 
             <div className="mt-6 flex items-center justify-between">
               {currentAvatar.video.length > 0 && !isLoading ? (
@@ -465,7 +466,7 @@ const EditAvater: React.FC = () => {
                 );
               })}
             </div>
-              <div className="mt-8 mb-3 px-4">
+              <div className="mt-8 mb-3  w-full">
               <Button
                   disabled={formik.values.silent_video_avatar.length == 0}
                   onClick={() =>{
