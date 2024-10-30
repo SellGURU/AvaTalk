@@ -149,11 +149,11 @@ const EditAiSetting = () => {
     <>
       <div
         id="aiSettingEdit"
-        className="absolute w-full hiddenScrollBar overflow-y-scroll h-dvh top-[0px] bg-white z-[15]"
+        className="absolute w-full hiddenScrollBar overflow-y-scroll  h-dvh top-[0px] bg-white z-[15]"
       >
         {showAiSuggestion && (
           <div className=" top-0 left-0 w-full bg-white min-h-screen absolute z-40">
-            <div className="flex  w-full items-center justify-between px-6 mt-[120px] ">
+            <div className="flex  w-full items-center justify-between px-6 mt-[100px] ">
               <div className="invisible">
                 <Button
                   onClick={() => {
@@ -345,7 +345,7 @@ const EditAiSetting = () => {
               page="AiSetting"
             ></AccessNotifManager>
           </div>
-          <div className="px-6 mt-4">
+          <div className="px-6 mt-2">
             <div className="text-base  mb-4 text-justify text-text-primary">
               Here, you can train the AI to interact with your contacts by
               providing detailed and useful content in the AI knowledge field.
@@ -386,7 +386,7 @@ const EditAiSetting = () => {
               onChange={setValue}
             /> */}
           </div>
-          <div className="px-6 mt-6">
+          <div className="px-6 mt-4">
             <Select
               label="Voice Gender"
               required
@@ -430,7 +430,7 @@ const EditAiSetting = () => {
                     </div>
                 </div>
           </div>           */}
-          <div className="px-6 mt-10">
+          <div className="px-6 mt-5">
             <Button
               data-os={getOS}
               disabled={
@@ -463,12 +463,12 @@ const EditAiSetting = () => {
             </Button>
           </div>
 
-          <div className="px-6 mt-8">
+          <div className="px-6 mt-4">
             <div className="w-full flex ">
               <img src="./Carbon/message-question.svg" alt="" />
               <div className="text-sm font-medium ml-1 text-text-primary">Need Help?</div>
             </div>
-            <div className="text-sm text-left mt-2 text-text-primary">Watch our <span onClick={() => {
+            <div className="text-sm text-left mt-1 text-text-primary">Watch our <span onClick={() => {
               // navigate('/settings/Help/tutorial')
               handleFullscreen()
             }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>

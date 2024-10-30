@@ -77,7 +77,7 @@ const EditLinks = () => {
   })
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
+      <div className={`absolute w-full hiddenScrollBar h-dvh ${links.length > 4 ? 'overflow-auto' : 'overflow-hidden'} top-[0px] bg-white z-[15]`}>
         <div className="relative top-8">
           <BackIcon title="Link" theme="Carbon"></BackIcon>
         </div>        

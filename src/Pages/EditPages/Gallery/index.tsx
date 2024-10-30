@@ -54,7 +54,7 @@ const EditGallery = () => {
   };
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh overflow-scroll top-[0px] bg-white z-[15]">
+      <div className="absolute w-full  h-dvh top-[0px] bg-white z-[15]">
         <div className="relative top-8">
           <BackIcon title="Gallery" theme="Carbon"></BackIcon>
         </div>
