@@ -21,20 +21,20 @@ axios.interceptors.response.use((response) => {
     }
     return response;
 }, (error) => {
-    if(error.status) {
-         toast.dismiss()
-    }
-    if(error.status ==401 || error.status ==498 || error.data.detail == 'Unauthorized - User Not Found'||error.data.detail == 'Invalid or logged out token'||error.data.detail == 'Missing Authorization Header'||error.data.detail == 'Unauthorized - User does not match token' || error.data.detail == 'Signature has expired' || error.data.detail == 'Invalid crypto padding'|| error.data.detail =='Not enough segments'){
+    // if(error.status) {
+    //      toast.dismiss()
+    // }
+    if(error.response.status ==401 || error.response.status ==498 ){
         localStorage.clear()
         window.location.reload(); 
     }    
 
     
-    if(error.data.detail){
-        if (error.data.detail && error.data.detail.toLowerCase().includes("successfully")) {
-            toast.success(error.data.detail)
+    if(error.response.data.detail){
+        if (error.response.data.detail && error.response.data.detail.toLowerCase().includes("successfully")) {
+            toast.success(error.response.data.detail)
         }else {
-            toast.error(error.data.detail) 
+            toast.error(error.response.data.detail) 
         }
     }    
     if (error.response && error.response.data) {
