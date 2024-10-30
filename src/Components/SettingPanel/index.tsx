@@ -106,7 +106,7 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
       <div className={`Carbon-ContactsView-Container   `}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[20px]`}>Setting</p>
-        <div className="px-6 overflow-auto  ">
+        <div className="px-6 overflow-y-scroll hiddenScrollBar h-svh pb-[200px] ">
           {isShowPlanCard &&
             <div className="">
               <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
