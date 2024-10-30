@@ -333,22 +333,22 @@ class Auth extends Api {
   }
 
   static getContactInfo(){
-    const response = this.post('/show_contact_info',{})
+    const response = this.post('/show_contact_info',{},{noPending:true})
     return response
   }
 
   static getReferalNumber() {
-    const response = this.post('/referral_shownumber',{})
+    const response = this.post('/referral_shownumber',{},{noPending:true})
     return response
   }
 
   static googleWallet() {
-    const response = this.post('/generic_pass',{})
+    const response = this.post('/generic_pass',{},{noPending:true})
     return response
   }
 
   static sendEmail(data:any) {
-    const response = this.post('/alert_email',data)
+    const response = this.post('/alert_email',data,{noPending:true})
     return response    
   }
 }
