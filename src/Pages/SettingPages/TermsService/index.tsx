@@ -15,9 +15,9 @@ const SettingTermsService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Terms of Service</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[100px] pt-[32px]">
                 <div>
-                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap space-y-3">
+                    <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap space-y-3 ">
                     <h3 className="font-semibold">Terms of Service</h3>
                     <p>Last Updated: 9/18/2024
 
