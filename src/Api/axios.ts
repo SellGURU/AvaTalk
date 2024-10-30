@@ -10,11 +10,7 @@ axios.interceptors.response.use((response) => {
         localStorage.clear()
         window.location.reload(); 
     }    
-    // if(response.data.error){
-    //     // alert("login")
-        
-    //     // redirect('https://portal.avatalk.me/#/login?nfc_id=nfc_3aa92bf1cc')
-    // }
+
     
     if(response.data.detail){
         if (response.data.detail && response.data.detail.toLowerCase().includes("successfully")) {
@@ -25,6 +21,22 @@ axios.interceptors.response.use((response) => {
     }
     return response;
 }, (error) => {
+    if(error.status) {
+         toast.dismiss()
+    }
+    if(error.status ==401 || error.status ==498 || error.data.detail == 'Unauthorized - User Not Found'||error.data.detail == 'Invalid or logged out token'||error.data.detail == 'Missing Authorization Header'||error.data.detail == 'Unauthorized - User does not match token' || error.data.detail == 'Signature has expired' || error.data.detail == 'Invalid crypto padding'|| error.data.detail =='Not enough segments'){
+        localStorage.clear()
+        window.location.reload(); 
+    }    
+
+    
+    if(error.data.detail){
+        if (error.data.detail && error.data.detail.toLowerCase().includes("successfully")) {
+            toast.success(error.data.detail)
+        }else {
+            toast.error(error.data.detail) 
+        }
+    }    
     if (error.response && error.response.data) {
         return Promise.reject(error.response.data);
     }
