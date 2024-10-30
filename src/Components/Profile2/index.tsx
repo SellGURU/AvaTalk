@@ -502,8 +502,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
                       if(authContext.currentUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
+                        console.log(chats)
                         Auth.sendEmail({
-                          "userid":chats[0].chat_user,
+                          "userid":chats[1].chat_user,
                           "guest_id":authContext.currentUser.information?.userId,
                           "alert_type":"unmute_chat"
                         })                   
