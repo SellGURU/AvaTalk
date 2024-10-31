@@ -6,7 +6,7 @@ const SettingTermsService =() => {
 
     return (
         <>
-        <div className={`Carbon-ChatDetails-container`}>
+        <div className={`Carbon-ChatDetails-container overflow-auto`}>
             <Outlet></Outlet>
             <div className="flex px-6 items-center space-x-4 absolute  top-8">
                 <Button onClick={() => {navigate(-1)}} theme={`Carbon-back`}>
@@ -15,7 +15,7 @@ const SettingTermsService =() => {
                 <p className={`Carbon-ChatDetails-title`}>Terms of Service</p>
             </div>            
 
-            <div className="flex flex-col gap-y-5 px-6 mt-[55px] hiddenScrollBar h-dvh overflow-y-scroll pb-[100px] pt-[32px]">
+            <div className="flex flex-col gap-y-5 px-6 mt-[55px] pb-[100px] pt-[32px]">
                 <div>
                     <div className="px-6 mt-24 Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify whitespace-pre-wrap space-y-3 ">
                     <h3 className="font-semibold">Terms of Service</h3>
