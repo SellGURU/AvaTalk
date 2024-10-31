@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "symphony-ui";
 
 interface ToggleProps {
@@ -10,7 +10,9 @@ interface ToggleProps {
 }
 const ToggleButton2: React.FC<ToggleProps> = ({ theme,value, leftText, rightText, onButtonClick }) => {
   const [activeButton, setActiveButton] = useState(value);
-
+  useEffect(() => {
+    setActiveButton(value)
+  },[value])
   const handleButtonClick = (buttonText: string) => {
     setActiveButton(buttonText);
     onButtonClick(buttonText);
