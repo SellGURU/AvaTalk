@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
 
 const useWindowHeight = () => {
-  const [height, setHeight] = useState(window.innerHeight);
+  const [remainingHeight, setRemainingHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     const updateHeight = () => {
-      setHeight(window.innerHeight);
+      const windowHeight = window.innerHeight;
+      const element = document.getElementById('2');
+      const elementHeight = element ? element.getBoundingClientRect().height : 0;
+      
+      setRemainingHeight(windowHeight - elementHeight);
     };
 
-    // Add event listener on mount
+    // Initial calculation
+    updateHeight();
+
+    // Update height on window resize
     window.addEventListener('resize', updateHeight);
 
-    // Clean up event listener on unmount
+    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('resize', updateHeight);
     };
   }, []);
 
-  return height;
+  return remainingHeight;
 };
+
 
 export default useWindowHeight;

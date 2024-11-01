@@ -33,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({ theme, activeItem, onItemChange }) => {
     return () => clearInterval(interval);    
   },[])
   return (
-    <div className={`${theme}-Footer-Container`}>
+    <div id="footerItem" className={`${theme}-Footer-Container`}>
       <div
         onClick={() => handleItemClick("profile")}
         className={`${theme}-Footer-VectorSection ${
