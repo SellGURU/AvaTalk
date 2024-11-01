@@ -187,7 +187,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
                                 <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
                                 {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
                                 </div> */}
-                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Trash.svg" alt="" />
+                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
                               </div>
                             }
                           </>
