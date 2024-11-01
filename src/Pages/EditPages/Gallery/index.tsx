@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
 import { useState } from "react";
+import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -16,6 +17,7 @@ const validationSchema = Yup.object().shape({
 
 const EditGallery = () => {
   const auth = useAuth();
+  const height = useWindowHeight();
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "GalleryBox"
@@ -54,85 +56,86 @@ const EditGallery = () => {
   };
   return (
     <>
-      <div className="absolute w-full  h-dvh top-[0px] bg-white z-[15]">
-        <div className="relative top-8">
-          <BackIcon title="Gallery" theme="Carbon"></BackIcon>
-        </div>
-        <div className="mt-[120px] hiddenScrollBar h-full">
-          <div className="px-6 mt-24  mb-[24px]">
-            <AccessNotifManager
-              isLimited={auth.currentUser.type_of_account.getType()== "Free" && formik.values.files.length >= 5}
-              page="GallerySetting"
-            ></AccessNotifManager>
+      <div className="absolute w-full  top-[0px] overflow-auto hiddenScrollBar pb-[20px] bg-white z-[15]" style={{height:height-40+'px'}} >
+          <div className="relative top-8">
+            <BackIcon title="Gallery" theme="Carbon"></BackIcon>
           </div>
-          <div className="px-6">
-            <TextField
-              {...formik.getFieldProps("title")}
-              errorMessage={formik.errors?.title}
-              inValid={
-                formik.errors?.title != undefined &&
-                (formik.touched?.title as boolean)
-              }
-              theme="Carbon"
-              label="Title"
-              name="title"
-              type="text"
-              placeholder="Enter title..."
-            ></TextField>
-          </div>
-          <div className="px-6 mt-3">
-            <ImageUploadr
-              accept="image/*"
-              limite={5}
-              onClick={(e) => {
-                if (auth.currentUser.type_of_account.getType() == "Free") {
-                  if (formik.values.files.length >=5 ) {
-                    setIsReadyTo(true);
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }
+          <div className="mt-[120px]  " >
+            <div className="px-6 mt-24  mb-[24px]">
+              <AccessNotifManager
+                isLimited={auth.currentUser.type_of_account.getType()== "Free" && formik.values.files.length >= 5}
+                page="GallerySetting"
+              ></AccessNotifManager>
+            </div>
+            <div className="px-6">
+              <TextField
+                {...formik.getFieldProps("title")}
+                errorMessage={formik.errors?.title}
+                inValid={
+                  formik.errors?.title != undefined &&
+                  (formik.touched?.title as boolean)
                 }
-              }}
-              userMode={auth.currentUser.type_of_account.getType()}
-              value={formik.values.files.map((item) => {
-                return {
-                  url: item.original,
-                  name: item.name ? item.name : "item",
-                };
-              })}
-              uploades={(files: Array<any>) => {
-                console.log(files);
-                const converted = files.map((item) => {
+                theme="Carbon"
+                label="Title"
+                name="title"
+                type="text"
+                placeholder="Enter title..."
+              ></TextField>
+            </div>
+            <div className="px-6 mt-3">
+              <ImageUploadr
+                accept="image/*"
+                limite={5}
+                onClick={(e) => {
+                  if (auth.currentUser.type_of_account.getType() == "Free") {
+                    if (formik.values.files.length >=5 ) {
+                      setIsReadyTo(true);
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }
+                  }
+                }}
+                userMode={auth.currentUser.type_of_account.getType()}
+                value={formik.values.files.map((item) => {
                   return {
-                    original: item.url,
-                    thumbnail: item.url,
-                    name: item.name,
-                    sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+                    url: item.original,
+                    name: item.name ? item.name : "item",
                   };
-                });
-                formik.setFieldValue("files", converted);
-              }}
-              mod="files"
-              label="Upload Images"
-            ></ImageUploadr>
+                })}
+                uploades={(files: Array<any>) => {
+                  console.log(files);
+                  const converted = files.map((item) => {
+                    return {
+                      original: item.url,
+                      thumbnail: item.url,
+                      name: item.name,
+                      sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+                    };
+                  });
+                  formik.setFieldValue("files", converted);
+                }}
+                mod="files"
+                label="Upload Images"
+              ></ImageUploadr>
+            </div>
+            <div className="px-6 mt-10">
+              <Button onClick={submit} theme="Carbon">
+                Save Changes
+              </Button>
+            </div>
           </div>
-          <div className="px-6 mt-10">
-            <Button onClick={submit} theme="Carbon">
-              Save Changes
-            </Button>
-          </div>
+          {isReadyTO && (
+            <div className="fixed w-full left-0 bottom-0 flex justify-center">
+              <ReadyForMore
+                page="Gallery"
+                onClose={() => {
+                  setIsReadyTo(false);
+                }}
+              ></ReadyForMore>
+            </div>
+          )}
+
         </div>
-        {isReadyTO && (
-          <div className="fixed w-full left-0 bottom-0 flex justify-center">
-            <ReadyForMore
-              page="Gallery"
-              onClose={() => {
-                setIsReadyTo(false);
-              }}
-            ></ReadyForMore>
-          </div>
-        )}
-      </div>
     </>
   );
 };
