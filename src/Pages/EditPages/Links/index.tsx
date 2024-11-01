@@ -10,6 +10,7 @@ import { AddLink, Confirm, ReadyForMore } from "../../../Components/__Modal__";
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
+import useWindowHeight from "../../../hooks/HightSvreen";
 const regex = /^.*Test.*$/
 
 const validationSchema = Yup.object().shape({
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 
 const EditLinks = () => {
   const auth = useAuth()
+  const height = useWindowHeight();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() == 'LinkBox')[0] as LinkBox
   if(currentBox == undefined) {
       currentBox = new LinkBox('links',[])
@@ -77,11 +79,11 @@ const EditLinks = () => {
   })
   return (
     <>
-      <div className={`absolute w-full hiddenScrollBar h-dvh ${links.length > 4 ? 'overflow-auto' : 'overflow-hidden'} top-[0px] bg-white z-[15]`}>
+      <div className={`absolute w-full hiddenScrollBar pb-[50px]  overflow-y-auto top-[0px] bg-white z-[15]`} style={{height:height+'px'}}>
         <div className="relative top-8">
           <BackIcon title="Link" theme="Carbon"></BackIcon>
         </div>        
-        <div className="mt-[120px] hiddenScrollBar h-full">
+        <div className="mt-[120px] ">
           <div className="px-6 mt-24  mb-[24px]">
             <AccessNotifManager isLimited={links.length >=2} page="LinkSetting"></AccessNotifManager>
 

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { AnimateGroup } from 'react-animation'
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
+import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -51,6 +52,7 @@ const EditSocials = () => {
   if (currentBox == undefined) {
     currentBox = new SocialBox("social", []);
   }
+  const height = useWindowHeight();
   const [socials, setSocials] = useState<Array<Social>>(currentBox.getSocialMedias().map((item: Social) => Object.assign(new Social("Facebook", item.value), item)));
   const [selectItem, setSelectedItem] = useState<null | Social>(null);
   const [openNewSocial, setOpenNewSocial] = useState(false);
@@ -83,22 +85,22 @@ const EditSocials = () => {
       setOpenAddNewSocial(false)
     }
   })
-  useEffect(() => {
-    setTimeout(() => {
-        const el = document.getElementById('sortable2');
-        Sortable.create(el,{
-          animation: 150,
-          filter: ".ignore-elements"
-        });      
-    }, 500);
-  })
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //       const el = document.getElementById('sortable2');
+  //       Sortable.create(el,{
+  //         animation: 150,
+  //         filter: ".ignore-elements"
+  //       });      
+  //   }, 500);
+  // })
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh  top-[0px] bg-white z-[15]">
+      <div className="absolute w-full hiddenScrollBar overflow-y-scroll overflow-x-hidden pb-[50px]  top-[0px] bg-white z-[15]" style={{height:height+'px'}}>
         <div className="relative top-8">
           <BackIcon title="Social" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-[120px] hiddenScrollBar h-full">
+        <div className="mt-[120px]">
           <div className="mt-24 px-6">
             <TextField
               {...formik.getFieldProps("title")}
@@ -118,7 +120,7 @@ const EditSocials = () => {
             <>
                 <AnimateGroup animation="popIn" durationOut="500">
                 <div className={`Carbon-Select-label mt-4 pl-6 w-full text-left`}>Social Media</div>
-                <ul style={{width:'100%'}} id="sortable2">
+                <ul style={{width:'100%'}} >
                   {socials.map((item: Social, index) => {
                     return (
                       <>

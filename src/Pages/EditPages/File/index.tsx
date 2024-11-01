@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ReadyForMore } from "../../../Components/__Modal__";
+import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -16,6 +17,7 @@ const validationSchema = Yup.object().shape({
 
 const EditFile = () => {
   const auth = useAuth();
+  const height = useWindowHeight();
   const [limiteMdoe, setLimiteMode] = useState("defualt");
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter(
@@ -71,11 +73,11 @@ const EditFile = () => {
   });
   return (
     <>
-      <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
+      <div className="absolute w-full hiddenScrollBar overflow-y-auto pb-[50px]  top-[0px] bg-white z-[15]" style={{height:height+'px'}}>
         <div className="relative top-8">
           <BackIcon title="File" theme="Carbon"></BackIcon>
         </div>
-        <div className="mt-[120px] hiddenScrollBar h-full">
+        <div className="mt-[120px] ">
           <div className="px-6 mt-24  mb-[24px]">
             <AccessNotifManager
               modeLimited={limiteMdoe}
