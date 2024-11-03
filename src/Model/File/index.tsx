@@ -54,7 +54,7 @@ export class File {
                 return 'wordVector';
             case 'DOCX'://doc
                 return 'wordVector';
-            default: return 'wordVecto'
+            default: return 'wordVector'
         }
     }
     public resolveRender(theme:string,_userID:string) {
