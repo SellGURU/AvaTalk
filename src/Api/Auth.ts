@@ -302,7 +302,9 @@ class Auth extends Api {
   }
 
   static addEvent(event:AddEvent) {
-    this.post('/add_event',event,{noPending:true})
+    if(event.event_type!=null && event.sub_event_category!=null ){
+      this.post('/add_event',event,{noPending:true})
+    }
     if(event.event_type == 'page_view' || event.event_type == 'ar_usage' || event.event_type == 'save_contact' || event.event_type == 'file_click' ){
       publish("isHaveNewAnalyse",{})
     }
@@ -350,6 +352,13 @@ class Auth extends Api {
   static sendEmail(data:any) {
     const response = this.post('/alert_email',data,{noPending:true})
     return response    
+  }
+
+  static checkLogo(logo:string) {
+    const response = this.post('/check_logo ',{
+      logo:logo
+    },{noPending:true})
+    return response        
   }
 }
 

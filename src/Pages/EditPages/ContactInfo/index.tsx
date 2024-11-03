@@ -100,9 +100,12 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
-          <FileUploadr label="Logo" mod="profile" value={icons} uploades={(files) => {
-            setIcons(files)
-            console.log(files)
+          <FileUploadr  label="Logo" mod="profile" value={icons} uploades={(files) => {
+            Auth.checkLogo(files[0].url).then(() => {
+              setIcons(files)
+            }).catch(() => {
+              setIcons([])
+            })
           }} accept=".png"></FileUploadr>
         </div>
         <div className="mt-3 px-6">

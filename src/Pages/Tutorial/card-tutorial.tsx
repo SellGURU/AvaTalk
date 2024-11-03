@@ -3,6 +3,7 @@ import {useEffect, useState,useRef} from "react";
 import {TutorialApi} from "../../Api";
 import {Rating} from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css';
+import { useAuth } from "../../hooks/useAuth";
 
 interface  Props{
     link:string,
@@ -27,6 +28,7 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
             videoElement.load(); // Reload the video to show the cover image
         }
     };      
+    const useauth = useAuth()
     const svgImage= (<svg aria-hidden="true" className="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 27 25.81"
                     preserveAspectRatio="xMidYMid meet" stroke-width="2">
         <g shape-rendering="geometricPrecision">
@@ -62,7 +64,7 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
         const handleFullscreen = () => {
         const videoElement:any = videoRef.current;
         if (videoElement) {
-            TutorialApi.view(videoId);
+            TutorialApi.view(videoId,useauth.currentUser.information?.userId as string);
             // Trigger fullscreen mode
             if (videoElement.requestFullscreen) {
             videoElement.requestFullscreen();

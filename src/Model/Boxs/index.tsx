@@ -39,6 +39,8 @@ class Box {
             case 'FileBox': return 'more_info_files'
             case 'SocialBox': return 'more_info_socials'
             case 'LinkBox': return 'more_info_links'
+            case 'GoogleMapBox': return 'more_info_google_map'
+            default: return ''
         }
     }
 
