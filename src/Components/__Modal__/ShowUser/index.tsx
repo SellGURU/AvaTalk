@@ -36,13 +36,13 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </Button>
                             <div>
                                 <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
-                                <div className='text-text-primary mt-1 text-center text-xs flex justify-start items-center '>{auth.currentUser.information?.job}
-                                     {" @ "}  
-                                    <span className='ml-1'>
-                                        <img className='w-[16px] h-[16px]' src={auth.currentUser.information?.logo} alt="" />
-                                    </span>
-                                     {auth.currentUser.information?.company}
-                                </div>
+                                    <div className={`text-text-primary ${auth.currentUser.information?.company && auth.currentUser.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-start items-center `}>{auth.currentUser.information?.job}
+                                        {" @ "}  
+                                        <span className='ml-1'>
+                                            <img className={`w-[16px] ${auth.currentUser.information?.logo?'block':'hidden'} h-[16px]`} src={auth.currentUser.information?.logo} alt="" />
+                                        </span>
+                                        {auth.currentUser.information?.company}
+                                    </div>
                             </div>
                             <div className="invisible">
                                 <Button onClick={onClose} theme="Carbon-back">
@@ -68,7 +68,16 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             </div>
                             <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.personlEmail}</p>
                             </a>
-                        :undefined}    
+                        :undefined}   
+                        {user?.information?.address ?
+                            <a  
+                            className={`${theme}-ContactDetails-container5 `}>
+                            <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
+                                <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-locationIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+                            </div>
+                            <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.address}</p>
+                            </a>
+                        :undefined}                             
                         <Button onClick={() => {
                             const contact = {
                                 name: user.information?.lastName as string,
