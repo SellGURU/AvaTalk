@@ -47,7 +47,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
     }  
     return (
         <>
-        <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[95vh] pb-10 rounded-b-none slideupModal  bg-white w-full">
+        <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[95svh] pb-10 rounded-b-none slideupModal  bg-white w-full">
           {step == 0 ?
             <>
                 <div className='flex w-full justify-between items-start'>
