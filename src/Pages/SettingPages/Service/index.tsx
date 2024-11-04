@@ -63,6 +63,7 @@ const SettingService =() => {
             mode:'year',
             price:80
         },)
+    const [subLink,setsubLink] = useState("")
         
     return (
         <>
@@ -133,7 +134,8 @@ const SettingService =() => {
                                 unit_amount:activeService.price * 100
                             }).then(res => {
                                 // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
-                                window.open(res.data.sublink)
+                                // window.open(res.data.sublink)
+                                setsubLink(res.data.sublink)
                             })
                         }} theme="Carbon">Continue to Payment</Button>
                     </div>
@@ -170,7 +172,15 @@ const SettingService =() => {
                 <p className={"text-lg font-semibold text-[#374151]"}>has been successfully completed</p>
             </div>
             </div>
-        </Modal>        
+        </Modal>  
+        <Modal isOpen={subLink.length > 0}>
+            <div>
+                <a href={subLink} data-rewardful>
+                    peyment
+                </a>
+
+            </div>
+        </Modal>      
         </>
     )
 }
