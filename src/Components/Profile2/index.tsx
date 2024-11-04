@@ -5,7 +5,7 @@ import { boxProvider, getOS, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
 import { Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { Auth, Contacts } from "../../Api";
+import { Auth } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
 import ContentCard from "../ContentCard";
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
@@ -16,8 +16,8 @@ import ToggleButton2 from "../ToggleButton2";
 import Presentition2 from "../Presentition2";
 import AudioProvider from "../AudioProvider";
 import { chat } from "../../Types";
-import { ExchangeContact } from "../__Modal__";
-import { toast } from "react-toastify";
+import  ExchangeContact  from "../__Modal__/ExchangeContact/index2";
+// import { toast } from "react-toastify";
 import ShowUser from "../__Modal__/ShowUser";
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Notification from "../Notification";
@@ -828,8 +828,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setStartVideoTalk(false)
       publish("voiceIsEnded",{})
     }} url={audioUrl} theme="Carbon" audioref={audioRef}></AudioProvider>    
+    {showExchangeContact &&
+      <>
+          <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+            <ExchangeContact fullName={shareUser.information?.firstName+ ' '+shareUser.information?.lastName} onClose={() => setShowExchangeContact(false)}></ExchangeContact>
+          </div>
+          <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
+      </>
+    }
 
-    <ExchangeContact mode='add' onAddContact={(data) => {
+    {/* <ExchangeContact mode='add' onAddContact={(data) => {
         Contacts.addContact({
           email:data.email,
           full_name:data.fullName,
@@ -839,7 +847,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         }).then(() => {
           toast.success("contact is exchanged")
         })
-    }} onEditContact={() => {}} theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>    
+    }} onEditContact={() => {}} theme='Carbon' isOpen={showExchangeContact} onClose={() => {setShowExchangeContact(false)}} title='Share your contact info with'></ExchangeContact>     */}
     </>
   );
 };
