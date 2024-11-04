@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useState, useEffect, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap,useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import "leaflet/dist/images/marker-icon-2x.png";
 import { Button } from "symphony-ui";
@@ -33,7 +34,7 @@ const EditGoogleMap = () => {
     currentBox = new GoogleMapBox("Google Map", { lan: 33, lat: 33 });
   }
 
-  const [position, setPosition] = useState<[number, number]>([currentBox.location.lan, currentBox.location.lat]);
+  const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
   const [searchQuery, setSearchQuery] = useState('');
 
   const formik = useFormik({
@@ -70,7 +71,19 @@ const EditGoogleMap = () => {
     }, 500), // 500ms delay
     []
   );
+  function LocationMarker() {
+    // const [position, setPosition] = useState(null);
 
+    // Using useMapEvents to handle map clicks
+    useMapEvents({
+      click(e:any) {
+        setPosition([parseFloat(e.latlng.lat), parseFloat(e.latlng.lng)]);
+        // console.log(e)
+      },
+    });
+
+    return position ? <Marker position={position}></Marker> : null;
+  }
   useEffect(() => {
     handleSearch(searchQuery);
   }, [searchQuery, handleSearch]);
@@ -109,12 +122,13 @@ const EditGoogleMap = () => {
           />
         </div>
         <div className="px-6 mt-3">
-          <MapContainer center={position} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
+          <MapContainer  center={position} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            <Marker position={position} />
+            {/* <Marker position={position} /> */}
+            <LocationMarker></LocationMarker>
             <FlyToLocation position={position} />
           </MapContainer>
         </div>
