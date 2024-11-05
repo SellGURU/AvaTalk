@@ -6,7 +6,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { AuthContext } from "../../../../store/auth-context";
 import { useContext } from "react";
 interface InformationStepProps {
-    onSubmit:() => void
+    onSubmit:(gender:string) => void
 }
 
 const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
@@ -49,7 +49,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
     
     return (
         <>
-            <div className="mt-8">
+            <div className="mt-0">
                 <div className="text-text-primary font-semibold text-center">{authContext.linkedInSignup ? 'Sign up with LinkedIn ' : 'Create Your Account'}</div>
                 <div className="flex justify-center">
                     <div className="text-[#6B7280] text-[14px] mt-2 text-center w-[256px]">
@@ -126,7 +126,7 @@ const InformationStep:React.FC<InformationStepProps> = ({onSubmit}) => {
                             lastName:formik.values.LastName,
                             gender:formik.values.gender
                         })
-                        onSubmit()
+                        onSubmit(formik.values.gender)
                     }} disabled={!formik.isValid || formik.values.FirstName == ''} theme="Carbon">Continue</Button>                              
                 </div>                   
             </div>

@@ -41,7 +41,7 @@ const CreatePasswordStep:React.FC<CreatePasswordStep> = ({
     })
     return (
         <>
-            <div className="mt-8">
+            <div className="mt-2">
                 <div className="text-text-primary font-semibold text-center"> Set a Password</div>
                 <div className="flex justify-center">
                     <div className="text-[#6B7280] text-[14px] mt-2 text-center w-[256px]">
