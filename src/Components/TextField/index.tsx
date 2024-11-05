@@ -166,7 +166,7 @@ const TextField: React.FC<InputProps> = ({
         <div className={`${theme}-TextField-error`}>{errorMessage}</div>
       ):
       <>
-        <div className={`${theme}-TextField-error invisible`}>error text</div>
+        {/* <div className={`${theme}-TextField-error invisible`}>error text</div> */}
       </>}
     </div>
   );
