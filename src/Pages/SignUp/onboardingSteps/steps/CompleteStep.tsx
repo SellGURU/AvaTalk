@@ -7,10 +7,59 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { Box } from "../../../../Model";
 import { boxProvider } from "../../../../help";
 import { toast } from "react-toastify";
+import { useEffect, useRef, useState } from "react";
 
 const CompleteStep = () => {
     const navigate = useNavigate();
     const authContext = useAuth()
+    const videoRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false); // Track video visibility
+    const handleFullscreen = () => {
+        setIsVisible(true)
+        const videoElement:any = videoRef.current;
+        if (videoElement) {
+        // Request fullscreen for the video element
+        if (videoElement.requestFullscreen) {
+            videoElement.requestFullscreen();
+        } else if (videoElement.mozRequestFullScreen) { // For Firefox
+            videoElement.mozRequestFullScreen();
+        } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+            videoElement.webkitRequestFullscreen();
+        } else if (videoElement.msRequestFullscreen) { // For IE/Edge
+            videoElement.msRequestFullscreen();
+        }
+
+        // Play the video when fullscreen is entered
+        videoElement.play();
+        }
+    };  
+    const handleFullscreenChange = () => {
+        const videoElement:any = videoRef.current;
+        if (document.fullscreenElement === null && videoElement) {
+        // Exit fullscreen: stop the video and hide it
+        videoElement.pause();
+        videoElement.currentTime = 0; // Reset the video to the start
+        setIsVisible(false);
+        navigate("/?splash=false&signup_success=true");
+        }
+    };  
+    const handleVideoEnd = () => {
+        // Exit fullscreen when the video ends
+        if (document.fullscreenElement) {
+        document.exitFullscreen();
+        }
+        navigate("/?splash=false&signup_success=true");
+        setIsVisible(false);
+    };
+    useEffect(() => {
+        // Add event listener for fullscreen change
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        };
+    }, []);     
     return (
         <>
             <div className="mt-8">
@@ -72,7 +121,8 @@ const CompleteStep = () => {
                                     })
                                     authContext.currentUser.setBox(resolveSocial)
                                 })                                  
-                                 navigate("/?splash=false");
+                                handleFullscreen()
+                                //  navigate("/?splash=false");
                             }else{
                                 toast.error(res.data)
                             }                            
@@ -123,16 +173,18 @@ const CompleteStep = () => {
                                         gender:data.information.gender
                                     })
                                     authContext.currentUser.setBox(resolveSocial)
-                                })                                  
-                                 navigate("/?splash=false&signup_success=true");
+                                })                           
+                                handleFullscreen()       
+                                //  navigate("/?splash=false&signup_success=true");
                             }else{
                                 toast.error(res.data)
                             }
                         })                    
                     }
                    
-                }} theme="Carbon">Get Started</Button>         
+                }} theme="Carbon">Get Started</Button>      
             </div>        
+             <video onEnded={handleVideoEnd}  ref={videoRef} src={'https://codieblob.blob.core.windows.net/avatalk/Videos/full_tut.mp4'} style={{display:isVisible?'block':'none'}} />
         </>
     )
 }
