@@ -615,6 +615,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </div>
                     <div className={`${theme}-Profile-Box`}>
                       <Button onClick={() => {
+                        setIsTalking(false)
                         window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                       }} theme='Carbon-back'>
                         <div className={`${theme}-Profile-BoxVector`}></div>
@@ -710,6 +711,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                             userid:shareUser.information?.userId as string,
                             sub_event_category:'view_link'
                           })
+                          setIsTalking(false)
                           window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                         }} theme='Carbon-back'>
                           <div className={`${theme}-Profile-BoxVector`}></div>

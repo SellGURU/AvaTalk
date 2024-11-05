@@ -139,10 +139,10 @@ const OnBoarding = () => {
                 }
                 {step == 1 &&
                     <>
-                        <InformationStep onSubmit={() => {
+                        <InformationStep onSubmit={(gender:string) => {
                             if(uploadedAvater.photo == '' ){
-                                formik.setFieldValue('silent_video_avatar',avatarList.filter((el:any) =>el.gender =='female')[0].video)
-                                formik.setFieldValue('avatar_pic_url',avatarList.filter((el:any) =>el.gender =='female')[0].photo)                            
+                                formik.setFieldValue('silent_video_avatar',avatarList.filter((el:any) =>el.gender ==gender)[0].video)
+                                formik.setFieldValue('avatar_pic_url',avatarList.filter((el:any) =>el.gender ==gender)[0].photo)                            
                             }
                             setStep(step+1)
                         }}></InformationStep>

@@ -4,6 +4,7 @@ import { BissinesCard, TextField } from "../../../../Components"
 import React from "react";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
+import * as Yup from "yup";
 
 interface BusinessStepProps {
     onSubmit:() => void
@@ -19,13 +20,17 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
             job:context.siginUpOptions.job,
             company:context.siginUpOptions.company
         },
+        validationSchema:Yup.object().shape({
+            job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
+            company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
+        }),
         onSubmit:() => {
-
+            
         }
     })    
     return (
         <>
-            <div className="mt-8">
+            <div className="mt-0">
                 <div className="text-text-primary font-semibold text-center">Business Information</div>
                 <div className="flex justify-center">
                     <div className="text-[#6B7280] text-[14px] mt-2 text-center w-[256px]">
@@ -45,7 +50,7 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                     theme="Carbon"
                     name="job"
                     type="text"
-                    inValid={false}
+                    inValid={formik.errors?.job != undefined && (formik.touched?.job as boolean)}
                     errorMessage={formik.errors.job}
                     ></TextField>
                 </div>
@@ -58,11 +63,12 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                     theme="Carbon"
                     name="company"
                     type="text"
-                    inValid={false}
+                    errorMessage={formik.errors?.company}
+                    inValid={formik.errors?.company != undefined && (formik.touched?.company as boolean)}
                     ></TextField>
                 </div>  
                 <div className="mt-8">
-                    <Button onClick={() => {
+                    <Button disabled={!formik.isValid} onClick={() => {
                         // console.log(formik.values.phone)
                         context.siginupHandler({
                             job:formik.values.job,
