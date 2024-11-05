@@ -47,7 +47,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
     }  
     return (
         <>
-        <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[95svh] pb-10 rounded-b-none slideupModal  bg-white w-full">
+        <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[93svh] pb-10 rounded-b-none slideupModal  bg-white w-full">
           {step == 0 ?
             <>
                 <div className='flex w-full justify-between items-start'>
@@ -194,7 +194,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
           <div className='absolute w-full flex justify-center pt-28 top-0 left-0'>
               <img className='' src="./icons/illo.png" alt="" />
           </div>          
-          <div className="mt-10 mb-4">
+          <div className="mt-20 mb-4">
             <Button disabled={false} onClick={() => {
               onClose()
               setStep(0)

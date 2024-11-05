@@ -162,9 +162,12 @@ const TextField: React.FC<InputProps> = ({
           </div>
         )}
       </div>
-      {inValid && (
+      {inValid ? (
         <div className={`${theme}-TextField-error`}>{errorMessage}</div>
-      )}
+      ):
+      <>
+        <div className={`${theme}-TextField-error invisible`}>error text</div>
+      </>}
     </div>
   );
 };
