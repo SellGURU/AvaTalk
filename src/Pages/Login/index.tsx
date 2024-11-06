@@ -209,6 +209,8 @@ const Login = () => {
   }, 3000);
   useConstructor(() => {
     localStorage.clear()
+    console.log(parametr.get('via'))
+    localStorage.setItem("referalCodeA",parametr.get('via') as string)    
     // localStorage.setItem("token",'')
     authContext.setNfc_id(parametr.get('nfc_id'))
   })

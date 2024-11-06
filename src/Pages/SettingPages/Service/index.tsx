@@ -132,7 +132,7 @@ const SettingService =() => {
                                 quantity:1,
                                 recurring_interval:activeService.mode,
                                 unit_amount:activeService.price * 100,
-                                referral_id:context.refrealCode as string
+                                referral_id:context.refrealCode != null ?context.refrealCode:localStorage.getItem("referalCodeA") as string
                             }).then(res => {
                                 // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
                                 window.open(res.data.sublink)
