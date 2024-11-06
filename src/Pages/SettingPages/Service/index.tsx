@@ -63,7 +63,7 @@ const SettingService =() => {
             mode:'year',
             price:80
         },)
-    const [subLink,setsubLink] = useState("")
+    const [subLink,] = useState("")
         
     return (
         <>
@@ -132,11 +132,11 @@ const SettingService =() => {
                                 quantity:1,
                                 recurring_interval:activeService.mode,
                                 unit_amount:activeService.price * 100,
-                                referral_id:'8444da'
+                                referral_id:context.refrealCode as string
                             }).then(res => {
                                 // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
-                                // window.open(res.data.sublink)
-                                setsubLink(res.data.sublink)
+                                window.open(res.data.sublink)
+                                // setsubLink(res.data.sublink)
                             })
                         }} theme="Carbon">Continue to Payment</Button>
                     </div>
