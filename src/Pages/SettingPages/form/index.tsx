@@ -8,7 +8,9 @@ import SupportForm from "../../../Api/suportForm.ts";
 import {useState} from "react";
 import TextArea from "../../../Components/TextArea";
 import {useNavigate} from 'react-router-dom'
+import { useAuth } from "../../../hooks/useAuth.tsx";
 export const FormPage = () => {
+    const context = useAuth()
     const navigate = useNavigate()
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -19,8 +21,8 @@ export const FormPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const initialValue = {
         message:"" ,
-        email:"" ,
-        fullname:"",
+        email:context.currentUser.information?.personlEmail as string,
+        fullname:context.currentUser.information?.firstName +" "+ context.currentUser.information?.lastName as string,
     };
     const formik = useFormik({
         initialValues:initialValue,
@@ -58,7 +60,7 @@ export const FormPage = () => {
                     <div className="mb-4">
                         <div className="flex flex-col relative gap-y-4 w-[100%]">
 
-                            <div className={" font-bold mb-4 text-[14px] text-center"}>Get in touch with us! Have any questions? Let us know, we're here to help!</div>
+                            <div className={" font-bold mb-4 text-[14px] text-justify"}>Get in touch with us! Have any questions? Let us know, we're here to help!</div>
                         </div>
                         <div className={"flex flex-col items-center justify-center gap-4"}>
                             <TextField errorMessage={formik.errors.fullname}  inValid={formik.errors.fullname as string}  {...formik.getFieldProps("fullname")} theme="Carbon" label={"Full Name"} placeholder={"Enter your first and last name..."}
