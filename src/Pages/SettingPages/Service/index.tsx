@@ -131,7 +131,8 @@ const SettingService =() => {
                             Service.SubLink({
                                 quantity:1,
                                 recurring_interval:activeService.mode,
-                                unit_amount:activeService.price * 100
+                                unit_amount:activeService.price * 100,
+                                referral_id:'8444da'
                             }).then(res => {
                                 // window.open(`https://app.getrewardful.com/setup/code?platform=`+res.data.sublink)
                                 // window.open(res.data.sublink)

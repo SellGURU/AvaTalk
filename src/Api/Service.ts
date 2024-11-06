@@ -5,6 +5,7 @@ interface SublinkPayload {
     unit_amount: | number,
     recurring_interval:'year'|'month',
     quantity:number
+    referral_id?:string
 }
 
 interface Product {
