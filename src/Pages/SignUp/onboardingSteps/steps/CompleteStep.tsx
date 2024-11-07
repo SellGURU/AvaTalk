@@ -9,7 +9,12 @@ import { boxProvider } from "../../../../help";
 import { toast } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
 
-const CompleteStep = () => {
+interface CompleteStepProps {
+    setISCreated:(action:boolean) => void
+}
+const CompleteStep:React.FC<CompleteStepProps> = ({
+    setISCreated
+}) => {
     const navigate = useNavigate();
     const authContext = useAuth()
     const videoRef = useRef(null);
@@ -93,6 +98,7 @@ const CompleteStep = () => {
                 })
                 authContext.currentUser.setBox(resolveSocial)
                 setStep(2)
+                setISCreated(true)
             })                                  
             // handleFullscreen()
             //  navigate("/?splash=false");
@@ -171,8 +177,8 @@ const CompleteStep = () => {
                 </>
                 :
                 <>
-                <div className="mt-8">
-                    <div className="text-text-primary font-semibold text-center">Welcome to Avatalk!</div>
+                <div className="mt-16">
+                    <div className="text-text-primary text-[16px] font-semibold text-center">Welcome to Avatalk!</div>
                     <div className="flex justify-center">
                         <div className="text-[#6B7280] text-[14px] mt-2  text-justify px-4">
                             Whether it’s a quick chat or staying updated with your contact, AVATALK makes it easy to stay connected with everyone who matters.              
@@ -181,6 +187,7 @@ const CompleteStep = () => {
 
                     <div className="px-4 mt-8">
                         <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"} style={{width:'100%',boxShadow:'4px 4px 20px 0px #886FB069'}}>
+                            <div className="text-text-primary text-[14px] font-medium ">Welcome to Avatalk!</div>
                             <div className={"space-y-5 w-full"}>
                                 <video onPlay={handleFullscreen} id={'welcomVideo'} onEnded={() => handleVideoEnd()} ref={videoRef}   poster={'./icons/baner.png'} className={"rounded-xl w-full h-[180px]"}   controls>
                                     <source src={totorialVideo} type="video/mp4"/>
