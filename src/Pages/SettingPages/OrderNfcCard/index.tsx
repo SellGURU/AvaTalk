@@ -20,14 +20,20 @@ export const OrderNfcCard = () => {
         if(!used){
             console.log('Rewardful Ready!')
             if(searchParametr.get("status") == "success"){
+                setIsOpen(true)
+                setUsed(true)
                 setTimeout(() => {
                     Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
-                        setIsOpen(true)
-                        setUsed(true)
                         // publish("refreshPage",{})
                         rewardful('convert', { email: searchParametr.get("email") });
                         // console.log(location.pathname)
                         // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+                    }).catch(() => {
+                        try{
+                            rewardful('convert', { email: searchParametr.get("email") });
+                        }catch(e){
+                            console.log(e)
+                        }
                     })    
                 }, 1000);
             }        
