@@ -23,7 +23,26 @@ const SettingService =() => {
     const [isOpen, setIsOpen] = useState(false);
     const [plan,setplan] = useState(context.currentUser.type_of_account.getType())
     const [beExpired,setIsExpired] = useState(false)
-    
+    const [used,setUsed] = useState(false)
+    rewardful('ready', () => {
+         if(!used){
+             if(searchParametr.get("status") == "true"){
+                 setIsOpen(true)
+                 setplan('Pro')
+                 setUsed(true)
+                 context.currentUser.type_of_account.setType("Pro")
+                 setTimeout(() => {
+                     Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
+                         rewardful('convert', { email: searchParametr.get("email") });                 
+                         // publish("refreshPage",{})
+                         // navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
+                     })   
+                     // console.log(context.currentUser.information?.personlEmail )
+                     // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
+                 }, 3000);
+             }        
+         }
+    })    
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
         if(searchParametr.get("status") == "true"){
