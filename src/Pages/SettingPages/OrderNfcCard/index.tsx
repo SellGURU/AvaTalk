@@ -20,10 +20,10 @@ export const OrderNfcCard = () => {
         if(!used){
             console.log('Rewardful Ready!')
             if(searchParametr.get("status") == "success"){
-                setIsOpen(true)
-                setUsed(true)
                 setTimeout(() => {
                     Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
+                        setIsOpen(true)
+                        setUsed(true)
                         // publish("refreshPage",{})
                         rewardful('convert', { email: searchParametr.get("email") });
                         // console.log(location.pathname)
@@ -76,6 +76,7 @@ export const OrderNfcCard = () => {
             <div className={" relative pb-5 pt-6"}>
                 <div className={"absolute right-0 top-0"}>
                     <Button onClick={() => {
+                        rewardful('convert', { email: searchParametr.get("email") });
                         setIsOpen(false)
                     }} data-mode="profile-review-button-2" theme="Carbon-Google">
                         <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>
