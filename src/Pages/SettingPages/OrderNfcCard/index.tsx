@@ -21,6 +21,7 @@ export const OrderNfcCard = () => {
             setTimeout(() => {
                 Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
                     // publish("refreshPage",{})
+                    rewardful('convert', { email: searchParametr.get("email") });
                     console.log(location.pathname)
                     navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
                 })    

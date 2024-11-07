@@ -32,12 +32,12 @@ const SettingService =() => {
             context.currentUser.type_of_account.setType("Pro")
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
+                    rewardful('convert', { email: searchParametr.get("email") });                 
                     publish("refreshPage",{})
                     navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
                 })   
-                console.log(context.currentUser.information?.personlEmail )
+                // console.log(context.currentUser.information?.personlEmail )
                 // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
-                //  rewardful('convert', { email: "amir@gmail.com" });                 
             }, 3000);
         }
     },[])
