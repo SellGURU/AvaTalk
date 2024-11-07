@@ -45,22 +45,6 @@ const SettingService =() => {
     })    
     // console.log(searchParametr.get("sassionid"))
     useEffect(() => {
-        if(searchParametr.get("status") == "true"){
-            setIsOpen(true)
-            setplan('Pro')
-            context.currentUser.type_of_account.setType("Pro")
-            setTimeout(() => {
-                Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
-                    rewardful('convert', { email: searchParametr.get("email") });                 
-                    // publish("refreshPage",{})
-                    // navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
-                })   
-                // console.log(context.currentUser.information?.personlEmail )
-                // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
-            }, 3000);
-        }
-    },[])
-    useEffect(() => {
         if(context.currentUser.type_of_account.getDayremindToExpired() <= 7 && context.currentUser.type_of_account.getType() == 'Pro'){
             setIsExpired(true)
         }
