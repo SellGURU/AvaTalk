@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {BackIcon} from "../../../Components";
 import {CardOrderNFCProduct} from "../../../Components/OrderNFC__Card";
 import NFC from '../../../Api/Data/NFC.json'
@@ -15,7 +15,8 @@ export const OrderNfcCard = () => {
     // const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
+    rewardful('ready', () => {
+        console.log('Rewardful Ready!')
         if(searchParametr.get("status") == "success"){
             setIsOpen(true)
             setTimeout(() => {
@@ -26,8 +27,21 @@ export const OrderNfcCard = () => {
                     // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
                 })    
             }, 1000);
-        }
-    })    
+        }        
+    });
+    // useEffect(() => {
+    //     if(searchParametr.get("status") == "success"){
+    //         setIsOpen(true)
+    //         setTimeout(() => {
+    //             Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
+    //                 // publish("refreshPage",{})
+    //                 rewardful('convert', { email: searchParametr.get("email") });
+    //                 // console.log(location.pathname)
+    //                 // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+    //             })    
+    //         }, 1000);
+    //     }
+    // })    
     return (
         <>
             <>
