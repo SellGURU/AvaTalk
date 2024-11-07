@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {BackIcon} from "../../../Components";
 import {CardOrderNFCProduct} from "../../../Components/OrderNFC__Card";
 import NFC from '../../../Api/Data/NFC.json'
-import {  useSearchParams ,useNavigate} from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { Service } from "../../../Api";
 // import { publish } from "../../../utils/event";
 import Modal from "react-modal";
@@ -12,7 +12,7 @@ import { Button } from "symphony-ui";
 export const OrderNfcCard = () => {
     const [nfcCards] = useState(NFC)
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
@@ -22,8 +22,8 @@ export const OrderNfcCard = () => {
                 Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
                     // publish("refreshPage",{})
                     rewardful('convert', { email: searchParametr.get("email") });
-                    console.log(location.pathname)
-                    navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+                    // console.log(location.pathname)
+                    // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
                 })    
             }, 1000);
         }
