@@ -18,6 +18,11 @@ export const OrderNfcCard = () => {
     const [used,setUsed] = useState(false)
     rewardful('ready', () => {
         if(!used){
+            if(Rewardful.referral) {
+            console.log('Current referral ID: ', Rewardful.referral);
+            } else {
+            console.log('No referral present.');
+            }            
             console.log('Rewardful Ready!')
             if(searchParametr.get("status") == "success"){
                 setIsOpen(true)
