@@ -22,6 +22,7 @@ const OnBoarding = () => {
     const [step ,setStep] = useState(0)
     const authContext = useAuth()
     const navigate = useNavigate()
+    const [isCreated,setISCreated] = useState(false)
     const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
     const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
         photo:"",
@@ -175,7 +176,7 @@ const OnBoarding = () => {
                 }   
                 {step == 5 &&
                     <>
-                        <CompleteStep></CompleteStep>
+                        <CompleteStep setISCreated={setISCreated}></CompleteStep>
                     </>
                 }                                                                            
             </>
@@ -185,19 +186,9 @@ const OnBoarding = () => {
         <>
             <div className="w-full h-screen  px-4">
                 <div className="h-[98vh] py-5 hiddenScrollBar overflow-y-scroll w-full">
-                    <div className="flex justify-between items-center w-full">
-                        {(authContext.googleInformation!= null && step >1 )||  authContext.googleInformation == null ?
-                            <Button onClick={() =>{
-                                if(step>0){
-                                    setStep(step -1)
-                                }else{
-                                    navigate('/signup')
-                                }
-                            }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                                <div className="Carbon-back-Button-vector"></div>
-                            </Button>
-                            :
-                            <div className="invisible">
+                    {!isCreated &&
+                        <div className="flex justify-between items-center w-full">
+                            {(authContext.googleInformation!= null && step >1 )||  authContext.googleInformation == null ?
                                 <Button onClick={() =>{
                                     if(step>0){
                                         setStep(step -1)
@@ -206,23 +197,35 @@ const OnBoarding = () => {
                                     }
                                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                                     <div className="Carbon-back-Button-vector"></div>
-                                </Button>                        
+                                </Button>
+                                :
+                                <div className="invisible">
+                                    <Button onClick={() =>{
+                                        if(step>0){
+                                            setStep(step -1)
+                                        }else{
+                                            navigate('/signup')
+                                        }
+                                    }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                                        <div className="Carbon-back-Button-vector"></div>
+                                    </Button>                        
 
+                                </div>
+                            }
+
+                            <div className={`mt-10 ${step>0 && step < 5?'visible':'invisible'}`}>
+                                    <StepController
+                                        theme="Carbon"
+                                        steps={4}
+                                        currentStep={step}
+                                    ></StepController>                    
                             </div>
-                        }
 
-                        <div className={`mt-10 ${step>0 && step < 5?'visible':'invisible'}`}>
-                                <StepController
-                                    theme="Carbon"
-                                    steps={4}
-                                    currentStep={step}
-                                ></StepController>                    
+                            <div onClick={() => {
+                                skipMannager()
+                            }} className={`text-text-primary invisible cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
                         </div>
-
-                        <div onClick={() => {
-                            skipMannager()
-                        }} className={`text-text-primary invisible cursor-pointer ${step< 5?'visible':'invisible'} font-semibold`}>Skip</div>
-                    </div>
+                    }
                     {
                         resolveStep()
                     }

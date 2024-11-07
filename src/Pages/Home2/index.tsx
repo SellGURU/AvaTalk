@@ -79,6 +79,7 @@ const Home2 = () => {
         // audio.play();        
     }
     useConstructor(() => {
+        authContext.setReferalCode(parametr.get("via") as string)
         getProfile()
         checkSub()
     })

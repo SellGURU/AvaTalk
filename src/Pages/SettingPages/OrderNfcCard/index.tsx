@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {BackIcon} from "../../../Components";
 import {CardOrderNFCProduct} from "../../../Components/OrderNFC__Card";
 import NFC from '../../../Api/Data/NFC.json'
-import {  useSearchParams ,useNavigate} from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { Service } from "../../../Api";
 // import { publish } from "../../../utils/event";
 import Modal from "react-modal";
@@ -12,21 +12,51 @@ import { Button } from "symphony-ui";
 export const OrderNfcCard = () => {
     const [nfcCards] = useState(NFC)
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
-        if(searchParametr.get("status") == "success"){
-            setIsOpen(true)
-            setTimeout(() => {
-                Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
-                    // publish("refreshPage",{})
-                    console.log(location.pathname)
-                    navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
-                })    
-            }, 1000);
+    const [used,setUsed] = useState(false)
+    rewardful('ready', () => {
+        if(!used){
+            if(Rewardful.referral) {
+            console.log('Current referral ID: ', Rewardful.referral);
+            } else {
+            console.log('No referral present.');
+            }            
+            console.log('Rewardful Ready!')
+            if(searchParametr.get("status") == "success"){
+                setIsOpen(true)
+                setUsed(true)
+                setTimeout(() => {
+                    Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
+                        // publish("refreshPage",{})
+                        rewardful('convert', { email: searchParametr.get("email") });
+                        // console.log(location.pathname)
+                        // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+                    }).catch(() => {
+                        try{
+                            rewardful('convert', { email: searchParametr.get("email") });
+                        }catch(e){
+                            console.log(e)
+                        }
+                    })    
+                }, 1000);
+            }        
         }
-    })    
+    });
+    // useEffect(() => {
+    //     if(searchParametr.get("status") == "success"){
+    //         setIsOpen(true)
+    //         setTimeout(() => {
+    //             Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
+    //                 // publish("refreshPage",{})
+    //                 rewardful('convert', { email: searchParametr.get("email") });
+    //                 // console.log(location.pathname)
+    //                 // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+    //             })    
+    //         }, 1000);
+    //     }
+    // })    
     return (
         <>
             <>
@@ -57,6 +87,7 @@ export const OrderNfcCard = () => {
             <div className={" relative pb-5 pt-6"}>
                 <div className={"absolute right-0 top-0"}>
                     <Button onClick={() => {
+                        rewardful('convert', { email: searchParametr.get("email") });
                         setIsOpen(false)
                     }} data-mode="profile-review-button-2" theme="Carbon-Google">
                         <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0 "></div>

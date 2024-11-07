@@ -122,11 +122,14 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
             <div className={"flex items-center w-full justify-between"}>
 
                 {!isLoading
-&&
+                &&
                 <Rating
                     className={"!w-24"}
                     value={rating}
-                    onChange={setRating}
+                    onChange={(val:any) => {
+                        setRating(val)
+                        setVideoRate(val)
+                    }}
                     readOnly={videoRate}
                     itemStyles={customStyles}
                 />}

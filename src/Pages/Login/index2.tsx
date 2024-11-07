@@ -107,6 +107,8 @@ const Login = () => {
   useConstructor(() => {
     localStorage.clear()
     // localStorage.setItem("token",'')
+    console.log(parametr.get('via'))
+    localStorage.setItem("referalCodeA",parametr.get('via') as string)
     authContext.setNfc_id(parametr.get('nfc_id'))
   })
   useEffect(() => {
