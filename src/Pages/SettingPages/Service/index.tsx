@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "symphony-ui"
-import { Outlet, useNavigate, useSearchParams, useLocation } from "react-router-dom"
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
 import { Service } from "../../../Api";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
-import { publish } from "../../../utils/event";
+// import { publish } from "../../../utils/event";
 // import {useState} from "react";
 interface serviceType {
     title:string,
@@ -19,7 +19,7 @@ const SettingService =() => {
     const context = useAuth()
     const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
-    const location = useLocation();    
+    // const location = useLocation();    
     const [isOpen, setIsOpen] = useState(false);
     const [plan,setplan] = useState(context.currentUser.type_of_account.getType())
     const [beExpired,setIsExpired] = useState(false)
@@ -33,8 +33,8 @@ const SettingService =() => {
             setTimeout(() => {
                 Service.subRedirect(searchParametr.get("sassionid")||"").then(() => {
                     rewardful('convert', { email: searchParametr.get("email") });                 
-                    publish("refreshPage",{})
-                    navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
+                    // publish("refreshPage",{})
+                    // navigate(location.pathname+"/?Successfulpayment=true", { replace: true });                  
                 })   
                 // console.log(context.currentUser.information?.personlEmail )
                 // rewardful('convert', { email: context.currentUser.information?.personlEmail });  
