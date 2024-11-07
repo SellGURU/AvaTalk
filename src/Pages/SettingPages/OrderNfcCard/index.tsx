@@ -15,19 +15,23 @@ export const OrderNfcCard = () => {
     // const navigate = useNavigate();
     const [searchParametr] = useSearchParams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    const [used,setUsed] = useState(false)
     rewardful('ready', () => {
-        console.log('Rewardful Ready!')
-        if(searchParametr.get("status") == "success"){
-            setIsOpen(true)
-            setTimeout(() => {
-                Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
-                    // publish("refreshPage",{})
-                    rewardful('convert', { email: searchParametr.get("email") });
-                    // console.log(location.pathname)
-                    // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
-                })    
-            }, 1000);
-        }        
+        if(!used){
+            console.log('Rewardful Ready!')
+            if(searchParametr.get("status") == "success"){
+                setIsOpen(true)
+                setUsed(true)
+                setTimeout(() => {
+                    Service.payRedirect(searchParametr.get("sassionid")||"").then(() => {
+                        // publish("refreshPage",{})
+                        rewardful('convert', { email: searchParametr.get("email") });
+                        // console.log(location.pathname)
+                        // navigate(location.pathname+'?Successfulpayment=true', { replace: true });                  
+                    })    
+                }, 1000);
+            }        
+        }
     });
     // useEffect(() => {
     //     if(searchParametr.get("status") == "success"){
