@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useState } from 'react';
 import { User } from '../../../Model';
 import { Button } from 'symphony-ui';
 import { Auth } from '../../../Api';
-import { useAuth } from '../../../hooks/useAuth';
+// import { useAuth } from '../../../hooks/useAuth';
 import ConfettiExplosion from 'react-confetti-explosion';
 interface ShowUserProps {
     isOpen: boolean;
@@ -13,9 +13,21 @@ interface ShowUserProps {
     user:User
 }
 
-
+const createVCard = (contact:any) => {
+  return `
+    BEGIN:VCARD
+    VERSION:3.0
+    N:${contact.lastName};${contact.firstName}
+    FN:${contact.firstName} ${contact.lastName}
+    EMAIL;TYPE=INTERNET:${contact.email}
+    TEL;TYPE=CELL:${contact.phone}
+    URL:${contact.website}
+    ${Object.entries(contact.socialProfiles).map(([key, value]) => `X-SOCIALPROFILE;TYPE=${key}:${value}`).join("\n")}
+    END:VCARD
+    `.trim();
+};
 const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
-    const auth = useAuth();
+    // const auth = useAuth();
     const [step,setStep] = useState(0)
     const [explotaion,setExplotaion] = useState(false)
     useEffect(() => {
@@ -38,13 +50,13 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                             <div className={`${theme}-back-Button-vector`}></div>
                         </Button>
                         <div>
-                            <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{auth.currentUser.information?.firstName+'  '+auth.currentUser.information?.lastName}</div>
-                                <div className={`text-text-primary ${auth.currentUser.information?.company && auth.currentUser.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-start items-center `}>{auth.currentUser.information?.job}
+                            <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{user.information?.firstName+'  '+user.information?.lastName}</div>
+                                <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-start items-center `}>{user.information?.job}
                                     {" @ "}  
                                     <span className='ml-1'>
-                                        <img className={`w-[16px] ${auth.currentUser.information?.logo?'block':'hidden'} h-[16px]`} src={auth.currentUser.information?.logo} alt="" />
+                                        <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />
                                     </span>
-                                    {auth.currentUser.information?.company}
+                                    {user.information?.company}
                                 </div>
                         </div>
                         <div className="invisible">
@@ -104,23 +116,45 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                         </a>
                     :undefined}                                                                 
                     <Button onClick={() => {
+                        const socialProfiles:any ={}
+                        if(socialsBox){
+                            socialsBox.getSocialMedias().map((el:any) => {
+                                if(el.type =='LinkedIn'){
+                                    socialProfiles.linkedin = el.value
+                                }
+                                if(el.type =='Instagram'){
+                                    socialProfiles.instagram = el.value
+                                }  
+                                if(el.type =='Facebook'){
+                                    socialProfiles.facebook = el.value
+                                }     
+                                if(el.type =='Youtube'){
+                                    socialProfiles.youtube = el.value
+                                }    
+                                if(el.type =='Telegram'){
+                                    socialProfiles.telegram = el.value
+                                }                                                                                                                                                                      
+                            })
+                        }
                         const contact = {
-                            name: user.information?.lastName as string,
+                            lastName:user.information?.lastName,
+                            firstName: user.information?.firstName as string,
                             phone: user.information?.phone as string,
                             email: user.information?.personlEmail as string ,
                             company:user.information?.company as string,
                             address:user.information?.address as string,
                             job:user.information?.job as string,
+                            socialProfiles: socialProfiles                            
                         };
 
                         // create a vcard file
-                        const vcard = "BEGIN:VCARD\nVERSION:4.0\nFN:" + contact.name + "\nTEL;TYPE=work,voice:" + contact.phone + "\nCOMPANY:" + contact.company + "JOB:" + contact.job + "ADDRESS:" + contact.address + "\nEMAIL:" + contact.email + "\nEND:VCARD";
+                        const vcard = createVCard(contact)
                         const blob = new Blob([vcard], { type: "text/vcard" });
                         const url = URL.createObjectURL(blob);
 
                         const newLink = document.createElement('a');
-                        newLink.download = contact.name + ".vcf";
-                        newLink.textContent = contact.name;
+                        newLink.download = contact.firstName+contact.lastName + ".vcf";
+                        newLink.textContent = contact.firstName;
                         newLink.href = url;
                         Auth.addEvent({
                             event_type:'save_contact',
