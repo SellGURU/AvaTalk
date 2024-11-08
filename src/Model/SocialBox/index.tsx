@@ -35,17 +35,29 @@ class Social {
         return ''
     }
 
-    public resolveRender(theme:string,userID:string) {
+    public resolveRender(theme:string,userID?:string) {
         return (
             <div onClick={() => {
                 Auth.addEvent({
                 event_type:"more_info",
-                userid:userID,
+                userid:userID as string,
                 sub_event_category:'more_info_socials'
                 })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector bg-white`}>
+                    <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[24px] h-[24px]`}></div>
+                </div>
+                {/* <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div> */}
+            </div>            
+        )
+    }
+    public resolveRenderShare(theme:string) {
+        return (
+            <div onClick={() => {          
+                window.open(this.value)
+            }} className={``}>
+                <div className={``}>
                     <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[24px] h-[24px]`}></div>
                 </div>
                 {/* <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div> */}
@@ -103,6 +115,27 @@ class SocialBox extends Box{
             </>
         )
     }
+    public resolveShowProfileRender(theme: string,mode?:string,): JSX.Element {
+        return (
+            <>
+                {
+                    this.socialMedias.length > 0 ?
+                        <div className={`${theme}-Profile-Vectors ml-2`}>
+                            {this.socialMedias.sort((a,b) => a.order -b.order).map((item) => {
+                                const newSocal = Object.assign(new Social('Facebook',''),item)
+                                return (
+                                    <>
+                                        {newSocal.resolveRenderShare(theme)}
+                                    </>
+                                )
+                            })}
+                        </div>            
+                    :
+                        this.resolveAddRender(theme,mode)
+                }
+            </>
+        )
+    }    
     public getRouteAddress(): string {
         return 'socials'
     }
