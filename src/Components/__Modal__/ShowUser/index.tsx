@@ -105,7 +105,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                         <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{mettingBox.getUrl().substring(0,50)}</p>
                         </a>
                     :undefined}    
-                    {user?.boxs.filter((el) =>el.getTypeName() == 'SocialBox').length>0 ?
+                    {user?.boxs.filter((el) =>el.getTypeName() == 'SocialBox').length>0 && socialsBox.getSocialMedias().length>0 ?
                         <a  
                         className={`${theme}-ContactDetails-container5 `}>
                         <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
