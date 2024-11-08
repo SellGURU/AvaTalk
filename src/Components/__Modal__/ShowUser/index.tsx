@@ -21,7 +21,6 @@ const createVCard = (contact:any) => {
     FN:${contact.firstName} ${contact.lastName}
     EMAIL;TYPE=INTERNET:${contact.email}
     TEL;TYPE=CELL:${contact.phone}
-    URL:${contact.website}
     ${Object.entries(contact.socialProfiles).map(([key, value]) => `X-SOCIALPROFILE;TYPE=${key}:${value}`).join("\n")}
     END:VCARD
     `.trim();
