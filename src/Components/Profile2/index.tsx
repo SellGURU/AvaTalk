@@ -813,10 +813,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         :undefined}
         {isShowProfileOpen?
         <>
-          <div className="absolute z-40 left-0  bottom-[-20px] w-full flex justify-center items-center">
+         <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
             <ShowUser user={shareUser} isOpen={true} onClose={() => {setShowIsProfileOpen(false)}} refEl={ShowProfileRef} theme="Carbon"></ShowUser>
-          </div>      
-          <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>  
+         </div>    
+      <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
         </>
         :undefined
         }
