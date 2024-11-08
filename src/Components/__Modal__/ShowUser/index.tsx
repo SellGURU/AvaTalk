@@ -15,15 +15,18 @@ interface ShowUserProps {
 
 const createVCard = (contact:any) => {
   return `
-    BEGIN:VCARD
-    VERSION:3.0
-    N:${contact.lastName};${contact.firstName}
-    FN:${contact.firstName} ${contact.lastName}
-    EMAIL;TYPE=INTERNET:${contact.email}
-    TEL;TYPE=CELL:${contact.phone}
-    ${Object.entries(contact.socialProfiles).map(([key, value]) => `X-SOCIALPROFILE;TYPE=${key}:${value}`).join("\n")}
-    END:VCARD
-    `.trim();
+BEGIN:VCARD
+VERSION:2.1
+N:${contact.lastName};${contact.firstName}
+FN:${contact.firstName} ${contact.lastName}
+EMAIL:${contact.email}
+TEL:${contact.phone}
+URL:${contact.website}
+${contact.socialProfiles.twitter ? `URL:${contact.socialProfiles.twitter}` : ""}
+${contact.socialProfiles.linkedin ? `URL:${contact.socialProfiles.linkedin}` : ""}
+${contact.socialProfiles.instagram ? `URL:${contact.socialProfiles.instagram}` : ""}
+END:VCARD
+  `.trim();
 };
 const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
     // const auth = useAuth();
