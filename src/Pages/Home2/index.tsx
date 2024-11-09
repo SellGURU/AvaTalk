@@ -73,6 +73,7 @@ const Home2 = () => {
             console.log(res)
         })
     }
+    const [footerHight,setFooterHight] = useState(0)
     const playNotifSound = () => {
         // const audio = new Audio('sounds/notif2.wav');
         // audio.volume= 10
@@ -91,6 +92,12 @@ const Home2 = () => {
     subscribe("playNotifSound",() => {
         playNotifSound()
     })
+    subscribe("IncressFooter",() => {
+        setFooterHight(64)
+    })
+    subscribe("DisIncressFooter",() => {
+        setFooterHight(0)
+    })    
     subscribe('profileIsReview',() => {
         setShowFooter(false)
     })
@@ -136,7 +143,7 @@ const Home2 = () => {
                     }} theme="Carbon"/>
                 :
                 <>
-                    <div className="sticky  bottom-0"></div>
+                    <div className="sticky  bottom-0" style={{height:footerHight}}></div>
                 </>
                 }
                 {
