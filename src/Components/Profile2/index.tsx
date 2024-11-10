@@ -779,7 +779,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className=" absolute w-full z-20 bottom-0">
               {mode == 'review' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length == 0
               ?
-              <div className="w-full bg-white pb-4  flex justify-start items-center">
+              <div className="w-full bg-white pb-4 text-justify flex justify-start items-center">
                 <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
                 <div className=" ml-1 font-normal text-[10px] sm:text-[13px] leading-[15px]">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="text-primary-color font-medium cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
               </div>            
@@ -809,12 +809,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         </>
         }
         {showShareContact?
-          <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
+        <>
+          <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+            <ShareContact theme='Carbon' isOpen={showShareContact} onClose={() => {setShowShareContact(false)}}></ShareContact>
+          </div>
+          <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div> 
+        </>
         :undefined}
         {isShowProfileOpen?
         <>
          <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
-            <ShowUser user={shareUser} isOpen={true} onClose={() => {setShowIsProfileOpen(false)}} refEl={ShowProfileRef} theme="Carbon"></ShowUser>
+            <ShowUser mode={mode} user={shareUser} isOpen={true} onClose={() => {setShowIsProfileOpen(false)}} refEl={ShowProfileRef} theme="Carbon"></ShowUser>
          </div>    
       <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
         </>

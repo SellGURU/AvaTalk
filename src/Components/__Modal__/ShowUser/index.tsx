@@ -11,6 +11,7 @@ interface ShowUserProps {
     refEl:MutableRefObject<HTMLDivElement|null>;
     theme?: string;
     user:User
+    mode?:string
 }
 
 const createVCard = (contact:any) => {
@@ -28,7 +29,7 @@ ${contact.socialProfiles.instagram ? `URL:${contact.socialProfiles.instagram}` :
 END:VCARD
   `.trim();
 };
-const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
+const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => {
     // const auth = useAuth();
     const [step,setStep] = useState(0)
     const [explotaion,setExplotaion] = useState(false)
@@ -41,7 +42,6 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
 
     const mettingBox:any = user?.boxs.filter((el) =>el.getTypeName() == 'MeetingBox')[0]
     const socialsBox:any = user?.boxs.filter((el) =>el.getTypeName() == 'SocialBox')[0]
-    console.log(socialsBox)
     return (
         <> 
          <div ref={refEl} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-auto max-h-[678px] pb-10 rounded-b-none slideupModal  bg-white w-full">
@@ -218,9 +218,10 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,user,theme,onClose}) => {
                         <img className='' src="./icons/illo.png" alt="" />
                     </div>
                     <div className="mt-10 mb-4">
-                        <Button  onClick={() => {
+                        <Button disabled={mode!='share'} onClick={() => {
                         onClose()
                         setStep(0)
+                        window.open('https://portal.avatalk.me/')
                         }} theme="Carbon">
                         <div >Create Your Avatalk for Free</div>
                         </Button>
