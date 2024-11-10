@@ -158,7 +158,7 @@ const EditAvater: React.FC = () => {
     <>
     {showGudieLine?
     <div className={`absolute w-full pt-8 px-4 hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'} top-[0px] bg-white z-[15]`}>
-        <div className={`w-full ${showGudieLine?'visible':'hidden'} text-left relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}>
+        <div className={`w-full ${showGudieLine?'visible':'hidden'} pb-[60px] text-left relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}>
           <div>
             {/* <div className="absolute right-6 top-6">
               <Button

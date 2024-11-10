@@ -30,11 +30,7 @@ const initialValue2 = {
   lastName:"",
   phone:""
 };
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required('First name is required.').nonNullable().max(12),
-  lastName:Yup.string().required('Last name is required.').max(12),
-  email:Yup.string().required('Email address is required.').email()
-});
+
 const validationSchema2 = Yup.object().shape({
   firstName: Yup.string().required('First name is required.').nonNullable().max(12),
   lastName:Yup.string().required('Last name is required.').max(12),
@@ -44,6 +40,12 @@ const validationSchema2 = Yup.object().shape({
 const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
     const [mode,setMode] = useState<'mainSection'|'smsSection'|'emailSection'>('mainSection')
     const authContext = useAuth()
+
+    const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required.').nonNullable().max(12),
+    lastName:Yup.string().required('Last name is required.').max(12),
+    email:Yup.string().required('Email address is required.').notOneOf([authContext.currentUser.information?.personlEmail], 'Oops! We can’t send your profile link to your email.').email()
+    });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const formik = useFormik({
         initialValues: initialValue,
@@ -92,7 +94,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
             style={{content:{borderRadius:'24px',overflowY:'scroll',maxHeight:'95svh',width:'100%',maxWidth:'360px',background:'rgba(243, 244, 246, 1)'},overlay:{backgroundColor:'rgba(0,0,0,0.7)'}}}
             contentLabel="Example Modal"
         > */}
-        <div ref={ShowProfileRef} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-auto max-h-[678px] relative pb-10 rounded-b-none slideupModal  bg-white w-full">
+        <div ref={ShowProfileRef} className="rounded-[27px] text-left px-6 py-6 max-w-[32rem] h-auto max-h-[678px] relative pb-10 rounded-b-none slideupModal  bg-white w-full">
                 {
                 mode == 'mainSection' ?
                 <>
