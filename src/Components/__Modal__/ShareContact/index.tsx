@@ -44,7 +44,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
     const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required.').nonNullable().max(12),
     lastName:Yup.string().required('Last name is required.').max(12),
-    email:Yup.string().required('Email address is required.').notOneOf([authContext.currentUser.information?.personlEmail], 'Oops! We couldn’t send your profile link to your email.').email()
+    email:Yup.string().required('Email address is required.').notOneOf([authContext.currentUser.information?.personlEmail], 'Oops! We can’t send your profile link to your email.').email()
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const formik = useFormik({
