@@ -113,7 +113,7 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
     return (
         <div className={"Carbon-ContentCard-Container text-right  space-y-5 w-full"} style={{width:'100%'}}>
             <div className={"space-y-5 w-full"}>
-                <h1 className={"text-left text-[14px]  font-medium"}>{title}</h1>
+                <div className={"text-left text-[14px]  font-medium"}>{title}</div>
                 <video id={title} onEnded={() => handleVideoEnded()} ref={videoRef}   poster={cover} className={"rounded-xl w-full h-[180px]"}   controls>
                     <source src={link} type="video/mp4"/>
                 </video>

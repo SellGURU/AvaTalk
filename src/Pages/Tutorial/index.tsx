@@ -23,7 +23,7 @@ export const Tutorial=()=>{
                 <BackIcon title="Tutorial Videos" theme="Carbon"></BackIcon>
 
             </div>
-            <div className={" rounded-lg px-6  mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
+            <div className={" rounded-lg px-6  mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[200px] pt-[10px]"}>
                 {
                     !isLoading?(
                         <>
