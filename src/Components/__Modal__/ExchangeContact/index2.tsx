@@ -4,10 +4,11 @@ import { useFormik } from "formik"
 import * as Yup from "yup";
 import PhoneNumberInput from "../../PhoneSelectComponent";
 import TextArea from "../../TextArea";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 import { Contacts } from "../../../Api";
 import { toast } from "react-toastify";
+import useModalAutoClose from "../../../hooks/useModalAutoClose";
 
 interface ExchangeContactProps {
     onClose:() =>void
@@ -45,9 +46,16 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
         })        
         setStep(step+1)
     }  
+    const ShowProfileRef =useRef<HTMLDivElement>(null)
+    useModalAutoClose({
+        refrence:ShowProfileRef,
+        close:() => {
+            onClose()
+        }
+    })      
     return (
         <>
-        <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[93svh] max-h-[678px] pb-10 rounded-b-none slideupModal  bg-white w-full">
+        <div ref={ShowProfileRef} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[93svh] max-h-[678px] pb-10 rounded-b-none slideupModal  bg-white w-full">
           {step == 0 ?
             <>
                 <div className='flex w-full justify-between items-start'>
