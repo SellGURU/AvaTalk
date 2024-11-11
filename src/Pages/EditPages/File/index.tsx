@@ -146,7 +146,7 @@ const EditFile = () => {
                   setLimiteMode("length");
                 }
                 const converted: Array<File> = validFiles.map((item) => {
-                  console.log("item.type", item.type);
+                  console.log("item.type", item);
                   const newFile: File = new File(
                     item.url,
                     item.name,

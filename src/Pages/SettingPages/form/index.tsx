@@ -70,10 +70,8 @@ export const FormPage = () => {
                             <TextArea textAreaHeight="136px" {...formik.getFieldProps("message")} theme="Carbon" label={"Message"} placeholder={"Write your message..."}
                                          inValid={""} />
                             <Button onClick={() => {
-                                console.log(formik.isValid )
-                                console.log(!formik.touched.email)
                                 getData()
-                            }} disabled={!formik.isValid || !formik.touched.email} theme={'Carbon'}>Send</Button>
+                            }} disabled={!formik.isValid } theme={'Carbon'}>Send</Button>
                         </div>
 
                     </div>
