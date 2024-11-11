@@ -351,3 +351,8 @@ html, body {
 .slideupModal {
   animation: slide-up 0.5s ease forwards;
 }
+.image-gallery-image {
+  min-height: 400px; /* Set this to the desired min height */
+  object-fit: contain; /* Ensures the image scales while keeping aspect ratio */
+  max-height: 400px !important;
+}

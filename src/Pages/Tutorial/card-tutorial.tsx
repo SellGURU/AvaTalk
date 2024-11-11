@@ -133,8 +133,8 @@ export const CartTu = ({link,total_views,videoId,rate,title,cover,description}:P
                     readOnly={videoRate}
                     itemStyles={customStyles}
                 />}
-                <p className={"text-[12px] font-normal"}>{total_views} reviews</p>
-                <p className={"text-[10px] font-normal"}>08/08/2024</p>
+                <p className={"text-[12px] font-normal cursor-default"}>{total_views} reviews</p>
+                <p className={"text-[10px] font-normal cursor-default"}>08/08/2024</p>
 
             </div>
         </div>

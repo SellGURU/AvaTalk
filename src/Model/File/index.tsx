@@ -24,6 +24,8 @@ export class File {
                 return 'PhotoShopVector';
             case 'PSD': //psd
                 return 'PhotoShopVector';
+            case 'data:application/octet-stream':
+                return 'PhotoShopVector';
             case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //docx
                 return 'wordVector';
             case 'application/postscript': //ai
@@ -54,7 +56,7 @@ export class File {
                 return 'wordVector';
             case 'DOCX'://doc
                 return 'wordVector';
-            default: return 'wordVector'
+            default: return 'PhotoShopVector'
         }
     }
     public resolveRender(theme:string,_userID:string) {
