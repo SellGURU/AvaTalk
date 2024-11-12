@@ -100,7 +100,7 @@ const SettingAccount =() => {
                         type="text" 
                         ></TextField>
 
-                        <div className=" opacity-50">
+                        <div >
                             <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
                             theme="Carbon" name="personlEmail"
                             type="email" disabled></TextField>
