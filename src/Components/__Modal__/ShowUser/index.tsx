@@ -53,7 +53,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                         </Button>
                         <div>
                             <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{user.information?.firstName+'  '+user.information?.lastName}</div>
-                                <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-start items-center `}>{user.information?.job}
+                                <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-center items-center `}>{user.information?.job}
                                     {" @ "}  
                                     <span className='ml-1'>
                                         <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />

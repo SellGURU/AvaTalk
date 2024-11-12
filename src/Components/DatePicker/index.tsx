@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef } from "react";
 import Litepicker from "../../Litepicker";
 import { useAuth } from "../../hooks/useAuth";
+import useModalAutoClose from "../../hooks/useModalAutoClose";
 
 const DatePicker = ({ day, setDay }: any) => {
   const context = useAuth();
@@ -11,11 +13,11 @@ const DatePicker = ({ day, setDay }: any) => {
   const datepickerRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLDivElement>(null);
 
-  // useModalAutoClose({
-  //   refrence: datepickerRef,
-  //   buttonRefrence: btnRef,
-  //   close: () => setisOpen(false),
-  // });
+  useModalAutoClose({
+    refrence: datepickerRef,
+    buttonRefrence: btnRef,
+    close: () => setisOpen(false),
+  });
   const handleDateChange = (value: string) => {
     const [startDateString, endDateString] = value.split(" - ");
     const newDates = {
@@ -27,10 +29,11 @@ const DatePicker = ({ day, setDay }: any) => {
   };
 
   return (
-    <div ref={datepickerRef} className="flex mt-4 relative items-center">
+    <div  className="flex mt-4 relative items-center">
       <div
         onClick={() => {
           document.getElementById("dataPicker")?.click();
+          setisOpen(!isOpen);
         }}
         className={`h-[44px] ${
           isVisible ? "" : "opacity-20"
@@ -39,7 +42,8 @@ const DatePicker = ({ day, setDay }: any) => {
         <div
           onClick={() => {
             document.getElementById("dataPicker")?.click();
-            setisOpen(true);
+            // setisOpen(true);
+            setisOpen(!isOpen);
           }}
           className="h-full flex items-center justify-between w-full px-2"
         >
@@ -48,28 +52,31 @@ const DatePicker = ({ day, setDay }: any) => {
               className={`Carbon-Profile-EditProfileBtnVector6 px-3 Carbon-Footer-Vectors text-[#8290a3] w-6 h-6 ms-2`}
             ></div>
 
-            {isOpen && (
-              <Litepicker
-                id="dataPicker"
-                className="text-gray-700 z-50 text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
-                value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
-                onChange={handleDateChange}
-                options={{
-                  autoApply: false,
-                  format: "YYYY-MM-DD",
-                  singleMode: false,
-                  numberOfColumns: 1,
-                  numberOfMonths: 1,
-                  showWeekNumbers: true,
-                  dropdowns: {
-                    minYear: 1990,
-                    maxYear: null,
-                    months: true,
-                    years: true,
-                  },
-                }}
-              />
-            )}
+             <div ref={datepickerRef}>
+                <Litepicker
+                
+                  id="dataPicker"
+                  className="text-gray-700 z-50 text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
+                  value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
+                  onChange={handleDateChange}
+                  options={{
+                    autoApply: false,
+                    format: "YYYY-MM-DD",
+                    singleMode: false,
+                    numberOfColumns: 1,
+                    numberOfMonths: 1,
+                    showWeekNumbers: true,
+                    dropdowns: {
+                      minYear: 1990,
+                      maxYear: null,
+                      months: true,
+                      years: true,
+                    },
+                  }}
+                />
+
+             </div>
+            
           </div>
           <div
             ref={btnRef}
