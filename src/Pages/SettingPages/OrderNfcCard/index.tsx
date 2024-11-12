@@ -65,7 +65,7 @@ export const OrderNfcCard = () => {
                         <BackIcon title="Order NFC Card" theme="Carbon"></BackIcon>
 
                     </div>
-                    <div className={"flex  flex-wrap items-center justify-between px-4 mt-[66px]  hiddenScrollBar h-dvh overflow-y-scroll pb-[130px]"}>
+                    <div className={"flex  flex-wrap items-center justify-between px-4 mt-[66px]  hiddenScrollBar h-[80vh] pt-[16px] overflow-y-scroll pb-[130px]"}>
                     {nfcCards.map((el) => {
                         return (
                             <>

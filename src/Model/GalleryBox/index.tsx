@@ -38,6 +38,7 @@ class GalleryBox extends Box{
             }} className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'}  h-full`}>
                 {this.contents.length > 0 ?
                     <ImageGallery 
+                    showFullscreenButton={false}
                     items={this.contents} 
                     renderLeftNav={(onClick, disabled) => {
                         return (
