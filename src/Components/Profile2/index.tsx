@@ -839,7 +839,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     {showExchangeContact &&
       <>
           <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
-            <ExchangeContact fullName={shareUser.information?.firstName+ ' '+shareUser.information?.lastName} onClose={() => setShowExchangeContact(false)}></ExchangeContact>
+            <ExchangeContact mode={mode} fullName={shareUser.information?.firstName+ ' '+shareUser.information?.lastName} onClose={() => setShowExchangeContact(false)}></ExchangeContact>
           </div>
           <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
       </>
