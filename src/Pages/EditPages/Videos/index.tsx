@@ -87,7 +87,7 @@ const EditVideos = () => {
     }, 500);
   });
   useEffect(() => {
-    if (auth.currentUser.type_of_account.getType() == 'Free' && video.length > 1) {
+    if (auth.currentUser.type_of_account.getType() == 'Free' && video.length >=1) {
       setLimiteMode("length");
     } else {
       setLimiteMode("defult");
