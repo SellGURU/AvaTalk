@@ -215,6 +215,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 personlEmail:data.information.email,
                 company:data.information.company_name,
                 job:data.information.job_title,
+                address:data.information.address,
                 banelImage:data.information.back_ground_pic,
                 imageurl:data.information.profile_pic,
                 location:{

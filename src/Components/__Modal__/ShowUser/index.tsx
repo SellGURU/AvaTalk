@@ -95,7 +95,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                         <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.address}</p>
                         </a>
                     :undefined}      
-                    {user?.boxs.filter((el) =>el.getTypeName() == 'MeetingBox').length>0 ?
+                    {user?.boxs.filter((el) =>el.getTypeName() == 'MeetingBox').length>0 && mettingBox.getUrl()!=''?
                         <a  
                         href={mettingBox.getUrl()}
                         className={`${theme}-ContactDetails-container5 `}>
