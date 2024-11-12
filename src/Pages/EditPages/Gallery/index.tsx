@@ -39,7 +39,7 @@ const EditGallery = () => {
   });
   const submit = () => {
     if (auth.currentUser.type_of_account.getType() == "Free") {
-      if (formik.values.files.length >= 5) {
+      if (formik.values.files.length > 5) {
         setIsReadyTo(true);
       } else {
         auth.currentUser.addBox(

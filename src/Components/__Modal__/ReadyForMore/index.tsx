@@ -12,8 +12,10 @@ const ReadyForMore:React.FC<ReadyForMoreProps> = ({onClose,page}) => {
     const navigate = useNavigate()
     useEffect(() => {
         publish("profileIsReview",{})
+        publish("IncressFooter",{})
         return () => {
             publish("profileIsProfile",{})
+            publish("DisIncressFooter",{})
         }
     },[])
 

@@ -59,6 +59,11 @@ const EditFile = () => {
     }
   };
   useEffect(() => {
+    if(formik.values.files.length == 0 && auth.currentUser.type_of_account.getType() == "Free"){
+      setLimiteMode("default")
+    }
+  },[formik.values.files])
+  useEffect(() => {
     let numberofBiges = 0;
     files.map((el) => {
       if (Number(el.getSize()) > 10 * 1024 * 1024) {
