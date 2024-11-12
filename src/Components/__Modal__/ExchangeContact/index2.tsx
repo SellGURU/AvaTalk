@@ -13,9 +13,10 @@ import useModalAutoClose from "../../../hooks/useModalAutoClose";
 interface ExchangeContactProps {
     onClose:() =>void
     fullName:string
+    mode?:string
 }
 
-const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
+const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) => {
     const theme ="Carbon"
     const [step,setStep] = useState(0)
     const formik = useFormik({
@@ -203,9 +204,10 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName}) => {
               <img className='' src="./icons/illo.png" alt="" />
           </div>          
           <div className="mt-20 mb-4">
-            <Button disabled={false} onClick={() => {
+            <Button disabled={mode!='share'} onClick={() => {
               onClose()
               setStep(0)
+              window.open('https://portal.avatalk.me/')
               }} theme="Carbon">
               <div >Create Your Avatalk for Free</div>
             </Button>
