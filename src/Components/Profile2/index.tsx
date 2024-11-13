@@ -187,6 +187,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       }
     }
   })  
+
   useEffect(() => {
     if(authContext.needReload){
       window.location.reload()
@@ -372,6 +373,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           refren.load()
       }        
   },[isTalking])      
+  useEffect(() => {
+    if(videoRef.current){
+        const refren = videoRef.current  as any   
+        refren.load()
+    }  
+  },[shareUser.information?.silent_video_avatar])
   useEffect(() => {
     if(audioRef.current){
         const refren = audioRef.current  as any   
