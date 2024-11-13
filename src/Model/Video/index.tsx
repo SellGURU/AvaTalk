@@ -9,9 +9,13 @@ import { Button } from "symphony-ui";
 
 class Video {
   public order: number = -1;
-
-  constructor(protected url: string, protected name: string) {}
-
+  private id:string = ''
+  constructor(protected url: string, protected name: string) {
+    this.id = `id-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`    
+  }
+  public getid() {
+      return this.id
+  }
   public resolveRender(_theme: string, userID: string) {
     console.log("this.geturl() mkmk", this.geturl());
 

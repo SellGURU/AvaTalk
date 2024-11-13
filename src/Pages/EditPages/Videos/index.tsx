@@ -50,13 +50,15 @@ const EditVideos = () => {
   });
   const [editName, setEditName] = useState("");
   const [editeValue, setEditeValue] = useState("");
+  const [editeId, setEditeId] = useState("");
   const [isReadyTO,setIsReadyTo] = useState(false)
   const addLink = (name: string, url: string) => {
     const newVidoe = new Video(url, name);
-    if (editName != "") {
-      setVideo([...video.filter((el) => el.getName() != editName), newVidoe]);
+    if (editName != "" && editeId != '') {
+      setVideo([...video.filter((el) => el.getid() != editeId), newVidoe]);
       setEditName("");
       setEditeValue("");
+      setEditeId("")
     } else {
       setVideo([...video, newVidoe]);
     }
@@ -191,6 +193,7 @@ const EditVideos = () => {
                               onClick={() => {
                                 setEditName(item.getName());
                                 setEditeValue(item.geturl());
+                                setEditeId(item.getid())
                                 setOpenAddLink(true);
                               }}
                               className={`Carbon-ContactDetails-editIcon`}
@@ -257,6 +260,7 @@ const EditVideos = () => {
             onClose={() => {
               setEditName("");
               setEditeValue("");
+              setEditeId("")
               setOpenAddLink(false);
             }}
             onComplete={(name: string, url: string) => {
