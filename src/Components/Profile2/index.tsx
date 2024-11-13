@@ -23,6 +23,7 @@ import useModalAutoClose from "../../hooks/useModalAutoClose";
 import Notification from "../Notification";
 import { Notification as NotificationApi } from "../../Api"
 import UserType from "../../Model/UserType";
+import {  ClipLoader } from "react-spinners";
 
 interface ProfileProps {
   theme?: string;
@@ -90,6 +91,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const [isFirstScrol,setIsFirstScrol] = useState(false);
   const [isTalking,setIsTalking] = useState(false)
   const [startVideoTalk,setStartVideoTalk] = useState(false);
+  const [videoIsLoaded,setVideoIsLoaded] = useState(false)
   const [chats,setChats] = useState<Array<chat>>([
   ])      
   useEffect(() => {
@@ -185,6 +187,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       }
     }
   })  
+
   useEffect(() => {
     if(authContext.needReload){
       window.location.reload()
@@ -370,6 +373,12 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           refren.load()
       }        
   },[isTalking])      
+  useEffect(() => {
+    if(videoRef.current){
+        const refren = videoRef.current  as any   
+        refren.load()
+    }  
+  },[shareUser.information?.silent_video_avatar])
   useEffect(() => {
     if(audioRef.current){
         const refren = audioRef.current  as any   
@@ -667,16 +676,27 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking  ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
                         <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
                     </video>      
-                    <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                    <video onCanPlay={() => {
+                      setVideoIsLoaded(true)
+                    }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                         <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                     </video>                         
                   </>
                 :
                     <>
+                    {!videoIsLoaded &&
+                    <>
+                      <div className="w-full h-full flex justify-center items-center bg-slate-100 opacity-70">
+                        <ClipLoader></ClipLoader>
+                      </div>
+                    </>
+                    }
                     <video id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking && startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
                         <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
                     </video>                 
-                    <video id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                    <video onCanPlay={() => {
+                      setVideoIsLoaded(true)
+                    }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
                         <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
                     </video>                      
                     </>
