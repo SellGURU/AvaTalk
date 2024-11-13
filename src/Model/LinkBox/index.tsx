@@ -5,8 +5,9 @@ import { Auth } from "../../Api";
 
 class Link {
     public order:number = -1
+    private id:string = ''
     constructor(protected url:string,protected name:string){
-
+        this.id = `id-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`
     } 
     public resolveRender(theme:string,userID:string) {
         return (
@@ -35,7 +36,9 @@ class Link {
     public geturl(){
         return this.url
     }
-
+    public getid() {
+        return this.id
+    }
     public isValidURL() {
         const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/\S*)?$/;
         return regex.test(this.url);

@@ -98,6 +98,30 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       setPanel('Chat');
     }
   }, []);
+  useEffect(() => {
+    const video:any = videoRef.current;
+
+    // Check if the video is ready and play if not playing
+    const handleCanPlayThrough = () => {
+      if (video && !video.playing) {
+        video.play().catch(() => {
+          // console.error("Video play failed", error);
+        });
+      }
+    };
+
+    // Add the event listener to handle first play
+    if (video) {
+      video.addEventListener("canplaythrough", handleCanPlayThrough);
+    }
+
+    return () => {
+      // Clean up the event listener
+      if (video) {
+        video.removeEventListener("canplaythrough", handleCanPlayThrough);
+      }
+    };
+  }, []);  
   // useEffect(() => {
   //   if(isTalking){
   //     if(videoRef2.current){
