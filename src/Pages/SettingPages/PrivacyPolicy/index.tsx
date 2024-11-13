@@ -6,7 +6,7 @@ const SettingPrivacyPolicy = () => {
 
   return (
     <>
-      <div className={`Carbon-ChatDetails-container overflow-auto `}>
+      <div className={`Carbon-ChatDetails-container `}>
         <Outlet></Outlet>
         <div className="flex px-6 items-center space-x-4 absolute  top-8">
           <Button
@@ -20,7 +20,7 @@ const SettingPrivacyPolicy = () => {
           <p className={`Carbon-ChatDetails-title`}>Privacy Policy</p>
         </div>
 
-        <div className="flex flex-col gap-y-5 px-6 mt-[55px]  pb-[100px] pt-[32px]">
+        <div className="flex flex-col gap-y-5 h-dvh px-6 mt-[66px] overflow-y-scroll  pb-[250px] pt-[16px]">
           <div>
             <div className="px-6 mt-24  Carbon-Setting-CardContainer text-sm font-normal leading-[21px] text-justify space-y-1 ">
               <h3 className="font-semibold">Privacy Policy Introduction</h3>

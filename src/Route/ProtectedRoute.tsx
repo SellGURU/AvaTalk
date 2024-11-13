@@ -9,7 +9,7 @@ function ProtectedRoute({ Component }: ProtectedRouteProps) {
   const { isLoggedIn } = useAuth();
   const [parametr] = useSearchParams() 
   if (!isLoggedIn) {
-    return <Navigate to={parametr.get("via")?"/login?via="+parametr.get("via"):"/login"} replace />;
+    return <Navigate to={"/login"} state={{via:parametr.get("via"),referral:parametr.get("referral")}} replace />;
   }
   return <Component />;
 }

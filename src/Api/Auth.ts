@@ -149,12 +149,12 @@ class Auth extends Api {
   static get_UserInfo(token:string) {
     const response = this.post("/get_userinfo",{
       code:token
-    })
+    },{noPending:true})
     return response
   }
 
   static checkSub(){
-    const response = this.post("/check_sub",{})
+    const response = this.post("/check_sub",{},{noPending:true})
     return response
   }
 
@@ -212,13 +212,13 @@ class Auth extends Api {
   }
 
   static getAllContacts(resolve: (data: Array<Contact>) => void) {
-    this.post("/contactsInfo", {}).then((res) => {
+    this.post("/contactsInfo", {},{noPending:true}).then((res) => {
       resolve(res.data);
     });
   }
 
   static getContactDetails(_contactId: string, resolve: (data: any) => void) {
-    this.post("/show_contacts_information", {created_contact_id:_contactId}).then((res) => {
+    this.post("/show_contacts_information", {created_contact_id:_contactId},{noPending:true}).then((res) => {
       resolve(res.data);
     });
     // this.getAllContacts((data) => {
@@ -311,7 +311,7 @@ class Auth extends Api {
   }
 
   static getAnalytics(from:string,to:string,resolve:(data:any) => void){
-    this.post('/analytics',{from_date:from,to_date:to}).then(res => {
+    this.post('/analytics',{from_date:from,to_date:to},{noPending:true}).then(res => {
       resolve(res.data)
     })
   }

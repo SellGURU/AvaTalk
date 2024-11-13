@@ -59,6 +59,16 @@ const EditFile = () => {
     }
   };
   useEffect(() => {
+    if(formik.values.files.length == 1&& auth.currentUser.type_of_account.getType() == "Free"){
+      setLimiteMode("length")
+    }
+  })
+  useEffect(() => {
+    if(formik.values.files.length == 0 && auth.currentUser.type_of_account.getType() == "Free"){
+      setLimiteMode("default")
+    } 
+  },[formik.values.files])
+  useEffect(() => {
     let numberofBiges = 0;
     files.map((el) => {
       if (Number(el.getSize()) > 10 * 1024 * 1024) {
@@ -142,7 +152,7 @@ const EditFile = () => {
                   return true;
                 });
                 console.log(validFiles);
-                if (validFiles.length > 1) {
+                if (validFiles.length >= 1) {
                   setLimiteMode("length");
                 }
                 const converted: Array<File> = validFiles.map((item) => {

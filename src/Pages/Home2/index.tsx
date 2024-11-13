@@ -48,7 +48,7 @@ const Home2 = () => {
                 silent_video_avatar:data.information.silent_video_url,
                 talk_video_avater:data.information.talking_video_avatar,
                 referral_code:data.information.referral_code,
-                address:'',
+                address:data.information.address,
                 unique_id:data.information.unique_id,
                 logo:data.information.logo,
                 gender:data.information.gender

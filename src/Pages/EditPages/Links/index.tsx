@@ -43,12 +43,13 @@ const EditLinks = () => {
   });    
   const [editName,setEditName] = useState('')
   const [editeValue,setEditeValue] = useState('')
-
+  const [editid,setEditid] = useState("")
   const addLink = (name:string,url:string) => {
       const newLink = new Link(url,name)
-      if(editName!= ''){
-        setLinks([...links.filter((el) =>el.getName() != editName),newLink])
+      if(editName!= '' && editid!=''){
+        setLinks([...links.filter((el) =>el.getid() != editid),newLink])
         setEditName('')
+        setEditid('')
         setEditeValue('')
       }else{
         setLinks([...links,newLink]) 
@@ -147,6 +148,7 @@ const EditLinks = () => {
                               }                             */}
                             <div onClick={() => {
                               setEditName(item.getName())
+                              setEditid(item.getid())
                               setEditeValue(item.geturl())
                               setOpenAddLink(true)
                             }} className={`Carbon-ContactDetails-editIcon`}></div>
@@ -197,6 +199,7 @@ const EditLinks = () => {
           <AddLink name={editName} value={editeValue} theme="Carbon" isOpen={openaddlink} onClose={() =>{
             setEditName('')
             setEditeValue('')
+            setEditid("")
             setOpenAddLink(false)
           }} 
           onComplete={(name:string,url:string) => {

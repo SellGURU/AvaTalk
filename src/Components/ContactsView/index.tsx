@@ -200,7 +200,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
               </div>
             </div>
           ) : (
-            <ContactList data={filteredContacts} theme={theme} />
+            <div className="mt-8">
+              <ContactList data={filteredContacts} theme={theme} />
+
+            </div>
           )}
         </>
       ) : (

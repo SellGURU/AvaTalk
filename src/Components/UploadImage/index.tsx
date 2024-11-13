@@ -10,11 +10,12 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   label?:string
   accept?:string
   limite?:number
+  onClick?:(e:any) => void
   userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   // const getBase64 = (file:any,name:string) => {
@@ -153,9 +154,9 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,label,limite ,user
                                 </div>
                             </div>
                         </div>
-                        <input  onChange={(res:any) => {
+                        <input onClick={onClick}  onChange={(res:any) => {
                             setisLoading(true)
-                            console.log(res.target.files)
+                            // console.log(res.target.files)
                             // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
                             //   // console.log(res.target.files[index])
                             //   getBase64(res.target.files[index],res.target.value.split('\\')[2])  

@@ -86,7 +86,7 @@ const SettingAccount =() => {
                 <p className={`Carbon-ChatDetails-title`}>Your Account</p>
             </div>            
 
-            <div className="flex flex-col  px-6 mt-[66px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px]">
+            <div className="flex flex-col  px-6 mt-[86px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px]">
                 <div className="mb-4">
                     <div className="flex flex-col relative gap-y-4 w-[100%]">
 
@@ -100,7 +100,7 @@ const SettingAccount =() => {
                         type="text" 
                         ></TextField>
 
-                        <div className=" opacity-50">
+                        <div >
                             <TextField label="Account Email" {...formik.getFieldProps("personlEmail")} inValid={false} 
                             theme="Carbon" name="personlEmail"
                             type="email" disabled></TextField>
