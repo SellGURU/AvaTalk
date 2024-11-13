@@ -61,6 +61,8 @@ const SignUp = () => {
                     if(res.data.check_user == true){
                         authContext.setGoogleInformation(value.data)
                         authContext.setLinkedInSignup(false)
+                        console.log(parametr.get("referral"))
+                        authContext.setReferalCode(parametr.get("referral") as string)                        
                         navigate('/createAccount')
                     }else {
                         toast.error("user exist")

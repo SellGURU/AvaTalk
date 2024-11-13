@@ -50,6 +50,18 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const navigate = useNavigate();
   const [parametr] = useSearchParams() 
+  const resolveParameretrs = () => {
+    if(parametr.get("referral") && parametr.get("via")){
+      return '?via='+parametr.get("via")+"&referral="+parametr.get("referral")
+    }
+    if(parametr.get("referral")){
+      return "?referral="+parametr.get("referral")
+    }
+    if(parametr.get("via")){
+      return "?via="+parametr.get("via")
+    }    
+    return ''
+  }
   const [showSplash,setshowSplash] = useState(false);
   const [loading, setLoading] = useState(false); 
 
@@ -340,7 +352,7 @@ const Login = () => {
                 </Button>
                 <div className="text-[14px] text-[#374151] text-center mt-4">
                  Don't have an account? <span onClick={() => {
-                    navigate('/signup')
+                    navigate('/signup'+resolveParameretrs())
                   }} className="text-[#06B6D4] cursor-pointer">Sign up</span> 
                 </div>
                 <div className="flex w-full items-center mt-6">
