@@ -71,7 +71,9 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
     }))    
   },[chartData])
   const [legendItems, setLegendItems] = useState<boolean[]>(data.map(() => true));
-
+  useEffect(() => {
+    setLegendItems(data.map(() => true))
+  },[data])
   const handleLegendClick = (index: number) => {
     const newLegendItems = [...legendItems];
     newLegendItems[index] = !newLegendItems[index];
@@ -88,7 +90,7 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
           className={`${theme}-PiChartComponent-listItem `}
           key={`legend-${index}`}
           onClick={() => handleLegendClick(index)}
-          style={{ textDecoration: legendItems[index] ? "" : "line-through", color: entry.color }}
+          style={{ textDecoration: legendItems[index] ? "none" : "line-through", color: entry.color }}
         >
           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
           <p className="text-xs text-gray-400">{entry.name}</p>
