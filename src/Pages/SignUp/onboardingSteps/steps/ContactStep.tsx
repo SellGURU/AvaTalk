@@ -103,7 +103,7 @@ const ContactStep:React.FC<ContactStepProps> = ({
                     errorMessage={formik.errors.phone}
                 ></PhoneNumberInput>                
                 </div> 
-                <div className={`mt-4 ${formik.values.email != '' && 'opacity-50'}`}>
+                <div className={`mt-4 ${formik.values.email != '' && ''}`}>
                     <TextField 
                     disabled= {formik.values.email != ''}
                         id="email"
