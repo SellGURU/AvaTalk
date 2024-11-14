@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { Auth } from "../../../Api";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
+import { publish } from "../../../utils/event";
 
 // const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 //   const validatePhone = (phone: number | undefined) => {
@@ -29,7 +30,7 @@ import { Confirm } from "../../../Components/__Modal__";
 //       ).isValidSync(phone);
 //   };
 const validationSchema = Yup.object().shape({
-    phone:Yup.string().required('Phone number is required'),
+    phone:Yup.string(),
     firstname:Yup.string().required('First Name is required'),
     lastname:Yup.string().required('Last Name is required'),
 });
@@ -168,11 +169,13 @@ const SettingAccount =() => {
                             language:selectedLanguage.value,
                             state:true
                         })
+                        
                         context.currentUser.updateCustomInformation({
                             firstName: formik.values.firstname as string,
                             lastName:formik.values.lastname as string,
                             phone:formik.values.phone as string,
                         })
+                        publish("refreshPage",{})
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>
                 <div  className="mt-10 flex items-center ">

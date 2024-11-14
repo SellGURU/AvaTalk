@@ -1,7 +1,7 @@
 {
   "name": "card-visit",
   "private": true,
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "",
   "type": "module",
   "scripts": {
@@ -33,6 +33,7 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "litepicker": "^2.0.12",
+    "lucide-react": "^0.456.0",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-advanced-cropper": "^0.20.0",

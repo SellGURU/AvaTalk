@@ -39,9 +39,9 @@ export const FormPage = () => {
         setIsLoading(true)
         SupportForm.SupportFormApi(formik.values.fullname,formik.values.email,formik.values.message).then(() => {
             // toast.success(res.data)
+            setIsOpen(true)
             
         });
-        setIsOpen(true)
 
         setIsLoading(false);
     }
@@ -89,7 +89,7 @@ export const FormPage = () => {
             contentLabel=" Modal"
         >
             <div className={" relative pb-5 pt-6"}>
-                <div className={"absolute right-2 top-0 borderBox-Gray  "}>
+                <div className={"absolute right-2 top-0  "}>
                     <Button onClick={() => {
                         setIsOpen(false)
                         navigate(-1)
@@ -100,9 +100,9 @@ export const FormPage = () => {
             <div className={"flex flex-col items-center justify-center"}>
 
                 <img src={"/Carbon/tick-circle.svg"}/>
-                <h1 className={"text-lg font-medium text-[#374151]"}>Thank you!</h1>
-                <p className={"text-lg text-center font-medium text-[#374151]"}>
-Your request has been successfully submitted. Our team will review it and get back to you shortly.</p>
+                <div className={"text-[18px] font-medium font-poppins text-[#374151]"}>Thank you!</div>
+                <div className={"text-[16px] font-poppins text-center font-medium text-[#374151]"}>
+Your request has been successfully submitted. Our team will review it and get back to you shortly.</div>
             </div>
             </div>
         </Modal>                   

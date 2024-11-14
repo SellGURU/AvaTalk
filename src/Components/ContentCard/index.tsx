@@ -65,7 +65,13 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
                 // }                
               }}  className={`${theme}-ContentCard-CardVector`} data-active={activeDrag?'true':'false'}>
                 <div className={`${theme}-ContentCard-ArrowVector ${theme}-ContentCard-MaskVector`}></div>
-              </div> */}
+                </div> */}
+              <button onClick={() => {
+                // alert('clicked')
+                navigate('/edit/'+item.getRouteAddress())
+              }} className={`${theme}-ContentCard-CardVector`}>
+                <div className={`${theme}-ContentCard-EditVector ${theme}-ContentCard-MaskVector`}></div>
+              </button>
               <div onClick={() => {
                 setShowConfirm(true)
                 // auth.currentUser.removeBox(item)
@@ -73,12 +79,6 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
               }}  className={`${theme}-ContentCard-CardVector`}>
                 <div className={`${theme}-ContentCard-TrashVector ${theme}-ContentCard-MaskVector`}></div>
               </div>
-              <button onClick={() => {
-                // alert('clicked')
-                navigate('/edit/'+item.getRouteAddress())
-              }} className={`${theme}-ContentCard-CardVector`}>
-                <div className={`${theme}-ContentCard-EditVector ${theme}-ContentCard-MaskVector`}></div>
-              </button>
             </div>
         </div>
 

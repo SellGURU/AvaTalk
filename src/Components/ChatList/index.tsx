@@ -69,7 +69,7 @@ const ChatList = ({ data, theme ,isLimitedChat}: { data: DataProps[]; theme: str
       // return mustBeRenderDate(new Date(date1))
   };  
   return (
-    <div className={`w-full  ${isLimitedChat?'':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[400px]`}>
+    <div className={`w-full  ${isLimitedChat?'':'overflow-y-scroll'}  hiddenScrollBar mt-4 h-dvh px-6 pb-[250px]`}>
       {data.map((items, index) => (
         <>
           <ChatItem isLimitedChat={isLimitedChat} plan={context.currentUser.type_of_account.getType()} visibleDate={mustBeRenderDate2(items.date_group,items.title)} theme={theme} key={index} data={items} />
