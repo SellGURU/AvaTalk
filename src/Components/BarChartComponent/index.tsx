@@ -78,7 +78,7 @@ const BarChartComponent: React.FC<Props> = ({ theme ,data}) => {
                 <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
                 <YAxis fontSize={12} stroke="#9CA3AF" />
                 <Tooltip cursor={false} />
-                <Bar dataKey="value" fill="#5048E5" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill="#5B21B6" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
         ):(<div className={" h-full w-full flex-col flex items-center justify-center scale-150"}>

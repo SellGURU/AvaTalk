@@ -24,7 +24,7 @@ const PiChartComponent: React.FC<Props> = ({ theme ,chartData }) => {
     }else  if(name == 'Email'){
       return '#c8f7ab'
     }else {
-      return '#e4bbfc'
+      return '#855CF8'
     }
   }
   // const initialData: DataItem[] = chartData.map(el => {
