@@ -74,7 +74,7 @@ class GalleryBox extends Box{
                         }
 
                         return (
-                            <div className="absolute right-1 bottom-4 z-30 cursor-pointer" onClick={(e) => {
+                            <div className="absolute right-1 bottom-4 z-[2] cursor-pointer" onClick={(e) => {
                                 // console.log(document.getElementById("image-gallery-image"))
                                 // const cols =document.getElementsByClassName("image-gallery-image")
                                 document.querySelectorAll(".image-gallery-image").forEach((element:any) => {
