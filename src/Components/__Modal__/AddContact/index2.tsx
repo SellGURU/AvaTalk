@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { publish } from "../../../utils/event"
 import { Button } from "symphony-ui"
 import TextField from "../../TextField"
@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { PhoneNumberInput, TextArea } from "../.."
 import { Contacts } from "../../../Api"
 import { Contact } from "../../../Types"
+import useModalAutoClose from "../../../hooks/useModalAutoClose"
 
 interface AddContactNewProps {
     onClose:() =>void
@@ -17,9 +18,11 @@ interface AddContactNewProps {
 
 const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}) => {
     useEffect(() => {
+        publish("IncressFooter",{})
         publish("profileIsReview",{})
         return () => {
             publish("profileIsProfile",{})
+            publish("DisIncressFooter",{})
         }
     },[])    
     const theme ="Carbon"
@@ -40,9 +43,16 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
         }),
         onSubmit:() =>{}
     })
+    const refrrence = useRef(null)
+    useModalAutoClose({
+        refrence:refrrence,
+        close:() => {
+            onClose()
+        }
+    })      
     return (
         <>
-            <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[80vh] pb-10 rounded-b-none slideupModal  bg-white w-full">
+            <div ref={refrrence} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[80vh] pb-10 rounded-b-none slideupModal  bg-white w-full">
                 <div className="w-full">
                     <div className="w-full flex justify-between items-center">
                         <div className="relative">

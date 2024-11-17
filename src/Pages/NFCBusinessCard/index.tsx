@@ -315,7 +315,21 @@ export const NFCBusinessCard = () => {
       colorName: "purple",
     },
   ]);
+  useEffect(() => {
+    const handleKeyDown = (event:any) => {
+      if (event.key === 'Tab') {
+        event.preventDefault(); // Prevent the Tab key behavior globally
+      }
+    };
 
+    // Add the event listener globally when the app mounts
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);  
   const changeCardColor = (id: string, newColor: string) => {
     setSelectedColor((prevCards) =>
       prevCards.map((card: any) =>

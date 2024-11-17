@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
 import { DeleteContact } from "../__Modal__";
 import EditContact from "../__Modal__/AddContact/editContact";
@@ -30,7 +30,21 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   const { contactId } = useParams();
   const [tags, setTags] = useState<Tag[]>([]);
   const navigate = useNavigate()
+  useEffect(() => {
+    const handleKeyDown = (event:any) => {
+      if (event.key === 'Tab') {
+        event.preventDefault(); // Prevent the Tab key behavior globally
+      }
+    };
 
+    // Add the event listener globally when the app mounts
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);  
   useConstructor(() => {
     setIsLoading(true);
     if (contactId) {
