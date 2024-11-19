@@ -31,7 +31,7 @@ const EditGoogleMap = () => {
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "GoogleMapBox")[0] as GoogleMapBox;
 
   if (!currentBox) {
-    currentBox = new GoogleMapBox("Google Map", { lan: 33, lat: 33 });
+    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 });
   }
 
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
@@ -91,7 +91,7 @@ const EditGoogleMap = () => {
   return (
     <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
       <div className="relative top-8">
-        <BackIcon title="Google Map" theme="Carbon" />
+        <BackIcon title="Address" theme="Carbon" />
       </div>
       <div className="mt-[120px] hiddenScrollBar h-full">
         <div className="mt-24 px-6 text-left">

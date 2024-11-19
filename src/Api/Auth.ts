@@ -200,7 +200,7 @@ class Auth extends Api {
       res.data.map((item: any) => {
         const newBox = boxProvider(item);
         resolveSocial.push(newBox);
-      });
+      },{noPending:true});
       resolve(resolveSocial);
     });
   }
