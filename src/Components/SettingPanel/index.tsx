@@ -28,11 +28,11 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     //   icon: "share.svg",
     //   link: "sharing",
     // },
-    {
-      name: "Order NFC Card",
-      icon: "OrderNFCCard.svg",
-      link: "OrderNFCCard",
-    },
+    // {
+    //   name: "Order NFC Card",
+    //   icon: "OrderNFCCard.svg",
+    //   link: "OrderNFCCard",
+    // },
     // {
     //   name: "Your Service",
     //   icon: "service.svg",
