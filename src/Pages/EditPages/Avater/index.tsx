@@ -98,8 +98,8 @@ const EditAvater: React.FC = () => {
     // setIsLoading(true)
     setFirstLoading(true)
     formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
-    formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)    
-    Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
+    formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)
+    Auth.avatarList({}).then(res => {
       if(res.data[res.data.length -1].video == ''){
         createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
         setFirstLoading(false)
