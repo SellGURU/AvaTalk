@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
-import { boxProvider, useConstructor } from "../../help";
+import { boxProvider, getOS, useConstructor } from "../../help";
 import { Box, User } from "../../Model";
 import Share from "../../Api/Share";
 import { Outlet, useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -12,7 +12,7 @@ import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import { publish } from "../../utils/event";
 import ShareContact from "../__Modal__/ShareContact";
 import Spinners from "../Spinner";
-// import ToggleButton2 from "../ToggleButton2";
+import ToggleButton2 from "../ToggleButton2";
 import Presentition2 from "../Presentition2";
 import AudioProvider from "../AudioProvider";
 import { chat } from "../../Types";
@@ -24,7 +24,6 @@ import Notification from "../Notification";
 import { Notification as NotificationApi } from "../../Api"
 import UserType from "../../Model/UserType";
 import {  ClipLoader } from "react-spinners";
-import ToggleButton3 from "../ToggleButton3";
 
 interface ProfileProps {
   theme?: string;
@@ -413,7 +412,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         }
         <div className={`flex flex-col gap-3 justify-center items-center ${mode =='profile' ? 'mt-11':'mt-3'} sticky`}>
 
-          {/* {
+          {
             mode == 'profile' &&
               <div ref={ButtonnotificationRefrence} className="absolute top-4 left-6 z-20">
                 <Button onClick={() => {
@@ -435,58 +434,19 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         
               </div>          
 
-          } */}
+          }
           {/* } */}
           {
             mode == 'profile' ?
             <>
-              <div  ref={ButtonnotificationRefrence} className="absolute grid gap-2 top-4 right-6 z-20">
-                <Button onClick={() => {
-                  setShowNotification(!showNotification)
-                  setIsHaveNewNotif(false)
-                }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                  <div className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`} ></div>
-                  {isHaveNewNotif &&
-                    <div className="absolute animate-pulse flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
-                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>                      
-                    </div>
-                  }
-                  {!isHaveNewNotif &&resolveunRead(notifs) > 0 &&
-                    <div className="absolute flex justify-center items-center w-[12px] h-[12px] bg-primary-color top-[8px] rounded-full right-[10px]">
-                      <div className="text-white text-[8px]">{resolveunRead(notifs)}</div>
-                    </div>
-                  }
-                </Button>                
-                
-                <Button onClick={() => {
-                  setMode('review')
-                  publish('profileIsReview',{})
-                  window.history.replaceState(null, "", "/#/?review=true")                
-                }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                  <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors m-0`} ></div>
-                </Button>  
-              </div>
-
-              <div className="absolute grid gap-2 top-4 left-6 z-20">
-                <Button onClick={() => {
-                  navigate('/edit')
-                }} theme="Carbon-Google" data-mode="profile-review-button-2">
-                  <div className="flex w-full items-center pl-2 justify-center ">
-                    <div className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors m-0`} ></div>
-
-                  </div>
-                  {/*  className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`} */}
-                </Button>  
-                <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-review-button-2">
-                  <div className="flex w-full items-center pl-2 justify-center ">
-                    <div
-                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
-                      style={{width:'1.25rem'}}
-                    ></div>    
-
-                  </div>
-                  {/*  className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`} */}
-                </Button>                  
+              <div className="absolute top-4 right-6 z-20">
+              <Button onClick={() => {
+                setMode('review')
+                publish('profileIsReview',{})
+                window.history.replaceState(null, "", "/#/?review=true")                
+              }} theme="Carbon-Google" data-mode="profile-review-button-2">
+                <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors m-0`} ></div>
+              </Button>                
               </div>
             </>
             :
@@ -499,8 +459,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   window.history.replaceState(null, "", "/#/")             
               }} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className={`${theme}-Profile-closeIcon ${theme}-Footer-Vectors m-0`} ></div>
-              </Button>   
-                           
+              </Button>                
               </div>            
               :
               <></>
@@ -548,14 +507,6 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </Button>                
                   </div>  
               }
-                  <div className="absolute top-28 right-6 z-20">
-                      <Button onClick={() => {
-                        setIsTalking(false)
-                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
-                      }} theme='Carbon-back'>
-                        <div className={`${theme}-Profile-BoxVector`}></div>
-                      </Button>              
-                  </div>                
             </>
             :
             undefined
@@ -623,106 +574,164 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   </div>
                 :undefined
                 }     */}
-            <div className={`w-full mt-[-320px]  invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
-              <div className={`w-full relative overflow-hidden bg-white ${mode != 'profile'?'h-[160px] -mt-[16px]':' h-[130px] -mt-[20px]'}  rounded-[16px] flex items-center justify-start boxShadow-Gray`}>
-                 <img src="./icons/squiggles.png" className="absolute w-full top-[-50px] " alt="" />
-                <div className="ml-[90px] min-w-[86px] relative z-10">
-                  <img className="w-[86px] border-solid border-[2px] boxShadow-Gray border-primary-color h-[86px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
-                  {
-                    shareUser.information?.logo &&
-                    <div className=" w-[33px] h-[33px] flex justify-center items-center overflow-hidden rounded-full border-primary-color border-2 bg-white border-3 absolute left-[-14px] z-30 top-2">
-                      <img className="w-[20px] rounded-full h-[20px] object-cover" src={shareUser.information?.logo} alt="" />
-                    </div>
-
-                  }                
+            <div className={`w-full mt-[-320px] invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
+              <div className="w-full bg-[#E2E8F0] h-[148px] -mt-[16px] rounded-[16px] flex items-center justify-start boxShadow-Gray">
+                <div className="ml-2 min-w-[129px]">
+                  <img className="w-[129px] border-solid border-[8px] boxShadow-Gray border-white h-[129px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                 </div>
-                <div className="ml-2 max-w-[300px] relative z-10 overflow-hidden">
-                  <h1 className={`${theme}-Profile-ProfileName text-start`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
+                <div className="ml-3 max-w-[320px] overflow-hidden">
+                  <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
                   <p className={`${theme}-Profile-SubTitle`}>
                     {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                   </p>                    
                 </div>
-              {
-                mode != 'profile' &&
-                <div className="absolute left-[8px] top-3">
-                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {setPanel(value)}} rightText="Profile" value={panel}></ToggleButton3>
-                </div>
-
-              }                
               </div>
+              {mode == 'profile' ?
+                <div className="flex justify-evenly mt-4 gap-4 ">
+                  <Button onClick={() => {
+                    navigate('/edit')
+                  }} theme="Carbon-Google" data-mode="profile-edit-button">
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
+                    ></div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
+                  </Button>
+                  <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2
+                      `}
+                      style={{width:'1.25rem'}}
+                    ></div>  
+                    <span data-os={getOS()} className={`${theme}-text-layer1`}>
+                    Share Profile
+                      </span>   
+                  </Button>
+                </div>
+              :
+                <>
+                  <div className={`flex items-center mt-4  justify-around ${window.innerWidth>=500?'px-0':'px-2'}`}>
+                    <div className="w-[75%] max-w-[85%] flex items-center justify-between">
+                      <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                        setPanel(el as any)
+                      }} theme="Carbon"></ToggleButton2>
+                    </div>
+                    <div className={`${theme}-Profile-Box`}>
+                      <Button onClick={() => {
+                        setIsTalking(false)
+                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                      }} theme='Carbon-back'>
+                        <div className={`${theme}-Profile-BoxVector`}></div>
+                      </Button> 
+                    </div>
+                  </div>
+                </>
+              }  
                         
             </div>
-            {/*  ${scrolled? 'profileAimation2-mobile md:profileAimation2:' :'profileAimation2-backward-mobile md:profileAimation2-backward'} */}
-            <div className={`w-full ${mode !='profile'?'mt-[140px]':'mt-[170px]'}  overflow-hidden relative  h-[231px]  ${scrolled? 'profileAimation2-mobile md:profileAimation2' :'profileAimation2-backward-mobile md:profileAimation2-backward'}   md:h-[231px] bg-white rounded-3xl rounded-t-none  pb-4  flex flex-col `} style={{boxShadow:!window.location.href.includes("/edit") ?'0px 4px 12px 0px #6F8CB069':'unset'}}>
-              <img src="./icons/squiggles.png" className="absolute w-full top-[-30px]" alt="" />
-              <div className="w-full relative flex justify-center mt-5  items-center">
-                <div className="relative">
-                  <div className="w-[146px] border-4 relative border-primary-color flex justify-center items-center h-[146px] rounded-full overflow-hidden">
-                    <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video object-cover w-full h-full absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
-                        <source id="videoPlayer3"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                    </video>                 
+            <div className={`w-full ${mode!='share'?'mt-[88px] ':'mt-[88px] '} ${scrolled? 'profileAimation2-mobile md:profileAimation2:' :'profileAimation2-backward-mobile md:profileAimation2-backward'} h-[320px] md:h-[370px] bg-[#E2E8F0] rounded-3xl pb-4 gap-4 flex flex-col overflow-hidden`}>
+              <div className="h-[300px] relative overflow-y-hidden">
 
-                    {prisentMode == 'video' ?
-                      <>
-                        <video onEnded={() => {
-                          if(prisentMode == 'video'){
-                            setIsTalking(false)
-                          }
-                        }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video w-full h-full object-cover absolute ${isTalking  ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
-                            <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
-                        </video>      
-                        <video onCanPlay={() => {
-                          setVideoIsLoaded(true)
-                        }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} height={'100%'} className={`pk_video object-cover w-full h-full absolute ${!isTalking ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" style={{width:'100%',height:'100%' ,objectFit:'cover'}}  autoPlay={true} loop muted >
-                            <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                        </video>                         
-                      </>
-                    :
-                        <>
-                        {!videoIsLoaded &&
-                        <>
-                          <div className="w-full h-full flex justify-center items-center bg-slate-100 opacity-70">
-                            <ClipLoader></ClipLoader>
-                          </div>
-                        </>
-                        }
-                        <video id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video h-full w-full object-cover absolute ${isTalking && startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
-                            <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
-                        </video>                 
-                        <video onCanPlay={() => {
-                          setVideoIsLoaded(true)
-                        }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video w-full h-full object-cover absolute ${!isTalking || !startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
-                            <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
-                        </video>                      
-                        </>
+                <video  id="dragAbleAi3" playsInline width={'100%'} className={`pk_video absolute ${isTalking?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted  loop  >
+                    <source id="videoPlayer3"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                </video>                 
+
+                {prisentMode == 'video' ?
+                  <>
+                    <video onEnded={() => {
+                      if(prisentMode == 'video'){
+                        setIsTalking(false)
+                      }
+                    }} id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking  ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
+                        <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                    </video>      
+                    <video onCanPlay={() => {
+                      setVideoIsLoaded(true)
+                    }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                        <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                    </video>                         
+                  </>
+                :
+                    <>
+                    {!videoIsLoaded &&
+                    <>
+                      <div className="w-full h-full flex justify-center items-center bg-slate-100 opacity-70">
+                        <ClipLoader></ClipLoader>
+                      </div>
+                    </>
                     }
+                    <video id="dragAbleAi2" ref={videoRef2} playsInline width={'100%'} className={`pk_video absolute ${isTalking && startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto" muted={prisentMode== 'video'?false:true} autoPlay={prisentMode== 'video'?false:true} loop={prisentMode== 'video'?false:true}  >
+                        <source id="videoPlayer2"  src={prisentMode=='video'? VideoUrl :shareUser.information?.talk_video_avater} type="video/mp4"></source>
+                    </video>                 
+                    <video onCanPlay={() => {
+                      setVideoIsLoaded(true)
+                    }} id="dragAbleAi" ref={videoRef} playsInline width={'100%'} className={`pk_video absolute ${!isTalking || !startVideoTalk ?'visible':'invisible'} ${window.innerWidth>600?'mt-[0px]':'mt-[0px]'}`} preload="auto"  autoPlay={true} loop muted >
+                        <source id="videoPlayer"  src={shareUser.information?.silent_video_avatar} type="video/mp4"></source>
+                    </video>                      
+                    </>
+                }
 
-                  </div>
-                  {/* <div className="w-full h-full absolute left-0 top-0 flex justify-center items-center z-10">
-                    <div className=" w-[44px] h-[44px] rounded-full border-primary-color bg-white border-3 "></div>
-
-                  </div> */}
-                  {
-                    shareUser.information?.logo &&
-                    <div className=" w-[44px] h-[44px] flex justify-center items-center overflow-hidden rounded-full border-primary-color border-2 bg-white border-3 absolute left-[-14px] z-30 top-2">
-                      <img className="w-[30px] rounded-full h-[30px] object-cover" src={shareUser.information?.logo} alt="" />
-                    </div>
-
-                  }
-                </div>
               </div>
+              {/* <div
+                className="relative w-full h-[261px] rounded-t-3xl boxShadow-Gray bg-no-repeat bg-center"
+                style={{ backgroundImage: 'url("./Carbon/women.jpg")' }}
+              >
+                <div className="w-full h-8 absolute bg-black opacity-[32%] bottom-0 flex items-center justify-between px-5">
+                  <div className={`${theme}-Profile-VolumeHighVector`}></div>
+                  <div
+                    className={`${theme}-Profile-LanguageSquareVector`}
+                  ></div>
+                </div>
+              </div> */}
               <div>
-                <h1 className={`${theme}-Profile-ProfileName mt-2`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
+                <h1 className={`${theme}-Profile-ProfileName`}>{shareUser.information?.firstName+' '+shareUser.information?.lastName}</h1>
                 <p className={`${theme}-Profile-SubTitle`}>
                   {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                 </p>
               </div>
-              {
-                mode != 'profile' &&
-                <div className="absolute left-[20px] top-6">
-                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {setPanel(value)}} rightText="Profile" value={panel}></ToggleButton3>
+              {mode == 'profile' ?
+                <div className="flex justify-evenly gap-4 px-4 ">
+                  <Button onClick={() => {
+                    navigate('/edit')
+                  }} theme="Carbon-Google" data-mode="profile-edit-button">
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector2 ${theme}-Footer-Vectors2`}
+                    ></div>
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>Edit Profile</div>
+                  </Button>
+                  <Button onClick={() => {setShowShareContact(true)}} theme="Carbon-Google" data-mode="profile-edit-button">
+                    <div
+                      className={`${theme}-Profile-EditProfileBtnVector3 ${theme}-Footer-Vectors2 text-[#8290a3]`}
+                      style={{width:'1.25rem'}}
+                    ></div>     
+                    <div data-os={getOS()} className={`${theme}-text-layer1`}>
+                      Share Profile
+                    </div>               
+                  </Button>
                 </div>
-
+              :
+              <>
+                    <div className={`flex items-center mt-0  justify-around ${window.innerWidth>=500?'px-4':'px-2'}`}>
+                      <div className="w-[75%] max-w-[85%] flex items-center justify-between">
+                        <ToggleButton2 value={panel}  leftText="Profile" rightText="Chat" onButtonClick={(el) => {
+                          setPanel(el as any)
+                          setIsTalking(false)
+                        }} theme="Carbon"></ToggleButton2>
+                      </div>
+                      <div className={`${theme}-Profile-Box`}>
+                        <Button onClick={() => {
+                          Auth.addEvent({
+                            event_type:"ar_usage",
+                            userid:shareUser.information?.userId as string,
+                            sub_event_category:'view_link'
+                          })
+                          setIsTalking(false)
+                          window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                        }} theme='Carbon-back'>
+                          <div className={`${theme}-Profile-BoxVector`}></div>
+                        </Button> 
+                      </div>
+                    </div>
+              </>
               }
             </div>
 {/* 
@@ -732,7 +741,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
         </div>
         {panel == 'Profile' || mode=='profile' ?
           <div id="scrollBoxProfile" onScroll={(event:any) => {
-            if(event.nativeEvent.srcElement.scrollTop >= 200) {
+            if(event.nativeEvent.srcElement.scrollTop >= 100) {
               setScrolled(true)
               setIsFirstScrol(true)
             }else if(event.nativeEvent.srcElement.scrollTop == 0){

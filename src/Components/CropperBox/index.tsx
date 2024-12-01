@@ -70,7 +70,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 //     resizable: false                                    
                                 // }}
                                 stencilProps={{
-                                    aspectRatio: 2/1,
+                                    aspectRatio: 1/1,
                                 }}
                                 style={{ height: 400, width: 400 }}
                             />                            
