@@ -591,6 +591,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </Button>                
                   </div>       
                 :
+                <>
                   <div className="absolute top-4 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
@@ -601,6 +602,15 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       <div className={`${theme}-Profile-VolumeHighVector`} ></div>
                     </Button>                
                   </div>  
+                  <div className="absolute top-16 right-6 z-20">
+                      <Button onClick={() => {
+                        setIsTalking(false)
+                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                      }} theme='Carbon-back'>
+                        <div className={`${theme}-Profile-BoxVector`}></div>
+                      </Button>              
+                  </div>                     
+                </>
               }
             </>
             :
