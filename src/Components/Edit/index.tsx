@@ -94,7 +94,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
                 <div onClick={() => {
                   navigate('/edit/avatars')
                 }} className={`${
-                    "absolute rounded-full w-[32px] h-[32px] bg-gray-100  flex justify-center items-center border border-white borderBox-Gray  cursor-pointer -right-2 -top-2"
+                    "absolute rounded-full w-[32px] h-[32px] bg-gray-100  flex justify-center items-center border border-white borderBox-Gray  cursor-pointer -right-0 -top-2"
                   }`}>
                   <div className={`${theme}-Profile-EditProfileBtnVector7 ${theme}-Footer-Vectors
                          text-[#8290a3] w-[20px] h-[20px]
@@ -107,7 +107,7 @@ const Edit: React.FC<EditProps> = ({ theme }) => {
               </div>              
               <img onClick={() => {
                   navigate('/edit/avatars')
-                }} className="w-[120px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
+                }} className="w-[80px] h-[80px] m-auto rounded-[8px] border border-gray-100" src={authContext.currentUser.information?.imageurl} alt="" />
               <div onClick={() => {
                   navigate('/edit/avatars')
                 }} className="text-gray-700 cursor-pointer mt-3 font-medium text-sm font-poppins">Edit Your Avatar</div>

@@ -290,7 +290,7 @@ const EditAvater: React.FC = () => {
             <div className="mt-6 flex items-center justify-between">
               {currentAvatar.video.length > 0 && !isLoading ? (
                 <>
-                  <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                  <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                     <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
                       <img src="./icons/Vector.svg" alt="" />
                     </div>
@@ -309,7 +309,7 @@ const EditAvater: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-[160px] h-[80px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <div className="w-[130px] h-[130px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                     <video
                       id="dragAbleAi"
                       playsInline
@@ -342,7 +342,7 @@ const EditAvater: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-[160px] h-[103px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <div className="w-[130px] h-[130px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                     <RingLoader></RingLoader>
                   </div>
                 </>            
