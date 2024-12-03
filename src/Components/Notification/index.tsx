@@ -73,7 +73,7 @@ const Notification:React.FC<NotificationProps> = ({notifs,setNotifs}) => {
     } 
     return (
         <>
-            <div className="absolute z-30 px-4 py-6 rounded-[27px] boxShadow-button-gray top-[110px] left-4 bg-white h-[320px] w-[320px]">
+            <div className="absolute z-30 px-4 py-6 rounded-[27px] boxShadow-button-gray top-[110px] right-4 bg-white h-[320px] w-[320px]">
                 <div className="w-full text-sm  flex justify-between">
                     <div onClick={() => {
                         setMenu('All')

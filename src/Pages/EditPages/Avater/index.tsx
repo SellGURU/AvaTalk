@@ -290,7 +290,7 @@ const EditAvater: React.FC = () => {
             <div className="mt-6 flex items-center justify-between">
               {currentAvatar.video.length > 0 && !isLoading ? (
                 <>
-                  <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                  <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                     <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
                       <img src="./icons/Vector.svg" alt="" />
                     </div>
@@ -309,7 +309,7 @@ const EditAvater: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-[160px] h-[80px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <div className="w-[130px] h-[130px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                     <video
                       id="dragAbleAi"
                       playsInline
@@ -342,7 +342,7 @@ const EditAvater: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-[160px] h-[103px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                  <div className="w-[130px] h-[130px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                     <RingLoader></RingLoader>
                   </div>
                 </>            
@@ -366,7 +366,7 @@ const EditAvater: React.FC = () => {
 
             <div className="w-full gap-4 mt-5 grid grid-cols-4 grid-flow-row">
               <div
-                className="w-full  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
+                className="w-[100px] max-w-[100px] max-h-[100px] h-[100px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
                 onClick={() => {
                   if(uploadedAvater.photo.length != 0){
                       // setAvatarVideo("")
@@ -394,7 +394,7 @@ const EditAvater: React.FC = () => {
                   />
                 </div>
                 {uploadedAvater.photo.length > 0 ? (
-                  <img className="w-full h-full rounded-[12px]" src={uploadedAvater.photo} alt="" />
+                  <img className="w-full h-full object-cover rounded-[12px]" src={uploadedAvater.photo} alt="" />
                 ) : undefined}
 
                 {/* // */}
@@ -453,14 +453,14 @@ const EditAvater: React.FC = () => {
                         //   formik.setFieldValue('silent_video_avatar',res.data)
                         // })
                       }}
-                      className={`w-full ${
+                      className={`w-[100px] ${
                         el.photo == formik.values.avatar_pic_url
                           ? "borderBox-primary"
                           : "borderBox-Gray "
-                      } boxShadow-Gray  border-3 overflow-hidden flex justify-center items-center cursor-pointer  rounded-[12px] `}
+                      } boxShadow-Gray min-w-[100px] min-h-[100px] max-w-[100px] border-3 overflow-hidden flex h-[80px] justify-center items-center cursor-pointer  rounded-[12px] `}
                     >
                       {/* <img src="" alt="" /> */}
-                      <img src={el.photo} className="w-full object-cover h-[80px]" alt="" />
+                      <img src={el.photo} className="w-full object-contain h-full " alt="" />
                     </div>
                   </>
                 );

@@ -25,3 +25,20 @@
 .Carbon-secandary-Toggle-Button-container-disabled {
   @apply opacity-[50%] #{!important};
 }
+
+
+.Carbon-grid-Toggle-Button-container {
+  @apply disabled:cursor-not-allowed flex px-1 py-3   whitespace-nowrap  text-[#8290a3] leading-[21px]  text-[10px] font-[500]    #{!important};
+}
+
+.Carbon-grid-Toggle-Button-container-disabled {
+  @apply opacity-[50%] #{!important};
+}
+
+.Carbon-grid-Toggle-Button-container[data-mode="active"] {
+  @apply text-white #{!important};
+}
+
+.Carbon-grid-Toggle-Button-container[data-mode="active2"] {
+  @apply text-[#8290a3] #{!important};
+}
