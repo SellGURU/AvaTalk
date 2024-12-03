@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react"
+import {  useRef, useState } from "react"
 // import { Cropper } from "react-cropper"
 import { CropperRef, Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
@@ -34,15 +34,41 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
     const getData2 = () => {
         if(cropper){
             onResolve(cropper)
+        }else {
+            getCropData()
         }
     }
     const cancel =() => {
         onCancel()
     }
+    const cropperRef = useRef<any>(null); // Reference to the Cropper
 	const onChange = (cropper: CropperRef) => {
 		// console.log(cropper.getCanvas()?.toDataURL());
         setCropper(cropper.getCanvas()?.toDataURL())
 	};    
+  const getCropData = () => {
+    if (cropperRef.current) {
+      const cropperInstance = cropperRef.current;
+
+      // Get crop coordinates
+      const coordinates = cropperInstance.getCoordinates();
+
+      // Get cropped area as a canvas
+      const canvas = cropperInstance.getCanvas();
+
+      if (canvas) {
+        const preview = canvas.toDataURL(); // Base64 image
+        setCropper(
+          preview,
+        );
+        onResolve(preview)
+        
+        console.log("Crop Data:", { coordinates, preview });
+      } else {
+        console.log("No canvas available. Ensure the cropper is loaded.");
+      }
+    }
+  };  
     return (
         <>
         {
@@ -61,8 +87,10 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 setCropper(instance);
                             }}
                             /> */}
+
                             <Cropper
                                 src={url}
+                                ref={cropperRef}
                                 onChange={onChange}
                                 // stencilComponent={{
                                 //     aspectRatio: 1/1,
@@ -74,6 +102,7 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                                 }}
                                 style={{ height: 400, width: 400 }}
                             />                            
+
                             <div className="mt-7 flex justify-center gap-2 px-4">
                                 <Button onClick={cancel} theme="Carbon-Google" style={{boxShadow:'none'}}>Cancel</Button> 
                                 <Button onClick={getData2} theme="Carbon-Crop">Crop</Button> 
