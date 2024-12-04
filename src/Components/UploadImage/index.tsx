@@ -10,14 +10,27 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   label?:string
   accept?:string
   limite?:number
+  uploadServer?:boolean
+  checkFile?:(files:any) => Promise<any>
   onClick?:(e:any) => void
   userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
+  const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
+  const [progress,setProgress] = useState(0)
+  useEffect(() => {
+    let interval:any;
+    if (isLoading) {
+      interval = setInterval(() => {
+        setProgress((prev) => (prev < 100 ? prev + 1 : 100));
+      }, 300);
+    }
+    return () => clearInterval(interval); // Cleanup interval when loading stops
+  }, [isLoading]);
   // const getBase64 = (file:any,name:string) => {
   //     const reader = new FileReader();
   //     reader.readAsDataURL(file);
@@ -55,6 +68,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limi
   //     };
   // }   
   const getUploadFiles = (newfiles:any) => {
+
     if (newfiles) {
       const fileArray = Array.from(newfiles);
       const base64Promises = fileArray.map((file:any) => convertToBase64(file));
@@ -62,7 +76,6 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limi
       // Wait for all files to be converted to Base64
       Promise.all(base64Promises)
         .then((base64Files:any) => {
-          console.log(base64Files)
           setFiles([...files,...base64Files])
           if(uploades){
             if(mod == 'files'){
@@ -79,6 +92,31 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limi
           console.error("Error converting files to base64", error);
         });
     }
+  }
+  const CheckUploadFiles = (newfiles:any) => {
+    // console.log(newfiles)
+    // setProgress(0)
+    const fileArray = Array.from(newfiles);
+    const base64Promises = fileArray.map((file:any) => convertToBase64(file));
+    Promise.all(base64Promises).then((base64Files:any) => {
+      setUploadingFiles([...files,...base64Files])
+      checkFile?
+        checkFile([...files,...base64Files]).then(() => {
+          setFiles([...files,...base64Files])
+          if(uploades){
+            if(mod == 'files'){
+              uploades([...files,...base64Files])
+            }else{
+              setFiles([...base64Files])              
+              uploades([...base64Files])              
+            }
+          }
+          setisLoading(false)              
+        })
+      :undefined
+
+    })
+    // getUploadFiles([])
   }
   const convertToBase64 = (file: File): Promise<any> => {
     return new Promise((resolve, reject) => {
@@ -106,10 +144,31 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limi
   const deleteFile = (index:number) => {
     const newArr = [...files]
     newArr.splice(index,1)
-    setFiles(newArr)
-    if(uploades){
-      uploades(newArr)
-    }    
+
+    if(uploadServer) {
+      setUploadingFiles([...newArr])
+      checkFile?
+        checkFile([...newArr]).then(() => {
+          setFiles([...newArr])
+          if(uploades){
+            if(mod == 'files'){
+              uploades([...newArr])
+            }else{
+              setFiles([...newArr])              
+              uploades([...newArr])              
+            }
+          }
+          setisLoading(false)              
+        })
+      :undefined
+    } else {
+      setFiles(newArr)
+      if(uploades){
+        uploades(newArr)
+      }    
+
+    }  
+    
   }
   useEffect(() => {
     console.log(files)
@@ -122,78 +181,107 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ children,onClick,label,limi
       </label>      
       <div className={`${theme}-ImageUploader-container`} {...props}>
             <div className={`${theme}-ImageUploader-uploadBox-container`}>
-                {isLoading ?
-                    <div className={`${theme}-ImageUploader-uploadBox-loading`}>
-                                
-                    </div>                                         
-                    :
-                    <div className={`${theme}-ImageUploader-uploadBox-box ${files.length >0 ? `${theme}-ImageUploader-uploadBox-fileExist`:undefined}`}>
-                        <div style={{
-                          display:'flex',
-                          justifyContent:'center',
-                          alignItems:'center',
-                          width:'100%',
-                          height:'100%'
-                        }}>
-                            <div style={{display:'grid'}}>
-                              {files.length > 0 && mod == 'profile'?
-                                <img className="w-[66px] justify-self-center my-2 h-[66px] rounded-full " src={files[0].url} alt="" />
-                              :
-                                <div className={`${theme}-ImageUploader-icon`}></div>
-                              }                              
-                                <div style={{
-                                  fontSize:'12px',
-                                  textAlign:'center',
-                                  color:'#0F0F0F',
-                                  fontWeight:'500'
-                                }}>
-                                    <span style={{color:'#00B5FB',cursor:'pointer'}}>Choose File</span> 
-                                </div>
-                                <div className={`${theme}-ImageUploader-uploader-suportText-container`}>
-                                    <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: {accept}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <input onClick={onClick}  onChange={(res:any) => {
-                            setisLoading(true)
-                            // console.log(res.target.files)
-                            // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
-                            //   // console.log(res.target.files[index])
-                            //   getBase64(res.target.files[index],res.target.value.split('\\')[2])  
-                            // })
-                            getUploadFiles(res.target.files)
-                            // getBase64(res.target.files[0],res.target.value.split('\\')[2])    
-                            // res.target.files.map(element => {
-                            // });
-                        }}  className={`${theme}-ImageUploader-uploader-input`} multiple type="file" id="upload-button"  accept={accept} />                        
-                    </div>
-              }
-              {files.length > 0 && mod=='files'? 
+
+              <div className={`${theme}-ImageUploader-uploadBox-box ${files.length >0 ? `${theme}-ImageUploader-uploadBox-fileExist`:undefined}`}>
+                  <div style={{
+                    display:'flex',
+                    justifyContent:'center',
+                    alignItems:'center',
+                    width:'100%',
+                    height:'100%'
+                  }}>
+                      <div style={{display:'grid'}}>
+                        {files.length > 0 && mod == 'profile'?
+                          <img className="w-[66px] justify-self-center my-2 h-[66px] rounded-full " src={files[0].url} alt="" />
+                        :
+                          <div className={`${theme}-ImageUploader-icon`}></div>
+                        }                              
+                          <div style={{
+                            fontSize:'12px',
+                            textAlign:'center',
+                            color:'#0F0F0F',
+                            fontWeight:'500'
+                          }}>
+                              <span style={{color:'#00B5FB',cursor:'pointer'}}>Choose File</span> 
+                          </div>
+                          <div className={`${theme}-ImageUploader-uploader-suportText-container`}>
+                              <div className={`${theme}-ImageUploader-uploader-suportText`}>Supported formats: {accept}</div>
+                          </div>
+                      </div>
+                  </div>
+                  <input onClick={onClick}  onChange={(res:any) => {
+                      setisLoading(true)
+                      setProgress(0)
+                      // console.log(res.target.files)
+                      // Array(res.target.files.length).fill(1).forEach((_iet,index) => {
+                      //   // console.log(res.target.files[index])
+                      //   getBase64(res.target.files[index],res.target.value.split('\\')[2])  
+                      // })
+                      if(uploadServer){
+                        CheckUploadFiles(res.target.files)
+                      }else {
+                        getUploadFiles(res.target.files)
+
+                      }
+                      // getBase64(res.target.files[0],res.target.value.split('\\')[2])    
+                      // res.target.files.map(element => {
+                      // });
+                  }}  className={`${theme}-ImageUploader-uploader-input`} multiple type="file" id="upload-button"  accept={accept} />                        
+              </div>
+
+              {(files.length > 0 || (Uplodingfiles.length>0 && isLoading)) && mod=='files'? 
                 <>
                   <div>
                     <div className={`${theme}-ImageUploader-itemList-titleBox`}>Uploaded</div>
                     <div className={`${theme}-ImageUploader-itemList-items`}>
-                      {files.map((item,index) => {
-                        return (
-                          <>
-                            {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
-                              <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
-                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
-                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                </div> */}
-                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
-                              </div>                            
-                            :
-                              <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                                <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
-                                {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                </div> */}
-                                <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
-                              </div>
-                            }
-                          </>
-                        )
-                      })}
+                      {isLoading ?
+                      <>
+                        {
+                          Uplodingfiles.map((item,index) => {
+                            return (
+                              <>
+                                <div key={index} className={`${theme}-ImageUploader-uploadBox-file-loading relative`}>
+                                  <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
+                                  <div className="absolute bottom-0 w-full left-0">
+                                    <div className="w-full h-[6px] relative rounded-lg bg-white">
+                                      <div className="absolute left-[1px] top-[1px] rounded-lg h-[4px] bg-primary-color " style={{width:progress+'%'}}></div>
+                                    </div>
+
+                                  </div>
+                                  {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                  </div> */}
+                                  {/* <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" /> */}
+                                </div>                            
+                              </>
+                            )
+                          })
+                        }
+                      </>
+                      :
+                      <>
+                        {files.map((item,index) => {
+                          return (
+                            <>
+                              {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
+                                <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                  <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                  {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                  </div> */}
+                                  <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
+                                </div>                            
+                              :
+                                <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                  <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
+                                  {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                  </div> */}
+                                  <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
+                                </div>
+                              }
+                            </>
+                          )
+                        })}
+                      </>
+                      }
                     </div>
                   </div>
                 </>

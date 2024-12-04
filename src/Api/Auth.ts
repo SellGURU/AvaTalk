@@ -269,6 +269,14 @@ class Auth extends Api {
     })
   }
 
+  static checkBox(box:Box) {
+    return this.post('/update_more_info',{
+      title:box.getTitle(),
+      type_name:box.getTypeName(),
+      content:box
+    })
+  }  
+
   static updateBox(allBoxs:Array<Box>){
     this.post('/save_boxes',{box_data:allBoxs},{noPending:true})
   }

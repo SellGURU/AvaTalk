@@ -13,7 +13,7 @@ interface galleryImage {
 
 class GalleryBox extends Box{
     
-    constructor(protected title:string,protected contents:Array<galleryImage>){
+    constructor(protected title:string,protected contents:Array<galleryImage>,protected type?:'upload'|'save'){
         super(title)
         this.order = 4
         this.type_name = 'GalleryBox'
