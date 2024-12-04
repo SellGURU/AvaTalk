@@ -58,7 +58,7 @@ class Social {
                 window.open(this.value)
             }} className={``}>
                 <div className={``}>
-                    <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[24px] h-[24px]`}></div>
+                    <div className={`${theme}-Profile-${this.resolveClassVectorName()} w-[35px] h-[35px]`}></div>
                 </div>
                 {/* <div className={`${theme}-ContentCard-CardVector ${theme}-Profile-${this.resolveClassVectorName()}`}></div> */}
             </div>            

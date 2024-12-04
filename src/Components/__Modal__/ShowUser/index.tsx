@@ -108,12 +108,12 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                     {user?.boxs.filter((el) =>el.getTypeName() == 'SocialBox').length>0 && socialsBox.getSocialMedias().length>0 ?
                         <a  
                         className={`${theme}-ContactDetails-container5 `}>
-                        <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
-                            <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-share  ${theme}-ContactDetails-ActiveVectors`}></div>
-                        </div>
-                        {
-                            socialsBox.resolveShowProfileRender("Carbon")
-                        }
+                            <div className='flex justify-center w-full'>
+                                {
+                                    socialsBox.resolveShowProfileRender("Carbon")
+                                }
+
+                            </div>
                         {/* <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{mettingBox.getUrl().substring(0,50)}</p> */}
                         </a>
                     :undefined}                                                                 

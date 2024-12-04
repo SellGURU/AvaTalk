@@ -44,6 +44,7 @@ class Chat extends Api {
     }
 
     public static checkHaveChats(){
+        console.log(this.lastUsed )
         if(this.lastUsed == null){
             const last = localStorage.getItem("lastcheckChat")
             if(last){
@@ -51,7 +52,7 @@ class Chat extends Api {
             }
         }
         const response = this.post("/check_user_chat_list",{
-            time:this.lastUsed?.getTime()
+            time:this.lastUsed?.getTime()?this.lastUsed?.getTime():new Date().getTime()
         },{
             noPending:true
         }    
