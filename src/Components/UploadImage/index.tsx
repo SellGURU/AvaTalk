@@ -31,42 +31,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
     }
     return () => clearInterval(interval); // Cleanup interval when loading stops
   }, [isLoading]);
-  // const getBase64 = (file:any,name:string) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     // console.log(file)
-  //     reader.onload = function () {
-  //         setFiles([...files,{
-  //           url:reader.result,
-  //           name:name,
-  //           type:file.type
-  //         }])
-  //         if(uploades){
-  //           if(mod == 'files'){
-  //             uploades([...files,{
-  //               url:reader.result,
-  //               name:name,
-  //               type:file.type
-  //             }])
-  //           }else{
-  //           setFiles([{
-  //             url:reader.result,
-  //             name:name,
-  //             type:file.type
-  //           }])              
-  //             uploades([{
-  //               url:reader.result,
-  //               name:name,
-  //               type:file.type
-  //             }])              
-  //           }
-  //         }
-  //         setisLoading(false)       
-  //     };
-  //     reader.onerror = function (error) {
-  //         console.log('Error: ', error);
-  //     };
-  // }   
+
   const getUploadFiles = (newfiles:any) => {
 
     if (newfiles) {
@@ -99,7 +64,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
     const fileArray = Array.from(newfiles);
     const base64Promises = fileArray.map((file:any) => convertToBase64(file));
     Promise.all(base64Promises).then((base64Files:any) => {
-      setUploadingFiles([...files,...base64Files])
+      setUploadingFiles([...base64Files])
       checkFile?
         checkFile([...files,...base64Files]).then(() => {
           setFiles([...files,...base64Files])
@@ -112,6 +77,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
             }
           }
           setisLoading(false)              
+        }).finally(() => {
+          setisLoading(false)       
         })
       :undefined
 
@@ -188,7 +155,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                     justifyContent:'center',
                     alignItems:'center',
                     width:'100%',
-                    height:'100%'
+                    height:'100%',
+                    opacity:isLoading?'50%':'100%'
                   }}>
                       <div style={{display:'grid'}}>
                         {files.length > 0 && mod == 'profile'?
@@ -209,7 +177,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                           </div>
                       </div>
                   </div>
-                  <input onClick={onClick}  onChange={(res:any) => {
+                  <input onClick={onClick} disabled={isLoading}  onChange={(res:any) => {
                       setisLoading(true)
                       setProgress(0)
                       // console.log(res.target.files)
