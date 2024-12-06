@@ -72,7 +72,7 @@ const boxProvider = (box: any) => {
       return Object.assign(new GalleryBox("simple", [],'save'), box);
     }
     case "GoogleMapBox": {
-      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0}), box);
+      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0},'',false), box);
     }    
     case "FileBox": {
         return Object.assign(new FileBox("simple", []), box);
@@ -233,7 +233,7 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
   return jsonBox.map((item) => {
     switch (item.type_name) {
       case "GoogleMapBox":
-        return new GoogleMapBox(item.title, item.location);
+        return new GoogleMapBox(item.title, item.location,item.address);
       case "AboutBox":
         return new AboutBox(item.title, item.text);
       case "MeetingBox":

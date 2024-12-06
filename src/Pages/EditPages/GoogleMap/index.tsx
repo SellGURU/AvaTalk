@@ -12,6 +12,9 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 // import { debounce } from 'lodash';
 import '../../../index.css';
+import LocationModal from '../../../Components/__Modal__/LocationModal';
+import { useEffect, useState } from 'react';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -30,18 +33,18 @@ const EditGoogleMap = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "GoogleMapBox")[0] as GoogleMapBox;
-
+  const [showAddLocation,setShowAddLocation] = useState(false)
   if (!currentBox) {
-    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 });
+    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
   }
 
-  // const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
+  const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
   // const [searchQuery, setSearchQuery] = useState('');
-
+  const [isLocation,setIsLocation] = useState(currentBox.getISLocation())
   const formik = useFormik({
     initialValues: { 
       title: currentBox.getTitle(),
-      address:''
+      address:currentBox.address
      },
     validationSchema,
     onSubmit: (values) => {
@@ -52,13 +55,13 @@ const EditGoogleMap = () => {
   const submit = () => {
     auth.currentUser.addBox(
       new GoogleMapBox(formik.values.title, {
-        lan: 0,
-        lat: 0,
-      })
+        lan: position[0],
+        lat: position[1],
+      },formik.values.address,isLocation)
     );
     navigate('/');
   };
-
+  const [isGenerating,setIsGenerating] = useState(false)
   // const handleSearch = useCallback(
   //   debounce(async (query: string) => {
   //     if (!query) return;
@@ -91,7 +94,13 @@ const EditGoogleMap = () => {
   // useEffect(() => {
   //   handleSearch(searchQuery);
   // }, [searchQuery, handleSearch]);
-
+  useEffect(() => {
+    if(isGenerating == true){
+      setTimeout(() => {
+        setIsGenerating(false)
+      }, 500);
+    }
+  },[isGenerating])
   return (
     <div className="absolute w-full hiddenScrollBar h-dvh top-[0px] bg-white z-[15]">
       <div className="relative top-8">
@@ -121,10 +130,25 @@ const EditGoogleMap = () => {
             theme='Carbon'
             label='Address'
           ></TextArea>
-        </div>       
+        </div>
+        {isLocation &&!isGenerating  &&
+          <div className='px-8 mt-2'>
+            <MapContainer dragging={false}  center={position}  zoom={13} style={{ height: '80px', borderRadius: '27px' }}>
+                <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={position} />
+                
+            </MapContainer>               
+
+          </div>
+        }
         <div className='w-full px-8 flex justify-end mt-2'>
 
-          <div className='flex justify-end items-center'>
+          <div onClick={() => {
+            setShowAddLocation(true)
+          }} className='flex justify-end items-center'>
             <img src="./icons/location-add.svg" alt="" />
             <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>Add Location on Map</div>
 
@@ -158,6 +182,18 @@ const EditGoogleMap = () => {
           <Button onClick={submit} theme="Carbon">Save Changes</Button>
         </div>
       </div>
+      {
+        showAddLocation&&
+        <>
+          <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+            <LocationModal setAddress={(text:string) =>formik.setFieldValue("address",text) } setISLocation={setIsLocation} position={position} setPosition={setPosition} isOpen={true} onClose={() => {
+              setShowAddLocation(false)
+              setIsGenerating(true)
+              }} theme='Carbon'></LocationModal>
+          </div>
+          <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
+        </>
+      }
     </div>
   );
 };

@@ -12,10 +12,13 @@ interface Location {
 }
 
 class GoogleMapBox extends Box {
-    constructor(protected title:string,public location:Location){
+    constructor(protected title:string,public location:Location,public address:string,protected isLocation?:boolean){
         super(title)
         this.type_name = 'GoogleMapBox'
         this.order = 5
+    }
+    public getISLocation () {
+        return this.isLocation
     }
     public resolveRender(theme: string): JSX.Element {
         // const mapRef = createRef<LeafletElement>();
