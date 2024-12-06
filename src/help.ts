@@ -339,4 +339,18 @@ const handleDivices = () =>  {
   // }
 }
 
-export { resolveMenuFromRoute,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+const fetchAddress = async (position:any,onresolve:(data:any) =>void) => {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.lat}&lon=${position.lon}`;
+    try {
+    const response = await fetch(url);
+    const data = await response.json();
+    onresolve(data)
+    // setLocalAddress(data.display_name || "");
+    // console.log(data)
+    } catch (error) {
+    console.error("Error fetching address:", error);
+    // setAddress("Error fetching address");
+    }
+    }; 
+
+export { resolveMenuFromRoute,fetchAddress,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };

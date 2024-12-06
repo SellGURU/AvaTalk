@@ -31,7 +31,7 @@ const EditGoogleMap = () => {
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "GoogleMapBox")[0] as GoogleMapBox;
 
   if (!currentBox) {
-    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 });
+    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'');
   }
 
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
@@ -50,7 +50,7 @@ const EditGoogleMap = () => {
       new GoogleMapBox(formik.values.title, {
         lan: position[0],
         lat: position[1],
-      })
+      },'')
     );
     navigate('/');
   };
