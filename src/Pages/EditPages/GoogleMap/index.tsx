@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import  { useState } from 'react';
 // import { MapContainer, TileLayer, Marker, useMap,useMapEvents } from 'react-leaflet';
@@ -10,10 +11,10 @@ import { GoogleMapBox } from "../../../Model";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-// import { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import '../../../index.css';
 import LocationModal from '../../../Components/__Modal__/LocationModal';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 const validationSchema = Yup.object().shape({
@@ -62,38 +63,25 @@ const EditGoogleMap = () => {
     navigate('/');
   };
   const [isGenerating,setIsGenerating] = useState(false)
-  // const handleSearch = useCallback(
-  //   debounce(async (query: string) => {
-  //     if (!query) return;
-  //     try {
-  //       const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
-  //       const data = await response.json();
-  //       if (data.length > 0) {
-  //         const { lat, lon } = data[0];
-  //         setPosition([parseFloat(lat), parseFloat(lon)]);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching location:", error);
-  //     }
-  //   }, 500), // 500ms delay
-  //   []
-  // );
-  // function LocationMarker() {
-  //   // const [position, setPosition] = useState(null);
-
-  //   // Using useMapEvents to handle map clicks
-  //   useMapEvents({
-  //     click(e:any) {
-  //       setPosition([parseFloat(e.latlng.lat), parseFloat(e.latlng.lng)]);
-  //       // console.log(e)
-  //     },
-  //   });
-
-  //   return position ? <Marker position={position}></Marker> : null;
-  // }
-  // useEffect(() => {
-  //   handleSearch(searchQuery);
-  // }, [searchQuery, handleSearch]);
+  const handleSearch = useCallback(
+    debounce(async (query: string) => {
+      if (!query) return;
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
+        const data = await response.json();
+        if (data.length > 0) {
+          const { lat, lon } = data[0];
+          setPosition([parseFloat(lat), parseFloat(lon)]);
+        }
+      } catch (error) {
+        console.error("Error fetching location:", error);
+      }
+    }, 500), // 500ms delay
+    []
+  );
+  useEffect(() => {
+    handleSearch(formik.values.address);
+  }, [formik.values.address, handleSearch]);
   useEffect(() => {
     if(isGenerating == true){
       setTimeout(() => {

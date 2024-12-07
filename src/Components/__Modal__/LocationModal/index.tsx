@@ -71,7 +71,7 @@ const LocationModal:React.FC<LocationModalProps> = ({
       }
     }, 500), // 500ms delay
     []
-  );
+    );
     function LocationMarker() {
         // const [position, setPosition] = useState(null);
 

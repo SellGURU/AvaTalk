@@ -28,17 +28,25 @@ class GoogleMapBox extends Box {
         // Open the URL in the user's default browser or map app
         window.open(googleMapUrl, "_blank"); // Opens in a new tab
     };
-
+    private resolveAddresRender () {
+        if(this.address.length<=30){
+            return this.address
+        }
+        if(this.address.length>30){
+            return this.address.substring(0,30)+ '...'
+        }
+    }
     public resolveRender(theme: string): JSX.Element {
         
  
         return (
             <div className={`${theme}-Profile-Vectors justify-center relative`}>
-                {this.location &&
+                {this.location && this.address.length>0 &&
                     <>
+                    
                         <div onClick={() =>{
                             this.openMap()
-                        }} className="w-full flex cursor-pointer justify-start overflow-hidden gap-3 items-center px-4 bg-[#F3F4F6] borderBox-Gray h-[52px] rounded-[27px]" style={{
+                        }} className="w-full  flex cursor-pointer justify-start overflow-hidden gap-3 items-center px-4 bg-[#F3F4F6] borderBox-Gray h-[52px] rounded-[27px]" style={{
                             boxShadow:'4px 4px 20px 0px #886FB069'
                         }}>
                             <div>
@@ -51,7 +59,15 @@ class GoogleMapBox extends Box {
                                     Current Location
                                 </div>
                                 <div className="text-[#374151] text-[14px] font-medium">
-                                    {this.address.split(",")[0]+" ,"+this.address.split(",")[1]}
+                                    {this.address.split(",").length >2 ?
+                                    <>
+                                        {this.address.split(",")[0]+" ,"+this.address.split(",")[1]}
+                                    </>
+                                    :
+                                    <>
+                                    {this.resolveAddresRender()}
+                                    </>
+                                    }
                                 </div>
                             </div>
                         </div>
