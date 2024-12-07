@@ -72,7 +72,7 @@ const boxProvider = (box: any) => {
       return Object.assign(new GalleryBox("simple", [],'save'), box);
     }
     case "GoogleMapBox": {
-      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0}), box);
+      return Object.assign(new GoogleMapBox("simple",{lan:0,lat:0},'',false), box);
     }    
     case "FileBox": {
         return Object.assign(new FileBox("simple", []), box);
@@ -233,7 +233,7 @@ const resolveBoxsJson = (jsonBox: Array<any>) => {
   return jsonBox.map((item) => {
     switch (item.type_name) {
       case "GoogleMapBox":
-        return new GoogleMapBox(item.title, item.location);
+        return new GoogleMapBox(item.title, item.location,item.address);
       case "AboutBox":
         return new AboutBox(item.title, item.text);
       case "MeetingBox":
@@ -339,4 +339,18 @@ const handleDivices = () =>  {
   // }
 }
 
-export { resolveMenuFromRoute,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
+const fetchAddress = async (position:any,onresolve:(data:any) =>void) => {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.lat}&lon=${position.lon}`;
+    try {
+    const response = await fetch(url);
+    const data = await response.json();
+    onresolve(data)
+    // setLocalAddress(data.display_name || "");
+    // console.log(data)
+    } catch (error) {
+    console.error("Error fetching address:", error);
+    // setAddress("Error fetching address");
+    }
+    }; 
+
+export { resolveMenuFromRoute,fetchAddress,handleDivices,getTextColorFromBackground,getOS, resolveNavigation, useConstructor, boxProvider, getDragAfterElement, dragStart, dragEnd, dragOver, generateSlugId, sendToApi, reolveJsonToObject };
