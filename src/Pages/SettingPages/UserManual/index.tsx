@@ -1,38 +1,75 @@
-import {BackIcon} from "../../../Components";
-import {Accordion} from "../../../Components/accardion";
+import { useNavigate } from "react-router-dom";
+import { Button } from "symphony-ui";
+import { SettingCard } from "../../../Components";
 
 export const UserManual=()=>{
-    const AccordionData=[
-        {
-            body:"How we use...?",
-            title:"step into the future of professional networking with the Avatalk NFC Business Card, a cutting-edge tool designed to transform how you connect with others. This isn’t just another business card—it’s an AI-powered networking assistant embedded within a sleek, modern design. The Avatalk NFC Business Card goes beyond traditional contact sharing, offering a comprehensive digital experience that captivates, engages, and leaves a lasting impression."
-        },
-        {
-            body:"What is ...?",
-            title:""
-        },
-        {
-            body:"How we can...?",
-            title:""
-        },
+  const navigate = useNavigate();
 
-    ]
+  const SupportMenus = [
+    {
+      name: "Welcome to Avatalk",
+      icon: "",
+      link: "/settings/Help/ManualView/Welcome_to_Avatalk",
+    },
+    {
+      name: "Profile Mastery",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },
+    {
+      name: "AI Persona Magic",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },
+    {
+      name: "Dynamic Galleries",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },
+    {
+      name: "Social Connections",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },    
+    {
+      name: "Adding Links",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },     
+    {
+      name: "File Sharing",
+      icon: "",
+      // link:""
+      link: "/settings/Help/ManualView/Profile_Mastery",
+    },        
+  ];
     return(
         <>
-            <div className={"w-full bg-[#FDFDFE] hiddenScrollBar h-dvh top-[0px]  z-[15]"}>
-                <div className=" top-4">
-                    <BackIcon title="User Manumal" theme="Carbon"></BackIcon>
-
-                </div>
-                <div
-                    className={" p-4 rounded-lg   mt-[96px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[10px]"}>
-                    {AccordionData.map(({title, body})=>{
-                        return (
-                            <Accordion bodyText={title} title={body}/>
-                        )
-                    })}
-
-                </div>
+            <div className={`Carbon-ChatDetails-container`}>
+            <div className="flex px-6 items-center space-x-4 absolute top-8">
+                <Button
+                onClick={() => navigate(-1)}
+                theme={`Carbon-back`}
+                >
+                <div className={`Carbon-back-Button-vector`}></div>
+                </Button>
+                <p className={`Carbon-ChatDetails-title`}>User Manual</p>
+            </div>
+            <div className="flex flex-col px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[4px]">
+                {SupportMenus.map((item) => (
+                <SettingCard
+                    key={item.name}
+                    linkTo={item.link}
+                    content={item}
+                    theme="Carbon"
+                />
+                ))}
+            </div>
             </div>
         </>
     )

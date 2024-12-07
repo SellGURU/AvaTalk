@@ -11,12 +11,12 @@ const HelpSupport = () => {
       icon: "form.svg",
       link: "/settings/Help/form",
     },
-    // {
-    //   name: "User Manual",
-    //   icon: "manual.svg",
-    //   link:""
-    //   // link: "/settings/Help/manual",
-    // },
+    {
+      name: "User Manual",
+      icon: "manual.svg",
+      // link:""
+      link: "/settings/Help/manual",
+    },
     {
       name: "Tutorial Videos",
       icon: "tutorial.svg",
@@ -41,7 +41,7 @@ const HelpSupport = () => {
         </Button>
         <p className={`Carbon-ChatDetails-title`}>Support</p>
       </div>
-      <div className="flex flex-col px-6 mt-[40px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[32px]">
+      <div className="flex flex-col px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[4px]">
         {SupportMenus.map((item) => (
           <SettingCard
             key={item.name}
