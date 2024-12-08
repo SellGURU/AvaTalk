@@ -15,6 +15,7 @@ interface SettingCardProps {
 
 const SettingCard: React.FC<SettingCardProps> = ({ theme, content, linkTo }) => {
   const navigate = useNavigate();
+
   return (
     <>
       <div

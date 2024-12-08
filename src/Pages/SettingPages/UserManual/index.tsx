@@ -5,49 +5,44 @@ import { SettingCard } from "../../../Components";
 export const UserManual=()=>{
   const navigate = useNavigate();
 
-  const SupportMenus = [
-    {
-      name: "Welcome to Avatalk",
-      icon: "",
-      link: "/settings/Help/ManualView/Welcome_to_Avatalk",
-    },
-    {
-      name: "Profile Mastery",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },
-    {
-      name: "AI Persona Magic",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },
-    {
-      name: "Dynamic Galleries",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },
-    {
-      name: "Social Connections",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },    
-    {
-      name: "Adding Links",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },     
-    {
-      name: "File Sharing",
-      icon: "",
-      // link:""
-      link: "/settings/Help/ManualView/Profile_Mastery",
-    },        
-  ];
+    const SupportMenus = [
+        {
+            name: "Welcome to Avatalk",
+            icon: "",
+            link: "/settings/Help/ManualView/Welcome_to_Avatalk",
+        },
+        {
+            name: "Profile Mastery",
+            icon: "",
+            link: "/settings/Help/ManualView/Profile_Mastery",
+        },
+        {
+            name: "AI Persona Magic",
+            icon: "",
+            link: "/settings/Help/ManualView/AI_Persona_Magic",
+        },
+        {
+            name: "Dynamic Galleries",
+            icon: "",
+            link: "/settings/Help/ManualView/Dynamic_Galleries",
+        },
+        {
+            name: "Social Connections",
+            icon: "",
+            link: "/settings/Help/ManualView/Social_Connections",
+        },
+        {
+            name: "Adding Links",
+            icon: "",
+            link: "/settings/Help/ManualView/Adding_Links",
+        },
+        {
+            name: "File Sharing",
+            icon: "",
+            link: "/settings/Help/ManualView/File_Sharing",
+        },
+    ];
+
     return(
         <>
             <div className={`Carbon-ChatDetails-container`}>
