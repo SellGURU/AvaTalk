@@ -233,7 +233,7 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
 
                                 <div onClick={() => {
                                     navigate('/settings/service')
-                                }} className="text-[#FBBF24] font-semibold cursor-pointer text-[14px]">{authContext.currentUser.type_of_account.getType() == 'Pro'? 'Renew Your Plan':'Upgrade to Pro'}</div>
+                                }} className="text-[#FBBF24] font-semibold cursor-pointer text-[14px]">{authContext.currentUser.type_of_account.getType() == 'Pro'? 'Renew Your_Plan':'Upgrade to Pro'}</div>
                                 // </Link>
                             }
                             <div onClick={() => {

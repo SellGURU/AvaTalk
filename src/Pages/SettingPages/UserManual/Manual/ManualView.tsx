@@ -12,130 +12,130 @@ const supportMenus = [
     },
     {
         key: 'Profile_Mastery',
-        title: 'Profile Mastery',
+        title: 'Profile_Mastery',
         header: 'Setting Up and Editing Your Profile',
         description: 'The "Edit Profile" section in the Avatalk app is your go-to hub for creating a professional and personalized digital presence. Here’s how to get started:',
         stepBySteps: [
             {
                 title: 'Update Your Avatar:',
                 description: 'Choose or upload an image that represents your professional identity. This visual will be the face of your AI persona.',
-                image: ''
+                image: '/Carbon/manualview/Profile_Mastery/1.png'
             },
             {
                 title: 'AI Settings:',
                 description: 'Tailor how your AI interacts with others by adjusting communication styles and professional goals. Ensure your persona reflects your unique voice.',
-                image: ''
+                image: '/Carbon/manualview/Profile_Mastery/2.png'
             },
             {
                 title: 'Contact Information:',
                 description: 'Input and share your contact details, social media profiles, and personal websites. Make it easy for others to connect with you through multiple channels.',
-                image: ''
+                image: '/Carbon/manualview/Profile_Mastery/3.png'
             },
             {
                 title: 'Add Multimedia:',
                 description: 'Enhance your profile by uploading files, images, or videos. Showcase your work, projects, or portfolio to create a dynamic and engaging profile.',
-                image: ''
+                image: '/Carbon/manualview/Profile_Mastery/4.png'
             },
             {
                 title: 'Appointment Scheduling:',
                 description: 'Integrate appointment scheduling tools to allow others to book meetings with you directly from your profile.',
-                image: ''
+                image: '/Carbon/manualview/Profile_Mastery/5.png'
             }
         ],
         endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.'
     },
     {
         key: 'AI_Persona_Magic',
-        title: 'AI Persona Magic',
+        title: 'AI_Persona_Magic',
         header: 'Customizing Your AI Persona',
         description: 'With Avatalk’s "AI Settings," you can customize your AI-driven persona for professional networking. Here’s a quick guide:',
         stepBySteps: [
             {
                 title: 'Navigate to "AI Settings":',
                 description: 'Open the app and navigate to the "AI Settings" section to begin customizing your persona.',
-                image: ''
+                image: '/Carbon/manualview/AI_Persona_Magic/1.png'
             },
             {
                 title: 'Modify AI Information:',
                 description: 'Use the text editor to modify or input new information your AI will use in conversations.',
-                image: ''
+                image: '/Carbon/manualview/AI_Persona_Magic/2.png'
             },
             {
                 title: 'Analyze with AI:',
                 description: 'Tap the "Analyze with AI" button to review your input and ensure accurate, engaging responses.',
-                image: ''
+                image: '/Carbon/manualview/AI_Persona_Magic/3.png'
             },
             {
                 title: 'Review AI Suggestions:',
                 description: 'Tap on the "Analyzed" button to review AI-generated suggestions and refine your persona further.',
-                image: ''
+                image: '/Carbon/manualview/AI_Persona_Magic/4.png'
             },
             {
                 title: 'Test the AI:',
                 description: 'Test your AI with text and voice interactions to ensure it handles questions appropriately.',
-                image: ''
+                image: '/Carbon/manualview/AI_Persona_Magic/5.png'
             }
         ],
         endSection: 'During the free trial, you get full access to these features only for once. After the trial, upgrade to Pro for unlimited access and ongoing customization options.'
     },
     {
         key: 'Dynamic_Galleries',
-        title: 'Dynamic Galleries',
+        title: 'Dynamic_Galleries',
         header: 'Managing and Sharing Visuals with Avatalk',
         description: 'The "Edit Gallery" feature in Avatalk is your go-to tool for managing and curating the visual aspects of your digital profile. It allows you to upload, organize, and update images that represent your professional identity, making sure you present yourself in the best light to your network.',
         stepBySteps: [
             {
                 title: 'Upload Images:',
                 description: 'Navigate to the "Edit Gallery" section within the app, and click the "Choose File" button to upload images from your device (JPEG and PNG formats supported).',
-                image: ''
+                image: '/Carbon/manualview/Dynamic_Galleries/1.png'
             },
             {
                 title: 'Manage Your Gallery:',
                 description: 'Once uploaded, manage your images by replacing or deleting outdated visuals.',
-                image: ''
+                 image: '/Carbon/manualview/Dynamic_Galleries/2.png'
             },
             {
                 title: 'Review Your Gallery:',
                 description: 'Review your gallery to ensure it reflects your current personal or professional brand.',
-                image: ''
+                 image: '/Carbon/manualview/Dynamic_Galleries/3.png'
             }
         ],
         endSection: 'Regularly updating your gallery ensures that your digital presence remains fresh and professional, helping you stand out in every interaction. Upgrade to Pro for a more seamless and customizable experience.'
     },
     {
         key: 'Social_Connections',
-        title: 'Social Connections',
+        title: 'Social_Connections',
         header: 'Integrating and Managing Social Links',
         description: 'The "Socials" feature in Avatalk allows you to seamlessly integrate your social media profiles into your AI-driven networking experience. By linking platforms like LinkedIn, Telegram, Instagram, Facebook, Twitter/X, or YouTube, you can centralize your online presence and make it easier for connections to engage with you.',
         stepBySteps: [
             {
                 title: 'Add Social Media Links:',
                 description: 'Go to the "Socials" section in Avatalk, enter a title for your social media card, and select the social media platforms you wish to link.',
-                image: ''
+                 image: '/Carbon/manualview/Social_Connections/1.png'
             },
             {
                 title: 'Save Links:',
                 description: 'Add your account information for each platform, and once saved, these links will appear on your Avatalk profile.',
-                image: ''
+                 image: '/Carbon/manualview/Social_Connections/2.png'
             }
         ],
         endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.'
     },
     {
         key: 'Adding_Links',
-        title: 'Adding Links',
+        title: 'Adding_Links',
         header: 'Maximizing Your Networking Using Links',
         description: 'The "Links" section in the Avatalk app allows you to effectively manage and share essential web resources, amplifying your professional networking. This tool helps you store, organize, and showcase crucial links, including portfolios, social media, or company websites, directly in your digital business card.',
         stepBySteps: [
             {
                 title: 'Add New Link:',
                 description: 'Navigate to the "Links" section in the Avatalk app, tap "Add New Link," enter a title and URL.',
-                image: ''
+                 image: '/Carbon/manualview/Adding_Links/1.png'
             },
             {
                 title: 'Edit or Remove Links:',
                 description: 'To edit a link, select the desired link, make adjustments, and save. To delete outdated links, simply select and remove them.',
-                image: ''
+                image: '/Carbon/manualview/Adding_Links/2.png'
             }
         ],
         endSection: 'Start using the "Links" section today and make your digital business card more effective. With Avatalk, you can ensure that your network always has access to the most relevant information.'
@@ -195,7 +195,7 @@ const ManualView = () => {
                                             </div>
                                         </div>
                                         <div className={`min-w-[138px] w-[40%] ${index %2 != 0 ? 'order-first':'order-last'} `}>
-                                            <img src="/icons/manual/Card-Fill-Preview.png" alt="" />
+                                            <img src={el.image.length>=1?el.image:"/icons/manual/Card-Fill-Preview.png"} alt="" />
                                         </div>
                                     </div>
                                 </>
