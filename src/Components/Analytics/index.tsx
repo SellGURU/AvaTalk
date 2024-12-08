@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AccessNotifManager, AnalyticsSummary, AreaChartComponent, BarChartComponent, DatePicker, PiChartComponent } from "..";
 import { Auth } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
+import { useConstructor } from "../../help";
 
 interface Props {
   theme?: string;
@@ -74,6 +75,13 @@ const Analytics: React.FC<Props> = ({ theme }) => {
     ])
     }
   },[day])
+  useConstructor(() => {
+      Auth.addEvent({
+          event_type:'user_act',
+          sub_event_category:'analytics_page_visit_count',
+          userid:context.currentUser.information?.userId as string
+      })
+  })   
   return (
     <div className={`${theme}-Analytics-container `}>
       <p className={`${theme}-Analytics-text`}>Analytics</p>

@@ -2,11 +2,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { SettingCard } from "../../../Components";
+import { useConstructor } from "../../../help";
+import { Auth } from "../../../Api";
+import { useAuth } from "../../../hooks/useAuth";
 
 const SettingHelp = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const context = useAuth()
   const helpMenus = [
     {
       name: "Privacy Policy",
@@ -24,7 +27,13 @@ const SettingHelp = () => {
       link: "support",
     },
   ];
-
+  useConstructor(() => {
+      Auth.addEvent({
+          event_type:'user_act',
+          sub_event_category:'help_section_usage_count',
+          userid:context.currentUser.information?.userId as string
+      })    
+  })
   const isRootHelpPath = location.pathname === "/settings/Help";
 
   return (
