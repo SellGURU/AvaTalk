@@ -8,7 +8,11 @@ const supportMenus = [
         header: 'Introduction to the App',
         description: 'Welcome to Avatalk, your AI-powered networking assistant. Here\'s how to get the most out of Avatalk:\nProfile Setup: Begin by creating your professional profile. Input your details, including your contact information, job role, and key skills. This profile will form the basis of your AI persona.\nAI Persona Creation: Once your profile is complete, Avatalk will generate a personalized AI persona. This persona can interact on your behalf, sharing your contact details and responding intelligently to inquiries.\nNetworking: Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you\'re unavailable, ensuring ongoing professional presence.\nScheduling: Avatalk’s AI can also schedule meetings for you. Sync your calendar to ensure seamless scheduling of appointments, directly from interactions.\nAnalytics Dashboard: Track the performance of your AI persona through Avatalk’s analytics. Review interaction metrics to optimize and refine your networking approach.\nAvatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals.',
         stepBySteps: [],
-        endSection: 'Avatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals. Whether you\'re freelancing, part of a small business, or with a large enterprise, Avatalk scales with you, ensuring your professional presence is always impactful.'
+        endSection: 'Avatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals. Whether you\'re freelancing, part of a small business, or with a large enterprise, Avatalk scales with you, ensuring your professional presence is always impactful.',
+        limitations: {
+            free: "Limited access to AI features, analytics, and profile customizations.",
+            pro: "Full access to all features including unlimited profile customizations, enhanced AI settings, and in-depth analytics."
+        }
     },
     {
         key: 'Profile_Mastery',
@@ -42,7 +46,11 @@ const supportMenus = [
                 image: '/Carbon/manualview/Profile_Mastery/5.png'
             }
         ],
-        endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.'
+        endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.',
+        limitations: {
+            free: "Limited profile customizations and multimedia options.",
+            pro: "Unlimited profile customizations, multimedia uploads, and enhanced appointment scheduling features."
+        }
     },
     {
         key: 'AI_Persona_Magic',
@@ -76,7 +84,11 @@ const supportMenus = [
                 image: '/Carbon/manualview/AI_Persona_Magic/5.png'
             }
         ],
-        endSection: 'During the free trial, you get full access to these features only for once. After the trial, upgrade to Pro for unlimited access and ongoing customization options.'
+        endSection: 'During the free trial, you get full access to these features only for once. After the trial, upgrade to Pro for unlimited access and ongoing customization options.',
+        limitations: {
+            free: "One-time full access during the trial period.",
+            pro: "Unlimited access with ongoing customization, and additional AI features."
+        }
     },
     {
         key: 'Dynamic_Galleries',
@@ -92,15 +104,19 @@ const supportMenus = [
             {
                 title: 'Manage Your Gallery:',
                 description: 'Once uploaded, manage your images by replacing or deleting outdated visuals.',
-                 image: '/Carbon/manualview/Dynamic_Galleries/2.png'
+                image: '/Carbon/manualview/Dynamic_Galleries/2.png'
             },
             {
                 title: 'Review Your Gallery:',
                 description: 'Review your gallery to ensure it reflects your current personal or professional brand.',
-                 image: '/Carbon/manualview/Dynamic_Galleries/3.png'
+                image: '/Carbon/manualview/Dynamic_Galleries/3.png'
             }
         ],
-        endSection: 'Regularly updating your gallery ensures that your digital presence remains fresh and professional, helping you stand out in every interaction. Upgrade to Pro for a more seamless and customizable experience.'
+        endSection: 'Regularly updating your gallery ensures that your digital presence remains fresh and professional, helping you stand out in every interaction. Upgrade to Pro for a more seamless and customizable experience.',
+        limitations: {
+            free: "Limited image uploads and management options.",
+            pro: "Unlimited image uploads and enhanced gallery management features."
+        }
     },
     {
         key: 'Social_Connections',
@@ -111,15 +127,19 @@ const supportMenus = [
             {
                 title: 'Add Social Media Links:',
                 description: 'Go to the "Socials" section in Avatalk, enter a title for your social media card, and select the social media platforms you wish to link.',
-                 image: '/Carbon/manualview/Social_Connections/1.png'
+                image: '/Carbon/manualview/Social_Connections/1.png'
             },
             {
                 title: 'Save Links:',
                 description: 'Add your account information for each platform, and once saved, these links will appear on your Avatalk profile.',
-                 image: '/Carbon/manualview/Social_Connections/2.png'
+                image: '/Carbon/manualview/Social_Connections/2.png'
             }
         ],
-        endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.'
+        endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.',
+        limitations: {
+            free: "Limited social media integrations and management.",
+            pro: "Unlimited social media integrations with enhanced management features."
+        }
     },
     {
         key: 'Adding_Links',
@@ -130,7 +150,7 @@ const supportMenus = [
             {
                 title: 'Add New Link:',
                 description: 'Navigate to the "Links" section in the Avatalk app, tap "Add New Link," enter a title and URL.',
-                 image: '/Carbon/manualview/Adding_Links/1.png'
+                image: '/Carbon/manualview/Adding_Links/1.png'
             },
             {
                 title: 'Edit or Remove Links:',
@@ -138,7 +158,11 @@ const supportMenus = [
                 image: '/Carbon/manualview/Adding_Links/2.png'
             }
         ],
-        endSection: 'Start using the "Links" section today and make your digital business card more effective. With Avatalk, you can ensure that your network always has access to the most relevant information.'
+        endSection: 'Start using the "Links" section today and make your digital business card more effective. With Avatalk, you can ensure that your network always has access to the most relevant information.',
+        limitations: {
+            free: "Limited link management and sharing capabilities.",
+            pro: "Unlimited links with enhanced management options."
+        }
     },
     {
         key: 'File_Sharing',
@@ -148,16 +172,14 @@ const supportMenus = [
         stepBySteps: [
             {
                 title: 'Upload Files:',
-                description: 'Navigate to the "Files" section in Avatalk, tap "Choose File" to upload files in supported formats (PDF, DOCX, XLSX, PSD, AI).',
-                image: ''
-            },
-            {
-                title: 'Manage Your Files:',
-                description: 'Once uploaded, your files will be securely stored and ready for sharing during conversations.',
-                image: ''
+                description: 'Navigate to the "Files" section in Avatalk, tap "Choose File"',
+                image: '/Carbon/manualview/File_Sharing/1.png'
             }
         ],
-        endSection: 'Avatalk makes managing your professional assets easy, but for maximum file capacity and flexibility, upgrading to Pro is recommended.'
+        limitations: {
+            free: "Limited file storage and sharing options.",
+            pro: "Unlimited file uploads and enhanced sharing capabilities."
+        }
     }
 ];
 
@@ -182,26 +204,56 @@ const ManualView = () => {
                     <div className="text-[#374151] text-[14px] font-medium mt-4">{data.header}</div>
                     <div className="text-[#374151] text-[12px] mt-6 text-justify">{data.description}</div>
                     <div className="mt-3">
-                        {data.stepBySteps.map((el:any,index:number) => {
+                        {data.stepBySteps.map((el: any, index: number) => {
                             return (
                                 <>
                                     <div key={el.title} className="flex  justify-between items-start">
                                         <div className="flex-grow mt-2 order-2">
                                             <div className="text-[12px] font-semibold text-[#374151]">
-                                                {index+1}. {el.title}
+                                                {index + 1}. {el.title}
                                             </div>
                                             <div className="text-justify mt-1 text-[#374151] text-[12px]">
                                                 {el.description}
                                             </div>
                                         </div>
-                                        <div className={`min-w-[138px] w-[40%] ${index %2 != 0 ? 'order-first':'order-last'} `}>
-                                            <img src={el.image.length>=1?el.image:"/icons/manual/Card-Fill-Preview.png"} alt="" />
+                                        <div
+                                            className={`min-w-[138px] w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
+                                            <img
+                                                src={el.image.length >= 1 ? el.image : "/icons/manual/Card-Fill-Preview.png"}
+                                                alt=""/>
                                         </div>
                                     </div>
+
                                 </>
                             )
                         })}
 
+                    </div>
+                    <div className="text-[#374151] text-[12px] mt-6 text-justify">
+                        <div className="text-[12px] font-semibold text-[#374151]">
+                            Free vs. Pro Limitations
+                        </div>
+                        <div className={"space-y-1.5"}>
+                            <div className={"text-[#374151] pt-1.5  flex gap-1.5  items-start justify-start text-[12px] text-justify text-wrap "}>
+                                <div className={"text-[12px] font-semibold text-[#374151]"}>
+                                pro:
+                                </div>
+                                <div>
+
+                                {data.limitations.pro}
+                                </div>
+                            </div>
+                            <div className={"text-[#374151] flex  gap-1.5 items-start justify-start  text-[12px] text-justify text-wrap "} >
+                                <div className={" text-[12px] font-semibold text-[#374151]"}>
+
+                                    free:
+                                </div>
+                                <div>
+
+                                {data.limitations.free}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="text-[#374151] text-[12px] mt-6 text-justify">{data.endSection}</div>
                 </div>
