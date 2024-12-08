@@ -6,6 +6,7 @@ import { Box } from "..";
 // import { createRef } from "react";
 // import { LeafletElement } from "../../Components/Base/LefeatMapLoader/leaflet-map-loader";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
+// import { publish } from "../../utils/event";
 // import { position } from "html2canvas/dist/types/css/property-descriptors/position";
 
 interface Location {
@@ -23,9 +24,10 @@ class GoogleMapBox extends Box {
         return this.isLocation
     }
     private openMap = () => {
-        // Construct the Google Maps URL
-        const googleMapUrl = `https://www.google.com/maps?q=${this.location.lat},${this.location.lan}`;
-        // Open the URL in the user's default browser or map app
+        // publish("showGoogleMapModal",{value:this.location})
+        // // Construct the Google Maps URL
+        const googleMapUrl = `https://www.google.com/maps?q=${this.location.lan},${this.location.lat}`;
+        // // Open the URL in the user's default browser or map app
         window.open(googleMapUrl, "_blank"); // Opens in a new tab
     };
     private resolveAddresRender () {

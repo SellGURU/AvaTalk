@@ -9,7 +9,7 @@ import { Auth } from "../../Api";
 import { useAuth } from "../../hooks/useAuth";
 import ContentCard from "../ContentCard";
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
-import { publish } from "../../utils/event";
+import { publish, subscribe } from "../../utils/event";
 import ShareContact from "../__Modal__/ShareContact";
 import Spinners from "../Spinner";
 // import ToggleButton2 from "../ToggleButton2";
@@ -25,6 +25,7 @@ import { Notification as NotificationApi } from "../../Api"
 import UserType from "../../Model/UserType";
 import {  ClipLoader } from "react-spinners";
 import ToggleButton3 from "../ToggleButton3";
+import GoogleMapModal from "../__Modal__/GoogleMapModal";
 
 interface ProfileProps {
   theme?: string;
@@ -78,6 +79,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
       return unreadCount;
   }     
   const [showExchangeContact,setShowExchangeContact] = useState(false)
+  const [showGoogleMap,setShowGoogleMap] = useState(false)
+  subscribe("showGoogleMapModal",() => {
+    setShowGoogleMap(true)
+  })
   const [mode,setMode] = useState<'profile'|'review'|'share'>(resolveMode())
   const [,setShowMuiteController] = useState(false)
   const [panel,setPanel] = useState<'Profile'|'Chat'>('Chat')
@@ -857,7 +862,17 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
           <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
       </>
     }
-
+    {
+      showGoogleMap &&
+      <>
+       <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
+         <GoogleMapModal context={shareUser} theme="Carbon" onClose={() =>{
+          setShowGoogleMap(false)
+         }}></GoogleMapModal>
+       </div>
+       <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>
+      </>
+    }
     {/* <ExchangeContact mode='add' onAddContact={(data) => {
         Contacts.addContact({
           email:data.email,
