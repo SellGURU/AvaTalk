@@ -173,7 +173,7 @@ const supportMenus = [
             {
                 title: 'Upload Files:',
                 description: 'Navigate to the "Files" section in Avatalk, tap "Choose File"',
-                image: '/Carbon/manualview/File_Sharing/1.png'
+                image: ''
             }
         ],
         limitations: {
