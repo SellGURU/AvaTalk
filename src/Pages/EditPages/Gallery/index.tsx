@@ -37,22 +37,28 @@ const EditGallery = () => {
       console.log(values);
     },
   });
+  const [isChanged,setIsChanged] = useState(false)
   const submit = () => {
-    if (auth.currentUser.type_of_account.getType() == "Free") {
-      if (formik.values.files.length > 5) {
-        setIsReadyTo(true);
-      } else {
-        auth.currentUser.addSaveBox(
-          new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
-          new GalleryBox(formik.values.title, [],'save')
-        );
-        navigate("/");
-      }
-    } else {
-      auth.currentUser.addSaveBox(
-        new GalleryBox(formik.values.title, formik.values.files,'save'),
-        new GalleryBox(formik.values.title, [],'save')
-      );
+    if(isChanged){
+        if (auth.currentUser.type_of_account.getType() == "Free") {
+          if (formik.values.files.length > 5) {
+            setIsReadyTo(true);
+          } else {
+            auth.currentUser.addSaveBox(
+              new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
+              new GalleryBox(formik.values.title, [],'save')
+            );
+            navigate("/");
+          }
+        } else {
+          auth.currentUser.addSaveBox(
+            new GalleryBox(formik.values.title, formik.values.files,'save'),
+            new GalleryBox(formik.values.title, [],'save')
+          );
+          navigate("/");
+        }
+
+    }else {
       navigate("/");
     }
   };
@@ -65,6 +71,7 @@ const EditGallery = () => {
         sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
       };
     });    
+    setIsChanged(true)
     return auth.currentUser.checkBox(
       new GalleryBox(formik.values.title, converted,'upload')
     );
