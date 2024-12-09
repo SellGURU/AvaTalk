@@ -16,7 +16,7 @@ const supportMenus = [
     },
     {
         key: 'Profile_Mastery',
-        title: 'Profile_Mastery',
+        title: 'Profile Mastery',
         header: 'Setting Up and Editing Your Profile',
         description: 'The "Edit Profile" section in the Avatalk app is your go-to hub for creating a professional and personalized digital presence. Here’s how to get started:',
         stepBySteps: [
@@ -54,7 +54,7 @@ const supportMenus = [
     },
     {
         key: 'AI_Persona_Magic',
-        title: 'AI_Persona_Magic',
+        title: 'AI Persona Magic',
         header: 'Customizing Your AI Persona',
         description: 'With Avatalk’s "AI Settings," you can customize your AI-driven persona for professional networking. Here’s a quick guide:',
         stepBySteps: [
@@ -92,7 +92,7 @@ const supportMenus = [
     },
     {
         key: 'Dynamic_Galleries',
-        title: 'Dynamic_Galleries',
+        title: 'Dynamic Galleries',
         header: 'Managing and Sharing Visuals with Avatalk',
         description: 'The "Edit Gallery" feature in Avatalk is your go-to tool for managing and curating the visual aspects of your digital profile. It allows you to upload, organize, and update images that represent your professional identity, making sure you present yourself in the best light to your network.',
         stepBySteps: [
@@ -120,7 +120,7 @@ const supportMenus = [
     },
     {
         key: 'Social_Connections',
-        title: 'Social_Connections',
+        title: 'Social Connections',
         header: 'Integrating and Managing Social Links',
         description: 'The "Socials" feature in Avatalk allows you to seamlessly integrate your social media profiles into your AI-driven networking experience. By linking platforms like LinkedIn, Telegram, Instagram, Facebook, Twitter/X, or YouTube, you can centralize your online presence and make it easier for connections to engage with you.',
         stepBySteps: [
@@ -143,7 +143,7 @@ const supportMenus = [
     },
     {
         key: 'Adding_Links',
-        title: 'Adding_Links',
+        title: 'Adding Links',
         header: 'Maximizing Your Networking Using Links',
         description: 'The "Links" section in the Avatalk app allows you to effectively manage and share essential web resources, amplifying your professional networking. This tool helps you store, organize, and showcase crucial links, including portfolios, social media, or company websites, directly in your digital business card.',
         stepBySteps: [
@@ -190,7 +190,7 @@ const ManualView = () => {
 
     return (
         <>
-            <div className={`Carbon-ChatDetails-container`}>
+            <div className={`Carbon-ChatDetails-container pb-[100px]`}>
                 <div className="flex px-6 items-center space-x-4 absolute top-8">
                     <Button
                     onClick={() => navigate(-1)}
@@ -200,7 +200,7 @@ const ManualView = () => {
                     </Button>
                     <p className={`Carbon-ChatDetails-title`}>{data.title}</p>
                 </div>
-                <div className=" px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[300px] pt-[4px]">
+                <div className=" px-6 mt-[60px] hiddenScrollBar h-dvh overflow-y-scroll pb-[200px]  pt-[4px]">
                     <div className="text-[#374151] text-[14px] font-medium mt-4">{data.header}</div>
                     <div className="text-[#374151] text-[12px] mt-6 text-justify">{data.description}</div>
                     <div className="mt-3">
