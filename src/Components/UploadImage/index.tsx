@@ -200,7 +200,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
               {(files.length > 0 || (Uplodingfiles.length>0 && isLoading)) && mod=='files'? 
                 <>
                   <div>
-                    <div className={`${theme}-ImageUploader-itemList-titleBox`}>Uploaded</div>
+                    <div className={`${theme}-ImageUploader-itemList-titleBox`}>{(Uplodingfiles.length>0 && isLoading)? <>Uploading <span>0/{Uplodingfiles.length}</span></>:' Uploaded'}</div>
                     <div className={`${theme}-ImageUploader-itemList-items`}>
                       {isLoading ?
                       <>

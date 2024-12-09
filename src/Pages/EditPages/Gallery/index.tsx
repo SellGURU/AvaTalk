@@ -110,7 +110,7 @@ const EditGallery = () => {
             </div>
             <div className="px-6 mt-3">
               <ImageUploadr
-                accept="image/*"
+                accept="image/png, image/jpeg"
                 limite={5}
                 onClick={(e) => {
                   if (auth.currentUser.type_of_account.getType() == "Free") {
