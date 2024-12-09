@@ -76,7 +76,7 @@ const EditGallery = () => {
       auth.currentUser.checkBox(
         new GalleryBox(formik.values.title, converted,'upload')
       );      
-      return new Promise((resolve,reject)=>{
+      return new Promise((_resolve,reject)=>{
         reject("")
       })
     }
