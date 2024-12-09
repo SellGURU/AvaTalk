@@ -12,7 +12,7 @@ import {  useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required.'),
+  title: Yup.string(),
 });
 
 const EditGallery = () => {

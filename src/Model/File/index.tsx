@@ -92,7 +92,7 @@ export class File {
 }
 class FileBox extends Box{
     
-    constructor(protected title:string,protected contents:Array<File>){
+    constructor(protected title:string,protected contents:Array<File>,protected type?:'upload'|'save'){
         super(title)
         this.order = 5
         this.type_name = 'FileBox'

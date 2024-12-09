@@ -14,7 +14,7 @@ import useWindowHeight from "../../../hooks/HightSvreen";
 const regex = /^.*Test.*$/
 
 const validationSchema = Yup.object().shape({
-    title:Yup.string().required(),
+    title:Yup.string(),
     url:Yup.string().matches((regex))
 });
 

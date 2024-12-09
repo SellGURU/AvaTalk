@@ -18,7 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string(),
   address:Yup.string()
 });
 

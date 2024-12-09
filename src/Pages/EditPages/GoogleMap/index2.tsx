@@ -14,7 +14,7 @@ import { debounce } from 'lodash';
 import '../../../index.css';
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string(),
 });
 
 const FlyToLocation = ({ position }: { position: [number, number] }) => {
