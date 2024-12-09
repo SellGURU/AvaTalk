@@ -12,7 +12,7 @@ import {  useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string().required('Title is required.'),
 });
 
 const EditGallery = () => {
@@ -70,7 +70,17 @@ const EditGallery = () => {
         name: item.name,
         sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
       };
-    });    
+    });      
+    if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
+      setIsReadyTo(true);
+      auth.currentUser.checkBox(
+        new GalleryBox(formik.values.title, converted,'upload')
+      );      
+      return new Promise((resolve,reject)=>{
+        reject("")
+      })
+    }
+  
     setIsChanged(true)
     return auth.currentUser.checkBox(
       new GalleryBox(formik.values.title, converted,'upload')
@@ -93,7 +103,7 @@ const EditGallery = () => {
                 page="GallerySetting"
               ></AccessNotifManager>
             </div>
-            <div className="px-6">
+            <div className="px-6 text-left">
               <TextField
                 {...formik.getFieldProps("title")}
                 errorMessage={formik.errors?.title}

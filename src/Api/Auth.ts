@@ -264,7 +264,7 @@ class Auth extends Api {
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    }).then(res => {
+    },{noPending:true}).then(res => {
       console.log(res)
     })
   }
@@ -274,7 +274,7 @@ class Auth extends Api {
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    })
+    },{noPending:true})
   }  
 
   static updateBox(allBoxs:Array<Box>){

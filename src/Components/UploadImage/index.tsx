@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { HtmlHTMLAttributes, useEffect, useState } from "react";
+import React, { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
 
 
 type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -22,6 +22,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
   const [progress,setProgress] = useState(0)
+  const fileInputRef = useRef<any>(null);
   useEffect(() => {
     let interval:any;
     if (isLoading) {
@@ -42,6 +43,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
       Promise.all(base64Promises)
         .then((base64Files:any) => {
           setFiles([...files,...base64Files])
+          fileInputRef.current.value = "";   
           if(uploades){
             if(mod == 'files'){
               uploades([...files,...base64Files])
@@ -76,9 +78,11 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
               uploades([...base64Files])              
             }
           }
-          setisLoading(false)              
+          setisLoading(false)         
+            fileInputRef.current.value = "";    
         }).finally(() => {
-          setisLoading(false)       
+          setisLoading(false)     
+          fileInputRef.current.value = "";  
         })
       :undefined
 
@@ -177,7 +181,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                           </div>
                       </div>
                   </div>
-                  <input onClick={onClick} disabled={isLoading}  onChange={(res:any) => {
+                  <input ref={fileInputRef} onClick={onClick} disabled={isLoading}  onChange={(res:any) => {
                       setisLoading(true)
                       setProgress(0)
                       // console.log(res.target.files)
