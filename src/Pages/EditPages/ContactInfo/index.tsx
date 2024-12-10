@@ -86,6 +86,13 @@ const EditContactInfo = () => {
       // setPointVals([[res.data.location.lat,res.data.location.lng]])
     })
   })
+  const checkFile = (files:any) => {
+    return Auth.checkLogo(files[0].url).then(() => {
+      setIcons(files)
+    }).catch(() => {
+      setIcons([])
+    })    
+  }
   return (
     <>
       <div className=" absolute  hiddenScrollBar  h-dvh pb-[100px] hiddenScrollBar overflow-y-scroll w-full hiddenScrollBar  top-[30px] bg-white z-[12]">
@@ -100,13 +107,17 @@ const EditContactInfo = () => {
         </div>
 
         <div className="mt-3 px-6">
-          <FileUploadr  label="Logo" mod="profile" value={icons} uploades={(files) => {
-            Auth.checkLogo(files[0].url).then(() => {
-              setIcons(files)
-            }).catch(() => {
-              setIcons([])
-            })
-          }} accept=".png"></FileUploadr>
+          <FileUploadr  
+          checkFile={checkFile}
+          uploadServer
+          label="Logo" mod="profile" value={icons} uploades={(files) => {
+            setIcons(files)
+            // Auth.checkLogo(files[0].url).then(() => {
+            //   setIcons(files)
+            // }).catch(() => {
+            //   setIcons([])
+            // })
+          }} accept=".png, .jpeg, .jpg"></FileUploadr>
         </div>
         <div className="mt-3 px-6">
           {/* <p className="Carbon-TextField-label mb-1">Your Location</p> */}
