@@ -9,7 +9,7 @@ class Api {
   protected static post(url: string, data?: any,config?:any) {
     if(!config?.noPending ){
       toast.clearWaitingQueue()
-      toast.loading('pending ...')
+      // toast.loading('pending ...')
     }
     const response = axios.post(this.base_url + url, data, {
       headers: {

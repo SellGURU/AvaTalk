@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik"
-import { BissinesCard, TextField } from "../../../../Components"
+import { BissinesCard, PhoneNumberInput, TextField } from "../../../../Components"
 import React from "react";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
@@ -18,9 +18,11 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
     const formik = useFormik({
         initialValues:{
             job:context.siginUpOptions.job,
+            phone:context.siginUpOptions.phone,
             company:context.siginUpOptions.company
         },
         validationSchema:Yup.object().shape({
+            phone: Yup.string(),
             job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
             company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
         }),
@@ -67,12 +69,25 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                     inValid={formik.errors?.company != undefined && (formik.touched?.company as boolean)}
                     ></TextField>
                 </div>  
+                <div className="mt-4">
+                    <PhoneNumberInput 
+                        onChange={(e) => {
+                            formik.setFieldValue("phone",e)
+                        }}
+                        value={formik.values.phone}
+                        label="Account Phone"
+                        invalid={formik.errors.phone?true:false} 
+                        errorMessage={formik.errors.phone}
+                    ></PhoneNumberInput>                 
+
+                </div>
                 <div className="mt-8">
                     <Button disabled={!formik.isValid} onClick={() => {
                         // console.log(formik.values.phone)
                         context.siginupHandler({
                             job:formik.values.job,
-                            company:formik.values.company
+                            company:formik.values.company,
+                            phone:formik.values.phone
                         })             
                         onSubmit()           
                     }}  theme="Carbon">Continue</Button>
