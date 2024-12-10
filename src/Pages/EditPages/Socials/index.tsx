@@ -16,7 +16,7 @@ import useModalAutoClose from "../../../hooks/useModalAutoClose";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string(),
 });
 
 const EditSocials = () => {

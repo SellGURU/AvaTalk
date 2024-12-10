@@ -6,6 +6,7 @@ import AdvancedSettings from "./AdvancedSettings";
 import { Auth } from "../../Api";
 import { boxProvider } from "../../help";
 import UserType from "../UserType";
+// import GalleryBox from "../GalleryBox";
 
 interface Information {
     firstName:string;
@@ -166,6 +167,17 @@ class User {
         // this.syncToLocalStorage()
     }
 
+    public checkBox(newBox:Box) {
+        // console.log(newBox)
+        return Auth.checkBox(newBox)
+    }
+    public addSaveBox(newBox:Box,emptyBox:Box) {
+        if(this.boxs.filter((item) => item.getTypeName() == newBox.getTypeName()).length > 0){
+            this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
+        }
+        this.boxs.push(newBox)
+        Auth.addBox( emptyBox)
+    }
     public updateBoxs(orderBoxs:Array<string>) {
         this.boxs.forEach((box:Box) => {
             box.setOrder(orderBoxs.indexOf(box.getTypeName())+1)

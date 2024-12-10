@@ -8,8 +8,8 @@ import { useNavigate } from "react-router";
 import { getOS } from "../../../help";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required.'),
-  bio: Yup.string().required('Bio is required.'),
+  title: Yup.string(),
+  bio: Yup.string(),
 });
 
 const EditAbout = () => {

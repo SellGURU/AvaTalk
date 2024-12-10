@@ -206,7 +206,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         <div className="mt-6 flex items-center justify-between">
                             {currentAvatar.video.length > 0 && !isLoading ? (
                                 <>
-                                    <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                                    <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                                     <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
                                         <img src="./icons/Vector.svg" alt="" />
                                     </div>
@@ -225,7 +225,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                                     />
                                     </div>
 
-                                    <div className="w-[160px] h-[80px] relative overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                                    <div className="w-[160px] h-[160px] relative overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                                         <video
                                             id="dragAbleAi"
                                             playsInline
@@ -251,7 +251,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                                 </>
                             ) : 
                             <>
-                                <div className="w-[90px] h-[57px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                                <div className="w-[90px] h-[90px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                                 <RingLoader size={30}></RingLoader>
                                 </div>
 
@@ -263,7 +263,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                                 />
                                 </div>
 
-                                <div className="w-[160px] h-[103px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                                <div className="w-[160px] h-[160px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                                 <RingLoader></RingLoader>
                                 </div>
                             </>            
@@ -292,27 +292,27 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                     <div className="mt-6 flex items-center justify-between">
                         {currentAvatar.video.length > 0 && !isLoading ? (
                             <>
-                                <div className="w-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
-                                <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
+                                <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                                    <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
                                     <img src="./icons/Vector.svg" alt="" />
-                                </div>
-                                <img
+                                    </div>
+                                    <img
                                     className=" w-full rounded-[6.76px] h-full"
                                     src={formik.values.avatar_pic_url}
                                     alt=""
-                                />
+                                    />
                                 </div>
 
                                 <div>
-                                <img
+                                    <img
                                     className="w-10 h-10"
                                     src="./icons/fi-rr-arrow-right.svg"
                                     alt=""
-                                />
+                                    />
                                 </div>
 
-                                <div className="w-[160px] h-[80px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
-                                <video
+                                <div className="w-[130px] h-[130px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                                    <video
                                     id="dragAbleAi"
                                     playsInline
                                     style={{}}
@@ -321,18 +321,18 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                                     autoPlay={true}
                                     loop
                                     muted
-                                >
+                                    >
                                     <source
-                                    id="videoPlayer"
-                                    src={formik.values.silent_video_avatar}
-                                    type="video/mp4"
+                                        id="videoPlayer"
+                                        src={formik.values.silent_video_avatar}
+                                        type="video/mp4"
                                     ></source>
-                                </video>
+                                    </video>
                                 </div>
                             </>
                         ) : 
                         <>
-                            <div className="w-[90px] h-[57px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                            <div className="w-[90px] h-[90px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
                             <RingLoader size={30}></RingLoader>
                             </div>
 
@@ -344,7 +344,7 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                             />
                             </div>
 
-                            <div className="w-[160px] h-[103px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                            <div className="w-[130px] h-[130px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
                             <RingLoader></RingLoader>
                             </div>
                         </>            

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui"
 import { useEffect, useState } from "react"
-import {AvatarStep, BusinessStep, ContactStep, CreatePasswordStep, InformationStep} from "./steps"
+import {AvatarStep, BusinessStep, CreatePasswordStep, InformationStep} from "./steps"
 import { StepController } from "../../../Components"
 import { useConstructor } from "../../../help"
 import { Auth } from "../../../Api"
@@ -149,21 +149,21 @@ const OnBoarding = () => {
                         }}></InformationStep>
                     </>
                 }      
-                {step == 2 &&
+                {/* {step == 2 &&
                     <>
                         <ContactStep onSubmit={() => {
                             setStep(step+1)
                         }}></ContactStep>
                     </>
-                }   
-                {step == 3 &&
+                }    */}
+                {step == 2&&
                     <>
                         <BusinessStep onSubmit={() => {
                             setStep(step+1)
                         }}></BusinessStep>
                     </>
                 }      
-                {step == 4 &&
+                {step == 3 &&
                     <>
                         <AvatarStep setUploadedAvater={setUploadedAvater} formik={formik} avatarList={avatarList} uploadedAvater={uploadedAvater} onSubmit={() => {
                             setStep(step+1)
@@ -174,7 +174,7 @@ const OnBoarding = () => {
                         }}></AvatarStep>
                     </>
                 }   
-                {step == 5 &&
+                {step == 4 &&
                     <>
                         <CompleteStep setISCreated={setISCreated}></CompleteStep>
                     </>

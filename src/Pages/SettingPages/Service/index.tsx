@@ -4,9 +4,11 @@ import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 // import { useState } from "react";
 import { ToggleButton } from "../../../Components";
 import { useAuth } from "../../../hooks/useAuth";
-import { Service } from "../../../Api";
+import { Service,Auth } from "../../../Api";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
+import { useConstructor } from "../../../help";
+
 // import { publish } from "../../../utils/event";
 // import {useState} from "react";
 interface serviceType {
@@ -66,8 +68,14 @@ const SettingService =() => {
             mode:'year',
             price:80
         },)
-    // const [subLink,] = useState("")
-        
+    const [subLink,] = useState("")
+    useConstructor(() => {
+        Auth.addEvent({
+            event_type:'user_act',
+            sub_event_category:'subscription_page_visit',
+            userid:context.currentUser.information?.userId as string
+        })
+    })   
     return (
         <>
         <div className={`Carbon-ChatDetails-container`}>

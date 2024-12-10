@@ -76,9 +76,9 @@ interface AccountInfo {
 }
 
 interface AddEvent {
-  event_type: 'page_view'|'save_contact'| 'add_contact' |'link_click'|'file_click'| 'exchange_contact' | 'more_info' |'share_link'|'ar_usage',
+  event_type: 'page_view'|'save_contact'| 'add_contact' |'link_click'|'file_click'| 'exchange_contact' | 'more_info' |'share_link'|'ar_usage'|'user_act',
   userid: string,
-  sub_event_category: 'view_link' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
+  sub_event_category: 'view_link'|'help_section_usage_count'|'analytics_page_visit_count'|'subscription_page_visit' | 'view_qr_code' | 'view_email' |'view_sms' | 'more_info_socials'|
                       'more_info_about' | 'more_info_gallery' | 'more_info_videos' | 'more_info_links'|
                       'email'|'sms'|'clipboard'|'qr_code'|'share_link'|"more_info_video"|"more_info_files"
 }
@@ -264,10 +264,18 @@ class Auth extends Api {
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    }).then(res => {
+    },{noPending:true}).then(res => {
       console.log(res)
     })
   }
+
+  static checkBox(box:Box) {
+    return this.post('/update_more_info',{
+      title:box.getTitle(),
+      type_name:box.getTypeName(),
+      content:box
+    },{noPending:true})
+  }  
 
   static updateBox(allBoxs:Array<Box>){
     this.post('/save_boxes',{box_data:allBoxs},{noPending:true})

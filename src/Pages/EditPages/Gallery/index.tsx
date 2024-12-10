@@ -8,11 +8,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { ReadyForMore } from "../../../Components/__Modal__";
-import { useState } from "react";
+import {  useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string(),
 });
 
 const EditGallery = () => {
@@ -37,26 +37,62 @@ const EditGallery = () => {
       console.log(values);
     },
   });
+  const [isChanged,setIsChanged] = useState(false)
   const submit = () => {
-    if (auth.currentUser.type_of_account.getType() == "Free") {
-      if (formik.values.files.length > 5) {
-        setIsReadyTo(true);
-      } else {
-        auth.currentUser.addBox(
-          new GalleryBox(formik.values.title, formik.values.files.slice(0, 5))
-        );
-        navigate("/");
-      }
-    } else {
-      auth.currentUser.addBox(
-        new GalleryBox(formik.values.title, formik.values.files)
-      );
+    if(isChanged){
+        if (auth.currentUser.type_of_account.getType() == "Free") {
+          if (formik.values.files.length > 5) {
+            setIsReadyTo(true);
+          } else {
+            auth.currentUser.addSaveBox(
+              new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
+              new GalleryBox(formik.values.title, [],'save')
+            );
+            navigate("/");
+          }
+        } else {
+          auth.currentUser.addSaveBox(
+            new GalleryBox(formik.values.title, formik.values.files,'save'),
+            new GalleryBox(formik.values.title, [],'save')
+          );
+          navigate("/");
+        }
+
+    }else {
       navigate("/");
     }
   };
+  const checkFile = (files:any) => {
+    const converted = files.map((item:any) => {
+      return {
+        original: item.url,
+        thumbnail: item.url,
+        name: item.name,
+        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+      };
+    });      
+    if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
+      setIsReadyTo(true);
+      auth.currentUser.checkBox(
+        new GalleryBox(formik.values.title, converted,'upload')
+      );      
+      return new Promise((_resolve,reject)=>{
+        reject("")
+      })
+    }
+  
+    setIsChanged(true)
+    return auth.currentUser.checkBox(
+      new GalleryBox(formik.values.title, converted,'upload')
+    );
+  };  
+
+  // useEffect(() => {
+  //   checkFile()
+  // },[formik.values.files])
   return (
     <>
-      <div className="absolute w-full  top-[0px] overflow-auto pb-[50px] hiddenScrollBar pb-[50px] bg-white z-[15]" style={{height:height+'px'}} >
+      <div className="absolute w-full  top-[0px] overflow-auto pb-[50px] hiddenScrollBar bg-white z-[15]" style={{height:height+'px'}} >
           <div className="relative top-8">
             <BackIcon title="Gallery" theme="Carbon"></BackIcon>
           </div>
@@ -67,7 +103,7 @@ const EditGallery = () => {
                 page="GallerySetting"
               ></AccessNotifManager>
             </div>
-            <div className="px-6">
+            <div className="px-6 text-left">
               <TextField
                 {...formik.getFieldProps("title")}
                 errorMessage={formik.errors?.title}
@@ -84,7 +120,7 @@ const EditGallery = () => {
             </div>
             <div className="px-6 mt-3">
               <ImageUploadr
-                accept="image/*"
+                accept="image/png, image/jpeg"
                 limite={5}
                 onClick={(e) => {
                   if (auth.currentUser.type_of_account.getType() == "Free") {
@@ -95,6 +131,8 @@ const EditGallery = () => {
                     }
                   }
                 }}
+                checkFile={checkFile}
+                uploadServer
                 userMode={auth.currentUser.type_of_account.getType()}
                 value={formik.values.files.map((item) => {
                   return {
@@ -103,7 +141,6 @@ const EditGallery = () => {
                   };
                 })}
                 uploades={(files: Array<any>) => {
-                  console.log(files);
                   const converted = files.map((item) => {
                     return {
                       original: item.url,

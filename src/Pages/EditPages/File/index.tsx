@@ -12,7 +12,7 @@ import { ReadyForMore } from "../../../Components/__Modal__";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required(),
+  title: Yup.string(),
 });
 
 const EditFile = () => {
@@ -20,6 +20,7 @@ const EditFile = () => {
   const height = useWindowHeight();
   const [limiteMdoe, setLimiteMode] = useState("defualt");
   const navigate = useNavigate();
+  const [isChanged,setIsChanged] = useState(false)
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "FileBox"
   )[0] as FileBox;
@@ -44,18 +45,24 @@ const EditFile = () => {
     },
   });
   const submit = () => {
-    if (
-      (auth.currentUser.type_of_account.getType() == "Free" &&
-        formik.values.files.length > 1) ||
-      (auth.currentUser.type_of_account.getType() == "Free" &&
-        limiteMdoe == "fileSize")
-    ) {
-      setIsReadyTo(true);
-    } else {
-      auth.currentUser.addBox(
-        new FileBox(formik.values.title, formik.values.files)
-      );
-      navigate("/");
+    if(isChanged) {
+      if (
+        (auth.currentUser.type_of_account.getType() == "Free" &&
+          formik.values.files.length > 1) ||
+        (auth.currentUser.type_of_account.getType() == "Free" &&
+          limiteMdoe == "fileSize")
+      ) {
+        setIsReadyTo(true);
+      } else {
+        auth.currentUser.addSaveBox(
+          new FileBox(formik.values.title, formik.values.files,'save'),
+          new FileBox(formik.values.title, [],'save')
+        );
+        navigate("/");
+      }
+
+    }else {
+      navigate("/")
     }
   };
   useEffect(() => {
@@ -81,6 +88,38 @@ const EditFile = () => {
       // setLimiteMode("defualt");
     }
   });
+  const checkFile = (files:any) => {  
+    const converted: Array<File> = files.map((item:any) => {
+      const newFile: File = new File(
+        item.url,
+        item.name,
+        item.type,
+        item.size
+      );
+      return newFile;
+    });    
+    if (
+      (auth.currentUser.type_of_account.getType() == "Free" &&
+        files.length > 1) ||
+      (auth.currentUser.type_of_account.getType() == "Free" &&
+        limiteMdoe == "fileSize")  
+    ) {
+      setIsReadyTo(true);
+      auth.currentUser.checkBox(
+        new FileBox(formik.values.title, converted,'upload')
+        // new GalleryBox(formik.values.title, converted,'upload')
+      );      
+      return new Promise((_resolve,reject)=>{
+        reject("")
+      })
+    }
+  
+    setIsChanged(true)
+    return auth.currentUser.checkBox(
+      new FileBox(formik.values.title, converted,'upload')
+      // new GalleryBox(formik.values.title, converted,'upload')
+    );
+  };    
   return (
     <>
       <div className="absolute w-full hiddenScrollBar overflow-y-auto pb-[50px]  top-[0px] bg-white z-[15]" style={{height:height+'px'}}>
@@ -121,6 +160,8 @@ const EditFile = () => {
                   size: item.getSize(),
                 };
               })}
+              checkFile={checkFile}
+              uploadServer
               limite={0}
               onClick={(e) => {
                 if 
