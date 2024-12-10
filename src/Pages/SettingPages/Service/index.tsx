@@ -68,7 +68,7 @@ const SettingService =() => {
             mode:'year',
             price:80
         },)
-    const [subLink,] = useState("")
+    // const [subLink,] = useState("")
     useConstructor(() => {
         Auth.addEvent({
             event_type:'user_act',
