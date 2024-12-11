@@ -19,8 +19,10 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
+  const [deletingLoding,setDeletingLoding] = useState(false);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
+  const [deleteingFiles,setDeleteingFiles] = useState<Array<any>>([]);
   const [progress,setProgress] = useState(0)
   const fileInputRef = useRef<any>(null);
   // useEffect(() => {
@@ -62,7 +64,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
   }
   const CheckUploadFiles = (newfiles:any) => {
     // console.log(newfiles)
-    // setProgress(0)
+    setProgress(0)
     const fileArray = Array.from(newfiles);
     const base64Promises = fileArray.map((file:any) => convertToBase64(file));
     Promise.all(base64Promises).then((base64Files:any) => {
@@ -117,12 +119,17 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
   },[limite])
   const deleteFile = (index:number) => {
     const newArr = [...files]
-    newArr.splice(index,1)
-
+    const deleteing = newArr.splice(index,1)
+    setProgress(0)
+    setDeletingLoding(true)
     if(uploadServer) {
-      setUploadingFiles([...newArr])
+      setUploadingFiles([])
+      setDeleteingFiles(deleteing)
       checkFile?
-        checkFile([...newArr],()=>{}).then(() => {
+        checkFile([...newArr],(progressEvent) =>{
+           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+           setProgress(percentCompleted)
+        }).then(() => {
           setFiles([...newArr])
           if(uploades){
             if(mod == 'files'){
@@ -132,7 +139,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
               uploades([...newArr])              
             }
           }
-          setisLoading(false)              
+          setDeletingLoding(false)              
         })
       :undefined
     } else {
@@ -217,7 +224,25 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                         <div>{progress+'%'}</div>
                       </div>
                       </>
-                      :' Uploaded'}
+                      :
+                      <>
+                      {(deleteingFiles.length>0 && deletingLoding)? 
+                      <>
+                      <div className="flex justify-between items-center">
+                        <div className="flex justify-start items-center">
+                           Deleting <span>0/{deleteingFiles.length}</span>
+
+                        </div>
+                        <div>{progress+'%'}</div>
+                      </div>                      
+                      </>
+                      :
+                      <>
+                       Uploaded
+                      </>
+                      }
+                      </>
+                      } 
                     </div>
                     <div className={`${theme}-ImageUploader-itemList-items`}>
                       {isLoading ?
@@ -245,27 +270,55 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                       </>
                       :
                       <>
-                        {files.map((item,index) => {
-                          return (
-                            <>
-                              {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
-                                <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
-                                  <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
-                                  {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                  </div> */}
-                                  <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
-                                </div>                            
-                              :
-                                <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                                  <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
-                                  {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                  </div> */}
-                                  <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
-                                </div>
-                              }
-                            </>
-                          )
-                        })}
+                        {
+                          deletingLoding ?
+                          <>
+                            {
+                            deleteingFiles.map((item,index) => {
+                              return (
+                                <>
+                                  <div key={index} className={`${theme}-ImageUploader-uploadBox-file-loading relative`}>
+                                    <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
+                                    <div className="absolute bottom-0 w-full left-0">
+                                      <div className="w-full h-[6px] relative rounded-lg bg-white">
+                                        <div className="absolute left-[1px] top-[1px] rounded-lg h-[4px] bg-primary-color " style={{width:progress+'%'}}></div>
+                                      </div>
+
+                                    </div>
+                                    {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                    </div> */}
+                                    {/* <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" /> */}
+                                  </div>                            
+                                </>
+                              )
+                            })                              
+                            }                          
+                          </>
+                          :
+                          <>
+                            {files.map((item,index) => {
+                              return (
+                                <>
+                                  {(userMode == 'Free' && index >= resolveLimite) || (userMode == 'Free' && item.size >10 * 1024 * 1024) ?
+                                    <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                      <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                      {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                      </div> */}
+                                      <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
+                                    </div>                            
+                                  :
+                                    <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                      <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
+                                      {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                      </div> */}
+                                      <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
+                                    </div>
+                                  }
+                                </>
+                              )
+                            })}
+                          </>
+                        }
                       </>
                       }
                     </div>
