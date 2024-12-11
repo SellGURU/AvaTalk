@@ -3,6 +3,7 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
 import { Link } from "react-router-dom";
+import { Auth } from "../../Api";
 // interface File {
 //     name:string
 //     url:string
@@ -63,7 +64,13 @@ export class File {
         return (
             <>
             <div >
-                <Link to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
+                <Link onClick={() => {
+                    Auth.addEvent({
+                        event_type:"more_info",
+                        userid:_userID,
+                        sub_event_category:'more_info_files'
+                    })             
+                }} to={this.url} download data-tooltip-id={"link"+this.url} data-tooltip-content={this.url}  className={`${theme}-Profile-BackgroundVectors`}>
                     <div className={`${theme}-ContentCard-CardVector`}>
                         <div className={`${theme}-ContentCard-${this.resolveSvg()}`}></div>
                     </div>
