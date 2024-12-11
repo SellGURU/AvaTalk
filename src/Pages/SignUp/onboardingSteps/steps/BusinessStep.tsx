@@ -29,6 +29,14 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
     onSubmit
 }) => {
     const context = useAuth()
+    const resolveEmail = () => {
+        if(context.siginUpOptions.email != ''){
+            return context.siginUpOptions.email as string
+        }else if(context.googleInformation.email){
+            return context.googleInformation.email as string
+        }
+        return ''
+    }    
     const formik = useFormik({
         initialValues:{
             job:context.siginUpOptions.job,
@@ -105,7 +113,8 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                         context.siginupHandler({
                             job:formik.values.job,
                             company:formik.values.company,
-                            phone:formik.values.phone
+                            phone:formik.values.phone,
+                            email:resolveEmail()
                         })             
                         onSubmit()           
                     }}  theme="Carbon">Continue</Button>

@@ -16,7 +16,7 @@ const DatePicker = ({ day, setDay }: any) => {
   useModalAutoClose({
     refrence: datepickerRef,
     buttonRefrence: btnRef,
-    close: () => setisOpen(false),
+    close: () => setisOpen(true),
   });
   const handleDateChange = (value: string) => {
     const [startDateString, endDateString] = value.split(" - ");
