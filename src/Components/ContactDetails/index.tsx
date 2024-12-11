@@ -158,7 +158,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       <div className={`${theme}-ContactDetails-container2`}>
         <div className={`${theme}-ContactDetails-container3`}>      
           <div className={`${theme}-Profile-ProfilePictureSection`}>
-            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
+            <img src={`https://ui-avatars.com/api/?name=`+contact?.fullName} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div onClick={() => {
