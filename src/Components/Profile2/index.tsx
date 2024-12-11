@@ -660,7 +660,9 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {
                 mode != 'profile' &&
                 <div className="absolute left-[8px] top-3">
-                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {setPanel(value)}} rightText="Profile" value={panel}></ToggleButton3>
+                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {
+                    setIsTalking(false)
+                    setPanel(value)}} rightText="Profile" value={panel}></ToggleButton3>
                 </div>
 
               }                
@@ -735,7 +737,10 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {
                 mode != 'profile' &&
                 <div className="absolute left-[20px] top-6">
-                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {setPanel(value)}} rightText="Profile" value={panel}></ToggleButton3>
+                  <ToggleButton3 theme="Carbon-grid" leftText="Chat" onButtonClick={(value:any) => {
+                    setPanel(value)
+                    setIsTalking(false)
+                    }} rightText="Profile" value={panel}></ToggleButton3>
                 </div>
 
               }

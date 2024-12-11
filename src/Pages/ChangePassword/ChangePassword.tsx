@@ -18,9 +18,12 @@ const ChangePassowrd = () => {
 
   const validationSchema = Yup.object().shape({
     currentPassword: Yup.string().required("Current password is required"),
-    newPassword: Yup.string()
-      .required("New password is required")
-      .min(8, "Password should be at least 8 characters"),
+    newPassword:Yup.string().min(8, 'New Password must be at least 8 characters')
+                .matches(/[A-Z]/, 'New Password must contain at least one uppercase letter')
+                .matches(/[a-z]/, 'New Password must contain at least one lowercase letter')
+                .matches(/\d/, 'New Password must contain at least one number')
+                .matches(/[!@#$%^&*(),.?":{}|<>]/, 'New Password must contain at least one special character')
+                .required('New Password is required'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("newPassword")], "Passwords must match")
       .required("Confirm password is required"),
@@ -34,7 +37,6 @@ const ChangePassowrd = () => {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema,
-    validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (values) => {
       try {
@@ -103,7 +105,7 @@ const ChangePassowrd = () => {
   };
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate(-1);
+    navigate('/settings');
   };
 
   return (
@@ -114,7 +116,11 @@ const ChangePassowrd = () => {
         <div className="flex px-6 items-center space-x-4 absolute  top-8">
           <Button
             onClick={() => {
-              navigate(-1);
+              if(step ==2){
+                setStep(1)
+              }else {
+                navigate(-1);
+              }
             }}
             theme={`Carbon-back`}
           >
@@ -168,36 +174,32 @@ const ChangePassowrd = () => {
               <>
                 <TextField
                   {...formik.getFieldProps("newPassword")}
-                  inValid={!!formik.errors.newPassword}
+                  inValid={formik.errors?.newPassword != undefined && (formik.touched?.newPassword as boolean)}
                   theme="Carbon"
                   required
                   placeholder="Enter your new password..."
                   errorMessage={
-                    formik.touched.newPassword ? formik.errors.newPassword : ""
+                    formik.errors?.newPassword
                   }
                   name="newPassword"
                   label="New Password"
                   type="password"
-                  onBlur={() => formik.setFieldTouched("newPassword", true)}
                 />
                 <TextField
                   {...formik.getFieldProps("confirmPassword")}
-                  inValid={!!formik.errors.confirmPassword}
+                  inValid={formik.errors?.confirmPassword != undefined && (formik.touched?.confirmPassword as boolean)}
                   theme="Carbon"
                   required
                   placeholder="Enter your new password..."
 
                   errorMessage={
-                    formik.touched.confirmPassword
-                      ? formik.errors.confirmPassword
-                      : ""
+                    formik.errors.confirmPassword
                   }
                   name="confirmPassword"
                   label="Confirm New Password"
                   type="password"
-                  onBlur={() => formik.setFieldTouched("confirmPassword", true)}
                 />
-                <Button onClick={handleChangePassword} theme={"Carbon"}>
+                <Button disabled={!formik.isValid} onClick={handleChangePassword} theme={"Carbon"}>
                   Change Password
                 </Button>
               </>

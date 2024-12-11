@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import React from "react";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 interface ContactStepProps {
     onSubmit:() => void
@@ -40,6 +41,20 @@ const ContactStep:React.FC<ContactStepProps> = ({
     //         }
     //     ).isValidSync(phone);
     // };    
+    const validatePhoneNumber = (value:any) => {
+    try {
+        if(value == '' || value== undefined){
+        return true
+        }
+        const phoneNumber = parsePhoneNumberFromString("+"+value);
+        if (!phoneNumber || !phoneNumber.isValid()) {
+        return "Invalid phone number for the selected country.";
+        }
+        return true;
+    } catch (error) {
+        return "Invalid phone number format.";
+    }
+    };    
     const resolveEmail = () => {
         if(context.siginUpOptions.email != ''){
             return context.siginUpOptions.email as string
@@ -56,7 +71,11 @@ const ContactStep:React.FC<ContactStepProps> = ({
             email:resolveEmail()
         },
         validationSchema:Yup.object().shape({
-            phone: Yup.string(),
+            phone: Yup.string().test(
+                "isValidPhoneNumber",
+                "Invalid phone number for the selected country.",
+                (value) => validatePhoneNumber(value) === true
+                ),
             email: Yup.string().required('Email is required.').test('email', 'Email is invalid', (value) => {
                 return validateEmail(value)
             })

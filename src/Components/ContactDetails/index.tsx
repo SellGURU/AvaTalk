@@ -158,7 +158,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
       <div className={`${theme}-ContactDetails-container2`}>
         <div className={`${theme}-ContactDetails-container3`}>      
           <div className={`${theme}-Profile-ProfilePictureSection`}>
-            <img src={contact?.photo} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
+            <img src={`https://ui-avatars.com/api/?name=`+contact?.fullName} alt={contact?.fullName} className={`${theme}-Profile-ProfilePicture `} />
           </div>
           <div className={`${theme}-ContactDetails-importIconContainer`}>
             <div onClick={() => {
@@ -297,7 +297,10 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-locationIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.address}</p>
+                <p className={`${theme}-ContactDetails-textItem max-w-[350px] `} style={{
+                    wordWrap: "break-word", // Ensures long words break to the next line
+                    overflowWrap: "break-word", // Handles long unbroken strings
+                }}>{contact?.address}</p>
               </div>
             :undefined}
           {showMore && (

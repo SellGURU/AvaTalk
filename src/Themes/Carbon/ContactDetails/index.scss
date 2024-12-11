@@ -29,7 +29,7 @@
   @apply flex flex-col space-y-3;
 }
 .Carbon-ContactDetails-container5 {
-  @apply flex items-center space-x-2;
+  @apply flex items-start space-x-2;
 }
 .Carbon-ContactDetails-Vectors {
   mask-size: 100%;
@@ -99,7 +99,9 @@
 }
 
 .Carbon-ContactDetails-textItem {
-  @apply text-gray-700 leading-[21px] text-[14px] font-[500];
+  word-wrap: "break-word"; // Ensures long words break to the next line
+  overflow-wrap: "break-word"; // Handles long unbroken strings
+  @apply text-gray-700 leading-[21px] mt-2  max-w-[200px] sm:max-w-[350px]   text-[14px] font-[500];
 }
 .Carbon-ContactDetails-nameItem {
   @apply text-gray-700 tracking-wider mb-[2px] leading-[20px] text-[18px] font-[500];

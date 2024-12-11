@@ -17,7 +17,9 @@ import ContactItem from "../ContactItem";
 const ContactList = ({ data, theme }: { data: Contact[]; theme: string | undefined }) => {
   return (
     <div className={`${theme}-ContactList-container`}>
-      {data.map((items, index) => (
+      {data.sort((a, b) =>
+      a.fullName.localeCompare(b.fullName)
+    ).map((items, index) => (
         <ContactItem theme={theme} key={index} data={items} />
       ))}
     </div>

@@ -99,9 +99,10 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     //   });
   });
   const handleAddContact = (formData: Contact) => {
-    const formDataWithPhoto = { ...formData, photo: "/Acord/person.png", isExchange: false };
+    const formDataWithPhoto:Contact = { ...formData, photo: "/Acord/person.png", isExchange: false };
 
     setContacts([...contacts, formDataWithPhoto]);
+    getContacts()
   };
   // useConstructor(() => {
   //   setIsLoading(true);
