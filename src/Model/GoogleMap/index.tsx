@@ -73,8 +73,10 @@ class GoogleMapBox extends Box {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-0 mt-3 w-full relative z-0">
-                            <MapContainer dragging={false}  center={[this.location?.lan, this.location?.lat]} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
+                        <div className="px-0 mt-3 w-full relative z-0 " onClick={() => {
+                            this.openMap()
+                        }}>
+                            <MapContainer dragging={false} zoomControl={false} touchZoom={false} scrollWheelZoom={false}  center={[this.location?.lan, this.location?.lat]} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
                                 <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

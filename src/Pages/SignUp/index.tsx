@@ -265,7 +265,7 @@ const SignUp = () => {
                         <div  className="text-center text-[14px] mt-1 cursor-pointer"><span onClick={() => {
                             // navigate('https://avatalk.me/termsofservice/')
                             window.open('https://avatalk.me/terms-of-service/')
-                        }} className="text-[#06B6D4]">Terms & Conditions. </span></div>
+                        }} className="text-[#06B6D4]">Terms of Service . </span></div>
                     </div>
                 </>
             }  
