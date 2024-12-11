@@ -10,6 +10,7 @@ import { Auth } from "../../../Api";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 import { publish } from "../../../utils/event";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 // const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 //   const validatePhone = (phone: number | undefined) => {
@@ -29,8 +30,27 @@ import { publish } from "../../../utils/event";
 //         }
 //       ).isValidSync(phone);
 //   };
+
+const validatePhoneNumber = (value:any) => {
+  try {
+    if(value == '' || value== undefined){
+      return true
+    }
+    const phoneNumber = parsePhoneNumberFromString("+"+value);
+    if (!phoneNumber || !phoneNumber.isValid()) {
+      return "Invalid phone number for the selected country.";
+    }
+    return true;
+  } catch (error) {
+    return "Invalid phone number format.";
+  }
+}; 
 const validationSchema = Yup.object().shape({
-    phone:Yup.string(),
+    phone:Yup.string().test(
+    "isValidPhoneNumber",
+    "Invalid phone number for the selected country.",
+    (value) => validatePhoneNumber(value) === true
+    ),
     firstname:Yup.string().required('First Name is required'),
     lastname:Yup.string().required('Last Name is required'),
 });

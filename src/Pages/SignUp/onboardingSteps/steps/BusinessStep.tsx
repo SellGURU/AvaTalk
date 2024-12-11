@@ -5,11 +5,25 @@ import React from "react";
 import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
 import * as Yup from "yup";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 interface BusinessStepProps {
     onSubmit:() => void
 }
-
+const validatePhoneNumber = (value:any) => {
+    try {
+        if(value == '' || value== undefined){
+        return true
+        }
+        const phoneNumber = parsePhoneNumberFromString("+"+value);
+        if (!phoneNumber || !phoneNumber.isValid()) {
+        return "Invalid phone number for the selected country.";
+        }
+        return true;
+    } catch (error) {
+        return "Invalid phone number format.";
+    }
+};  
 
 const BusinessStep:React.FC<BusinessStepProps> = ({
     onSubmit
@@ -22,7 +36,11 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
             company:context.siginUpOptions.company
         },
         validationSchema:Yup.object().shape({
-            phone: Yup.string(),
+            phone: Yup.string().test(
+                "isValidPhoneNumber",
+                "Invalid phone number for the selected country.",
+                (value) => validatePhoneNumber(value) === true
+                ),
             job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
             company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
         }),

@@ -9,12 +9,28 @@ import { PhoneNumberInput, TextArea } from "../.."
 import { Contacts } from "../../../Api"
 import { Contact } from "../../../Types"
 import useModalAutoClose from "../../../hooks/useModalAutoClose"
+import parsePhoneNumberFromString from "libphonenumber-js"
 
 interface AddContactNewProps {
     onClose:() =>void
     title:string
     onAddContact:(formData: Contact) => void
 }
+
+const validatePhoneNumber = (value:any) => {
+  try {
+    if(value == '' || value== undefined){
+      return true
+    }
+    const phoneNumber = parsePhoneNumberFromString("+"+value);
+    if (!phoneNumber || !phoneNumber.isValid()) {
+      return "Invalid phone number for the selected country.";
+    }
+    return true;
+  } catch (error) {
+    return "Invalid phone number format.";
+  }
+};
 
 const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}) => {
     useEffect(() => {
@@ -39,7 +55,11 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
         validationSchema:Yup.object().shape({
             fullName:Yup.string().required('Full Name is required'),
             email:Yup.string().required('Email address is required').email('Email is invalid'),
-            phone:Yup.string().required('Phone is required'),
+            phone:Yup.string().required('Phone is required').test(
+                "isValidPhoneNumber",
+                "Invalid phone number for the selected country.",
+                (value) => validatePhoneNumber(value) === true
+                ),
         }),
         onSubmit:() =>{}
     })

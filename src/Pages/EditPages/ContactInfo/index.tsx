@@ -9,10 +9,35 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
+const validatePhoneNumber = (value:any) => {
+  try {
+    if(value == '' || value== undefined){
+      return true
+    }
+    const phoneNumber = parsePhoneNumberFromString("+"+value);
+    if (!phoneNumber || !phoneNumber.isValid()) {
+      return "Invalid phone number for the selected country.";
+    }
+    return true;
+  } catch (error) {
+    return "Invalid phone number format.";
+  }
+}; 
 const validationSchema = Yup.object().shape({
 job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
 company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
+phone:Yup.string().test(
+  "isValidPhoneNumber",
+  "Invalid phone number for the selected country.",
+  (value) => validatePhoneNumber(value) === true
+),
+workPhone:Yup.string().test(
+  "isValidPhoneNumber",
+  "Invalid phone number for the selected country.",
+  (value) => validatePhoneNumber(value) === true
+),
 });
 
 const EditContactInfo = () => {
@@ -25,7 +50,7 @@ const EditContactInfo = () => {
     address :auth.currentUser.information?.address,
     workEmail:auth.currentUser.information?.workEmail,
     phone:auth.currentUser.information?.phone,
-    workPhone:auth.currentUser.information?.workPhone
+    workPhone:auth.currentUser.information?.workPhone?auth.currentUser.information?.workPhone:''
   };    
   const [location] = useState({
     lat: auth.currentUser.information?.location.lat,

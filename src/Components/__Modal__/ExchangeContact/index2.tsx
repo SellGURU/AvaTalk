@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "symphony-ui"
 import TextField from "../../TextField"
 import { useFormik } from "formik"
@@ -9,6 +10,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import { Contacts } from "../../../Api";
 import { toast } from "react-toastify";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 interface ExchangeContactProps {
     onClose:() =>void
@@ -19,6 +21,17 @@ interface ExchangeContactProps {
 const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) => {
     const theme ="Carbon"
     const [step,setStep] = useState(0)
+    const validatePhoneNumber = (value:any) => {
+      try {
+        const phoneNumber = parsePhoneNumberFromString("+"+value);
+        if (!phoneNumber || !phoneNumber.isValid()) {
+          return "Invalid phone number for the selected country.";
+        }
+        return true;
+      } catch (error) {
+        return "Invalid phone number format.";
+      }
+    };    
     const formik = useFormik({
         initialValues:{
             fullName:'',
@@ -29,7 +42,11 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) 
         validationSchema:Yup.object().shape({
             fullName:Yup.string().required('Full name  is required'),
             email: Yup.string().email('Email address must be valid.').required('Email  is required'),
-            phone:Yup.string().required('Phone  is required')
+            phone:Yup.string().required('Phone  is required').test(
+              "isValidPhoneNumber",
+              "Invalid phone number for the selected country.",
+              (value) => validatePhoneNumber(value) === true
+            )
         }),
         onSubmit:() => {
 
@@ -135,10 +152,6 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) 
                             value={formik.values.phone}
                             required
                             onChange={(e) => {
-                            //   setFormData({
-                            //       ...formData,
-                            //       ["phone"]: e,
-                            //     });
                             formik.setFieldValue("phone",e)
                             }}
                             label="Phone"
