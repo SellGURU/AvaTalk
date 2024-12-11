@@ -56,7 +56,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
         }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div data-os={getOS()} className={`${theme}-ContentCard-Title`}>
-                {item.getTitle()}
+                {item.getTitle().substring(0,30)}...
             </div>
             <div data-mode={mod} className={`${theme}-ContentCard-Vectors`}>
               {/* <div onClick={() => {
