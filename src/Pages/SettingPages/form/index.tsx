@@ -85,7 +85,7 @@ export const FormPage = () => {
                 setIsOpen(false)
             navigate(-1)}
         }
-            style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "380px", background: "rgba(243, 244, 246, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
+            style={{ content: { borderRadius: "24px", width: "100%", maxWidth: "380px", background: "rgba(255, 255, 255, 1)" }, overlay: { backgroundColor: "rgba(0,0,0,0.7)" } }}
             contentLabel=" Modal"
         >
             <div className={" relative pb-5 pt-6"}>

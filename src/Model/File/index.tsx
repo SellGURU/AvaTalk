@@ -15,50 +15,73 @@ export class File {
 
     }
     private resolveSvg() {
-        console.log("type:",this.type)
         switch(this.type) {
-            case 'application/pdf': //pdf
+            case 'application/pdf': // pdf
+            case 'PDF':
                 return 'PdfVector';
-            case 'PDF': //pdf
-                return 'PdfVector';
-            case 'application/psd': //psd
-                return 'PhotoShopVector';
-            case 'PSD': //psd
-                return 'PhotoShopVector';
+
+            case 'application/psd': // psd
+            case 'PSD':
             case 'data:application/octet-stream':
                 return 'PhotoShopVector';
-            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': //docx
+
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': // docx
+            case 'application/msword': // doc
+            case 'application/x-zip-compressed': // word
+            case 'DOC':
+            case 'DOCX':
+            case 'application/rtf': // rtf
+            case 'text/plain': // txt
                 return 'wordVector';
-            case 'application/postscript': //ai
+
+            case 'application/postscript': // ai
+            case 'AI':
                 return 'idVector';
-            case 'AI': //ai
-                return 'idVector';
-            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': //pptp
+
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': // pptx
+            case 'application/vnd.ms-powerpoint': // ppt
+            case 'PPTP':
+            case 'PPT':
                 return 'powerpointVector';
-            case 'PPTP': //pptp
-                return 'powerpointVector';
-            case 'PPT': //pptp
-                return 'powerpointVector';
-            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': //xslx
-                return 'ExelVector'
-            case 'XLSX': //xslx
-                return 'ExelVector'
-            case 'XLS': //xslx
-                return 'ExelVector'
-            case 'XLX': //xslx
-                return 'ExelVector'
-            case 'application/vnd.ms-excel': //xls
-                return 'ExelVector'
-            case 'application/x-zip-compressed': //word
-                return 'wordVector';
-            case 'application/msword'://doc
-                return 'wordVector';
-            case 'DOC'://doc
-                return 'wordVector';
-            case 'DOCX'://doc
-                return 'wordVector';
-            default: return 'PhotoShopVector'
+
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': // xlsx
+            case 'application/vnd.ms-excel': // xls
+            case 'XLSX':
+            case 'XLS':
+            case 'XLX':
+            case 'application/csv': // csv
+            case 'text/csv':
+                return 'ExelVector';
+
+            case 'image/jpeg': // jpg/jpeg
+            case 'image/jpg':
+            case 'image/png': // png
+            case 'image/gif': // gif
+            case 'image/tiff': // tiff
+            case 'image/bmp': // bmp
+                return 'ImageVector';
+
+            case 'application/epub+zip': // epub
+                return 'EpubVector';
+
+            case 'application/x-7z-compressed': // 7z
+            case 'application/zip': // zip
+            case 'application/x-rar-compressed': // rar
+            case 'application/x-tar': // tar
+            case 'application/gzip': // gzip
+                return 'ArchiveVector';
+
+            case 'application/json': // json
+            case 'application/javascript': // js
+            case 'application/xml': // xml
+            case 'text/html': // html
+            case 'text/javascript': // js
+                return 'CodeVector';
+
+            default:
+                return 'PhotoShopVector';
         }
+
     }
     public resolveRender(theme:string,_userID:string) {
         return (

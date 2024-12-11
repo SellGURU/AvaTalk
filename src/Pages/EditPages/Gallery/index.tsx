@@ -62,7 +62,7 @@ const EditGallery = () => {
       navigate("/");
     }
   };
-  const checkFile = (files:any) => {
+  const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {
     const converted = files.map((item:any) => {
       return {
         original: item.url,
@@ -74,7 +74,8 @@ const EditGallery = () => {
     if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
       setIsReadyTo(true);
       auth.currentUser.checkBox(
-        new GalleryBox(formik.values.title, converted,'upload')
+        new GalleryBox(formik.values.title, converted,'upload'),
+        uploadProgress
       );      
       return new Promise((_resolve,reject)=>{
         reject("")
@@ -83,7 +84,8 @@ const EditGallery = () => {
   
     setIsChanged(true)
     return auth.currentUser.checkBox(
-      new GalleryBox(formik.values.title, converted,'upload')
+      new GalleryBox(formik.values.title, converted,'upload'),
+      uploadProgress
     );
   };  
 

@@ -269,12 +269,14 @@ class Auth extends Api {
     })
   }
 
-  static checkBox(box:Box) {
+  static checkBox(box:Box,onUploadProgress:(progressEvent:any) =>void) {
     return this.post('/update_more_info',{
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    },{noPending:true})
+    },{noPending:true,onUploadProgress:(progressEvent:any) => {
+        onUploadProgress(progressEvent)
+    }})
   }  
 
   static updateBox(allBoxs:Array<Box>){

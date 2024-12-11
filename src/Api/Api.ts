@@ -15,6 +15,11 @@ class Api {
       headers: {
         Authorization: "Bearer " + getTokenFromLocalStorage(),
       },
+      onUploadProgress: (progressEvent:any) => {
+        if(config.onUploadProgress){
+          config.onUploadProgress(progressEvent)
+        }
+      },      
       // timeout:15000
     });
     return response;

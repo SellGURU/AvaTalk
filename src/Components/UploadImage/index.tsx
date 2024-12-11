@@ -11,7 +11,7 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   accept?:string
   limite?:number
   uploadServer?:boolean
-  checkFile?:(files:any) => Promise<any>
+  checkFile?:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
   onClick?:(e:any) => void
   userMode?:'Free'|'Trial'|'Pro'
 };
@@ -23,15 +23,15 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
   const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
   const [progress,setProgress] = useState(0)
   const fileInputRef = useRef<any>(null);
-  useEffect(() => {
-    let interval:any;
-    if (isLoading) {
-      interval = setInterval(() => {
-        setProgress((prev) => (prev < 100 ? prev + 1 : 100));
-      }, 300);
-    }
-    return () => clearInterval(interval); // Cleanup interval when loading stops
-  }, [isLoading]);
+  // useEffect(() => {
+  //   let interval:any;
+  //   if (isLoading) {
+  //     interval = setInterval(() => {
+  //       setProgress((prev) => (prev < 100 ? prev + 1 : 100));
+  //     }, 300);
+  //   }
+  //   return () => clearInterval(interval); // Cleanup interval when loading stops
+  // }, [isLoading]);
 
   const getUploadFiles = (newfiles:any) => {
 
@@ -68,7 +68,10 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
     Promise.all(base64Promises).then((base64Files:any) => {
       setUploadingFiles([...base64Files])
       checkFile?
-        checkFile([...files,...base64Files]).then(() => {
+        checkFile([...files,...base64Files],(progressEvent) =>{
+           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+           setProgress(percentCompleted)
+        }).then(() => {
           setFiles([...files,...base64Files])
           if(uploades){
             if(mod == 'files'){
@@ -119,7 +122,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
     if(uploadServer) {
       setUploadingFiles([...newArr])
       checkFile?
-        checkFile([...newArr]).then(() => {
+        checkFile([...newArr],()=>{}).then(() => {
           setFiles([...newArr])
           if(uploades){
             if(mod == 'files'){
