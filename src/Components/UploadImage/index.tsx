@@ -217,8 +217,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                     <div className={`${theme}-ImageUploader-itemList-titleBox`}>
                       {(Uplodingfiles.length>0 && isLoading)? <>
                       <div className="flex justify-between items-center">
-                        <div className="flex justify-start items-center">
-                           Uploading <span>0/{Uplodingfiles.length}</span>
+                        <div className="flex gap-1 justify-start items-center">
+                           Uploading <span>{" "} 0/{Uplodingfiles.length}</span>
 
                         </div>
                         <div>{progress+'%'}</div>
@@ -229,8 +229,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                       {(deleteingFiles.length>0 && deletingLoding)? 
                       <>
                       <div className="flex justify-between items-center">
-                        <div className="flex justify-start items-center">
-                           Deleting <span>0/{deleteingFiles.length}</span>
+                        <div className="flex gap-1 justify-start items-center">
+                           Deleting <span> {" "}0/{deleteingFiles.length}</span>
 
                         </div>
                         <div>{progress+'%'}</div>
