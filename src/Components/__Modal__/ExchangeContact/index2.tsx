@@ -7,7 +7,7 @@ import PhoneNumberInput from "../../PhoneSelectComponent";
 import TextArea from "../../TextArea";
 import { useRef, useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
-import { Contacts } from "../../../Api";
+import { Auth, Contacts } from "../../../Api";
 import { toast } from "react-toastify";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
@@ -16,9 +16,10 @@ interface ExchangeContactProps {
     onClose:() =>void
     fullName:string
     mode?:string
-}
+    userId?:string
+} 
 
-const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) => {
+const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,userId}) => {
     const theme ="Carbon"
     const [step,setStep] = useState(0)
     const validatePhoneNumber = (value:any) => {
@@ -61,6 +62,14 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode}) 
           adding_method:'exchange'
         }).then(() => {
           toast.success("contact is exchanged")
+          if(mode == 'share') {
+            Auth.addEvent({
+              event_type:'save_contact',
+              sub_event_category:'view_link',
+              userid:userId?userId:''
+            })
+
+          }
         })        
         setStep(step+1)
     }  

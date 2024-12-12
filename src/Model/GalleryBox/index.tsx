@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from ".."
 import ImageGallery from "react-image-gallery";
 import { Button } from "symphony-ui";
-import { Auth } from "../../Api";
+// import { Auth } from "../../Api";
 import { Fullscreen } from 'lucide-react';
 interface galleryImage {
     original:string
@@ -28,14 +29,16 @@ class GalleryBox extends Box{
             return true
         }
     }    
-    public resolveRender(theme: string,mode?:string,options?:any): JSX.Element {
+    public resolveRender(theme: string,mode?:string,_options?:any): JSX.Element {
         return (
             <div onClick={() => {
-                Auth.addEvent({
-                    event_type:"more_info",
-                    userid:options.userId,
-                    sub_event_category:'more_info_gallery'
-                })                 
+                // if(mode=='share') {
+                //     // Auth.addEvent({
+                //     //     event_type:"more_info",
+                //     //     userid:options.userId,
+                //     //     sub_event_category:'more_info_gallery'
+                //     // })                 
+                // }
             }} className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'}  h-full`}>
                 {this.contents.length > 0 ?
                     <ImageGallery 
