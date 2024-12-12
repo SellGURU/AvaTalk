@@ -20,6 +20,7 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
 const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [deletingLoding,setDeletingLoding] = useState(false);
+  const [defeatedFiles,setDefeatedFiles] = useState<Array<any>>([]);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
   const [deleteingFiles,setDeleteingFiles] = useState<Array<any>>([]);
@@ -85,6 +86,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
           }
           setisLoading(false)         
             fileInputRef.current.value = "";    
+        }).catch(() => {
+          setDefeatedFiles([...base64Files])
         }).finally(() => {
           setisLoading(false)     
           fileInputRef.current.value = "";  
@@ -151,6 +154,12 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
     }  
     
   }
+  const deleteDefeatedFile = (index:number) => {
+    const newArr = [...defeatedFiles]
+    newArr.splice(index,1)
+    setProgress(0)
+    setDefeatedFiles(newArr)
+  }  
   useEffect(() => {
     console.log(files)
   })
@@ -314,6 +323,18 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                                       <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
                                     </div>
                                   }
+                                </>
+                              )
+                            })}
+                            {defeatedFiles.map((item,index) => {
+                              return (
+                                <>
+                                  <div key={index} data-mode={"outSize"} className={`${theme}-ImageUploader-uploadBox-file`}>
+                                    <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,15)}</div>
+                                    {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
+                                    </div> */}
+                                    <img className="w-4 h-4 cursor-pointer" onClick={() => deleteDefeatedFile(index)} src="./Carbon/Add.svg" alt="" />
+                                  </div>                            
                                 </>
                               )
                             })}
