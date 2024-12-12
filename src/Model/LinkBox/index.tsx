@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "..";
 import { Tooltip } from 'react-tooltip'
-import { Auth } from "../../Api";
+// import { Auth } from "../../Api";
 
 class Link {
     public order:number = -1
@@ -9,15 +10,15 @@ class Link {
     constructor(protected url:string,protected name:string){
         this.id = `id-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`
     } 
-    public resolveRender(theme:string,userID:string) {
+    public resolveRender(theme:string,_userID:string) {
         return (
             <>
             <div data-tooltip-id={"link"+this.url} data-tooltip-content={this.url} onClick={() =>{
-            Auth.addEvent({
-                event_type:"more_info",
-                userid:userID,
-                sub_event_category:'more_info_links'
-            }) 
+            // Auth.addEvent({
+            //     event_type:"more_info",
+            //     userid:userID,
+            //     sub_event_category:'more_info_links'
+            // }) 
             window.open(this.url)
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>

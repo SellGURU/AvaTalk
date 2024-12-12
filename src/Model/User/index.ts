@@ -167,9 +167,9 @@ class User {
         // this.syncToLocalStorage()
     }
 
-    public checkBox(newBox:Box) {
+    public checkBox(newBox:Box,progress:(uploadProgress:any) =>void) {
         // console.log(newBox)
-        return Auth.checkBox(newBox)
+        return Auth.checkBox(newBox,progress)
     }
     public addSaveBox(newBox:Box,emptyBox:Box) {
         if(this.boxs.filter((item) => item.getTypeName() == newBox.getTypeName()).length > 0){

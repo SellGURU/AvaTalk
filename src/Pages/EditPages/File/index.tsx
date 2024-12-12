@@ -88,7 +88,7 @@ const EditFile = () => {
       // setLimiteMode("defualt");
     }
   });
-  const checkFile = (files:any) => {  
+  const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {  
     const converted: Array<File> = files.map((item:any) => {
       const newFile: File = new File(
         item.url,
@@ -106,7 +106,8 @@ const EditFile = () => {
     ) {
       setIsReadyTo(true);
       auth.currentUser.checkBox(
-        new FileBox(formik.values.title, converted,'upload')
+        new FileBox(formik.values.title, converted,'upload'),
+        uploadProgress
         // new GalleryBox(formik.values.title, converted,'upload')
       );      
       return new Promise((_resolve,reject)=>{
@@ -116,7 +117,8 @@ const EditFile = () => {
   
     setIsChanged(true)
     return auth.currentUser.checkBox(
-      new FileBox(formik.values.title, converted,'upload')
+      new FileBox(formik.values.title, converted,'upload'),
+      uploadProgress
       // new GalleryBox(formik.values.title, converted,'upload')
     );
   };    
