@@ -641,7 +641,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className={`w-full mt-[-320px]  invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className={`w-full relative overflow-hidden bg-white ${mode != 'profile'?'h-[160px] -mt-[16px]':' h-[130px] -mt-[20px]'}  rounded-[16px] flex items-center justify-start boxShadow-Gray`}>
                  <img src="./icons/squiggles.png" className="absolute w-full top-[-50px] " alt="" />
-                <div className="ml-[90px] min-w-[86px] relative z-10">
+                <div className="ml-[22%] min-w-[86px] relative z-10">
                   <img className="w-[86px] border-solid border-[2px] boxShadow-Gray border-primary-color h-[86px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                   {
                     shareUser.information?.logo &&
