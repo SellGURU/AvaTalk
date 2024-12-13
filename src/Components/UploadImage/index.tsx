@@ -220,7 +220,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                   }}  className={`${theme}-ImageUploader-uploader-input`} multiple type="file" id="upload-button"  accept={accept} />                        
               </div>
 
-              {(files.length > 0 || (Uplodingfiles.length>0 && isLoading)) && mod=='files'? 
+              {(files.length > 0||defeatedFiles.length>0 || (Uplodingfiles.length>0 && isLoading)) && mod=='files'? 
                 <>
                   <div>
                     <div className={`${theme}-ImageUploader-itemList-titleBox`}>
