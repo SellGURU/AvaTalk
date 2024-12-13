@@ -57,10 +57,10 @@ class GoogleMapBox extends Box {
                                 </div>
                             </div>
                             <div>
-                                <div className="text-[#6B7280] text-[14px]">
+                                <div className="text-[#6B7280] text-[12px] md:text-[14px]">
                                     Current Location
                                 </div>
-                                <div className="text-[#374151] text-[14px] font-medium">
+                                <div className="text-[#374151] text-[12px] md:text-[14px] break-words font-medium">
                                     {this.address.split(",").length >2 ?
                                     <>
                                         {this.address.split(",")[0]+" ,"+this.address.split(",")[1]}

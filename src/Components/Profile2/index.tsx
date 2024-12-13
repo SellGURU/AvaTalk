@@ -641,8 +641,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
             <div className={`w-full mt-[-320px]  invisible py-4 px-4 pb-0 -mb-2  ${scrolled?'profileAimation3': isFirstScrol?'profileAimation3-backward':''} `}>
               <div className={`w-full relative overflow-hidden bg-white ${mode != 'profile'?'h-[160px] -mt-[16px]':' h-[130px] -mt-[20px]'}  rounded-[16px] flex items-center justify-start boxShadow-Gray`}>
                  <img src="./icons/squiggles.png" className="absolute w-full top-[-50px] " alt="" />
-                <div className="ml-[22%] min-w-[86px] relative z-10">
-                  <img className="w-[86px] border-solid border-[2px] boxShadow-Gray border-primary-color h-[86px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
+                <div className="ml-[18%] min-w-[70px] relative z-10">
+                  <img className="w-[70px] border-solid border-[2px] boxShadow-Gray border-primary-color h-[70px] rounded-full object-cover object-[50% 50%]" src={shareUser.information?.imageurl} alt="" />
                   {
                     shareUser.information?.logo &&
                     <div className=" w-[33px] h-[33px] flex justify-center items-center overflow-hidden rounded-full border-primary-color border-2 bg-white border-3 absolute left-[-14px] z-30 top-2">
@@ -652,8 +652,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   }                
                 </div>
                 <div className="ml-2 max-w-[300px] relative z-10 overflow-hidden">
-                  <h1 className={`${theme}-Profile-ProfileName text-start`}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
-                  <p className={`${theme}-Profile-SubTitle`}>
+                  <h1 className={`${theme}-Profile-ProfileName text-start`} style={{fontSize:'14px'}}>{shareUser.information?.firstName.substring(0,10)+' '+shareUser.information?.lastName.substring(0,10)}</h1>
+                  <p className={`${theme}-Profile-SubTitle`} style={{fontSize:'12px'}}>
                     {shareUser.information?.job} {shareUser.information?.job && shareUser.information?.company ? "@" : ""} {shareUser.information?.company}
                   </p>                    
                 </div>
