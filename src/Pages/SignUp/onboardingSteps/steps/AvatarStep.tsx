@@ -447,7 +447,9 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                                         );
                                         setIsLoading(false);
                                     }
-                                    );
+                                    ).finally(() => {
+                                        setIsLoading(false)
+                                    });
                                 } else {
                                     formik.setFieldValue("avatar_pic_url", el.photo);
                                     formik.setFieldValue("silent_video_avatar", el.video);
@@ -525,6 +527,8 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                         setIsLoading(false);
 
                         }              
+                        }).finally(() => {
+                            setIsLoading(false)
                         });
                     }}
                     onCancel={() => {
@@ -551,10 +555,11 @@ const AvatarStep:React.FC<AvatarStepProps> = ({onSubmit,avatarList,uploadedAvate
                             type:'Local',
                             video:""
                             })
+                            
                             setAddAvatar(false)
                             // setAvatarVideo("")
-                            formik.setFieldValue("avatar_pic_url","")
-                            formik.setFieldValue("silent_video_avatar","")
+                            formik.setFieldValue("avatar_pic_url", avatarList.filter(e => e.gender == authContext.siginUpOptions.gender)[0].photo);
+                            formik.setFieldValue("silent_video_avatar", avatarList.filter(e => e.gender == authContext.siginUpOptions.gender)[0].video);
                         }}
                         name={"modal name"}
                         value={"editeValue"}

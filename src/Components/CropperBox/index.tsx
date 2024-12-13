@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {  useRef, useState } from "react"
+import {  useRef } from "react"
 // import { Cropper } from "react-cropper"
-import { CropperRef, Cropper } from 'react-advanced-cropper';
+import { CircleStencil, Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
 import { Button } from "symphony-ui"
@@ -13,7 +13,18 @@ interface CropperBoxProps {
 }
 
 const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
-    const [cropper,setCropper] = useState<any>()
+    // const [cropper,setCropper] = useState<any>()
+    const onCrop = () => {
+        if (cropperRef.current) {
+            // setCropper(cropperRef.current.getCanvas()?.toDataURL())
+            onResolve(cropperRef.current.getCanvas()?.toDataURL())
+            // setCoordinates(cropperRef.current.getCoordinates());
+            // // You are able to do different manipulations at a canvas
+            // // but there we just get a cropped image, that can be used
+            // // as src for <img/> to preview result
+            // setImage(cropperRef.current.getCanvas()?.toDataURL());
+        }
+    };
     // const getCropData = async () => {
     //     if (cropper) {
     //         const file = await fetch(cropper.getCroppedCanvas().toDataURL())
@@ -32,43 +43,44 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
     //     }
     // };    
     const getData2 = () => {
-        if(cropper){
-            onResolve(cropper)
-        }else {
-            getCropData()
-        }
+        onCrop()
+        // if(cropper){
+        //     onResolve(cropper)
+        // }else {
+        //     getCropData()
+        // }
     }
     const cancel =() => {
         onCancel()
     }
     const cropperRef = useRef<any>(null); // Reference to the Cropper
-	const onChange = (cropper: CropperRef) => {
-		// console.log(cropper.getCanvas()?.toDataURL());
-        setCropper(cropper.getCanvas()?.toDataURL())
-	};    
-  const getCropData = () => {
-    if (cropperRef.current) {
-      const cropperInstance = cropperRef.current;
+	// const onChange = (cropper: CropperRef) => {
+	// 	// console.log(cropper.getCanvas()?.toDataURL());
+    //     setCropper(cropper.getCanvas()?.toDataURL())
+	// };    
+//   const getCropData = () => {
+//     if (cropperRef.current) {
+//       const cropperInstance = cropperRef.current;
 
-      // Get crop coordinates
-      const coordinates = cropperInstance.getCoordinates();
+//       // Get crop coordinates
+//       const coordinates = cropperInstance.getCoordinates();
 
-      // Get cropped area as a canvas
-      const canvas = cropperInstance.getCanvas();
+//       // Get cropped area as a canvas
+//       const canvas = cropperInstance.getCanvas();
 
-      if (canvas) {
-        const preview = canvas.toDataURL(); // Base64 image
-        setCropper(
-          preview,
-        );
-        onResolve(preview)
+//       if (canvas) {
+//         const preview = canvas.toDataURL(); // Base64 image
+//         setCropper(
+//           preview,
+//         );
+//         onResolve(preview)
         
-        console.log("Crop Data:", { coordinates, preview });
-      } else {
-        console.log("No canvas available. Ensure the cropper is loaded.");
-      }
-    }
-  };  
+//         console.log("Crop Data:", { coordinates, preview });
+//       } else {
+//         console.log("No canvas available. Ensure the cropper is loaded.");
+//       }
+//     }
+//   };  
     return (
         <>
         {
@@ -91,7 +103,8 @@ const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
                             <Cropper
                                 src={url}
                                 ref={cropperRef}
-                                onChange={onChange}
+                                // onChange={onChange}
+                                stencilComponent={CircleStencil}
                                 // stencilComponent={{
                                 //     aspectRatio: 1/1,
                                 //     movable: false,

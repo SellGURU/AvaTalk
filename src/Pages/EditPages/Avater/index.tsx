@@ -87,6 +87,8 @@ const EditAvater: React.FC = () => {
         formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
         formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
              
+      }).finally(() => {
+        setIsLoading(false)
       })     
   }
   const [asktakePhoto,setAskTakePhoto] = useState(false)
@@ -443,7 +445,9 @@ const EditAvater: React.FC = () => {
                               );
                               setIsLoading(false);
                             }
-                          );
+                          ).finally(() => {
+                            setIsLoading(false)
+                          });
                         } else {
                           formik.setFieldValue("avatar_pic_url", el.photo);
                           formik.setFieldValue("silent_video_avatar", el.video);
@@ -526,6 +530,11 @@ const EditAvater: React.FC = () => {
                 setIsLoading(false);
 
               }              
+              }).catch(() => {
+                  setIsLoading(false)
+                  toast.dismiss()                 
+              }).finally(() => {
+                setIsLoading(false)
               });
             }}
             onCancel={() => {
@@ -553,9 +562,9 @@ const EditAvater: React.FC = () => {
                     video:""
                   })
                   setAddAvatar(false)
+                  formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
+                  formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)                     
                   // setAvatarVideo("")
-                  formik.setFieldValue("avatar_pic_url","")
-                  formik.setFieldValue("silent_video_avatar","")
                 }}
                 name={"modal name"}
                 value={"editeValue"}
