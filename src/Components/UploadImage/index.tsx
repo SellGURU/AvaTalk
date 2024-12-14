@@ -200,7 +200,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                           </div>
                       </div>
                   </div>
-                  <input ref={fileInputRef} onClick={onClick} disabled={isLoading}  onChange={(res:any) => {
+                  <input ref={fileInputRef} onClick={onClick} disabled={isLoading || deletingLoding}  onChange={(res:any) => {
                       setisLoading(true)
                       setProgress(0)
                       // console.log(res.target.files)
