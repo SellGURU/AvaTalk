@@ -366,7 +366,7 @@ const EditAvater: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full gap-4 mt-5 grid grid-cols-4 grid-flow-row">
+            <div className="w-full gap-4 mt-5 grid grid-cols-3 sm:grid-cols-4 grid-flow-row">
               <div
                 className="w-[100px] max-w-[100px] max-h-[100px] h-[100px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
                 onClick={() => {

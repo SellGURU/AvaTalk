@@ -571,6 +571,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
               {
                 isMuted?
+                <>
                   <div className="absolute top-4 right-6 z-20">
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
@@ -594,7 +595,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }} theme="Carbon-Google" data-mode="profile-review-button-2">
                       <div className={`${theme}-Profile-mutedVector`} ></div>
                     </Button>                
-                  </div>       
+                  </div>  
+                  <div className="absolute top-16 right-6 z-20">
+                      <Button onClick={() => {
+                        setIsTalking(false)
+                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                      }} theme='Carbon-back'>
+                        <div className={`${theme}-Profile-BoxVector`}></div>
+                      </Button>              
+                  </div>                          
+                </>
                 :
                 <>
                   <div className="absolute top-4 right-6 z-20">
