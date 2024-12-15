@@ -7,11 +7,12 @@ export default defineConfig({
   plugins: [react()
   ,VitePWA({
           registerType: 'autoUpdate',
-          devOptions: {
-              enabled: true
-          },
+          // devOptions: {
+          //     enabled: true
+          // },
           includeAssets: ['favicon.ico', "icon-512x512.png","icon-384x384.png","icon-256x256.png","icon-192x192.png","icon-152x152.png",'icon-48x48.png', 'icon-72x72.png', "icon-96x96.png","icon-128x128.png","icon-144x144.png"],
           manifest: {
+              start_url: "/",
               name: 'Avatalk',
               short_name: 'Avatalk',
               description: 'Avatalk',
