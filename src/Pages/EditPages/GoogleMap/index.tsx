@@ -33,7 +33,7 @@ const validationSchema = Yup.object().shape({
 const EditGoogleMap = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "GoogleMapBox")[0] as GoogleMapBox;
+  let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "AddressBox")[0] as GoogleMapBox;
   const [showAddLocation,setShowAddLocation] = useState(false)
   if (!currentBox) {
     currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
