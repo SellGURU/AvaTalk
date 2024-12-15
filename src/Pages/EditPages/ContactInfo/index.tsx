@@ -33,6 +33,7 @@ phone:Yup.string().test(
   "Invalid phone number for the selected country.",
   (value) => validatePhoneNumber(value) === true
 ),
+workEmail:Yup.string().email('Email is invalid'),
 workPhone:Yup.string().test(
   "isValidPhoneNumber",
   "Invalid phone number for the selected country.",
@@ -161,8 +162,8 @@ const EditContactInfo = () => {
             placeholder="Enter your personal Email..."
           ></TextField>
         </div>
-        <div className="mt-3 px-6">
-          <TextField {...formik.getFieldProps("workEmail")} theme="Carbon" label="Work Email" inValid={false} name="workEmail"  type="text"  placeholder="Enter your work Email..."></TextField>
+        <div className="mt-3 px-6 text-left">
+          <TextField {...formik.getFieldProps("workEmail")} theme="Carbon" label="Work Email" inValid={formik.errors.workEmail!=undefined } name="workEmail"  type="text" errorMessage={formik.errors.workEmail}  placeholder="Enter your work Email..."></TextField>
         </div>
         {/* <div className="mt-3 px-6">
           <TextField

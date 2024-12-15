@@ -7,11 +7,12 @@ export default defineConfig({
   plugins: [react()
   ,VitePWA({
           registerType: 'autoUpdate',
-          devOptions: {
-              enabled: true
-          },
-          includeAssets: ['favicon.ico', "icon-512x512.png","icon-384x384.png","icon-256x256.png","icon-192x192.png","icon-152x152.png",'icon-48x48.png', 'icon-72x72.png', "icon-96x96.png","icon-128x128.png","icon-144x144.png"],
+          // devOptions: {
+          //     enabled: true
+          // },
+          includeAssets: ['favicon.ico', "512_512.png","384_384.png","256_256.png","192_192.png","152_152.png",'48_48.png', '72_72.png', "96_96.png","128_128.png","144_144.png"],
           manifest: {
+              start_url: "/",
               name: 'Avatalk',
               short_name: 'Avatalk',
               description: 'Avatalk',
@@ -19,52 +20,52 @@ export default defineConfig({
               display: "standalone",
               icons: [
                   {
-                      "src": "/iconspwa/icon-48x48.png",
+                      "src": "/iconspwa/lite/48_48.png",
                       "sizes": "48x48",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-72x72.png",
+                      "src": "/iconspwa/lite/72_72.png",
                       "sizes": "72x72",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-96x96.png",
+                      "src": "/iconspwa/lite/96_96.png",
                       "sizes": "96x96",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-128x128.png",
+                      "src": "/iconspwa/lite/128_128.png",
                       "sizes": "128x128",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-144x144.png",
+                      "src": "/iconspwa/lite/144_144.png",
                       "sizes": "144x144",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-152x152.png",
+                      "src": "/iconspwa/lite/152_152.png",
                       "sizes": "152x152",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-192x192.png",
+                      "src": "/iconspwa/lite/192_192.png",
                       "sizes": "192x192",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-256x256.png",
+                      "src": "/iconspwa/lite/256_256.png",
                       "sizes": "256x256",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-384x384.png",
+                      "src": "/iconspwa/lite/384_384.png",
                       "sizes": "384x384",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-512x512.png",
+                      "src": "/iconspwa/lite/512_512.png",
                       "sizes": "512x512",
                       "type": "image/png"
                   }

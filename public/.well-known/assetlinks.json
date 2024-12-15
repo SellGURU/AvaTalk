@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "avatalk",
+      "package_name": "com.avatalk",
+      "sha256_cert_fingerprints": [
+"24:76:7C:33:EE:2D:34:6C:27:27:1C:E7:7E:02:93:22:E6:99:F3:DA:E5:51:F1:3E:E9:92:35:A5:7D:D6:09:F1"
+      ]
+    }
+  }
+]

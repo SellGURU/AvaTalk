@@ -62,6 +62,10 @@ const EditFile = () => {
       }
 
     }else {
+        auth.currentUser.addSaveBox(
+          new FileBox(formik.values.title, formik.values.files,'save'),
+          new FileBox(formik.values.title, formik.values.files,'')
+        );      
       navigate("/")
     }
   };
@@ -115,11 +119,26 @@ const EditFile = () => {
       })
     }
   
-    setIsChanged(true)
     return auth.currentUser.checkBox(
       new FileBox(formik.values.title, converted,'upload'),
       uploadProgress
       // new GalleryBox(formik.values.title, converted,'upload')
+    );
+  };   
+
+  const removeFile = (files:any) => {  
+    const converted: Array<File> = files.map((item:any) => {
+      const newFile: File = new File(
+        item.url,
+        item.name,
+        item.type,
+        item.size
+      );
+      return newFile;
+    });    
+  
+    return auth.currentUser.removeUploadBox(
+      new FileBox(formik.values.title, converted,'upload'),
     );
   };    
   return (
@@ -162,6 +181,9 @@ const EditFile = () => {
                   size: item.getSize(),
                 };
               })}
+              isChanged={isChanged}
+              deleteUploadFile={removeFile}
+              setIsChanged={setIsChanged}
               checkFile={checkFile}
               uploadServer
               limite={0}

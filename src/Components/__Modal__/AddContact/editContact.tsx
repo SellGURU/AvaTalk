@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { publish } from "../../../utils/event"
 import { Button } from "symphony-ui"
 import TextField from "../../TextField"
@@ -7,6 +7,8 @@ import { useFormik } from "formik"
 import * as Yup from "yup";
 import { PhoneNumberInput, TextArea } from "../.."
 import { Contact } from "../../../Types"
+import useModalAutoClose from "../../../hooks/useModalAutoClose"
+import {validationYup} from '../../../utils/validationYup';
 
 interface EditContactProps {
     onClose:() =>void
@@ -17,11 +19,13 @@ interface EditContactProps {
 
 const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddContact}) => {
     useEffect(() => {
+        publish("IncressFooter",{})
         publish("profileIsReview",{})
         return () => {
             publish("profileIsProfile",{})
+            publish("DisIncressFooter",{})
         }
-    },[])    
+    },[]) 
     const theme ="Carbon"
     const formik = useFormik({
         initialValues:{
@@ -34,15 +38,22 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
             note:contact?.note
         },
         validationSchema:Yup.object().shape({
-            fullName:Yup.string().required('Full Name is required'),
+            fullName:validationYup("fullName"),
             email:Yup.string().required('Email address is required').email('Email is invalid'),
             phone:Yup.string().required('Phone is required'),
         }),
         onSubmit:() =>{}
     })
+    const refrrence = useRef(null)
+    useModalAutoClose({
+        refrence:refrrence,
+        close:() => {
+            onClose()
+        }
+    })       
     return (
         <>
-            <div className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[80vh] pb-10 rounded-b-none slideupModal  bg-white w-full">
+            <div ref={refrrence} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-[80vh] pb-10 rounded-b-none slideupModal  bg-white w-full">
                 <div className="w-full">
                     <div className="w-full flex justify-between items-center">
                         <div className="relative">
@@ -136,6 +147,18 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
                                 inValid={formik.errors.job!= undefined}
                                 />                            
                         </div>  
+                        <div className="mt-4">
+                            <TextArea 
+                                {...formik.getFieldProps("note")}
+                                label="Note"
+                                placeholder="Write a note..."
+                                theme="Carbon"
+                                textAreaHeight="136px"
+                                name="note"
+                                errorMessage={formik.errors.note}
+                                inValid={formik.errors.note!= undefined}                            
+                            ></TextArea>
+                        </div>                       
                             <div className="mt-10 mb-6">
                             <Button
                                 disabled={!formik.isValid || formik.values.fullName == ''}
