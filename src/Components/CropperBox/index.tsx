@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {  useRef } from "react"
+import {  useEffect, useRef } from "react"
 // import { Cropper } from "react-cropper"
 import { CircleStencil, Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
 import { Button } from "symphony-ui"
+import { publish } from "../../utils/event";
 
 interface CropperBoxProps {
     url:string
@@ -14,6 +15,14 @@ interface CropperBoxProps {
 
 const CropperBox:React.FC<CropperBoxProps> = ({url,onResolve,onCancel}) => {
     // const [cropper,setCropper] = useState<any>()
+    useEffect(() => {
+        publish("IncressFooter",{})
+        publish("profileIsReview",{})
+        return () => {
+            publish("profileIsProfile",{})
+            publish("DisIncressFooter",{})
+        }
+    },[])     
     const onCrop = () => {
         if (cropperRef.current) {
             // setCropper(cropperRef.current.getCanvas()?.toDataURL())
