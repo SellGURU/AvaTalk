@@ -24,7 +24,12 @@ class Box {
         this.order =order
     }
     public getTypeName() {
-        return this.type_name
+        if(this.type_name !='GoogleMapBox'){
+            return this.type_name
+        }
+        else {
+            return 'AddressBox'
+        }
     }
 
     public getCardName() {

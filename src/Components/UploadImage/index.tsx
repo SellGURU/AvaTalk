@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
+// import { BeatLoader } from "react-spinners";
+import FileBoxItem from "./FileBoxItem";
 
 
 type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
@@ -11,19 +13,22 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   accept?:string
   limite?:number
   uploadServer?:boolean
+  isChanged?:boolean
+  setIsChanged?:(action:boolean) =>void
   checkFile?:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
+  deleteUploadFile?:(files:any) => Promise<any>
   onClick?:(e:any) => void
   userMode?:'Free'|'Trial'|'Pro'
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,setIsChanged,isChanged,deleteUploadFile,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [deletingLoding,setDeletingLoding] = useState(false);
   const [defeatedFiles,setDefeatedFiles] = useState<Array<any>>([]);
   const [files,setFiles] = useState<Array<any>>(value?value:[]);
   const [Uplodingfiles,setUploadingFiles] = useState<Array<any>>([]);
-  const [deleteingFiles,setDeleteingFiles] = useState<Array<any>>([]);
+  // const [deleteingFiles,setDeleteingFiles] = useState<Array<any>>([]);
   const [progress,setProgress] = useState(0)
   const fileInputRef = useRef<any>(null);
   // useEffect(() => {
@@ -76,6 +81,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
            setProgress(percentCompleted)
         }).then(() => {
           setFiles([...files,...base64Files])
+          setIsChanged? setIsChanged(true):undefined
           if(uploades){
             if(mod == 'files'){
               uploades([...files,...base64Files])
@@ -120,19 +126,17 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
   useEffect(() => {
     setResolveLimite(limite?limite:1)
   },[limite])
-  const deleteFile = (index:number) => {
+  const deleteFile = (index:number,complete?:() => void) => {
     const newArr = [...files]
     const deleteing = newArr.splice(index,1)
     setProgress(0)
     setDeletingLoding(true)
     if(uploadServer) {
       setUploadingFiles([])
-      setDeleteingFiles(deleteing)
-      checkFile?
-        checkFile([...newArr],(progressEvent) =>{
-           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-           setProgress(percentCompleted)
-        }).then(() => {
+      // setDeleteingFiles(deleteing)
+      if(defeatedFiles && isChanged) {
+        deleteUploadFile?
+        deleteUploadFile(deleteing).then(() => {
           setFiles([...newArr])
           if(uploades){
             if(mod == 'files'){
@@ -143,10 +147,28 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
             }
           }
           setDeletingLoding(false)              
-        })
-      :undefined
+        }).finally(() => {
+          complete?complete():undefined
+          setDeletingLoding(false)
+        }) 
+        :undefined
+      }else {
+          setFiles([...newArr])
+          if(uploades){
+            if(mod == 'files'){
+              uploades([...newArr])
+            }else{
+              setFiles([...newArr])              
+              uploades([...newArr])              
+            }
+          }
+          setDeletingLoding(false)     
+          complete?complete():undefined       
+      }
+
     } else {
       setFiles(newArr)
+      complete?complete():undefined
       if(uploades){
         uploades(newArr)
       }    
@@ -235,21 +257,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                       </>
                       :
                       <>
-                      {(deleteingFiles.length>0 && deletingLoding)? 
-                      <>
-                      <div className="flex justify-between items-center">
-                        <div className="flex gap-1 justify-start items-center">
-                           Deleting <span> {" "}0/{deleteingFiles.length}</span>
-
-                        </div>
-                        <div>{progress+'%'}</div>
-                      </div>                      
-                      </>
-                      :
-                      <>
-                       Uploaded
-                      </>
-                      }
+                       Uploaded        
                       </>
                       } 
                     </div>
@@ -280,30 +288,6 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                       :
                       <>
                         {
-                          deletingLoding ?
-                          <>
-                            {
-                            deleteingFiles.map((item,index) => {
-                              return (
-                                <>
-                                  <div key={index} className={`${theme}-ImageUploader-uploadBox-file-loading relative`}>
-                                    <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
-                                    <div className="absolute bottom-0 w-full left-0">
-                                      <div className="w-full h-[6px] relative rounded-lg bg-white">
-                                        <div className="absolute left-[1px] top-[1px] rounded-lg h-[4px] bg-primary-color " style={{width:progress+'%'}}></div>
-                                      </div>
-
-                                    </div>
-                                    {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                    </div> */}
-                                    {/* <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" /> */}
-                                  </div>                            
-                                </>
-                              )
-                            })                              
-                            }                          
-                          </>
-                          :
                           <>
                             {files.map((item,index) => {
                               return (
@@ -316,12 +300,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,checkFile,chil
                                       <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/Add.svg" alt="" />
                                     </div>                            
                                   :
-                                    <div key={index} className={`${theme}-ImageUploader-uploadBox-file`}>
-                                      <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
-                                      {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
-                                      </div> */}
-                                      <img className="w-4 h-4 cursor-pointer" onClick={() => deleteFile(index)} src="./Carbon/trash2.svg" alt="" />
-                                    </div>
+                                      <FileBoxItem deleteFile={deleteFile} index={index} item={item}></FileBoxItem>
                                   }
                                 </>
                               )

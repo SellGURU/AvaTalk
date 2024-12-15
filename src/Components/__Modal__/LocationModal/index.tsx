@@ -48,7 +48,7 @@ const LocationModal:React.FC<LocationModalProps> = ({
             onClose()
         }
     })     
-    let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "GoogleMapBox")[0] as GoogleMapBox;
+    let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "AddressBox")[0] as GoogleMapBox;
 
     if (!currentBox) {
         currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
