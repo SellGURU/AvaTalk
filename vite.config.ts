@@ -20,52 +20,52 @@ export default defineConfig({
               display: "standalone",
               icons: [
                   {
-                      "src": "/iconspwa/icon-48x48.png",
+                      "src": "/iconspwa/lite/48x48.png",
                       "sizes": "48x48",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-72x72.png",
+                      "src": "/iconspwa/lite/72x72.png",
                       "sizes": "72x72",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-96x96.png",
+                      "src": "/iconspwa/lite/96x96.png",
                       "sizes": "96x96",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-128x128.png",
+                      "src": "/iconspwa/lite/128x128.png",
                       "sizes": "128x128",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-144x144.png",
+                      "src": "/iconspwa/lite/144x144.png",
                       "sizes": "144x144",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-152x152.png",
+                      "src": "/iconspwa/lite/152x152.png",
                       "sizes": "152x152",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-192x192.png",
+                      "src": "/iconspwa/lite/192x192.png",
                       "sizes": "192x192",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-256x256.png",
+                      "src": "/iconspwa/lite/256x256.png",
                       "sizes": "256x256",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-384x384.png",
+                      "src": "/iconspwa/lite/384x384.png",
                       "sizes": "384x384",
                       "type": "image/png"
                   },
                   {
-                      "src": "/iconspwa/icon-512x512.png",
+                      "src": "/iconspwa/lite/512x512.png",
                       "sizes": "512x512",
                       "type": "image/png"
                   }
