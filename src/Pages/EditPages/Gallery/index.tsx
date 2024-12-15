@@ -59,6 +59,10 @@ const EditGallery = () => {
         }
 
     }else {
+      auth.currentUser.addSaveBox(
+        new GalleryBox(formik.values.title, formik.values.files,'save'),
+        new GalleryBox(formik.values.title, formik.values.files,'')
+      );      
       navigate("/");
     }
   };
@@ -81,14 +85,25 @@ const EditGallery = () => {
         reject("")
       })
     }
-  
-    setIsChanged(true)
+
     return auth.currentUser.checkBox(
       new GalleryBox(formik.values.title, converted,'upload'),
       uploadProgress
     );
   };  
-
+  const deleteFile = (files:any) => {
+    const converted = files.map((item:any) => {
+      return {
+        original: item.url,
+        thumbnail: item.url,
+        name: item.name,
+        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+      };
+    });      
+    return auth.currentUser.removeUploadBox(
+      new GalleryBox(formik.values.title, converted,'upload')
+    );
+  }; 
   // useEffect(() => {
   //   checkFile()
   // },[formik.values.files])
@@ -124,6 +139,7 @@ const EditGallery = () => {
               <ImageUploadr
                 accept="image/png, image/jpeg"
                 limite={5}
+                setIsChanged={setIsChanged}
                 onClick={(e) => {
                   if (auth.currentUser.type_of_account.getType() == "Free") {
                     if (formik.values.files.length >=5 ) {
@@ -153,6 +169,7 @@ const EditGallery = () => {
                   });
                   formik.setFieldValue("files", converted);
                 }}
+                deleteUploadFile={deleteFile}
                 mod="files"
                 label="Upload Images"
               ></ImageUploadr>
