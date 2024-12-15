@@ -61,6 +61,8 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
                 "Invalid phone number for the selected country.",
                 (value) => validatePhoneNumber(value) === true
                 ),
+            job:validationYup("job"),
+            company:validationYup("company"),    
         }),
         onSubmit:() =>{}
     })

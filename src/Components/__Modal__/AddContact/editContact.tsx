@@ -41,6 +41,8 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
             fullName:validationYup("fullName"),
             email:Yup.string().required('Email address is required').email('Email is invalid'),
             phone:Yup.string().required('Phone is required'),
+            job:validationYup("job"),
+            company:validationYup("company"),            
         }),
         onSubmit:() =>{}
     })
