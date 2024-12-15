@@ -5,6 +5,7 @@ import { Button } from "symphony-ui"
 import TextField from "../../TextField"
 import { useFormik } from "formik"
 import * as Yup from "yup";
+import { validationYup } from "../../../utils/validationYup"
 import { PhoneNumberInput, TextArea } from "../.."
 import { Contacts } from "../../../Api"
 import { Contact } from "../../../Types"
@@ -53,7 +54,7 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
             note:''
         },
         validationSchema:Yup.object().shape({
-            fullName:Yup.string().required('Full Name is required'),
+            fullName:validationYup("fullName"),
             email:Yup.string().required('Email address is required').email('Email is invalid'),
             phone:Yup.string().required('Phone is required').test(
                 "isValidPhoneNumber",
@@ -166,6 +167,18 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
                                 inValid={formik.errors.job!= undefined}
                                 />                            
                         </div>  
+                        <div className="mt-4">
+                            <TextArea 
+                                {...formik.getFieldProps("note")}
+                                label="Note"
+                                placeholder="Write a note..."
+                                theme="Carbon"
+                                textAreaHeight="136px"
+                                name="note"
+                                errorMessage={formik.errors.note}
+                                inValid={formik.errors.note!= undefined}                            
+                            ></TextArea>
+                        </div>                             
                             <div className="mt-10 mb-6">
                             <Button
                                 disabled={!formik.isValid || !formik.touched.fullName}

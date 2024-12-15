@@ -11,6 +11,7 @@ import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
 import { publish } from "../../../utils/event";
 import parsePhoneNumberFromString from "libphonenumber-js";
+import { validationYup } from "../../../utils/validationYup";
 
 // const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 //   const validatePhone = (phone: number | undefined) => {
@@ -51,8 +52,8 @@ const validationSchema = Yup.object().shape({
     "Invalid phone number for the selected country.",
     (value) => validatePhoneNumber(value) === true
     ),
-    firstname:Yup.string().required('First Name is required'),
-    lastname:Yup.string().required('Last Name is required'),
+    firstname:validationYup("firstname"),
+    lastname:validationYup("lastname"),
 });
 interface SettingAccount {
     value: any;

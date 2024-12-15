@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { PhoneNumberInput, TextArea } from "../.."
 import { Contact } from "../../../Types"
 import useModalAutoClose from "../../../hooks/useModalAutoClose"
+import {validationYup} from '../../../utils/validationYup';
 
 interface EditContactProps {
     onClose:() =>void
@@ -37,7 +38,7 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
             note:contact?.note
         },
         validationSchema:Yup.object().shape({
-            fullName:Yup.string().required('Full Name is required'),
+            fullName:validationYup("fullName"),
             email:Yup.string().required('Email address is required').email('Email is invalid'),
             phone:Yup.string().required('Phone is required'),
         }),
@@ -146,6 +147,18 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
                                 inValid={formik.errors.job!= undefined}
                                 />                            
                         </div>  
+                        <div className="mt-4">
+                            <TextArea 
+                                {...formik.getFieldProps("note")}
+                                label="Note"
+                                placeholder="Write a note..."
+                                theme="Carbon"
+                                textAreaHeight="136px"
+                                name="note"
+                                errorMessage={formik.errors.note}
+                                inValid={formik.errors.note!= undefined}                            
+                            ></TextArea>
+                        </div>                       
                             <div className="mt-10 mb-6">
                             <Button
                                 disabled={!formik.isValid || formik.values.fullName == ''}
