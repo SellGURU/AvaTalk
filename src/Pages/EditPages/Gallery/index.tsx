@@ -140,6 +140,8 @@ const EditGallery = () => {
                 accept="image/png, image/jpeg"
                 limite={5}
                 setIsChanged={setIsChanged}
+                isChanged={isChanged}
+                
                 onClick={(e) => {
                   if (auth.currentUser.type_of_account.getType() == "Free") {
                     if (formik.values.files.length >=5 ) {
