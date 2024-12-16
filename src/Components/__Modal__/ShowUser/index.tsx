@@ -69,12 +69,12 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                     </div>
                     <div className="my-4 flex flex-col gap-5 font-medium text-sm">
                     {user?.information?.phone ?
-                        <a      href={`tel:${user?.information?.phone}`}
+                        <a      href={`tel:+${user?.information?.phone}`}
                         className={`${theme}-ContactDetails-container5`}>
                         <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                             <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-phoneIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                         </div>
-                        <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{user?.information?.phone}</p>
+                        <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{'+'+user?.information?.phone}</p>
                         </a>
                     :undefined}
                     {user?.information?.personlEmail ?

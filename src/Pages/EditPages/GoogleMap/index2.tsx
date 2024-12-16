@@ -33,7 +33,6 @@ const EditGoogleMap = () => {
   if (!currentBox) {
     currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'');
   }
-
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
   const [searchQuery, setSearchQuery] = useState('');
 
