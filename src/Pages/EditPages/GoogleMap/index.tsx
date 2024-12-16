@@ -35,6 +35,7 @@ const EditGoogleMap = () => {
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter((item) => item.getTypeName() === "AddressBox")[0] as GoogleMapBox;
   const [showAddLocation,setShowAddLocation] = useState(false)
+  console.log(currentBox)
   if (!currentBox) {
     currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
   }
