@@ -75,8 +75,8 @@ const BarChartComponent: React.FC<Props> = ({ theme ,data}) => {
                   barSize={28}
               >
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                <XAxis dataKey="name" fontSize={12} stroke="#9CA3AF" />
-                <YAxis fontSize={12} stroke="#9CA3AF" />
+                <XAxis dataKey="name" allowDecimals={false} fontSize={12} stroke="#9CA3AF" />
+                <YAxis allowDecimals={false} fontSize={12} stroke="#9CA3AF" />
                 <Tooltip cursor={false} />
                 <Bar dataKey="value" fill="#5B21B6" radius={[4, 4, 0, 0]} />
               </BarChart>

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MutableRefObject } from 'react';
+import { MutableRefObject, useEffect } from 'react';
+import { publish } from '../../../utils/event';
 interface AddSocialsProps {
     isOpen: boolean;
     isCanRemove:boolean;
@@ -18,6 +19,14 @@ interface AddSocialsProps {
 
 const AddSocials: React.FC<AddSocialsProps> = ({ refEl,onTakePhoto,isCanRemove ,onRemove,onComplete}) => {
 
+    useEffect(() => {
+        publish("IncressFooter",{})
+        publish("profileIsReview",{})
+        return () => {
+            publish("profileIsProfile",{})
+            publish("DisIncressFooter",{})
+        }
+    },[])     
     const handleChooseFromLibrary = () => {
         // Programmatically trigger the file input click
         const fileInput = document.getElementById('file-input');

@@ -64,7 +64,7 @@ class Video {
 class VideoBox extends Box {
   constructor(protected title: string, public contents: Array<Video>) {
     super(title);
-    this.order = 3;
+    this.order = 9;
     this.type_name = "VideoBox";
   }
 

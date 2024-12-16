@@ -39,8 +39,8 @@ const AreaChartComponent: React.FC<Props> = ({ theme,data }) => {
                 }}
             >
               <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="name" strokeWidth="0px" fontSize={12} stroke="#9CA3AF" />
-              <YAxis width={70} fontSize={12} stroke="#9CA3AF" />
+              <XAxis dataKey="name" allowDecimals={false} strokeWidth="0px" fontSize={12} stroke="#9CA3AF" />
+              <YAxis width={70} allowDecimals={false} fontSize={12} stroke="#9CA3AF" />
               <Tooltip />
               <Area type="monotone" dataKey="view" stroke="#6D28D9" opacity={0.5} fill="#6D28D9" />
             </AreaChart>

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Auth } from "../../../Api";
 import { useConstructor } from "../../../help";
 import parsePhoneNumberFromString from "libphonenumber-js";
+import { validationYup } from "../../../utils/validationYup";
 
 const validatePhoneNumber = (value:any) => {
   try {
@@ -26,8 +27,8 @@ const validatePhoneNumber = (value:any) => {
   }
 }; 
 const validationSchema = Yup.object().shape({
-job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
-company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
+job:validationYup("job"),
+company:validationYup("company"),
 phone:Yup.string().test(
   "isValidPhoneNumber",
   "Invalid phone number for the selected country.",
