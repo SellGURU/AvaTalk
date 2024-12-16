@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class Box {
     protected static boxCounter:number = 0
-    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'VideoBox'|'GoogleMapBox' | 'FileBox' = 'Box'
+    protected type_name:'Box'|'SocialBox'|'LinkBox'|'AboutBox'|'MeetingBox'|'GalleryBox'|'VideoBox'|'AddressBox' | 'FileBox' = 'Box'
     protected order:number = -1;
 
     constructor(protected title:string){}
@@ -24,12 +24,7 @@ class Box {
         this.order =order
     }
     public getTypeName() {
-        if(this.type_name !='GoogleMapBox'){
-            return this.type_name
-        }
-        else {
-            return 'AddressBox'
-        }
+        return this.type_name
     }
 
     public getCardName() {
@@ -44,7 +39,7 @@ class Box {
             case 'FileBox': return 'more_info_files'
             case 'SocialBox': return 'more_info_socials'
             case 'LinkBox': return 'more_info_links'
-            case 'GoogleMapBox': return 'more_info_google_map'
+            case 'AddressBox': return 'more_info_google_map'
             default: return ''
         }
     }
