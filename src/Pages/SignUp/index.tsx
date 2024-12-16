@@ -4,10 +4,11 @@ import {BissinesCard, Splash, TextField} from "../../Components";
 import { Button } from "symphony-ui";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Box } from "../../Model";
 import { Auth } from "../../Api";
 import { AuthContext } from "../../store/auth-context";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useConstructor } from "../../help";
+import { useConstructor ,boxProvider} from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -54,7 +55,6 @@ const SignUp = () => {
             });
             // console.log(userInfo)
             userInfo.then((value) => {
-                console.log(value)
                 Auth.check_user_existence({
                     google_json:value.data,
                 }).then(res => {
@@ -65,7 +65,47 @@ const SignUp = () => {
                         authContext.setReferalCode(parametr.get("referral") as string)                        
                         navigate('/createAccount')
                     }else {
-                        toast.error("user exist")
+                        Auth.loginWithGoogle(
+                        {
+                            google_json:value.data
+                        },
+                        ).then((res) => {
+                        authContext.setReferalCode(parametr.get("referral") as string)
+                        if(res.data.access_token){
+                            localStorage.setItem("token",res.data.access_token)
+                            authContext.login(res.data.access_token)
+                            const resolveSocial: Array<Box> = [];
+                            Auth.showProfile((data) => {
+                                data.boxs.map((item:any) => {
+                                    const newBox = boxProvider(item);
+                                    resolveSocial.push(newBox);
+                                })
+                                authContext.currentUser.updateInformation({
+                                    firstName:data.information.first_name,
+                                    lastName:data.information.last_name,
+                                    phone:data.information.mobile_number,
+                                    personlEmail:data.information.email,
+                                    company:data.information.company_name,
+                                    unique_id:data.information.unique_id,
+                                    job:data.information.job_title,
+                                    banelImage:data.information.back_ground_pic,
+                                    imageurl:data.information.profile_pic,
+                                    location:{
+                                        lat:33,
+                                        lng:33
+                                    },
+                                    workEmail:data.information.work_email,
+                                    workPhone:data.information.work_mobile_number,
+                                    userId:data.information.created_userid
+                                })
+                                authContext.currentUser.setBox(resolveSocial)
+                                navigate("/?splash=true&signin_success=true");
+                            })                                                   
+                        }else{
+                            toast.error(res.data.error)
+                        }
+                        });                          
+                        // toast.error("user exist")
                     }
                 })
             })
