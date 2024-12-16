@@ -15,9 +15,29 @@ class Box {
     public getTitle() {
         return this.title
     }
-
+    private resolveMockOrder() {
+        switch(this.type_name){
+            case 'AboutBox':
+                return 1
+            case 'SocialBox':
+                return 2
+            case 'LinkBox':
+                return 3
+            case 'FileBox':
+                return 4
+            case 'MeetingBox':
+                return 5
+            case 'GalleryBox':
+                return 6
+            case 'AddressBox':
+                return 7
+            case 'VideoBox':
+                return 8
+        }
+        return 9
+    }
     public getOrder() {
-        return this.order
+        return this.resolveMockOrder()
     }
 
     public setOrder(order:number) {
