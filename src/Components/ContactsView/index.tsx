@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
 import { toast } from 'react-toastify';
 import ToggleButton from "../ToggleButton";
@@ -76,6 +76,14 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
     setContacts([])
     getContacts()
   })
+  useEffect(() => {
+    // Set the interval to call the function every 30 minutes (30 * 60 * 1000 ms)
+    const intervalId = setInterval(() => {
+      getContacts()
+    }, 20000);
+
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array ensures it runs once on mount  
   useConstructor(() => {
     Contacts.showTags((resolveTags) => {
       setTags(resolveTags.map((el) => {
@@ -138,7 +146,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   })
   return (
     <div className={`${theme}-ContactsView-Container  `}>
-      <Outlet></Outlet>
+      <Outlet context={{ getContacts }}></Outlet>
       <div className="flex w-full items-center relative justify-between mb-[22px] -mt-2 pr-6">
         <p className={`${theme}-ContactsView-contactText mb-0 `}>Contacts</p>
         <div ref={ButtonmoreModalRef}>

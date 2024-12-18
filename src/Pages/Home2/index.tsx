@@ -134,7 +134,7 @@ const Home2 = () => {
                 <Splash theme="Carbon"></Splash>
             :
             <>
-                <Outlet></Outlet>
+                <Outlet ></Outlet>
 
                 {showFooter ? 
                     <Footer activeItem={menu} onItemChange={(element) => {

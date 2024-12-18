@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Button } from "symphony-ui";
 import { useEffect, useRef, useState } from "react";
 import { Auth, Contacts } from "../../Api";
@@ -9,18 +9,21 @@ import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
 // import AddTagContact from "../__Modal__/AddTagContact";
-import { publish } from "../../utils/event";
+// import { publish } from "../../utils/event";
 // import AddTagContact from "../__Modal__/AddTagContact";
 import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
 import { TagPicker } from 'rsuite';
 import useModalAutoClose from "../../hooks/useModalAutoClose";
 import { TimeManegar } from "../../Model";
+type OutletContextType = {
+  getContacts: () => void;
+};
 
 const ContactDetails = ({ theme }: { theme: string }) => {
   // const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map(
   //   item => ({ label: item, value: item })
   // );
-
+  const { getContacts } = useOutletContext<OutletContextType>();
   const [showMore, setShowMore] = useState(false);
   const [contact, setContact] = useState<Contact>();
   const [isLoading, setIsLoading] = useState(false);
@@ -135,7 +138,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     }
     setContact({...contac} as Contact)
     Contacts.updateContact(contac as Contact)
-    publish('contactChange',{})
+    getContacts()
+    // publish('contactChange',{})
     // setShowEditContactModal(false)
   }
   const handleShowLess = () => {
@@ -237,7 +241,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                   const newContact = contact  as Contact
                   newContact.tags = selected
                   Contacts.updateContact(newContact)
-                  publish('contactChange',{})                  
+                  getContacts()
+                  // publish('contactChange',{})                  
                 }} data={tags.map((e) => {
                   return {
                     label:e.name,
@@ -371,7 +376,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         theme="Carbon"
         onDelete={() => {
           Contacts.deleteContact(contactId as string).then(() => {
-            publish('contactChange',{})
+            // publish('contactChange',{})
+            getContacts()
             navigate('/contacts')
           })
           setShowDeleteContactModal(false);

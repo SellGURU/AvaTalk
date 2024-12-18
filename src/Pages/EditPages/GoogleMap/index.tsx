@@ -37,7 +37,7 @@ const EditGoogleMap = () => {
   const [showAddLocation,setShowAddLocation] = useState(false)
   console.log(currentBox)
   if (!currentBox) {
-    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
+    currentBox = new GoogleMapBox("Address", { lan: 51.50, lat: 0.1276 },'',false);
   }
 
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
@@ -61,7 +61,12 @@ const EditGoogleMap = () => {
         lat: position[1],
       },formik.values.address,isLocation)
     );
-    navigate('/');
+    setTimeout(() => {
+      // publish('ForceReload',{})
+      auth.setNeedReload(true)
+      navigate('/?splash=false')
+    }, 200);
+    // navigate('/');
   };
   const [isGenerating,setIsGenerating] = useState(false)
   const handleSearch = useCallback(
@@ -82,7 +87,7 @@ const EditGoogleMap = () => {
   );
   useEffect(() => {
     handleSearch(formik.values.address);
-  }, [formik.values.address, handleSearch]);
+  }, [formik.values.address]);
   useEffect(() => {
     if(isGenerating == true){
       setTimeout(() => {
@@ -137,12 +142,25 @@ const EditGoogleMap = () => {
 
           <div onClick={() => {
             setShowAddLocation(true)
-          }} className='flex justify-end items-center'>
+          }} className='flex justify-end  gap-1 items-center'>
             <img src="./icons/location-add.svg" alt="" />
-            <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>Add Location on Map</div>
+            <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>{isLocation?'Change Location':'Add Location on Map'}</div>
 
           </div>
         </div> 
+        {
+            isLocation &&
+            <div className='w-full px-8 flex justify-end mt-2'>
+
+              <div onClick={() => {
+                setIsLocation(false)
+              }} className='flex justify-end gap-1 items-center'>
+                <img src="./icons/removeLocation.svg" alt="" />
+                <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>Remove Location</div>
+
+              </div>
+            </div>         
+        }
         {/* <div className="px-6 mt-3 mb-[50px] w-full h-[2rem] flex flex-col items-center justify-start">
           <TextField
             value={searchQuery}
@@ -177,7 +195,7 @@ const EditGoogleMap = () => {
           <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
             <LocationModal setAddress={(text:string) =>formik.setFieldValue("address",text) } setISLocation={setIsLocation} position={position} setPosition={setPosition} isOpen={true} onClose={() => {
               setShowAddLocation(false)
-              setIsGenerating(true)
+              setIsGenerating(true)         
               }} theme='Carbon'></LocationModal>
           </div>
           <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    

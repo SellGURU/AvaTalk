@@ -5,7 +5,7 @@ import { useConstructor } from "../../../help";
 import { Auth } from "../../../Api";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { RingLoader } from "react-spinners";
+import { BeatLoader, RingLoader } from "react-spinners";
 import { Button } from "symphony-ui";
 import CropperBox from "../../../Components/CropperBox";
 import { AddAvatar } from "../../../Components/__Modal__";
@@ -472,7 +472,7 @@ const EditAvater: React.FC = () => {
             </div>
               <div className="mt-8 mb-3  w-full">
               <Button
-                  disabled={formik.values.silent_video_avatar.length == 0}
+                  disabled={formik.values.silent_video_avatar.length == 0 || isLoading}
                   onClick={() =>{
                     setIsLoading(true)
                     setFirstLoading(true)
@@ -495,7 +495,13 @@ const EditAvater: React.FC = () => {
                   }}
                   theme="Carbon"
               >
-                  Save Changes
+                {isLoading ? 
+                <>
+                  <BeatLoader size={10} color="white"></BeatLoader>
+                </>
+                :
+                 'Save Changes'
+                }
               </Button>
               </div>
           </div>
