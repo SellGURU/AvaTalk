@@ -59,6 +59,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,us
           full_name:formik.values.fullName,
           phone:formik.values.phone,
           note:formik.values.note,
+          user_id:userId?userId:'',
           adding_method:'exchange'
         }).then(() => {
           toast.success("contact is exchanged")

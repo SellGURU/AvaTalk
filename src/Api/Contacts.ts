@@ -14,6 +14,7 @@ interface addContactData {
     company?: string,
     job_title?: string,
     note?: string,
+    user_id?:string,
     tag?: Array<string>,
     address?:string,
     adding_method?: string
