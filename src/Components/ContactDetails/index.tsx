@@ -9,7 +9,7 @@ import { getTextColorFromBackground, useConstructor } from "../../help";
 import { Contact, Tag } from "../../Types";
 import { BackIcon } from "..";
 // import AddTagContact from "../__Modal__/AddTagContact";
-import { publish } from "../../utils/event";
+// import { publish } from "../../utils/event";
 // import AddTagContact from "../__Modal__/AddTagContact";
 import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
 import { TagPicker } from 'rsuite';
@@ -135,7 +135,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
     }
     setContact({...contac} as Contact)
     Contacts.updateContact(contac as Contact)
-    publish('contactChange',{})
+    // publish('contactChange',{})
     // setShowEditContactModal(false)
   }
   const handleShowLess = () => {
@@ -237,7 +237,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                   const newContact = contact  as Contact
                   newContact.tags = selected
                   Contacts.updateContact(newContact)
-                  publish('contactChange',{})                  
+                  // publish('contactChange',{})                  
                 }} data={tags.map((e) => {
                   return {
                     label:e.name,
@@ -371,7 +371,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         theme="Carbon"
         onDelete={() => {
           Contacts.deleteContact(contactId as string).then(() => {
-            publish('contactChange',{})
+            // publish('contactChange',{})
             navigate('/contacts')
           })
           setShowDeleteContactModal(false);

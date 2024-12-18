@@ -23,6 +23,9 @@ class GoogleMapBox extends Box {
     public getISLocation () {
         return this.isLocation
     }
+    public setISLocation (action:boolean) {
+        this.isLocation  = action
+    }
     private openMap = () => {
         // publish("showGoogleMapModal",{value:this.location})
         // // Construct the Google Maps URL

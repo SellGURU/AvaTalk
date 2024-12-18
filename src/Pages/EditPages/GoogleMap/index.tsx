@@ -137,12 +137,25 @@ const EditGoogleMap = () => {
 
           <div onClick={() => {
             setShowAddLocation(true)
-          }} className='flex justify-end items-center'>
+          }} className='flex justify-end  gap-1 items-center'>
             <img src="./icons/location-add.svg" alt="" />
-            <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>Add Location on Map</div>
+            <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>{isLocation?'Change Location':'Add Location on Map'}</div>
 
           </div>
         </div> 
+        {
+            isLocation &&
+            <div className='w-full px-8 flex justify-end mt-2'>
+
+              <div onClick={() => {
+                setIsLocation(false)
+              }} className='flex justify-end gap-1 items-center'>
+                <img src="./icons/removeLocation.svg" alt="" />
+                <div className='text-[#06B6D4] text-[13px] cursor-pointer font-medium'>Remove Location</div>
+
+              </div>
+            </div>         
+        }
         {/* <div className="px-6 mt-3 mb-[50px] w-full h-[2rem] flex flex-col items-center justify-start">
           <TextField
             value={searchQuery}
@@ -177,7 +190,7 @@ const EditGoogleMap = () => {
           <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
             <LocationModal setAddress={(text:string) =>formik.setFieldValue("address",text) } setISLocation={setIsLocation} position={position} setPosition={setPosition} isOpen={true} onClose={() => {
               setShowAddLocation(false)
-              setIsGenerating(true)
+              setIsGenerating(true)         
               }} theme='Carbon'></LocationModal>
           </div>
           <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
