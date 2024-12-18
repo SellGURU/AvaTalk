@@ -95,7 +95,9 @@ const ChatDetails:React.FC<ChatDetailsProps> = ({theme}) => {
             </div>            
 
             <div className="flex flex-col gap-y-5 px-6 mt-[56px] hiddenScrollBar h-dvh overflow-y-scroll pb-[200px] pt-[32px]">
-              <div className="text-center mb-1">{TimeManegar.formatDateMonthName(new Date(currentChat[0]?.messages[0]?.date * 1000))}</div>
+              {currentChat.length>0 &&
+                <div className="text-center mb-1">{TimeManegar.formatDateMonthName(new Date(currentChat[0]?.messages[0]?.date * 1000))}</div>
+              }
               {currentChat.map((el) => {
                 return (
                   <>
