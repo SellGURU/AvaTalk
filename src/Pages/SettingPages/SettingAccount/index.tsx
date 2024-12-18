@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { Auth } from "../../../Api";
 import { removeTokenFromLocalStorage } from "../../../Storage/Token";
 import { Confirm } from "../../../Components/__Modal__";
-import { publish } from "../../../utils/event";
+// import { publish } from "../../../utils/event";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { validationYup } from "../../../utils/validationYup";
 
@@ -196,7 +196,7 @@ const SettingAccount =() => {
                             lastName:formik.values.lastname as string,
                             phone:formik.values.phone as string,
                         })
-                        publish("refreshPage",{})
+                        // publish("refreshPage",{})
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>
                 <div  className="mt-10 flex items-center ">
