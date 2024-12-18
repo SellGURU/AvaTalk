@@ -483,6 +483,7 @@ const EditAvater: React.FC = () => {
                       // publish("refreshPage",{})
                       // window.location.reload()
                       // publish('isLoading-stop',{})
+                      publish('isLoading-stop',{})
                       setTimeout(() => {
                         // publish('ForceReload',{})
                         context.setNeedReload(true)
