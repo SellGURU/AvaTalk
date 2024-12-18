@@ -34,12 +34,13 @@ class GoogleMapBox extends Box {
         window.open(googleMapUrl, "_blank"); // Opens in a new tab
     };
     private resolveAddresRender () {
-        if(this.address.length<=30){
-            return this.address
-        }
-        if(this.address.length>30){
-            return this.address.substring(0,30)+ '...'
-        }
+        return this.address
+        // if(this.address.length<=30){
+        //     return this.address
+        // }
+        // if(this.address.length>30){
+        //     return this.address.substring(0,30)+ '...'
+        // }
     }
     public resolveRender(theme: string): JSX.Element {
         
@@ -51,43 +52,40 @@ class GoogleMapBox extends Box {
                     
                         <div onClick={() =>{
                             this.openMap()
-                        }} className="w-full  flex cursor-pointer justify-start overflow-hidden gap-3 items-center px-4 bg-[#F3F4F6] borderBox-Gray h-[52px] rounded-[27px]" style={{
+                        }} className="w-full  flex cursor-pointer justify-start  gap-3 items-start px-4 bg-[#F3F4F6] py-3 borderBox-Gray min-h-[52px] rounded-[27px]" style={{
                             boxShadow:'4px 4px 20px 0px #886FB069'
                         }}>
-                            <div>
-                                <div className="w-6 h-6 borderBox-Gray rounded-[6px] flex justify-center items-center">
-                                    <div className="Carbon-ContactDetails-Vectors Carbon-ContactDetails-locationIcon Carbon-ContactDetails-ActiveVectors"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="text-[#6B7280] text-[12px] md:text-[14px]">
-                                    Current Location
-                                </div>
-                                <div className="text-[#374151] text-[12px] md:text-[14px] break-words font-medium">
-                                    {this.address.split(",").length >2 ?
-                                    <>
-                                        {this.address.split(",")[0]+" ,"+this.address.split(",")[1]}
-                                    </>
-                                    :
-                                    <>
+                            {
+                                this.isLocation &&
+                                    <div>
+                                        <div className="w-6 h-6 borderBox-Gray rounded-[6px] flex justify-center items-center">
+                                            <div className="Carbon-ContactDetails-Vectors Carbon-ContactDetails-locationIcon Carbon-ContactDetails-ActiveVectors"></div>
+                                        </div>
+                                    </div>
+
+                            }
+                            <div className="">
+
+                                <div className="text-[#374151] overflow-hidden flex-grow text-[12px] md:text-[14px] text-wrap break-words font-medium">
+
                                     {this.resolveAddresRender()}
-                                    </>
-                                    }
                                 </div>
                             </div>
                         </div>
-                        <div className="px-0 mt-3 w-full relative z-0 " onClick={() => {
-                            this.openMap()
-                        }}>
-                            <MapContainer dragging={false} zoomControl={false} touchZoom={false} scrollWheelZoom={false}  center={[this.location?.lan, this.location?.lat]} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
-                                <TileLayer
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                />
-                                <Marker position={[this.location?.lan, this.location?.lat]} />
-                                
-                            </MapContainer>
-                        </div>            
+                        {this.isLocation &&
+                            <div className="px-0 mt-3 w-full relative z-0 " onClick={() => {
+                                this.openMap()
+                            }}>
+                                <MapContainer dragging={false} zoomControl={false} touchZoom={false} scrollWheelZoom={false}  center={[this.location?.lan, this.location?.lat]} zoom={13} style={{ height: '250px', borderRadius: '27px' }}>
+                                    <TileLayer
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    />
+                                    <Marker position={[this.location?.lan, this.location?.lat]} />
+                                    
+                                </MapContainer>
+                            </div>            
+                        }
                     </>
                 }
             </div>            
