@@ -37,7 +37,7 @@ const EditGoogleMap = () => {
   const [showAddLocation,setShowAddLocation] = useState(false)
   console.log(currentBox)
   if (!currentBox) {
-    currentBox = new GoogleMapBox("Address", { lan: 33, lat: 33 },'',false);
+    currentBox = new GoogleMapBox("Address", { lan: 51.50, lat: 0.1276 },'',false);
   }
 
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
@@ -61,7 +61,12 @@ const EditGoogleMap = () => {
         lat: position[1],
       },formik.values.address,isLocation)
     );
-    navigate('/');
+    setTimeout(() => {
+      // publish('ForceReload',{})
+      auth.setNeedReload(true)
+      navigate('/?splash=false')
+    }, 200);
+    // navigate('/');
   };
   const [isGenerating,setIsGenerating] = useState(false)
   const handleSearch = useCallback(
@@ -82,7 +87,7 @@ const EditGoogleMap = () => {
   );
   useEffect(() => {
     handleSearch(formik.values.address);
-  }, [formik.values.address, handleSearch]);
+  }, [formik.values.address]);
   useEffect(() => {
     if(isGenerating == true){
       setTimeout(() => {

@@ -9,7 +9,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { GoogleMapBox } from "../../../Model";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { debounce } from 'lodash';
 import '../../../index.css';
 
@@ -43,7 +43,7 @@ const EditGoogleMap = () => {
       console.log(values);
     },
   });
-
+  const { getProfile } = useOutletContext<any>();
   const submit = () => {
     auth.currentUser.addBox(
       new GoogleMapBox(formik.values.title, {
@@ -51,7 +51,9 @@ const EditGoogleMap = () => {
         lat: position[1],
       },'')
     );
-    navigate('/');
+    getProfile()
+    // navigate('/');
+    navigate('/?splash=false')
   };
 
   const handleSearch = useCallback(
