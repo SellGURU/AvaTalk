@@ -120,6 +120,18 @@ const SignUp = () => {
     setTimeout(() => {
         setshowSplash(false)
     }, 3000);    
+    const resolveParameretrs = () => {
+        if(parametr.get("referral") && parametr.get("via")){
+        return '?via='+parametr.get("via")+"&referral="+parametr.get("referral")
+        }
+        if(parametr.get("referral")){
+        return "?referral="+parametr.get("referral")
+        }
+        if(parametr.get("via")){
+        return "?via="+parametr.get("via")
+        }    
+        return ''
+    }    
     useConstructor(() => {
         // localStorage.clear()
         console.log(parametr.get('via'))
@@ -262,7 +274,7 @@ const SignUp = () => {
                         </div>
                         <div className="mt-4">
                             <div className="text-sm text-center text-text-primary">Already have an account?<span onClick={() => {
-                                navigate('/login')
+                                navigate('/login'+resolveParameretrs())
                             }} className="text-[#06B6D4] cursor-pointer"> Log in</span></div>
                         </div>
 
