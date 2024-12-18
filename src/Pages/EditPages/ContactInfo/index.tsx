@@ -50,7 +50,7 @@ const EditContactInfo = () => {
     company:auth.currentUser.information?.company,
     personlEmail:auth.currentUser.information?.personlEmail,
     address :auth.currentUser.information?.address,
-    workEmail:auth.currentUser.information?.workEmail,
+    workEmail:auth.currentUser.information?.workEmail?auth.currentUser.information?.workEmail:"",
     phone:auth.currentUser.information?.phone,
     workPhone:auth.currentUser.information?.workPhone?auth.currentUser.information?.workPhone:''
   };    
