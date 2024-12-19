@@ -109,11 +109,14 @@ const EditContactInfo = () => {
       formik.setFieldValue("job",res.data.job_title)
       formik.setFieldValue("company",res.data.company_name)
       formik.setFieldValue("address",res.data.address)
-      setIcons([...icons,{name:"file",type:"image/png",url:res.data.logo}])
+      if(res.data.logo!= null && res.data.logo!= ""){
+        setIcons([...icons,{name:"file",type:"image/png",url:res.data.logo}])
+      }
       // setPointVals([[res.data.location.lat,res.data.location.lng]])
     })
   })
   const checkFile = (files:any) => {
+    console.log(files)
     return Auth.checkLogo(files[0].url).then(() => {
       setIcons(files)
     }).catch(() => {
