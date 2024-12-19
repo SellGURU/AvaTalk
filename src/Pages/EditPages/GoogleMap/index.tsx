@@ -61,12 +61,12 @@ const EditGoogleMap = () => {
         lat: position[1],
       },formik.values.address,isLocation)
     );
-    setTimeout(() => {
-      // publish('ForceReload',{})
-      auth.setNeedReload(true)
-      navigate('/?splash=false')
-    }, 200);
-    // navigate('/');
+    // setTimeout(() => {
+    //   // publish('ForceReload',{})
+    //   auth.setNeedReload(true)
+    //   navigate('/?splash=false')
+    // }, 200);
+    navigate('/');
   };
   const [isGenerating,setIsGenerating] = useState(false)
   const handleSearch = useCallback(
