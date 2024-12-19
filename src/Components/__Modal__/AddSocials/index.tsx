@@ -19,7 +19,7 @@ const urlPatterns = {
   youtube: /^(https:\/\/(www\.)?youtube\.com\/|https:\/\/youtu\.be\/).+$/,
   linkedIn: /^https:\/\/(www\.)?linkedin\.com\/.+$/,
   instagram: /^https:\/\/(www\.)?instagram\.com\/.+$/,
-  twitter: /^https:\/\/(www\.)?twitter\.com\/.+$/,
+  twitter: /^https:\/\/(www\.)?(twitter\.com|x\.com)\/.+$/,
   facebook: /^https:\/\/(www\.)?facebook\.com\/.+$/,
   telegram: /^(https:\/\/t\.me\/([a-zA-Z0-9_]{5,32})|https:\/\/t\.me\/joinchat\/[a-zA-Z0-9_-]+)$/,
 };
