@@ -10,6 +10,15 @@ class Link {
     constructor(protected url:string,protected name:string){
         this.id = `id-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`
     } 
+    private resolveFallBackImage = () => {
+        if(this.url.includes("rewardful")){
+            return './icons/www.rewardful.com'
+        }
+        if(this.url.includes("www.futurelearn.com")){
+            return './icons/www.futurelearn.com'
+        }
+        return './Carbon/globalLinksVector.svg'
+    }
     public resolveRender(theme:string,_userID:string) {
         return (
             <>
@@ -23,7 +32,10 @@ class Link {
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     {this.isValidURL() ?
-                        <img className="rounded-full" src={`https://logo.clearbit.com/${new URL(this.geturl()).hostname}`} alt="" />
+                        <img className="rounded-full" src={`https://logo.clearbit.com/${new URL(this.geturl()).hostname}`} onError={(e:any) => {
+                            e.target.onerror = null; // Prevent infinite loop in case fallback fails
+                            e.target.src = this.resolveFallBackImage(); // Set fallback image
+                        }} alt="" />
                     :
                     <div className={`${theme}-ContentCard-GlobalVector`}></div>
                     }
