@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "react-toastify";
 import { Box } from "../Model";
@@ -285,8 +286,8 @@ class Auth extends Api {
       content:box
     },{noPending:true})
   }  
-  static updateBox(allBoxs:Array<Box>){
-    this.post('/save_boxes',{box_data:allBoxs},{noPending:true})
+  static updateBox(_allBoxs:Array<Box>){
+    // this.post('/save_boxes',{box_data:allBoxs},{noPending:true})
   }
   ///
   static support(data: SupportData) {
