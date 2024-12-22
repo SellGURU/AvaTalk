@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ReadyForMore } from "../../../Components/__Modal__";
+import { NetworkError, ReadyForMore } from "../../../Components/__Modal__";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
 const validationSchema = Yup.object().shape({
@@ -37,6 +37,7 @@ const EditFile = () => {
     files: currentBox.getContents(),
   };
   const [isReadyTO, setIsReadyTo] = useState(false);
+  const [isNetworkerror,setISNetworkError] = useState(false)
   const formik = useFormik({
     initialValues: initialValue,
     validationSchema,
@@ -181,6 +182,9 @@ const EditFile = () => {
                   size: item.getSize(),
                 };
               })}
+              onNetwerkError={() => {
+                  setISNetworkError(true)
+              }}
               isChanged={isChanged}
               deleteUploadFile={removeFile}
               setIsChanged={setIsChanged}
@@ -253,6 +257,15 @@ const EditFile = () => {
             ></ReadyForMore>
           </div>
         )}
+          {isNetworkerror && (
+            <div className="fixed w-full left-0 bottom-0 flex justify-center">
+              <NetworkError
+                onClose={() => {
+                  setISNetworkError(false);
+                }}
+              ></NetworkError>
+            </div>
+          )}        
       </div>
     </>
   );
