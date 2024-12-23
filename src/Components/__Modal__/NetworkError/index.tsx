@@ -29,7 +29,7 @@ const NetworkError:React.FC<ReadyForMoreProps> = ({onClose}) => {
                             <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0"></div>
                         </Button>                    
                     </div>
-                    <div className="text-[14px] font-semibold text-text-primary">Oops! </div>
+                    <div className="text-[14px] font-semibold text-text-primary">File Size Limit Exceeded</div>
                     <div>
                         <Button onClick={() => {
                             publish("profileIsProfile",{})
@@ -47,7 +47,7 @@ const NetworkError:React.FC<ReadyForMoreProps> = ({onClose}) => {
                 <div className="px-5">
                     <Button onClick={() => {
                         onClose()
-                    }} theme="Carbon">Ok</Button>
+                    }} theme="Carbon">Got It</Button>
 
                 </div>                
             </div>
