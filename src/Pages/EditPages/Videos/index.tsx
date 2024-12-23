@@ -66,7 +66,7 @@ const EditVideos = () => {
   const [openaddlink, setOpenAddLink] = useState(false);
   const navigate = useNavigate();
   const submit = () => {
-    if (auth.currentUser.type_of_account.getType() === 'Free' && video.length > 1) {
+    if (auth.currentUser.type_of_account.getType() === 'Free' && video?.length > 1) {
       setIsReadyTo(true);
     } else {
       auth.currentUser.addBox(new VideoBox(formik.values.title, video));
@@ -89,12 +89,12 @@ const EditVideos = () => {
     }, 500);
   });
   useEffect(() => {
-    if (auth.currentUser.type_of_account.getType() == 'Free' && video.length >=1) {
+    if (auth.currentUser.type_of_account.getType() == 'Free' && video?.length >=1) {
       setLimiteMode("length");
     } else {
       setLimiteMode("defult");
     }
-  }, [video.length]);
+  }, [video?.length]);
 
   return (
     <>
@@ -122,7 +122,7 @@ const EditVideos = () => {
             ></TextField>
           </div>
 
-          {video.length == 0 ? (
+          {video?.length == 0 ? (
             <div className="mt-3 px-6">
               <TextField
                 theme="Carbon"
@@ -145,7 +145,7 @@ const EditVideos = () => {
                 >
                   Videos Links
                 </div>
-                {video.map((item: any, index) => {
+                {video?.map((item: any, index) => {
                   return (
                     <li
                       data-mame={item.getName()}
@@ -181,7 +181,7 @@ const EditVideos = () => {
                             </div>
                           </div>
                           <div className="flex justify-end gap-3 items-start">
-                            {video.length > 1 ? (
+                            {video?.length > 1 ? (
                               <div>
                                 {/* <div
                                   className={`Carbon-ContentCard-ArrowVector Carbon-ContentCard-MaskVector `}
@@ -231,7 +231,7 @@ const EditVideos = () => {
           <div className="px-6 mt-3">
             <Button
               onClick={() => {
-                if(auth.currentUser.type_of_account.getType() == 'Free' && video.length >= 1){
+                if(auth.currentUser.type_of_account.getType() == 'Free' && video?.length >= 1){
                   setLimiteMode("length")
                   setIsReadyTo(true)
                   // setOpenAddLink(!openaddlink)
