@@ -10,6 +10,6 @@ import ExchangeContact from "./ExchangeContact";
 import EnhanceModal from "./EnhanceModal";
 import ReadyForMore from "./ReadyForMore";
 import AddContactNew from "./AddContact/index2";
+import NetworkError from "./NetworkError";
 
-
-export { ReadyForMore,AddContactNew,AddSocials,Confirm,AddLink,AddAvatar,BookMark, AddContact, EditContact, DeleteContact, ExchangeContact,EnhanceModal };
+export { ReadyForMore,AddContactNew,NetworkError,AddSocials,Confirm,AddLink,AddAvatar,BookMark, AddContact, EditContact, DeleteContact, ExchangeContact,EnhanceModal };

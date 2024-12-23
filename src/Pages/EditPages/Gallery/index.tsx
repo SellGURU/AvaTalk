@@ -7,7 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { ReadyForMore } from "../../../Components/__Modal__";
+import { NetworkError, ReadyForMore } from "../../../Components/__Modal__";
 import {  useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
 
@@ -19,6 +19,7 @@ const EditGallery = () => {
   const auth = useAuth();
   const height = useWindowHeight();
   const navigate = useNavigate();
+  const [isNetworkerror,setISNetworkError] = useState(false)
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "GalleryBox"
   )[0] as GalleryBox;
@@ -141,7 +142,9 @@ const EditGallery = () => {
                 limite={5}
                 setIsChanged={setIsChanged}
                 isChanged={isChanged}
-                
+                onNetwerkError={() => {
+                  setISNetworkError(true)
+                }}
                 onClick={(e) => {
                   if (auth.currentUser.type_of_account.getType() == "Free") {
                     if (formik.values.files.length >=5 ) {
@@ -192,7 +195,15 @@ const EditGallery = () => {
               ></ReadyForMore>
             </div>
           )}
-
+          {isNetworkerror && (
+            <div className="fixed w-full left-0 bottom-0 flex justify-center">
+              <NetworkError
+                onClose={() => {
+                  setISNetworkError(false);
+                }}
+              ></NetworkError>
+            </div>
+          )}
         </div>
     </>
   );

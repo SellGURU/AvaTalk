@@ -18,11 +18,12 @@ type ImageUploadrProps = HtmlHTMLAttributes<HTMLDivElement> & {
   checkFile?:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
   deleteUploadFile?:(files:any) => Promise<any>
   onClick?:(e:any) => void
-  userMode?:'Free'|'Trial'|'Pro'
+  userMode?:'Free'|'Trial'|'Pro',
+  onNetwerkError?:() => void
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,setIsChanged,isChanged,deleteUploadFile,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
+const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError,setIsChanged,isChanged,deleteUploadFile,checkFile,children,onClick,label,limite ,userMode,theme,mod,uploades,value,accept, ...props }) => {
   const [isLoading,setisLoading] = useState(false);
   const [deletingLoding,setDeletingLoding] = useState(false);
   const [defeatedFiles,setDefeatedFiles] = useState<Array<any>>([]);
@@ -93,6 +94,7 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,setIsChanged,i
           setisLoading(false)         
             fileInputRef.current.value = "";    
         }).catch(() => {
+          onNetwerkError?onNetwerkError():undefined
           setDefeatedFiles([...base64Files])
         }).finally(() => {
           setisLoading(false)     
