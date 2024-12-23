@@ -17,7 +17,7 @@ const NetworkError:React.FC<ReadyForMoreProps> = ({onClose}) => {
 
     const resolveText = () => {
         return  `
-        Oops! The total size of your files is over 4.5 MB. Please try uploading smaller files or reduce their size and try again. Thanks!
+            Oops! The total size of your files exceeds 4.5 MB. Please choose smaller files or reduce their size and try again. Thanks!
         `        
     }
     return (
@@ -29,7 +29,7 @@ const NetworkError:React.FC<ReadyForMoreProps> = ({onClose}) => {
                             <div className="Carbon-Profile-closeIcon Carbon-Footer-Vectors m-0"></div>
                         </Button>                    
                     </div>
-                    <div className="text-[14px] font-semibold text-text-primary">File Size Limit Exceeded</div>
+                    <div className="text-[14px] font-semibold text-text-primary">Upload Limit Exceeded</div>
                     <div>
                         <Button onClick={() => {
                             publish("profileIsProfile",{})
