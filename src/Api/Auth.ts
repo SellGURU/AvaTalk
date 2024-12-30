@@ -377,6 +377,15 @@ class Auth extends Api {
     },{noPending:true})
     return response        
   }
+  static uploadFileOrGallery(box:any,onUploadProgress:(progressEvent:any) =>void) {
+    return this.post('/upload_content',box,{noPending:true,onUploadProgress:(progressEvent:any) => {
+        onUploadProgress(progressEvent)
+    }})
+  } 
+
+  static getContentsFile(id:string){
+    return this.post("/get_content",{content_id:id})
+  }
 }
 
 export default Auth;

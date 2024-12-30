@@ -68,27 +68,28 @@ const EditGallery = () => {
     }
   };
   const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {
-    const converted = files.map((item:any) => {
-      return {
-        original: item.url,
-        thumbnail: item.url,
-        name: item.name,
-        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
-      };
-    });      
-    if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
-      setIsReadyTo(true);
-      auth.currentUser.checkBox(
-        new GalleryBox(formik.values.title, converted,'upload'),
-        uploadProgress
-      );      
-      return new Promise((_resolve,reject)=>{
-        reject("")
-      })
-    }
+    const converted = {
+        type_name:'GalleryBox',
+        content:{
+          original: files.url,
+          thumbnail: files.url,
+          name: files.name,
+          sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+        }
+      }     
+    // if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
+    //   setIsReadyTo(true);
+    //   auth.currentUser.checkBox(
+    //     new GalleryBox(formik.values.title, converted,'upload'),
+    //     uploadProgress
+    //   );      
+    //   return new Promise((_resolve,reject)=>{
+    //     reject("")
+    //   })
+    // }
 
     return auth.currentUser.checkBox(
-      new GalleryBox(formik.values.title, converted,'upload'),
+      converted,
       uploadProgress
     );
   };  
@@ -164,6 +165,7 @@ const EditGallery = () => {
                   };
                 })}
                 uploades={(files: Array<any>) => {
+                  console.log(files)
                   const converted = files.map((item) => {
                     return {
                       original: item.url,

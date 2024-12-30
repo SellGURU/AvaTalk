@@ -167,9 +167,9 @@ class User {
         // this.syncToLocalStorage()
     }
 
-    public checkBox(newBox:Box,progress:(uploadProgress:any) =>void) {
+    public checkBox(uploadData:any,progress:(uploadProgress:any) =>void) {
         // console.log(newBox)
-        return Auth.checkBox(newBox,progress)
+        return Auth.uploadFileOrGallery(uploadData,progress)
     }
 
     public removeUploadBox(newBox:Box){
