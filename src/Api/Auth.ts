@@ -386,6 +386,10 @@ class Auth extends Api {
   static getContentsFile(id:string){
     return this.post("/get_content",{content_id:id})
   }
+
+  static deleteContentfile(id:string){
+    return this.post("/delete_content",{content_id:id})
+  }
 }
 
 export default Auth;

@@ -8,8 +8,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { NetworkError, ReadyForMore } from "../../../Components/__Modal__";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
+import { Auth } from "../../../Api";
+import UploadingFile from "../../../Components/uploadingFile";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string(),
@@ -27,6 +29,7 @@ const EditGallery = () => {
     currentBox = new GalleryBox("Gallery", []);
   }
   const [isReadyTO, setIsReadyTo] = useState(false);
+  
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -40,33 +43,62 @@ const EditGallery = () => {
   });
   const [isChanged,setIsChanged] = useState(false)
   const submit = () => {
-    if(isChanged){
-        if (auth.currentUser.type_of_account.getType() == "Free") {
-          if (formik.values.files.length > 5) {
-            setIsReadyTo(true);
-          } else {
-            auth.currentUser.addSaveBox(
-              new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
-              new GalleryBox(formik.values.title, [],'save')
-            );
-            navigate("/");
-          }
-        } else {
-          auth.currentUser.addSaveBox(
-            new GalleryBox(formik.values.title, formik.values.files,'save'),
-            new GalleryBox(formik.values.title, [],'save')
-          );
-          navigate("/");
-        }
-
+  // auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),'') )
+    if (auth.currentUser.type_of_account.getType() == "Free") {
+      if (formik.values.files.length > 5) {
+        setIsReadyTo(true);
+      }else {
+        auth.currentUser.addBox(
+          new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id).slice(0, 5),''),
+        );
+        navigate("/");        
+      }
     }else {
-      auth.currentUser.addSaveBox(
-        new GalleryBox(formik.values.title, formik.values.files,'save'),
-        new GalleryBox(formik.values.title, formik.values.files,'')
-      );      
-      navigate("/");
-    }
+      auth.currentUser.addBox(
+        new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),''),
+      );
+      navigate("/");      
+    }  
+  // if(isChanged){
+    //     if (auth.currentUser.type_of_account.getType() == "Free") {
+    //       if (formik.values.files.length > 5) {
+    //         setIsReadyTo(true);
+    //       } else {
+    //         auth.currentUser.addSaveBox(
+    //           new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
+    //           new GalleryBox(formik.values.title, [],'save')
+    //         );
+    //         navigate("/");
+    //       }
+    //     } else {
+    //       auth.currentUser.addSaveBox(
+    //         new GalleryBox(formik.values.title, formik.values.files,'save'),
+    //         new GalleryBox(formik.values.title, [],'save')
+    //       );
+    //       navigate("/");
+    //     }
+
+    // }else {
+    //   auth.currentUser.addSaveBox(
+    //     new GalleryBox(formik.values.title, formik.values.files,'save'),
+    //     new GalleryBox(formik.values.title, formik.values.files,'')
+    //   );      
+    //   navigate("/");
+    // }
   };
+  const resolveContent = async () => {
+      const filesids:any =currentBox.getContents();
+      const base64Images = await Promise.all(
+          filesids.map(async (fileId:any) => {
+          const data = await Auth.getContentsFile(fileId);
+          return {...data.data.content,id:fileId} ;
+          })
+      );
+      formik.setFieldValue("files",base64Images)
+  }   
+  useEffect(() => {
+    resolveContent()
+  },[])
   const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {
     const converted = {
         type_name:'GalleryBox',
@@ -94,17 +126,7 @@ const EditGallery = () => {
     );
   };  
   const deleteFile = (files:any) => {
-    const converted = files.map((item:any) => {
-      return {
-        original: item.url,
-        thumbnail: item.url,
-        name: item.name,
-        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
-      };
-    });      
-    return auth.currentUser.removeUploadBox(
-      new GalleryBox(formik.values.title, converted,'upload')
-    );
+    return Auth.deleteContentfile(files.id)
   }; 
   // useEffect(() => {
   //   checkFile()
@@ -138,7 +160,7 @@ const EditGallery = () => {
               ></TextField>
             </div>
             <div className="px-6 mt-3">
-              <ImageUploadr
+              {/* <ImageUploadr
                 accept="image/png, image/jpeg"
                 limite={5}
                 setIsChanged={setIsChanged}
@@ -158,19 +180,20 @@ const EditGallery = () => {
                 checkFile={checkFile}
                 uploadServer
                 userMode={auth.currentUser.type_of_account.getType()}
-                value={formik.values.files.map((item) => {
+                value={formik.values.files.map((item:any) => {
                   return {
                     url: item.original,
                     name: item.name ? item.name : "item",
+                    id:item.id
                   };
                 })}
                 uploades={(files: Array<any>) => {
-                  console.log(files)
                   const converted = files.map((item) => {
                     return {
                       original: item.url,
                       thumbnail: item.url,
                       name: item.name,
+                      id:item.id,
                       sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
                     };
                   });
@@ -179,7 +202,8 @@ const EditGallery = () => {
                 deleteUploadFile={deleteFile}
                 mod="files"
                 label="Upload Images"
-              ></ImageUploadr>
+              ></ImageUploadr> */}
+              <UploadingFile value={[]} label="Upload Images" theme="Carbon"></UploadingFile>
             </div>
             <div className="px-6 mt-10">
               <Button onClick={submit} theme="Carbon">

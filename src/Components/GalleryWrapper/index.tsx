@@ -12,8 +12,7 @@ const GalleryWrapper:React.FC<GalleryWrapperProps> =({contentsUp}) => {
     const theme = 'Carbon'
     const [contents,setContents] = useState<any>([])
     const resolveContent = async () => {
-        console.log(contentsUp)
-        const filesids:any =contentsUp.map(item => Object.values(item)[0]);
+        const filesids:any =contentsUp;
         const base64Images = await Promise.all(
             filesids.map(async (fileId:any) => {
             const data = await Auth.getContentsFile(fileId);

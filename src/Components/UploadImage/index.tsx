@@ -140,14 +140,15 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError
   const deleteFile = (index:number,complete?:() => void) => {
     const newArr = [...files]
     const deleteing = newArr.splice(index,1)
+    // console.log(deleteing)
     setProgress(0)
     setDeletingLoding(true)
     if(uploadServer) {
       setUploadingFiles([])
       // setDeleteingFiles(deleteing)
-      if(defeatedFiles && isChanged) {
+      if(defeatedFiles ) {
         deleteUploadFile?
-        deleteUploadFile(deleteing).then(() => {
+        deleteUploadFile(deleteing[0]).then(() => {
           setFiles([...newArr])
           if(uploades){
             if(mod == 'files'){
