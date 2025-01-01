@@ -17,26 +17,26 @@ class Video {
       return this.id
   }
   public resolveRender(_theme: string, userID: string) {
-    console.log("this.geturl() mkmk", this.geturl());
+    console.log("this.geturl() mkmk", this.geturlEmbeded());
 
     return (
       <div className={`w-full`}>
         <div
-          data-tooltip-id={"link" + this.geturl()}
-          data-tooltip-contents={this.geturl()}
+          data-tooltip-id={"link" + this.geturlEmbeded()}
+          data-tooltip-contents={this.geturlEmbeded()}
           onClick={() => this.handleMoreInfoClick(userID)}
         >
           <iframe
             className=" !rounded-xl"
             width="100%"
             height="315"
-            src={this.geturl()}
+            src={this.geturlEmbeded()}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
-        <Tooltip id={"link" + this.geturl()} />
+        <Tooltip id={"link" + this.geturlEmbeded()} />
       </div>
     );
   }
@@ -50,11 +50,15 @@ class Video {
   }
 
   public geturl() {
+    return this.url;
+  }
+  public geturlEmbeded() {
     // Extract the video ID from the original URL
     const videoId = this.url.split("v=")[1];
     // Construct the embed URL
-    return `https://www.youtube.com/embed/${videoId}`;
-  }
+    return `https://www.youtube.com/embed/${videoId}`;    
+    
+  }  
 
   public getName() {
     return this.name;
