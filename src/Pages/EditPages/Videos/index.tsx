@@ -264,6 +264,7 @@ const EditVideos = () => {
               setOpenAddLink(false);
             }}
             onComplete={(name: string, url: string) => {
+              console.log(url)
               formik.setFieldValue("url", url);
               formik.setFieldValue("name", name);
               addLink(name, url);
