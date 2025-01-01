@@ -53,13 +53,40 @@ class Video {
     return this.url;
   }
   public geturlEmbeded() {
-    // Extract the video ID from the original URL
-    const videoId = this.url.split("v=")[1];
-    // Construct the embed URL
-    return `https://www.youtube.com/embed/${videoId}`;    
+
+    return this.convertToEmbedLink(this.url)
     
   }  
+  private convertToEmbedLink = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      
+      // Check if it's a valid YouTube URL
+      if (urlObj.hostname !== 'www.youtube.com' && urlObj.hostname !== 'youtu.be') {
+        throw new Error('Invalid YouTube URL');
+      }
 
+      if (urlObj.hostname === 'youtu.be') {
+        // Handle shortened YouTube links
+        const videoId = urlObj.pathname.slice(1); // Get the video ID from the pathname
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+
+      // Handle standard YouTube links
+      const videoId = urlObj.searchParams.get('v');
+      if (!videoId) {
+        throw new Error('No video ID found in the URL');
+      }
+
+      // Check for playlist
+      const playlistId = urlObj.searchParams.get('list');
+      return playlistId
+        ? `https://www.youtube.com/embed/${videoId}?list=${playlistId}`
+        : `https://www.youtube.com/embed/${videoId}`;
+    } catch (error) {
+      return '';
+    }
+  };
   public getName() {
     return this.name;
   }
