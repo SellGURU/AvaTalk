@@ -17,26 +17,26 @@ class Video {
       return this.id
   }
   public resolveRender(_theme: string, userID: string) {
-    console.log("this.geturl() mkmk", this.geturl());
+    console.log("this.geturl() mkmk", this.geturlEmbeded());
 
     return (
       <div className={`w-full`}>
         <div
-          data-tooltip-id={"link" + this.geturl()}
-          data-tooltip-contents={this.geturl()}
+          data-tooltip-id={"link" + this.geturlEmbeded()}
+          data-tooltip-contents={this.geturlEmbeded()}
           onClick={() => this.handleMoreInfoClick(userID)}
         >
           <iframe
             className=" !rounded-xl"
             width="100%"
             height="315"
-            src={this.geturl()}
+            src={this.geturlEmbeded()}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
-        <Tooltip id={"link" + this.geturl()} />
+        <Tooltip id={"link" + this.geturlEmbeded()} />
       </div>
     );
   }
@@ -50,12 +50,55 @@ class Video {
   }
 
   public geturl() {
-    // Extract the video ID from the original URL
-    const videoId = this.url.split("v=")[1];
-    // Construct the embed URL
-    return `https://www.youtube.com/embed/${videoId}`;
+    return this.url;
   }
+  public geturlEmbeded() {
 
+    return this.convertToEmbedLink(this.url)
+    
+  }  
+  private convertToEmbedLink = (url: string): string => {
+  try {
+    const urlObj = new URL(url);
+
+    // Check if it's a valid YouTube URL
+    if (
+      urlObj.hostname !== 'www.youtube.com' &&
+      urlObj.hostname !== 'youtube.com' &&
+      urlObj.hostname !== 'youtu.be'
+    ) {
+      throw new Error('Invalid YouTube URL');
+    }
+
+    // Handle shortened YouTube links (youtu.be)
+    if (urlObj.hostname === 'youtu.be') {
+      const videoId = urlObj.pathname.slice(1); // Get the video ID from the pathname
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Handle standard YouTube video links (/watch?v=)
+    if (urlObj.pathname === '/watch') {
+      const videoId = urlObj.searchParams.get('v');
+      if (!videoId) {
+        throw new Error('No video ID found in the URL');
+      }
+      const playlistId = urlObj.searchParams.get('list');
+      return playlistId
+        ? `https://www.youtube.com/embed/${videoId}?list=${playlistId}`
+        : `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Handle YouTube Shorts links (/shorts/)
+    if (urlObj.pathname.startsWith('/shorts/')) {
+      const videoId = urlObj.pathname.split('/')[2]; // Extract the video ID
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    throw new Error('Unsupported YouTube URL format');
+  } catch (error) {
+    return '';
+  }
+  };
   public getName() {
     return this.name;
   }
@@ -86,6 +129,7 @@ class VideoBox extends Box {
         {this.contents?.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide
+              autoplay={false}  
               prevArrow={
                 <div
                   className={`${theme}-back-Button-container-box`}
