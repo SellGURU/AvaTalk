@@ -58,34 +58,46 @@ class Video {
     
   }  
   private convertToEmbedLink = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      
-      // Check if it's a valid YouTube URL
-      if (urlObj.hostname !== 'www.youtube.com' && urlObj.hostname !== 'youtu.be') {
-        throw new Error('Invalid YouTube URL');
-      }
+  try {
+    const urlObj = new URL(url);
 
-      if (urlObj.hostname === 'youtu.be') {
-        // Handle shortened YouTube links
-        const videoId = urlObj.pathname.slice(1); // Get the video ID from the pathname
-        return `https://www.youtube.com/embed/${videoId}`;
-      }
+    // Check if it's a valid YouTube URL
+    if (
+      urlObj.hostname !== 'www.youtube.com' &&
+      urlObj.hostname !== 'youtube.com' &&
+      urlObj.hostname !== 'youtu.be'
+    ) {
+      throw new Error('Invalid YouTube URL');
+    }
 
-      // Handle standard YouTube links
+    // Handle shortened YouTube links (youtu.be)
+    if (urlObj.hostname === 'youtu.be') {
+      const videoId = urlObj.pathname.slice(1); // Get the video ID from the pathname
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Handle standard YouTube video links (/watch?v=)
+    if (urlObj.pathname === '/watch') {
       const videoId = urlObj.searchParams.get('v');
       if (!videoId) {
         throw new Error('No video ID found in the URL');
       }
-
-      // Check for playlist
       const playlistId = urlObj.searchParams.get('list');
       return playlistId
         ? `https://www.youtube.com/embed/${videoId}?list=${playlistId}`
         : `https://www.youtube.com/embed/${videoId}`;
-    } catch (error) {
-      return '';
     }
+
+    // Handle YouTube Shorts links (/shorts/)
+    if (urlObj.pathname.startsWith('/shorts/')) {
+      const videoId = urlObj.pathname.split('/')[2]; // Extract the video ID
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    throw new Error('Unsupported YouTube URL format');
+  } catch (error) {
+    return '';
+  }
   };
   public getName() {
     return this.name;
@@ -117,6 +129,7 @@ class VideoBox extends Box {
         {this.contents?.length > 0 ? (
           <div className={`${theme}-Profile-Vectors hiram tstst`}>
             <Slide
+              autoplay={false}  
               prevArrow={
                 <div
                   className={`${theme}-back-Button-container-box`}
