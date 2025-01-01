@@ -203,7 +203,29 @@ const EditGallery = () => {
                 mod="files"
                 label="Upload Images"
               ></ImageUploadr> */}
-              <UploadingFile value={[]} label="Upload Images" theme="Carbon"></UploadingFile>
+              <UploadingFile 
+                deleteUploadFile={deleteFile}
+                value={formik.values.files.map((item:any) => {
+                  return {
+                    url: item.original,
+                    name: item.name ? item.name : "item",
+                    id:item.id
+                  };
+                })} 
+                uploades={(files: Array<any>) => {
+                  const converted = files.map((item) => {
+                    return {
+                      original: item.url,
+                      thumbnail: item.url,
+                      name: item.name,
+                      id:item.id,
+                      sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+                    };
+                  });
+                  console.log(converted)
+                  formik.setFieldValue("files", converted);
+                }}                
+                accept="image/png, image/jpeg" checkFile={checkFile}  label="Upload Images" theme="Carbon"></UploadingFile>
             </div>
             <div className="px-6 mt-10">
               <Button onClick={submit} theme="Carbon">

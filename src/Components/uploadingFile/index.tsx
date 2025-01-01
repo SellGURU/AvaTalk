@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UploadBox from "./UploadBox";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -8,10 +8,12 @@ interface UploadingFileProps {
     value:Array<any>
     accept?:string
     onClick?:() => void
+    uploades?: (files:Array<any>) => void
+    checkFile:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
+    deleteUploadFile:(file:any) => Promise<any>
 }
 
-const UploadingFile:React.FC<UploadingFileProps> = ({theme,onClick,value,accept,label,...props}) => {
-    const [files,setFiles] = useState<Array<any>>(value);
+const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uploades,checkFile,onClick,value,accept,label,...props}) => {
     const [uploadinFile,setUploading] = useState<Array<any>>([])
     const [isLoading,setisLoading] = useState(false);
     const fileInputRef = useRef<any>(null);
@@ -35,9 +37,14 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,onClick,value,accept,
         const fileArray = Array.from(newfiles);
         const base64Promises = fileArray.map((file:any) => convertToBase64(file));
         Promise.all(base64Promises).then((base64Files:any) => {
-            setUploading([...base64Files])
+            setUploading((pre) => {
+                return  [...value,...base64Files]
+            })
         })
     }
+    useEffect(() => {
+        setUploading(value)
+    },[value])
     return(
         <>
         <div className="w-full text-left">
@@ -46,7 +53,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,onClick,value,accept,
             </label>           
             <div className={`${theme}-ImageUploader-container`} {...props}>
                 <div className={`${theme}-ImageUploader-uploadBox-container`}>
-                    <div className={`${theme}-ImageUploader-uploadBox-box  ${files.length >0 ? `${theme}-ImageUploader-uploadBox-fileExist`:undefined}`}>
+                    <div className={`${theme}-ImageUploader-uploadBox-box  ${value.length >0 ? `${theme}-ImageUploader-uploadBox-fileExist`:undefined}`}>
                         <div style={{
                             display:'flex',
                             justifyContent:'center',
@@ -70,7 +77,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,onClick,value,accept,
                                 </div>
                             </div>
                         </div>
-                        <input ref={fileInputRef} onClick={onClick} disabled={isLoading }  onChange={(res:any) => {
+                        <input ref={fileInputRef} onClick={onClick}   onChange={(res:any) => {
                             setisLoading(true)
                             // setUploading(res.target.files)
                             startUplod(res.target.files)
@@ -84,19 +91,71 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,onClick,value,accept,
                     </div>                    
                 </div>
                 <div>
-                    <div className={`${theme}-ImageUploader-itemList-titleBox`}>
-                    Uploaded    
-                    </div>
+                    {
+                        (value.length >0 || uploadinFile.length >0)
+                        &&
+                        <div className={`${theme}-ImageUploader-itemList-titleBox`}>
+                            Uploaded    
+                        </div>
+
+                    }
                     <div className={`${theme}-ImageUploader-itemList-items`}>
                         {
                             uploadinFile.map((el,index) => {
                                 return (
                                     <>
-                                     <UploadBox item={el} index={index} deleteFile={() =>{}}></UploadBox>
+                                     <UploadBox
+                                        onDeleted={() => {
+                                        if(uploades){
+                                            setUploading((pre) => {
+                                                const newArr = [...pre]
+                                                newArr.splice(index,1)
+                                                uploades( [...newArr])
+                                                return newArr
+                                            })
+                                        }                                        
+                                     }}                                      
+                                      isCompleted={el.id} onCompleted={(uploded) => {
+                                        fileInputRef.current.value = "";  
+                                        setUploading((pre) => {
+                                            const newData =[...pre]
+                                            const element =  newData.map((val,inde) => {
+                                                if(inde == index) {
+                                                    return uploded
+                                                }else {
+                                                    return val
+                                                }
+                                            })
+                                            if(uploades){
+                                                uploades([...element.filter((value) =>value.id!=null)])
+                                            }
+                                            return element
+                                        })
+                                        }} checkFile={checkFile}  item={el} index={index} deleteFile={deleteUploadFile}></UploadBox>
                                     </>
                                 )
                             })
                         }
+                        {/* {
+                            value.map((el,index) => {
+                                return (
+                                    <>
+                                     <UploadBox
+                                     onDeleted={() => {
+                                        if(uploades){
+                                            const newArr = [...value]
+                                            newArr.splice(index,1)
+                                            console.log(newArr)
+                                            uploades([...newArr])
+                                        }
+                                     }}
+                                      onCompleted={() => {
+                                        fileInputRef.current.value = "";  
+                                     }} checkFile={checkFile} item={el} isCompleted index={index} deleteFile={deleteUploadFile}></UploadBox>
+                                    </>
+                                )
+                            })
+                        } */}
                     </div>
                 </div>              
             </div>    
