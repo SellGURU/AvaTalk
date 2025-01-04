@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
-import ImageUploadr from "../../../Components/UploadImage";
 import { GalleryBox } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
@@ -41,7 +40,6 @@ const EditGallery = () => {
       console.log(values);
     },
   });
-  const [isChanged,setIsChanged] = useState(false)
   const submit = () => {
   // auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),'') )
     if (auth.currentUser.type_of_account.getType() == "Free") {
@@ -49,15 +47,17 @@ const EditGallery = () => {
         setIsReadyTo(true);
       }else {
         auth.currentUser.addBox(
-          new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id).slice(0, 5),''),
+          new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id).slice(0, 5),''),
         );
         navigate("/");        
       }
     }else {
       auth.currentUser.addBox(
-        new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),''),
+        new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),''),
       );
-      navigate("/");      
+      setTimeout(() => {
+        navigate("/");      
+      }, 1000);
     }  
   // if(isChanged){
     //     if (auth.currentUser.type_of_account.getType() == "Free") {

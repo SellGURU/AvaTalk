@@ -8,25 +8,28 @@ interface UploadBoxProps {
     deleteFile:(file:any) => Promise<any>
     checkFile:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
     onCompleted:(file:any) => void
+    onFailed:(file:any) => void
     onDeleted:() => void
     isCompleted:boolean
+    isFailedFile?:boolean
 }
 
 const UploadBox:React.FC<UploadBoxProps> = ({
-    index,
     item,
     deleteFile,
+    onFailed,
     onDeleted,
     isCompleted,
     checkFile,
+    isFailedFile,
     onCompleted
 }) => {
     const [isDeleting,setIsdeleting] = useState(false)
     const theme = 'Carbon'
     const [isLoading,setISLoading] = useState(!isCompleted)
     const [progress,setProgress] = useState(0)
-    const [visible,setVisible] = useState(true)
-    const [isFailed,setISFailed] = useState(false)
+    const [visible] = useState(true)
+    const [isFailed,setISFailed] = useState(isFailedFile)
     useEffect(() => {
         if(!isCompleted && item.url){
                 checkFile(item,(progressEvent) =>{
@@ -54,6 +57,11 @@ const UploadBox:React.FC<UploadBoxProps> = ({
                 // fileInputRef.current.value = "";    
                 }).catch(() => {
                     setISFailed(true)
+                    // setVisible(false)
+                    // onDeleted()
+                    onFailed({
+                        ...item
+                    })
                 // onNetwerkError?onNetwerkError():undefined
                 // setDefeatedFiles([...base64Files])
                 }).finally(() => {
