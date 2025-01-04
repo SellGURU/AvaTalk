@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
-import ImageUploadr from "../../../Components/UploadImage";
+// import ImageUploadr from "../../../Components/UploadImage";
 import { FileBox, File } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NetworkError, ReadyForMore } from "../../../Components/__Modal__";
 import useWindowHeight from "../../../hooks/HightSvreen";
+import UploadingFile from "../../../Components/uploadingFile";
+import { Auth } from "../../../Api";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string(),
@@ -20,7 +22,6 @@ const EditFile = () => {
   const height = useWindowHeight();
   const [limiteMdoe, setLimiteMode] = useState("defualt");
   const navigate = useNavigate();
-  const [isChanged,setIsChanged] = useState(false)
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "FileBox"
   )[0] as FileBox;
@@ -30,7 +31,7 @@ const EditFile = () => {
   const [files, setFiles] = useState<Array<File>>(
     currentBox
       .getContents()
-      .map((item: File) => Object.assign(new File("", "", "", "0"), item))
+      .map((item: File) => Object.assign(new File("", "", "", "0",''), item))
   );
   const initialValue = {
     title: currentBox.getTitle(),
@@ -46,29 +47,24 @@ const EditFile = () => {
     },
   });
   const submit = () => {
-    if(isChanged) {
-      if (
-        (auth.currentUser.type_of_account.getType() == "Free" &&
-          formik.values.files.length > 1) ||
-        (auth.currentUser.type_of_account.getType() == "Free" &&
-          limiteMdoe == "fileSize")
-      ) {
+    if (auth.currentUser.type_of_account.getType() == "Free") {
+      if ((formik.values.files.length > 1) || limiteMdoe == "fileSize") {
         setIsReadyTo(true);
-      } else {
-        auth.currentUser.addSaveBox(
-          new FileBox(formik.values.title, formik.values.files,'save'),
-          new FileBox(formik.values.title, [],'save')
+      }else {
+        // new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id).slice(0, 5),''),
+        auth.currentUser.addBox(
+          new FileBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),'')
         );
-        navigate("/");
+        navigate("/");        
       }
-
     }else {
-        auth.currentUser.addSaveBox(
-          new FileBox(formik.values.title, formik.values.files,'save'),
-          new FileBox(formik.values.title, formik.values.files,'')
-        );      
-      navigate("/")
-    }
+      auth.currentUser.addBox(
+        new FileBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),''),
+      );
+      setTimeout(() => {
+        navigate("/");      
+      }, 1000);
+    }      
   };
   useEffect(() => {
     if(formik.values.files.length == 1&& auth.currentUser.type_of_account.getType() == "Free"){
@@ -93,53 +89,21 @@ const EditFile = () => {
       // setLimiteMode("defualt");
     }
   });
-  const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {  
-    const converted: Array<File> = files.map((item:any) => {
-      const newFile: File = new File(
-        item.url,
-        item.name,
-        item.type,
-        item.size
-      );
-      return newFile;
-    });    
-    if (
-      (auth.currentUser.type_of_account.getType() == "Free" &&
-        files.length > 1) ||
-      (auth.currentUser.type_of_account.getType() == "Free" &&
-        limiteMdoe == "fileSize")  
-    ) {
-      setIsReadyTo(true);
-      auth.currentUser.checkBox(
-        new FileBox(formik.values.title, converted,'upload'),
-        uploadProgress
-        // new GalleryBox(formik.values.title, converted,'upload')
-      );      
-      return new Promise((_resolve,reject)=>{
-        reject("")
-      })
-    }
-  
-    return auth.currentUser.checkBox(
-      new FileBox(formik.values.title, converted,'upload'),
-      uploadProgress
-      // new GalleryBox(formik.values.title, converted,'upload')
-    );
+  const deleteFile = (files:any) => {
+    return Auth.deleteContentfile(files.id)
   };   
 
-  const removeFile = (files:any) => {  
-    const converted: Array<File> = files.map((item:any) => {
-      const newFile: File = new File(
-        item.url,
-        item.name,
-        item.type,
-        item.size
-      );
-      return newFile;
-    });    
-  
-    return auth.currentUser.removeUploadBox(
-      new FileBox(formik.values.title, converted,'upload'),
+  const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {
+    console.log(files)
+    const converted = {
+        type_name:'FileBox',
+        content:{
+            ...files
+        }
+      }     
+    return auth.currentUser.checkBox(
+      converted,
+      uploadProgress
     );
   };    
   return (
@@ -172,7 +136,47 @@ const EditFile = () => {
             ></TextField>
           </div>
           <div className="px-6 mt-3">
-            <ImageUploadr
+              <UploadingFile 
+                deleteUploadFile={deleteFile}
+                value={formik.values.files.map((item:any) => {
+                  return {
+                    url: item.original,
+                    name: item.name ? item.name : "item",
+                    id:item.id
+                  };
+                })} 
+                uploades={(files: Array<any>) => {
+                  const selectedFiles = Array.from(files);
+                  const maxFileSize = 10 * 1024 * 1024; // 10 MB in bytes
+                  // Filter files based on size (<= 10 MB)
+                  const validFiles = selectedFiles.filter((file) => {
+                    if (file.size > maxFileSize) {
+                     // setIsReadyTo(true)
+                     setLimiteMode("fileSize");
+                    }
+                    // if(auth.currentUser.type_of_account.getType()=='Free'){
+                    //   return file.size <= maxFileSize
+                   // }
+                    return true;
+                  });
+                  if (validFiles.length >= 1) {
+                    setLimiteMode("length");
+                  }
+                  const converted: Array<File> = validFiles.map((item) => {
+                    const newFile: File = new File(
+                      item.url,
+                      item.name,
+                      item.type,
+                      item.size,
+                      item.id,
+                    );
+                   return newFile;
+                  });
+                  setFiles(converted);
+                  formik.setFieldValue("files", converted);                  
+                }}                
+                accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id" checkFile={checkFile}  label="Upload Files" theme="Carbon"></UploadingFile>            
+            {/* <ImageUploadr
               accept=".pdf, .doc, .docx, .xls, .xlsx, .pptx, .psd, .ai, .id"
               value={files.map((item) => {
                 return {
@@ -239,7 +243,7 @@ const EditFile = () => {
               }}
               mod="files"
               label="Upload Files"
-            ></ImageUploadr>
+            ></ImageUploadr> */}
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">

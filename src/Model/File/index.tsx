@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 // }
 export class File {
     public order:number = -1
-    constructor(protected url:string,protected name:string,protected type:string,protected size:string){
+    constructor(protected url:string,protected name:string,protected type:string,protected size:string,protected id:string){
 
     }
     private resolveSvg() {
@@ -144,7 +144,7 @@ class FileBox extends Box{
                     <>
                         <div className={`${theme}-Profile-Vectors`}>
                             {this.contents.sort((a,b) => a.order -b.order).map((item) => {
-                                const newSocal = Object.assign(new File('file','','',''),item)
+                                const newSocal = Object.assign(new File('file','','','',''),item)
                                 return (
                                     <>
                                         {newSocal.resolveRender(theme,options.userId)}
