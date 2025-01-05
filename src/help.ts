@@ -6,9 +6,10 @@ import { Chat } from "./Api";
 import { toast } from "react-toastify";
 
 const resolveMenuFromRoute = () => {
-  console.log(window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0])
+  // console.log(window.location.pathname)
+  // console.log(window.location.hash.replace("/", "").replace("?splash=false", "").split("/")[0])
   // console.log(window.location.hash.replace('#/','').split('/')[0])
-  switch (window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0]) {
+  switch (window.location.pathname.replace("/", "").replace("?splash=false", "").split("/")[0]) {
     case "":
       return "profile";
     case "edit":
@@ -28,7 +29,7 @@ const resolveMenuFromRoute = () => {
     case "analytics":
       return 'status';      
     default:
-      return window.location.hash.replace("#/", "").replace("?splash=false", "").split("/")[0];
+      return window.location.pathname.replace("/", "").replace("?splash=false", "").split("/")[0];
   }
 };
 const resolveNavigation = (item: MenuType, navigate: (route: string) => void) => {
