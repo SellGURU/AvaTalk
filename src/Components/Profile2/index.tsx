@@ -32,7 +32,7 @@ interface ProfileProps {
 }
 const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   const resolveMode = () => {
-    switch(window.location.hash.replace('#/','').split('/')[0]){
+    switch(window.location.pathname.replace('/','').split('/')[0]){
       case '' :return 'profile'
       case 'share' :return 'share'
       case 'A' :return 'share'
@@ -466,7 +466,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <Button onClick={() => {
                   setMode('review')
                   publish('profileIsReview',{})
-                  window.history.replaceState(null, "", "/#/?review=true")                
+                  window.history.replaceState(null, "", "/?review=true")                
                 }} theme="Carbon-Google" data-mode="profile-review-button-2">
                   <div className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors m-0`} ></div>
                 </Button>  
@@ -501,7 +501,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               <Button onClick={() => {
                   setMode('profile')
                   publish('profileIsProfile',{})
-                  window.history.replaceState(null, "", "/#/")             
+                  window.history.replaceState(null, "", "/")             
               }} theme="Carbon-Google" data-mode="profile-review-button-2">
                 <div className={`${theme}-Profile-closeIcon ${theme}-Footer-Vectors m-0`} ></div>
               </Button>   
@@ -796,8 +796,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {mode != 'profile' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length > 0
               ?
               <div className="w-full  pb-4  flex justify-start items-center">
-                <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
-                <div className=" leading-[15px] flex-grow text-justify  font-normal text-[10px]  sm:text-[13px]  ml-1 ">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="text-primary-color text-justify font-medium cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
+                <img onClick={() => {window.open('https://portal.avatalk.me/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
+                <div className=" leading-[15px] flex-grow text-justify  font-normal text-[10px]  sm:text-[13px]  ml-1 ">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/')}}  className="text-primary-color text-justify font-medium cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
               </div>
               // <div className=" flex px-5 py-6 flex-col gap-2 bg-white justify-start items-start text-xs w-full	">
               //     <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className="w-20 h-8 cursor-pointer" src="/Carbon/splashImage.svg" alt="logo" />
@@ -814,8 +814,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               {mode == 'review' && shareUser.boxs.filter((el) =>el.isShareAble() == true).length == 0
               ?
               <div className="w-full bg-white pb-4 text-justify flex justify-start items-center">
-                <img onClick={() => {window.open('https://portal.avatalk.me/#/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
-                <div className=" ml-1 font-normal text-[10px] sm:text-[13px] leading-[15px]">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/#/')}}  className="text-primary-color font-medium cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
+                <img onClick={() => {window.open('https://portal.avatalk.me/')}} className=" cursor-pointer" src="/icons/avatalk.svg" alt="logo" />
+                <div className=" ml-1 font-normal text-[10px] sm:text-[13px] leading-[15px]">Want your own <span onClick={() => {window.open('https://portal.avatalk.me/')}}  className="text-primary-color font-medium cursor-pointer">Avatalk</span>? Create your AI Avatar in less than 3 minutes!</div>
               </div>            
               :undefined}
               <div className=" bg-[#E2E8F0]  px-5 pt-3 pb-6 rounded-t-2xl">

@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import {  Login, Verification, Spinner, CreateAccount, Splash, Dev, Edit, EditAbout, Setting, Share, Home2, SignUp, RegisterVerification, ForgetPassword, LinkedInCallback } from "../Pages";
 
 import ContactPage from "../Pages/ContactPage";
@@ -19,7 +19,7 @@ import {UserManual} from "../Pages/SettingPages/UserManual";
 import {FormPage} from "../Pages/SettingPages/form";
 import ChangePassowrd from "../Pages/ChangePassword/ChangePassword";
 import ManualView from "../Pages/SettingPages/UserManual/Manual/ManualView";
-const route = createHashRouter([
+const route = createBrowserRouter([
   {
     path: "/",
     element: <ProtectedRoute Component={Home2} />,
