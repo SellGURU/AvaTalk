@@ -46,6 +46,19 @@ const EditFile = () => {
       console.log(values);
     },
   });
+  const resolveContent = async () => {
+      const filesids:any =currentBox.getContents();
+      const base64Images = await Promise.all(
+          filesids.map(async (fileId:any) => {
+          const data = await Auth.getContentsFile(fileId);
+          return {...data.data.content,id:fileId} ;
+          })
+      );
+      formik.setFieldValue("files",base64Images)
+  }   
+  useEffect(() => {
+    resolveContent()
+  },[])  
   const submit = () => {
     if (auth.currentUser.type_of_account.getType() == "Free") {
       if ((formik.values.files.length > 1) || limiteMdoe == "fileSize") {

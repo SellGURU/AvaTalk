@@ -3,6 +3,7 @@
 import { Tooltip } from "react-tooltip"
 import { Box } from ".."
 import { Link } from "react-router-dom";
+import FileViewWrapper from "../../Components/FileViewWrapper";
 // import { Auth } from "../../Api";
 // interface File {
 //     name:string
@@ -139,24 +140,25 @@ class FileBox extends Box{
     }    
     public resolveRender(theme: string,mode?:string,options?:any): JSX.Element {
         return (
-            <div className={`${theme}-Profile-Vectors justify-start relative`}>
-                {this.contents.length > 0 ?
-                    <>
-                        <div className={`${theme}-Profile-Vectors`}>
-                            {this.contents.sort((a,b) => a.order -b.order).map((item) => {
-                                const newSocal = Object.assign(new File('file','','','',''),item)
-                                return (
-                                    <>
-                                        {newSocal.resolveRender(theme,options.userId)}
-                                    </>
-                                )
-                            })}
-                        </div>                         
-                    </>              
-                :
-                    this.resolveAddRender(theme,mode)
-                }
-            </div>            
+            <FileViewWrapper contentsUp={this.contents} resolveAddRender={() => this.resolveAddRender(theme,mode)} options={options}></FileViewWrapper>
+            // <div className={`${theme}-Profile-Vectors justify-start relative`}>
+            //     {this.contents.length > 0 ?
+            //         <>
+            //             <div className={`${theme}-Profile-Vectors`}>
+            //                 {this.contents.sort((a,b) => a.order -b.order).map((item) => {
+            //                     const newSocal = Object.assign(new File('file','','','',''),item)
+            //                     return (
+            //                         <>
+            //                             {newSocal.resolveRender(theme,options.userId)}
+            //                         </>
+            //                     )
+            //                 })}
+            //             </div>                         
+            //         </>              
+            //     :
+            //         this.resolveAddRender(theme,mode)
+            //     }
+            // </div>            
         )
     }
 
