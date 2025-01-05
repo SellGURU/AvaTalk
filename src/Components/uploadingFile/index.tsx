@@ -38,7 +38,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uplo
         const fileArray = Array.from(newfiles);
         const base64Promises = fileArray.map((file:any) => convertToBase64(file));
         Promise.all(base64Promises).then((base64Files:any) => {
-            setUploading((pre:any) => {
+            setUploading(() => {
                 return  [...value,...base64Files]
             })
         })
