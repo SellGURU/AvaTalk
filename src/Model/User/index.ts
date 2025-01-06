@@ -157,12 +157,12 @@ class User {
         localStorage.setItem('authUser',JSON.stringify(this))
     }
 
-    public addBox(newBox:Box) {
+    public addBox(newBox:Box,finaly?:() => void) {
         if(this.boxs.filter((item) => item.getTypeName() == newBox.getTypeName()).length > 0){
             this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
         }
         this.boxs.push(newBox)
-        Auth.addBox(newBox)
+        Auth.addBox(newBox,finaly)
         // toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }

@@ -260,13 +260,13 @@ class Auth extends Api {
     })
   }
   
-  static addBox(box:Box) {
+  static addBox(box:Box,finaly?:() => void) {
     this.post('/update_more_info',{
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    },{noPending:true}).then(res => {
-      console.log(res)
+    },{noPending:true}).finally(() => {
+      finaly?finaly():undefined
     })
   }
 

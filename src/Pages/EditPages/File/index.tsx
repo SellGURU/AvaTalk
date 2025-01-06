@@ -2,6 +2,7 @@
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
 // import ImageUploadr from "../../../Components/UploadImage";
+import { BeatLoader } from "react-spinners";
 import { FileBox, File } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
@@ -21,6 +22,7 @@ const EditFile = () => {
   const auth = useAuth();
   const height = useWindowHeight();
   const [limiteMdoe, setLimiteMode] = useState("defualt");
+  const [isLoading,setIsLaoding] = useState(false)
   const navigate = useNavigate();
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "FileBox"
@@ -65,18 +67,24 @@ const EditFile = () => {
         setIsReadyTo(true);
       }else {
         // new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id).slice(0, 5),''),
+        setIsLaoding(true)
         auth.currentUser.addBox(
           new FileBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),'')
-        );
-        navigate("/");        
+          ,() => {
+            setIsLaoding(false)
+            navigate("/");      
+          }
+        );  
       }
     }else {
+      setIsLaoding(true)
       auth.currentUser.addBox(
         new FileBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),''),
-      );
-      setTimeout(() => {
-        navigate("/");      
-      }, 1000);
+      () => {
+          setIsLaoding(false)
+          navigate("/");      
+      }    
+    );
     }      
   };
   useEffect(() => {
@@ -260,7 +268,11 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-10">
             <Button onClick={submit} theme="Carbon">
-              Save Changes
+                {isLoading ?
+                  <BeatLoader color="white" size={10}></BeatLoader>
+                :
+                'Save Changes'
+                }
             </Button>
           </div>
         </div>

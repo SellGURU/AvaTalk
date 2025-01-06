@@ -11,6 +11,7 @@ import {  useEffect, useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
 import { Auth } from "../../../Api";
 import UploadingFile from "../../../Components/uploadingFile";
+import { BeatLoader } from "react-spinners";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string(),
@@ -20,6 +21,7 @@ const EditGallery = () => {
   const auth = useAuth();
   const height = useWindowHeight();
   const navigate = useNavigate();
+  const [isLoading,setIsLaoding] = useState(false)
   const [isNetworkerror,setISNetworkError] = useState(false)
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "GalleryBox"
@@ -41,23 +43,28 @@ const EditGallery = () => {
     },
   });
   const submit = () => {
+    
   // auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),'') )
     if (auth.currentUser.type_of_account.getType() == "Free") {
       if (formik.values.files.length > 5) {
         setIsReadyTo(true);
       }else {
+        setIsLaoding(true)
         auth.currentUser.addBox(
           new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id).slice(0, 5),''),
-        );
-        navigate("/");        
+          () => {
+            setIsLaoding(false)
+            navigate("/");      
+          });   
       }
     }else {
+      setIsLaoding(true)
       auth.currentUser.addBox(
         new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),''),
-      );
-      setTimeout(() => {
-        navigate("/");      
-      }, 1000);
+      () => {
+          setIsLaoding(false)
+          navigate("/");      
+      });
     }  
   // if(isChanged){
     //     if (auth.currentUser.type_of_account.getType() == "Free") {
@@ -229,7 +236,11 @@ const EditGallery = () => {
             </div>
             <div className="px-6 mt-10">
               <Button onClick={submit} theme="Carbon">
-                Save Changes
+                {isLoading ?
+                  <BeatLoader color="white" size={10}></BeatLoader>
+                :
+                'Save Changes'
+                }
               </Button>
             </div>
           </div>

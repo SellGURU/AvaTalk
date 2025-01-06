@@ -34,7 +34,12 @@ const UploadBox:React.FC<UploadBoxProps> = ({
         if(!isCompleted && item.url){
                 checkFile(item,(progressEvent) =>{
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                setProgress(percentCompleted)
+                if(percentCompleted == 100){
+                    setProgress(99)
+                }
+                if(percentCompleted >0 && percentCompleted<100){
+                    setProgress(percentCompleted)
+                }
                 }).then((res) => {
                     // setVisible(false)
                     onCompleted({
