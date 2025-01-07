@@ -73,6 +73,7 @@ export default defineConfig({
           },
         workbox: {
             cleanupOutdatedCaches: false,
+            maximumFileSizeToCacheInBytes: 4 * 1024 * 1024, // Increase file size limit
             skipWaiting: true, // Forces the new service worker to activate immediately
             clientsClaim: true, // Takes control of clients without requiring a reload
         },             
