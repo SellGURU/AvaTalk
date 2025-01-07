@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
@@ -132,8 +133,11 @@ const EditGallery = () => {
       uploadProgress
     );
   };  
-  const deleteFile = (files:any) => {
-    return Auth.deleteContentfile(files.id)
+  const deleteFile = (_files:any) => {
+    return new Promise((resolve) => {
+      resolve("")
+    })
+    // return Auth.deleteContentfile(files.id)
   }; 
   // useEffect(() => {
   //   checkFile()
