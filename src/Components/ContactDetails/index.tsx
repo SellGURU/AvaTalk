@@ -95,9 +95,8 @@ const ContactDetails = ({ theme }: { theme: string }) => {
   });
 
   const handleEditContact = (updatedContactData: Contact) => {
-    setContact(updatedContactData);
+    
     // console.log(updatedContactData);
-    console.log(updatedContactData.tags)
     if (contactId) {
       Auth.editContact(
         contactId,
@@ -116,6 +115,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         },
         (res) => {
           console.log(res);
+          setContact(updatedContactData);
         }
       );
       // const contact2 = contact
@@ -276,7 +276,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
         ></div>
       </div>
       <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>
-        {contact.phone}
+        +{contact.phone}
       </p>
     </a>
   ) : undefined}
