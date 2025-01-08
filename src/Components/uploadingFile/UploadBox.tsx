@@ -16,7 +16,6 @@ interface UploadBoxProps {
 
 const UploadBox:React.FC<UploadBoxProps> = ({
     item,
-    deleteFile,
     onFailed,
     onDeleted,
     isCompleted,
@@ -111,11 +110,12 @@ const UploadBox:React.FC<UploadBoxProps> = ({
                 </>
                 :
                     <img className="w-4 h-4 cursor-pointer" onClick={() =>{
-                        setIsdeleting(true)    
-                        deleteFile(item).finally(() => {
-                            setIsdeleting(false)
-                            onDeleted()
-                        })
+                        setIsdeleting(true)  
+                         onDeleted()  
+                        // deleteFile(item).finally(() => {
+                        //     setIsdeleting(false)
+                        //     onDeleted()
+                        // })
                     } 
                 } src="./Carbon/trash2.svg" alt="" />
 
