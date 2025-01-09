@@ -100,7 +100,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uplo
                         </div>
 
                     }
-                    <div className={`${theme}-ImageUploader-itemList-items`}>
+                    <div id="uploadScroolbar" className={`${theme}-ImageUploader-itemList-items`}>
                         {
                             uploadinFile.map((el,index) => {
                                 return (
@@ -135,6 +135,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uplo
                                         })
                                         }} 
                                     onFailed={(uploded) => {
+                                         fileInputRef.current.value = "";  
                                         setFailedFiles((pre) => {
                                             return [...pre,uploded]
                                         })
@@ -180,6 +181,7 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uplo
                                         })
                                         }} 
                                     onFailed={(uploded) => {
+                                        fileInputRef.current.value = "";  
                                         setFailedFiles((pre) => {
                                             return [...pre,uploded]
                                         })

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { BeatLoader } from "react-spinners"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface UploadBoxProps {
@@ -23,7 +22,7 @@ const UploadBox:React.FC<UploadBoxProps> = ({
     isFailedFile,
     onCompleted
 }) => {
-    const [isDeleting,setIsdeleting] = useState(false)
+    // const [isDeleting,setIsdeleting] = useState(false)
     const theme = 'Carbon'
     const [isLoading,setISLoading] = useState(!isCompleted)
     const [progress,setProgress] = useState(0)
@@ -103,14 +102,8 @@ const UploadBox:React.FC<UploadBoxProps> = ({
                 <div className={`${theme}-ImageUploader-itemList-title`}>{item.name.substring(0,30)}</div>
                 {/* <div onClick={() => deleteFile(index)} className={`${theme}-ImageUploader-uploadBox-trashIcon`}>
                 </div> */}
-                {
-                isDeleting ?
-                <>
-                    <BeatLoader size={4} color="#5B21B6"></BeatLoader>
-                </>
-                :
                     <img className="w-4 h-4 cursor-pointer" onClick={() =>{
-                        setIsdeleting(true)  
+                        // setIsdeleting(true)  
                          onDeleted()  
                         // deleteFile(item).finally(() => {
                         //     setIsdeleting(false)
@@ -118,8 +111,6 @@ const UploadBox:React.FC<UploadBoxProps> = ({
                         // })
                     } 
                 } src="./Carbon/trash2.svg" alt="" />
-
-                }
             </div>           
             }
         </div>
