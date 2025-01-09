@@ -14,14 +14,14 @@ const Analytics: React.FC<Props> = ({ theme }) => {
   const context = useAuth()
   startDate.setMonth(startDate.getMonth() -1)
   const [day, setDay] = useState(() => {
-    const savedDates = localStorage.getItem("selectedDates");
-    if (savedDates) {
-      const { startDate, endDate } = JSON.parse(savedDates);
-      return {
-        startDate: new Date(startDate),
-        endDate: new Date(endDate),
-      };
-    }
+    // const savedDates = localStorage.getItem("selectedDates");
+    // if (savedDates) {
+    //   const { startDate, endDate } = JSON.parse(savedDates);
+    //   return {
+    //     startDate: new Date(startDate),
+    //     endDate: new Date(endDate),
+    //   };
+    // }
     return {
       startDate: startDate,
       endDate: new Date(),
