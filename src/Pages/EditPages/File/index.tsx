@@ -163,6 +163,33 @@ const EditFile = () => {
           </div>
           <div className="px-6 mt-3">
               <UploadingFile 
+                checkPermisiens={(newFiles) => {
+                  if 
+                    (auth.currentUser.type_of_account.getType() == "Free" &&
+                      formik.values.files.length + newFiles.length > 1)
+                  
+                  {
+                    setLimiteMode("length");
+                    setIsReadyTo(true);
+                    return false
+                  }     
+                  else {
+                    return true
+                  }
+                }}     
+                onClick={(e) => {
+                  if 
+                    (auth.currentUser.type_of_account.getType() == "Free" &&
+                      formik.values.files.length >= 1)
+                  
+                  {
+                    setLimiteMode("length");
+                    setIsReadyTo(true);
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}                         
                 deleteUploadFile={deleteFile}
                 value={formik.values.files.map((item:any) => {
                   return {

@@ -8,13 +8,14 @@ interface UploadingFileProps {
     label?:string
     value:Array<any>
     accept?:string
-    onClick?:() => void
+    onClick?:(e:any) => void
     uploades?: (files:Array<any>) => void
     checkFile:(files:any,uploadProgress:(value:any)=>void) => Promise<any>
     deleteUploadFile:(file:any) => Promise<any>
+    checkPermisiens:(files:any) => boolean
 }
 
-const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uploades,checkFile,onClick,value,accept,label,...props}) => {
+const UploadingFile:React.FC<UploadingFileProps> = ({theme,checkPermisiens,deleteUploadFile,uploades,checkFile,onClick,value,accept,label,...props}) => {
     const [uploadinFile,setUploading] = useState<Array<any>>([])
     const [failedFiles,setFailedFiles] = useState<Array<any>>([])
     const fileInputRef = useRef<any>(null);
@@ -37,11 +38,15 @@ const UploadingFile:React.FC<UploadingFileProps> = ({theme,deleteUploadFile,uplo
     const startUplod = (newfiles:any) => {
         const fileArray = Array.from(newfiles);
         const base64Promises = fileArray.map((file:any) => convertToBase64(file));
-        Promise.all(base64Promises).then((base64Files:any) => {
-            setUploading(() => {
-                return  [...value,...base64Files]
+        if(checkPermisiens(base64Promises)){
+            Promise.all(base64Promises).then((base64Files:any) => {
+                setUploading(() => {
+                    return  [...value,...base64Files]
+                })
             })
-        })
+        }else {
+            fileInputRef.current.value = "";  
+        }
     }
     useEffect(() => {
         setUploading(value)

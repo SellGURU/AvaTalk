@@ -215,6 +215,15 @@ const EditGallery = () => {
                 label="Upload Images"
               ></ImageUploadr> */}
               <UploadingFile 
+                checkPermisiens={(newFiles) => {
+                  if (auth.currentUser.type_of_account.getType() == "Free") {
+                    if (formik.values.files.length + newFiles.length >5 ) {
+                      setIsReadyTo(true);
+                      return false
+                    }
+                  }         
+                  return true         
+                }}
                 deleteUploadFile={deleteFile}
                 value={formik.values.files.map((item:any) => {
                   return {
@@ -223,6 +232,15 @@ const EditGallery = () => {
                     id:item.id
                   };
                 })} 
+                onClick={(e) => {
+                  if (auth.currentUser.type_of_account.getType() == "Free") {
+                    if (formik.values.files.length >=5 ) {
+                      setIsReadyTo(true);
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }
+                  }
+                }}                
                 uploades={(files: Array<any>) => {
                   const converted = files.map((item) => {
                     return {
