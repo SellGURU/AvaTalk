@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, TextField } from "symphony-ui";
 import { AccessNotifManager, BackIcon } from "../../../Components";
-import ImageUploadr from "../../../Components/UploadImage";
 import { GalleryBox } from "../../../Model";
 import { useAuth } from "../../../hooks/useAuth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { NetworkError, ReadyForMore } from "../../../Components/__Modal__";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import useWindowHeight from "../../../hooks/HightSvreen";
+import { Auth } from "../../../Api";
+import UploadingFile from "../../../Components/uploadingFile";
+import { BeatLoader } from "react-spinners";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string(),
@@ -19,6 +22,7 @@ const EditGallery = () => {
   const auth = useAuth();
   const height = useWindowHeight();
   const navigate = useNavigate();
+  const [isLoading,setIsLaoding] = useState(false)
   const [isNetworkerror,setISNetworkError] = useState(false)
   let currentBox = auth.currentUser.boxs.filter(
     (item) => item.getTypeName() == "GalleryBox"
@@ -27,6 +31,7 @@ const EditGallery = () => {
     currentBox = new GalleryBox("Gallery", []);
   }
   const [isReadyTO, setIsReadyTo] = useState(false);
+  
   const initialValue = {
     title: currentBox.getTitle(),
     files: currentBox.getContents(),
@@ -38,72 +43,101 @@ const EditGallery = () => {
       console.log(values);
     },
   });
-  const [isChanged,setIsChanged] = useState(false)
   const submit = () => {
-    if(isChanged){
-        if (auth.currentUser.type_of_account.getType() == "Free") {
-          if (formik.values.files.length > 5) {
-            setIsReadyTo(true);
-          } else {
-            auth.currentUser.addSaveBox(
-              new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
-              new GalleryBox(formik.values.title, [],'save')
-            );
-            navigate("/");
-          }
-        } else {
-          auth.currentUser.addSaveBox(
-            new GalleryBox(formik.values.title, formik.values.files,'save'),
-            new GalleryBox(formik.values.title, [],'save')
-          );
-          navigate("/");
-        }
-
+    
+  // auth.currentUser.addBox(new GalleryBox(formik.values.title, formik.values.files.map((el:any) => el.id),'') )
+    if (auth.currentUser.type_of_account.getType() == "Free") {
+      if (formik.values.files.length > 5) {
+        setIsReadyTo(true);
+      }else {
+        setIsLaoding(true)
+        auth.currentUser.addBox(
+          new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id).slice(0, 5),''),
+          () => {
+            setIsLaoding(false)
+            navigate("/");      
+          });   
+      }
     }else {
-      auth.currentUser.addSaveBox(
-        new GalleryBox(formik.values.title, formik.values.files,'save'),
-        new GalleryBox(formik.values.title, formik.values.files,'')
-      );      
-      navigate("/");
-    }
+      setIsLaoding(true)
+      auth.currentUser.addBox(
+        new GalleryBox(formik.values.title, formik.values.files.filter((el:any) =>el.id != undefined).map((el:any) => el.id),''),
+      () => {
+          setIsLaoding(false)
+          navigate("/");      
+      });
+    }  
+  // if(isChanged){
+    //     if (auth.currentUser.type_of_account.getType() == "Free") {
+    //       if (formik.values.files.length > 5) {
+    //         setIsReadyTo(true);
+    //       } else {
+    //         auth.currentUser.addSaveBox(
+    //           new GalleryBox(formik.values.title, formik.values.files.slice(0, 5),'save'),
+    //           new GalleryBox(formik.values.title, [],'save')
+    //         );
+    //         navigate("/");
+    //       }
+    //     } else {
+    //       auth.currentUser.addSaveBox(
+    //         new GalleryBox(formik.values.title, formik.values.files,'save'),
+    //         new GalleryBox(formik.values.title, [],'save')
+    //       );
+    //       navigate("/");
+    //     }
+
+    // }else {
+    //   auth.currentUser.addSaveBox(
+    //     new GalleryBox(formik.values.title, formik.values.files,'save'),
+    //     new GalleryBox(formik.values.title, formik.values.files,'')
+    //   );      
+    //   navigate("/");
+    // }
   };
+  const resolveContent = async () => {
+      const filesids:any =currentBox.getContents();
+      const base64Images = await Promise.all(
+          filesids.map(async (fileId:any) => {
+          const data = await Auth.getContentsFile(fileId);
+          return {...data.data.content,id:fileId} ;
+          })
+      );
+      formik.setFieldValue("files",base64Images)
+  }   
+  useEffect(() => {
+    resolveContent()
+  },[])
   const checkFile = (files:any,uploadProgress:(progressEvent:any) =>void) => {
-    const converted = files.map((item:any) => {
-      return {
-        original: item.url,
-        thumbnail: item.url,
-        name: item.name,
-        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
-      };
-    });      
-    if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
-      setIsReadyTo(true);
-      auth.currentUser.checkBox(
-        new GalleryBox(formik.values.title, converted,'upload'),
-        uploadProgress
-      );      
-      return new Promise((_resolve,reject)=>{
-        reject("")
-      })
-    }
+    const converted = {
+        type_name:'GalleryBox',
+        content:{
+          original: files.url,
+          thumbnail: files.url,
+          name: files.name,
+          sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+        }
+      }     
+    // if (auth.currentUser.type_of_account.getType() == "Free" && files.length > 5) {
+    //   setIsReadyTo(true);
+    //   auth.currentUser.checkBox(
+    //     new GalleryBox(formik.values.title, converted,'upload'),
+    //     uploadProgress
+    //   );      
+    //   return new Promise((_resolve,reject)=>{
+    //     reject("")
+    //   })
+    // }
 
     return auth.currentUser.checkBox(
-      new GalleryBox(formik.values.title, converted,'upload'),
+      converted,
       uploadProgress
     );
   };  
-  const deleteFile = (files:any) => {
-    const converted = files.map((item:any) => {
-      return {
-        original: item.url,
-        thumbnail: item.url,
-        name: item.name,
-        sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
-      };
-    });      
-    return auth.currentUser.removeUploadBox(
-      new GalleryBox(formik.values.title, converted,'upload')
-    );
+  const deleteFile = (_files:any) => {
+    return new Promise((resolve) => {
+      resolve("")
+    })
+    // return Auth.deleteContentfile(files.id)
   }; 
   // useEffect(() => {
   //   checkFile()
@@ -137,7 +171,7 @@ const EditGallery = () => {
               ></TextField>
             </div>
             <div className="px-6 mt-3">
-              <ImageUploadr
+              {/* <ImageUploadr
                 accept="image/png, image/jpeg"
                 limite={5}
                 setIsChanged={setIsChanged}
@@ -157,10 +191,11 @@ const EditGallery = () => {
                 checkFile={checkFile}
                 uploadServer
                 userMode={auth.currentUser.type_of_account.getType()}
-                value={formik.values.files.map((item) => {
+                value={formik.values.files.map((item:any) => {
                   return {
                     url: item.original,
                     name: item.name ? item.name : "item",
+                    id:item.id
                   };
                 })}
                 uploades={(files: Array<any>) => {
@@ -169,6 +204,7 @@ const EditGallery = () => {
                       original: item.url,
                       thumbnail: item.url,
                       name: item.name,
+                      id:item.id,
                       sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
                     };
                   });
@@ -177,11 +213,56 @@ const EditGallery = () => {
                 deleteUploadFile={deleteFile}
                 mod="files"
                 label="Upload Images"
-              ></ImageUploadr>
+              ></ImageUploadr> */}
+              <UploadingFile 
+                checkPermisiens={(newFiles) => {
+                  if (auth.currentUser.type_of_account.getType() == "Free") {
+                    if (formik.values.files.length + newFiles.length >5 ) {
+                      setIsReadyTo(true);
+                      return false
+                    }
+                  }         
+                  return true         
+                }}
+                deleteUploadFile={deleteFile}
+                value={formik.values.files.map((item:any) => {
+                  return {
+                    url: item.original,
+                    name: item.name ? item.name : "item",
+                    id:item.id
+                  };
+                })} 
+                onClick={(e) => {
+                  if (auth.currentUser.type_of_account.getType() == "Free") {
+                    if (formik.values.files.length >=5 ) {
+                      setIsReadyTo(true);
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }
+                  }
+                }}                
+                uploades={(files: Array<any>) => {
+                  const converted = files.map((item) => {
+                    return {
+                      original: item.url,
+                      thumbnail: item.url,
+                      name: item.name,
+                      id:item.id,
+                      sizes: `(max-width: 710px) 120px,(max-width: 991px) 193px,278px`,
+                    };
+                  });
+                  console.log(converted)
+                  formik.setFieldValue("files", converted);
+                }}                
+                accept="image/png, image/jpeg" checkFile={checkFile}  label="Upload Images" theme="Carbon"></UploadingFile>
             </div>
             <div className="px-6 mt-10">
               <Button onClick={submit} theme="Carbon">
-                Save Changes
+                {isLoading ?
+                  <BeatLoader color="white" size={10}></BeatLoader>
+                :
+                'Save Changes'
+                }
               </Button>
             </div>
           </div>

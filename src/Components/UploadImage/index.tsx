@@ -69,6 +69,35 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError
         });
     }
   }
+  const checkOneFile = (oneFile:any) =>{
+    if(checkFile) {
+      checkFile(oneFile,(progressEvent) =>{
+         const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+         setProgress(percentCompleted)
+      }).then((res) => {
+        setFiles((pre) => {
+          return [...pre,{...oneFile,id:res.file_id}]
+        })
+        setIsChanged? setIsChanged(true):undefined
+        if(uploades){
+          if(mod == 'files'){
+            uploades([...files,{...oneFile,id:res.data.file_id}])
+          }else{
+            setFiles([{...oneFile,id:res.data.file_id}])              
+            uploades([{...oneFile,id:res.data.file_id}])              
+          }
+        }
+        setisLoading(false)         
+        fileInputRef.current.value = "";    
+      }).catch(() => {
+        onNetwerkError?onNetwerkError():undefined
+        // setDefeatedFiles([...base64Files])
+      }).finally(() => {
+        setisLoading(false)     
+        fileInputRef.current.value = "";  
+      })    
+    }
+  }
   const CheckUploadFiles = (newfiles:any) => {
     // console.log(newfiles)
     setProgress(0)
@@ -77,28 +106,8 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError
     Promise.all(base64Promises).then((base64Files:any) => {
       setUploadingFiles([...base64Files])
       checkFile?
-        checkFile([...files,...base64Files],(progressEvent) =>{
-           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-           setProgress(percentCompleted)
-        }).then(() => {
-          setFiles([...files,...base64Files])
-          setIsChanged? setIsChanged(true):undefined
-          if(uploades){
-            if(mod == 'files'){
-              uploades([...files,...base64Files])
-            }else{
-              setFiles([...base64Files])              
-              uploades([...base64Files])              
-            }
-          }
-          setisLoading(false)         
-            fileInputRef.current.value = "";    
-        }).catch(() => {
-          onNetwerkError?onNetwerkError():undefined
-          setDefeatedFiles([...base64Files])
-        }).finally(() => {
-          setisLoading(false)     
-          fileInputRef.current.value = "";  
+        base64Files.map((el:any) => {
+          checkOneFile(el)
         })
       :undefined
 
@@ -131,14 +140,15 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError
   const deleteFile = (index:number,complete?:() => void) => {
     const newArr = [...files]
     const deleteing = newArr.splice(index,1)
+    // console.log(deleteing)
     setProgress(0)
     setDeletingLoding(true)
     if(uploadServer) {
       setUploadingFiles([])
       // setDeleteingFiles(deleteing)
-      if(defeatedFiles && isChanged) {
+      if(defeatedFiles ) {
         deleteUploadFile?
-        deleteUploadFile(deleteing).then(() => {
+        deleteUploadFile(deleteing[0]).then(() => {
           setFiles([...newArr])
           if(uploades){
             if(mod == 'files'){

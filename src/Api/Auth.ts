@@ -260,13 +260,13 @@ class Auth extends Api {
     })
   }
   
-  static addBox(box:Box) {
+  static addBox(box:Box,finaly?:() => void) {
     this.post('/update_more_info',{
       title:box.getTitle(),
       type_name:box.getTypeName(),
       content:box
-    },{noPending:true}).then(res => {
-      console.log(res)
+    },{noPending:true}).finally(() => {
+      finaly?finaly():undefined
     })
   }
 
@@ -376,6 +376,19 @@ class Auth extends Api {
       logo:logo
     },{noPending:true})
     return response        
+  }
+  static uploadFileOrGallery(box:any,onUploadProgress:(progressEvent:any) =>void) {
+    return this.post('/upload_content',box,{noPending:true,onUploadProgress:(progressEvent:any) => {
+        onUploadProgress(progressEvent)
+    }})
+  } 
+
+  static getContentsFile(id:string){
+    return this.post("/get_content",{content_id:id})
+  }
+
+  static deleteContentfile(id:string){
+    return this.post("/delete_content",{content_id:id})
   }
 }
 

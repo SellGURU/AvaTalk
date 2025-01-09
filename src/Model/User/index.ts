@@ -157,19 +157,19 @@ class User {
         localStorage.setItem('authUser',JSON.stringify(this))
     }
 
-    public addBox(newBox:Box) {
+    public addBox(newBox:Box,finaly?:() => void) {
         if(this.boxs.filter((item) => item.getTypeName() == newBox.getTypeName()).length > 0){
             this.boxs.splice(this.boxs.findIndex((item) => item.getTypeName() == newBox.getTypeName()),1)
         }
         this.boxs.push(newBox)
-        Auth.addBox(newBox)
+        Auth.addBox(newBox,finaly)
         // toast.success("Done Successfully!")
         // this.syncToLocalStorage()
     }
 
-    public checkBox(newBox:Box,progress:(uploadProgress:any) =>void) {
+    public checkBox(uploadData:any,progress:(uploadProgress:any) =>void) {
         // console.log(newBox)
-        return Auth.checkBox(newBox,progress)
+        return Auth.uploadFileOrGallery(uploadData,progress)
     }
 
     public removeUploadBox(newBox:Box){
