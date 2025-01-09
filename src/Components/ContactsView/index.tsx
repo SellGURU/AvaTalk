@@ -27,6 +27,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [showAddTagModal, setShowAddTagModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [contactsCsv, setContactsCsv] = useState<Array<any>>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
   const [showMoreModal,setShowMoreModal] = useState(false);
@@ -68,8 +69,14 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
         }
       })
   }
+  const getContactsCsv = () => {
+    Contacts.getContactsCsvList().then((res) => {
+      setContactsCsv(res.data)
+    })
+  }
   useConstructor(() => {
     getContacts()
+    getContactsCsv()
   });
 
   subscribe('contactChange',() => {
@@ -111,6 +118,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
 
     setContacts([...contacts, formDataWithPhoto]);
     getContacts()
+    getContactsCsv()
   };
   // useConstructor(() => {
   //   setIsLoading(true);
@@ -165,13 +173,15 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
                   <div className="text-gray-700 ml-2">Scan Business Card</div>
                 </div>    */}
                 <div onClick={() => {
-                  const csv = generateCsv(csvConfig)(contacts.map((el) => {
+                  const csv = generateCsv(csvConfig)(contactsCsv.map((el) => {
                     return {
-                      name:el.fullName,
+                      name:el.full_name,
                       email:el.email,
                       phone:el.phone,
                       note:el.note,
-                      company:el.company,                      
+                      company:el.company,           
+                      address:el.address,
+                      job:el.job_title,           
                     }
                   }));
                   download(csvConfig)(csv)

@@ -83,6 +83,10 @@ class Contacts extends Api {
       const response =this.post('/update_contact',{state:false,created_contact_id:id})
       return response
     }
+
+    static getContactsCsvList() {
+      return this.post('/show_all_contacts_info',{},{noPending:true})
+    }
 }
 
 export default Contacts

@@ -68,7 +68,7 @@ const EditAvater: React.FC = () => {
       Auth.createAvatarVideo(photo).then((response) => {
           if(response.data == 'No face detected'){
             setIsLoading(false)
-            toast.dismiss()
+            // toast.dismiss()
             formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
             formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
           }else{
@@ -83,7 +83,7 @@ const EditAvater: React.FC = () => {
           }
       }).catch(() => {
         setIsLoading(false)
-        toast.dismiss()
+        // toast.dismiss()
         formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
         formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
              
@@ -539,7 +539,7 @@ const EditAvater: React.FC = () => {
               }              
               }).catch(() => {
                   setIsLoading(false)
-                  toast.dismiss()                 
+                  // toast.dismiss()                 
               }).finally(() => {
                 setIsLoading(false)
               });
