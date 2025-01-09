@@ -68,6 +68,15 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                         </div>
                     </div>
                     <div className="my-4 flex flex-col gap-5 font-medium text-sm">
+
+                    <a href={'https://portal.avatalk.me'+user?.resolveLink()}
+                    className={`${theme}-ContactDetails-container5`}>
+                    <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
+                        <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-avatalkIcon ${theme}-ContactDetails-ActiveVectors`}></div>
+                    </div>
+                    <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{'portal.avatalk.me'+user?.resolveLink()}</p>
+                    </a>
+                
                     {user?.information?.phone ?
                         <a      href={`tel:+${user?.information?.phone}`}
                         className={`${theme}-ContactDetails-container5`}>
@@ -118,7 +127,8 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                         </a>
                     :undefined}                                                                 
                     <Button onClick={() => {
-                        const socialProfiles:any ={}
+                        const socialProfiles:any ={
+                        }
                         if(socialsBox){
                             socialsBox.getSocialMedias().map((el:any) => {
                                 if(el.type =='LinkedIn'){
@@ -143,6 +153,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                             firstName: user.information?.firstName as string,
                             phone: user.information?.phone as string,
                             email: user.information?.personlEmail as string ,
+                            url:'https://portal.avatalk.me'+user?.resolveLink(),
                             company:user.information?.company as string,
                             address:user.information?.address as string,
                             job:user.information?.job as string,
