@@ -22,7 +22,7 @@ N:${contact.lastName};${contact.firstName}
 FN:${contact.firstName} ${contact.lastName}
 EMAIL:${contact.email}
 TEL:${contact.phone}
-URL:${contact.website}
+URL:${contact.url}
 ${contact.socialProfiles.twitter ? `URL:${contact.socialProfiles.twitter}` : ""}
 ${contact.socialProfiles.linkedin ? `URL:${contact.socialProfiles.linkedin}` : ""}
 ${contact.socialProfiles.instagram ? `URL:${contact.socialProfiles.instagram}` : ""}
