@@ -117,7 +117,7 @@ const EditContactInfo = () => {
   })
   const checkFile = (files:any) => {
     console.log(files)
-    return Auth.checkLogo(files[0].url).then(() => {
+    return Auth.checkLogo(files.url).then(() => {
       setIcons(files)
     }).catch(() => {
       setIcons([])
