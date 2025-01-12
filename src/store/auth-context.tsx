@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-undef */
 /* eslint-disable-next-line no-unused-vars*/
@@ -50,7 +51,7 @@ interface AuthContextProps {
   login: (token: string) => void;
   verificationHandler: (verification:VerificationProps) => void;
   siginupHandler:(siginup:any) =>void
-  logout: () => void;
+  logout: (isDeleteAccount?:boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -90,7 +91,7 @@ export const AuthContext = createContext<AuthContextProps>({
   login: () => {},
   prerecorded_voice:"",
   setPrerecorded_voice:() => {},
-  logout: () => {
+  logout: (_isDeleteAccount?:boolean) => {
     // Auth.logout()
     
     // localStorage.clear()
@@ -144,8 +145,10 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   })
   // const userIsLoggedIn = !!token && !!user.information;
 
-  function logoutHandler() {
-    Auth.logout()
+  function logoutHandler(isDeleteAccount?:boolean) {
+    if(!isDeleteAccount){
+      Auth.logout()
+    }
     setToken(null);
     // localStorage.removeItem("token");
     removeTokenFromLocalStorage();
