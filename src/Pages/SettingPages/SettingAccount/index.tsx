@@ -221,7 +221,7 @@ const SettingAccount =() => {
                         user_id:context.currentUser.information?.userId as string,
                         state:false
                     }).then(() => {
-                        context.logout()
+                        context.logout(true)
                         localStorage.clear()
                         removeTokenFromLocalStorage()
                         navigate('/login')
