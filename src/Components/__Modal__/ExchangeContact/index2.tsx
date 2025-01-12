@@ -69,10 +69,9 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,us
               sub_event_category:'view_link',
               userid:userId?userId:''
             })
-
           }
+          setStep(step+1)
         })        
-        setStep(step+1)
     }  
     const ShowProfileRef =useRef<HTMLDivElement>(null)
     useModalAutoClose({

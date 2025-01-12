@@ -66,7 +66,7 @@ class GoogleMapBox extends Box {
                             }
                             <div className="">
 
-                                <div className="text-[#374151] overflow-hidden flex-grow text-[12px] md:text-[14px] text-wrap break-words font-medium">
+                                <div className="text-[#374151] overflow-hidden flex-grow text-[12px] md:text-[14px] text-wrap break-words font-medium " style={{overflowWrap:'anywhere'}}>
 
                                     {this.resolveAddresRender()}
                                 </div>
