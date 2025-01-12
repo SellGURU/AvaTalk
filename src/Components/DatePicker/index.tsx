@@ -32,7 +32,9 @@ const DatePicker = ({ day, setDay }: any) => {
     <div  className="flex mt-4 relative items-center">
       <div
         onClick={() => {
-          document.getElementById("dataPicker")?.click();
+          if(isOpen){
+            document.getElementById("dataPicker")?.click();
+          }
           setisOpen(!isOpen);
         }}
         className={`h-[44px] ${
@@ -79,12 +81,7 @@ const DatePicker = ({ day, setDay }: any) => {
             
           </div>
           <div
-            ref={btnRef}
-            onClick={(e) => {
-              // document.getElementById("dataPicker")?.click();
-              e.stopPropagation();
-              // setisOpen(!isOpen);
-            }}
+            
             className={`Carbon-Card-Vector me-2 cursor-pointer transition-transform ${isOpen ? 'rotate-90' : '-rotate-90'} `}
           ></div>
         </div>
