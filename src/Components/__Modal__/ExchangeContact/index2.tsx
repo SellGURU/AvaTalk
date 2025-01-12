@@ -213,7 +213,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,us
                 <img className="ml-[-30px]" src="./icons/CardProf2.png" alt="" />
               </div>
               <div>
-                <div className="text-white text-[18px] font-semibold  text-center">{formik.values.fullName}</div>
+                <div className="text-white text-[18px] font-semibold overflow-hidden text-nowrap text-ellipsis  text-center">{formik.values.fullName}</div>
                 <div className="text-white text-[12px] font-medium opacity-85  text-center">Job Title/ Company</div>
               </div>
               <div className="w-full flex justify-center mt-4">
