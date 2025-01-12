@@ -74,6 +74,7 @@ const EditSocials = () => {
     navigate("/");
   };
   const addSocialRef = useRef(null)
+  const ButtonaddSocialRef = useRef(null)
   const deleteSocial = (index: number) => {
     const newArr = [...socials];
     newArr.splice(index, 1);
@@ -83,7 +84,8 @@ const EditSocials = () => {
     refrence:addSocialRef,
     close:() => {
       setOpenAddNewSocial(false)
-    }
+    },
+    buttonRefrence:ButtonaddSocialRef
   })
   // useEffect(() => {
   //   setTimeout(() => {
@@ -218,7 +220,9 @@ const EditSocials = () => {
             </Select>
           </div> */}
           <div className="mt-6  px-6">     
-            <Button disabled={socials.length >= 6} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+            <div ref={ButtonaddSocialRef}>
+              <Button disabled={socials.length >= 6} data-mode={openaddNewSocial?'openModal':'false'} onClick={() => setOpenAddNewSocial(!openaddNewSocial)} theme="Carbon-AddLink">Add Social</Button>
+            </div>
               <div className="relative">
                 {openaddNewSocial ?
                   <div ref={addSocialRef} className="bg-[#F3F4F6] w-full absolute boxShadow-Gray mt-1 rounded-b-[27px]">

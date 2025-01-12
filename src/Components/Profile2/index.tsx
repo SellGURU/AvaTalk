@@ -524,11 +524,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       //  console.log(authContext.currentUser.type_of_account.getType())    
                       if(shareUser.type_of_account.getType() == 'Free'){
                         setISMuted(true)
-                        Auth.sendEmail({
-                          "userid":shareUser.information?.userId,
-                          "guest_id":chats[1].chat_user,
-                          "alert_type":"unmute_chat"
-                        })
+
                         setAudioUrl(authContext.prerecorded_voice)
                         setPrisentMode('audio')
                         setIsTalking(true)
@@ -576,7 +572,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     <Button onClick={() => {
                       const video:HTMLVideoElement = document.getElementById('dragAbleAi2') as  HTMLVideoElement
   
-                      if(shareUser.type_of_account.getType() == 'Free'){
+                      if(shareUser.type_of_account.getType() == 'Free' && mode == 'share'){
                         setISMuted(true)
                         // console.log(chats)
                         Auth.sendEmail({

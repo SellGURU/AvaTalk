@@ -74,17 +74,17 @@ const ImageUploadr: React.FC<ImageUploadrProps> = ({ uploadServer,onNetwerkError
       checkFile(oneFile,(progressEvent) =>{
          const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
          setProgress(percentCompleted)
-      }).then((res) => {
+      }).then(() => {
         setFiles((pre) => {
-          return [...pre,{...oneFile,id:res.file_id}]
+          return [...pre,{...oneFile}]
         })
         setIsChanged? setIsChanged(true):undefined
         if(uploades){
           if(mod == 'files'){
-            uploades([...files,{...oneFile,id:res.data.file_id}])
+            uploades([...files,{...oneFile}])
           }else{
-            setFiles([{...oneFile,id:res.data.file_id}])              
-            uploades([{...oneFile,id:res.data.file_id}])              
+            setFiles([{...oneFile}])              
+            uploades([{...oneFile}])              
           }
         }
         setisLoading(false)         
