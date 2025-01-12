@@ -41,9 +41,9 @@ const DatePicker = ({ day, setDay }: any) => {
       >
         <div
           onClick={() => {
-            document.getElementById("dataPicker")?.click();
+            // document.getElementById("dataPicker")?.click();
             // setisOpen(true);
-            setisOpen(!isOpen);
+            // setisOpen(!isOpen);
           }}
           className="h-full flex items-center justify-between w-full px-2"
         >
@@ -81,9 +81,9 @@ const DatePicker = ({ day, setDay }: any) => {
           <div
             ref={btnRef}
             onClick={(e) => {
-              document.getElementById("dataPicker")?.click();
+              // document.getElementById("dataPicker")?.click();
               e.stopPropagation();
-              setisOpen(!isOpen);
+              // setisOpen(!isOpen);
             }}
             className={`Carbon-Card-Vector me-2 cursor-pointer transition-transform ${isOpen ? 'rotate-90' : '-rotate-90'} `}
           ></div>
