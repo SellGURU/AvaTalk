@@ -6,6 +6,7 @@ import { Button } from "symphony-ui";
 import { useAuth } from "../../../../hooks/useAuth";
 import * as Yup from "yup";
 import parsePhoneNumberFromString from "libphonenumber-js";
+import { Auth } from "../../../../Api";
 
 interface BusinessStepProps {
     onSubmit:() => void
@@ -56,6 +57,17 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
             
         }
     })    
+    const checkEmail = () => {
+        return Auth.check_user_existence({
+            code_type:'verification',
+            mobile_number:formik.values.phone
+        })
+    }
+    // useEffect(() => {
+    //     if(validatePhoneNumber(formik.values.phone) == true && formik.values.phone!=''){
+    //         checkEmail()
+    //     }
+    // },[formik.values.phone])
     return (
         <>
             <div className="mt-0">
@@ -110,13 +122,18 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                 <div className="mt-8">
                     <Button disabled={!formik.isValid} onClick={() => {
                         // console.log(formik.values.phone)
-                        context.siginupHandler({
-                            job:formik.values.job,
-                            company:formik.values.company,
-                            phone:formik.values.phone,
-                            email:resolveEmail()
-                        })             
-                        onSubmit()           
+                        checkEmail().then(() => {
+                            context.siginupHandler({
+                                job:formik.values.job,
+                                company:formik.values.company,
+                                phone:formik.values.phone,
+                                email:resolveEmail()
+                            })             
+                            onSubmit()           
+                        }).catch((err) => {
+                            console.log(err)
+                            formik.setFieldError("phone",err.detail)
+                        })
                     }}  theme="Carbon">Continue</Button>
                 </div>                                                         
             </div>
