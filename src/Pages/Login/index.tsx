@@ -279,7 +279,10 @@ const Login = () => {
           }else{
             toast.error(res.data.error)
           }
-        });    
+        }).catch(() => {
+            authContext.setGoogleInformation(userInfo.data)
+            navigate('/createAccount')
+          })  
         console.log('User Info:', userInfo.data);
       } catch (error) {
         console.error('Failed to fetch user info:', error);

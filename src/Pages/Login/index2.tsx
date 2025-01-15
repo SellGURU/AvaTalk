@@ -230,7 +230,13 @@ const Login = () => {
                               navigate("/register")
                             }
                           }
-                        });                          
+                        }).catch(() => {
+                          authContext.verificationHandler({
+                            emailOrPhone: prof?.email,
+                            googleJson:prof
+                          })
+                          navigate('/createAccount')
+                        })                     
                       }}
                       onError={() => {
                         console.log('Login Failed');
