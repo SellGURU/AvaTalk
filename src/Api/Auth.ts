@@ -49,7 +49,8 @@ interface SupportData {
 
 interface check_user_existenceProps {
   email?:string
-  mobileNumber?:string
+  // mobileNumber?:string
+  mobile_number?:string
   google_json?:any
   code_type?:"verification"|"reset"
 }
