@@ -11,11 +11,12 @@ interface FileViewWrapperProps {
 const FileViewWrapper:React.FC<FileViewWrapperProps> = ({contentsUp,options,resolveAddRender}) => {
     const theme = 'Carbon'
     const [contents,setContents] = useState<any>([])
+    const authUser = JSON.parse(localStorage.getItem("authUser") as string)
     const resolveContent = async () => {
         const filesids:any =contentsUp;
         const base64Images = await Promise.all(
             filesids.map(async (fileId:any) => {
-            const data = await Auth.getContentsFile(fileId);
+            const data = await Auth.getContentsFile(fileId,authUser.information.userId);
             return data.data.content ;
             })
         );

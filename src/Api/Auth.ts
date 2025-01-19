@@ -384,8 +384,8 @@ class Auth extends Api {
     }})
   } 
 
-  static getContentsFile(id:string){
-    return this.post("/get_content",{content_id:id})
+  static getContentsFile(id:string,userId?:string){
+    return this.post("/get_content",{content_id:id,userid:userId})
   }
 
   static deleteContentfile(id:string){

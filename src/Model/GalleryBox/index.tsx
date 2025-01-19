@@ -46,7 +46,7 @@ class GalleryBox extends Box{
             }} className={`${theme}-Profile-Vectors ${this.contents.length>0?'justify-center' :'justify-start'}  h-full`}>
                 {this.contents.length > 0 ?
                     <>
-                        <GalleryWrapper contentsUp={this.contents}></GalleryWrapper>
+                        <GalleryWrapper  contentsUp={this.contents}></GalleryWrapper>
              
                     </>
                 :
