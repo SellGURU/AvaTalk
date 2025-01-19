@@ -98,7 +98,7 @@ const EditGallery = () => {
       const filesids:any =currentBox.getContents();
       const base64Images = await Promise.all(
           filesids.map(async (fileId:any) => {
-          const data = await Auth.getContentsFile(fileId);
+          const data = await Auth.getContentsFile(fileId,auth?.currentUser?.information?.userId);
           return {...data.data.content,id:fileId} ;
           })
       );
