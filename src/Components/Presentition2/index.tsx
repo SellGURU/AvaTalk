@@ -96,6 +96,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
     const [isLoading,setIsLoading] = useState(false);
     const [isRecording,setIsRecording] = useState(false)  
     const [showSuggestions,setShowSuggestions] = useState(false);     
+    const [isVoceEnded,setIsVoceEnded] = useState(false)
     // const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
     // const [suggestionList,setSuggestionList] = useState(context.currentUser.sugesstions)   
@@ -119,6 +120,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         if(context.currentUser.type_of_account.getType() == 'Free' && mode == 'review'){
             setIsSilent?setIsSilent(true):undefined
         }
+        setIsVoceEnded(true)
         // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
     })
@@ -341,7 +343,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             </>
         }
         {
-            mode !="share" || chats.length >= 2
+            mode !="share" || isVoceEnded
             &&
                 <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
                     <AccessNotifManager  modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
