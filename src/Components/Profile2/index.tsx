@@ -552,7 +552,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-28 right-6 z-20">
                       <Button onClick={() => {
                         setIsTalking(false)
-                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                        window.open('https://ar-card-develop.vercel.app/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                       }} theme='Carbon-back'>
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button>              
@@ -595,7 +595,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-16 right-6 z-20">
                       <Button onClick={() => {
                         setIsTalking(false)
-                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                        window.open('https://ar-card-develop.vercel.app/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                       }} theme='Carbon-back'>
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button>              
@@ -616,7 +616,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <div className="absolute top-16 right-6 z-20">
                       <Button onClick={() => {
                         setIsTalking(false)
-                        window.open('https://ar.avatalk.me/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
+                        window.open('https://ar-card-develop.vercel.app/#detect7/?user='+shareUser.information?.unique_id+'&view='+mode)
                       }} theme='Carbon-back'>
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button>              
