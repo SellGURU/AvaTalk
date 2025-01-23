@@ -120,7 +120,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         if(context.currentUser.type_of_account.getType() == 'Free' && mode == 'review'){
             setIsSilent?setIsSilent(true):undefined
         }
-        setIsVoceEnded(true)
+        
+        if(chats.filter((cha) =>cha.from =='Ai').length >= 3){
+            setIsVoceEnded(true)
+        }
         // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
     })
