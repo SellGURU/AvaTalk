@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSX } from "react/jsx-runtime"
 import Box from "../Boxs"
-import { Auth } from "../../Api"
+// import { Auth } from "../../Api"
 
 type initialSocials = 'LinkedIn' | 'Instagram' | 'Facebook' | 'Twitter/ X' | 'Youtube' | 'Telegram'
 
