@@ -343,7 +343,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             </>
         }
         {
-            mode !="share" || isVoceEnded
+            mode !='share' || isVoceEnded
             &&
                 <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
                     <AccessNotifManager  modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
