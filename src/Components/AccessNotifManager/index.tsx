@@ -14,7 +14,6 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     const [showNotif,setShowNotif] = useState(false)
     const [isSkipped,setIsSkipped] = useState(false)
     const navigate = useNavigate()
-    console.log()
     useEffect(() => {
         // if(authContext.currentUser.type_of_account.getType() == 'Trial' && !isSkipped){
         //     setTimeout(() => {
@@ -40,8 +39,9 @@ const AccessNotifManager:React.FC<AccessNotifManager> = ({page,isLimited,modeLim
     subscribe("nextPage",() => {
         setShowNotif(false)
     })
-    const resolveText = () => {     
+    const resolveText = () => {  
         if(modeLimited == 'endUser') {
+            // return ""
             return  "Impressed by what you heard? Imagine your voice here. Start your free Avatalk trial today!"
         }
         if(authContext.currentUser.type_of_account.getType() == 'Trial') {

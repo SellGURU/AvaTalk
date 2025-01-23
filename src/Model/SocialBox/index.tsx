@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { JSX } from "react/jsx-runtime"
 import Box from "../Boxs"
@@ -35,14 +36,14 @@ class Social {
         return ''
     }
 
-    public resolveRender(theme:string,userID?:string) {
+    public resolveRender(theme:string,_userID?:string) {
         return (
             <div onClick={() => {
-                Auth.addEvent({
-                event_type:"more_info",
-                userid:userID as string,
-                sub_event_category:'more_info_socials'
-                })                
+                // Auth.addEvent({
+                // event_type:"more_info",
+                // userid:userID as string,
+                // sub_event_category:'more_info_socials'
+                // })                
                 window.open(this.value)
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector bg-white`}>

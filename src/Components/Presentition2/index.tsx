@@ -105,7 +105,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         if(usedMoreVoice){
             return "moreVoice"
         }
-        if(mode != 'review') {
+        if(mode != 'review' && chats.length>1) {
             return "endUser"
         }
         return mode
@@ -340,10 +340,15 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             }
             </>
         }
-        <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
-            <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
-            {/* <ChatNotifManager></ChatNotifManager> */}
-        </div>            
+        {
+            mode !="share" || chats.length >= 2
+            &&
+                <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
+                    <AccessNotifManager  modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
+                    {/* <ChatNotifManager></ChatNotifManager> */}
+                </div>            
+
+        }
         </div> 
         <FooterPresentation setShowSuggestions={setShowSuggestions} langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
         </>

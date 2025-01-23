@@ -9,6 +9,7 @@ import {useState} from "react";
 import TextArea from "../../../Components/TextArea";
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../../../hooks/useAuth.tsx";
+import { validationYup } from "../../../utils/validationYup.ts";
 export const FormPage = () => {
     const context = useAuth()
     const navigate = useNavigate()
@@ -16,7 +17,8 @@ export const FormPage = () => {
         email: Yup.string()
             .email('Invalid email format')  // Ensures a valid email format
             .required('Email is required'),
-        fullname: Yup.string().required('Full name is required'),
+        fullname: validationYup("fullName"),
+        message:Yup.string().min(10,"Please enter a message with at least 10 characters describing your issue or request.")
     });
     const [isOpen, setIsOpen] = useState(false);
     const initialValue = {
@@ -67,8 +69,8 @@ export const FormPage = () => {
                                         type={"text"} required={true}/>
                             <TextField errorMessage={formik.errors.email}  {...formik.getFieldProps("email")} theme="Carbon" label={"Email Address"} placeholder={"Enter your email address..."}
                                         type={"text"} inValid={formik.errors.email as string} required={true}/>
-                            <TextArea textAreaHeight="136px" {...formik.getFieldProps("message")} theme="Carbon" label={"Message"} placeholder={"Write your message..."}
-                                         inValid={""} />
+                            <TextArea textAreaHeight="136px" errorMessage={formik.errors.message} {...formik.getFieldProps("message")} theme="Carbon" label={"Message"} placeholder={"Write your message..."}
+                                         inValid={formik.errors.message as string} />
                             <Button onClick={() => {
                                 getData()
                             }} disabled={!formik.isValid } theme={'Carbon'}>Send</Button>
