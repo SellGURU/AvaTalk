@@ -121,7 +121,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             setIsSilent?setIsSilent(true):undefined
         }
         
-        if(chats.filter((cha) =>cha.from =='Ai').length >= 3){
+        if(chats.filter((cha) =>cha.from =="Ai").length >= 3){
             setIsVoceEnded(true)
         }
         // setFirstComeSuggestion(true)
