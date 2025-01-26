@@ -91,24 +91,27 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         { lan: "Chinese", code: "zh-cn", icon: "./icons/country/China.png" },
     ]);
     const handleLanguageSelect = (selectedCode:any) => {
-    setLanguagesList((prevList:any) => {
-      // Extract the fixed languages: English, German, French
-      const fixedLanguages = ["en-US", "de", "fr"].filter((el) =>el !=selectedCode);
-      const fixedLangs = prevList.filter((lang:any) => fixedLanguages.includes(lang.code));
+        setLanguagesList((prevList:any) => {
+        // Extract the fixed languages: English, German, French
+        const fixedLanguages = ["en-US", "de", "fr"].filter((el) =>el !=selectedCode);
+        const fixedLangs = prevList.filter((lang:any) => fixedLanguages.includes(lang.code));
 
-      // Find the selected language
-      const selectedLang = prevList.find((lang:any) => lang.code === selectedCode);
+        // Find the selected language
+        const selectedLang = prevList.find((lang:any) => lang.code === selectedCode);
+        localStorage.setItem("chatLanguage",JSON.stringify(selectedLang))
+        // Filter out the selected language and the fixed languages
+        const otherLangs = prevList.filter(
+            (lang:any) => lang.code !== selectedCode && !fixedLanguages.includes(lang.code)
+        );
 
-      // Filter out the selected language and the fixed languages
-      const otherLangs = prevList.filter(
-        (lang:any) => lang.code !== selectedCode && !fixedLanguages.includes(lang.code)
-      );
-
-      // Combine: fixed languages + selected language + other languages
-      return [selectedLang,...fixedLangs , ...otherLangs].filter(Boolean); // Filter removes any undefined
-    });
+        // Combine: fixed languages + selected language + other languages
+        return [selectedLang,...fixedLangs , ...otherLangs].filter(Boolean); // Filter removes any undefined
+        });
     };    
-    const [selectedLang,setSelectedLang] = useState(languagesList[0])
+    const [selectedLang,setSelectedLang] = useState(localStorage.getItem("chatLanguage")?JSON.parse(localStorage.getItem("chatLanguage")as string) :languagesList[0])
+    useEffect(() => {
+        handleLanguageSelect(selectedLang.code)
+    },[])
     // const [chats,setChats] = useState<Array<chat>>([
     // ])    
 
