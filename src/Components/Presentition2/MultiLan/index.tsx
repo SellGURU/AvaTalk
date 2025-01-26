@@ -12,9 +12,10 @@ interface MultiLanProps {
     setShowMore:(action:boolean) =>void
     setSelectedLang:(val:Langs) => void
     selected:Langs
+    handleLanChange:(code:string) => void
 }
 
-const MultiLan:React.FC<MultiLanProps> = ({langs,selected,setShowMore,setSelectedLang}) =>{
+const MultiLan:React.FC<MultiLanProps> = ({langs,selected,handleLanChange,setShowMore,setSelectedLang}) =>{
     const [isOpen,setIsOpen] = useState(false);
     const refrence = useRef(null)
     const refrenceButton = useRef(null)
@@ -25,6 +26,18 @@ const MultiLan:React.FC<MultiLanProps> = ({langs,selected,setShowMore,setSelecte
             setIsOpen(false)
         }
     })
+    const resolveLanSmallName =() => {
+        switch(selected.lan){
+            case "English" : return 'EN'
+            case "German" : return 'DE'
+            case "French" : return 'FR'
+            case "Arabic" : return 'AR'
+            case "Persian" : return 'FA'
+            case "Chinese" : return 'ZH'
+            case "Turkish" : return 'TR'
+        }
+        return "EN"
+    }
     return (
         <div className="relative">
             <div ref={refrenceButton} onClick={() => {
@@ -32,7 +45,7 @@ const MultiLan:React.FC<MultiLanProps> = ({langs,selected,setShowMore,setSelecte
             }} className=" borderBox-Gray select-none relative flex justify-center items-center boxShadow-Gray cursor-pointer w-[56px] h-[56px] rounded-full  ">
                 <img src="./Carbon/translate.svg" alt="" />
                 <div className="absolute flex justify-center text-[12px] items-center text-white font-medium w-6 h-6 bg-primary-color rounded-full left-[-6px] top-[-4px]">
-                    {selected.lan.substring(0,2)}
+                   {resolveLanSmallName()}
                 </div>
             </div>
             {isOpen &&
@@ -43,6 +56,7 @@ const MultiLan:React.FC<MultiLanProps> = ({langs,selected,setShowMore,setSelecte
                                 <div onClick={() => {
                                     setSelectedLang(el)
                                     setTimeout(() => {
+                                        handleLanChange(el.code)
                                         setIsOpen(false)
                                     }, 400);
                                 }} className="flex   px-2 items-center cursor-pointer border-b py-2 border-[#E5E7EB] justify-between gap-1 ">

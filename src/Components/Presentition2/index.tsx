@@ -81,15 +81,33 @@ const TextWithNewlinesAndLinks: React.FC<TextWithNewlinesAndLinksProps> = ({ tex
 const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestions,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     const context = useAuth()
     const [showSelectLan,setShowSelectLan]= useState(false)
-    const languagesList = [
-        { lan: "English", code: "en-US",icon:"./icons/country/Great Britain.png" },
-        { lan: "German", code: "de",icon:"./icons/country/Germany.png" },
-        { lan: "French", code: "fr",icon:"./icons/country/France.png"},
-        { lan: "Arabic", code: "ar-AE",icon:"./icons/country/United Arab Emirates.png" },
-        { lan: "Persian", code: "fa",icon:"./icons/country/Iran.png" },
-        { lan: "Turkish", code: "tr-TR",icon:"./icons/country/Turkey.png" },
-        { lan: "Chinese", code: "zh-cn",icon:"./icons/country/China.png" },
-    ];      
+    const [languagesList, setLanguagesList] = useState([
+        { lan: "English", code: "en-US", icon: "./icons/country/Great Britain.png" },
+        { lan: "German", code: "de", icon: "./icons/country/Germany.png" },
+        { lan: "French", code: "fr", icon: "./icons/country/France.png" },
+        { lan: "Arabic", code: "ar-AE", icon: "./icons/country/United Arab Emirates.png" },
+        { lan: "Persian", code: "fa", icon: "./icons/country/Iran.png" },
+        { lan: "Turkish", code: "tr-TR", icon: "./icons/country/Turkey.png" },
+        { lan: "Chinese", code: "zh-cn", icon: "./icons/country/China.png" },
+    ]);
+    const handleLanguageSelect = (selectedCode:any) => {
+    setLanguagesList((prevList:any) => {
+      // Extract the fixed languages: English, German, French
+      const fixedLanguages = ["en-US", "de", "fr"].filter((el) =>el !=selectedCode);
+      const fixedLangs = prevList.filter((lang:any) => fixedLanguages.includes(lang.code));
+
+      // Find the selected language
+      const selectedLang = prevList.find((lang:any) => lang.code === selectedCode);
+
+      // Filter out the selected language and the fixed languages
+      const otherLangs = prevList.filter(
+        (lang:any) => lang.code !== selectedCode && !fixedLanguages.includes(lang.code)
+      );
+
+      // Combine: fixed languages + selected language + other languages
+      return [selectedLang,...fixedLangs , ...otherLangs].filter(Boolean); // Filter removes any undefined
+    });
+    };    
     const [selectedLang,setSelectedLang] = useState(languagesList[0])
     // const [chats,setChats] = useState<Array<chat>>([
     // ])    
@@ -348,6 +366,11 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             }
             </>
         }
+        <div className="absolute z-40 bottom-20 right-2">
+            <MultiLan handleLanChange={handleLanguageSelect}  setShowMore={(act) => {
+                setShowSelectLan(act)
+            }} selected={selectedLang} setSelectedLang={setSelectedLang} langs={languagesList}></MultiLan>
+        </div>        
         {
             mode !='share' || isVoceEnded
             &&
@@ -358,14 +381,14 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
 
         }
         </div> 
-        <div className="absolute bottom-20 right-2">
+        {/* <div className="absolute z-40 bottom-20 right-2">
             <MultiLan setShowMore={(act) => {
                 setShowSelectLan(act)
             }} selected={selectedLang} setSelectedLang={setSelectedLang} langs={languagesList}></MultiLan>
-        </div>
+        </div> */}
         {
             showSelectLan?
-            <PopUpModal setSelectLang={setSelectedLang} languagesList={languagesList} selectedLang={selectedLang} onClose={() => {
+            <PopUpModal handleLanChange={handleLanguageSelect}  setSelectLang={setSelectedLang} languagesList={languagesList} selectedLang={selectedLang} onClose={() => {
                 setShowSelectLan(false)
             }}>
 

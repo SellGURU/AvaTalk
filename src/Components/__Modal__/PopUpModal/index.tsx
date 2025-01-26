@@ -9,9 +9,10 @@ interface PopUpModalProps {
     languagesList:Array<any>
     selectedLang:any
     setSelectLang:(lan:any) =>void
+    handleLanChange:(code:string) => void
 }
 
-const PopUpModal:React.FC<PopUpModalProps> = ({onClose,languagesList,selectedLang,setSelectLang}) => {
+const PopUpModal:React.FC<PopUpModalProps> = ({onClose,handleLanChange,languagesList,selectedLang,setSelectLang}) => {
     // const navigate = useNavigate()
     const [activelan,setActiveLan] = useState(selectedLang)
     useEffect(() => {
@@ -74,6 +75,7 @@ const PopUpModal:React.FC<PopUpModalProps> = ({onClose,languagesList,selectedLan
                         <div className="max-w-[420px] px-6 w-full">
                             <Button onClick={() => {
                                 setSelectLang(activelan)
+                                handleLanChange(activelan.code)
                                 onClose()
                             }} theme="Carbon">
                                 Confirm
