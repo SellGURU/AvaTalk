@@ -123,7 +123,7 @@ const EditLinks = () => {
                       <div className="w-full flex items-center justify-between">
                         <div className="flex justify-start ml-1 gap-1 items-center">
                           {item.isValidURL() ?
-                            <img className="h-4" src={`https://logo.clearbit.com/${new URL(item.geturl()).hostname}`} alt="" />
+                            <img className="h-4" src={ `https://www.google.com/s2/favicons?sz=64&domain=${new URL(item.geturl()).hostname}`} alt="" />
                           :
                           undefined
                           }
