@@ -10,6 +10,8 @@ import { BeatLoader } from "react-spinners";
 import AccessNotifManager from "../AccessNotifManager";
 import { useAuth } from "../../hooks/useAuth";
 import { subscribe } from "../../utils/event";
+import MultiLan from "./MultiLan";
+import PopUpModal from "../__Modal__/PopUpModal";
 // import ChatNotifManager from "./ChatNotifManager";
 
 interface PresentationProps {
@@ -78,16 +80,38 @@ const TextWithNewlinesAndLinks: React.FC<TextWithNewlinesAndLinksProps> = ({ tex
 
 const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestions,setIsSilent,setVideoUrl,setShowMuiteController,setChats,shareUser,setAudioUrl,setIsTalking,isSilent,setPrisentMode}) => {
     const context = useAuth()
-    const languagesList = [
-        { lan: "English", code: "en-US" },
-        { lan: "German", code: "de" },
-        { lan: "French", code: "fr" },
-        { lan: "Persian", code: "fa" },
-        { lan: "Turkish", code: "tr-TR" },
-        { lan: "Chinese", code: "zh-cn" },
-        { lan: "Arabic", code: "ar-AE" },
-    ];      
-    const [selectedLang] = useState(languagesList[0])
+    const [showSelectLan,setShowSelectLan]= useState(false)
+    const [languagesList, setLanguagesList] = useState([
+        { lan: "English", code: "en-US", icon: "./icons/country/Great Britain.png" },
+        { lan: "German", code: "de", icon: "./icons/country/Germany.png" },
+        { lan: "French", code: "fr", icon: "./icons/country/France.png" },
+        { lan: "Arabic", code: "ar-AE", icon: "./icons/country/United Arab Emirates.png" },
+        { lan: "Persian", code: "fa", icon: "./icons/country/Iran.png" },
+        { lan: "Turkish", code: "tr-TR", icon: "./icons/country/Turkey.png" },
+        { lan: "Chinese", code: "zh-cn", icon: "./icons/country/China.png" },
+    ]);
+    const handleLanguageSelect = (selectedCode:any) => {
+        setLanguagesList((prevList:any) => {
+        // Extract the fixed languages: English, German, French
+        const fixedLanguages = ["en-US", "de", "fr"].filter((el) =>el !=selectedCode);
+        const fixedLangs = prevList.filter((lang:any) => fixedLanguages.includes(lang.code));
+
+        // Find the selected language
+        const selectedLang = prevList.find((lang:any) => lang.code === selectedCode);
+        localStorage.setItem("chatLanguage",JSON.stringify(selectedLang))
+        // Filter out the selected language and the fixed languages
+        const otherLangs = prevList.filter(
+            (lang:any) => lang.code !== selectedCode && !fixedLanguages.includes(lang.code)
+        );
+
+        // Combine: fixed languages + selected language + other languages
+        return [selectedLang,...fixedLangs , ...otherLangs].filter(Boolean); // Filter removes any undefined
+        });
+    };    
+    const [selectedLang,setSelectedLang] = useState(localStorage.getItem("chatLanguage")?JSON.parse(localStorage.getItem("chatLanguage")as string) :languagesList[0])
+    useEffect(() => {
+        handleLanguageSelect(selectedLang.code)
+    },[])
     // const [chats,setChats] = useState<Array<chat>>([
     // ])    
 
@@ -96,6 +120,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
     const [isLoading,setIsLoading] = useState(false);
     const [isRecording,setIsRecording] = useState(false)  
     const [showSuggestions,setShowSuggestions] = useState(false);     
+    const [isVoceEnded,setIsVoceEnded] = useState(false)
     // const [showAccessNotifManager,setShowAccessNotifManager] = useState(false)
     const BLokedIdList =useRef<string[]>([]);
     // const [suggestionList,setSuggestionList] = useState(context.currentUser.sugesstions)   
@@ -105,7 +130,7 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
         if(usedMoreVoice){
             return "moreVoice"
         }
-        if(mode != 'review') {
+        if(mode != 'review' && chats.length>1) {
             return "endUser"
         }
         return mode
@@ -118,6 +143,10 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
     subscribe("voiceIsEnded",() => {
         if(context.currentUser.type_of_account.getType() == 'Free' && mode == 'review'){
             setIsSilent?setIsSilent(true):undefined
+        }
+        
+        if(chats.filter((cha) =>cha.from =="Ai").length >= 2){
+            setIsVoceEnded(true)
         }
         // setFirstComeSuggestion(true)
         // setShowAccessNotifManager(false)
@@ -340,12 +369,37 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
             }
             </>
         }
-        <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
-            <AccessNotifManager modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
-            {/* <ChatNotifManager></ChatNotifManager> */}
-        </div>            
+        <div className="absolute z-40 bottom-20 right-2">
+            <MultiLan handleLanChange={handleLanguageSelect}  setShowMore={(act) => {
+                setShowSelectLan(act)
+            }} selected={selectedLang} setSelectedLang={setSelectedLang} langs={languagesList}></MultiLan>
+        </div>        
+        {
+            mode !='share' || isVoceEnded
+            &&
+                <div className=" absolute bottom-10 bg-white z-50 py-4 mt-24  mb-[24px]">
+                    <AccessNotifManager  modeLimited={resolveModeNotif() as string} page="chatEndUser"></AccessNotifManager>
+                    {/* <ChatNotifManager></ChatNotifManager> */}
+                </div>            
+
+        }
         </div> 
-        <FooterPresentation setShowSuggestions={setShowSuggestions} langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
+        {/* <div className="absolute z-40 bottom-20 right-2">
+            <MultiLan setShowMore={(act) => {
+                setShowSelectLan(act)
+            }} selected={selectedLang} setSelectedLang={setSelectedLang} langs={languagesList}></MultiLan>
+        </div> */}
+        {
+            showSelectLan?
+            <PopUpModal handleLanChange={handleLanguageSelect}  setSelectLang={setSelectedLang} languagesList={languagesList} selectedLang={selectedLang} onClose={() => {
+                setShowSelectLan(false)
+            }}>
+
+            </PopUpModal>        
+            :
+            <FooterPresentation setShowSuggestions={setShowSuggestions} langCode={selectedLang.code} isRecording={isRecording} setIsRecording={setIsRecording} isLoading={isLoading} theme="Carbon" onSendVector={handleSendVector}/>
+
+        }
         </>
     )
 }

@@ -11,6 +11,7 @@ import { Auth, Contacts } from "../../../Api";
 import { toast } from "react-toastify";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { validationYup } from "../../../utils/validationYup";
 
 interface ExchangeContactProps {
     onClose:() =>void
@@ -41,7 +42,7 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,us
             note:''
         },
         validationSchema:Yup.object().shape({
-            fullName:Yup.string().required('Full name  is required'),
+            fullName:validationYup("fullName"),
             email: Yup.string().email('Email address must be valid.').required('Email  is required'),
             phone:Yup.string().required('Phone  is required').test(
               "isValidPhoneNumber",
