@@ -77,39 +77,54 @@ const supportMenus = [
     {
         key: 'AI_Persona_Magic',
         title: 'AI Persona Magic',
-        header: 'Customizing Your AI Persona',
+        header: '',
         description: 'With Avatalk’s "AI Settings," you can customize your AI-driven persona for professional networking. Here’s a quick guide:',
         stepBySteps: [
             {
-                title: 'Navigate to "AI Settings":',
-                description: 'Open the app and navigate to the "AI Settings" section to begin customizing your persona.',
+                title: '',
+                description: 'Navigate to "AI Settings" in the app to begin customizing your persona.',
                 image: '/Carbon/manualview/AI_Persona_Magic/1.png'
             },
             {
-                title: 'Modify AI Information:',
+                title: '',
                 description: 'Use the text editor to modify or input new information your AI will use in conversations.',
                 image: '/Carbon/manualview/AI_Persona_Magic/2.png'
             },
             {
-                title: 'Analyze with AI:',
+                title: '',
                 description: 'Tap the "Analyze with AI" button to review your input and ensure accurate, engaging responses.',
                 image: '/Carbon/manualview/AI_Persona_Magic/3.png'
             },
             {
-                title: 'Review AI Suggestions:',
-                description: 'Tap on the "Analyzed" button to review AI-generated suggestions and refine your persona further.',
+                title: '',
+                description: 'Tap on the "Analyzed" button to have a look at the AI review and read the suggestions.',
                 image: '/Carbon/manualview/AI_Persona_Magic/4.png'
             },
             {
-                title: 'Test the AI:',
+                title: '',
                 description: 'Test your AI with text and voice interactions to ensure it handles questions appropriately.',
                 image: '/Carbon/manualview/AI_Persona_Magic/5.png'
-            }
+            },
+            {
+                title: '',
+                description: `If the AI's responses aren't complete, add more details to the AI Knowledge section.`,
+                image: ''
+            },
+            {
+                title: '',
+                description: 'Choose your AI’s voice gender from the dropdown menu to match your professional style.',
+                image: '/Carbon/manualview/AI_Persona_Magic/7.png'
+            },
+            {
+                title: '',
+                description: 'After adjusting, click "Save Changes" to apply.',
+                image: ''
+            }                                    
         ],
         endSection: 'During the free trial, you get full access to these features only for once. After the trial, upgrade to Pro for unlimited access and ongoing customization options.',
         limitations: {
-            free: "One-time full access during the trial period.",
-            pro: "Unlimited access with ongoing customization, and additional AI features."
+            // free: "One-time full access during the trial period.",
+            // pro: "Unlimited access with ongoing customization, and additional AI features."
         }
     },
     {
@@ -119,25 +134,30 @@ const supportMenus = [
         description: 'The "Edit Gallery" feature in Avatalk is your go-to tool for managing and curating the visual aspects of your digital profile. It allows you to upload, organize, and update images that represent your professional identity, making sure you present yourself in the best light to your network.',
         stepBySteps: [
             {
-                title: 'Upload Images:',
-                description: 'Navigate to the "Edit Gallery" section within the app, and click the "Choose File" button to upload images from your device (JPEG and PNG formats supported).',
+                title: '',
+                description: 'Navigate to the "Edit Gallery" section within the app.',
                 image: '/Carbon/manualview/Dynamic_Galleries/1.png'
             },
             {
-                title: 'Manage Your Gallery:',
-                description: 'Once uploaded, manage your images by replacing or deleting outdated visuals.',
+                title: '',
+                description: 'Click the "Choose File" button to upload images from your device (JPEG and PNG formats supported).',
                 image: '/Carbon/manualview/Dynamic_Galleries/2.png'
             },
             {
-                title: 'Review Your Gallery:',
+                title: '',
+                description: 'Once uploaded, manage your images by replacing or deleting outdated visuals.',
+                image: ''
+            },
+            {
+                title: '',
                 description: 'Review your gallery to ensure it reflects your current personal or professional brand.',
                 image: '/Carbon/manualview/Dynamic_Galleries/3.png'
-            }
+            }            
         ],
         endSection: 'Regularly updating your gallery ensures that your digital presence remains fresh and professional, helping you stand out in every interaction. Upgrade to Pro for a more seamless and customizable experience.',
         limitations: {
-            free: "Limited image uploads and management options.",
-            pro: "Unlimited image uploads and enhanced gallery management features."
+            free: "You can upload up to 5 images and are limited to basic management features.",
+            pro: ` Unlimited image uploads, advanced organization tools, and priority customer support. Upgrade to Pro for enhanced flexibility and control over your gallery.`
         }
     },
     {
@@ -231,19 +251,23 @@ const ManualView = () => {
                                 <>
                                     <div key={el.title} className="flex  justify-between items-start">
                                         <div className="flex-grow mt-2 order-2">
-                                            <div className="text-[12px] font-semibold text-[#374151]">
-                                                {index + 1}. {el.title}
-                                            </div>
+                                            {el.title !="" &&
+                                                <div className="text-[12px] font-semibold text-[#374151]">
+                                                    {index + 1}. {el.title}
+                                                </div>
+                                            }
                                             <div className="text-justify mt-1 text-[#374151] text-[12px]">
                                                 {el.description}
                                             </div>
                                         </div>
-                                        <div
-                                            className={`min-w-[138px] mx-2 w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
-                                            <img
-                                                src={el.image.length >= 1 ? el.image : "/icons/manual/Card-Fill-Preview.png"}
-                                                alt=""/>
-                                        </div>
+                                        {el.image!='' &&
+                                            <div
+                                                className={`min-w-[138px] mx-2 w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
+                                                <img
+                                                    src={el.image.length >= 1 ? el.image : "/icons/manual/Card-Fill-Preview.png"}
+                                                    alt=""/>
+                                            </div>
+                                        }
                                     </div>
 
                                 </>
