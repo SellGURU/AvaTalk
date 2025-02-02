@@ -167,20 +167,36 @@ const supportMenus = [
         description: 'The "Socials" feature in Avatalk allows you to seamlessly integrate your social media profiles into your AI-driven networking experience. By linking platforms like LinkedIn, Telegram, Instagram, Facebook, Twitter/X, or YouTube, you can centralize your online presence and make it easier for connections to engage with you.',
         stepBySteps: [
             {
-                title: 'Add Social Media Links:',
-                description: 'Go to the "Socials" section in Avatalk, enter a title for your social media card, and select the social media platforms you wish to link.',
+                title: '',
+                description: 'Go to the "Socials" section in Avatalk.',
                 image: '/Carbon/manualview/Social_Connections/1.png'
             },
             {
-                title: 'Save Links:',
-                description: 'Add your account information for each platform, and once saved, these links will appear on your Avatalk profile.',
+                title: '',
+                description: 'Enter a title for your social media card.',
                 image: '/Carbon/manualview/Social_Connections/2.png'
-            }
+            },
+            {
+                title: '',
+                description: 'Select the social media platforms you wish to link.',
+                image: '/Carbon/manualview/Social_Connections/3.png'
+            },
+            {
+                title: '',
+                description: 'Add your account information for each platform.',
+                image: '/Carbon/manualview/Social_Connections/4.png'
+            } ,
+
+            {
+                title: '',
+                description: 'Once saved, these links will appear on your Avatalk profile.',
+                image: '/Carbon/manualview/Social_Connections/5.png'
+            }                                                            
         ],
         endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.',
         limitations: {
-            free: "Limited social media integrations and management.",
-            pro: "Unlimited social media integrations with enhanced management features."
+            // free: "Limited social media integrations and management.",
+            // pro: "Unlimited social media integrations with enhanced management features."
         }
     },
     {
@@ -190,37 +206,63 @@ const supportMenus = [
         description: 'The "Links" section in the Avatalk app allows you to effectively manage and share essential web resources, amplifying your professional networking. This tool helps you store, organize, and showcase crucial links, including portfolios, social media, or company websites, directly in your digital business card.',
         stepBySteps: [
             {
-                title: 'Add New Link:',
-                description: 'Navigate to the "Links" section in the Avatalk app, tap "Add New Link," enter a title and URL.',
+                title: '',
+                description: 'Navigate to the "Links" section in the Avatalk app.',
                 image: '/Carbon/manualview/Adding_Links/1.png'
             },
             {
-                title: 'Edit or Remove Links:',
-                description: 'To edit a link, select the desired link, make adjustments, and save. To delete outdated links, simply select and remove them.',
+                title: '',
+                description: 'Tap "Add New Link" to enter a title and URL. This ensures your link is clearly labeled and relevant.',
                 image: '/Carbon/manualview/Adding_Links/2.png'
-            }
+            },
+            {
+                title: '',
+                description: 'To edit a link, select the desired link, make adjustments, and save.',
+                image: '/Carbon/manualview/Adding_Links/3.png'
+            },
+            {
+                title: '',
+                description: 'Remove outdated links by selecting and deleting them to keep your profile current and streamlined.',
+                image: '/Carbon/manualview/Adding_Links/4.png'
+            }                        
         ],
         endSection: 'Start using the "Links" section today and make your digital business card more effective. With Avatalk, you can ensure that your network always has access to the most relevant information.',
         limitations: {
-            free: "Limited link management and sharing capabilities.",
-            pro: "Unlimited links with enhanced management options."
+            free: "Free Version: Limited to 2 links in your profile, which restricts the amount of information you can share.",
+            pro: "Pro Version: Enjoy unlimited links and advanced organizational features to create a more comprehensive digital presence."
         }
     },
     {
         key: 'File_Sharing',
         title: 'File Sharing',
         header: 'Managing Your Digital Assets in Avatalk',
-        description: 'Avatalk\'s "Files" section allows users to efficiently manage and store crucial digital assets for professional interactions. This feature is designed to ensure that important documents, such as presentations, contracts, and portfolios, are easily accessible during conversations.',
+        description: `Avatalk's "Files" section allows users to efficiently manage and store crucial digital assets for professional interactions. This feature is designed to ensure that important documents, such as presentations, contracts, and portfolios, are easily accessible during conversations, enhancing the depth of your interactions.`,
         stepBySteps: [
             {
-                title: 'Upload Files:',
-                description: 'Navigate to the "Files" section in Avatalk, tap "Choose File"',
-                image: ''
-            }
+                title: '',
+                description: 'Navigate to the "Files" section in the Avatalk app.',
+                image: '/Carbon/manualview/File/1.png'
+            },
+            {
+                title: '',
+                description: 'Tap on the "Choose File" button to upload files in supported formats like PDF, DOCX, XLSX, PSD, and AI.',
+                image: '/Carbon/manualview/File/2.png'
+            },
+            {
+                title: '',
+                description: 'After selecting the file, click "Save Changes" to confirm its addition to your digital asset library.',
+                image: '/Carbon/manualview/File/3.png'
+            },
+            {
+                title: '',
+                description: 'Your file is now securely stored and ready for your persona to share during conversations.',
+                image: '/Carbon/manualview/File/4.png'
+            }                                    
         ],
+         endSection: 'Avatalk makes managing your professional assets easy, but for maximum file capacity and flexibility, upgrading to Pro is recommended. This will help ensure all your important files are always ready when you need them.',
         limitations: {
-            free: "Limited file storage and sharing options.",
-            pro: "Unlimited file uploads and enhanced sharing capabilities."
+            free: "Free users can upload up to 1 file with a maximum size of 10MB.",
+            pro: "Pro users enjoy up to 50 uploads with a higher maximum file size (50MB), enabling them to store and share larger assets."
         }
     }
 ];
