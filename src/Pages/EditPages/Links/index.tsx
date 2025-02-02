@@ -46,7 +46,7 @@ const EditLinks = () => {
   const [editid,setEditid] = useState("")
   const addLink = (name:string,url:string) => {
       const newLink = new Link(url,name)
-      if(editName!= '' && editid!=''){
+      if(editid!=''){
         setLinks([...links.filter((el) =>el.getid() != editid),newLink])
         setEditName('')
         setEditid('')
@@ -123,7 +123,7 @@ const EditLinks = () => {
                       <div className="w-full flex items-center justify-between">
                         <div className="flex justify-start ml-1 gap-1 items-center">
                           {item.isValidURL() ?
-                            <img className="h-4" src={`https://logo.clearbit.com/${new URL(item.geturl()).hostname}`} alt="" />
+                            <img className="h-4" src={ `https://www.google.com/s2/favicons?sz=64&domain=${new URL(item.geturl()).hostname}`} alt="" />
                           :
                           undefined
                           }

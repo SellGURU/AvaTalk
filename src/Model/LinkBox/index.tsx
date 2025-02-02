@@ -32,7 +32,7 @@ class Link {
             }} className={`${theme}-Profile-BackgroundVectors`}>
                 <div className={`${theme}-ContentCard-CardVector`}>
                     {this.isValidURL() ?
-                        <img className="rounded-full" src={`https://logo.clearbit.com/${new URL(this.geturl()).hostname}`} onError={(e:any) => {
+                        <img className="rounded-full" src={ `https://www.google.com/s2/favicons?sz=64&domain=${new URL(this.geturl()).hostname}`} onError={(e:any) => {
                             e.target.onerror = null; // Prevent infinite loop in case fallback fails
                             e.target.src = this.resolveFallBackImage(); // Set fallback image
                         }} alt="" />

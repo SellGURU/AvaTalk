@@ -6,12 +6,36 @@ const supportMenus = [
         key: 'Welcome_to_Avatalk',
         title: 'Welcome to Avatalk',
         header: 'Introduction to the App',
-        description: 'Welcome to Avatalk, your AI-powered networking assistant. Here\'s how to get the most out of Avatalk:\nProfile Setup: Begin by creating your professional profile. Input your details, including your contact information, job role, and key skills. This profile will form the basis of your AI persona.\nAI Persona Creation: Once your profile is complete, Avatalk will generate a personalized AI persona. This persona can interact on your behalf, sharing your contact details and responding intelligently to inquiries.\nNetworking: Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you\'re unavailable, ensuring ongoing professional presence.\nScheduling: Avatalk’s AI can also schedule meetings for you. Sync your calendar to ensure seamless scheduling of appointments, directly from interactions.\nAnalytics Dashboard: Track the performance of your AI persona through Avatalk’s analytics. Review interaction metrics to optimize and refine your networking approach.\nAvatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals.',
-        stepBySteps: [],
-        endSection: 'Avatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals. Whether you\'re freelancing, part of a small business, or with a large enterprise, Avatalk scales with you, ensuring your professional presence is always impactful.',
+        description: `Welcome to Avatalk, your AI-powered networking assistant. Here's how to get the most out of Avatalk:`,
+        stepBySteps: [
+            {
+                title: 'Profile Setup:',
+                description: 'Begin by creating your professional profile. Input your details, including your contact information, job role, and key skills. This profile will form the basis of your AI persona.',
+                image: '/Carbon/manualview/Welcome To Avatalk/2.png'
+            },
+            {
+                title: 'AI Persona Creation:',
+                description: 'Once your profile is complete, Avatalk will generate a personalized AI persona. This persona can interact on your behalf, sharing your contact details and responding intelligently to inquiries.',
+                image: '/Carbon/manualview/Welcome To Avatalk/1.png'
+            },
+            {
+                title: 'Networking:',
+                description: `Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you're unavailable, ensuring ongoing professional presence.`,
+                image: '/Carbon/manualview/Welcome To Avatalk/3.png'
+            },
+            {
+                title: 'Scheduling:',
+                description: 'Avatalk’s AI can also schedule meetings for you. Sync your calendar to ensure seamless scheduling of appointments, directly from interactions.',
+                image: '/Carbon/manualview/Welcome To Avatalk/4.png'
+            },
+            {
+                title: 'Analytics Dashboard:',
+                description: 'Track the performance of your AI persona through Avatalk’s analytics. Review interaction metrics to optimize and refine your networking approach.',
+                image: '/Carbon/manualview/Welcome To Avatalk/5.png'
+            }            
+        ],
+        endSection: `Avatalk is designed to enhance your networking efforts, making each connection meaningful and tailored to your professional goals. Whether you're freelancing, part of a small business, or with a large enterprise, Avatalk scales with you, ensuring your professional presence is always impactful.`,
         limitations: {
-            free: "Limited access to AI features, analytics, and profile customizations.",
-            pro: "Full access to all features including unlimited profile customizations, enhanced AI settings, and in-depth analytics."
         }
     },
     {
@@ -21,7 +45,7 @@ const supportMenus = [
         description: 'The "Edit Profile" section in the Avatalk app is your go-to hub for creating a professional and personalized digital presence. Here’s how to get started:',
         stepBySteps: [
             {
-                title: 'Update Your Avatar:',
+                title: 'Update Your Avatar',
                 description: 'Choose or upload an image that represents your professional identity. This visual will be the face of your AI persona.',
                 image: '/Carbon/manualview/Profile_Mastery/1.png'
             },
@@ -48,8 +72,6 @@ const supportMenus = [
         ],
         endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.',
         limitations: {
-            free: "Limited profile customizations and multimedia options.",
-            pro: "Unlimited profile customizations, multimedia uploads, and enhanced appointment scheduling features."
         }
     },
     {
@@ -217,7 +239,7 @@ const ManualView = () => {
                                             </div>
                                         </div>
                                         <div
-                                            className={`min-w-[138px] w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
+                                            className={`min-w-[138px] mx-2 w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
                                             <img
                                                 src={el.image.length >= 1 ? el.image : "/icons/manual/Card-Fill-Preview.png"}
                                                 alt=""/>
@@ -229,32 +251,34 @@ const ManualView = () => {
                         })}
 
                     </div>
-                    <div className="text-[#374151] text-[12px] mt-6 text-justify">
-                        <div className="text-[12px] font-semibold text-[#374151]">
-                            Free vs. Pro Limitations
-                        </div>
-                        <div className={"space-y-1.5"}>
-                            <div className={"text-[#374151] pt-1.5  flex gap-1.5  items-start justify-start text-[12px] text-justify text-wrap "}>
-                                <div className={"text-[12px] font-semibold text-[#374151]"}>
-                                pro:
-                                </div>
-                                <div>
+                    {data.limitations.pro &&
+                        <div className="text-[#374151] text-[12px] mt-6 text-justify">
+                            <div className="text-[12px] font-semibold text-[#374151]">
+                                Free vs. Pro Limitations
+                            </div>
+                            <div className={"space-y-1.5"}>
+                                <div className={"text-[#374151] pt-1.5  flex gap-1.5  items-start justify-start text-[12px] text-justify text-wrap "}>
+                                    <div className={"text-[12px] font-semibold text-[#374151]"}>
+                                    pro:
+                                    </div>
+                                    <div>
 
-                                {data.limitations.pro}
+                                    {data.limitations.pro}
+                                    </div>
+                                </div>
+                                <div className={"text-[#374151] flex  gap-1.5 items-start justify-start  text-[12px] text-justify text-wrap "} >
+                                    <div className={" text-[12px] font-semibold text-[#374151]"}>
+
+                                        free:
+                                    </div>
+                                    <div>
+
+                                    {data.limitations.free}
+                                    </div>
                                 </div>
                             </div>
-                            <div className={"text-[#374151] flex  gap-1.5 items-start justify-start  text-[12px] text-justify text-wrap "} >
-                                <div className={" text-[12px] font-semibold text-[#374151]"}>
-
-                                    free:
-                                </div>
-                                <div>
-
-                                {data.limitations.free}
-                                </div>
-                            </div>
                         </div>
-                    </div>
+                    }
                     <div className="text-[#374151] text-[12px] mt-6 text-justify">{data.endSection}</div>
                 </div>
             </div>
