@@ -45,7 +45,7 @@ const supportMenus = [
         description: 'The "Edit Profile" section in the Avatalk app is your go-to hub for creating a professional and personalized digital presence. Here’s how to get started:',
         stepBySteps: [
             {
-                title: 'Update Your Avatar:',
+                title: 'Update Your Avatar',
                 description: 'Choose or upload an image that represents your professional identity. This visual will be the face of your AI persona.',
                 image: '/Carbon/manualview/Profile_Mastery/1.png'
             },
@@ -72,8 +72,6 @@ const supportMenus = [
         ],
         endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.',
         limitations: {
-            free: "Limited profile customizations and multimedia options.",
-            pro: "Unlimited profile customizations, multimedia uploads, and enhanced appointment scheduling features."
         }
     },
     {
@@ -241,7 +239,7 @@ const ManualView = () => {
                                             </div>
                                         </div>
                                         <div
-                                            className={`min-w-[138px] w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
+                                            className={`min-w-[138px] mx-2 w-[40%] ${index % 2 != 0 ? 'order-first' : 'order-last'} `}>
                                             <img
                                                 src={el.image.length >= 1 ? el.image : "/icons/manual/Card-Fill-Preview.png"}
                                                 alt=""/>
