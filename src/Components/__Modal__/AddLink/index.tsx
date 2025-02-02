@@ -66,7 +66,7 @@ const AddSocials:React.FC<AddSocialsProps> = ({isOpen,name,value,title,onComplet
                 </Button>
             </div>
             <div>
-              <div className="my-4">
+              <div className="my-4 hidden">
                 <TextField  {...formik.getFieldProps("name")}  label={'Name'} placeholder="Website" theme="Carbon" name="name" type="text" errorMessage="" inValid={false} />
               </div>  
               <div className="my-4">

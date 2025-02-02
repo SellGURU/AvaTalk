@@ -244,6 +244,9 @@ const Presentition2:React.FC<PresentationProps> = ({ theme,chats,mode,suggestion
     })
 
     const handleSendVector = (value: string) => {
+        if(chats.length <=1){
+            setIsTalking(false)
+        }
         setShowSuggestions(false)
         setIsLoading(true)
         sendToApi(chats,setChats,value,(res) => {

@@ -46,7 +46,7 @@ const EditLinks = () => {
   const [editid,setEditid] = useState("")
   const addLink = (name:string,url:string) => {
       const newLink = new Link(url,name)
-      if(editName!= '' && editid!=''){
+      if(editid!=''){
         setLinks([...links.filter((el) =>el.getid() != editid),newLink])
         setEditName('')
         setEditid('')
