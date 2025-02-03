@@ -26,7 +26,7 @@ const AboutComponent:React.FC<AboutComponentProps> = ({text}) => {
                         </p>
                             <span onClick={() => {
                                 setIsShowMore(false)
-                            }} className="text-[#06B6D4] cursor-pointer text-sm font-medium">show less</span>
+                            }} className="text-[#06B6D4] cursor-pointer text-sm font-medium">Show less</span>
                     </div>
                     :
                     <div>
@@ -34,7 +34,7 @@ const AboutComponent:React.FC<AboutComponentProps> = ({text}) => {
 
                             {text.substring(0,120)+ '...'}
                         </p>
-                        <span onClick={() => {setIsShowMore(true)}} className="text-[#06B6D4] cursor-pointer text-sm font-medium">show more</span>
+                        <span onClick={() => {setIsShowMore(true)}} className="text-[#06B6D4] cursor-pointer text-sm font-medium">Show more</span>
                     </div>
                 }
             </div> 
