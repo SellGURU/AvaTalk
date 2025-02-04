@@ -264,7 +264,76 @@ const supportMenus = [
             free: "Free users can upload up to 1 file with a maximum size of 10MB.",
             pro: "Pro users enjoy up to 50 uploads with a higher maximum file size (50MB), enabling them to store and share larger assets."
         }
-    }
+    },
+    {
+        key: 'Adding_Location',
+        title: 'Adding Location',
+        header: 'Map Your Connections with Avatalk’s Address Feature',
+        description: `The Address section in the Avatalk app makes managing and sharing your professional location details quick and easy. Whether updating your office address, sharing your current location, or saving frequent destinations, this tool simplifies location management for seamless networking.`,
+        stepBySteps: [
+            {
+                title: 'Open Google Map Section:',
+                description: 'Open the Avatalk app and navigate to the “Google Map” section.',
+                image: '/Carbon/manualview/location/1.PNG'
+            },
+            {
+                title: 'View Current Location:',
+                description: 'View your current location on the interactive map, marked by a red pin.',
+                image: '/Carbon/manualview/location/2.PNG'
+            },
+            {
+                title: 'Search a New Location:',
+                description: ' Use the “Search your location...” bar to type in an address or location name.',
+                image: '/Carbon/manualview/location/3.PNG'
+            },
+            {
+                title: 'Set Location:',
+                description: 'Once the desired location is displayed, click to set it.',
+                image: '/Carbon/manualview/location/4.PNG'
+            },
+            {
+                title: 'Save Changes:',
+                description: 'Press the “Save Change” button to confirm and update your professional address.',
+                image: '/Carbon/manualview/location/5.PNG'
+            }                                                    
+        ],
+         endSection: 'Avatalk’s address feature ensures that your professional information stays up-to-date, supporting smooth interactions and effortless networking. Stay ahead by keeping your location accurate with just a few clicks.',
+        limitations: {
+        }
+    },
+    {
+        key: 'Adding_Videos',
+        title: 'Adding Videos',
+        header: 'Videos in Avatalk',
+        description: `The "Video" section in Avatalk helps you enhance your digital business card by uploading and managing video content. This feature enables you to create a dynamic professional profile by adding video links directly to your Avatalk profile, boosting engagement and showcasing your expertise.`,
+        stepBySteps: [
+            {
+                title: 'Go to Video Section: ',
+                description: 'Open the Avatalk app and navigate to the "Video" section.',
+                image: '/Carbon/manualview/videos/1.PNG'
+            },
+            {
+                title: 'Add a Video Link: ',
+                description: 'Tap "Add New Link," input a video title, and paste your video link.',
+                image: '/Carbon/manualview/videos/2.PNG'
+            },
+            {
+                title: 'Edit or Delete:',
+                description: ' Edit or delete links to keep your video content relevant.',
+                image: '/Carbon/manualview/videos/3.PNG'
+            },
+            {
+                title: 'Save Changes:',
+                description: ` Once you're done, tap "Save Change" to update your profile instantly.`,
+                image: '/Carbon/manualview/videos/4.PNG'
+            },                                                
+        ],
+         endSection: 'With Avatalk, you can easily enrich your digital business card with engaging video content. Consider upgrading to Pro for enhanced features and limitless customization options.',
+        limitations: {
+            free: "Limited to 1 video upload.",
+            pro: " Up to 50 video uploads and advanced management tools. Upgrade to Pro for greater flexibility."            
+        }
+    }           
 ];
 
 const ManualView = () => {

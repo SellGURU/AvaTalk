@@ -41,6 +41,16 @@ export const UserManual=()=>{
             icon: "",
             link: "/settings/Help/ManualView/File_Sharing",
         },
+        {
+            name: "Adding Location",
+            icon: "",
+            link: "/settings/Help/ManualView/Adding_Location",
+        },     
+        {
+            name: "Adding Videos",
+            icon: "",
+            link: "/settings/Help/ManualView/Adding_Videos",
+        },               
     ];
 
     return(
