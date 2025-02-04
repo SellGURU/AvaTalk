@@ -21,12 +21,12 @@ const supportMenus = [
             {
                 title: 'Networking:',
                 description: `Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you're unavailable, ensuring ongoing professional presence.`,
-                image: '/Carbon/manualview/Welcome To Avatalk/3.png'
+                image: '/Carbon/manualview/Welcome To Avatalk/4.png'
             },
             {
                 title: 'Scheduling:',
                 description: 'Avatalk’s AI can also schedule meetings for you. Sync your calendar to ensure seamless scheduling of appointments, directly from interactions.',
-                image: '/Carbon/manualview/Welcome To Avatalk/4.jpeg'
+                image: '/Carbon/manualview/Welcome To Avatalk/3.jpeg'
             },
             {
                 title: 'Analytics Dashboard:',
@@ -274,7 +274,7 @@ const supportMenus = [
             {
                 title: 'Open Google Map Section:',
                 description: 'Open the Avatalk app and navigate to the “Google Map” section.',
-                image: '/Carbon/manualview/location/1.png'
+                image: '/Carbon/manualview/location/3.png'
             },
             {
                 title: 'View Current Location:',
@@ -284,7 +284,7 @@ const supportMenus = [
             {
                 title: 'Search a New Location:',
                 description: ' Use the “Search your location...” bar to type in an address or location name.',
-                image: '/Carbon/manualview/location/3.png'
+                image: '/Carbon/manualview/location/5.png'
             },
             {
                 title: 'Set Location:',
@@ -294,7 +294,7 @@ const supportMenus = [
             {
                 title: 'Save Changes:',
                 description: 'Press the “Save Change” button to confirm and update your professional address.',
-                image: '/Carbon/manualview/location/5.png'
+                image: '/Carbon/manualview/location/1.png'
             }                                                    
         ],
          endSection: 'Avatalk’s address feature ensures that your professional information stays up-to-date, supporting smooth interactions and effortless networking. Stay ahead by keeping your location accurate with just a few clicks.',
@@ -310,22 +310,22 @@ const supportMenus = [
             {
                 title: 'Go to Video Section: ',
                 description: 'Open the Avatalk app and navigate to the "Video" section.',
-                image: '/Carbon/manualview/videos/1.png'
+                image: '/Carbon/manualview/videos/2.png'
             },
             {
                 title: 'Add a Video Link: ',
                 description: 'Tap "Add New Link," input a video title, and paste your video link.',
-                image: '/Carbon/manualview/videos/2.png'
+                image: '/Carbon/manualview/videos/3.png'
             },
             {
                 title: 'Edit or Delete:',
                 description: ' Edit or delete links to keep your video content relevant.',
-                image: '/Carbon/manualview/videos/3.PNG'
+                image: '/Carbon/manualview/videos/4.PNG'
             },
             {
                 title: 'Save Changes:',
                 description: ` Once you're done, tap "Save Change" to update your profile instantly.`,
-                image: '/Carbon/manualview/videos/4.PNG'
+                image: '/Carbon/manualview/videos/1.PNG'
             },                                                
         ],
          endSection: 'With Avatalk, you can easily enrich your digital business card with engaging video content. Consider upgrading to Pro for enhanced features and limitless customization options.',
@@ -343,12 +343,12 @@ const supportMenus = [
             {
                 title: 'Access the Appointments Section:',
                 description: 'Go to the "Appointments" section in Avatalk.',
-                image: '/Carbon/manualview/appointment/1.PNG'
+                image: '/Carbon/manualview/appointment/2.PNG'
             },
             {
                 title: 'Enter a Title:',
                 description: 'Provide a title for your booking page (e.g., "Book with me").',
-                image: '/Carbon/manualview/appointment/2.PNG'
+                image: '/Carbon/manualview/appointment/4.PNG'
             },
             {
                 title: 'Paste Your Calendly Link:',
@@ -358,7 +358,7 @@ const supportMenus = [
             {
                 title: 'Save Your Changes:',
                 description: `Click "Save" to activate the link on your Avatalk profile.`,
-                image: '/Carbon/manualview/appointment/4.PNG'
+                image: '/Carbon/manualview/appointment/1.PNG'
             },                                                
         ],
          endSection: 'Enhance Your Professional Networking: By setting up appointments on Avatalk, you streamline your communication and eliminate the back-and-forth hassle of scheduling. Upgrade to the Pro version for unlimited access and added features to boost your efficiency.',
@@ -381,12 +381,12 @@ const supportMenus = [
             {
                 title: 'Customize Your View:',
                 description: 'Adjust the date range to analyze specific periods of activity.',
-                image: '/Carbon/manualview/analyse/2.PNG'
+                image: '/Carbon/manualview/analyse/3.PNG'
             },
             {
                 title: 'Review Key Metrics: ',
                 description: 'Examine profile views, AR usage, chat interactions, and file clicks.',
-                image: '/Carbon/manualview/analyse/3.PNG'
+                image: '/Carbon/manualview/analyse/2.PNG'
             },
             {
                 title: 'Visualize Your Data:',
