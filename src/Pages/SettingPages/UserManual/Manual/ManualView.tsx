@@ -11,7 +11,7 @@ const supportMenus = [
             {
                 title: 'Profile Setup:',
                 description: 'Begin by creating your professional profile. Input your details, including your contact information, job role, and key skills. This profile will form the basis of your AI persona.',
-                image: '/Carbon/manualview/Welcome To Avatalk/1.PNG'
+                image: '/Carbon/manualview/Welcome To Avatalk/1.png'
             },
             {
                 title: 'AI Persona Creation:',
@@ -21,7 +21,7 @@ const supportMenus = [
             {
                 title: 'Networking:',
                 description: `Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you're unavailable, ensuring ongoing professional presence.`,
-                image: '/Carbon/manualview/Welcome To Avatalk/3.PNG'
+                image: '/Carbon/manualview/Welcome To Avatalk/3.png'
             },
             {
                 title: 'Scheduling:',
@@ -62,12 +62,12 @@ const supportMenus = [
             {
                 title: 'Add Multimedia:',
                 description: 'Enhance your profile by uploading files, images, or videos. Showcase your work, projects, or portfolio to create a dynamic and engaging profile.',
-                image: '/Carbon/manualview/Profile_Mastery/4.PNG'
+                image: '/Carbon/manualview/Profile_Mastery/4.png'
             },
             {
                 title: 'Appointment Scheduling:',
                 description: 'Integrate appointment scheduling tools to allow others to book meetings with you directly from your profile.',
-                image: '/Carbon/manualview/Profile_Mastery/5.PNG'
+                image: '/Carbon/manualview/Profile_Mastery/5.png'
             }
         ],
         endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.',
@@ -83,42 +83,42 @@ const supportMenus = [
             {
                 title: 'Access AI Settings',
                 description: 'Navigate to "AI Settings" in the app to begin customizing your persona.',
-                image: '/Carbon/manualview/AI_Persona_Magic/1.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/1.png'
             },
             {
                 title: 'Edit AI Knowledge:',
                 description: 'Use the text editor to modify or input new information your AI will use in conversations.',
-                image: '/Carbon/manualview/AI_Persona_Magic/2.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/2.png'
             },
             {
                 title: 'Analyze with AI:',
                 description: 'Tap the "Analyze with AI" button to review your input and ensure accurate, engaging responses.',
-                image: '/Carbon/manualview/AI_Persona_Magic/3.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/3.png'
             },
             {
                 title: 'Review AI Suggestions:',
                 description: 'Tap on the "Analyzed" button to have a look at the AI review and read the suggestions.',
-                image: '/Carbon/manualview/AI_Persona_Magic/4.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/4.png'
             },
             {
                 title: 'Test Your AI:',
                 description: 'Test your AI with text and voice interactions to ensure it handles questions appropriately.',
-                image: '/Carbon/manualview/AI_Persona_Magic/5.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/5.png'
             },
             {
                 title: 'Refine AI Responses:',
                 description: `If the AI's responses aren't complete, add more details to the AI Knowledge section.`,
-                image: '/Carbon/manualview/AI_Persona_Magic/6.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/6.png'
             },
             {
                 title: 'Choose AI Voice:',
                 description: 'Choose your AI’s voice gender from the dropdown menu to match your professional style.',
-                image: '/Carbon/manualview/AI_Persona_Magic/7.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/7.png'
             },
             {
                 title: 'Save Changes:',
                 description: 'After adjusting, click "Save Changes" to apply.',
-                image: '/Carbon/manualview/AI_Persona_Magic/8.PNG'
+                image: '/Carbon/manualview/AI_Persona_Magic/8.png'
             }                                    
         ],
         endSection: 'During the free trial, you get full access to these features only for once. After the trial, upgrade to Pro for unlimited access and ongoing customization options.',
@@ -140,8 +140,8 @@ const supportMenus = [
             },
             {
                 title: 'Upload Images:',
-                description: 'Click the "Choose File" button to upload images from your device (JPEG and PNG formats supported).',
-                image: '/Carbon/manualview/Dynamic_Galleries/4.PNG'
+                description: 'Click the "Choose File" button to upload images from your device (JPEG and png formats supported).',
+                image: '/Carbon/manualview/Dynamic_Galleries/4.png'
             },
             {
                 title: 'Manage Your Gallery:',
@@ -151,7 +151,7 @@ const supportMenus = [
             {
                 title: 'Review & Update:',
                 description: 'Ensure your gallery reflects your current personal or professional brand.',
-                image: '/Carbon/manualview/Dynamic_Galleries/3.PNG'
+                image: '/Carbon/manualview/Dynamic_Galleries/3.png'
             }            
         ],
         endSection: 'Regularly updating your gallery ensures that your digital presence remains fresh and professional, helping you stand out in every interaction. Upgrade to Pro for a more seamless and customizable experience.',
@@ -184,13 +184,13 @@ const supportMenus = [
             {
                 title: 'Add Account Information:',
                 description: 'Input your account details for each platform.',
-                image: '/Carbon/manualview/Social_Connections/4.PNG'
+                image: '/Carbon/manualview/Social_Connections/4.png'
             } ,
 
             {
                 title: 'Save & Display:',
                 description: ' Once saved, these links will appear on your Avatalk profile.',
-                image: '/Carbon/manualview/Social_Connections/5.PNG'
+                image: '/Carbon/manualview/Social_Connections/5.png'
             }                                                            
         ],
         endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.',
@@ -218,7 +218,7 @@ const supportMenus = [
             {
                 title: 'Edit Links:',
                 description: 'To edit a link, select the desired link, make adjustments, and save.',
-                image: '/Carbon/manualview/Adding_Links/3.PNG'
+                image: '/Carbon/manualview/Adding_Links/3.png'
             },
             {
                 title: 'Delete Outdated Links:',
@@ -251,12 +251,12 @@ const supportMenus = [
             {
                 title: 'Save Changes:',
                 description: 'After selecting the file, click "Save Changes" to confirm its addition to your digital asset library.',
-                image: '/Carbon/manualview/File/3.PNG'
+                image: '/Carbon/manualview/File/3.png'
             },
             {
                 title: 'Access Files Anytime:',
                 description: 'Your file is now securely stored and ready for your persona to share during conversations.',
-                image: '/Carbon/manualview/File/4.PNG'
+                image: '/Carbon/manualview/File/4.png'
             }                                    
         ],
          endSection: 'Avatalk makes managing your professional assets easy, but for maximum file capacity and flexibility, upgrading to Pro is recommended. This will help ensure all your important files are always ready when you need them.',
@@ -274,27 +274,27 @@ const supportMenus = [
             {
                 title: 'Open Google Map Section:',
                 description: 'Open the Avatalk app and navigate to the “Google Map” section.',
-                image: '/Carbon/manualview/location/1.PNG'
+                image: '/Carbon/manualview/location/1.png'
             },
             {
                 title: 'View Current Location:',
                 description: 'View your current location on the interactive map, marked by a red pin.',
-                image: '/Carbon/manualview/location/2.PNG'
+                image: '/Carbon/manualview/location/2.png'
             },
             {
                 title: 'Search a New Location:',
                 description: ' Use the “Search your location...” bar to type in an address or location name.',
-                image: '/Carbon/manualview/location/3.PNG'
+                image: '/Carbon/manualview/location/3.png'
             },
             {
                 title: 'Set Location:',
                 description: 'Once the desired location is displayed, click to set it.',
-                image: '/Carbon/manualview/location/4.PNG'
+                image: '/Carbon/manualview/location/4.png'
             },
             {
                 title: 'Save Changes:',
                 description: 'Press the “Save Change” button to confirm and update your professional address.',
-                image: '/Carbon/manualview/location/5.PNG'
+                image: '/Carbon/manualview/location/5.png'
             }                                                    
         ],
          endSection: 'Avatalk’s address feature ensures that your professional information stays up-to-date, supporting smooth interactions and effortless networking. Stay ahead by keeping your location accurate with just a few clicks.',
@@ -310,12 +310,12 @@ const supportMenus = [
             {
                 title: 'Go to Video Section: ',
                 description: 'Open the Avatalk app and navigate to the "Video" section.',
-                image: '/Carbon/manualview/videos/1.PNG'
+                image: '/Carbon/manualview/videos/1.png'
             },
             {
                 title: 'Add a Video Link: ',
                 description: 'Tap "Add New Link," input a video title, and paste your video link.',
-                image: '/Carbon/manualview/videos/2.PNG'
+                image: '/Carbon/manualview/videos/2.png'
             },
             {
                 title: 'Edit or Delete:',
