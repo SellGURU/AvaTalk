@@ -333,7 +333,73 @@ const supportMenus = [
             free: "Limited to 1 video upload.",
             pro: " Up to 50 video uploads and advanced management tools. Upgrade to Pro for greater flexibility."            
         }
-    }           
+    },
+    {
+        key: 'Setting_Appointments',
+        title: 'Setting Appointments',
+        header: 'Appointment Mastery: Setting Up and Managing Appointments',
+        description: `Avatalk’s appointment scheduling feature helps you seamlessly manage your meetings and networking. By integrating with Calendly, you allow others to book meetings with you directly from your Avatalk profile. This guide walks you through the setup process, ensuring your professional availability is accessible and well-organized.`,
+        stepBySteps: [
+            {
+                title: 'Access the Appointments Section:',
+                description: 'Go to the "Appointments" section in Avatalk.',
+                image: '/Carbon/manualview/appointment/1.PNG'
+            },
+            {
+                title: 'Enter a Title:',
+                description: 'Provide a title for your booking page (e.g., "Book with me").',
+                image: '/Carbon/manualview/appointment/2.PNG'
+            },
+            {
+                title: 'Paste Your Calendly Link:',
+                description: ' Insert your unique Calendly URL in the designated field.',
+                image: '/Carbon/manualview/appointment/3.PNG'
+            },
+            {
+                title: 'Save Your Changes:',
+                description: `Click "Save" to activate the link on your Avatalk profile.`,
+                image: '/Carbon/manualview/appointment/4.PNG'
+            },                                                
+        ],
+         endSection: 'Enhance Your Professional Networking: By setting up appointments on Avatalk, you streamline your communication and eliminate the back-and-forth hassle of scheduling. Upgrade to the Pro version for unlimited access and added features to boost your efficiency.',
+        limitations: {
+            free: "You can send and receive a limited number of messages, and only the first 3 responses will be visible. After this, the messages will be blurred, limiting your ability to fully engage.",
+            pro: "  Unlock unlimited chats and the ability to review past conversations, ensuring you never miss an important connection."            
+        }
+    },
+    {
+        key: 'Analytics',
+        title: 'Analytics',
+        header: '',
+        description: `The "Analytics" section in Avatalk is designed to give you a comprehensive understanding of how your AI-powered business persona is performing. With detailed insights, you can monitor and refine your networking efforts, ensuring each interaction is purposeful and effective.`,
+        stepBySteps: [
+            {
+                title: 'Navigate to Analytics:',
+                description: ' Open the "Analytics" tab in your Avatalk dashboard.',
+                image: '/Carbon/manualview/analyse/1.PNG'
+            },
+            {
+                title: 'Customize Your View:',
+                description: 'Adjust the date range to analyze specific periods of activity.',
+                image: '/Carbon/manualview/analyse/2.PNG'
+            },
+            {
+                title: 'Review Key Metrics: ',
+                description: 'Examine profile views, AR usage, chat interactions, and file clicks.',
+                image: '/Carbon/manualview/analyse/3.PNG'
+            },
+            {
+                title: 'Visualize Your Data:',
+                description: `Use pie charts and bar graphs for a quick overview of your performance.`,
+                image: '/Carbon/manualview/analyse/4.PNG'
+            },                                                
+        ],
+         endSection: ` By leveraging Avatalk’s Analytics, you can continuously improve your networking strategy. Whether you're using the free or Pro version, these tools are essential for making informed decisions and ensuring that your digital interactions lead to meaningful connections.`,
+        limitations: {
+            free: " In the free version of Avatalk, you can access basic analytics such as profile views and limited AR usage statistics.  After this, the graphs will be blurred, limiting your ability to fully understand the data.",
+            pro: "The Pro version provides a more comprehensive view, empowering you to optimize your networking strategy effectively. For more detailed insights, including advanced metrics and customizable data exports, upgrading to the Pro version is recommended."            
+        }
+    }                             
 ];
 
 const ManualView = () => {

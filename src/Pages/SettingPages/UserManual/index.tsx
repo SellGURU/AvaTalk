@@ -50,7 +50,17 @@ export const UserManual=()=>{
             name: "Adding Videos",
             icon: "",
             link: "/settings/Help/ManualView/Adding_Videos",
-        },               
+        },   
+        {
+            name: "Setting Appointments",
+            icon: "",
+            link: "/settings/Help/ManualView/Setting_Appointments",
+        },     
+        {
+            name: "Analytics",
+            icon: "",
+            link: "/settings/Help/ManualView/Analytics",
+        },                                 
     ];
 
     return(
