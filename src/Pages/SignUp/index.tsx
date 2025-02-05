@@ -221,7 +221,7 @@ const SignUp = () => {
             // Handle the received token
             const { info } = event.data;
             Auth.check_user_existence({
-                google_json:info,
+                linkedin_json:info
             }).then(res => {
                 if(res.data.check_user == true){
                     authContext.setGoogleInformation(info)
