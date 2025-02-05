@@ -11,7 +11,7 @@ const supportMenus = [
             {
                 title: 'Profile Setup:',
                 description: 'Begin by creating your professional profile. Input your details, including your contact information, job role, and key skills. This profile will form the basis of your AI persona.',
-                image: '/Carbon/manualview/Welcome To Avatalk/1.png'
+                image: '/Carbon/manualview/Welcome To Avatalk/1-t.png'
             },
             {
                 title: 'AI Persona Creation:',
@@ -21,12 +21,12 @@ const supportMenus = [
             {
                 title: 'Networking:',
                 description: `Use Avatalk to exchange contacts via NFC or QR codes effortlessly. Your AI persona will continue to engage with contacts, even when you're unavailable, ensuring ongoing professional presence.`,
-                image: '/Carbon/manualview/Welcome To Avatalk/4.png'
+                image: '/Carbon/manualview/Welcome To Avatalk/4.jpeg'
             },
             {
                 title: 'Scheduling:',
                 description: 'Avatalk’s AI can also schedule meetings for you. Sync your calendar to ensure seamless scheduling of appointments, directly from interactions.',
-                image: '/Carbon/manualview/Welcome To Avatalk/3.jpeg'
+                image: '/Carbon/manualview/Welcome To Avatalk/3-t.png'
             },
             {
                 title: 'Analytics Dashboard:',
@@ -62,12 +62,12 @@ const supportMenus = [
             {
                 title: 'Add Multimedia:',
                 description: 'Enhance your profile by uploading files, images, or videos. Showcase your work, projects, or portfolio to create a dynamic and engaging profile.',
-                image: '/Carbon/manualview/Profile_Mastery/4.png'
+                image: '/Carbon/manualview/Profile_Mastery/4-t.png'
             },
             {
                 title: 'Appointment Scheduling:',
                 description: 'Integrate appointment scheduling tools to allow others to book meetings with you directly from your profile.',
-                image: '/Carbon/manualview/Profile_Mastery/5.png'
+                image: '/Carbon/manualview/Profile_Mastery/5-t.png'
             }
         ],
         endSection: 'By following these steps, the "Edit Profile" section transforms your digital persona into a vibrant, interactive, and professional representation of yourself. Make every interaction count.',
@@ -179,18 +179,18 @@ const supportMenus = [
             {
                 title: 'Select Platforms:',
                 description: 'Choose the social media platforms you want to link.',
-                image: '/Carbon/manualview/Social_Connections/3.png'
+                image: '/Carbon/manualview/Social_Connections/3-t.png'
             },
             {
                 title: 'Add Account Information:',
                 description: 'Input your account details for each platform.',
-                image: '/Carbon/manualview/Social_Connections/4.png'
+                image: '/Carbon/manualview/Social_Connections/4-t.png'
             } ,
 
             {
                 title: 'Save & Display:',
                 description: ' Once saved, these links will appear on your Avatalk profile.',
-                image: '/Carbon/manualview/Social_Connections/5.png'
+                image: '/Carbon/manualview/Social_Connections/5-t.png'
             }                                                            
         ],
         endSection: 'Integrating your social media profiles in Avatalk enriches your networking by making your digital presence easily accessible. Upgrade to Pro for a more comprehensive experience and better control over your online connections.',
@@ -274,27 +274,27 @@ const supportMenus = [
             {
                 title: 'Open Google Map Section:',
                 description: 'Open the Avatalk app and navigate to the “Google Map” section.',
-                image: '/Carbon/manualview/location/3.png'
+                image: '/Carbon/manualview/location/3-t.png'
             },
             {
                 title: 'View Current Location:',
                 description: 'View your current location on the interactive map, marked by a red pin.',
-                image: '/Carbon/manualview/location/2.png'
+                image: '/Carbon/manualview/location/2-t.png'
             },
             {
                 title: 'Search a New Location:',
                 description: ' Use the “Search your location...” bar to type in an address or location name.',
-                image: '/Carbon/manualview/location/5.png'
+                image: '/Carbon/manualview/location/5-t.png'
             },
             {
                 title: 'Set Location:',
                 description: 'Once the desired location is displayed, click to set it.',
-                image: '/Carbon/manualview/location/4.png'
+                image: '/Carbon/manualview/location/4-t.png'
             },
             {
                 title: 'Save Changes:',
                 description: 'Press the “Save Change” button to confirm and update your professional address.',
-                image: '/Carbon/manualview/location/1.png'
+                image: '/Carbon/manualview/location/1-t.png'
             }                                                    
         ],
          endSection: 'Avatalk’s address feature ensures that your professional information stays up-to-date, supporting smooth interactions and effortless networking. Stay ahead by keeping your location accurate with just a few clicks.',
@@ -310,22 +310,22 @@ const supportMenus = [
             {
                 title: 'Go to Video Section: ',
                 description: 'Open the Avatalk app and navigate to the "Video" section.',
-                image: '/Carbon/manualview/videos/2.png'
+                image: '/Carbon/manualview/videos/2-t.png'
             },
             {
                 title: 'Add a Video Link: ',
                 description: 'Tap "Add New Link," input a video title, and paste your video link.',
-                image: '/Carbon/manualview/videos/3.png'
+                image: '/Carbon/manualview/videos/3-t.png'
             },
             {
                 title: 'Edit or Delete:',
                 description: ' Edit or delete links to keep your video content relevant.',
-                image: '/Carbon/manualview/videos/4.PNG'
+                image: '/Carbon/manualview/videos/4-t.PNG'
             },
             {
                 title: 'Save Changes:',
                 description: ` Once you're done, tap "Save Change" to update your profile instantly.`,
-                image: '/Carbon/manualview/videos/1.PNG'
+                image: '/Carbon/manualview/videos/1-t.PNG'
             },                                                
         ],
          endSection: 'With Avatalk, you can easily enrich your digital business card with engaging video content. Consider upgrading to Pro for enhanced features and limitless customization options.',
