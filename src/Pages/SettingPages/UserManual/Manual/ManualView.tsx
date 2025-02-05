@@ -169,12 +169,12 @@ const supportMenus = [
             {
                 title: 'Go to Socials:',
                 description: ' Navigate to the "Socials" section in Avatalk.',
-                image: '/Carbon/manualview/Social_Connections/1.png'
+                image: '/Carbon/manualview/Social_Connections/1-t.png'
             },
             {
                 title: 'Title Your Social Media Card:',
                 description: 'Enter a title for your social media links.',
-                image: '/Carbon/manualview/Social_Connections/2.png'
+                image: '/Carbon/manualview/Social_Connections/2-t.png'
             },
             {
                 title: 'Select Platforms:',
@@ -320,12 +320,12 @@ const supportMenus = [
             {
                 title: 'Edit or Delete:',
                 description: ' Edit or delete links to keep your video content relevant.',
-                image: '/Carbon/manualview/videos/4-t.PNG'
+                image: '/Carbon/manualview/videos/4-t.png'
             },
             {
                 title: 'Save Changes:',
                 description: ` Once you're done, tap "Save Change" to update your profile instantly.`,
-                image: '/Carbon/manualview/videos/1-t.PNG'
+                image: '/Carbon/manualview/videos/1-t.png'
             },                                                
         ],
          endSection: 'With Avatalk, you can easily enrich your digital business card with engaging video content. Consider upgrading to Pro for enhanced features and limitless customization options.',
