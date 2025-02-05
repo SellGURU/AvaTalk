@@ -294,7 +294,7 @@ const supportMenus = [
             {
                 title: 'Save Changes:',
                 description: 'Press the “Save Change” button to confirm and update your professional address.',
-                image: '/Carbon/manualview/location/1-t.png'
+                image: '/Carbon/manualview/location/11-t.png'
             }                                                    
         ],
          endSection: 'Avatalk’s address feature ensures that your professional information stays up-to-date, supporting smooth interactions and effortless networking. Stay ahead by keeping your location accurate with just a few clicks.',
