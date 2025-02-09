@@ -28,7 +28,7 @@ axios.interceptors.response.use((response) => {
     }    
 
     
-    if(error.response.data.detail){
+    if(error.response.data.detail && error.response.status !=406 ){
         if (error.response.data.detail && error.response.data.detail.toLowerCase().includes("successfully")) {
             toast.success(error.response.data.detail)
         }else {
