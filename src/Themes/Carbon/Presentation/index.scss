@@ -70,7 +70,7 @@
     @apply flex items-center;   
 }
 .Carbon-Presentation-MoreInfoSection{
-    @apply flex flex-col gap-3 items-center h-[40vh] overflow-y-scroll hiddenScrollBar w-full;
+    @apply flex flex-col gap-3 items-center h-[100svh] overflow-y-scroll hiddenScrollBar w-full;
 }
 .Carbon-Presentation-chatItem{
     @apply flex justify-start overflow-hidden max-w-[363px] items-center tracking-tighter text-[#374151] text-justify disabled:cursor-not-allowed bg-[#F3F4F6] leading-[19.36px] text-[14px] font-[500]  rounded-[16px] rounded-tl-none px-6 py-[14px] h-auto  #{!important};
