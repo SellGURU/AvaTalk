@@ -132,7 +132,7 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                             onSubmit()           
                         }).catch((err) => {
                             console.log(err)
-                           formik.setFieldError("phone",err.response.data.deta.detail)
+                           formik.setFieldError("phone",err.response.data.detail)
                         })
                     }}  theme="Carbon">Continue</Button>
                 </div>                                                         
