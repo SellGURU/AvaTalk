@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "symphony-ui";
 import { toast } from 'react-toastify';
-import ToggleButton from "../ToggleButton";
+// import ToggleButton from "../ToggleButton";
 import SearchBox from "../SearchBox";
 import ContactList from "../ContactList";
 import { mkConfig, generateCsv, download } from "export-to-csv";
@@ -31,7 +31,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [isLoading] = useState(false);
   const [showMoreModal,setShowMoreModal] = useState(false);
-  const [activeView, setActiveView] = useState("Contact List");
+  const [activeView,] = useState("Contact List");
   const getContacts = () => {
       Contacts.showContactList((res) => {
         if (typeof res === 'object') {
@@ -140,9 +140,9 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
-  const handleToggleButtonClick = (buttonText: string) => {
-    setActiveView(buttonText);
-  };
+  // const handleToggleButtonClick = (buttonText: string) => {
+  //   setActiveView(buttonText);
+  // };
   const moreModalRef= useRef<HTMLDivElement>(null)
   const ButtonmoreModalRef= useRef<HTMLDivElement>(null)
   useModalAutoClose({
@@ -196,7 +196,7 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
           undefined
         }        
       </div>
-      <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
+      {/* <div className={`${theme}-ContactsView-buttonsContainer w-full`}>
         <div className="w-[45%] min-w-[205px] invisible">
           <ToggleButton onButtonClick={handleToggleButtonClick} leftText="Contact List" rightText="Tag List" theme="Carbon" />
         </div>
@@ -205,6 +205,13 @@ const ContactsView: React.FC<Props> = ({ theme }) => {
             {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
           </Button>
 
+        </div>
+      </div> */}
+      <div className="flex w-full justify-end  px-6">     
+        <div className="max-w-[120px] w-full">
+          <Button onClick={activeView === "Contact List" ? () => setShowAddContactModal(true) : () => setShowAddTagModal(true)} theme="Carbon">
+            {activeView === "Contact List" ? "Add Contact" : "Add Tag"}
+          </Button>        
         </div>
       </div>
       {activeView === "Contact List" ? (

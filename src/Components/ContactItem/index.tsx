@@ -26,7 +26,7 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
         <img src={'https://ui-avatars.com/api/?name='+data.fullName} alt={data.fullName} className="w-[50px] h-[50px] rounded-full" />
         <div className={`${theme}-ContactItem-card `}>
           <div className={`${theme}-ContactItem-innerCard `}>
-            <p  className={`${theme}-ContactItem-name `}>{data.fullName}</p>
+            <p  className={`${theme}-ContactItem-name overflow-hidden text-nowrap text-ellipsis  w-[60%]`}>{data.fullName}</p>
             <div className={`${theme}-ContactItem-iconContainer  `}>
               {data.tags.length == 1 && <p className={`${theme}-ContactItem-exhibition cursor-pointer overflow-x-hidden `} style={{backgroundColor:data.tags[0].color,color:getTextColorFromBackground(data.tags[0].color)}}>{data.tags[0].name}</p>}
               {data.tags.length > 1 ?
@@ -58,10 +58,10 @@ const ContactItem = ({ data, theme }: { data: Contact; theme: string | undefined
                     )
                   })}
                 </div>}
-              <div className={`${theme}-ContactItem-Vector`}></div>
+              <div className={`${theme}-ContactItem-Vector absolute right-3`}></div>
             </div>
           </div>
-          <p className={`${theme}-ContactItem-email `}>{data.email}</p>
+          <p className={`${theme}-ContactItem-email overflow-hidden text-nowrap text-ellipsis w-[80%] `}>{data.email}</p>
         </div>
       </div>
     </div>
