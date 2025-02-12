@@ -142,6 +142,7 @@ class VideoBox extends Box {
                 </div>
               }
               infinite={this.contents.length>1}
+              
               arrows={this.contents.length>1}
               nextArrow={
                 <div
