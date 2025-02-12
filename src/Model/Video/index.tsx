@@ -141,6 +141,8 @@ class VideoBox extends Box {
                   </Button>
                 </div>
               }
+              infinite={this.contents.length>1}
+              arrows={this.contents.length>1}
               nextArrow={
                 <div
                   className={`${theme}-back-Button-container-box`}
