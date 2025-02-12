@@ -8,6 +8,11 @@
 .Carbon-ContactsView-buttonsContainer {
   @apply flex justify-between items-center px-6 space-x-[25px]  min-w-[380px];
 }
+@media screen and (max-width: 400px)  {
+.Carbon-ContactsView-buttonsContainer {
+  @apply   min-w-[300px];
+}
+}
 .Carbon-ContactsView-box {
   @apply flex flex-col  relative w-[100%] px-6  gap-y-1;
 }
