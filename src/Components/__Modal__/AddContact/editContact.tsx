@@ -105,6 +105,7 @@ const EditContact:React.FC<EditContactProps> = ({onClose,contact,title,onAddCont
                                 onChange={(e) => {
                                     formik.setFieldValue("phone",e)
                                 }}
+                                required
                                 value={formik.values.phone}
                                 label="Phone"
                                 invalid={formik.errors.phone?true:false} 

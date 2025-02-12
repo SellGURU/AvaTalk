@@ -181,7 +181,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
             <div onClick={() => setShowDeleteContactModal(true)} className={`${theme}-ContactDetails-recycleIcon`}></div>
           </div>
         </div>
-        <p className={`${theme}-ContactDetails-nameItem mt-2`}>{contact?.fullName}</p>
+        <p className={`${theme}-ContactDetails-nameItem mt-2 break-words text-center w-[80%]`}>{contact?.fullName}</p>
         <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
         <div className={`${theme}-ContactDetails-showExibitionconContainer `}>
           {/* {showExhibition && (
@@ -324,7 +324,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-meetingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.note}</p>
+                <p className={`${theme}-ContactDetails-textItem break-words`}>{contact?.note}</p>
               </div>
             :undefined}
             {contact?.addDate?
