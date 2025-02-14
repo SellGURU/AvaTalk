@@ -125,6 +125,7 @@ const AddContactNew:React.FC<AddContactNewProps> = ({onClose,title,onAddContact}
                                 onChange={(e) => {
                                     formik.setFieldValue("phone",e)
                                 }}
+                                required
                                 value={formik.values.phone}
                                 label="Phone"
                                 invalid={formik.errors.phone?true:false} 
