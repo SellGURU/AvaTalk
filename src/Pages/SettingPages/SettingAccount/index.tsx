@@ -180,7 +180,7 @@ const SettingAccount =() => {
 
                 <div className="mt-4">
                     <Button onClick={() => {
-                        navigate(-1)
+                        
                         Auth.updateYourAccount({
                             user_id:context.currentUser.information?.userId as string,
                             email:context.currentUser.information?.personlEmail as string,
@@ -189,13 +189,17 @@ const SettingAccount =() => {
                             mobile_number:formik.values.phone as string,
                             language:selectedLanguage.value,
                             state:true
+                        }).then(() => {
+                            context.currentUser.updateCustomInformation({
+                                firstName: formik.values.firstname as string,
+                                lastName:formik.values.lastname as string,
+                                phone:formik.values.phone as string,
+                            })
+                            navigate(-1)
+                        }).catch((err) => {
+                            formik.setFieldError("phone",err.detail)
                         })
                         
-                        context.currentUser.updateCustomInformation({
-                            firstName: formik.values.firstname as string,
-                            lastName:formik.values.lastname as string,
-                            phone:formik.values.phone as string,
-                        })
                         // publish("refreshPage",{})
                     }} disabled={!formik.isValid} theme={'Carbon'}>Save Changes</Button>
                 </div>

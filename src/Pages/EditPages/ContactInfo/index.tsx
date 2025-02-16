@@ -78,17 +78,7 @@ const EditContactInfo = () => {
 
   const [icons,setIcons] = useState<Array<any>>([])
   const submit = () => {
-    auth.currentUser.updateCustomInformation({
-      job:formik.values.job as string,
-      company:formik.values.company as string ,
-      personlEmail:formik.values.personlEmail as string,
-      workEmail:formik.values.workEmail as string,
-      workPhone:formik.values.workPhone as string,
-      referral_code:auth.currentUser.information?.referral_code,
-      address:formik.values.address,
-      phone:formik.values.phone,
-      logo:icons[0]?.url
-    })
+
     Auth.updateContactInfo({
       company_name:formik.values.company as string,
       job_title:formik.values.job as string,
@@ -101,8 +91,23 @@ const EditContactInfo = () => {
       work_email:formik.values.workEmail as string,
       address:formik.values.address,
       work_phone:formik.values.workPhone as string
+    }).then(() => {
+      auth.currentUser.updateCustomInformation({
+        job:formik.values.job as string,
+        company:formik.values.company as string ,
+        personlEmail:formik.values.personlEmail as string,
+        workEmail:formik.values.workEmail as string,
+        workPhone:formik.values.workPhone as string,
+        referral_code:auth.currentUser.information?.referral_code,
+        address:formik.values.address,
+        phone:formik.values.phone,
+        logo:icons[0]?.url
+      })
+      navigate('/')
+    }).catch((err) => {
+      // console.log(err)
+      formik.setFieldError("phone",err.detail)
     })
-    navigate('/')
   }
   useConstructor(() => {
     Auth.getContactInfo().then(res => {
