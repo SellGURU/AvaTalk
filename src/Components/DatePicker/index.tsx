@@ -29,10 +29,10 @@ const DatePicker = ({ day, setDay }: any) => {
   };
 
   return (
-    <div  className="flex mt-4 relative items-center">
+    <div className="flex mt-4 relative items-center">
       <div
         onClick={() => {
-          if(isOpen){
+          if (isOpen) {
             document.getElementById("dataPicker")?.click();
           }
           setisOpen(!isOpen);
@@ -54,35 +54,33 @@ const DatePicker = ({ day, setDay }: any) => {
               className={`Carbon-Profile-EditProfileBtnVector6 px-3 Carbon-Footer-Vectors text-[#8290a3] w-6 h-6 ms-2`}
             ></div>
 
-             <div ref={datepickerRef}>
-                <Litepicker
-                
-                  id="dataPicker"
-                  className="text-gray-700 z-50 text-sm lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
-                  value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
-                  onChange={handleDateChange}
-                  options={{
-                    autoApply: false,
-                    format: "YYYY-MM-DD",
-                    singleMode: false,
-                    numberOfColumns: 1,
-                    numberOfMonths: 1,
-                    showWeekNumbers: true,
-                    dropdowns: {
-                      minYear: 1990,
-                      maxYear: null,
-                      months: true,
-                      years: true,
-                    },
-                  }}
-                />
-
-             </div>
-            
+            <div ref={datepickerRef}>
+              <Litepicker
+                id="dataPicker"
+                className="text-gray-700 z-50 text-sm min-w-[240px] lg:min-w-[230px] tracking-widest h w-full pl-2 bg-inherit cursor-pointer"
+                value={`${day.startDate.toLocaleDateString()} - ${day.endDate.toLocaleDateString()}`}
+                onChange={handleDateChange}
+                options={{
+                  autoApply: false,
+                  format: "YYYY-MM-DD",
+                  singleMode: false,
+                  numberOfColumns: 1,
+                  numberOfMonths: 1,
+                  showWeekNumbers: true,
+                  dropdowns: {
+                    minYear: 1990,
+                    maxYear: null,
+                    months: true,
+                    years: true,
+                  },
+                }}
+              />
+            </div>
           </div>
           <div
-            
-            className={`Carbon-Card-Vector me-2 cursor-pointer transition-transform ${isOpen ? 'rotate-90' : '-rotate-90'} `}
+            className={`Carbon-Card-Vector me-2 cursor-pointer transition-transform ${
+              isOpen ? "rotate-90" : "-rotate-90"
+            } `}
           ></div>
         </div>
       </div>
