@@ -332,6 +332,11 @@ body {
       @apply left-[15px] !important;
     }
   }
+  @media (max-width: 350px) {
+    .litepicker {
+      @apply w-[-webkit-fill-available] !important;
+    }
+  }
   .litepicker .container__months {
     -webkit-box-shadow: none;
     boxshadow: none;
