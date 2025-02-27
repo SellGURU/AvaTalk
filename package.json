@@ -1,7 +1,7 @@
 {
   "name": "avatalk",
   "private": true,
-  "version": "1.4.12",
+  "version": "1.4.13",
   "description": "",
   "type": "module",
   "scripts": {
