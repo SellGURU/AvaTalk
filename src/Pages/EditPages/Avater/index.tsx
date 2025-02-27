@@ -50,10 +50,11 @@ const EditAvater: React.FC = () => {
         console.log(values)
     },
   });
+  const [showGudieLine, setShowGudieLine] = useState(false);
   const [openCamera,setOpenCamera] = useState(false);
   const [canScroll,setCanScrol] = useState(true)
   useEffect(() => {
-    if(addAvatar || openCamera || Cropper.length > 1) {
+    if((addAvatar || openCamera || Cropper.length > 1) && !showGudieLine) {
       publish('profileIsReview',{})
       setCanScrol(false)
     }else{
@@ -63,7 +64,7 @@ const EditAvater: React.FC = () => {
     return () =>{
       publish('profileIsProfile',{})
     }
-  },[addAvatar,openCamera,Cropper])
+  },[addAvatar,openCamera,Cropper,showGudieLine])
   const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
       Auth.createAvatarVideo(photo).then((response) => {
           if(response.data == 'No face detected'){
@@ -134,7 +135,7 @@ const EditAvater: React.FC = () => {
     }
   },[firstLoading])
   // const navigate = useNavigate();  
-  const [showGudieLine, setShowGudieLine] = useState(false);
+  
   useEffect(() => {
     setCurrentAvatr({
       photo:"",
