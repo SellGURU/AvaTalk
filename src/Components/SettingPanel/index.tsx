@@ -1,6 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 // import { Button } from "symphony-ui";
-import PackageJson from '../../../package.json';
+import PackageJson from "../../../package.json";
 import { Outlet } from "react-router-dom";
 import SettingCard from "../SettingCard";
 import { useAuth } from "../../hooks/useAuth";
@@ -11,11 +11,11 @@ interface SettingPanelProps {
   theme?: string;
 }
 
-const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
+const SettingPanel: React.FC<SettingPanelProps> = ({ theme }) => {
   //   const navigate = useNavigate();
-  const confirmRef = createRef<HTMLDivElement>()
-  const [showConfirm,setShowConfirm] = useState(false)
-  const auth =useAuth()
+  const confirmRef = createRef<HTMLDivElement>();
+  const [showConfirm, setShowConfirm] = useState(false);
+  const auth = useAuth();
   const [settingCards] = useState([
     {
       name: "Your Account",
@@ -89,52 +89,79 @@ const SettingPanel: React.FC<SettingPanelProps> = ({theme}) => {
     //   icon: "connected.svg",
     //   link: "connectedaccount",
     // },
-
   ]);
-  const [isShowPlanCard,setIsShowPalnCard] = useState(false)
+  const [isShowPlanCard, setIsShowPalnCard] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-        if(auth.currentUser.type_of_account.getType() != 'Pro' || auth.currentUser.type_of_account.getDayremindToExpired() <= 7) {
-          setIsShowPalnCard(true)
-        }
-      
+      if (
+        auth.currentUser.type_of_account.getType() != "Pro" ||
+        auth.currentUser.type_of_account.getDayremindToExpired() <= 7
+      ) {
+        setIsShowPalnCard(true);
+      }
     }, 100);
-  },[])
+  }, []);
   return (
     <>
-    
-      <div className={`Carbon-ContactsView-Container   `}>
+      <div className={`Carbon-ContactsView-Container`}>
         <Outlet></Outlet>
         <p className={`${theme}-Edit-title px-6 pb-[20px]`}>Setting</p>
-        <div className="px-6 overflow-y-scroll hiddenScrollBar h-svh pb-[200px] ">
-          {isShowPlanCard &&
+        <div className="px-6 overflow-y-scroll hiddenScrollBar h-svh pb-[200px]">
+          {isShowPlanCard && (
             <div className="">
-              <PlanCard onClose={() => {setIsShowPalnCard(false)}}></PlanCard>
+              <PlanCard
+                onClose={() => {
+                  setIsShowPalnCard(false);
+                }}
+              ></PlanCard>
             </div>
-          }
+          )}
           {settingCards.map((item) => {
-            return <SettingCard key={item.link} linkTo={item.link} content={item} theme="Carbon"></SettingCard>
+            return (
+              <SettingCard
+                key={item.link}
+                linkTo={item.link}
+                content={item}
+                theme="Carbon"
+              ></SettingCard>
+            );
           })}
           <div className="mt-10 flex items-center justify-center cursor-pointer">
             <div className={`${theme}-Setting-LogoutVector`}></div>
-            <p onClick={() =>setShowConfirm(true)} className="text-cyan-500 ms-2 text-sm	font-medium	">Log out</p>
+            <p
+              onClick={() => setShowConfirm(true)}
+              className="text-cyan-500 ms-2 text-sm	font-medium	"
+            >
+              Log out
+            </p>
           </div>
 
-          <div className="flex items-center text-[#8290a3] text-sm mt-5 justify-center">Version:{"    "}{PackageJson.description}{PackageJson.version}</div>
+          <div className="flex items-center text-[#8290a3] text-sm mt-5 justify-center">
+            Version:{"    "}
+            {PackageJson.description}
+            {PackageJson.version}
+          </div>
         </div>
       </div>
-        {showConfirm ?
+      {showConfirm ? (
         <>
-            <div className=' fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center'>
-                <Confirm confirmTitle="Log out" refrence={confirmRef} title={"Log out"} content={"Are you sure want to log out your account?"} onClose={() => {setShowConfirm(false)}} onConfirm={() => {
-                  auth.logout()
-                }}></Confirm>
-            </div>
-            {/* <div className="absolute w-full z-30 h-full bg-black opacity-60 top-0 left-0"></div> */}
+          <div className=" fixed top-0 left-0 z-[5000] w-full h-dvh flex justify-center items-center">
+            <Confirm
+              confirmTitle="Log out"
+              refrence={confirmRef}
+              title={"Log out"}
+              content={"Are you sure want to log out your account?"}
+              onClose={() => {
+                setShowConfirm(false);
+              }}
+              onConfirm={() => {
+                auth.logout();
+              }}
+            ></Confirm>
+          </div>
+          {/* <div className="absolute w-full z-30 h-full bg-black opacity-60 top-0 left-0"></div> */}
         </>
-        :
-        undefined
-        }
+      ) : undefined}
     </>
   );
 };
