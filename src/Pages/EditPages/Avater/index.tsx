@@ -31,139 +31,182 @@ const EditAvater: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   // const [avatarVideo, setAvatarVideo] = useState("");
   // const [selectedAvatar, setSelectedAvatar] = useState("");
-  const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
-    photo:"",
-    type:'Local',
-    video:''
+  const [uploadedAvater, setUploadedAvater] = useState<Avatars>({
+    photo: "",
+    type: "Local",
+    video: "",
   });
-  const [currentAvatar,setCurrentAvatr] = useState<Avatars>({
-    photo:"",
-    type:'Local',
-    video:''
-  })
+  const [currentAvatar, setCurrentAvatr] = useState<Avatars>({
+    photo: "",
+    type: "Local",
+    video: "",
+  });
   const [Cropper, setCropper] = useState("");
   const authContext = useAuth();
-  const [addAvatar,setAddAvatar] =useState(false)
-    const formik = useFormik({
+  const [addAvatar, setAddAvatar] = useState(false);
+  const formik = useFormik({
     initialValues: initialValue,
     onSubmit: (values) => {
-        console.log(values)
+      console.log(values);
     },
   });
   const [showGudieLine, setShowGudieLine] = useState(false);
-  const [openCamera,setOpenCamera] = useState(false);
-  const [canScroll,setCanScrol] = useState(true)
+  const [openCamera, setOpenCamera] = useState(false);
+  const [canScroll, setCanScrol] = useState(true);
   useEffect(() => {
-    if((addAvatar || openCamera || Cropper.length > 1) && !showGudieLine) {
-      publish('profileIsReview',{})
-      setCanScrol(false)
-    }else{
-      publish('profileIsProfile',{})
-      setCanScrol(true)
+    if ((addAvatar || openCamera || Cropper.length > 1) && !showGudieLine) {
+      publish("profileIsReview", {});
+      setCanScrol(false);
+    } else {
+      publish("profileIsProfile", {});
+      setCanScrol(true);
     }
-    return () =>{
-      publish('profileIsProfile',{})
-    }
-  },[addAvatar,openCamera,Cropper,showGudieLine])
-  const createAvatarVideo = (photo:string,replaceAvatar:Avatars) => {
-      Auth.createAvatarVideo(photo).then((response) => {
-          if(response.data == 'No face detected'){
-            setIsLoading(false)
-            // toast.dismiss()
-            formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-            formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
-          }else{
-            formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
-            setUploadedAvater({
-              photo:response.data.avatar_pic_link,
-              video:response.data.silent_video_link,
-              type:'Api'
-            })
-            formik.setFieldValue('silent_video_avatar',response.data.silent_video_link)
-            setIsLoading(false)
-          }
-      }).catch(() => {
-        setIsLoading(false)
+    return () => {
+      publish("profileIsProfile", {});
+    };
+  }, [addAvatar, openCamera, Cropper, showGudieLine]);
+  const createAvatarVideo = (photo: string, replaceAvatar: Avatars) => {
+    Auth.createAvatarVideo(photo)
+      .then((response) => {
+        if (response.data == "No face detected") {
+          setIsLoading(false);
+          // toast.dismiss()
+          formik.setFieldValue("silent_video_avatar", replaceAvatar.video);
+          formik.setFieldValue("avatar_pic_url", replaceAvatar.photo);
+        } else {
+          formik.setFieldValue("avatar_pic_url", response.data.avatar_pic_link);
+          setUploadedAvater({
+            photo: response.data.avatar_pic_link,
+            video: response.data.silent_video_link,
+            type: "Api",
+          });
+          formik.setFieldValue(
+            "silent_video_avatar",
+            response.data.silent_video_link
+          );
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        setIsLoading(false);
         // toast.dismiss()
-        formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
-             
-      }).finally(() => {
-        setIsLoading(false)
-      })     
-  }
-  const [asktakePhoto,setAskTakePhoto] = useState(false)
-  
-  const context = useAuth()
-  const [firstLoading,setFirstLoading] = useState(false)
+        formik.setFieldValue("silent_video_avatar", replaceAvatar.video);
+        formik.setFieldValue("avatar_pic_url", replaceAvatar.photo);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+  const [asktakePhoto, setAskTakePhoto] = useState(false);
+
+  const context = useAuth();
+  const [firstLoading, setFirstLoading] = useState(false);
   const navigate = useNavigate();
   useConstructor(() => {
     // setIsLoading(true)
-    setFirstLoading(true)
-    formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
-    formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)    
-    Auth.avatarList(authContext.varification?.googleJson.email ? {google_json:authContext.varification.googleJson}:{}).then(res => {
-      if(res.data[res.data.length -1].video == ''){
-        createAvatarVideo(res.data[res.data.length -1].photo,res.data[0])
-        setFirstLoading(false)
-        setAvaterList(res.data.filter((el:any) =>el.photo != res.data[res.data.length -1].photo).filter((el:any) => el.gender == authContext.currentUser.information?.gender))  
-      }else{
-        setAvaterList(res.data.filter((el:any) => el.gender == authContext.currentUser.information?.gender))
+    setFirstLoading(true);
+    formik.setFieldValue(
+      "silent_video_avatar",
+      context.currentUser.information?.silent_video_avatar
+    );
+    formik.setFieldValue(
+      "avatar_pic_url",
+      context.currentUser.information?.imageurl
+    );
+    Auth.avatarList(
+      authContext.varification?.googleJson.email
+        ? { google_json: authContext.varification.googleJson }
+        : {}
+    ).then((res) => {
+      if (res.data[res.data.length - 1].video == "") {
+        createAvatarVideo(res.data[res.data.length - 1].photo, res.data[0]);
+        setFirstLoading(false);
+        setAvaterList(
+          res.data
+            .filter(
+              (el: any) => el.photo != res.data[res.data.length - 1].photo
+            )
+            .filter(
+              (el: any) =>
+                el.gender == authContext.currentUser.information?.gender
+            )
+        );
+      } else {
+        setAvaterList(
+          res.data.filter(
+            (el: any) =>
+              el.gender == authContext.currentUser.information?.gender
+          )
+        );
         // setIsLoading(false)
-        setFirstLoading(false)
-        formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
-        formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)
-      }     
-    })
-  })
-  const handleTakePhoto =  (dataUri:string) => {
+        setFirstLoading(false);
+        formik.setFieldValue(
+          "silent_video_avatar",
+          context.currentUser.information?.silent_video_avatar
+        );
+        formik.setFieldValue(
+          "avatar_pic_url",
+          context.currentUser.information?.imageurl
+        );
+      }
+    });
+  });
+  const handleTakePhoto = (dataUri: string) => {
     // Do stuff with the photo...
     console.log(dataUri);
     setTimeout(() => {
-      setOpenCamera(false)
-      setCropper(dataUri)
+      setOpenCamera(false);
+      setCropper(dataUri);
     }, 1000);
-  }    
+  };
   useEffect(() => {
-    if(firstLoading) {
-      publish('isLoading-start',{})
-    }else{
-      publish('isLoading-stop',{})
+    if (firstLoading) {
+      publish("isLoading-start", {});
+    } else {
+      publish("isLoading-stop", {});
     }
-    return () =>{
-      publish('isLoading-stop',{})
-    }
-  },[firstLoading])
-  // const navigate = useNavigate();  
-  
+    return () => {
+      publish("isLoading-stop", {});
+    };
+  }, [firstLoading]);
+  // const navigate = useNavigate();
+
   useEffect(() => {
     setCurrentAvatr({
-      photo:"",
-      type:"Api",
-      video:""
-    })
+      photo: "",
+      type: "Api",
+      video: "",
+    });
     setTimeout(() => {
       setCurrentAvatr({
-        photo:formik.values.avatar_pic_url,
-        type:'Api',
-        video:formik.values.silent_video_avatar
-      })      
+        photo: formik.values.avatar_pic_url,
+        type: "Api",
+        video: formik.values.silent_video_avatar,
+      });
     }, 300);
-  },[formik.values.avatar_pic_url, formik.values.silent_video_avatar])
-  const addAvatarRef =useRef<HTMLDivElement>(null)
+  }, [formik.values.avatar_pic_url, formik.values.silent_video_avatar]);
+  const addAvatarRef = useRef<HTMLDivElement>(null);
   useModalAutoClose({
-    refrence:addAvatarRef,
-    close:() => {
-      setAddAvatar(false)
-    }
-  })    
+    refrence: addAvatarRef,
+    close: () => {
+      setAddAvatar(false);
+    },
+  });
   return (
     <>
-    {showGudieLine?
-    <div className={`absolute w-full pt-8 px-4 hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'} top-[0px] bg-white z-[15]`}>
-        <div className={`w-full ${showGudieLine?'visible':'hidden'} pb-[60px] text-left relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}>
-          <div>
-            {/* <div className="absolute right-6 top-6">
+      {showGudieLine ? (
+        <div
+          className={`absolute w-full pt-8 px-4 hiddenScrollBar h-dvh ${
+            canScroll ? "overflow-scroll" : "overflow-hidden"
+          } top-[0px] bg-white z-[15]`}
+        >
+          <div
+            className={`w-full ${
+              showGudieLine ? "visible" : "hidden"
+            } pb-[60px] text-left relative h-dvh pt-6 hiddenScrollBar overflow-y-scroll`}
+          >
+            <div>
+              {/* <div className="absolute right-6 top-6">
               <Button
                 onClick={() => {
                   setShowGudieLine(false);
@@ -173,235 +216,237 @@ const EditAvater: React.FC = () => {
                 <div className={`Carbon-Profile-closeIcon`}></div>
               </Button>
             </div> */}
-            <div
-              className={`text-gray-700  ${
-                window.innerWidth < 332 ? "mt-12" : "mt-2"
-              } ${
-                window.innerWidth < 420 ? "text-center" : "text-center"
-              } font-semibold text-base`}
-            >
-              Photo Guidelines for AI Profile
-            </div>
-            <div className="mt-6 flex relative justify-center">
-              <div className="relative">
-                <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full right-2 top-2">
-                  <img src="./icons/Vector2.svg" alt="" />
-                </div>
-                <img src="./icons/gudei1.svg" alt="" />
-              </div>
-            </div>
-
-            <div className="mt-8 px-6">
-              <div className="text-gray-700 text-left font-semibold text-[14px]">
-                Common Mistakes{" "}
-              </div>
-              <div className="mt-4 flex justify-start items-start">
-                <div className="relative min-w-[60px]">
-                  <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                    <img
-                      className="ml-[1px]"
-                      src="./icons/Add.svg"
-                      alt=""
-                    />
-                  </div>
-                  <img src="./icons/1.png" alt="" />
-                </div>
-                <div className="ml-3 max-w-[283px]">
-                  <div className=" text-[#374151] text-[13px] font-medium font-poppins">
-                    Not Neutral Expression
-                  </div>
-                  <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
-                    Your photo must feature a neutral facial expression.
-                    Ensure your mouth is closed and avoid smiling or
-                    frowning.
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-start items-start">
-                <div className="relative min-w-[60px]">
-                  <div className="absolute w-6 h-6 flex  text-justifyitems-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                    <img
-                      className="ml-[1px]"
-                      src="./icons/Add.svg"
-                      alt=""
-                    />
-                  </div>
-                  <img src="./icons/2.png" alt="" />
-                </div>
-                <div className="ml-3 text-justify max-w-[283px]">
-                  <div className=" text-[#374151] text-[13px] font-medium font-poppins">
-                    Distracting Background
-                  </div>
-                  <div className=" text-[#374151] text-[12px] font-normal font-poppins">
-                    Use a simple, uncluttered background to avoid any
-                    distractions from the primary focus—your face.
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex justify-start items-start">
-                <div className="relative min-w-[60px]">
-                  <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
-                    <img
-                      className="ml-[1px]"
-                      src="./icons/Add.svg"
-                      alt=""
-                    />
-                  </div>
-                  <img src="./icons/3.png" alt="" />
-                </div>
-                <div className="ml-3 max-w-[283px]">
-                  <div className=" text-justify text-[#374151] text-[13px] font-medium font-poppins">
-                    Indirect Camera Gaze{" "}
-                  </div>
-                  <div className=" text-[#374151] text-[12px] text-justify font-normal font-poppins">
-                    Look directly into the camera to establish a clear,
-                    forward-facing base for your AI profile.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`mt-5 ${
-                window.innerWidth < 400 ? "px-2" : "px-6"
-              }`}
-            >
-              <Button
-                onClick={() => setShowGudieLine(false)}
-                theme="Carbon"
+              <div
+                className={`text-gray-700  ${
+                  window.innerWidth < 332 ? "mt-12" : "mt-2"
+                } ${
+                  window.innerWidth < 420 ? "text-center" : "text-center"
+                } font-semibold text-base`}
               >
-                Got It
-              </Button>
+                Photo Guidelines for AI Profile
+              </div>
+              <div className="mt-6 flex relative justify-center">
+                <div className="relative">
+                  <div className="absolute w-10 flex items-center justify-center h-10 bg-[#16A34A] rounded-full right-2 top-2">
+                    <img src="./icons/Vector2.svg" alt="" />
+                  </div>
+                  <img src="./icons/gudei1.svg" alt="" />
+                </div>
+              </div>
+
+              <div className="mt-8 px-6">
+                <div className="text-gray-700 text-left font-semibold text-[14px]">
+                  Common Mistakes{" "}
+                </div>
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/1.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                      Not Neutral Expression
+                    </div>
+                    <div className=" text-[#374151] text-justify text-[12px] font-normal font-poppins">
+                      Your photo must feature a neutral facial expression.
+                      Ensure your mouth is closed and avoid smiling or frowning.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex  text-justifyitems-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/2.png" alt="" />
+                  </div>
+                  <div className="ml-3 text-justify max-w-[283px]">
+                    <div className=" text-[#374151] text-[13px] font-medium font-poppins">
+                      Distracting Background
+                    </div>
+                    <div className=" text-[#374151] text-[12px] font-normal font-poppins">
+                      Use a simple, uncluttered background to avoid any
+                      distractions from the primary focus—your face.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex justify-start items-start">
+                  <div className="relative min-w-[60px]">
+                    <div className="absolute w-6 h-6 flex items-center justify-center bg-[#DC2626] rounded-full -right-[3px] -top-[3px]">
+                      <img className="ml-[1px]" src="./icons/Add.svg" alt="" />
+                    </div>
+                    <img src="./icons/3.png" alt="" />
+                  </div>
+                  <div className="ml-3 max-w-[283px]">
+                    <div className=" text-justify text-[#374151] text-[13px] font-medium font-poppins">
+                      Indirect Camera Gaze{" "}
+                    </div>
+                    <div className=" text-[#374151] text-[12px] text-justify font-normal font-poppins">
+                      Look directly into the camera to establish a clear,
+                      forward-facing base for your AI profile.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`mt-5 mb-14 ${
+                  window.innerWidth < 400 ? "px-2" : "px-6"
+                }`}
+              >
+                <Button onClick={() => setShowGudieLine(false)} theme="Carbon">
+                  Got It
+                </Button>
+              </div>
             </div>
           </div>
-        </div>          
-    </div>
-    :
-    <>
-        <div className={`absolute w-full hiddenScrollBar h-dvh ${canScroll ? 'overflow-scroll':'overflow-hidden'}  bottom-0 bg-white z-[15]`}>
-          <div className="relative top-8">
-            <BackIcon title="Edit Your Avatar" theme="Carbon"></BackIcon>
-           
-          </div>        
-          <div className="px-5 mt-[120px] hiddenScrollBar h-full">
-            {/* <div className="text-gray-700 text-center font-semibold text-base">
+        </div>
+      ) : (
+        <>
+          <div
+            className={`absolute w-full hiddenScrollBar h-dvh ${
+              canScroll ? "overflow-scroll" : "overflow-hidden"
+            }  bottom-0 bg-white z-[15]`}
+          >
+            <div className="relative top-8">
+              <BackIcon title="Edit Your Avatar" theme="Carbon"></BackIcon>
+            </div>
+            <div className="px-5 mt-[120px] hiddenScrollBar h-full">
+              {/* <div className="text-gray-700 text-center font-semibold text-base">
               Edit Your Avatar
             </div> */}
 
-            <div className="mt-6 flex items-center justify-between">
-              {currentAvatar.video.length > 0 && !isLoading ? (
-                <>
-                  <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
-                    <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
-                      <img src="./icons/Vector.svg" alt="" />
+              <div className="mt-6 flex items-center justify-between">
+                {currentAvatar.video.length > 0 && !isLoading ? (
+                  <>
+                    <div className="w-[90px] h-[90px] relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                      <div className="absolute -right-1 -top-1 w-[14px] h-[14px] rounded-full flex items-center bg-green-500 justify-center">
+                        <img src="./icons/Vector.svg" alt="" />
+                      </div>
+                      <img
+                        className=" w-full rounded-[6.76px] h-full"
+                        src={formik.values.avatar_pic_url}
+                        alt=""
+                      />
                     </div>
-                    <img
-                      className=" w-full rounded-[6.76px] h-full"
-                      src={formik.values.avatar_pic_url}
-                      alt=""
-                    />
-                  </div>
 
-                  <div>
-                    <img
-                      className="w-10 h-10"
-                      src="./icons/fi-rr-arrow-right.svg"
-                      alt=""
-                    />
-                  </div>
+                    <div>
+                      <img
+                        className="w-10 h-10"
+                        src="./icons/fi-rr-arrow-right.svg"
+                        alt=""
+                      />
+                    </div>
 
-                  <div className="w-[130px] h-[130px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
-                    <video
-                      id="dragAbleAi"
-                      playsInline
-                      style={{}}
-                      width={"100%"}
-                      preload="auto"
-                      autoPlay={true}
-                      loop
-                      muted
-                    >
-                      <source
-                        id="videoPlayer"
-                        src={formik.values.silent_video_avatar}
-                        type="video/mp4"
-                      ></source>
-                    </video>
-                  </div>
-                </>
-              ) : 
-                <>
-                  <div className="w-[90px] h-[57px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
-                    <RingLoader size={30}></RingLoader>
-                  </div>
+                    <div className="w-[130px] h-[130px] overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                      <video
+                        id="dragAbleAi"
+                        playsInline
+                        style={{}}
+                        width={"100%"}
+                        preload="auto"
+                        autoPlay={true}
+                        loop
+                        muted
+                      >
+                        <source
+                          id="videoPlayer"
+                          src={formik.values.silent_video_avatar}
+                          type="video/mp4"
+                        ></source>
+                      </video>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-[90px] h-[57px] flex justify-center items-center relative object-cover boxShadow-Gray borderBox-Gray  rounded-[6.76px]  border border-white">
+                      <RingLoader size={30}></RingLoader>
+                    </div>
 
-                  <div>
-                    <img
-                      className="w-10 h-10"
-                      src="./icons/fi-rr-arrow-right.svg"
-                      alt=""
-                    />
-                  </div>
+                    <div>
+                      <img
+                        className="w-10 h-10"
+                        src="./icons/fi-rr-arrow-right.svg"
+                        alt=""
+                      />
+                    </div>
 
-                  <div className="w-[130px] h-[130px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
-                    <RingLoader></RingLoader>
-                  </div>
-                </>            
-              }
-            </div>
-
-            <div>
-              <div className="text-[#374151] text-[14px] opacity-80 mt-8 text-justify">
-                Upload image, or choose avatar, we will convert it to a talking profile.{" "}
-                <span
-                  onClick={() => {
-                    setShowGudieLine(true);
-                  }}
-                  className="text-[#06B6D4] cursor-pointer"
-                >
-                  {" "}
-                  Photo Guideline{" "}
-                </span>
+                    <div className="w-[130px] h-[130px] flex justify-center items-center overflow-hidden object-cover boxShadow-Gray borderBox-Gray rounded-[6.76px]  border border-white">
+                      <RingLoader></RingLoader>
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
 
-            <div className="w-full gap-4 mt-5 grid grid-cols-3 sm:grid-cols-4 grid-flow-row">
-              <div
-                className="w-[100px] max-w-[100px] max-h-[100px] h-[100px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
-                onClick={() => {
-                  if(uploadedAvater.photo.length != 0){
+              <div>
+                <div className="text-[#374151] text-[14px] opacity-80 mt-8 text-justify">
+                  Upload image, or choose avatar, we will convert it to a
+                  talking profile.{" "}
+                  <span
+                    onClick={() => {
+                      setShowGudieLine(true);
+                    }}
+                    className="text-[#06B6D4] cursor-pointer"
+                  >
+                    {" "}
+                    Photo Guideline{" "}
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-full gap-4 mt-5 grid grid-cols-3 sm:grid-cols-4 grid-flow-row">
+                <div
+                  className="w-[100px] max-w-[100px] max-h-[100px] h-[100px]  relative boxShadow-Gray flex justify-center items-center cursor-pointer borderBox-Gray rounded-[12px] "
+                  onClick={() => {
+                    if (uploadedAvater.photo.length != 0) {
                       // setAvatarVideo("")
                       setTimeout(() => {
                         // setAvatarVideo(uploadedAvater.video)
-                        formik.setFieldValue("avatar_pic_url",uploadedAvater.photo);
-                        formik.setFieldValue("silent_video_avatar",uploadedAvater.video);                      
+                        formik.setFieldValue(
+                          "avatar_pic_url",
+                          uploadedAvater.photo
+                        );
+                        formik.setFieldValue(
+                          "silent_video_avatar",
+                          uploadedAvater.video
+                        );
                       }, 300);
                       // setSelectedAvatar(uploadedAvater.photo)
-                  }else{
-                    setAddAvatar(true)
+                    } else {
+                      setAddAvatar(true);
+                    }
+                  }}
+                >
+                  <div
+                    onClick={() => {
+                      setAddAvatar(true);
+                    }}
+                    className={`${
+                      uploadedAvater.photo.length > 0
+                        ? "absolute rounded-full w-[30px] h-[30px] bg-white flex justify-center items-center -right-1 -top-1"
+                        : ""
+                    }`}
+                  >
+                    <img
+                      className="w-[20px] h-[20px]"
+                      src="./icons/gallery-add.svg"
+                      alt=""
+                    />
+                  </div>
+                  {uploadedAvater.photo.length > 0 ? (
+                    <img
+                      className="w-full h-full object-cover rounded-[12px]"
+                      src={uploadedAvater.photo}
+                      alt=""
+                    />
+                  ) : undefined}
 
-                  }
-                }}
-              >
-                  <div onClick={() => {
-                    setAddAvatar(true)
-                  }} className={`${
-                      uploadedAvater.photo.length > 0 ? "absolute rounded-full w-[30px] h-[30px] bg-white flex justify-center items-center -right-1 -top-1" : ""
-                    }`}>
-                  <img
-                    className="w-[20px] h-[20px]"
-                    src="./icons/gallery-add.svg"
-                    alt=""
-                  />
-                </div>
-                {uploadedAvater.photo.length > 0 ? (
-                  <img className="w-full h-full object-cover rounded-[12px]" src={uploadedAvater.photo} alt="" />
-                ) : undefined}
-
-                {/* // */}
-                {/* <input
+                  {/* // */}
+                  {/* <input
                   onChange={(res: any) => {
                     // setisLoading(true)
                     // getBase64(res.target.files[0],res.target.value)
@@ -422,209 +467,238 @@ const EditAvater: React.FC = () => {
                   type="file"
                   accept="*"
                 /> */}
-                {/* // */}
+                  {/* // */}
+                </div>
+                {avatarList.map((el) => {
+                  return (
+                    <>
+                      <div
+                        onClick={() => {
+                          // setSelectedAvatar(el.photo);
+                          // setAvatarVideo("");
+                          if (el.video == "") {
+                            setIsLoading(true);
+                            Auth.createAvatarVideo(el.photo as string)
+                              .then((response) => {
+                                formik.setFieldValue(
+                                  "avatar_pic_url",
+                                  response.data.avatar_pic_link
+                                );
+                                // setAvatarVideo(response.data.silent_video_link);
+                                formik.setFieldValue(
+                                  "silent_video_avatar",
+                                  response.data.silent_video_link
+                                );
+                                setIsLoading(false);
+                              })
+                              .finally(() => {
+                                setIsLoading(false);
+                              });
+                          } else {
+                            formik.setFieldValue("avatar_pic_url", el.photo);
+                            formik.setFieldValue(
+                              "silent_video_avatar",
+                              el.video
+                            );
+                          }
+                          // Auth.createAvatarVideo(el).then((res) => {
+                          //   setAvatarVideo(res.data)
+                          //   formik.setFieldValue('silent_video_avatar',res.data)
+                          // })
+                        }}
+                        className={`w-[100px] ${
+                          el.photo == formik.values.avatar_pic_url
+                            ? "borderBox-primary"
+                            : "borderBox-Gray "
+                        } boxShadow-Gray min-w-[100px] min-h-[100px] max-w-[100px] border-3 overflow-hidden flex h-[80px] justify-center items-center cursor-pointer  rounded-[12px] `}
+                      >
+                        {/* <img src="" alt="" /> */}
+                        <img
+                          src={el.photo}
+                          className="w-full object-contain h-full "
+                          alt=""
+                        />
+                      </div>
+                    </>
+                  );
+                })}
               </div>
-              {avatarList.map((el) => {
-                return (
-                  <>
-                    <div
-                      onClick={() => {
-                        // setSelectedAvatar(el.photo);
-                        // setAvatarVideo("");
-                        if (el.video == "") {
-                          setIsLoading(true);
-                          Auth.createAvatarVideo(el.photo as string).then(
-                            (response) => {
-                              formik.setFieldValue(
-                                "avatar_pic_url",
-                                response.data.avatar_pic_link
-                              );
-                              // setAvatarVideo(response.data.silent_video_link);
-                              formik.setFieldValue(
-                                "silent_video_avatar",
-                                response.data.silent_video_link
-                              );
-                              setIsLoading(false);
-                            }
-                          ).finally(() => {
-                            setIsLoading(false)
-                          });
-                        } else {
-                          formik.setFieldValue("avatar_pic_url", el.photo);
-                          formik.setFieldValue("silent_video_avatar", el.video);
-                        }
-                        // Auth.createAvatarVideo(el).then((res) => {
-                        //   setAvatarVideo(res.data)
-                        //   formik.setFieldValue('silent_video_avatar',res.data)
-                        // })
-                      }}
-                      className={`w-[100px] ${
-                        el.photo == formik.values.avatar_pic_url
-                          ? "borderBox-primary"
-                          : "borderBox-Gray "
-                      } boxShadow-Gray min-w-[100px] min-h-[100px] max-w-[100px] border-3 overflow-hidden flex h-[80px] justify-center items-center cursor-pointer  rounded-[12px] `}
-                    >
-                      {/* <img src="" alt="" /> */}
-                      <img src={el.photo} className="w-full object-contain h-full " alt="" />
-                    </div>
-                  </>
-                );
-              })}
-            </div>
               <div className="mt-8 mb-3  w-full">
-              <Button
-                  disabled={formik.values.silent_video_avatar.length == 0 || isLoading}
-                  onClick={() =>{
-                    setIsLoading(true)
-                    setFirstLoading(true)
-                    Auth.updateProfilePic(formik.values.avatar_pic_url,formik.values.silent_video_avatar).then(() => {
-                      context.currentUser.updateAvater(formik.values.avatar_pic_url,formik.values.silent_video_avatar)   
-                      setIsLoading(false)
-                      setFirstLoading(false)
+                <Button
+                  disabled={
+                    formik.values.silent_video_avatar.length == 0 || isLoading
+                  }
+                  onClick={() => {
+                    setIsLoading(true);
+                    setFirstLoading(true);
+                    Auth.updateProfilePic(
+                      formik.values.avatar_pic_url,
+                      formik.values.silent_video_avatar
+                    ).then(() => {
+                      context.currentUser.updateAvater(
+                        formik.values.avatar_pic_url,
+                        formik.values.silent_video_avatar
+                      );
+                      setIsLoading(false);
+                      setFirstLoading(false);
                       // publish("refreshPage",{})
                       // window.location.reload()
                       // publish('isLoading-stop',{})
-                      publish('isLoading-stop',{})
+                      publish("isLoading-stop", {});
                       setTimeout(() => {
                         // publish('ForceReload',{})
-                        context.setNeedReload(true)
-                        navigate('/?splash=false')
+                        context.setNeedReload(true);
+                        navigate("/?splash=false");
                       }, 200);
 
-                    // history.go(0);
-                    })
+                      // history.go(0);
+                    });
                   }}
                   theme="Carbon"
-              >
-                {isLoading ? 
-                <>
-                  <BeatLoader size={10} color="white"></BeatLoader>
-                </>
-                :
-                 'Save Changes'
-                }
-              </Button>
+                >
+                  {isLoading ? (
+                    <>
+                      <BeatLoader size={10} color="white"></BeatLoader>
+                    </>
+                  ) : (
+                    "Save Changes"
+                  )}
+                </Button>
               </div>
-          </div>
-          <CropperBox
-            url={Cropper}
-            onResolve={(resolve: string | ArrayBuffer | null) => {
-              // shareUser.updateImageurl(resolve)
-              //  formik.setFieldValue('PrifileImage',resolve)
-              // setAvatarUrl('')
-              setCropper("");
-              // setSelectedAvatar(resolve as string);
-              setAskTakePhoto(false)
-              setIsLoading(true);
-              Auth.createAvatarVideo(resolve as string).then((response) => {
-              if(response.data == 'No face detected' || !response.data.avatar_pic_link){
-                toast.warn(response.data )
-                setIsLoading(false)
-              }else{
-                formik.setFieldValue(
-                  "avatar_pic_url",
-                  response.data.avatar_pic_link
-                );
-                setUploadedAvater({
-                  photo:response.data.avatar_pic_link as string,
-                  type:'Local',
-                  video:response.data.silent_video_link
-                })
-                // setAvatarVideo(response.data.silent_video_link);
-                formik.setFieldValue(
-                  "silent_video_avatar",
-                  response.data.silent_video_link
-                );
-                setIsLoading(false);
-
-              }              
-              }).catch(() => {
-                  setIsLoading(false)
-                  // toast.dismiss()                 
-              }).finally(() => {
-                setIsLoading(false)
-              });
-            }}
-            onCancel={() => {
-              setCropper("");
-              if(asktakePhoto){
-                setOpenCamera(true)
-              }            
-            }}
-          ></CropperBox>
-          {addAvatar?
-            <div className="fixed z-40 left-0  bottom-[0px] w-full flex justify-center items-center">
-              <AddAvatar
-                refEl={addAvatarRef}
-                onTakePhoto={() => {
-                  setAddAvatar(false)
-                  setOpenCamera(true)
-                  setAskTakePhoto(true)
-                }}
-                isCanRemove={uploadedAvater.photo.length>0}
-                onRemove={() => {
-                  // setSelectedAvatar("")
-                  setUploadedAvater({
-                    photo:'',
-                    type:'Local',
-                    video:""
-                  })
-                  setAddAvatar(false)
-                  formik.setFieldValue('silent_video_avatar',context.currentUser.information?.silent_video_avatar)
-                  formik.setFieldValue('avatar_pic_url',context.currentUser.information?.imageurl)                     
-                  // setAvatarVideo("")
-                }}
-                name={"modal name"}
-                value={"editeValue"}
-                theme="Carbon"
-                isOpen={addAvatar}
-                onClose={() => {
-                  setAddAvatar(false);
-                }}
-                onComplete={(data:any) => {
-
-                        // setAvatarVideo("");
-                        const reader = new FileReader();
-                        reader.readAsDataURL(data);
-                        reader.onload = function () {
-                          setCropper(reader.result as string);
-                        };
-                        reader.onerror = function (error) {
-                          console.log("Error: ", error);
-                        };
-                        setAddAvatar(false)
-                
-                }}
-                title="Link"
-              ></AddAvatar>
-
             </div>
-          :
-          undefined}
-          {addAvatar?
-              <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>          
-          :undefined}
-        </div>
-        {openCamera?
-        <>
-          <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
-              <Camera
-                isImageMirror 
-                onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-              />      
+            <CropperBox
+              url={Cropper}
+              onResolve={(resolve: string | ArrayBuffer | null) => {
+                // shareUser.updateImageurl(resolve)
+                //  formik.setFieldValue('PrifileImage',resolve)
+                // setAvatarUrl('')
+                setCropper("");
+                // setSelectedAvatar(resolve as string);
+                setAskTakePhoto(false);
+                setIsLoading(true);
+                Auth.createAvatarVideo(resolve as string)
+                  .then((response) => {
+                    if (
+                      response.data == "No face detected" ||
+                      !response.data.avatar_pic_link
+                    ) {
+                      toast.warn(response.data);
+                      setIsLoading(false);
+                    } else {
+                      formik.setFieldValue(
+                        "avatar_pic_url",
+                        response.data.avatar_pic_link
+                      );
+                      setUploadedAvater({
+                        photo: response.data.avatar_pic_link as string,
+                        type: "Local",
+                        video: response.data.silent_video_link,
+                      });
+                      // setAvatarVideo(response.data.silent_video_link);
+                      formik.setFieldValue(
+                        "silent_video_avatar",
+                        response.data.silent_video_link
+                      );
+                      setIsLoading(false);
+                    }
+                  })
+                  .catch(() => {
+                    setIsLoading(false);
+                    // toast.dismiss()
+                  })
+                  .finally(() => {
+                    setIsLoading(false);
+                  });
+              }}
+              onCancel={() => {
+                setCropper("");
+                if (asktakePhoto) {
+                  setOpenCamera(true);
+                }
+              }}
+            ></CropperBox>
+            {addAvatar ? (
+              <div className="fixed z-40 left-0  bottom-[0px] w-full flex justify-center items-center">
+                <AddAvatar
+                  refEl={addAvatarRef}
+                  onTakePhoto={() => {
+                    setAddAvatar(false);
+                    setOpenCamera(true);
+                    setAskTakePhoto(true);
+                  }}
+                  isCanRemove={uploadedAvater.photo.length > 0}
+                  onRemove={() => {
+                    // setSelectedAvatar("")
+                    setUploadedAvater({
+                      photo: "",
+                      type: "Local",
+                      video: "",
+                    });
+                    setAddAvatar(false);
+                    formik.setFieldValue(
+                      "silent_video_avatar",
+                      context.currentUser.information?.silent_video_avatar
+                    );
+                    formik.setFieldValue(
+                      "avatar_pic_url",
+                      context.currentUser.information?.imageurl
+                    );
+                    // setAvatarVideo("")
+                  }}
+                  name={"modal name"}
+                  value={"editeValue"}
+                  theme="Carbon"
+                  isOpen={addAvatar}
+                  onClose={() => {
+                    setAddAvatar(false);
+                  }}
+                  onComplete={(data: any) => {
+                    // setAvatarVideo("");
+                    const reader = new FileReader();
+                    reader.readAsDataURL(data);
+                    reader.onload = function () {
+                      setCropper(reader.result as string);
+                    };
+                    reader.onerror = function (error) {
+                      console.log("Error: ", error);
+                    };
+                    setAddAvatar(false);
+                  }}
+                  title="Link"
+                ></AddAvatar>
+              </div>
+            ) : undefined}
+            {addAvatar ? (
+              <div className="absolute w-full z-10 h-full bg-black opacity-60 top-0 left-0"></div>
+            ) : undefined}
           </div>
-          <div className="relative z-50 top-4">
-            <BackIcon title="" icon="close" action={()=>{setOpenCamera(false)}} theme="Carbon"></BackIcon>
-          </div>
-          <div className="absolute w-full z-20 h-full bg-black opacity-60 top-0 left-0"></div>
+          {openCamera ? (
+            <>
+              <div className="absolute w-full z-40 flex justify-center items-center h-dvh top-0 left-0">
+                <Camera
+                  isImageMirror
+                  onTakePhoto={(dataUri) => {
+                    handleTakePhoto(dataUri);
+                  }}
+                />
+              </div>
+              <div className="relative z-50 top-4">
+                <BackIcon
+                  title=""
+                  icon="close"
+                  action={() => {
+                    setOpenCamera(false);
+                  }}
+                  theme="Carbon"
+                ></BackIcon>
+              </div>
+              <div className="absolute w-full z-20 h-full bg-black opacity-60 top-0 left-0"></div>
+            </>
+          ) : undefined}
         </>
-        :
-        undefined}
-    </>
-    }
- 
+      )}
     </>
   );
 };
 
-export default EditAvater
+export default EditAvater;
