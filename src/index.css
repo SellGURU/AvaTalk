@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html, body {
+html,
+body {
   overscroll-behavior: auto; /* or unset */
 }
 :root {
@@ -19,14 +20,13 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E1E7EF; /* color of the scrollbar handle */
+  background: #e1e7ef; /* color of the scrollbar handle */
   border-radius: 10px; /* roundness of the handle */
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* color on hover */
 }
-
 
 @font-face {
   font-family: Poppins;
@@ -38,112 +38,106 @@ html, body {
   src: url("../src/assets/Fonts/Poppins-Medium.ttf") format("truetype");
 }
 .dispalyOverLay {
- background: none;
+  background: none;
 }
-@keyframes profileAnimition{
-  0%{
+@keyframes profileAnimition {
+  0% {
     margin-top: -500px;
     opacity: 0%;
   }
-  100%{
+  100% {
     margin-top: 0px;
     opacity: 100%;
   }
 }
 
-@keyframes profileAnimition2{
-  0%{
+@keyframes profileAnimition2 {
+  0% {
     opacity: 100%;
     height: 231px;
-
   }
 
-  100%{
+  100% {
     margin-top: 0px;
     height: 0px;
     opacity: 0%;
     /* margin-top: -600px; */
     /* height: 398px; */
-
   }
 }
-@keyframes profileAnimition2-mobile{
-  0%{
+@keyframes profileAnimition2-mobile {
+  0% {
     opacity: 100%;
     height: 231px;
-
   }
 
-  100%{
+  100% {
     margin-top: 0px;
     height: 0px;
     opacity: 0%;
     /* margin-top: -600px; */
     /* height: 398px; */
-
   }
 }
 
-@keyframes profileAnimition2-backWard{
-  0%{
+@keyframes profileAnimition2-backWard {
+  0% {
     margin-top: 0px;
     height: 0px;
     /* height: 398px; */
-    opacity: 0%;    
+    opacity: 0%;
   }
-  80%{
+  80% {
     height: 231px;
-    opacity: 50%;    
-
+    opacity: 50%;
   }
-  100%{
+  100% {
     opacity: 100%;
   }
 }
-@keyframes profileAnimition2-backWard-mobile{
-  0%{
+@keyframes profileAnimition2-backWard-mobile {
+  0% {
     margin-top: 0px;
     height: 0px;
     /* height: 398px; */
-    opacity: 0%;    
+    opacity: 0%;
   }
-  80%{
+  80% {
     height: 231px;
-    opacity: 50%;    
-
+    opacity: 50%;
   }
-  100%{
+  100% {
     opacity: 100%;
   }
 }
 
-@keyframes profileAnimition3{
-  20%{
-    visibility: visible;  
+@keyframes profileAnimition3 {
+  20% {
+    visibility: visible;
   }
 
-  100%{
+  100% {
     visibility: visible;
     margin-top: 0px;
   }
 }
-@keyframes profileAnimition3-backWard{
-  0%{
-    margin-top: 0px; 
+@keyframes profileAnimition3-backWard {
+  0% {
+    margin-top: 0px;
     visibility: visible;
   }
-  60%{
+  60% {
     visibility: hidden;
   }
 
-  100%{
+  100% {
     visibility: hidden;
     margin-top: -320px;
   }
 }
 
 .profileAimation1 {
-  animation-name:profileAnimition ;
+  animation-name: profileAnimition;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
@@ -151,34 +145,34 @@ html, body {
 }
 
 .profileAimation2 {
-  animation-name:profileAnimition2 ;
+  animation-name: profileAnimition2;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
 .profileAimation2-mobile {
-  animation-name:profileAnimition2-mobile ;
+  animation-name: profileAnimition2-mobile;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
 .profileAimation3 {
-  animation-name:profileAnimition3 ;
+  animation-name: profileAnimition3;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
 .profileAimation2-backward {
-  animation-name:profileAnimition2-backWard ;
+  animation-name: profileAnimition2-backWard;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
-.profileAimation2-backward-mobile  {
-  animation-name:profileAnimition2-backWard-mobile;
+.profileAimation2-backward-mobile {
+  animation-name: profileAnimition2-backWard-mobile;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
@@ -186,112 +180,190 @@ html, body {
 
 /* animation-play-state: paused; */
 .profileAimation3-backward {
-  animation-name:profileAnimition3-backWard;
+  animation-name: profileAnimition3-backWard;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   /* animation-play-state: paused; */
   animation-fill-mode: forwards;
 }
-.ReactModal__Content::-webkit-scrollbar{
+.ReactModal__Content::-webkit-scrollbar {
   display: none !important;
 }
 @layer utilities {
   .boxsInnerShadows {
-    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6), inset 4px 4px 14px 2px rgba(226, 232, 240, 1) !important;
+    box-shadow: inset -4px -4px 9px 2px rgba(255, 255, 255, 0.6),
+      inset 4px 4px 14px 2px rgba(226, 232, 240, 1) !important;
   }
   .hiddenScrollBar::-webkit-scrollbar {
     display: none !important;
   }
   .boxShadow-Gray {
-    box-shadow: 4px 2px 20px 0px rgba(111, 140, 176, 0.41), -6px -2px 20px 0px rgba(255, 255, 255, 1), 2px 1px 4px 0px rgba(114, 142, 171, 0.1);
+    box-shadow: 4px 2px 20px 0px rgba(111, 140, 176, 0.41),
+      -6px -2px 20px 0px rgba(255, 255, 255, 1),
+      2px 1px 4px 0px rgba(114, 142, 171, 0.1);
   }
   .boxShadow-bisinesCard {
-    box-shadow: 2px 2px 4px 0px #728EAB1A;
+    box-shadow: 2px 2px 4px 0px #728eab1a;
   }
   .boxShadow-mini-Gray {
-    box-shadow: 2px 2px 4px 0px rgb(114, 142, 171,0.1), 2px 2px 20px 0px rgb(111, 140, 176,0.21);
+    box-shadow: 2px 2px 4px 0px rgb(114, 142, 171, 0.1),
+      2px 2px 20px 0px rgb(111, 140, 176, 0.21);
   }
   .boxShadow-purple {
-    background: linear-gradient(35deg, rgba(232, 225, 218, 1) -100%, #6432c9 50%, rgba(100, 50, 201, 1) 100%);
+    background: linear-gradient(
+      35deg,
+      rgba(232, 225, 218, 1) -100%,
+      #6432c9 50%,
+      rgba(100, 50, 201, 1) 100%
+    );
   }
   .borderBox-Gray {
     border: 1px solid transparent;
-    background: linear-gradient(0deg, rgba(243, 244, 246), rgba(243, 244, 246)) padding-box, linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
-      linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
+    background: linear-gradient(0deg, rgba(243, 244, 246), rgba(243, 244, 246))
+        padding-box,
+      linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))
+        border-box,
+      linear-gradient(
+          300deg,
+          rgba(243, 244, 246, 0.5),
+          rgba(255, 255, 255, 0.5)
+        )
+        border-box;
   }
 
   /* mina-soheilifar border box*/
   .borderBox-Gray2 {
     border: 1px solid transparent;
-    background: linear-gradient(0deg, #f3f4f6, #f3f4f6) padding-box, linear-gradient(267.62deg, rgba(227, 227, 238, 0.5) 8.2%, rgba(255, 255, 255, 0.5) 82.68%) border-box,
-      linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%) border-box;
+    background: linear-gradient(0deg, #f3f4f6, #f3f4f6) padding-box,
+      linear-gradient(
+          267.62deg,
+          rgba(227, 227, 238, 0.5) 8.2%,
+          rgba(255, 255, 255, 0.5) 82.68%
+        )
+        border-box,
+      linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%)
+        border-box;
   }
   .boxShadow-button-gray {
-    box-shadow: 4px 4px 20px 0px #886FB01F,2px 2px 4px 0px #728EAB1A;
+    box-shadow: 4px 4px 20px 0px #886fb01f, 2px 2px 4px 0px #728eab1a;
   }
   .borderBox-primary {
     border: 1px solid transparent;
     background: linear-gradient(white, white) padding-box,
-                linear-gradient(300deg, rgba(100, 50, 201, 0.7), rgba(100, 50, 201, 0.7)) border-box;
+      linear-gradient(300deg, rgba(100, 50, 201, 0.7), rgba(100, 50, 201, 0.7))
+        border-box;
   }
   .borderBox-primary3 {
     border: 1px solid transparent;
-    box-shadow: 4px 4px 20px 0px rgba(136, 111, 176, 0.12) , 2px 2px 4px 0px rgba(114, 142, 171, 0.1);
-    background: linear-gradient(0deg, rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
-      linear-gradient(333deg, rgba(232, 225, 218, 1) -75%, rgba(100, 50, 201, 1)) border-box;
-  }  
+    box-shadow: 4px 4px 20px 0px rgba(136, 111, 176, 0.12),
+      2px 2px 4px 0px rgba(114, 142, 171, 0.1);
+    background: linear-gradient(
+          0deg,
+          rgba(243, 244, 246, 1),
+          rgba(243, 244, 246, 1)
+        )
+        padding-box,
+      linear-gradient(
+          333deg,
+          rgba(232, 225, 218, 1) -75%,
+          rgba(100, 50, 201, 1)
+        )
+        border-box;
+  }
   .borderBox-primary2 {
     border: 1px solid transparent;
-    background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255)) padding-box, linear-gradient(293deg, rgba(214, 227, 243, 0.46), rgba(255, 255, 255, 0.46)) border-box,
-      linear-gradient(300deg, rgba(100, 50, 201, 1) 60%, rgba(100, 50, 201, 0.4)) border-box;
+    background: linear-gradient(0deg, rgba(255, 255, 255), rgba(255, 255, 255))
+        padding-box,
+      linear-gradient(
+          293deg,
+          rgba(214, 227, 243, 0.46),
+          rgba(255, 255, 255, 0.46)
+        )
+        border-box,
+      linear-gradient(
+          300deg,
+          rgba(100, 50, 201, 1) 60%,
+          rgba(100, 50, 201, 0.4)
+        )
+        border-box;
   }
 
   .inputBorderBox {
-    border: 1px solid transparent ;
-    background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1)) padding-box,
-      linear-gradient(to bottom, rgba(246, 246, 249, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%) border-box linear-gradient(36deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 140%) border-box;
+    border: 1px solid transparent;
+    background: linear-gradient(rgba(243, 244, 246, 1), rgba(243, 244, 246, 1))
+        padding-box,
+      linear-gradient(
+          to bottom,
+          rgba(246, 246, 249, 0.5) 0%,
+          rgba(255, 255, 255, 0.5) 100%
+        )
+        border-box
+        linear-gradient(
+          36deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0) 140%
+        )
+        border-box;
   }
 
-
   .btnInnerShadowsDark {
-    box-shadow: 4px 4px 14px 0px rgba(193, 213, 238, 1) inset, -4px -4px 9px 0px rgba(255, 255, 255, 0.88) inset !important;
+    box-shadow: 4px 4px 14px 0px rgba(193, 213, 238, 1) inset,
+      -4px -4px 9px 0px rgba(255, 255, 255, 0.88) inset !important;
   }
   .borderBox-GrayBox {
     border: 1px solid transparent;
-    background: linear-gradient(0deg, rgba(241, 245, 249) , rgba(241, 245, 249) ) padding-box, linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) border-box,
-      linear-gradient(300deg, rgba(243, 244, 246, 0.5), rgba(255, 255, 255, 0.5)) border-box;
+    background: linear-gradient(0deg, rgba(241, 245, 249), rgba(241, 245, 249))
+        padding-box,
+      linear-gradient(293deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))
+        border-box,
+      linear-gradient(
+          300deg,
+          rgba(243, 244, 246, 0.5),
+          rgba(255, 255, 255, 0.5)
+        )
+        border-box;
   }
 
   .litepicker {
     @apply top-[100px]  w-fit h-[390px] mx-auto overflow-y-auto rounded-[27px] p-3 boxShadow-Gray borderBox-Gray text-sm !important;
   }
+  @media (max-width: 410px) {
+    .litepicker {
+      @apply left-[15px] !important;
+    }
+  }
+  @media (max-width: 350px) {
+    .litepicker {
+      @apply w-[-webkit-fill-available] !important;
+    }
+  }
   .litepicker .container__months {
-    -webkit-box-shadow:none;
-    boxShadow:none;
+    -webkit-box-shadow: none;
+    boxshadow: none;
     @apply rounded-[27px] rounded-b-none bg-inherit !important;
   }
-  
+
   .litepicker .container__footer {
-    -webkit-box-shadow:none;
-    boxShadow:none;
+    -webkit-box-shadow: none;
+    boxshadow: none;
     @apply rounded-[27px] rounded-t-none m-0 bg-inherit grid text-center grid-rows-2 grid-flow-col justify-center justify-items-center !important;
   }
-  .litepicker .container__months .month-item-header div>.month-item-name{
+  .litepicker .container__months .month-item-header div > .month-item-name {
     @apply bg-inherit;
   }
-  .litepicker .container__months .month-item-header div>.month-item-year {
+  .litepicker .container__months .month-item-header div > .month-item-year {
     @apply bg-inherit;
   }
-  .litepicker .container__footer .button-apply{
+  .litepicker .container__footer .button-apply {
     @apply rounded-[27px] min-w-[80px] w-[133px] h-10 mt-1 boxShadow-purple boxShadow-Gray text-white  bg-primary-color !important;
   }
-  .litepicker .container__footer .button-cancel{
+  .litepicker .container__footer .button-cancel {
     @apply rounded-[27px] min-w-[80px] w-[133px] h-10 mt-1 boxShadow-Gray text-primary-color borderBox-primary !important;
   }
-  .litepicker .container__footer .preview-date-range{
-    @apply col-span-2 mr-0 text-sm 	;
+  .litepicker .container__footer .preview-date-range {
+    @apply col-span-2 mr-0 text-sm;
   }
-  .litepicker .container__days .day-item.is-start-date.is-end-date{
+  .litepicker .container__days .day-item.is-start-date.is-end-date {
     @apply rounded-full bg-primary-color;
   }
   .litepicker .container__days .day-item.is-end-date {
@@ -303,40 +375,39 @@ html, body {
   .litepicker .container__days .day-item:hover {
     @apply text-black  rounded-full ring-1 ring-primary-color;
   }
-  .litepicker .container__days .day-item.is-in-range{
+  .litepicker .container__days .day-item.is-in-range {
     @apply bg-primary-color bg-opacity-20;
   }
-  .litepicker .container__days .day-item{
+  .litepicker .container__days .day-item {
     @apply rounded-full;
   }
   .litepicker .container__days .day-item.is-end-date.is-flipped {
-    @apply rounded-full ;
+    @apply rounded-full;
   }
   .litepicker .container__days .day-item.is-start-date.is-flipped {
-    @apply rounded-full ;
+    @apply rounded-full;
   }
-/* read me */
+  /* read me */
   /* light: borderBox-Gray boxShadow-Gray   */
   /* dark box: borderBox-Gray boxsInnerShadows  */
   /* dark btn: borderBox-Gray btnInnerShadowsDark */
-
 }
-[aria-roledescription="carousel"]{
-    width: 100%;
+[aria-roledescription="carousel"] {
+  width: 100%;
 }
 .react-slideshow-container .default-nav {
-    z-index: 1;
+  z-index: 1;
 }
 .image-gallery {
   width: 100%;
 }
 
-.image-gallery-thumbnail.active{
-  border:   2px solid #5B21B6 !important;
+.image-gallery-thumbnail.active {
+  border: 2px solid #5b21b6 !important;
   border-radius: 8px;
 }
-.image-gallery-thumbnail:hover{
-  border:   2px solid #5B21B6 !important;
+.image-gallery-thumbnail:hover {
+  border: 2px solid #5b21b6 !important;
   border-radius: 8px;
 }
 @keyframes slide-up {
@@ -354,9 +425,9 @@ html, body {
 .image-gallery-image {
   min-height: 400px; /* Set this to the desired min height */
   object-fit: contain; /* Ensures the image scales while keeping aspect ratio */
-  max-height: 400px ;
+  max-height: 400px;
 }
-.Carbon-icon-chatVector{
-  margin-inline-end:0px !important;
+.Carbon-icon-chatVector {
+  margin-inline-end: 0px !important;
   width: 16px !important;
 }
