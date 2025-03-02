@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import useModalAutoClose from "../../../hooks/useModalAutoClose";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { validationYup } from "../../../utils/validationYup";
+// import TooltipText from "../../TooltipText";
 
 interface ExchangeContactProps {
     onClose:() =>void
@@ -87,14 +88,16 @@ const ExchangeContact:React.FC<ExchangeContactProps> =({onClose,fullName,mode,us
           {step == 0 ?
             <>
                 <div className='flex w-full justify-between items-start'>
-                    <Button onClick={onClose} theme="Carbon-back">
-                        <div className={`${theme}-back-Button-vector`}></div>
-                    </Button>
-                    <div>
-                        <div className='text-text-primary text-[14px] font-semibold contactNameShadow'>Share your contact info with</div>
-                        <div className='text-text-primary text-center text-xs '>{fullName}</div>
+                    <div className="w-[100px]">
+                      <Button onClick={onClose} theme="Carbon-back">
+                          <div className={`${theme}-back-Button-vector`}></div>
+                      </Button>
                     </div>
-                    <div className="invisible">
+                    <div className="flex-grow text-center">
+                        <div className='text-text-primary text-[14px] font-semibold w-full contactNameShadow'>Share your contact info with</div>
+                        <div className='text-text-primary break-words text-center  text-xs  '>{fullName.length>3? fullName.substring(0,30)+"...":fullName}</div>
+                    </div>
+                    <div className="invisible w-[100px]">
                         <Button onClick={onClose} theme="Carbon-back">
                             <div className={`${theme}-back-Button-vector`}></div>
                         </Button>
