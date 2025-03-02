@@ -14,6 +14,8 @@ import { useConstructor } from '../../../help';
 import Share from '../../../Api/Share';
 import { publish } from '../../../utils/event';
 import useModalAutoClose from '../../../hooks/useModalAutoClose';
+import TooltipText from '../../TooltipText';
+// import TooltipText from '../../TooltipText';
 interface ShareContactProps {
     isOpen : boolean
     onClose: () => void
@@ -122,19 +124,52 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
                             >
                             </QRCode>                      
                     </div> */}
-                    <div className={`${theme}-ShareContact-Cards`}>
-                        <div className='w-full py-4 bg-gray-200 mt-11 relative btnInnerShadowsDark flex justify-center rounded-[27px] '>
+                    <div className={`${theme}-ShareContact-Cards max-w-[85%] w-[300px] px-4 py-4 overflow-x-hidden`}>
+                        <div id="qrcodeBox" className='w-full py-4 bg-gray-200 mt-11 relative btnInnerShadowsDark flex justify-center rounded-[27px] '>
                             <div className=' absolute w-[70px] h-[70px] p-[6px] top-[-45px] bg-gray-200 border border-gray-100 rounded-full'>
                             <img className={`${theme}-Profile-ProfilePicture`} src={authContext.currentUser.resolveImageUrl()} alt="" />
                             </div>   
-                            <div>
-                                <div>
-                                    <div className='text-gray-700 mt-4 font-poppins text-sm text-center font-semibold'>{authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}</div>
-                                    {authContext.currentUser.information?.job && authContext.currentUser.information.company ?
+                            <div className='  ' >
+                                <div className='grid'>
+                                    <div className=' text-center flex justify-center mt-2'>
+                                        
+                                        <TooltipText className=' w-[202px] z-50 text-[#374151] font-[600]'  tooltipValue={authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}>
+                                            <>
+                                                { authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}
+                                            </>
+
+                                        </TooltipText>
+
+                                    </div>
+
+                                    <div className=' text-center flex justify-center '>
+                                        
+                                        <TooltipText className='w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.job as string}>
+                                            <>
+                                                {authContext.currentUser.information?.job}
+                                            </>
+
+                                        </TooltipText>
+
+                                    </div>
+                                    {authContext.currentUser.information?.company
+                                     &&
+                                        <div className=' text-center flex justify-center '>
+                                            
+                                            <TooltipText className=' w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.company as string}>
+                                                <>
+                                                    {'@'+authContext.currentUser.information?.company}
+                                                </>
+
+                                            </TooltipText>
+
+                                        </div>                                    
+                                     }
+                                    {/* {authContext.currentUser.information?.job && authContext.currentUser.information.company ?
                                     <div className='text-gray-700 opacity-80 font-poppins text-[11px] text-center'>{authContext.currentUser.information?.job +'@'+authContext.currentUser.information?.company}</div>
                                     :
                                     undefined
-                                    }
+                                    } */}
                                 </div>
                                 <div  id='qrCodeBox'  className={`${theme}-ShareContact-QrCodeVector`}>
                                     <img src={qrcodeValue} alt="" className='mt-5 mb-6'/>

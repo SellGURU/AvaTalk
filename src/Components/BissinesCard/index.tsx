@@ -2,7 +2,6 @@ import { useAuth } from "../../hooks/useAuth"
 
 const BissinesCard = () => {
     const context = useAuth()
-    console.log(context.siginUpOptions)
     const resolveProfImage = () => {
         if(context.siginUpOptions.avatar_pic_url != ''){
             return context.siginUpOptions.avatar_pic_url
@@ -19,12 +18,18 @@ const BissinesCard = () => {
         return context.siginUpOptions.firstName + " " +context.siginUpOptions.lastName
     }
 
-    const resolveCompanyJob = () => {
+    const resolveCompany = () => {
         if(context.siginUpOptions.job == '' && context.siginUpOptions.company == ''){
-            return 'Company/ Job Title'
+            return 'Company'
         }
-        return context.siginUpOptions.company + "/ " +context.siginUpOptions.job        
+        return context.siginUpOptions.company      
     }
+    const resolveJob = () => {
+        if(context.siginUpOptions.job == '' && context.siginUpOptions.company == ''){
+            return 'Job Title'
+        }
+        return context.siginUpOptions.job        
+    }    
     return (
         <>
             <div className="bg-primary-color relative flex justify-between items-center px-4 w-[270px] h-[144px] rounded-[16px]">
@@ -52,8 +57,11 @@ const BissinesCard = () => {
                     </div>
                 </div>
                 <div className="ml-2">
-                    <div className="text-[12px] text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
-                    <div className="text-[8px] opacity-80 text-white font-semibold">{resolveCompanyJob()}</div>
+                    <div className="text-[12px] text-wrap text-ellipsis overflow-hidden w-[130px] text-white font-semibold mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
+                    <div className="text-[8px] flex justify-start items-center opacity-80 text-white font-semibold">
+                        <div className="w-[70px] overflow-hidden text-wrap text-ellipsis">{resolveCompany()+'/'}</div>
+                        <div className="w-[70px] overflow-hidden text-wrap text-ellipsis">{resolveJob()}</div>
+                    </div>
                 </div>
             </div>
         </>
