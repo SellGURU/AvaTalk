@@ -18,7 +18,7 @@ export const FormPage = () => {
             .email('Invalid email format')  // Ensures a valid email format
             .required('Email is required'),
         fullname: validationYup("fullName"),
-        message:Yup.string().min(10,"Please enter a message with at least 10 characters describing your issue or request.")
+        message:Yup.string().required('message is required').min(10,"Please enter a message with at least 10 characters describing your issue or request.")
     });
     const [isOpen, setIsOpen] = useState(false);
     const initialValue = {
@@ -73,7 +73,7 @@ export const FormPage = () => {
                                          inValid={formik.errors.message as string} />
                             <Button onClick={() => {
                                 getData()
-                            }} disabled={!formik.isValid } theme={'Carbon'}>Send</Button>
+                            }} disabled={!formik.isValid || formik.values.message.length ==0 } theme={'Carbon'}>Send</Button>
                         </div>
 
                     </div>
