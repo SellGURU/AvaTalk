@@ -797,31 +797,57 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 </div>
                 <div className="ml-2  relative z-10 overflow-hidden">
                   <div className="flex justify-start">
-                    <TooltipText className={`${theme}-Profile-ProfileName text-start w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]  `} tooltipValue={shareUser.information?.firstName + " " + shareUser.information?.lastName as string}>
+                    <TooltipText
+                      className={`${theme}-Profile-ProfileName text-start w-[120px]  min-[400px]:w-[180px] min-[600px]:w-[190px]  `}
+                      tooltipValue={
+                        (shareUser.information?.firstName +
+                          " " +
+                          shareUser.information?.lastName) as string
+                      }
+                    >
                       <>
-                      {shareUser.information?.firstName + " " + shareUser.information?.lastName}
+                        {shareUser.information?.firstName +
+                          " " +
+                          shareUser.information?.lastName}
                       </>
                     </TooltipText>
-
                   </div>
-                  {/* <h1
-                    className={`${theme}-Profile-ProfileName text-start `}
-                    style={{ fontSize: "14px" }}
-                  >
-
-                  </h1> */}
                   <div className="flex justify-start">
-                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.job +"@"+shareUser.information?.company as string}>
-                      <>
-                    {shareUser.information?.job}{" "}
                     {shareUser.information?.job &&
-                    shareUser.information?.company
-                      ? "@"
-                      : ""}{" "}
-                    {shareUser.information?.company}
-                      </>
-                    </TooltipText>
-
+                    shareUser.information?.job?.length > 15 ? (
+                      <div className="flex flex-col">
+                        <TooltipText
+                          className={`w-[120px]  min-[400px]:w-[180px] min-[600px]:w-[190px] text-left text-[12px] ${theme}-Profile-SubTitle`}
+                          tooltipValue={shareUser.information?.job}
+                        >
+                          <>{shareUser.information?.job}</>
+                        </TooltipText>
+                        <TooltipText
+                          className={`w-[120px]  min-[400px]:w-[180px] min-[600px]:w-[190px] text-left text-[12px] ${theme}-Profile-SubTitle`}
+                          tooltipValue={shareUser.information?.company}
+                        >
+                          <>@ {shareUser.information?.company}</>
+                        </TooltipText>
+                      </div>
+                    ) : (
+                      <TooltipText
+                        className={`w-[110px]  min-[400px]:w-[180px] min-[600px]:w-[240px] text-left text-[12px] ${theme}-Profile-SubTitle`}
+                        tooltipValue={
+                          (shareUser.information?.job +
+                            " @ " +
+                            shareUser.information?.company) as string
+                        }
+                      >
+                        <>
+                          {shareUser.information?.job}{" "}
+                          {shareUser.information?.job &&
+                          shareUser.information?.company
+                            ? "@"
+                            : ""}{" "}
+                          {shareUser.information?.company}
+                        </>
+                      </TooltipText>
+                    )}
                   </div>
                   {/* <p
                     className={`${theme}-Profile-SubTitle`}
@@ -1037,46 +1063,47 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               </div>
               <div className="relative z-30">
                 <div className="flex justify-center">
-                  <TooltipText className={`${theme}-Profile-ProfileName   px-8 mt-2`} tooltipValue={shareUser.information?.firstName +" "+shareUser.information?.lastName}  >
+                  <TooltipText
+                    className={`${theme}-Profile-ProfileName px-8 mt-2 w-[240px]  min-[400px]:w-[280px] min-[600px]:w-[320px]`}
+                    tooltipValue={
+                      shareUser.information?.firstName +
+                      " " +
+                      shareUser.information?.lastName
+                    }
+                  >
                     <>
-                  {shareUser.information?.firstName +
-                    " " +
-                    shareUser.information?.lastName}                    
+                      {shareUser.information?.firstName +
+                        " " +
+                        shareUser.information?.lastName}
                     </>
                   </TooltipText>
                 </div>
-                {/* <h1 className={`${theme}-Profile-ProfileName text-nowrap overflow-hidden text-ellipsis px-8 mt-2`}>
-                  {shareUser.information?.firstName +
-                    " " +
-                    shareUser.information?.lastName}
-                </h1> */}
-                <p className={`${theme}-Profile-SubTitle flex justify-center items-center  px-8`}>
-                  <TooltipText   tooltipValue={shareUser.information?.job as string}>
+                <p
+                  className={`${theme}-Profile-SubTitle flex justify-center items-center  px-8`}
+                >
+                  <TooltipText
+                    tooltipValue={shareUser.information?.job as string}
+                    className={`${
+                      shareUser.information?.job &&
+                      shareUser.information?.job?.length > 20
+                        ? "w-[110px] min-[400px]:w-[140px] min-[600px]:w-[180px]"
+                        : "mr-1"
+                    }`}
+                  >
+                    <>{shareUser.information?.job || ""}</>
+                  </TooltipText>
+                  <TooltipText
+                    tooltipValue={shareUser.information?.job as string}
+                    className="text-left w-[90px] min-[400px]:w-[110px] min-[600px]:w-[120px]"
+                  >
                     <>
-                      {shareUser.information?.job || ""}
-
+                      {shareUser.information?.job &&
+                      shareUser.information?.company
+                        ? "@"
+                        : ""}{" "}
+                      {shareUser.information?.company}
                     </>
                   </TooltipText>
-                  <TooltipText   tooltipValue={shareUser.information?.job as string}>
-                    <>
-                    {shareUser.information?.job && shareUser.information?.company
-                      ? "@"
-                      : ""}{" "}
-                    {shareUser.information?.company}
-
-                    </>
-                  </TooltipText>                  
-                  {/* <div data-tooltip={shareUser.information?.job} className="text-nowrap overflow-hidden text-ellipsis">
-                    {shareUser.information?.job}{" "}
-
-                  </div> */}
-                  {/* <div className="text-nowrap overflow-hidden text-ellipsis">
-                    {shareUser.information?.job && shareUser.information?.company
-                      ? "@"
-                      : ""}{" "}
-                    {shareUser.information?.company}
-
-                  </div> */}
                 </p>
               </div>
               {mode != "profile" && (
