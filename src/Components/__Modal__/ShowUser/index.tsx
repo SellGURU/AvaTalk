@@ -48,7 +48,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
          <div ref={refEl} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-auto max-h-[678px] pb-10 rounded-b-none slideupModal  bg-white w-full">
             {step == 0 ?
                 <>
-                    <div className='flex w-full pt-6 justify-between items-start'>
+                    <div className='flex w-full pt-0 justify-between items-start'>
                         <div className='w-[100px]'>
                             <Button onClick={onClose} theme="Carbon-back">
                                 <div className={`${theme}-back-Button-vector`}></div>
@@ -56,7 +56,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
 
                         </div>
                         <div>
-                            <div className='text-text-primary text-[18px] font-medium break-words contactNameShadow'>{(user.information?.firstName+'  '+user.information?.lastName).substring(0,30)+'...'}</div>
+                            <div className='text-text-primary text-[18px] font-medium break-words contactNameShadow'>{(user.information?.firstName+'  '+user.information?.lastName).substring(0,25)+'...'}</div>
                                 <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-center items-center `}>
 
                                     <>

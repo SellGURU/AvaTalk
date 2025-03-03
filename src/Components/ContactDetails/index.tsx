@@ -182,7 +182,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
           </div>
         </div>
         <p className={`${theme}-ContactDetails-nameItem mt-2 break-words text-center w-[80%]`}>{contact?.fullName}</p>
-        <p className={`${theme}-ContactDetails-jobItem`}>{contact?.job}</p>
+        <p className={`${theme}-ContactDetails-jobItem break-words w-[80%]`}>{contact?.job}</p>
         <div className={`${theme}-ContactDetails-showExibitionconContainer `}>
           {/* {showExhibition && (
             <div className={`${theme}-ContactDetails-exibitionconContainer`}>
@@ -316,7 +316,7 @@ const ContactDetails = ({ theme }: { theme: string }) => {
                 <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                   <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-buildingIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                 </div>
-                <p className={`${theme}-ContactDetails-textItem`}>{contact?.company}</p>
+                <p className={`${theme}-ContactDetails-textItem break-words`}>{contact?.company}</p>
               </div>
             :undefined}
             {contact?.note?
