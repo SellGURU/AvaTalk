@@ -133,7 +133,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
                                 <div className='grid'>
                                     <div className=' text-center flex justify-center mt-2'>
                                         
-                                        <TooltipText className=' w-[202px] z-50 text-[#374151] font-[600]'  tooltipValue={authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}>
+                                        <TooltipText className=' w-[202px]  text-[#374151] font-[600]'  tooltipValue={authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}>
                                             <>
                                                 { authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}
                                             </>

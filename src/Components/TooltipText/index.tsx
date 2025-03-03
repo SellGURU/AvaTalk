@@ -34,7 +34,7 @@ const TooltipText: React.FC<TooltipTextProps> = ({
       >
         {children}
       </span>
-      {isEllipsized && <Tooltip variant='light'  positionStrategy='fixed' style={{width:'300px',wordBreak:'break-word'}} id={"tooltip"+tooltipValue}></Tooltip>}
+      {isEllipsized && <Tooltip variant='light'  positionStrategy='fixed' style={{width:'300px',wordBreak:'break-word',zIndex:'9999 !important'}} id={"tooltip"+tooltipValue}></Tooltip>}
     </>
   );
 };
