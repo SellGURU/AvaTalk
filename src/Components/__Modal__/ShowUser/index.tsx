@@ -56,18 +56,20 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
 
                         </div>
                         <div>
-                            <div className='text-text-primary text-[18px] font-medium break-words contactNameShadow'>{(user.information?.firstName+'  '+user.information?.lastName).substring(0,25)+'...'}</div>
-                                <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-center items-center `}>
-
-                                    <>
-                                        {user.information?.job.substring(0,10)}
-                                    </>
-                                    {" @ "}  
-                                    <span className='ml-1'>
-                                        <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />
-                                    </span>
-                                    {user.information?.company.substring(0,10)}
-                                </div>
+                            <div className='text-text-primary text-[16px] font-medium break-words  contactNameShadow'>{(user.information?.firstName+'  '+user.information?.lastName)}</div>
+                            <div className={`text-text-primary items-start break-words ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-wrap text-xs flex justify-center items-center `}>
+                                {user.information?.job}  
+                                {" @ "}  
+                                {/* <span className='ml-1'>
+                                    <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />
+                                </span> */}
+                                {user.information?.company}
+                            </div>
+                            {/* <div className='flex justify-start items-center'>
+                                {user.information?.job} {" @ "} 
+                                
+                                {user.information?.company}   
+                            </div> */}
                         </div>
                         <div className="invisible">
                             <Button onClick={onClose} theme="Carbon-back">

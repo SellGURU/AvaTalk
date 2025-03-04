@@ -133,7 +133,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
                                 <div className='grid'>
                                     <div className=' text-center flex justify-center mt-2'>
                                         
-                                        <TooltipText className=' w-[202px]  text-[#374151] font-[600]'  tooltipValue={authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}>
+                                        <TooltipText disableTooltip className=' w-[202px]  text-[#374151] font-[600]'  tooltipValue={authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}>
                                             <>
                                                 { authContext.currentUser.information?.firstName +' '+authContext.currentUser.information?.lastName}
                                             </>
@@ -144,7 +144,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
 
                                     <div className=' text-center flex justify-center '>
                                         
-                                        <TooltipText className='w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.job as string}>
+                                        <TooltipText disableTooltip className='w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.job as string}>
                                             <>
                                                 {authContext.currentUser.information?.job}
                                             </>
@@ -156,7 +156,7 @@ const ShareContact:React.FC<ShareContactProps> = ({onClose,theme}) => {
                                      &&
                                         <div className=' text-center flex justify-center '>
                                             
-                                            <TooltipText className=' w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.company as string}>
+                                            <TooltipText disableTooltip className=' w-[202px] text-gray-700 opacity-80 font-poppins text-[11px] text-center'  tooltipValue={authContext.currentUser.information?.company as string}>
                                                 <>
                                                     {'@'+authContext.currentUser.information?.company}
                                                 </>

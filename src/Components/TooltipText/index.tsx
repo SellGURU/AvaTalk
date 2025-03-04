@@ -6,11 +6,13 @@ import { createPortal } from 'react-dom';
 interface TooltipTextProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
   tooltipValue: string;
   children: ReactElement;
+  disableTooltip?:boolean
 }
 
 const TooltipText: React.FC<TooltipTextProps> = ({
   tooltipValue,
   children,
+  disableTooltip,
   ...props
 }) => {
   const textRef = useRef<any>(null);
@@ -47,12 +49,14 @@ const TooltipText: React.FC<TooltipTextProps> = ({
           textWrap: 'nowrap',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
+          MozUserSelect:'none',
+          WebkitUserSelect:'none'
         }}
       >
         {children}
       </span>
       {/* {isEllipsized && <Tooltip variant='light'  positionStrategy='fixed' style={{width:'300px',wordBreak:'break-word',zIndex:'9999 !important'}} id={"tooltip"+tooltipValue}></Tooltip>} */}
-        {isEllipsized && visible && createPortal(
+        {isEllipsized&&!disableTooltip && visible && createPortal(
           <div
           className='shadow-sm'
             style={{
