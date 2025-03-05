@@ -23,7 +23,13 @@ const TooltipText: React.FC<TooltipTextProps> = ({
     left: 0,
   });
   // const ref = useRef<HTMLDivElement>(null);
-
+  useEffect(() => {
+    if(visible) {
+      setTimeout(() => {
+        setVisible(false)
+      }, 3000);
+    }
+  },[visible])
   useEffect(() => {
     if (visible && textRef.current) {
       const rect = textRef.current.getBoundingClientRect();
@@ -67,9 +73,12 @@ const TooltipText: React.FC<TooltipTextProps> = ({
               backgroundColor: "white",
               color: "black",
               padding: "5px 10px",
+              textWrap:'wrap',
+              overflow:'hidden',
               maxWidth:'60%',
+              wordBreak:'break-all',
               borderRadius: "5px",
-              whiteSpace: "nowrap",
+              whiteSpace: "wrap",
               zIndex: 99999, // Ensures tooltip appears above all layers
             }}
           >
