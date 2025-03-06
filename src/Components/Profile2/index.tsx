@@ -811,18 +811,28 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
                   </h1> */}
                   <div className="flex justify-start">
-                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.job +"@"+shareUser.information?.company as string}>
+                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.job  as string}>
                       <>
                     {shareUser.information?.job}{" "}
-                    {shareUser.information?.job &&
-                    shareUser.information?.company
-                      ? "@"
-                      : ""}{" "}
-                    {shareUser.information?.company}
+
                       </>
                     </TooltipText>
 
                   </div>
+                  <div className="flex justify-start">
+                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.company as string}>
+                      <>
+                      {
+                      shareUser.information?.company
+                        ? "@"
+                        : ""}{" "}
+                      {shareUser.information?.company}                  
+
+                      </>
+                    </TooltipText>
+
+                  </div>                  
+
                   {/* <p
                     className={`${theme}-Profile-SubTitle`}
                     style={{ fontSize: "12px" }}
