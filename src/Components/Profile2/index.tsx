@@ -1067,7 +1067,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
 
                     </>
                   </TooltipText>
-                  <TooltipText   tooltipValue={shareUser.information?.job as string}>
+                  <TooltipText   tooltipValue={shareUser.information?.company as string}>
                     <>
                     {shareUser.information?.job && shareUser.information?.company
                       ? "@"
