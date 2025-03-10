@@ -7,7 +7,7 @@ const validationYup = (property:string) => {
         case 'job':
             return Yup.string().min(3,'Job title must be between 3 to 60 characters.').max(60,'Job title must be between 3 to 60 characters.').trim('Job must not be empty or just spaces.')
         case 'fullName':
-            return Yup.string().required('Full Name is required').max(50,'Full Name must be between 5 and 50 characters.').min(5,'Full Name must be between 5 and 50 characters.').trim('Full Name must not be empty or just spaces.')
+            return Yup.string().required('Full Name is required').max(100,'Full Name must be between 5 and 100 characters.').min(5,'Full Name must be between 5 and 100 characters.').trim('Full Name must not be empty or just spaces.')
         case 'firstname':
             return Yup.string().required('First Name is required').max(50,'First Name must be between 3 and 50 characters.').min(3,'First Name must be between 3 and 50 characters.').trim('First Name must not be empty or just spaces.')
         case 'lastname':

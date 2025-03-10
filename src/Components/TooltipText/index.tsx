@@ -64,6 +64,8 @@ const TooltipText: React.FC<TooltipTextProps> = ({
       {/* {isEllipsized && <Tooltip variant='light'  positionStrategy='fixed' style={{width:'300px',wordBreak:'break-word',zIndex:'9999 !important'}} id={"tooltip"+tooltipValue}></Tooltip>} */}
         {isEllipsized&&!disableTooltip && visible && createPortal(
           <div
+          onMouseEnter={() => setVisible(true)}
+           onMouseLeave={() => setVisible(false)}
           className='shadow-sm'
             style={{
               position: "fixed",
@@ -72,7 +74,7 @@ const TooltipText: React.FC<TooltipTextProps> = ({
               transform: "translateX(-50%)",
               backgroundColor: "white",
               color: "black",
-              padding: "5px 10px",
+              padding: "12px 10px",
               textWrap:'wrap',
               overflow:'hidden',
               maxWidth:'60%',

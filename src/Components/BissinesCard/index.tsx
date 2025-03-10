@@ -59,8 +59,9 @@ const BissinesCard = () => {
                 <div className="ml-2">
                     <div className="text-[12px] text-nowrap text-ellipsis overflow-hidden w-[130px] text-white font-semibold  mb-1" style={{letterSpacing:'0.95px'}}>{resolveCardName()}</div>
                     <div className="text-[8px] flex justify-start items-center opacity-80 text-white font-semibold">
-                        <div className="max-w-[60px] overflow-hidden text-nowrap text-ellipsis">{resolveCompany()+'/'}</div>
-                        <div className="max-w-[60px] overflow-hidden text-nowrap text-ellipsis">{resolveJob()}</div>
+                        <div className="max-w-[64px] overflow-hidden text-nowrap text-ellipsis">{resolveCompany()}</div>
+                        <div className="ml-[1px] mr-[1px]">{'/'}</div>
+                        <div className="max-w-[63px] overflow-hidden text-nowrap text-ellipsis">{resolveJob()}</div>
                     </div>
                 </div>
             </div>
