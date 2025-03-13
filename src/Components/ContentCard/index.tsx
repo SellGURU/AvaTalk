@@ -33,7 +33,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
   console.log(item.resolveRender(theme,mod,{userId:userId}))
   return (
     <>
-    <li  onClick={() => {
+    <li onClick={() => {
       if(mod == 'share'){
         Auth.addEvent({
           userid:userId as string,
@@ -53,7 +53,7 @@ const ContentCard: React.FC<ContentCardProps> = ({theme="default",item,mod,userI
           }
         })
         context.currentUser.updateBoxs(resolve as Array<string>)
-        }} className={`${theme}-ContentCard-Container ${!activeDrag ?'ignore-elements':''}`}>
+        }} className={`${theme}-ContentCard-Container select-none ${!activeDrag ?'ignore-elements':''}`}>
         <div className={`${theme}-ContentCard-Section`}>
             <div data-os={getOS()} className={`${theme}-ContentCard-Title`}>
                 {item.getTitle().substring(0,30)}{item.getTitle().length>30?'...':''}

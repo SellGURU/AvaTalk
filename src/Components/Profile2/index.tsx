@@ -31,6 +31,7 @@ import UserType from "../../Model/UserType";
 import { ClipLoader } from "react-spinners";
 import ToggleButton3 from "../ToggleButton3";
 import GoogleMapModal from "../__Modal__/GoogleMapModal";
+import TooltipText from "../TooltipText";
 
 interface ProfileProps {
   theme?: string;
@@ -794,16 +795,45 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     </div>
                   )}
                 </div>
-                <div className="ml-2 max-w-[300px] relative z-10 overflow-hidden">
-                  <h1
-                    className={`${theme}-Profile-ProfileName text-start`}
+                <div className="ml-2  relative z-10 overflow-hidden">
+                  <div className="flex justify-start">
+                    <TooltipText className={`${theme}-Profile-ProfileName text-start w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]  `} tooltipValue={shareUser.information?.firstName + " " + shareUser.information?.lastName as string}>
+                      <>
+                      {shareUser.information?.firstName + " " + shareUser.information?.lastName}
+                      </>
+                    </TooltipText>
+
+                  </div>
+                  {/* <h1
+                    className={`${theme}-Profile-ProfileName text-start `}
                     style={{ fontSize: "14px" }}
                   >
-                    {shareUser.information?.firstName.substring(0, 10) +
-                      " " +
-                      shareUser.information?.lastName.substring(0, 10)}
-                  </h1>
-                  <p
+
+                  </h1> */}
+                  <div className="flex justify-start">
+                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.job  as string}>
+                      <>
+                    {shareUser.information?.job}{" "}
+
+                      </>
+                    </TooltipText>
+
+                  </div>
+                  <div className="flex justify-start">
+                    <TooltipText className={`w-[110px]  min-[400px]:w-[140px] min-[600px]:w-[240px]   text-[12px] ${theme}-Profile-SubTitle`} tooltipValue={shareUser.information?.company as string}>
+                      <>
+                      {
+                      shareUser.information?.company
+                        ? "@"
+                        : ""}{" "}
+                      {shareUser.information?.company}                  
+
+                      </>
+                    </TooltipText>
+
+                  </div>                  
+
+                  {/* <p
                     className={`${theme}-Profile-SubTitle`}
                     style={{ fontSize: "12px" }}
                   >
@@ -813,7 +843,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       ? "@"
                       : ""}{" "}
                     {shareUser.information?.company}
-                  </p>
+                  </p> */}
                 </div>
                 {mode != "profile" && (
                   <div className="absolute left-[8px] top-3">
@@ -1015,18 +1045,48 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   )}
                 </div>
               </div>
-              <div>
-                <h1 className={`${theme}-Profile-ProfileName mt-2`}>
+              <div className="relative z-30">
+                <div className="flex justify-center">
+                  <TooltipText className={`${theme}-Profile-ProfileName   px-8 mt-2`} tooltipValue={shareUser.information?.firstName +" "+shareUser.information?.lastName}  >
+                    <>
+                  {shareUser.information?.firstName +
+                    " " +
+                    shareUser.information?.lastName}                    
+                    </>
+                  </TooltipText>
+                </div>
+                {/* <h1 className={`${theme}-Profile-ProfileName text-nowrap overflow-hidden text-ellipsis px-8 mt-2`}>
                   {shareUser.information?.firstName +
                     " " +
                     shareUser.information?.lastName}
-                </h1>
-                <p className={`${theme}-Profile-SubTitle`}>
-                  {shareUser.information?.job}{" "}
-                  {shareUser.information?.job && shareUser.information?.company
-                    ? "@"
-                    : ""}{" "}
-                  {shareUser.information?.company}
+                </h1> */}
+                <p className={`${theme}-Profile-SubTitle flex justify-center items-center  px-8`}>
+                  <TooltipText   tooltipValue={shareUser.information?.job as string}>
+                    <>
+                      {shareUser.information?.job || ""}
+
+                    </>
+                  </TooltipText>
+                  <TooltipText   tooltipValue={shareUser.information?.company as string}>
+                    <>
+                    {shareUser.information?.job && shareUser.information?.company
+                      ? "@"
+                      : ""}{" "}
+                    {shareUser.information?.company}
+
+                    </>
+                  </TooltipText>                  
+                  {/* <div data-tooltip={shareUser.information?.job} className="text-nowrap overflow-hidden text-ellipsis">
+                    {shareUser.information?.job}{" "}
+
+                  </div> */}
+                  {/* <div className="text-nowrap overflow-hidden text-ellipsis">
+                    {shareUser.information?.job && shareUser.information?.company
+                      ? "@"
+                      : ""}{" "}
+                    {shareUser.information?.company}
+
+                  </div> */}
                 </p>
               </div>
               {mode != "profile" && (

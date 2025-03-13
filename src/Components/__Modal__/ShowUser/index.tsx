@@ -5,6 +5,7 @@ import { Button } from 'symphony-ui';
 import { Auth } from '../../../Api';
 // import { useAuth } from '../../../hooks/useAuth';
 import ConfettiExplosion from 'react-confetti-explosion';
+// import TooltipText from '../../TooltipText';
 interface ShowUserProps {
     isOpen: boolean;
     onClose: () => void;
@@ -47,19 +48,28 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
          <div ref={refEl} className="rounded-[27px] px-6 py-6 max-w-[32rem] h-auto max-h-[678px] pb-10 rounded-b-none slideupModal  bg-white w-full">
             {step == 0 ?
                 <>
-                    <div className='flex w-full pt-6 justify-between items-start'>
-                        <Button onClick={onClose} theme="Carbon-back">
-                            <div className={`${theme}-back-Button-vector`}></div>
-                        </Button>
+                    <div className='flex w-full pt-0 justify-between items-start'>
+                        <div className='w-[100px]'>
+                            <Button onClick={onClose} theme="Carbon-back">
+                                <div className={`${theme}-back-Button-vector`}></div>
+                            </Button>
+
+                        </div>
                         <div>
-                            <div className='text-text-primary text-[18px] font-medium contactNameShadow'>{user.information?.firstName+'  '+user.information?.lastName}</div>
-                                <div className={`text-text-primary ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-xs flex justify-center items-center `}>{user.information?.job}
-                                    {" @ "}  
-                                    <span className='ml-1'>
-                                        <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />
-                                    </span>
-                                    {user.information?.company}
-                                </div>
+                            <div className='text-text-primary text-[16px] font-medium break-words  contactNameShadow'>{(user.information?.firstName+'  '+user.information?.lastName)}</div>
+                            <div className={`text-text-primary items-start break-words ${user.information?.company && user.information?.job ? 'visible':'invisible'} mt-1 text-center text-wrap text-xs flex justify-center items-center `}>
+                                {user.information?.job}  
+                                {" @ "}  
+                                {/* <span className='ml-1'>
+                                    <img className={`w-[16px] ${user.information?.logo?'block':'hidden'} h-[16px]`} src={user.information?.logo} alt="" />
+                                </span> */}
+                                {user.information?.company}
+                            </div>
+                            {/* <div className='flex justify-start items-center'>
+                                {user.information?.job} {" @ "} 
+                                
+                                {user.information?.company}   
+                            </div> */}
                         </div>
                         <div className="invisible">
                             <Button onClick={onClose} theme="Carbon-back">
@@ -74,7 +84,7 @@ const ShowUser: React.FC<ShowUserProps> = ({ refEl,mode,user,theme,onClose}) => 
                     <div className={`${theme}-ContactDetails-VectorSection ${theme}-ContactDetails-ActiveVectorSection`}>
                         <div className={`${theme}-ContactDetails-Vectors ${theme}-ContactDetails-avatalkIcon ${theme}-ContactDetails-ActiveVectors`}></div>
                     </div>
-                    <p className={`${theme}-ContactDetails-textItem cursor-pointer`}>{'portal.avatalk.me'+user?.resolveLink()}</p>
+                    <p className={`${theme}-ContactDetails-textItem cursor-pointer break-words`}>{'portal.avatalk.me'+user?.resolveLink()}</p>
                     </a>
                 
                     {user?.information?.phone ?

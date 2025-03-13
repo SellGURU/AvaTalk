@@ -7,6 +7,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import * as Yup from "yup";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { Auth } from "../../../../Api";
+import { validationYup } from "../../../../utils/validationYup";
 
 interface BusinessStepProps {
     onSubmit:() => void
@@ -50,9 +51,10 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                 "Invalid phone number for the selected country.",
                 (value) => validatePhoneNumber(value) === true
                 ),
-            job:Yup.string().min(3,'Job title must be between 3 and 15 characters.').max(15,'Job title must be between 3 and 15 characters.'),
-            company:Yup.string().min(3,'Company name must be between 3 and 15 characters.').max(15,'Company name must be between 3 and 15 characters.'),
+            job:validationYup("job"),
+            company:validationYup("company"),
         }),
+        validateOnChange:true, 
         onSubmit:() => {
             
         }
@@ -90,7 +92,7 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                     theme="Carbon"
                     name="job"
                     type="text"
-                    inValid={formik.errors?.job != undefined && (formik.touched?.job as boolean)}
+                    inValid={formik.errors.job? true: false}
                     errorMessage={formik.errors.job}
                     ></TextField>
                 </div>
@@ -104,7 +106,7 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                     name="company"
                     type="text"
                     errorMessage={formik.errors?.company}
-                    inValid={formik.errors?.company != undefined && (formik.touched?.company as boolean)}
+                    inValid={formik.errors?.company?true:false}
                     ></TextField>
                 </div>  
                 <div className="mt-4">
