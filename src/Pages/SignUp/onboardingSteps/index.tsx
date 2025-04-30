@@ -23,7 +23,70 @@ const OnBoarding = () => {
     const authContext = useAuth()
     const navigate = useNavigate()
     const [isCreated,setISCreated] = useState(false)
-    const [avatarList, setAvaterList] = useState<Array<Avatars>>([]);
+    const [avatarList, setAvaterList] = useState<Array<Avatars>>(
+    [
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_611d4f0aee44fc1c503a66639ff66162.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_611d4f0aee44fc1c503a66639ff66162.mp4",
+            "gender": "male",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_66d922698b23946a549a7d36e834066f.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_66d922698b23946a549a7d36e834066f.mp4",
+            "gender": "female",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_47713f79ace5f77d90afbe27ef70ad40.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_47713f79ace5f77d90afbe27ef70ad40.mp4",
+            "gender": "female",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_026c1b6ef578c603affa316e32ae813c.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_026c1b6ef578c603affa316e32ae813c.mp4",
+            "gender": "male",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_8ed59025c692e93af81708e939da2e03.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_8ed59025c692e93af81708e939da2e03.mp4",
+            "gender": "male",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d233420a77456bbacf345f434f643e8d.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d233420a77456bbacf345f434f643e8d.mp4",
+            "gender": "female",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_e0557adb983e4db6ae07514e7bf846ab.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_e0557adb983e4db6ae07514e7bf846ab.mp4",
+            "gender": "male",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d3cb0f89126260375cf4b21a262c50c8.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d3cb0f89126260375cf4b21a262c50c8.mp4",
+            "gender": "male",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_fd3e7b9da124ca035ed0fe5ba5108d5c.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_fd3e7b9da124ca035ed0fe5ba5108d5c.mp4",
+            "gender": "female",
+            "type": "Api"
+        },
+        {
+            "photo": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_cc6c779cb843035abc4e239b9f80105f.jpg",
+            "video": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_cc6c779cb843035abc4e239b9f80105f.mp44",
+            "gender": "female",
+            "type": "Api"
+        }
+    ]        
+    );
     const [uploadedAvater,setUploadedAvater] = useState<Avatars>({
         photo:"",
         type:'Local',
@@ -71,8 +134,8 @@ const OnBoarding = () => {
             if(response.data == 'No face detected'){
             // setIsLoading(false)
             toast.dismiss()
-            formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-            formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
+            // formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+            // formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)                  
             }else if(response.data.avatar_pic_link){
                 formik.setFieldValue('avatar_pic_url',response.data.avatar_pic_link)
                 setUploadedAvater({
@@ -84,13 +147,13 @@ const OnBoarding = () => {
             // setIsLoading(false)
             }else{
                 toast.dismiss()
-                formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-                formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
+                // formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+                // formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)   
             }
         }).catch(() => {
         toast.dismiss()
-        formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
-        formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)       
+        // formik.setFieldValue('silent_video_avatar',replaceAvatar.video)
+        // formik.setFieldValue('avatar_pic_url',replaceAvatar.photo)       
         })     
     }    
     useEffect(() => {
