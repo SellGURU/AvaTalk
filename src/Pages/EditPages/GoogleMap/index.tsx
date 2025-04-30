@@ -43,6 +43,7 @@ const EditGoogleMap = () => {
   const [position, setPosition] = useState<[number, number]>([currentBox?.location.lan, currentBox?.location.lat]);
   // const [searchQuery, setSearchQuery] = useState('');
   const [isLocation,setIsLocation] = useState(currentBox.getISLocation())
+  const [isAddressManuallyEntered, setIsAddressManuallyEntered] = useState(false);
   const formik = useFormik({
     initialValues: { 
       title: currentBox.getTitle(),
@@ -86,8 +87,10 @@ const EditGoogleMap = () => {
     []
   );
   useEffect(() => {
-    handleSearch(formik.values.address);
-  }, [formik.values.address]);
+    if (isAddressManuallyEntered) {
+      handleSearch(formik.values.address);
+    }
+  }, [formik.values.address, isAddressManuallyEntered]);
   useEffect(() => {
     if(isGenerating == true){
       setTimeout(() => {
@@ -123,6 +126,10 @@ const EditGoogleMap = () => {
             placeholder='Write your address ...'
             theme='Carbon'
             label='Address'
+            onChange={(e) => {
+              setIsAddressManuallyEntered(true);
+              formik.handleChange(e);
+            }}
           ></TextArea>
         </div>
         {isLocation &&!isGenerating  &&
@@ -193,10 +200,21 @@ const EditGoogleMap = () => {
         showAddLocation&&
         <>
           <div className="fixed w-full z-[1201] left-0 bottom-0 flex justify-center">
-            <LocationModal setAddress={(text:string) =>formik.setFieldValue("address",text) } setISLocation={setIsLocation} position={position} setPosition={setPosition} isOpen={true} onClose={() => {
-              setShowAddLocation(false)
-              setIsGenerating(true)         
-              }} theme='Carbon'></LocationModal>
+            <LocationModal 
+              setAddress={(text:string) => {
+                setIsAddressManuallyEntered(false);
+                formik.setFieldValue("address", text);
+              }} 
+              setISLocation={setIsLocation} 
+              position={position} 
+              setPosition={setPosition} 
+              isOpen={true} 
+              onClose={() => {
+                setShowAddLocation(false)
+                setIsGenerating(true)         
+              }} 
+              theme='Carbon'
+            ></LocationModal>
           </div>
           <div className="fixed w-full z-[1200] h-full bg-black opacity-60 top-0 left-0"></div>    
         </>

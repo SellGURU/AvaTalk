@@ -72,6 +72,12 @@ const LocationModal:React.FC<LocationModalProps> = ({
     }, 500), // 500ms delay
     []
     );
+
+    // Fetch address for initial position
+    useEffect(() => {
+      fetchAddress(position[0], position[1]);
+    }, []);
+
     function LocationMarker() {
         // const [position, setPosition] = useState(null);
 

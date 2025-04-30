@@ -11,7 +11,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useConstructor ,boxProvider} from "../../help";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { LinkedIn } from "react-linkedin-login-oauth2";
 import { BeatLoader } from "react-spinners";
 
@@ -102,7 +102,7 @@ const SignUp = () => {
                                 navigate("/?splash=true&signin_success=true");
                             })                                                   
                         }else{
-                            toast.error(res.data.error)
+                            // toast.error(res.data.error)
                         }
                         });                          
                         // toast.error("user exist")
@@ -228,7 +228,7 @@ const SignUp = () => {
                     authContext.setLinkedInSignup(true);
                     navigate('/createAccount')
                 }else {
-                    toast.error("user exist")
+                    // toast.error("user exist")
                 }
             })
         }

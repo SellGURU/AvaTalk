@@ -53,7 +53,7 @@ class GoogleMapBox extends Box {
                         <div onClick={() =>{
                             this.openMap()
                         }} className="w-full  flex cursor-pointer justify-start  gap-3 items-start px-4 bg-[#F3F4F6] py-3 borderBox-Gray min-h-[52px] rounded-[27px]" style={{
-                            boxShadow:'4px 4px 20px 0px #886FB069'
+                            boxShadow:'1px 1px 10px 0px #886FB069'
                         }}>
                             {
                                 this.isLocation &&
