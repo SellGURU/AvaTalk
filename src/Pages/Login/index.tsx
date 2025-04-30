@@ -12,7 +12,7 @@ import { useGoogleLogin} from "@react-oauth/google";
 // import { jwtDecode } from "jwt-decode";
 import { Box } from "../../Model";
 import { boxProvider, useConstructor } from "../../help";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import axios from "axios";
 import {LinkedIn} from "react-linkedin-login-oauth2";
 import { BeatLoader } from "react-spinners";
@@ -140,7 +140,7 @@ const Login = () => {
     }).catch((res) => {
       // console.log(res)
       if(res.detail){
-        toast.error(res.detail)
+        // toast.error(res.detail)
         if(res.detail == 'This user is not registered'){
           formik.setFieldError("email",res.detail)
         }
@@ -203,7 +203,7 @@ const Login = () => {
                 navigate("/?splash=true&signin_success=true");
             })                                                   
           }else{
-            toast.error(res.data)
+            // toast.error(res.data)
           }
         });    
       }
@@ -277,7 +277,7 @@ const Login = () => {
                 navigate("/?splash=true&signin_success=true");
             })                                                   
           }else{
-            toast.error(res.data.error)
+            // toast.error(res.data.error)
           }
         }).catch(() => {
             authContext.setGoogleInformation(userInfo.data)
