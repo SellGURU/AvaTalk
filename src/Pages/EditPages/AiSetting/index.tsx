@@ -474,7 +474,7 @@ const EditAiSetting = () => {
             }} className="text-[#06B6D4] cursor-pointer">tutorial video</span> for a step-by-step guide.</div>
           </div>
 
-          <video onEnded={handleVideoEnd}  ref={videoRef} src={'https://codieblob.blob.core.windows.net/avatalk/Videos/tut_1.mp4'} style={{display:isVisible?'block':'none'}} />
+          <video onEnded={handleVideoEnd}  ref={videoRef} src={'https://newcodieblob.blob.core.windows.net/avatalk/Videos/tut_1.mp4'} style={{display:isVisible?'block':'none'}} />
 
         </div>
         {isReadyTO && (
