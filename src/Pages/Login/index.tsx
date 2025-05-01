@@ -64,6 +64,7 @@ const Login = () => {
   }
   const [showSplash,setshowSplash] = useState(false);
   const [loading, setLoading] = useState(false); 
+  const [socialLoading, setSocialLoading] = useState(false);
 
   const authContext = useContext(AuthContext)
   const formik = useFormik({
@@ -129,8 +130,8 @@ const Login = () => {
                   },
                   workEmail:data.information.work_email,
                   workPhone:data.information.work_mobile_number,
-                  unique_id:data.information.unique_id,
-                  userId:data.information.created_userid
+                  userId:data.information.created_userid,
+                  unique_id:data.information.unique_id
               })
               authContext.currentUser.setBox(resolveSocial)
               navigate("/?splash=false&signin_success=true");
@@ -188,7 +189,6 @@ const Login = () => {
                     personlEmail:data.information.email,
                     company:data.information.company_name,
                     job:data.information.job_title,
-                    unique_id:data.information.unique_id,
                     banelImage:data.information.back_ground_pic,
                     imageurl:data.information.profile_pic,
                     location:{
@@ -197,7 +197,8 @@ const Login = () => {
                     },
                     workEmail:data.information.work_email,
                     workPhone:data.information.work_mobile_number,
-                    userId:data.information.created_userid
+                    userId:data.information.created_userid,
+                    unique_id:data.information.unique_id
                 })
                 authContext.currentUser.setBox(resolveSocial)
                 navigate("/?splash=true&signin_success=true");
@@ -234,6 +235,7 @@ const Login = () => {
   })
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      setSocialLoading(true);
       try {
         const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: {
@@ -261,7 +263,6 @@ const Login = () => {
                     phone:data.information.mobile_number,
                     personlEmail:data.information.email,
                     company:data.information.company_name,
-                    unique_id:data.information.unique_id,
                     job:data.information.job_title,
                     banelImage:data.information.back_ground_pic,
                     imageurl:data.information.profile_pic,
@@ -271,7 +272,8 @@ const Login = () => {
                     },
                     workEmail:data.information.work_email,
                     workPhone:data.information.work_mobile_number,
-                    userId:data.information.created_userid
+                    userId:data.information.created_userid,
+                    unique_id:data.information.unique_id
                 })
                 authContext.currentUser.setBox(resolveSocial)
                 navigate("/?splash=true&signin_success=true");
@@ -279,17 +281,20 @@ const Login = () => {
           }else{
             // toast.error(res.data.error)
           }
+          setSocialLoading(false);
         }).catch(() => {
             authContext.setGoogleInformation(userInfo.data)
             navigate('/createAccount')
+            setSocialLoading(false);
           })  
-        console.log('User Info:', userInfo.data);
       } catch (error) {
         console.error('Failed to fetch user info:', error);
+        setSocialLoading(false);
       }
     },
     onError: (error) => {
       console.log('Login Failed:', error);
+      setSocialLoading(false);
     },
   });
 
@@ -316,6 +321,14 @@ const Login = () => {
           :
         <>
               <div className="w-full px-4">
+                {socialLoading && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-lg">
+                      <BeatLoader color="#06B6D4" size={15} />
+                      <p className="mt-4 text-center text-gray-700">Authenticating...</p>
+                    </div>
+                  </div>
+                )}
                 <img src="/Avatalk Logo.svg" alt="logo" className="w-[49px] h-[54px] mx-auto mb-[30px]" />
                 <div className="w-full flex justify-center">
                   <div className="text-base mb-6 text-gray-700 font-semibold max-w-[256px] text-center">Enter Your Email Address and Password to Log in</div>
@@ -369,38 +382,37 @@ const Login = () => {
                 </div>
                 
                 <div className="flex items-center justify-center mt-4">
-                
-                    <Button onClick={() => handleGoogleLogin()} theme="Carbon-google" className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
+                    <Button 
+                      onClick={() => handleGoogleLogin()} 
+                      theme="Carbon-google" 
+                      className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500] rounded-[27px] h-[44px]"
+                      disabled={socialLoading}
+                    >
                       <img className="mr-2 w-5 h-5" src="./Carbon/Google.svg" alt="" />
                       <div className="text-text-primary">Log in with Google</div>
                     </Button>
                 </div>
-                  <LinkedIn
-                      clientId="786lwqvw2unoip"
-                      redirectUri="https://linkedin-callback.vercel.app/"
-                      // redirectUri={`http://localhost:5173/linkedin/callback`}
-                      onSuccess={handleSuccessLinkedIn}
-                      onError={handleFailureLinkedIn}
-                      scope={"profile,email,openid"}
-                      children={
-                          ({linkedInLogin}) => <div className="mt-4">
-                              <Button theme="Carbon-Outline"
-                                      onClick={linkedInLogin}
-                                      className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                                  <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
-
-                                  <div className="text-text-primary">Log in with LinkedIn</div>
-                              </Button>
-                          </div>
-                      }/>
-
-                  {/* <div className="mt-4">
-                      <Button theme="Carbon-Outline"
-                              className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500]  rounded-[27px] h-[44px]">
-                          <img className="mr-2 w-5 h-5" src="./Carbon/Apple.svg" alt=""/>
-                          <div className="text-text-primary">Login with Apple</div>
-                      </Button>
-                  </div> */}
+                  
+                <LinkedIn
+                    clientId="786lwqvw2unoip"
+                    redirectUri="https://linkedin-callback.vercel.app/"
+                    onSuccess={handleSuccessLinkedIn}
+                    onError={handleFailureLinkedIn}
+                    scope={"profile,email,openid"}
+                    children={
+                        ({linkedInLogin}) => <div className="mt-4">
+                            <Button 
+                              theme="Carbon-Outline"
+                              onClick={linkedInLogin}
+                              className="flex justify-center boxShadow-Gray items-center borderBox-primary2 w-full disabled:cursor-not-allowed leading-[19.36px] text-[14px] font-[500] rounded-[27px] h-[44px]"
+                              disabled={socialLoading}
+                            >
+                              <img className="mr-2 w-5 h-5" src="./Carbon/linkedin.png" alt=""/>
+                              <div className="text-text-primary">Log in with LinkedIn</div>
+                            </Button>
+                        </div>
+                    }
+                />
               </div>
         </>
       }
