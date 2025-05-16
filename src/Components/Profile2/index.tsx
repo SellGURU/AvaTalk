@@ -798,20 +798,20 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <img
                   src="./icons/squiggles.png"
                   className="absolute w-full top-[-50px] "
-                  alt=""
+                  alt="Decorative squiggles pattern"
                 />
                 <div className="ml-[18%] min-w-[70px] relative z-10">
                   <img
                     className="w-[70px] border-solid border-[2px] boxShadow-Gray border-primary-color h-[70px] rounded-full object-cover object-[50% 50%]"
                     src={shareUser.information?.imageurl}
-                    alt=""
+                    alt={`${shareUser.information?.firstName} ${shareUser.information?.lastName}'s profile picture`}
                   />
                   {shareUser.information?.logo && (
                     <div className=" w-[33px] h-[33px] flex justify-center items-center overflow-hidden rounded-full border-primary-color border-2 bg-white border-3 absolute left-[-14px] z-30 top-2">
                       <img
                         className="w-[20px] rounded-full h-[20px] object-cover"
                         src={shareUser.information?.logo}
-                        alt=""
+                        alt={`${shareUser.information?.company} company logo`}
                       />
                     </div>
                   )}
@@ -900,7 +900,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
               <img
                 src="./icons/squiggles.png"
                 className="absolute w-full top-[-30px]"
-                alt=""
+                alt="Decorative squiggles pattern"
               />
               <div className="w-full relative flex justify-center mt-5  items-center">
                 <div className="relative">
@@ -1060,7 +1060,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       <img
                         className="w-[30px] rounded-full h-[30px] object-cover"
                         src={shareUser.information?.logo}
-                        alt=""
+                        alt={`${shareUser.information?.company} company logo`}
                       />
                     </div>
                   )}
@@ -1169,7 +1169,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   <>
                     <img
                       src="/Carbon/Not-Found.svg"
-                      alt="Not Found"
+                      alt="No content found illustration"
                       className="w-[97px] h-[96px]"
                     />
                     <p className="text-sm	text-[#8290a3]">
@@ -1187,7 +1187,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       }}
                       className=" cursor-pointer"
                       src="/icons/avatalk.svg"
-                      alt="logo"
+                      alt="Avatalk logo"
                     />
                     <div className=" leading-[15px] flex-grow text-justify  font-normal text-[10px]  sm:text-[13px]  ml-1 ">
                       Want your own{" "}
@@ -1223,7 +1223,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           }}
                           className=" cursor-pointer"
                           src="/icons/avatalk.svg"
-                          alt="logo"
+                          alt="Avatalk logo"
                         />
                         <div className=" ml-1 font-normal text-[10px] sm:text-[13px] leading-[15px]">
                           Want your own{" "}

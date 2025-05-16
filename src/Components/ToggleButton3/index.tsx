@@ -35,9 +35,9 @@ const ToggleButton3: React.FC<Toggle3Props> = ({ theme,value, leftText, rightTex
           <div className=" flex justify-center items-center flex-col" >
             {
                 activeButton == rightText?
-                <img className=" w-4 h-4" src="./Carbon/profile-circle.svg" />
+                <img className=" w-4 h-4" src="./Carbon/profile-circle.svg" alt="Profile icon" />
                 :
-                <img src="./Carbon/userVector.svg" className=" w-4 h-4 "/>
+                <img src="./Carbon/userVector.svg" className=" w-4 h-4 " alt="User icon"/>
             }            
            
             {rightText}
