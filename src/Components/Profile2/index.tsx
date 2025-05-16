@@ -545,6 +545,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }}
                     theme="Carbon-Google"
                     data-mode="profile-review-button-2"
+                    name="notification"
                   >
                     <div className="flex w-full items-center pl-2 justify-center ">
                       <div
@@ -567,6 +568,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         window.history.replaceState(null, "", "/#/");
                       }}
                       theme="Carbon-Google"
+                      name="close"
                       data-mode="profile-review-button-2"
                     >
                       <div
@@ -602,6 +604,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         }
                       }}
                       theme="Carbon-Google"
+                      name="mute"
                       data-mode="profile-review-button-2"
                     >
                       <div className={`${theme}-Profile-mutedVector`}></div>
@@ -619,6 +622,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         setISMuted(true);
                       }}
                       theme="Carbon-Google"
+                      name="unmute"
                       data-mode="profile-review-button-2"
                     >
                       <div
@@ -638,6 +642,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           mode
                       );
                     }}
+                    name="ar"
                     theme="Carbon-back"
                   >
                     <div className={`${theme}-Profile-BoxVector`}></div>
@@ -678,6 +683,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           }
                         }}
                         theme="Carbon-Google"
+                        name="unmute"
                         data-mode="profile-review-button-2"
                       >
                         <div className={`${theme}-Profile-mutedVector`}></div>
@@ -694,6 +700,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                               mode
                           );
                         }}
+                        name="ar"
                         theme="Carbon-back"
                       >
                         <div className={`${theme}-Profile-BoxVector`}></div>
@@ -714,6 +721,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           setISMuted(true);
                         }}
                         theme="Carbon-Google"
+                        name="mute"
                         data-mode="profile-review-button-2"
                       >
                         <div
@@ -732,6 +740,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                               mode
                           );
                         }}
+                        name="ar"
                         theme="Carbon-back"
                       >
                         <div className={`${theme}-Profile-BoxVector`}></div>
