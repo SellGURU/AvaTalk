@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import {VitePWA} from "vite-plugin-pwa";
+import compression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -80,6 +81,7 @@ export default defineConfig({
             skipWaiting: true, // Forces the new service worker to activate immediately
             clientsClaim: true, // Takes control of clients without requiring a reload
         },             
-      })
+      }),
+      compression()
   ],
 })
