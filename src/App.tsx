@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <div className='w-full h-dvh font-poppins flex overflow-hidden justify-center items-center '>
-        <div className='w-full max-w-[32rem]'>
+        <div className='w-full max-w-[32rem] min-h-[200px]'>
             <GoogleOAuthProvider clientId="750278697489-u68emmire3d35234obo1mne9v0eobmsu.apps.googleusercontent.com">
               <RouterProvider router={route} />
               <ToastContainer   limit={1} />
