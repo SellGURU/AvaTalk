@@ -489,6 +489,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }}
                     theme="Carbon-Google"
                     data-mode="profile-review-button-2"
+                    aria-label="Toggle notifications"
                   >
                     <div
                       className={`${theme}-Profile-notificationVector ${theme}-Footer-Vectors m-0`}
@@ -517,6 +518,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }}
                     theme="Carbon-Google"
                     data-mode="profile-review-button-2"
+                    aria-label="Preview profile"
                   >
                     <div
                       className={`${theme}-Profile-PreviewProfileBtnVector ${theme}-Footer-Vectors m-0`}
@@ -531,6 +533,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }}
                     theme="Carbon-Google"
                     data-mode="profile-review-button-2"
+                    aria-label="Edit profile"
                   >
                     <div className="flex w-full items-center pl-2 justify-center ">
                       <div
@@ -546,6 +549,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     theme="Carbon-Google"
                     data-mode="profile-review-button-2"
                     name="notification"
+                    aria-label="Share contact"
                   >
                     <div className="flex w-full items-center pl-2 justify-center ">
                       <div
@@ -570,6 +574,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       theme="Carbon-Google"
                       name="close"
                       data-mode="profile-review-button-2"
+                      aria-label="Close preview"
                     >
                       <div
                         className={`${theme}-Profile-closeIcon ${theme}-Footer-Vectors m-0`}
@@ -606,6 +611,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       theme="Carbon-Google"
                       name="mute"
                       data-mode="profile-review-button-2"
+                      aria-label="Unmute audio"
                     >
                       <div className={`${theme}-Profile-mutedVector`}></div>
                     </Button>
@@ -624,6 +630,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       theme="Carbon-Google"
                       name="unmute"
                       data-mode="profile-review-button-2"
+                      aria-label="Mute audio"
                     >
                       <div
                         className={`${theme}-Profile-VolumeHighVector`}
@@ -644,6 +651,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                     }}
                     name="ar"
                     theme="Carbon-back"
+                    aria-label="Open AR view"
                   >
                     <div className={`${theme}-Profile-BoxVector`}></div>
                   </Button>
@@ -685,6 +693,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         theme="Carbon-Google"
                         name="unmute"
                         data-mode="profile-review-button-2"
+                        aria-label="Unmute audio"
                       >
                         <div className={`${theme}-Profile-mutedVector`}></div>
                       </Button>
@@ -702,6 +711,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         }}
                         name="ar"
                         theme="Carbon-back"
+                        aria-label="Open AR view"
                       >
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button>
@@ -723,6 +733,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         theme="Carbon-Google"
                         name="mute"
                         data-mode="profile-review-button-2"
+                        aria-label="Mute audio"
                       >
                         <div
                           className={`${theme}-Profile-VolumeHighVector`}
@@ -742,6 +753,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                         }}
                         name="ar"
                         theme="Carbon-back"
+                        aria-label="Open AR view"
                       >
                         <div className={`${theme}-Profile-BoxVector`}></div>
                       </Button>
@@ -1234,6 +1246,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                             setShowExchangeContact(true);
                           }}
                           theme="Carbon-Google"
+                          aria-label="Exchange contact information"
                         >
                           {" "}
                           <div className="text-primary-color">
@@ -1245,6 +1258,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                             setShowIsProfileOpen(true);
                           }}
                           theme="Carbon"
+                          aria-label="Show contact details"
                         >
                           Show Contact
                         </Button>
