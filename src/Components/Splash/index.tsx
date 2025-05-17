@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useState, useEffect } from 'react';
 
 interface SplashProps {
@@ -20,7 +21,10 @@ const Splash: React.FC<SplashProps> = ({ theme }) => {
   return (
     <div className={`${theme}-Splash-fade ${showSplash ? `${theme}-Splash-show` : `${theme}-Splash-hide`}`}>
       <div className={`${theme}-Splash-Container`}>
-        <img className={`${theme}-Splash-SplashIcon`} src="/Carbon/splashImage.svg" alt="" />
+        <img 
+          // @ts-ignore
+          fetchpriority="high"
+          className={`${theme}-Splash-SplashIcon`} width={266} height={103}  src="/Carbon/splashImage.svg" alt="" />
       </div>
     </div>
   );
