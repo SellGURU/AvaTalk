@@ -909,8 +909,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                       id="dragAbleAi3"
                       playsInline
                       width={"100%"}
-                      className={`pk_video object-cover w-full h-full absolute ${
-                        isTalking ? "visible" : "invisible"
+                      className={`pk_video object-cover w-full h-full absolute top-0 left-0 ${
+                        isTalking ? "visible" : "invisible pointer-events-none"
                       } ${window.innerWidth > 600 ? "mt-[0px]" : "mt-[0px]"}`}
                       preload="auto"
                       muted
@@ -935,8 +935,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           ref={videoRef2}
                           playsInline
                           width={"100%"}
-                          className={`pk_video w-full h-full object-cover absolute ${
-                            isTalking ? "visible" : "invisible"
+                          className={`pk_video w-full h-full object-cover absolute top-0 left-0 ${
+                            isTalking ? "visible" : "invisible pointer-events-none"
                           } ${
                             window.innerWidth > 600 ? "mt-[0px]" : "mt-[0px]"
                           }`}
@@ -964,8 +964,8 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                           playsInline
                           width={"100%"}
                           height={"100%"}
-                          className={`pk_video object-cover w-full h-full absolute ${
-                            !isTalking ? "visible" : "invisible"
+                          className={`pk_video object-cover w-full h-full absolute top-0 left-0 ${
+                            !isTalking ? "visible" : "invisible pointer-events-none"
                           } ${
                             window.innerWidth > 600 ? "mt-[0px]" : "mt-[0px]"
                           }`}
