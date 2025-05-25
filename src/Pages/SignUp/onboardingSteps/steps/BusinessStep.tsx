@@ -114,6 +114,7 @@ const BusinessStep:React.FC<BusinessStepProps> = ({
                         onChange={(e) => {
                             formik.setFieldValue("phone",e)
                         }}
+                        required
                         value={formik.values.phone}
                         label="Account Phone"
                         invalid={formik.errors.phone?true:false} 
