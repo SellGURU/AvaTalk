@@ -99,7 +99,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
     resolveMode()
   );
   const [, setShowMuiteController] = useState(false);
-  const [panel, setPanel] = useState<"Profile" | "Chat">("Chat");
+  const [panel, setPanel] = useState<"Profile" | "Chat">("Profile");
   const [searchParams] = useSearchParams();
   const { id } = useParams();
   const authContext = useAuth();
@@ -116,7 +116,7 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
   useEffect(() => {
     const mode = resolveMode();
     if (mode === "share") {
-      setPanel("Chat");
+      setPanel("Profile");
     }
   }, []);
   useEffect(() => {
@@ -867,15 +867,16 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                   </p> */}
                 </div>
                 {mode != "profile" && (
-                  <div className="absolute left-[8px] top-3">
+                  <div className="absolute  left-[8px] top-3">
                     <ToggleButton3
                       theme="Carbon-grid"
-                      leftText="Chat"
+                      // leftText="Chat"
                       onButtonClick={(value: any) => {
                         setIsTalking(false);
                         setPanel(value);
                       }}
-                      rightText="Profile"
+                      leftText="Profile"
+                      rightText="Chat"
                       value={panel}
                     ></ToggleButton3>
                   </div>
@@ -1114,12 +1115,13 @@ const Profile2: React.FC<ProfileProps> = ({ theme }) => {
                 <div className="absolute left-[20px] top-6">
                   <ToggleButton3
                     theme="Carbon-grid"
-                    leftText="Chat"
+                    // leftText="Chat"
                     onButtonClick={(value: any) => {
                       setPanel(value);
                       setIsTalking(false);
                     }}
-                    rightText="Profile"
+                    leftText="Profile"
+                    rightText="Chat"
                     value={panel}
                   ></ToggleButton3>
                 </div>
